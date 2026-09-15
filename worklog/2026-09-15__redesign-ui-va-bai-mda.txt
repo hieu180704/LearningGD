@@ -1,0 +1,9 @@
+SUMMARY: Dựng site v2 (UI thân thiện kiểu game) + CLAUDE.md + bài đầu tiên MDA (tang-1/01-mda) — check-site 0 lỗi; ảnh chụp đã xem (index/components desktop, lo-trinh mobile); ảnh bài MDA CHỈ subagent xem; quiz/flashcard CHƯA bấm thử trên trình duyệt thật.
+
+Đã làm:
+- v1 bị user chê (tối, rối, click chết: MDA "ready" khi chưa có file) → v2: theme sáng mặc định, màu theo tầng, Baloo 2 + Be Vietnam Pro, index / lo-trinh / components / _lesson-starter, tools/check-site.js + tools/shoot.ps1 (CDP).
+- Sửa lỗi gutter mobile lo-trinh (shorthand padding đè .container), data-demo trên components.html để không ghi tiến độ thật.
+- Research MDA fact-check → research/mda.txt. Bài MDA viết từ spec, main fact-check: bỏ 3 chỗ agent tự thêm ý, đảo đáp án quiz.
+- CLAUDE.md: quy trình viết bài, cấu trúc 12 phần, checklist, các bẫy đã vấp.
+
+Tiếp theo: Tầng 0 Nền móng (3 bài: Game là gì; Game Designer thực sự làm gì; Tư duy lấy người chơi làm trung tâm).

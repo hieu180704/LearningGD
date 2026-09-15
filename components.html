@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bộ component — Xưởng Game Design</title>
+<meta name="description" content="Trình diễn mọi component dùng trong một bài học, kèm snippet HTML để copy khi viết bài mới.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="components" data-root="./" data-lesson="tang-1/01-mda" data-demo="true" class="tier-1">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="lo-trinh.html">Lộ trình</a>
+            <a href="components.html" class="is-active">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="lo-trinh.html">Lộ trình</a> › <a href="lo-trinh.html#tang-1">Tầng 1 · Cốt lõi</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 1 · Bài 1</p>
+            <h1>Bộ component (trang trình diễn)</h1>
+            <p class="dek">Trang này dùng đúng khung layout của một bài học thật để trình diễn mọi component. Xem trực tiếp cách nó trông ra sao, và copy snippet HTML bên dưới mỗi mục khi viết bài mới.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 14 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Cơ bản</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="lo-trinh.html#tang-0">Game là gì</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Biết mọi class component để viết bài học đúng chuẩn</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Copy đúng snippet thay vì tạo class mới</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Thấy nav trái, TOC, pager hoạt động thật</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="callout">Callout</h2>
+        <p>Dùng để nhấn một ý ngoài luồng đọc chính: điều đáng nhớ, sai lầm hay gặp, ví dụ trong game, hoặc ghi chú nguồn. Đặt <code>data-kind</code> để đổi màu và icon; có thể ghi đè tiêu đề bằng <code>&lt;p class="callout-title"&gt;</code>.</p>
+        <div class="callout" data-kind="insight">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
+            <div class="callout-body"><p class="callout-title">Điều đáng nhớ</p><p>Designer nhìn game từ Mechanics ra Aesthetics; người chơi cảm nhận theo chiều ngược lại.</p></div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Sai lầm hay gặp</p><p>Nhầm dynamics (hành vi phát sinh khi chơi) với mechanics (luật đã viết ra).</p></div>
+        </div>
+        <div class="callout" data-kind="example">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+            <div class="callout-body"><p class="callout-title">Ví dụ trong game</p><p>Trong cờ vua, luật đi quân là mechanic; thế cờ căng thẳng ở tàn cuộc là dynamic; cảm giác hồi hộp là aesthetic.</p></div>
+        </div>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Ghi chú</p><p>Khái niệm MDA được Hunicke, LeBlanc, Zubek trình bày trong paper tại AAAI Workshop năm 2004 (trước đó dạy ở GDC Game Design and Tuning Workshop 2001–2004) — luôn dẫn nguồn khi trích.</p></div>
+        </div>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;div class="callout" data-kind="insight"&gt;
+  &lt;span class="icon-wrap"&gt;...svg...&lt;/span&gt;
+  &lt;div class="callout-body"&gt;
+    &lt;p class="callout-title"&gt;Điều đáng nhớ&lt;/p&gt;
+    &lt;p&gt;Nội dung callout.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h2 id="lens">Lens</h2>
+        <p>"Thẻ Lens" gói một góc nhìn thiết kế thành vài câu hỏi tự vấn khi làm bài tập, phỏng theo lối "Lens" trong sách Schell.</p>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Lens của Core Loop</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Người chơi lặp lại hành động gì mỗi 10–30 giây?</li>
+                <li><span class="q-icon">?</span> Điều gì khiến họ muốn lặp lại thêm một vòng nữa?</li>
+                <li><span class="q-icon">?</span> Vòng lặp có tạo ra tiến triển nhìn thấy được không?</li>
+            </ul>
+            <p class="lens-source">Phỏng theo lối "Lens" trong Schell, The Art of Game Design.</p>
+        </div>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;div class="lens"&gt;
+  &lt;div class="lens-head"&gt;
+    &lt;span class="icon-wrap"&gt;...svg...&lt;/span&gt;
+    &lt;div&gt;&lt;span class="lens-eyebrow"&gt;Lens&lt;/span&gt;&lt;h3&gt;Tên lens&lt;/h3&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;ul class="lens-questions"&gt;
+    &lt;li&gt;&lt;span class="q-icon"&gt;?&lt;/span&gt; Câu hỏi tự vấn&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;p class="lens-source"&gt;Nguồn.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h2 id="term">Thuật ngữ (term)</h2>
+        <p>Thuật ngữ tiếng Việt kèm tên gốc tiếng Anh: bấm hoặc di chuột vào <span class="term" data-en="Core Loop" tabindex="0">vòng lặp lõi</span> để xem tooltip. Chỉ hiện khi hover/focus, không chiếm chỗ khi ở trạng thái nghỉ.</p>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;span class="term" data-en="Core Loop" tabindex="0"&gt;vòng lặp lõi&lt;/span&gt;</code></pre>
+        </div>
+
+        <h2 id="mda">Chip MDA</h2>
+        <p>Bộ ba màu cố định cho Mechanics / Dynamics / Aesthetics — dùng nhất quán trong mọi bài có nhắc tới MDA.</p>
+        <p><span class="chip mda-m">Mechanics</span> <span class="chip mda-d">Dynamics</span> <span class="chip mda-a">Aesthetics</span> — hoặc chỉ đổi màu chữ: <span class="mda-m">Mechanics</span>, <span class="mda-d">Dynamics</span>, <span class="mda-a">Aesthetics</span>.</p>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;span class="chip mda-m"&gt;Mechanics&lt;/span&gt;
+&lt;span class="mda-d"&gt;Dynamics&lt;/span&gt;</code></pre>
+        </div>
+
+        <h2 id="diagram">Diagram</h2>
+        <p>Ưu tiên dựng diagram đơn giản bằng HTML/CSS (như mẫu MDA dưới đây) thay vì SVG tuyệt đối, để nhãn không bao giờ đè lên hình.</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block m">Mechanics<small>Luật, hệ thống</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block d">Dynamics<small>Hành vi khi chơi</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block a">Aesthetics<small>Cảm xúc người chơi</small></div>
+            </div>
+            <div class="mda-rows">
+                <p>Designer nhìn: M → D → A</p>
+                <p>Người chơi cảm: A → D → M</p>
+            </div>
+            <figcaption>Sơ đồ MDA dựng bằng HTML/CSS flex, không dùng SVG tuyệt đối.</figcaption>
+        </figure>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;figure class="diagram wide"&gt;
+  &lt;div class="mda-diagram"&gt;
+    &lt;div class="mda-block m"&gt;Mechanics&lt;small&gt;...&lt;/small&gt;&lt;/div&gt;
+    &lt;span class="mda-arrow"&gt;...svg...&lt;/span&gt;
+    &lt;div class="mda-block d"&gt;Dynamics&lt;small&gt;...&lt;/small&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;figcaption&gt;Chú thích.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+        </div>
+
+        <p>Khi cần một vòng phản hồi (bước cuối nối lại về bước đầu), dùng biến thể trung tính <code>.mda-block.loop</code> (không màu M/D/A) và thêm dòng <code>.loop-return</code> bên dưới hàng khối.</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Bước 1</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Bước 2</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Bước 3</div>
+            </div>
+            <div class="loop-return">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                <span>Quay lại Bước 1 — vòng lặp phản hồi tự nuôi chính nó</span>
+            </div>
+            <figcaption>Sơ đồ vòng lặp phản hồi, dùng chung khối/mũi tên với sơ đồ MDA.</figcaption>
+        </figure>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;figure class="diagram wide"&gt;
+  &lt;div class="mda-diagram"&gt;
+    &lt;div class="mda-block loop"&gt;Bước 1&lt;/div&gt;
+    &lt;span class="mda-arrow"&gt;...svg...&lt;/span&gt;
+    &lt;div class="mda-block loop"&gt;Bước 2&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="loop-return"&gt;
+    ...svg...
+    &lt;span&gt;Quay lại Bước 1&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;figcaption&gt;Chú thích.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+        </div>
+
+        <h2 id="bang">Bảng so sánh</h2>
+        <p>Bọc table trong <code>.table-wrap</code> để cuộn ngang riêng, không đẩy tràn trang.</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Tiêu chí</th><th>Core loop</th><th>Meta loop</th></tr></thead>
+                <tbody>
+                    <tr><td>Thời lượng một vòng</td><td>Vài giây tới vài phút</td><td>Nhiều phiên chơi</td></tr>
+                    <tr><td>Ví dụ</td><td>Bắn — nhặt đồ — nâng cấp</td><td>Mở khóa mùa giải, bảng xếp hạng</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;div class="table-wrap"&gt;
+  &lt;table class="compare"&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;...&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;...&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h2 id="exercise">Exercise (thực hành)</h2>
+        <p>Bài tập ngắn để biến kiến thức thành kỹ năng, luôn kèm gợi ý có thể mở ra khi bí.</p>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">10 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Vẽ core loop của một game bạn đang chơi</h3>
+                <ol class="steps">
+                    <li>Chọn một game bạn chơi tuần này.</li>
+                    <li>Viết ra hành động lặp lại nhiều nhất trong 30 giây đầu.</li>
+                    <li>Vẽ 3 mũi tên nối các bước đó thành một vòng khép kín.</li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nếu bí, thử bắt đầu từ nút bấm bạn nhấn nhiều nhất — nó thường là bước đầu của loop.</p>
+                </details>
+            </div>
+        </div>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;div class="exercise"&gt;
+  &lt;div class="exercise-head"&gt;...&lt;/div&gt;
+  &lt;div class="exercise-body"&gt;
+    &lt;h3&gt;...&lt;/h3&gt;
+    &lt;ol class="steps"&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ol&gt;
+    &lt;details class="hint"&gt;&lt;summary&gt;Xem gợi ý&lt;/summary&gt;&lt;p&gt;...&lt;/p&gt;&lt;/details&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h2 id="quiz">Quiz</h2>
+        <p>Chỉ cần viết <code>data-answer</code> và các <code>button[data-opt]</code>; site.js tự khóa sau khi chọn, hiện giải thích và nút làm lại.</p>
+        <div class="quiz" data-answer="b">
+            <p class="q">Trong MDA, "Dynamics" là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Luật chơi được lập trình sẵn</button>
+                <button data-opt="b"><span class="badge">B</span> Hành vi phát sinh khi người chơi tương tác với luật</button>
+                <button data-opt="c"><span class="badge">C</span> Cảm xúc người chơi cảm nhận được</button>
+            </div>
+            <div class="explain" hidden><p>Dynamics là tầng "vận hành lúc chơi thật" — cùng một mechanic có thể tạo dynamics khác nhau tùy người chơi.</p></div>
+        </div>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;div class="quiz" data-answer="b"&gt;
+  &lt;p class="q"&gt;Câu hỏi?&lt;/p&gt;
+  &lt;div class="quiz-opts"&gt;
+    &lt;button data-opt="a"&gt;&lt;span class="badge"&gt;A&lt;/span&gt; ...&lt;/button&gt;
+    &lt;button data-opt="b"&gt;&lt;span class="badge"&gt;B&lt;/span&gt; ...&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="explain" hidden&gt;&lt;p&gt;Vì sao đúng/sai.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h2 id="flashcards">Flashcards</h2>
+        <p>Bấm hoặc dùng Enter/Space để lật thẻ (mặc định của <code>&lt;button&gt;</code>).</p>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>MDA</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Mechanics — Dynamics — Aesthetics: khung phân tích 3 lớp cho game.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Core loop</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vòng hành động lặp lại tạo nên xương sống gameplay.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Flow</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Trạng thái tập trung khi thử thách vừa khớp kỹ năng người chơi.</span>
+                </span>
+            </button>
+        </div>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;button type="button" class="flash"&gt;
+  &lt;span class="flash-inner"&gt;
+    &lt;span class="front"&gt;&lt;strong&gt;Thuật ngữ&lt;/strong&gt;&lt;span class="hint-label"&gt;Bấm để lật&lt;/span&gt;&lt;/span&gt;
+    &lt;span class="back"&gt;Định nghĩa ngắn.&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/button&gt;</code></pre>
+        </div>
+
+        <h2 id="recap">Recap</h2>
+        <p>Ba ý chốt lại cuối bài, giúp người đọc nhớ được điều quan trọng nhất.</p>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Mechanics là luật; Dynamics là hành vi khi chơi; Aesthetics là cảm xúc.</li>
+                <li><span class="n">2</span> Designer thiết kế từ M, người chơi trải nghiệm từ A.</li>
+                <li><span class="n">3</span> Dùng MDA để chẩn đoán game chưa vui ở lớp nào.</li>
+            </ol>
+        </div>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;div class="recap"&gt;
+  &lt;h3&gt;Nhớ 3 điều&lt;/h3&gt;
+  &lt;ol&gt;&lt;li&gt;&lt;span class="n"&gt;1&lt;/span&gt; Ý chính.&lt;/li&gt;&lt;/ol&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h2 id="reading">Reading (đọc thêm)</h2>
+        <ul class="reading">
+            <li><span class="pill type-sach">Sách</span> <span class="reading-title">The Art of Game Design</span> <span class="reading-meta">Jesse Schell · 2008</span> <p class="reading-why">Đọc để có bộ "lens" tự vấn khi thiết kế bất kỳ hệ thống nào.</p></li>
+            <li><span class="pill type-paper">Paper</span> <span class="reading-title">MDA: A Formal Approach to Game Design</span> <span class="reading-meta">Hunicke, LeBlanc, Zubek · 2004</span> <p class="reading-why">Đọc để hiểu đúng nguồn gốc khung MDA trước khi dùng nó phân tích game.</p></li>
+        </ul>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;ul class="reading"&gt;
+  &lt;li&gt;
+    &lt;span class="pill type-sach"&gt;Sách&lt;/span&gt;
+    &lt;span class="reading-title"&gt;Tên&lt;/span&gt;
+    &lt;span class="reading-meta"&gt;Tác giả · Năm&lt;/span&gt;
+    &lt;p class="reading-why"&gt;Đọc để ...&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </div>
+
+        <h2 id="pager">Lesson foot &amp; pager</h2>
+        <p>Nút đánh dấu đã học và pager bên dưới đang hoạt động thật (site.js render theo <code>data-lesson</code> của trang này).</p>
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;footer class="lesson-foot"&gt;
+  &lt;button type="button" id="markDoneBtn"&gt;&lt;/button&gt;
+  &lt;nav class="pager"&gt;
+    &lt;a class="pager-prev" id="pagerPrev" href="#"&gt;&lt;/a&gt;
+    &lt;a class="pager-next" id="pagerNext" href="#"&gt;&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/footer&gt;</code></pre>
+        </div>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="assets/js/curriculum.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

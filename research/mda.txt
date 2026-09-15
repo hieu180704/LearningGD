@@ -1,0 +1,462 @@
+NGHIÊN CỨU & FACT-CHECK: MDA FRAMEWORK TRONG GAME DESIGN
+(Nguồn cho bài giảng tiếng Việt — người mới học Game Design)
+Ngày thực hiện: 2026-09-15
+
+MỤC LỤC
+1. Paper gốc — thông tin xuất bản & định nghĩa M/D/A
+2. Hai góc nhìn: Designer (M→D→A) vs Player (A→D→M)
+3. Danh sách 8 Aesthetics (nguyên văn)
+4. Ví dụ game trong paper minh họa Aesthetics
+5. Ví dụ phân tích Monopoly — feedback loop, dynamic model
+6. Phê bình / giới hạn của MDA & framework kế thừa
+7. Marc LeBlanc là ai
+8. Ví dụ game hiện đại phân tích theo MDA [PHÂN TÍCH — không từ nguồn]
+9. Hiểu lầm phổ biến khi người mới dùng MDA
+10. Tổng hợp mọi mục [CHƯA VERIFY]
+
+================================================================
+1. PAPER GỐC — THÔNG TIN XUẤT BẢN & ĐỊNH NGHĨA M/D/A
+================================================================
+
+Tên paper: "MDA: A Formal Approach to Game Design and Game Research"
+Tác giả: Robin Hunicke, Marc LeBlanc, Robert Zubek
+  (email trong paper: hunicke@cs.northwestern.edu, marc_leblanc@alum.mit.edu,
+  rob@cs.northwestern.edu)
+
+Nơi công bố (đã verify, đọc trực tiếp bản PDF gốc):
+- AAAI Workshop "Challenges in Game AI", 2004
+- Technical Report series: WS-04-04, xuất bản bởi AAAI Press, Palo Alto, CA
+- Trang chủ AAAI: https://aaai.org/papers/ws04-04-001-mda-a-formal-approach-to-game-design-and-game-research/
+- Danh sách toàn bộ workshop: https://aaai.org/proceeding/ws04-04/
+- PDF gốc (đọc trực tiếp để fact-check): https://users.cs.northwestern.edu/~hunicke/MDA.pdf
+
+Paper nói rõ framework "developed and taught as part of the Game Design
+and Tuning Workshop at the Game Developers Conference, San Jose 2001-2004"
+— tức là MDA được dạy ở GDC từ 2001 đến 2004 TRƯỚC KHI được viết thành
+paper học thuật công bố tại AAAI 2004. Đây KHÔNG phải một paper GDC, mà
+là paper AI/research được trình bày tại workshop AI của AAAI (Association
+for the Advancement of Artificial Intelligence), nhắm tới đối tượng
+research/AI-cho-game chứ không chỉ giới game design thuần túy.
+
+ĐỊNH NGHĨA GỐC (trích nguyên văn từ paper, đã đọc trực tiếp PDF):
+
+"Mechanics describes the particular components of the game, at the level
+of data representation and algorithms."
+→ Mechanics = các thành phần cụ thể của game, ở tầng biểu diễn dữ liệu và
+thuật toán (rules, actions, control mechanisms mà player có thể dùng).
+
+"Dynamics describes the run-time behavior of the mechanics acting on
+player inputs and each others' outputs over time."
+→ Dynamics = hành vi vận hành theo thời gian thực, khi mechanics phản ứng
+với input của player VÀ với output của các mechanics khác (tương tác lẫn
+nhau theo thời gian).
+
+"Aesthetics describes the desirable emotional responses evoked in the
+player, when she interacts with the game system."
+→ Aesthetics = các phản ứng cảm xúc mong muốn được khơi gợi ở player khi
+tương tác với hệ thống game.
+
+Paper nhấn mạnh một ý quan trọng hay bị bỏ qua: "games are more like
+artifacts than media" — nội dung (content) của game là HÀNH VI
+(behavior), không phải là media chảy ra từ nó tới player. Đây là lý do
+MDA coi game như hệ thống tạo ra hành vi qua tương tác, chứ không coi
+game như phim/sách để "truyền tải nội dung".
+
+Sơ đồ quy trình trong paper: Rules → System → "Fun", tương ứng
+Mechanics → Dynamics → Aesthetics.
+
+================================================================
+2. HAI GÓC NHÌN: DESIGNER (M→D→A) VS PLAYER (A→D→M)
+================================================================
+
+Trích nguyên văn (đã verify từ PDF gốc, mục "MDA as Lens"):
+
+"Each component of the MDA framework can be thought of as a 'lens' or a
+'view' of the game — separate, but causally linked."
+
+"From the designer's perspective, the mechanics give rise to dynamic
+system behavior, which in turn leads to particular aesthetic experiences.
+From the player's perspective, aesthetics set the tone, which is born
+out in observable dynamics and eventually, operable mechanics."
+
+"When working with games, it is helpful to consider both the designer
+and player perspectives. It helps us observe how even small changes in
+one layer can cascade into others. In addition, thinking about the
+player encourages experience-driven (as opposed to feature-driven)
+design."
+
+Paper minh họa bằng sơ đồ: mũi tên đỏ Designer đi M → D → A; mũi tên
+(chấm/ngược) Player đi A → D → M.
+
+Vì lý do này, paper CHỦ ĐỘNG chọn trình bày ngược thứ tự tên gọi khi đi
+vào chi tiết: "As such, we begin our investigation with a discussion of
+Aesthetics, and continue on to Dynamics, finishing with the underlying
+Mechanics." — tức là bản thân paper phân tích theo thứ tự A → D → M dù
+tên framework viết là M-D-A.
+
+================================================================
+3. DANH SÁCH 8 AESTHETICS (NGUYÊN VĂN)
+================================================================
+
+Trích nguyên văn taxonomy trong paper (mục "Aesthetics"):
+
+"In describing the aesthetics of a game, we want to move away from words
+like 'fun' and 'gameplay' towards a more directed vocabulary. This
+includes but is not limited to the taxonomy listed here:"
+
+1. Sensation — Game as sense-pleasure
+2. Fantasy — Game as make-believe
+3. Narrative — Game as drama
+4. Challenge — Game as obstacle course
+5. Fellowship — Game as social framework
+6. Discovery — Game as uncharted territory
+7. Expression — Game as self-discovery
+8. Submission — Game as pastime
+
+Lưu ý quan trọng khi giảng: paper ghi rõ danh sách này "includes but is
+not limited to" — tức bản thân tác giả không coi đây là danh sách đóng,
+đầy đủ tuyệt đối (điều này liên quan trực tiếp tới phê bình ở mục 6).
+
+Paper cũng đưa thêm mô tả ngắn cho một số aesthetic trong phần "Dynamic
+Models" (nguyên văn):
+- Challenge: "created by things like time pressure and opponent play."
+- Fellowship: "can be encouraged by sharing information across certain
+  members of a session (a team) or supplying winning conditions that are
+  more difficult to achieve alone (such as capturing an enemy base)."
+- Expression: "comes from dynamics that encourage individual users to
+  leave their mark: systems for purchasing, building or earning game
+  items, for designing, constructing and changing levels or worlds, and
+  for creating personalized, unique characters."
+- Dramatic tension (liên quan Narrative): "comes from dynamics that
+  encourage a rising tension, a release, and a denouement."
+
+================================================================
+4. VÍ DỤ GAME TRONG PAPER MINH HỌA AESTHETICS
+================================================================
+
+Trích nguyên văn (đã verify từ PDF gốc):
+
+"For example, consider the games Charades, Quake, The Sims and Final
+Fantasy. While each are 'fun' in their own right, it is much more
+informative to consider the aesthetic components that create their
+respective player experiences:
+
+Charades: Fellowship, Expression, Challenge.
+Quake: Challenge, Sensation, Competition, Fantasy.
+The Sims: Discovery, Fantasy, Expression, Narrative.
+Final Fantasy: Fantasy, Narrative, Expression, Discovery, Challenge,
+Submission."
+
+LƯU Ý FACT-CHECK QUAN TRỌNG: trong ví dụ Quake, paper liệt kê
+"Competition" như một aesthetic — nhưng "Competition" KHÔNG có trong
+danh sách chính thức 8 aesthetics ở mục 3. Đây là điểm không nhất quán
+trong chính bản gốc (không phải lỗi của người tổng hợp) — nên nêu khi
+giảng để tránh học viên bối rối khi đối chiếu hai đoạn.
+
+Paper kết luận: "each game pursues multiple aesthetic goals, in varying
+degrees. Charades emphasizes Fellowship over Challenge; Quake provides
+Challenge as a main element of gameplay. And while there is no Grand
+Unified Theory of games or formula that details the combination and
+proportion of elements that will result in 'fun', this taxonomy helps us
+describe games, shedding light on how and why different games appeal to
+different players, or to the same players at different times."
+
+Về tính "competitive": paper phân tích thêm "Charades and Quake are both
+competitive. They succeed when the various teams or players in these
+games are emotionally invested in defeating each other. This requires
+that players have adversaries (in Charades, teams compete, in Quake, the
+player competes against computer opponents) and that all parties want to
+win." — và nhấn mạnh: "supporting adversarial play and clear feedback
+about who is winning are essential to competitive games."
+
+================================================================
+5. VÍ DỤ PHÂN TÍCH MONOPOLY — FEEDBACK LOOP, DYNAMIC MODEL
+================================================================
+
+Đây là ví dụ trung tâm, dài nhất trong paper (mục "Dynamic Models",
+"Mechanics", "Tuning"), đã đọc trực tiếp và verify toàn bộ.
+
+(a) Dynamic model bằng xác suất:
+"the model of 2 six-sided die will help us determine the average time it
+will take a player to progress around the board in Monopoly, given the
+probability of various rolls." — paper có kèm biểu đồ phân phối xác suất
+2D6.
+
+(b) Feedback loop ("rich get richer" — LƯU Ý: cụm "the rich get richer"
+KHÔNG xuất hiện nguyên văn trong paper, đây là cách diễn đạt phổ biến
+trong cộng đồng game design khi tóm tắt ý này, không phải trích dẫn trực
+tiếp). Nguyên văn paper:
+
+"Similarly, we can identify feedback systems within gameplay to
+determine how particular states or changes affect the overall state of
+gameplay. In Monopoly, as the leader or leaders become increasingly
+wealthy, they can penalize players with increasing effectiveness. Poorer
+players become increasingly poor."
+
+"As the gap widens, only a few (and sometimes only one) of the players
+is really invested. Dramatic tension and agency are lost."
+
+Paper minh họa bằng sơ đồ so sánh với một feedback system quen thuộc:
+thermostat (Room — Thermometer — Controller, với "Too Hot!" / "Too
+Cold!"), rồi vẽ sơ đồ tương tự cho Monopoly (Roll → Move → Winners/Losers
+→ Cash In!/Pay Up!).
+
+(c) Đề xuất sửa (paper tự đưa ra, mang tính minh họa phương pháp chứ
+không phải khuyến nghị chính thức thay đổi luật Monopoly thật):
+"Using our understanding of aesthetics and dynamics, we can imagine ways
+to fix Monopoly — either rewarding players who are behind to keep them
+within a reasonable distance of the leaders, or making progress more
+difficult for rich players. Of course — this might impact the game's
+ability to recreate the reality of monopoly practices — but reality
+isn't always 'fun'."
+
+Ở tầng Mechanics, paper đề xuất cụ thể hơn: "bonuses or 'subsidies' for
+poor players, and penalties or 'taxes' for rich players — perhaps
+calculated when crossing the Go square, leaving jail, or exercising
+monopolies over a certain threshold in value." Hoặc thêm time-pressure
+mechanics: "depleting resources over time with a constant rate tax...,
+doubling all payouts on monopolies..., or randomly distributing all
+properties under a certain value threshold."
+
+Đây chính là ví dụ paper dùng để chứng minh cách MDA đi xuyên suốt 3 tầng:
+Aesthetic goal (giữ dramatic tension cho mọi player) → Dynamic (feedback
+loop giàu-nghèo cần được cân bằng) → Mechanic (thuế/subsidy cụ thể) →
+Tuning (playtest và chỉnh giá trị).
+
+(d) Ví dụ phụ khác trong paper (mục "MDA at Work"): một game
+"Babysitting" giả định (AI Babysitter), trình bày qua 3 "pass" nhắm tới
+3 nhóm tuổi khác nhau (3-7 tuổi; 7-12 tuổi kiểu Rugrats; 14-35 tuổi kiểu
+Splinter Cell/Thief) — dùng để minh họa việc thay đổi aesthetic goal (từ
+Discovery/Exploration, sang Narrative/Challenge, sang Fantasy/Submission)
+sẽ kéo theo thay đổi dynamics và mechanics hoàn toàn khác nhau, dù cùng
+một "core loop" tìm-và-bắt.
+
+================================================================
+6. PHÊ BÌNH / GIỚI HẠN CỦA MDA & FRAMEWORK KẾ THỪA
+================================================================
+
+(a) Luiz Claudio Silveira Duarte — "Revisiting the MDA framework"
+(Game Developer / Gamasutra):
+Link: https://www.gamedeveloper.com/design/revisiting-the-mda-framework
+Tóm tắt (đã đọc bài qua WebFetch): Duarte cho rằng giả định nền tảng của
+MDA — player tiếp cận game theo hướng Aesthetics trước rồi mới khám phá
+Dynamics/Mechanics — không áp dụng phổ quát cho mọi loại game, đặc biệt
+board game. Với board game, player buộc phải học luật (Mechanics) trước
+khi chơi ("It is impossible for a Chess novice to learn its rules simply
+by moving the men around on the board"), nên hành trình A→D→M không đúng
+với board game — Duarte cho rằng đây là dấu hiệu MDA bị thiên lệch về
+digital game. Ông đề xuất áp dụng MDA linh hoạt/phi tuyến hơn thay vì
+xem A→D→M là quy luật cứng.
+
+(b) Wikipedia — bài "MDA framework"
+Link: https://en.wikipedia.org/wiki/MDA_framework
+Bài này trích dẫn phê bình của Joris Dormans (nhà nghiên cứu game design,
+tác giả công cụ Machinations) cho rằng danh sách 8 aesthetics "form a
+rather arbitrary list of emotional targets, which lack fundamentals" —
+TỨC LÀ tám loại aesthetics không được xây dựng trên nền tảng lý thuyết
+tâm lý/cảm xúc vững chắc, mang tính liệt kê hơn là hệ thống hóa.
+[CHƯA VERIFY ở mức paper gốc của Dormans — trong phiên nghiên cứu này chỉ
+xác nhận được trích dẫn qua Wikipedia, chưa truy được trực tiếp bài viết
+gốc của Dormans để đối chiếu nguyên văn/context đầy đủ.]
+
+(c) Wolfgang Walk, Daniel Görlich, Mark Barrett (2017) — "Design,
+Dynamics, Experience (DDE): An Advancement of the MDA Framework for Game
+Design", chương sách trong "Entertainment Computing and Serious Games"
+(Springer).
+Link: https://link.springer.com/chapter/10.1007/978-3-319-53088-8_3
+Tóm tắt (đã verify qua kết quả search + trang Springer): nhóm tác giả cho
+rằng MDA "neglecting many design aspects of games while focusing too much
+on game mechanics", và không phù hợp cho các thể loại thiên về gamification
+hoặc thiết kế trải nghiệm (experience-driven design) không thuần túy
+mechanic-driven. Họ đề xuất framework kế thừa DDE (Design — Dynamics —
+Experience), thay "Aesthetics" bằng "Experience" được mô hình hóa chi
+tiết hơn (gồm cognition, behavior, sociocultural, affect...), và nhấn
+mạnh cấu trúc narrative/xung đột player-đối thủ nhiều hơn MDA gốc.
+
+(d) Jesse Schell — Elemental Tetrad, trong sách "The Art of Game Design:
+A Book of Lenses" (2008), chương 4.
+Link tham khảo: https://en.wikipedia.org/wiki/Elemental_tetrad
+Tóm tắt: không phải phê bình trực tiếp MDA, mà là một framework song
+song/khác hướng: chia game thành 4 thành tố ngang hàng — Mechanics,
+Story, Aesthetics, Technology — hỗ trợ lẫn nhau để tạo trải nghiệm, thay
+vì mô hình phân tầng nhân-quả M→D→A của Hunicke/LeBlanc/Zubek. Nên nêu
+như một góc nhìn bổ sung/thay thế hơn là "phê bình" MDA.
+
+(e) Miguel Sicart — "Against Procedurality" (Game Studies, vol. 11,
+issue 3, 2011).
+Link: https://gamestudies.org/1103/articles/sicart_ap
+QUAN TRỌNG — LIÊN QUAN GIÁN TIẾP, KHÔNG PHẢI PHÊ BÌNH MDA TRỰC TIẾP: bài
+này phê bình "procedural rhetoric" (lý thuyết của Ian Bogost) — quan
+điểm cho rằng ý nghĩa của game nằm trọn trong luật/hệ thống hình thức
+(rules), và player chỉ "hoàn thành" ý nghĩa đó. Sicart lập luận player là
+chủ thể sáng tạo, chơi mang tính "appropriative" (chiếm dụng/diễn giải
+lại), nên ý nghĩa không chỉ nằm trong hệ thống hình thức. Bài này KHÔNG
+nhắc tới MDA/Hunicke/LeBlanc/Zubek trực tiếp trong các phần đã tìm được;
+chỉ liên quan ở mức khái niệm — cùng thuộc dòng phê bình "chủ nghĩa hình
+thức" (formalism) trong game design mà MDA cũng thường bị xếp vào.
+[CHƯA VERIFY: liên hệ trực tiếp Sicart ↔ MDA — nên dùng cẩn trọng, nói rõ
+đây là phê bình formalism nói chung, không phải nhắm vào MDA.]
+
+(f) Không xác minh được:
+- Keith Burgun: không tìm được bài viết/nguồn cụ thể nào của Burgun phê
+  bình trực tiếp MDA framework trong phiên nghiên cứu này (dù ông có
+  hướng "formalist" gần với chủ đề). [CHƯA VERIFY — KHÔNG dùng làm nguồn
+  cho bài giảng cho đến khi tìm được trích dẫn cụ thể].
+- Frank Lantz: không tìm được phê bình cụ thể, có trích dẫn được, nhắm
+  vào MDA trong phiên nghiên cứu này. [CHƯA VERIFY].
+- "Tanya": tên này do lỗi trong đề bài research (không phải của user),
+  không có nguồn nào liên quan MDA — bỏ qua. Chỉ xác nhận được Wolfgang
+  Walk (đồng tác giả DDE, xem mục c).
+
+================================================================
+7. MARC LEBLANC LÀ AI
+================================================================
+
+Nguồn: Wikipedia "Marc LeBlanc" — https://en.wikipedia.org/wiki/Marc_LeBlanc
+(nguồn thứ cấp, chưa đối chiếu chéo với nguồn sơ cấp khác trong phiên
+này — mức tin cậy: khá, nhưng nên gắn [CHƯA VERIFY CHÉO] cho các chi tiết
+sự nghiệp chi tiết).
+
+- Học vấn: Cử nhân và Thạc sĩ Computer Science tại MIT.
+- Sự nghiệp: làm việc tại Looking Glass Studios, tham gia các game Ultima
+  Underworld II, System Shock, Flight Unlimited, Terra Nova: Strike Force
+  Centauri, dòng game Thief (Thief: The Dark Project, Thief 2: The Metal
+  Age), System Shock 2.
+- Sau đó làm AI cho game thể thao tại Sega/Visual Concepts.
+- Đồng phát triển game Oasis (2004) cùng Andrew Leker tại Mind Control
+  Software — đoạt giải tại Independent Games Festival (IGF).
+- Là người dẫn dắt (lead) "Game Design and Tuning Workshop" tại GDC nhiều
+  năm — CHÍNH LÀ nơi MDA được "developed and taught" từ 2001-2004 theo
+  paper gốc (đã verify ở mục 1).
+- Vận hành trang cá nhân 8kindsoffun.com / algorithmancy.8kindsoffun.com,
+  nơi đăng các bài giảng/rant về game design, bao gồm "8 Kinds of Fun".
+  Paper gốc trích dẫn 2 nguồn của LeBlanc:
+  [LeBlanc, 2004a] "Game Design and Tuning Workshop Materials", GDC 2004
+    — http://algorithmancy.8kindsoffun.com/GDC2004/
+  [LeBlanc, 2004b] "Mechanics, Dynamics, Aesthetics: A Formal Approach to
+    Game Design", bài giảng tại Northwestern University, tháng 4/2004
+    — http://algorithmancy.8kindsoffun.com/MDAnwu.ppt
+  (2 link .ppt này lấy từ danh mục References của chính paper gốc — chưa
+  tự tay mở lại 2 file .ppt để verify còn sống hay không trong phiên này;
+  [CHƯA VERIFY tình trạng link còn hoạt động]).
+
+Kết luận: khẳng định "Marc LeBlanc trình bày MDA tại GDC workshop từ
+2001-2004" là ĐÚNG, có trích dẫn trực tiếp từ paper gốc.
+
+================================================================
+8. VÍ DỤ GAME HIỆN ĐẠI PHÂN TÍCH THEO MDA
+   [PHÂN TÍCH — không từ nguồn, do người tổng hợp tự suy luận]
+================================================================
+
+Lưu ý: toàn bộ mục này là phân tích riêng, KHÔNG trích từ paper hay bất kỳ
+nguồn nào — dùng để minh họa cách áp dụng MDA cho game hiện đại, đa nền
+tảng/thể loại.
+
+1) Hades (Supergiant Games, PC/console, indie roguelike):
+   Mechanic: chết là reset run nhưng giữ lại currency/upgrade vĩnh viễn
+   (meta-progression), mỗi lần quay về hub có thoại NPC mới.
+   Dynamic: player lặp lại run ngắn liên tục, mỗi lần chết là một "chunk"
+   truyện được hé lộ thêm → vòng lặp thất bại-rồi-tiến bộ.
+   Aesthetic: Narrative (khám phá cốt truyện qua từng cái chết) +
+   Challenge (combat khó, build đa dạng) + Discovery (room/boon ngẫu
+   nhiên mỗi run).
+
+2) Among Us (InnerSloth, mobile/PC, social deduction):
+   Mechanic: role ẩn danh (Crewmate/Impostor), voting công khai, task
+   list hiển thị tiến độ chung.
+   Dynamic: thông tin bất đối xứng tạo ra tranh luận, buộc tội, nói dối
+   giữa vòng họp.
+   Aesthetic: Fellowship (chơi theo nhóm, đọc vị bạn bè) + Challenge
+   (thuyết phục/suy luận) — không nằm gọn trong danh sách gốc nhưng gần
+   nhất với Fellowship + Challenge theo taxonomy paper.
+
+3) Stardew Valley (ConcernedApe, indie farming sim, PC/console/mobile):
+   Mechanic: quỹ năng lượng (energy) giới hạn mỗi ngày, cây trồng có
+   timer sinh trưởng, điểm quan hệ (friendship point) với NPC.
+   Dynamic: player tối ưu hóa lịch trình hàng ngày, xây dựng trang trại
+   dần dần qua nhiều "ngày game".
+   Aesthetic: Expression (tự thiết kế farm layout) + Submission (vòng
+   lặp thư giãn, lặp lại) + Discovery (mở khóa vùng bản đồ, sự kiện mới).
+
+4) Elden Ring (FromSoftware, AAA console/PC):
+   Mechanic: stamina-based combat (mọi hành động tiêu stamina), open
+   world không chỉ đường, boss có thể gặp theo thứ tự tự do.
+   Dynamic: player tự mò hướng đi, rủi ro cao khi đấu boss vượt cấp, thất
+   bại lặp lại buộc học pattern.
+   Aesthetic: Challenge (độ khó nổi tiếng) + Discovery (tự tìm đường,
+   không có quest marker) + Fantasy (nhập vai Tarnished trong thế giới
+   dark fantasy).
+
+5) Genshin Impact (miHoYo/HoYoverse, mobile/PC/console, gacha):
+   Mechanic: tỉ lệ gacha để roll nhân vật, cơ chế elemental reaction khi
+   phối nguyên tố, giới hạn Resin (năng lượng) mỗi ngày để nhận reward.
+   Dynamic: player tối ưu đội hình theo counter/reaction, bị giới hạn
+   tốc độ tiến bộ bởi Resin → tạo thói quen quay lại game mỗi ngày.
+   Aesthetic: Expression (build đội hình, trang bị theo gu riêng) +
+   Discovery (open world, exploration puzzle) + Submission (vòng lặp
+   daily quest lặp lại, gacha compulsion loop).
+
+================================================================
+9. HIỂU LẦM PHỔ BIẾN KHI NGƯỜI MỚI DÙNG MDA
+================================================================
+
+1) Nhầm "Aesthetics" = đồ họa/hình ảnh (graphics/art style).
+   Sai theo paper: Aesthetics trong MDA là "desirable emotional responses
+   evoked in the player" — tức CẢM XÚC, không phải yếu tố thị giác. Từ
+   "Sensation" (1 trong 8 loại) mới liên quan gần nhất tới thẩm mỹ
+   nghe-nhìn, và đó chỉ là 1/8 loại.
+
+2) Coi 8 aesthetics là danh sách đóng, đầy đủ, phải chọn đúng 1-2 cái.
+   Sai theo paper: chính paper ghi "includes but is not limited to" — họ
+   không khẳng định đây là danh sách hoàn chỉnh. Ví dụ Quake còn được gắn
+   thêm "Competition" — một nhãn KHÔNG có trong danh sách 8 loại chính
+   thức (xem mục 4), cho thấy chính tác giả cũng dùng linh hoạt.
+
+3) Nghĩ M→D→A là trình tự BẮT BUỘC phải làm khi thiết kế (cứ phải làm
+   Mechanics trước).
+   Không hẳn: paper mô tả 2 góc nhìn song song (designer M→D→A, player
+   A→D→M) và khuyến khích tư duy experience-driven — tức khi thiết kế
+   vẫn nên bắt đầu suy nghĩ từ Aesthetic goal muốn tạo ra, rồi mới suy
+   ngược ra Dynamics/Mechanics, dù người thực-thi-code vẫn phải build
+   Mechanics trước về mặt kỹ thuật.
+
+4) Áp dụng MDA như công thức tính "độ fun" (cộng dồn aesthetics = game
+   hay).
+   Sai theo paper: "there is no Grand Unified Theory of games or formula
+   that details the combination and proportion of elements that will
+   result in 'fun'" — MDA chỉ là công cụ MÔ TẢ/PHÂN TÍCH và công cụ tư
+   duy khi tuning, không phải công thức đảm bảo game hay.
+
+5) Coi MDA là framework phổ quát cho MỌI loại game (kể cả board game,
+   tabletop) theo đúng nghĩa A→D→M.
+   Theo phê bình Duarte (mục 6a): với board game, player thường phải học
+   luật (Mechanics) trước khi trải nghiệm Aesthetics — ngược chiều mô
+   hình mặc định trong paper, vốn thiên về digital game.
+
+================================================================
+10. TỔNG HỢP MỌI MỤC [CHƯA VERIFY]
+================================================================
+
+- Cụm "the rich get richer" gắn với ví dụ Monopoly: KHÔNG xuất hiện
+  nguyên văn trong paper gốc — chỉ là cách diễn đạt phổ biến ngoài cộng
+  đồng để tóm ý feedback loop mà paper mô tả (xem mục 5b).
+- Trích dẫn Joris Dormans phê bình "arbitrary list of emotional targets":
+  chỉ xác nhận được qua Wikipedia, chưa truy trực tiếp bài viết gốc của
+  Dormans để đối chiếu nguyên văn (mục 6b).
+- Liên hệ Miguel Sicart "Against Procedurality" ↔ MDA cụ thể: KHÔNG tìm
+  thấy Sicart nhắc trực tiếp tới MDA/Hunicke/LeBlanc/Zubek; chỉ liên quan
+  ở tầng khái niệm phê bình formalism nói chung (mục 6e).
+- Keith Burgun phê bình MDA: KHÔNG tìm được nguồn cụ thể, có thể trích
+  dẫn được, trong phiên nghiên cứu này (mục 6f).
+- Frank Lantz phê bình MDA: KHÔNG tìm được nguồn cụ thể (mục 6f).
+- Nhân vật "Tanya" (nêu trong yêu cầu gốc) liên quan MDA: không xác định
+  được, nghi ngờ nhầm tên (mục 6f).
+- Hai link tài liệu .ppt của Marc LeBlanc (algorithmancy.8kindsoffun.com,
+  trích từ References của paper gốc): chưa tự mở lại để kiểm tra link còn
+  sống hay không trong phiên này (mục 7).
+- Chi tiết sự nghiệp Marc LeBlanc (danh sách game, Sega/Visual Concepts,
+  Oasis/IGF...): chỉ lấy từ Wikipedia, chưa đối chiếu chéo với nguồn sơ
+  cấp khác (mục 7).
+- Mục 8 (5 ví dụ game hiện đại) và phần diễn giải trong mục 9: hoàn toàn
+  là phân tích/suy luận của người tổng hợp, KHÔNG phải trích dẫn từ nguồn
+  nào — đã gắn nhãn rõ trong từng mục.
