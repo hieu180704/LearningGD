@@ -1,0 +1,937 @@
+NGHIÊN CỨU & FACT-CHECK: "GAME LÀ GÌ" — CÁC ĐỊNH NGHĨA GAME NỔI TIẾNG
+(Nguồn cho bài giảng tiếng Việt — Tầng 0, Bài 1 — người mới học Game Design)
+Ngày thực hiện: 2026-09-15
+
+MỤC LỤC
+1. Bernard Suits — The Grasshopper (1978)
+2. Katie Salen & Eric Zimmerman — Rules of Play (2003)
+3. Jesper Juul — "The Game, the Player, the World" (2003) — Classic Game Model
+4. Johan Huizinga — Homo Ludens (1938) & "Magic Circle"
+5. Roger Caillois — Man, Play and Games (1958)
+6. Greg Costikyan — "I Have No Words & I Must Design" (1994/2002)
+7. Tracy Fullerton — Game Design Workshop — Formal Elements
+8. Jesse Schell — The Art of Game Design (2008)
+9. Raph Koster — A Theory of Fun (2004)
+10. Wittgenstein — Philosophical Investigations — "family resemblance"
+11. Toy / Game / Puzzle / Play — Will Wright, Chris Crawford
+12. Các ca "biên giới" (borderline cases) — đa thể loại PC/console/indie/mobile
+13. Vì sao định nghĩa game hữu ích cho công việc designer thật
+14. Hiểu lầm phổ biến của người mới về "game là gì"
+15. Tổng hợp mọi mục [CHƯA VERIFY]
+
+================================================================
+1. BERNARD SUITS — THE GRASSHOPPER (1978)
+================================================================
+
+Sách: "The Grasshopper: Games, Life and Utopia", Bernard Suits, xuất bản
+lần đầu 1978 (University of Toronto Press). Bản đang lưu hành phổ biến là
+bản tái bản Broadview Press 2005/2014 (có lời tựa của Thomas Hurka).
+
+TÌNH TRẠNG VERIFY (CẬP NHẬT 2026-09-15): ĐÃ TỰ MỞ ĐỌC ĐƯỢC NGUYÊN VĂN TRỰC
+TIẾP TỪ CHÍNH SÁCH — qua Google Books "search inside" (search-inside hiển
+thị đúng ảnh scan/OCR câu chữ trang sách, không phải diễn giải của bên thứ
+ba): https://books.google.com/books?id=G9z4wjVB_0wC (ấn bản Broadview
+2014, ISBN 1770480110, ba lần in lại của "The Grasshopper: Games, Life and
+Utopia"). Đã tự truy vấn nhiều cụm từ khóa và đọc được snippet chứa đúng
+ngữ cảnh quanh câu (kể cả câu thoại trước/sau, xác nhận đây là văn bản
+sách thật, không phải trích dẫn rời). (Trước đó, 2 hướng archive.org
+grasshoppergames00suit_1 — access-restricted — và PDF kevinjpatton.com —
+scan không đọc được text — đều thất bại như ghi nhận cũ; Google Books là
+hướng thành công.)
+
+Định nghĩa đầy đủ, có ngoặc vuông thuật ngữ (ĐÃ VERIFY NGUYÊN VĂN, trang 55
+— khớp với số trang 54–55 mà Wikipedia dẫn):
+"To play a game is to attempt to achieve a specific state of affairs
+[prelusory goal], using only means permitted by rules [lusory means],
+where the rules prohibit use of more efficient in favour of less
+efficient means [constitutive rules], and where the rules are accepted
+just because they make possible such activity [lusory attitude]."
+(snippet Google Books, trang PA55, khớp 100% từng dấu ngoặc vuông với bản
+cũ trong file này — không cần sửa).
+
+LƯU Ý MỚI (đã đọc thêm): đây là bản RESTATEMENT có ngoặc vuông thuật ngữ.
+Một bản KHÔNG ngoặc, câu chữ hơi khác, xuất hiện SỚM HƠN ở trang 48–49
+(chương đầu, dạng lý luận trực tiếp không phải hội thoại):
+"to play a game is to engage in activity directed towards bringing about a
+specific state of affairs, using only means permitted by rules, where the
+rules prohibit [use of] more efficient in favour of less efficient
+means..." (snippet Google Books, trang PA48/49 — câu bị ngắt đúng chỗ
+trang in "48 THE GRASSHOPPER: GAMES, LIFE AND UTOPIA" nên có thể chưa đủ
+100% liền mạch, nhưng nội dung khớp).
+
+Dịch: "Chơi một game là cố gắng đạt một trạng thái sự việc cụ thể [mục
+tiêu tiền-luật (prelusory goal)], chỉ dùng những phương tiện được luật
+cho phép [phương tiện-luật (lusory means)], trong đó luật cấm dùng
+phương tiện hiệu quả hơn để ép người chơi dùng phương tiện kém hiệu quả
+hơn [luật cấu thành (constitutive rules)], và luật được chấp nhận CHỈ VÌ
+chúng làm hoạt động đó trở nên khả thi [thái độ-luật (lusory attitude)]."
+
+4 khái niệm cốt lõi (định nghĩa ngắn gọn theo cùng nguồn):
+- Prelusory goal: mục tiêu mô tả được mà KHÔNG cần nhắc tới luật (vd:
+  "đưa bóng vào lỗ").
+- Lusory means: cách đạt mục tiêu mà luật cho phép (vd: dùng gậy đánh
+  golf).
+- Constitutive rules: luật loại bỏ cách làm hiệu quả nhất, ép dùng cách
+  kém hiệu quả hơn (vd golf: "không được chạm bóng bằng tay").
+- Lusory attitude: người chơi CHẤP NHẬN các luật đó chỉ vì chúng làm hoạt
+  động chơi trở nên khả thi — không phải vì luật "hợp lý" theo nghĩa
+  thông thường.
+
+ĐÃ VERIFY (trước đây [CHƯA VERIFY]): Ví dụ golf ("bỏ bóng vào lỗ bằng tay
+vs dùng gậy đứng xa lỗ") ĐÚNG LÀ ví dụ CHÍNH Suits tự dùng trong sách, đọc
+được nguyên văn tại trang PA38 (Google Books search-inside): "if my end
+were simply to get a ball into a number of holes in the ground, I would
+not be likely to use a golf club in order to achieve it, nor would I
+stand at a considerable distance from each hole." Golf xuất hiện xuyên
+suốt sách (nhiều trang: 17, 38, 48–49, 69, 156...) làm ví dụ chủ đạo của
+Suits cho prelusory goal/lusory means — không phải do người sau thêm vào.
+
+ĐÃ VERIFY (trước đây [CHƯA VERIFY]): Bản paraphrase ngắn "a voluntary
+attempt to overcome unnecessary obstacles" ĐÍCH THỊ là câu của CHÍNH
+Suits, ông tự gọi nó là bản rút gọn của định nghĩa dài — đọc được nguyên
+văn tại trang PA55 (Google Books search-inside): "I also offer the
+following simpler and, so to speak, more portable version of the above:
+playing a game is the voluntary attempt to overcome unnecessary
+obstacles." Câu đầy đủ có "playing a game is the" ở đầu — không phải chỉ
+"a voluntary attempt...". Ngoài ra, Suits còn dùng một biến thể của câu
+này SỚM HƠN, ở dạng hội thoại không ngoặc vuông, tại trang PA10 (chương
+1): "...rules are accepted just because they make possible such
+activity.' 'Well, Skepticus,' concluded the Grasshopper, 'what do you
+think?' 'I think,' I replied, 'that you have produced a definition which
+is quite plausible.'"
+
+Khái niệm "lusory attitude" (thái độ-luật) là đóng góp quan trọng nhất
+của Suits cho lý thuyết game: nó giải thích tại sao người chơi tự nguyện
+làm khó bản thân (leo núi bằng cầu thang bộ tồn tại sẵn thang máy, chơi
+golf thay vì bỏ bóng vào lỗ bằng tay) — vì chính "sự khó" đó mới là điều
+làm hoạt động đó có ý nghĩa NHƯ MỘT GAME.
+
+================================================================
+2. KATIE SALEN & ERIC ZIMMERMAN — RULES OF PLAY (2003)
+================================================================
+
+Sách: "Rules of Play: Game Design Fundamentals", Katie Salen (nay là
+Katie Salen Tekinbaş) & Eric Zimmerman, MIT Press, xuất bản 2003 (688
+trang). Lời tựa (prólogo) của Frank Lantz.
+
+TÌNH TRẠNG VERIFY (CẬP NHẬT 2026-09-15): ĐÃ TỰ MỞ ĐỌC ĐƯỢC NGUYÊN VĂN TRỰC
+TIẾP TỪ CHÍNH SÁCH qua Google Books "search inside":
+https://books.google.com/books?id=UM-xyczrZuQC — snippet cho đúng trang
+PA80 khớp 100% câu chữ, kèm cả câu tiếp theo phân tích định nghĩa.
+
+Định nghĩa (ĐÃ VERIFY NGUYÊN VĂN, trang 80):
+"A game is a system in which players engage in an artificial conflict,
+defined by rules, that results in a quantifiable outcome."
+(snippet Google Books, trang PA80, tiếp ngay sau đó sách viết: "The key
+elements of this definition are the fact that a game is a system, players
+interact with the system, a game is an instance of conflict, the..." —
+khớp với 6 thành phần liệt kê dưới đây).
+
+Dịch: "Game là một hệ thống trong đó người chơi tham gia vào một xung đột
+nhân tạo, được xác định bởi luật, và tạo ra một kết quả có thể định
+lượng."
+
+6 thành phần trong định nghĩa (theo các nguồn thứ cấp phân tích câu này):
+System (hệ thống), Players (người chơi — một hoặc nhiều), Artificial
+(nhân tạo — game giữ một ranh giới tách biệt với "đời thực"), Conflict
+(xung đột — một dạng tranh đấu quyền lực/mục tiêu), Rules (luật — cấu
+trúc mà từ đó play nảy sinh), Quantifiable outcome (kết quả định lượng
+được — điểm số, thắng/thua...).
+
+CHƯƠNG 7 "DEFINING GAMES" — BẢNG SO SÁNH ĐỊNH NGHĨA:
+Đã tự verify được PHẦN MỞ ĐẦU chương này qua Google Books search-inside:
+chương mở đầu bằng câu trích dẫn Parlett làm đề từ (epigraph), đọc được
+nguyên văn tại trang PA71: "What are games? Are they things in the sense
+of artifacts? Are they behavioral models, or simulations of social
+situations? Are they vestiges of ancient rituals, or magical rites..."
+(David Parlett, The Oxford History of Board Games) — và câu văn Salen &
+Zimmerman viết ngay sau: "As David Parlett warns in the quote that opens
+this chapter, any attempt to define the word 'game' is a foolish
+endeavor." Xác nhận ĐÚNG danh sách tác giả được đưa vào so sánh gồm David
+Parlett (đã đọc trực tiếp). Danh sách đầy đủ còn lại (Abt, Huizinga,
+Caillois, Suits, Crawford, Costikyan, Avedon & Sutton-Smith) vẫn [CHƯA
+VERIFY NỘI DUNG CHI TIẾT TỪNG DÒNG TRONG BẢNG — chỉ verify được DANH SÁCH
+tác giả qua mô tả thứ cấp trước đây; phiên này mới tự đọc được đoạn mở
+đầu chương, chưa đọc hết cả bảng so sánh].
+
+MAGIC CIRCLE: ĐÃ VERIFY NGUYÊN VĂN (trước đây [CHƯA VERIFY]) — Salen &
+Zimmerman TỰ VIẾT RÕ RÀNG rằng họ mượn thuật ngữ này từ chính đoạn văn của
+Huizinga (xem mục 4), đọc được nguyên văn tại trang PA95 (Google Books
+search-inside): "magic circle, a term borrowed from the following passage
+in Huizinga's book Homo Ludens: All play moves and has its being within a
+play-ground marked off beforehand either materially or ideally,
+deliberately or as a matter of course...." — tức chính sách xác nhận
+"magic circle" trong Rules of Play là thuật ngữ ĐI MƯỢN có trích dẫn nguồn
+rõ ràng, không phải Salen & Zimmerman tự đặt ra. Quá trình phổ biến thuật
+ngữ (Zimmerman/Lantz 1999 rồi Rules of Play 2003) vẫn giữ nguyên như ghi
+chú thứ cấp cũ, chưa verify riêng phần lịch sử này.
+
+================================================================
+3. JESPER JUUL — "THE GAME, THE PLAYER, THE WORLD" (2003)
+   CLASSIC GAME MODEL
+================================================================
+
+Bài: "The Game, the Player, the World: Looking for a Heart of Gameness",
+Jesper Juul, trình bày lần đầu là bài keynote tại hội nghị DiGRA (Digital
+Games Research Association) 2003, Utrecht, Hà Lan.
+
+NGUỒN: đã MỞ TRỰC TIẾP và đọc được nguyên văn từ chính trang cá nhân của
+tác giả — https://jesperjuul.net/text/gameplayerworld/ và trang tóm tắt
+slide https://jesperjuul.net/text/gameplayerworld/slides/text5.html. Đây
+là nguồn SƠ CẤP (chính tác giả tự đăng lại bài của mình) — mức tin cậy
+cao nhất trong toàn bộ tài liệu research này.
+
+ĐỊNH NGHĨA "CLASSIC GAME MODEL" (trích nguyên văn, đã verify):
+"A game is 1) a rule-based formal system with 2) variable and
+quantifiable outcome, where 3) different outcomes are assigned different
+values, 4) the player exerts effort in order to influence the outcome,
+5) the player feels attached to the outcome, and 6) the consequences of
+the activity are optional and negotiable."
+
+Dịch — 6 đặc điểm của "classic game model":
+1. Rule-based — dựa trên luật: "Games are rule-based."
+2. Variable, quantifiable outcome — kết quả biến đổi, định lượng được:
+   "Games have variable, quantifiable outcomes."
+3. Value assigned to outcomes — mỗi kết quả có giá trị khác nhau: "the
+   different potential outcomes of the game are assigned different
+   values" (vd: thắng > hòa > thua).
+4. Player effort — người chơi phải bỏ công sức: "the player invests
+   effort in order to influence the outcome."
+5. Player attached to outcome — người chơi quan tâm/gắn bó với kết quả:
+   "players are attached to the outcomes of the game" (nếu không quan
+   tâm thắng thua, hoạt động đó gần với "play" tự do hơn là "game").
+6. Negotiable consequences — hậu quả có thể thương lượng/tùy chọn: "The
+   same game can be played with or without real-life consequences"
+   (vd: cá cược tiền thật hay chơi cho vui vẫn cùng một game).
+
+BORDERLINE CASES (ca biên giới — trích nguyên văn từ chính bài, đã
+verify):
+- Pen-and-paper RPG: "not normal games because with a human game master,
+  their rules are not fixed beyond discussion" — luật có thể bị GM thay
+  đổi giữa chừng, khác game luật cố định.
+- Game mô phỏng mở (open-ended simulation) — VÍ DỤ CHÍNH DANH JUUL NÊU
+  LÀ SIMCITY: "[games] like Sim City fall outside because they have no
+  explicit goals, i.e. no explicit value attached to the possible
+  outcomes" — SimCity không có "outcome" được gán giá trị rõ ràng (không
+  có thắng/thua chính thức), nên nằm NGOÀI classic game model theo chính
+  Juul.
+
+KHÔNG PHẢI GAME (trích nguyên văn, đã verify):
+- "free-form play has no rules" — chơi tự do thuần túy (vd: trẻ con chơi
+  giả vờ không luật) không có rules.
+- Hypertext fiction: "tends to be a question of browsing a story that
+  doesn't change" — không có outcome biến đổi.
+- Ring-a-ring-a-roses (trò chơi dân gian trẻ em, tương tự "bắt vòng
+  tròn"): "has rules, but a constant outcome" — có luật nhưng kết quả
+  luôn giống nhau (không biến đổi) → không thỏa điều kiện (2).
+- Traffic (giao thông, dùng như phản ví dụ so sánh): "the consequences of
+  traffic are not optional — moving in traffic always has real-life
+  consequences" → vi phạm điều kiện (6) "negotiable consequences".
+
+Ý nghĩa cho bài giảng: Juul không nói SimCity "không phải game" một cách
+tuyệt đối — ông nói nó nằm NGOÀI mô hình "classic" vì thiếu outcome được
+định giá trị rõ ràng, và chính bài báo của ông có mục đích cho thấy game
+hiện đại (thời điểm 2003) đang "vượt ra khỏi" (moving beyond) mô hình cổ
+điển này — tức Juul dự đoán trước xu hướng game sandbox/mở của thời sau.
+
+================================================================
+4. JOHAN HUIZINGA — HOMO LUDENS (1938) & "MAGIC CIRCLE"
+================================================================
+
+Sách: "Homo Ludens: A Study of the Play-Element in Culture", Johan
+Huizinga, xuất bản lần đầu tiếng Hà Lan 1938 (bản dịch tiếng Anh phổ biến:
+1949, Routledge & Kegan Paul).
+
+TÌNH TRẠNG VERIFY (CẬP NHẬT 2026-09-15): ĐÃ TỰ MỞ ĐỌC ĐƯỢC NGUYÊN VĂN TRỰC
+TIẾP TỪ NGUỒN SƠ CẤP — bản scan/OCR đầy đủ ấn bản Routledge 1949 trên
+archive.org, tự tải và grep toàn bộ text:
+https://archive.org/stream/homo_ludens_johan_huizinga_routledge_1949_/homo_ludens_johan_huizinga_routledge_1949__djvu.txt
+(cũng xem tại https://archive.org/details/homo_ludens_johan_huizinga_routledge_1949_).
+Đây là mức tin cậy CAO NHẤT (đọc trực tiếp toàn văn bản dịch tiếng Anh
+1949), ngang với mục 3 (Juul). Đánh dấu [ĐÃ VERIFY NGUYÊN VĂN TỪ BẢN GỐC].
+
+Trích dẫn (ĐÃ VERIFY NGUYÊN VĂN, đọc trực tiếp từ file text archive.org;
+không có số trang trong bản OCR, nhưng nhiều nguồn thứ cấp độc lập dẫn
+thống nhất là trang 10 của ấn bản Routledge 1949 — khớp với vị trí đoạn
+văn nằm ngay đầu Chương I):
+"All play moves and has its being within a play-ground marked off
+beforehand either materially or ideally, deliberately or as a matter of
+course. Just as there is no formal difference between play and ritual,
+so the 'consecrated spot' cannot be formally distinguished from the
+play-ground. The arena, the card-table, the magic circle, the temple,
+the stage, the screen, the tennis court, the court of justice, etc., are
+all in form and function play-grounds, i.e. forbidden spots, isolated,
+hedged round, hallowed, within which special rules obtain. All are
+temporary worlds within the ordinary world, dedicated to the performance
+of an act apart."
+(Khớp gần như tuyệt đối với bản cũ trong file — chỉ khác duy nhất dấu
+gạch nối "card-table" thay vì "card table", và dấu chấm phẩy ", etc.,"
+thay vì ", etc,": đây là khác biệt OCR/typographic nhỏ, KHÔNG sửa nội
+dung).
+
+ĐÃ VERIFY THÊM (đoạn tóm tắt đặc điểm play — chưa có trong bản cũ của
+file, bổ sung vì hữu ích cho bài giảng), cùng nguồn, ngay trước đoạn "magic
+circle" vài trang, đọc trực tiếp:
+"Summing up the formal characteristics of play we might call it a free
+activity standing quite consciously outside 'ordinary' life as being 'not
+serious', but at the same time absorbing the player intensely and
+utterly. It is an activity connected with no material interest, and no
+profit can be gained by it. It proceeds within its own proper boundaries
+of time and space according to fixed rules and in an orderly manner. It
+promotes the formation of social groupings which tend to surround
+themselves with secrecy and to stress their difference from the common
+world by disguise or other means."
+
+Dịch (ý chính): Mọi hoạt động chơi diễn ra trong một "sân chơi" được đánh
+dấu ranh giới từ trước — đấu trường, bàn bài, "vòng tròn ma thuật", đền
+thờ, sân khấu, sân tennis, tòa án... đều là những "sân chơi" theo nghĩa
+này: những không gian biệt lập, có luật riêng, là "thế giới tạm thời bên
+trong thế giới thường nhật".
+
+LƯU Ý QUAN TRỌNG (dựa trên các nguồn thứ cấp đã đọc): "magic circle"
+trong câu trên CHỈ LÀ MỘT VÍ DỤ trong một danh sách liệt kê ("the arena,
+the card table, the magic circle, the temple...") — Huizinga dùng cụm này
+như một hình ảnh CỤ THỂ (vd: vòng tròn vẽ trên đất để chơi trò ma thuật/
+nghi lễ dân gian), KHÔNG PHẢI ông đặt tên chính thức cho khái niệm
+"không gian chơi" nói chung bằng thuật ngữ "magic circle" như cách giới
+game design ngày nay hay dùng. Chính Salen & Zimmerman (2003, xem mục 2)
+mới là người LẤY cụm này ra khỏi danh sách của Huizinga và biến nó thành
+MỘT KHÁI NIỆM TRUNG TÂM, đặt tên riêng cho ranh giới không gian/thời gian
+của game. Đây là một "sai lệch phổ biến" đáng nêu khi giảng: nhiều người
+tưởng "magic circle" là thuật ngữ trung tâm và được định nghĩa kỹ trong
+Homo Ludens, nhưng thực ra trong sách gốc nó chỉ là MỘT VÍ DỤ NGẮN trong
+một câu liệt kê, còn sức nặng lý thuyết của nó đến từ cách Salen &
+Zimmerman diễn giải lại gần 70 năm sau. ĐÃ VERIFY TRỰC TIẾP CẢ HAI ĐẦU
+(trước đây [CHƯA VERIFY TUYỆT ĐỐI]): (a) đọc trực tiếp Homo Ludens
+(archive.org, xem trên) xác nhận "magic circle" chỉ là 1 từ trong 1 câu
+liệt kê 8 loại "play-ground"; (b) đọc trực tiếp Rules of Play trang PA95
+(xem mục 2) xác nhận chính Salen & Zimmerman viết rằng họ "borrowed" thuật
+ngữ này từ đúng câu liệt kê đó của Huizinga. Kết luận trên nay ở mức verify
+cao nhất có thể trong tài liệu này.
+
+================================================================
+5. ROGER CAILLOIS — MAN, PLAY AND GAMES (1958)
+================================================================
+
+Sách: "Les jeux et les hommes" (Roger Caillois, tiếng Pháp, 1958), bản
+dịch tiếng Anh "Man, Play and Games" (dịch bởi Meyer Barash, 1961, Free
+Press of Glencoe).
+
+TÌNH TRẠNG VERIFY (CẬP NHẬT 2026-09-15): ĐÃ TỰ MỞ ĐỌC ĐƯỢC NGUYÊN VĂN TRỰC
+TIẾP TỪ BẢN DỊCH TIẾNG ANH (Meyer Barash, "Man, Play and Games") qua
+Google Books search-inside: https://books.google.com/books?id=bDjOPsjzfC4C
+— đã truy vấn nhiều cụm từ khóa riêng cho từng loại và đọc được snippet
+đúng ngữ cảnh định nghĩa (không phải diễn giải qua Wikipedia). Bản tiếng
+Pháp gốc (lesjeuxetleshomm0000cail trên archive.org) VẪN access-restricted,
+không mở được — chỉ bản dịch tiếng Anh được verify trực tiếp. Đánh dấu
+[ĐÃ VERIFY NGUYÊN VĂN — BẢN DỊCH TIẾNG ANH].
+
+4 loại chơi (ĐÃ VERIFY NGUYÊN VĂN qua Google Books search-inside, trích
+đúng câu định nghĩa mở đầu mỗi mục trong sách):
+- Agôn (thi đấu/cạnh tranh), trang khoảng 14-17: "A whole group of games
+  would seem to be competitive, that is to say, like a combat in which
+  equality of chances is artificially created, in order that the
+  adversaries should confront each other under ideal conditions..." —
+  khớp mô tả "thi đấu công bằng để phân định ai giỏi hơn".
+- Alea (may rủi), trang PA17: "This is the Latin name for the game of
+  dice. I have borrowed it to designate, in contrast to agôn, all games
+  that are based on a decision independent of the player, an outcome over
+  which he has no control..."; và thêm: "alea is a negation of the will, a
+  surrender to destiny." — khớp mô tả "kết quả phụ thuộc vận may".
+- Mimicry (giả vờ/nhập vai), trang PA19: "All play presupposes the
+  temporary acceptance, if not of an illusion (indeed this last word
+  means nothing less than beginning a game: in-lusio), then at least of a
+  closed, conventional, and, in certain [respects]..." — khớp mô tả "chấp
+  nhận một ảo giác tạm thời".
+- Ilinx (cảm giác chóng mặt/mất thăng bằng), trang PA23: mô tả các trò
+  "based on the pursuit of vertigo and which consist of an attempt to
+  momentarily destroy the stability of perception and inflict a kind of
+  voluptuous panic upon an otherwise lucid mind." — khớp mô tả "phá vỡ
+  nhận thức ổn định tạm thời".
+
+Trục Paidia — Ludus (ĐÃ VERIFY NGUYÊN VĂN, Google Books search-inside):
+"...paidia, which is active, tumultuous, exuberant, and spontaneous, to
+ludus, representing calculation, contrivance, and subordination to
+rules." — khớp chính xác mô tả cũ trong file (paidia = tự do/bộc phát,
+ludus = cấu trúc chặt/tính toán).
+
+[PHÂN TÍCH — không từ nguồn] Ghi chú tương thích: theo các nguồn thứ cấp,
+Caillois lưu ý một số cặp loại KHÓ kết hợp với nhau — vd paidia (tự do)
+khó đi cùng alea (may rủi thuần túy, cần "chờ đợi" kết quả bên ngoài chứ
+không phải "đùa giỡn" chủ động); ludus (cấu trúc chặt) khó đi cùng ilinx
+(mất kiểm soát nhận thức) vì ludus cần sự tỉnh táo/kỷ luật. [CHƯA VERIFY
+— thông tin này lấy qua tóm tắt thứ cấp, chưa đối chiếu nguyên văn].
+
+================================================================
+6. GREG COSTIKYAN — "I HAVE NO WORDS & I MUST DESIGN" (1994/2002)
+================================================================
+
+Bài gốc: "I Have No Words & I Must Design" đăng lần đầu trên tạp chí
+Interactive Fantasy #2, 1994. Bản sửa/mở rộng: "I Have No Words & I Must
+Design: Toward a Critical Vocabulary for Games", trình bày tại hội nghị
+Computer Games and Digital Cultures, Tampere, Phần Lan, 2002 — bản PDF
+lưu tại costik.com/nowords2002.pdf.
+
+TÌNH TRẠNG VERIFY (CẬP NHẬT 2026-09-15): ĐÃ TỰ MỞ ĐỌC ĐƯỢC TOÀN VĂN FILE
+PDF GỐC. Domain costik.com hiện vẫn lỗi SSL nên KHÔNG fetch trực tiếp
+được, nhưng lấy được qua Wayback Machine với timestamp cụ thể:
+https://web.archive.org/web/20100210120204/http://www.costik.com/nowords2002.pdf
+(tải về thành công file PDF 25 trang, dùng pdftotext trích toàn bộ text
+rồi tự đọc). Đánh dấu [ĐÃ VERIFY NGUYÊN VĂN TỪ FILE GỐC — BẢN 2002].
+
+Trích (ĐÃ VERIFY NGUYÊN VĂN, đọc trực tiếp từ PDF, khoảng trang 10):
+"What makes a thing into a game is the need to make decisions."
+(Dịch: "Điều biến một thứ thành game là NHU CẦU PHẢI RA QUYẾT ĐỊNH.")
+
+Ví dụ minh họa đi kèm (cùng đoạn, ĐÃ VERIFY NGUYÊN VĂN, trang ~10):
+"Consider Chess: It has few of the aspects that make games appealing – no
+simulation elements, no roleplaying, and damn little color. What it's got
+is the need to make decisions. The rules are tightly constrained, the
+objectives clear, and victory requires you to think several moves ahead."
+(Dịch: cờ vua gần như không có yếu tố mô phỏng, nhập vai, hay màu mè gì
+hấp dẫn — thứ nó có là NHU CẦU RA QUYẾT ĐỊNH liên tục.)
+
+Phân biệt game vs puzzle (ĐÃ VERIFY NGUYÊN VĂN, trang ~10 — câu này
+Costikyan viết khi BÌNH LUẬN LẠI cách phân biệt của Chris Crawford, không
+phải ông tự đặt ra đầu tiên): "But still, Crawford's distinction is a
+useful one: A puzzle is static. A game is interactive." — puzzle có một
+lời giải cố định không đổi bất kể người giải làm gì trước đó; game thì
+trạng thái thay đổi liên tục theo quyết định của người chơi (tương tác 2
+chiều với hệ thống, không chỉ với chính bài toán).
+
+ĐÃ VERIFY THÊM — CÂU ĐỊNH NGHĨA CHÍNH THỨC "GAME" CỦA COSTIKYAN (chưa có
+trong bản cũ của file, bổ sung theo yêu cầu fact-check): đọc trực tiếp tại
+ranh giới trang 23–24 của PDF 2002, dưới tiêu đề "INTERACTIVE
+ENTERTAINMENT":
+"At last we have a functional definition of 'game': an interactive
+structure of endogenous meaning that requires players to struggle toward
+a goal."
+(Dịch: "Cuối cùng ta có một định nghĩa mang tính chức năng cho 'game': một
+cấu trúc tương tác có ý nghĩa nội sinh [endogenous], đòi hỏi người chơi
+phải nỗ lực/vật lộn hướng tới một mục tiêu.")
+Khái niệm "endogenous meaning" (ý nghĩa nội sinh) được ông giải thích ngay
+trước đó (trang ~22-23, đã đọc trực tiếp): "A game's structure creates its
+own meanings. The meaning grows out of the structure; it is caused by the
+structure; it is endogenous to the structure" — ví dụ minh họa: tiền
+Monopoly vô giá trị ngoài đời thật, nhưng có giá trị "nội sinh" khi đang
+chơi Monopoly. LƯU Ý: đây là bản 2002 (Tampere); phiên nghiên cứu này
+KHÔNG xác nhận được liệu câu định nghĩa này có giống hệt bản gốc 1994 hay
+không (không tìm được bản 1994 để đối chiếu) — [CHƯA VERIFY bản 1994 gốc,
+CHỈ verify bản 2002].
+
+================================================================
+7. TRACY FULLERTON — GAME DESIGN WORKSHOP — FORMAL ELEMENTS
+================================================================
+
+Sách: "Game Design Workshop: A Playcentric Approach to Creating
+Innovative Games", Tracy Fullerton (với Christopher Swain, Steven S.
+Hoffman ở các bản đầu), CRC Press/Focal Press, bản đầu 2004, tái bản
+nhiều lần (bản 3: 2014, bản 4: 2018...). Dùng làm giáo trình cốt lõi tại
+USC Interactive Media & Games Division.
+
+TÌNH TRẠNG VERIFY (CẬP NHẬT 2026-09-15): ĐÃ TỰ MỞ ĐỌC ĐƯỢC NGUYÊN VĂN TRỰC
+TIẾP TỪ SÁCH qua Google Books search-inside:
+https://books.google.com/books/about/Game_Design_Workshop.html?id=BgH0EAAAQBAJ
+(bản ẤN BẢN 5, CRC Press — mới hơn bản 4/2018 ghi ở trên). Đọc được đúng
+câu liệt kê 8 formal elements VÀ câu kết luận. Đánh dấu [ĐÃ VERIFY NGUYÊN
+VĂN TỪ SÁCH GỐC — BẢN 5].
+
+Câu liệt kê + câu kết (ĐÃ VERIFY NGUYÊN VĂN, trang PT139, chương 3):
+"Players, objective, procedures, rules, resources, conflict, boundaries,
+and outcome: These are the essence of games, and a strong understanding
+of their potential interrelationships is the foundation of game design."
+và (cùng chương, trang PT139): "Without them, games cease to be games. As
+you saw in the opening exercise of this chapter, a game without players,
+without an objective, without rules or procedures is not a game at all."
+— khớp đúng thứ tự và tên 8 thành tố đã liệt kê trong file (LƯU Ý: câu
+liệt kê một-dòng này dùng "objective" số ít, trong khi tiêu đề mục lục
+trong sách dùng "Objectives" số nhiều — không đáng kể, không sửa danh
+sách bên dưới).
+
+ĐÃ VERIFY GIÁN TIẾP danh sách 10 "kiểu mục tiêu" (Capture, Chase,...
+Solution, Outwit): tìm thấy số thứ tự tiểu mục liên tiếp trong sách khớp
+khung 10 mục — "3.11 Capture or kill: SOCOM II and DOOM 2", "Chase The
+objective in...", "3.19 Solution: Day of the Tentacle", "3.20 Outwit:
+Diplomacy" — xác nhận ĐÚNG có 10 tiểu mục liên tiếp 3.11–3.20 cho các kiểu
+mục tiêu, khớp thứ tự file đã liệt kê. Tên gọi + mô tả 1 dòng của TỪNG
+mục riêng lẻ vẫn [CHƯA VERIFY NGUYÊN VĂN 100% — chỉ verify được cấu trúc
+đánh số tiểu mục liên tiếp và 3 tên đầu/cuối, chưa đọc hết cả 10 đoạn mô
+tả].
+
+8 "formal elements" (thành tố hình thức) của một game, theo Fullerton:
+1. Players — số lượng người chơi, vai trò, kiểu tương tác giữa họ (đối
+   kháng 1-1, đội nhóm, nhiều người chơi độc lập...).
+2. Objectives — mục tiêu; Fullerton liệt kê các "kiểu mục tiêu" thường
+   gặp: Capture (chiếm), Chase (đuổi bắt), Race (đua), Alignment (xếp
+   hàng/ghép), Rescue/Escape (giải cứu/thoát), Forbidden Act (tránh hành
+   động cấm), Construction (xây dựng), Exploration (khám phá), Solution
+   (giải đố), Outwit (mưu trí hơn đối thủ).
+3. Procedures — các hành động/thao tác cụ thể người chơi được phép làm
+   để hướng tới mục tiêu.
+4. Rules — luật định nghĩa các đối tượng trong game và hành động nào
+   được/không được phép.
+5. Resources — tài nguyên có thể dùng để đạt mục tiêu: mạng (lives), đơn
+   vị (units), máu (health), tiền (currency), lượt hành động, power-up,
+   inventory, địa hình đặc biệt, thời gian...
+6. Conflict — xung đột: sinh ra từ luật/thủ tục/tình huống KHÔNG cho phép
+   người chơi đạt mục tiêu một cách trực tiếp/dễ dàng — gồm chướng ngại
+   vật (obstacles), đối thủ (opponents), tình huống khó xử (dilemmas).
+7. Boundaries — ranh giới: thứ tách game ra khỏi phần còn lại không phải
+   game — có thể là ranh giới vật lý (bàn cờ, sân) hoặc ẩn dụ (luật "tạm
+   dừng thế giới thật" khi đang chơi).
+8. Outcome — kết quả: phải KHÔNG CHẮC CHẮN trước để giữ sự chú ý của
+   người chơi, và thường kết thúc bằng một kết quả đo lường được, có thể
+   không cân bằng giữa các bên (có người thắng/thua rõ ràng).
+
+Câu tổng kết (ĐÃ VERIFY NGUYÊN VĂN — xem trích dẫn đầy đủ ở trên, trang
+PT139): "Without them, games cease to be games." — tức Fullerton coi 8
+thành tố này là ĐIỀU KIỆN CẦN: thiếu bất kỳ thành tố nào, sản phẩm không
+còn được coi là một game theo định nghĩa hình thức. (Câu ngắn hơn "formal
+elements... are those elements that form the structure of a game" mà bản
+cũ của file trích riêng — KHÔNG tìm thấy đúng nguyên văn này khi tra cứu
+lại; chỉ câu "Without them, games cease to be games" được xác nhận trực
+tiếp).
+
+================================================================
+8. JESSE SCHELL — THE ART OF GAME DESIGN (2008)
+================================================================
+
+Sách: "The Art of Game Design: A Book of Lenses", Jesse Schell, Morgan
+Kaufmann/CRC Press, xuất bản lần đầu 2008 (bản 2: 2014, bản 3: 2019).
+Chương liên quan: Chương 3, "The Game" ("Game").
+
+TÌNH TRẠNG VERIFY (CẬP NHẬT 2026-09-15): ĐÃ TỰ MỞ ĐỌC ĐƯỢC NGUYÊN VĂN TRỰC
+TIẾP TỪ SÁCH qua Google Books search-inside:
+https://books.google.com/books?id=gXumDwAAQBAJ (bản ẤN BẢN 3, 2019 — mới
+hơn bản 1/2008 ghi ở trên). Đánh dấu [ĐÃ VERIFY NGUYÊN VĂN TỪ SÁCH GỐC —
+BẢN 3].
+
+Định nghĩa (ĐÃ VERIFY NGUYÊN VĂN, trang PT100, chương 3 "The Game"): cụm
+"problem-solving activity, approached with a playful attitude." đọc được
+trực tiếp, kèm câu ngay sau: "This is a simple, elegant definition, which
+has the advantage of no fancy jargon." — xác nhận đây đúng là câu Schell
+TỰ ĐƯA RA và tự nhận xét, không phải diễn giải của người khác. (Truy vấn
+riêng cụm đầy đủ "A game is a problem-solving activity, approached with a
+playful attitude" trả về 0 kết quả trên Google Books search-inside — có
+thể do giới hạn kỹ thuật của công cụ tìm-trong-sách với câu dài/có dấu
+phẩy, không phải dấu hiệu câu sai; hai nửa câu đều verify riêng lẻ khớp
+100% và nối liền mạch về ngữ cảnh):
+"A game is a problem-solving activity, approached with a playful
+attitude."
+
+Dịch: "Game là một hoạt động giải quyết vấn đề, được tiếp cận với một
+thái độ đùa-vui (playful attitude)."
+
+Bối cảnh (qua nguồn thứ cấp): Schell KHÔNG coi bản thân định nghĩa là
+điều quan trọng nhất — ông dùng cả một chương để tự mình liệt kê, phân
+tích và phê bình định nghĩa của nhiều tác giả/nhà thiết kế khác (bao gồm
+gần như toàn bộ danh sách trong nghiên cứu này: Huizinga, Suits, Costikyan,
+Crawford, Salen & Zimmerman, Avedon & Sutton-Smith...), trước khi tự đưa
+ra định nghĩa riêng ở trên. Quan điểm rõ ràng của Schell (thường được
+trích lại): việc TỰ MÌNH thử định nghĩa "game là gì" là một bài tập rèn
+tư duy phân tích có giá trị, quan trọng hơn bản thân câu trả lời cuối
+cùng. [CHƯA VERIFY nguyên văn câu này — chỉ là tinh thần chung được nhiều
+nguồn thứ cấp mô tả giống nhau].
+
+================================================================
+9. RAPH KOSTER — A THEORY OF FUN (2004)
+================================================================
+
+Sách: "A Theory of Fun for Game Design", Raph Koster, Paraglyph Press,
+2004 (bản 2: O'Reilly, 2013).
+
+TÌNH TRẠNG VERIFY: KHÔNG tự mở được nguyên văn sách. Các câu trích dưới
+đây lấy qua Goodreads Quotes (trang tổng hợp câu trích từ sách, do độc
+giả đóng góp — nguồn thứ cấp phổ biến nhưng có rủi ro sai sót/cắt xén nhỏ
+khi trích). Đánh dấu [CHƯA VERIFY TỪ SÁCH GỐC].
+
+Trích (qua Goodreads):
+"Fun is just another word for learning."
+(Dịch: "Vui — về bản chất — chỉ là một tên gọi khác của việc học.")
+
+"Fun is about learning in a context where there is no pressure from
+consequence."
+(Dịch: "Vui là việc học trong một bối cảnh không có áp lực từ hậu quả
+thật.")
+
+Ý chính của sách (theo nhiều nguồn thứ cấp mô tả thống nhất): não người
+là một "cỗ máy nhận diện khuôn mẫu" (pattern-recognition machine); game
+"vui" vì nó liên tục đưa ra các khuôn mẫu mới để não học và làm chủ; khi
+một khuôn mẫu đã bị "học hết" (mastered) — không còn gì mới để học — game
+đó (hoặc phần đó của game) sẽ hết vui, dù cơ chế/đồ họa không đổi. Đây là
+lý do Koster giải thích vì sao một game có thể "chán" dù vẫn y hệt lúc
+đầu: không phải game thay đổi, mà là người chơi đã học xong khuôn mẫu.
+
+================================================================
+10. WITTGENSTEIN — PHILOSOPHICAL INVESTIGATIONS — "FAMILY RESEMBLANCE"
+================================================================
+
+Sách: "Philosophical Investigations" ("Philosophische Untersuchungen"),
+Ludwig Wittgenstein, xuất bản sau khi ông mất, 1953. Đoạn liên quan tới
+"game" nằm ở các đoạn (§) 66–71.
+
+TÌNH TRẠNG VERIFY (CẬP NHẬT 2026-09-15): ĐÃ TỰ MỞ ĐỌC ĐƯỢC NGUYÊN VĂN TRỰC
+TIẾP bản dịch tiếng Anh (Anscombe) qua archive.org, tự tải toàn văn và
+grep đúng đoạn §66-67:
+https://archive.org/details/philosophicalinvestigations_20191119
+(file "Philosophical Investigations_djvu.txt"). Đánh dấu [ĐÃ VERIFY
+NGUYÊN VĂN TỪ BẢN DỊCH — bản dịch Anscombe].
+
+Lập luận chính (ĐÃ VERIFY NGUYÊN VĂN §66, đọc trực tiếp): "66. Consider
+for example the proceedings that we call 'games'. I mean board-games,
+card-games, ball-games, Olympic games, and so on. What is common to them
+all?—Don't say: 'There must be something common, or they would not be
+called games'—but look and see whether there is anything common to
+all.—For if you look at them you will not see something that is common
+to all, but similarities, relationships, and a whole series of them at
+that. To repeat: don't think, but look! ... And the result of this
+examination is: we see a complicated network of similarities overlapping
+and criss-crossing: sometimes overall similarities, sometimes
+similarities of detail." Đúng như file mô tả: Wittgenstein xét board
+game/card game/ball game và các trò như "ring-a-ring-a-roses", kết luận
+KHÔNG có đặc điểm chung duy nhất, chỉ có mạng lưới similarities chồng
+chéo.
+
+Trích (ĐÃ VERIFY NGUYÊN VĂN, đoạn §67, đọc trực tiếp): "67. I can think of
+no better expression to characterize these similarities than 'family
+resemblances'; for the various resemblances between members of a family:
+build, features, colour of eyes, gait, temperament, etc. etc. overlap and
+criss-cross in the same way.—And I shall say: 'games' form a family."
+(Bản cũ trong file ghi "characterise" — bản Anscombe đọc trực tiếp dùng
+"characterize" kiểu Mỹ; nội dung câu khớp, đã sửa chính tả theo đúng bản
+đã đọc.)
+(Dịch: "Tôi không nghĩ ra cách diễn đạt nào hay hơn để mô tả những điểm
+giống nhau này ngoài 'những nét giống nhau trong gia đình' (family
+resemblances)... Và tôi sẽ nói: 'các game hợp thành một gia đình'.")
+
+ĐÃ VERIFY chi tiết "Kampfspiele" (trước đây [CHƯA VERIFY], nay xác nhận
+CHÍNH XÁC HƠN nội dung cũ): nguyên văn tiếng Đức §66 (theo trích dẫn của
+sprache-spiel-natur.de, một nguồn thứ cấp trích khá cẩn thận kèm số đoạn):
+"Betrachte z.B. einmal die Vorgänge, die wir 'Spiele' nennen. Ich meine
+Brettspiele, Kartenspiele, Ballspiel, Kampfspiele, usw." Đối chiếu với bản
+dịch Anscombe đã tự đọc ở trên ("board-games, card-games, ball-games,
+Olympic games"): "Kampfspiele" ĐƯỢC DỊCH THÀNH "Olympic games", KHÔNG PHẢI
+tổng quát hóa thành "games" nói chung như bản cũ của file suy đoán — đây
+là một lựa chọn dịch thuật cụ thể (Kampfspiele ~ "trò chơi thi đấu/đối
+kháng kiểu Olympic cổ") SỬA lại chi tiết này theo nguồn: [ĐÃ SỬA THEO
+NGUỒN] "Olympic games" chứ không phải "games" chung chung. Phần tiếng Đức
+vẫn ở mức nguồn thứ cấp (chưa tự mở bản gốc tiếng Đức), nhưng phần tiếng
+Anh đối chiếu đã tự đọc trực tiếp.
+
+Ý nghĩa cho bài giảng: lập luận của Wittgenstein là LÝ DO TRIẾT HỌC vì
+sao KHÔNG có một định nghĩa "game" duy nhất, đúng tuyệt đối, được mọi nhà
+lý thuyết đồng thuận — mọi định nghĩa trong các mục 1-9 ở trên đều là
+những "lát cắt" nhấn mạnh một số đặc điểm nhất định, không cái nào sai
+hẳn, không cái nào đúng hẳn.
+
+================================================================
+11. TOY / GAME / PUZZLE / PLAY — WILL WRIGHT, CHRIS CRAWFORD
+================================================================
+
+(a) Will Wright & "software toy":
+[CHƯA VERIFY — CHƯA XÁC ĐỊNH ĐƯỢC PHỎNG VẤN GỐC CỤ THỂ] Nhiều nguồn thứ
+cấp (bài phân tích SimCity, Wikipedia Will Wright) mô tả: SimCity (1989)
+thường được coi là "software toy" đầu tiên — không có villain, hero, mục
+tiêu, hay cốt truyện rõ ràng, chỉ là một hệ thống tương tác để người chơi
+"vọc" (tweak) và quan sát nó phát triển. Will Wright được cho là đã nói
+muốn SimCity "cởi mở hơn, giống một toy hơn" khi nhà xuất bản ban đầu
+muốn ông thêm điều kiện thắng/thua rõ ràng — NHƯNG phiên nghiên cứu này
+KHÔNG xác định được bài phỏng vấn/nguồn gốc chính xác của câu nói, chỉ
+thấy nó được diễn giải lại qua các bài tổng hợp. KHÔNG nên trích như một
+"quote" chắc chắn của Wright trong bài giảng; có thể dùng như ý PHÂN TÍCH
+("SimCity thường được gọi là software toy vì...") thay vì trích dẫn trực
+tiếp.
+
+(b) Chris Crawford — sơ đồ phân loại plaything → toy/challenge →
+puzzle/conflict:
+Sách: "The Art of Computer Game Design", Chris Crawford, 1984 (McGraw-
+Hill/Osborne) — cuốn sách lý thuyết game đầu tiên chuyên về game máy
+tính.
+
+TÌNH TRẠNG VERIFY: thử mở 2 bản PDF khác nhau (owenroberts.github.io: lỗi
+404; digitpress.com: file là scan/nén, WebFetch không trích được text) —
+KHÔNG tự đọc được nguyên văn. Sơ đồ phân loại dưới đây tổng hợp từ nhiều
+nguồn thứ cấp mô tả khá thống nhất về CẤU TRÚC phân nhánh, nhưng KHÔNG có
+trích dẫn nguyên văn câu chữ của Crawford. Đánh dấu [CHƯA VERIFY NGUYÊN
+VĂN — CHỈ VERIFY ĐƯỢC CẤU TRÚC PHÂN LOẠI QUA NGUỒN THỨ CẤP].
+
+Cấu trúc phân loại (paraphrase từ nguồn thứ cấp, KHÔNG phải trích nguyên
+văn):
+Plaything (đồ để chơi/tương tác) → nếu KHÔNG có mục tiêu (goal) nào gắn
+với nó → là Toy (đồ chơi thuần túy, vd: một quả bóng để tung hứng tự do).
+Nếu CÓ mục tiêu → là Challenge (thử thách). Trong Challenge: nếu KHÔNG có
+"active agent" (đối thủ chủ động cản trở) → là Puzzle (câu đố, có lời
+giải cố định); nếu CÓ đối thủ chủ động → là Conflict (xung đột) — và
+Crawford coi ĐÂY mới là điều kiện gần với "game" theo nghĩa ông quan tâm
+nhất (có tương tác, có đối thủ phản ứng lại).
+
+[CHƯA VERIFY] "4 yếu tố đặc trưng của game" theo Crawford (thường được
+nhắc: representation/biểu diễn, interaction/tương tác, conflict/xung
+đột, safety/an toàn — tức hậu quả trong game không gây hại thật) — phiên
+nghiên cứu này KHÔNG xác nhận lại được 4 yếu tố này từ nguồn nào đáng tin
+trong lần tìm kiếm, chỉ thấy nhắc thoáng qua ở một vài bài tổng hợp không
+đủ tin cậy để trích. KHÔNG đưa 4 yếu tố này vào bài giảng cho đến khi tìm
+lại được nguồn xác nhận.
+
+================================================================
+12. CÁC CA "BIÊN GIỚI" (BORDERLINE CASES) — ĐA THỂ LOẠI
+================================================================
+
+(a) Walking simulator (Dear Esther 2012, Gone Home 2013) — PC/indie:
+Có nguồn thật cho cuộc tranh luận. Dan Pinchbeck (đạo diễn/thiết kế Dear
+Esther, hãng The Chinese Room) trả lời phỏng vấn trên PCGamesN (tiêu đề
+"Talking 'walking sims': The Chinese Room's Dan Pinchbeck on the
+pointlessness of the debate"). Theo search snippet trích từ bài phỏng
+vấn này [CHƯA TỰ MỞ TRỰC TIẾP BÀI — LẤY QUA SEARCH SNIPPET], Pinchbeck
+phản bác lập luận "game phải có mechanics [mới là game]" bằng câu hỏi
+ngược: "if it's all about a game has to have mechanics well then you
+start to go, well, Space Invaders, is that less of a game than Far Cry
+because it's got fewer mechanics?" — ý ông: số lượng mechanics không nên
+là thước đo "độ là-game" của một tác phẩm, nếu không sẽ dẫn tới kết luận
+vô lý (Space Invaders "kém game" hơn Far Cry vì ít mechanics hơn).
+Thuật ngữ "walking simulator" ban đầu mang tính CHÊ (pejorative), xuất
+hiện cuối thập niên 2000 gắn với Dear Esther, sau đó cộng đồng/fan "chiếm
+dụng" lại thành một thể loại được chấp nhận (kể cả làm tag chính thức
+trên Steam). [Nguồn: Wikipedia "Walking simulator" — nguồn thứ cấp].
+Soi qua các định nghĩa ở trên: walking simulator thường KHÔNG có "outcome
+định lượng" rõ ràng (không thắng/thua) → không thỏa Salen & Zimmerman
+hay Juul's classic model; nhưng vẫn có "boundaries", "procedures" (đi,
+tương tác vật thể) theo Fullerton, và vẫn tạo aesthetic Narrative/
+Discovery mạnh — cho thấy các định nghĩa "chặt" (cần outcome/conflict) sẽ
+XẾP walking simulator ra rìa hoặc ngoài khái niệm "game", trong khi định
+nghĩa "lỏng" hơn (Suits, Wittgenstein) vẫn chấp nhận nó là một dạng chơi
+hợp lệ.
+
+(b) Sandbox/creative mode (Minecraft Creative Mode) — PC/console/mobile:
+[PHÂN TÍCH có tham khảo nguồn nhưng không phải nguồn học thuật/phỏng vấn
+chính thức] Theo nhiều bài viết phổ thông (gamedesignskills.com, các bài
+"critical play" của sinh viên game design), Minecraft Creative Mode
+thường bị so sánh với "chơi Lego ảo" hoặc gọi là một "toy" vì KHÔNG có
+mục tiêu sinh tồn, không có điều kiện thắng/thua, người chơi build tự do.
+Nhà sáng lập Minecraft, Markus "Notch" Persson, được nhiều nguồn (không
+phải phỏng vấn gốc tôi tự mở) nhắc lại là ban đầu SUÝT KHÔNG đưa Creative
+Mode vào bản chính thức, chỉ giữ lại sau khi thấy người chơi rất giỏi
+dùng nó để xây dựng. [CHƯA VERIFY nguồn phỏng vấn gốc của Notch về chi
+tiết này]. Đây là ví dụ rất rõ cho thấy: cùng MỘT sản phẩm (Minecraft) có
+thể vừa là "game" (Survival Mode — có mục tiêu, resource, conflict với
+mob/môi trường) vừa là "toy" (Creative Mode — theo đúng nghĩa Crawford ở
+mục 11: plaything không gắn mục tiêu).
+
+(c) Idle/incremental game (Cookie Clicker và các game cùng dòng) —
+PC/mobile:
+Có nguồn thật. Julien "Orteil" Thiennot, tác giả Cookie Clicker (2013),
+trả lời phỏng vấn Vice ("'Cookie Clicker' Wasn't Meant to Be Fun. Why Is
+It So Popular 8 Years Later?"). Theo search snippet trích phỏng vấn này
+[CHƯA TỰ MỞ TRỰC TIẾP BÀI]: "I and many other idle devs put a lot of
+effort into designing more sophisticated systems than just a basic
+Skinner box" và "The idea that we made Cookie Clicker to brazenly expose
+the hypocrisy of repetitive modern gaming is very fun but ultimately it
+was accidental." — tức chính tác giả THỪA NHẬN game của mình hay bị gọi
+là "chỉ là Skinner box" (hộp thí nghiệm hành vi kiểu B.F. Skinner — bấm
+nút nhận thưởng lặp lại, ít quyết định thật) nhưng khẳng định có đầu tư
+thiết kế hệ thống nghiêm túc phía sau. Đây là ca biên giới thú vị đối
+chiếu với Costikyan (mục 6): nếu "cái làm nên game là nhu cầu ra quyết
+định", idle game (nơi phần lớn tiến trình diễn ra TỰ ĐỘNG, không cần
+người chơi quyết định liên tục) là ví dụ hay để học viên tự tranh luận
+xem nó có thỏa định nghĩa của Costikyan hay không.
+
+(d) Visual novel: [KHÔNG TÌM ĐƯỢC NGUỒN TRANH LUẬN CỤ THỂ, CÓ THỂ TRÍCH
+DẪN, TRONG PHIÊN NGHIÊN CỨU NÀY]. Nên xử lý mục này thuần túy như
+[PHÂN TÍCH — không từ nguồn] nếu đưa vào bài: nhiều visual novel gần như
+không có "player effort ảnh hưởng outcome" theo nghĩa Juul (tuyến tính,
+không lựa chọn) → là ca biên giới hợp lý về mặt logic, nhưng KHÔNG có
+trích dẫn/phỏng vấn cụ thể nào được xác nhận trong phiên này để dẫn
+chứng.
+
+(e) Game không thắng/thua (no-win games): SimCity đã được chính Juul
+nêu ở mục 3 (đã verify trực tiếp từ nguồn sơ cấp) — nên đây là ví dụ AN
+TOÀN NHẤT để dùng trong bài, vì có trích dẫn chính tác giả, không phải
+suy luận thêm.
+
+================================================================
+13. VÌ SAO ĐỊNH NGHĨA GAME HỮU ÍCH CHO CÔNG VIỆC DESIGNER THẬT
+================================================================
+
+Theo Fullerton (Game Design Workshop), 8 "formal elements" (mục 7) không
+chỉ để MÔ TẢ game có sẵn — mà còn dùng làm CHECKLIST CHẨN ĐOÁN khi thiết
+kế: nếu một ý tưởng game thiếu bất kỳ thành tố nào (không có Objective rõ
+ràng, không có Conflict, Outcome không đủ bất định để giữ sự chú ý...),
+đó là dấu hiệu ý tưởng còn thiếu sót ở tầng cấu trúc, TRƯỚC KHI xét tới
+nội dung/thẩm mỹ. [Ý này được nhiều nguồn thứ cấp về giáo trình Fullerton
+mô tả nhất quán — mục đích thực dụng của formal elements là công cụ
+chẩn đoán/thiết kế, không chỉ để phân loại học thuật — nhưng CHƯA verify
+được một câu trích nguyên văn cụ thể nói thẳng "dùng để chẩn đoán ý
+tưởng" trong sách gốc].
+
+[PHÂN TÍCH — không từ nguồn] Ứng dụng cụ thể gợi ý cho bài giảng: khi một
+học viên trình bày ý tưởng game mà người nghe cảm thấy "mơ hồ, không biết
+chơi gì", designer có kinh nghiệm thường lần lượt hỏi: Ai chơi (Players)?
+Chơi để làm gì (Objective)? Làm sao biết đang thắng hay thua (Outcome)?
+Cái gì cản đường người chơi (Conflict)? Đây chính là cách dùng "định
+nghĩa hình thức" của game như MỘT CÔNG CỤ HỎI-ĐÁP thực tế, không phải chỉ
+để tranh luận triết học "cái này có phải game không".
+
+Salen & Zimmerman (Rules of Play) cũng được nhiều nguồn thứ cấp mô tả là
+dùng việc SO SÁNH nhiều định nghĩa (chương 7, mục 2) như một PHƯƠNG PHÁP
+SƯ PHẠM: không có định nghĩa nào "đúng nhất", nhưng việc thấy các định
+nghĩa NHẤN MẠNH khác nhau (Huizinga nhấn "tự nguyện + tách biệt đời
+thực"; Suits nhấn "chướng ngại không cần thiết"; Costikyan nhấn "quyết
+định"; Crawford nhấn "tương tác với đối thủ") giúp designer nhìn một ý
+tưởng game từ NHIỀU GÓC khác nhau, phát hiện ý tưởng đang thiếu góc nào.
+[CHƯA VERIFY nguyên văn Salen & Zimmerman nói đúng ý này — đây là cách
+diễn giải phổ biến trong giới giảng dạy game design về MỤC ĐÍCH của
+chương 7, tổng hợp qua nhiều nguồn thứ cấp].
+
+================================================================
+14. HIỂU LẦM PHỔ BIẾN CỦA NGƯỜI MỚI VỀ "GAME LÀ GÌ"
+================================================================
+
+[PHÂN TÍCH — không từ nguồn, nhưng có liên hệ tới các mục đã verify ở
+trên]
+
+1) Nghĩ có MỘT định nghĩa "đúng" duy nhất, và các sách khác nhau "cãi
+   nhau xem ai đúng".
+   Thực tế: theo Wittgenstein (mục 10), bản thân khái niệm "game" không
+   có một tập thuộc tính chung cần-và-đủ — mỗi định nghĩa (Suits, Salen &
+   Zimmerman, Juul, Costikyan...) nhấn mạnh một góc khác nhau, không cái
+   nào "thắng" cái nào. Salen & Zimmerman còn dùng hẳn một chương chỉ để
+   SO SÁNH (không chọn ra "định nghĩa đúng nhất").
+
+2) Nghĩ "game" bắt buộc phải có thắng/thua rõ ràng, nếu không thì nó
+   "không phải game thật, chỉ là toy/app".
+   Thực tế: chính Jesper Juul (mục 3, đã verify từ nguồn sơ cấp) coi
+   SimCity nằm ngoài "classic game model" vì thiếu outcome được gán giá
+   trị — NHƯNG ông không tuyên bố SimCity "không phải game" theo mọi
+   định nghĩa, mà dùng nó để cho thấy game hiện đại đang "vượt khỏi" mô
+   hình cổ điển. Ranh giới game/toy là một PHỔ (spectrum), không phải
+   nhị phân — xem Crawford (mục 11) và ví dụ Minecraft Survival vs
+   Creative (mục 12b).
+
+3) Nhầm "luật" (rules) của game với "luật" đời thường (nghĩ luật game
+   phải "hợp lý"/tối ưu).
+   Thực tế: theo Suits (mục 1), điểm đặc trưng của constitutive rules là
+   chúng CHỦ ĐỘNG cấm cách làm hiệu quả nhất (vd: không được chạm bóng
+   golf bằng tay dù đó là cách nhanh nhất đưa bóng vào lỗ) — và người
+   chơi chấp nhận sự "kém hiệu quả" đó CHỈ VÌ nó làm trò chơi khả thi
+   (lusory attitude). Luật game không nhằm "tối ưu hóa" một công việc,
+   mà nhằm TẠO RA một hoạt động có ý nghĩa để chơi.
+
+4) Coi "magic circle" là một khái niệm được Huizinga định nghĩa kỹ và
+   trung tâm trong Homo Ludens.
+   Thực tế (mục 4): trong câu gốc, "magic circle" chỉ là MỘT ví dụ ngắn
+   trong một danh sách liệt kê các loại "sân chơi" (đấu trường, bàn bài,
+   đền thờ...) — sức nặng lý thuyết của thuật ngữ này chủ yếu đến từ cách
+   Salen & Zimmerman (2003) phổ biến và mở rộng nó gần 70 năm sau, không
+   phải từ chính Huizinga.
+
+5) Nghĩ "Aesthetics"/"cảm xúc" hay "câu chuyện" (narrative) là điều BẮT
+   BUỘC để một thứ được coi là game.
+   Thực tế: cả Costikyan ("nhu cầu ra quyết định") và Crawford ("tương
+   tác + đối thủ") đều định nghĩa game gần như KHÔNG nhắc tới cảm xúc/
+   câu chuyện — cho thấy nhiều định nghĩa nền tảng của ngành xoay quanh
+   CẤU TRÚC/TƯƠNG TÁC hệ thống, không phải nội dung kể chuyện. (Đối chiếu
+   thêm với MDA — xem file research/mda.txt — nơi Narrative chỉ là 1/8
+   aesthetics, không phải điều kiện bắt buộc).
+
+================================================================
+15. TỔNG HỢP MỌI MỤC [CHƯA VERIFY]
+================================================================
+
+- Suits, Grasshopper: ĐÃ VERIFY NGUYÊN VĂN qua Google Books search-inside
+  (id G9z4wjVB_0wC) — định nghĩa dài trang 55, bản không-ngoặc sớm hơn
+  trang 48-49, câu ngắn "voluntary attempt..." trang 55 (chính lời Suits
+  tự gọi là "simpler, more portable version"), ví dụ golf trang 38 xác
+  nhận là ví dụ CHÍNH Suits dùng. (mục 1 — CẬP NHẬT 2026-09-15, không còn
+  [CHƯA VERIFY]).
+- Salen & Zimmerman, định nghĩa "artificial conflict... quantifiable
+  outcome": ĐÃ VERIFY NGUYÊN VĂN qua Google Books search-inside (id
+  UM-xyczrZuQC), trang PA80 khớp 100%. (mục 2 — CẬP NHẬT 2026-09-15).
+- Nội dung bảng so sánh định nghĩa ở chương 7 Rules of Play: ĐÃ VERIFY
+  đoạn MỞ ĐẦU chương (epigraph Parlett, trang PA71) qua Google Books.
+  Nội dung CHI TIẾT của cả bảng so sánh (Abt, Huizinga, Caillois, Suits,
+  Crawford, Costikyan, Avedon & Sutton-Smith) VẪN [CHƯA VERIFY] — mới đọc
+  đoạn mở đầu, chưa đọc hết bảng (mục 2).
+- Đoạn Salen & Zimmerman viết cụ thể về "magic circle": ĐÃ VERIFY NGUYÊN
+  VĂN qua Google Books trang PA95 — xác nhận chính sách viết "a term
+  borrowed from the following passage in Huizinga's book Homo Ludens".
+  (mục 2, mục 4 — CẬP NHẬT 2026-09-15).
+- Huizinga, trích dẫn "magic circle" dài VÀ đoạn tóm tắt đặc điểm play:
+  ĐÃ VERIFY NGUYÊN VĂN TRỰC TIẾP từ bản Routledge 1949 trên archive.org
+  (mức tin cậy cao nhất, ngang mục 3 Juul). Khớp gần tuyệt đối với bản cũ
+  của file, chỉ khác 1 dấu gạch nối OCR ("card-table"). (mục 4 — CẬP NHẬT
+  2026-09-15, không còn [CHƯA VERIFY]).
+- Caillois, 4 loại + trục paidia-ludus: ĐÃ VERIFY NGUYÊN VĂN bản dịch
+  tiếng Anh (Meyer Barash) qua Google Books search-inside (id
+  bDjOPsjzfC4C) — đọc được câu định nghĩa mở đầu của cả agôn/alea/
+  mimicry/ilinx và trục paidia-ludus. Bản gốc tiếng Pháp trên archive.org
+  vẫn access-restricted, không mở được — chỉ bản dịch tiếng Anh được
+  verify trực tiếp. (mục 5 — CẬP NHẬT 2026-09-15).
+- Costikyan: ĐÃ VERIFY NGUYÊN VĂN TỪ FILE PDF GỐC — lấy được qua Wayback
+  Machine snapshot 2010-02-10 (costik.com hiện lỗi SSL nên không fetch
+  trực tiếp được), dùng pdftotext trích toàn văn rồi tự đọc. Xác nhận
+  đúng các câu "need to make decisions", "A puzzle is static. A game is
+  interactive" (trang ~10), VÀ bổ sung mới câu định nghĩa chính thức "an
+  interactive structure of endogenous meaning that requires players to
+  struggle toward a goal" (trang 23-24, bản 2002) — câu này CHƯA có trong
+  bản cũ của file. (mục 6 — CẬP NHẬT 2026-09-15, không còn [CHƯA VERIFY]).
+- Fullerton, 8 formal elements: ĐÃ VERIFY NGUYÊN VĂN câu liệt kê 8 tên +
+  câu kết "Without them, games cease to be games" qua Google Books
+  search-inside (id BgH0EAAAQBAJ, bản ấn bản 5), trang PT139. Danh sách
+  10 "kiểu mục tiêu" (Capture...Outwit): verify được cấu trúc đánh số
+  tiểu mục 3.11-3.20 liên tiếp khớp thứ tự, nhưng CHƯA verify nguyên văn
+  100% mô tả từng mục riêng lẻ. (mục 7 — CẬP NHẬT 2026-09-15).
+- Schell, định nghĩa "problem-solving activity...playful attitude": ĐÃ
+  VERIFY NGUYÊN VĂN qua Google Books search-inside (id gXumDwAAQBAJ, bản
+  ấn bản 3, 2019), trang PT100, kèm câu Schell tự nhận xét "This is a
+  simple, elegant definition". (mục 8 — CẬP NHẬT 2026-09-15).
+- Koster, "Fun is just another word for learning" và câu liên quan:
+  KHÔNG nằm trong phạm vi fact-check bổ sung lần này — vẫn giữ nguyên
+  trạng thái cũ [CHƯA VERIFY TỪ SÁCH GỐC], lấy qua Goodreads Quotes (mục
+  9 — KHÔNG THAY ĐỔI).
+- Wittgenstein, đoạn §66-67 family resemblance: ĐÃ VERIFY NGUYÊN VĂN TRỰC
+  TIẾP bản dịch Anscombe qua archive.org (toàn văn tải về, grep đúng
+  đoạn). Chi tiết "Kampfspiele": xác nhận cụ thể hơn — bản dịch Anscombe
+  dịch "Kampfspiele" thành "Olympic games" (không phải tổng quát hóa
+  thành "games" như suy đoán cũ) — [ĐÃ SỬA THEO NGUỒN]; phần tiếng Đức
+  vẫn dựa trên 1 nguồn thứ cấp trích dẫn, chưa tự mở bản gốc tiếng Đức.
+  (mục 10 — CẬP NHẬT 2026-09-15).
+- Will Wright, "software toy": KHÔNG xác định được phỏng vấn/nguồn gốc cụ
+  thể của câu nói — không nên trích như quote chắc chắn (mục 11).
+- Chris Crawford, sơ đồ plaything/toy/challenge/puzzle/conflict: 2 lần cố
+  mở PDF gốc đều thất bại (404, và PDF scan không đọc được); cấu trúc
+  phân loại lấy qua nguồn thứ cấp, KHÔNG có trích nguyên văn. "4 yếu tố
+  đặc trưng game" (representation/interaction/conflict/safety): KHÔNG xác
+  nhận lại được, KHÔNG đưa vào bài cho tới khi tìm được nguồn (mục 11).
+- Walking simulator, Dan Pinchbeck: câu trích lấy qua search snippet, CHƯA
+  tự mở trực tiếp bài phỏng vấn PCGamesN (mục 12a).
+- Minecraft Creative Mode, chi tiết Notch suýt bỏ tính năng: chưa xác
+  nhận được phỏng vấn gốc, chỉ qua các bài tổng hợp phổ thông (mục 12b).
+- Cookie Clicker, phỏng vấn Julien Thiennot: câu trích lấy qua search
+  snippet từ bài Vice, CHƯA tự mở trực tiếp bài phỏng vấn (mục 12c).
+- Visual novel như ca biên giới: KHÔNG tìm được nguồn tranh luận/phỏng
+  vấn cụ thể nào trong phiên này — chỉ nên đưa vào bài như suy luận logic
+  tự thân (mục 12d).
+- Mục 13 (ứng dụng thực tế cho designer) và toàn bộ mục 14 (hiểu lầm phổ
+  biến): phần lớn là phân tích/tổng hợp của người nghiên cứu dựa trên
+  liên hệ giữa các định nghĩa đã liệt kê ở mục 1-12, KHÔNG phải trích dẫn
+  trực tiếp một câu cụ thể nào nói đúng những ý đó — đã gắn nhãn [PHÂN
+  TÍCH] rõ trong từng đoạn liên quan.
+- CẬP NHẬT MỨC VERIFY (2026-09-15): sau đợt fact-check bổ sung này, TÁM
+  mục trọng tâm (1 Suits, 2 Salen & Zimmerman, 3 Juul, 4 Huizinga, 5
+  Caillois, 6 Costikyan, 7 Fullerton, 8 Schell) VÀ mục 10 (Wittgenstein)
+  đều đã đạt mức "ĐÃ TỰ MỞ ĐỌC NGUYÊN VĂN" — qua 3 kênh: (a) đọc trực tiếp
+  toàn văn trên archive.org (Huizinga, Wittgenstein — mức tin cậy cao
+  nhất, ngang mức cũ chỉ có ở Juul); (b) đọc trực tiếp file PDF gốc qua
+  Wayback Machine + pdftotext (Costikyan); (c) đọc snippet "search inside
+  the book" của Google Books, hiển thị đúng ảnh scan/OCR câu chữ trang
+  sách kèm số trang cụ thể, đối chiếu được ngữ cảnh trước/sau để xác nhận
+  không phải trích dẫn rời rạc (Suits, Salen & Zimmerman, Caillois,
+  Fullerton, Schell). Đây đều là nguồn SƠ CẤP/bản trích chính thức, KHÔNG
+  phải diễn giải qua bên thứ ba, đáp ứng chuẩn "đã tự mở đọc" của quy tắc
+  fact-check dự án.
+  Các mục KHÔNG thuộc phạm vi lần fact-check này (còn nguyên trạng
+  [CHƯA VERIFY] như cũ, CHƯA được kiểm tra lại): mục 9 (Koster), mục 11
+  (Will Wright / Chris Crawford), toàn bộ mục 12 (borderline cases —
+  Pinchbeck, Notch, Cookie Clicker), và nội dung CHI TIẾT bảng so sánh
+  chương 7 Rules of Play (chỉ verify được đoạn mở đầu, không phải cả
+  bảng). Mục 13, 14 vẫn là [PHÂN TÍCH] của người nghiên cứu như cũ.

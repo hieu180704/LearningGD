@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tư duy lấy người chơi làm trung tâm — Xưởng Game Design</title>
+<meta name="description" content="Điều designer thấy khi đứng ngoài khác điều người chơi thật sự cảm nhận. Playtest, curse of knowledge, và vì sao nghe người chơi không có nghĩa là làm y lời họ nói.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-0/03-tu-duy-nguoi-choi" class="tier-0">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-0">Tầng 0 · Nền móng</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 0 · Bài 3</p>
+            <h1>Tư duy lấy người chơi làm trung tâm</h1>
+            <p class="dek">Điều bạn thấy khi đứng ngoài quan sát một ai đó chơi game của mình, khác hẳn điều người đó thật sự cảm nhận. Bài này nói về khoảng cách đó — vì sao nó tồn tại, và cách designer thu hẹp nó bằng playtest thay vì đoán.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 12 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Cơ bản</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="02-game-designer-lam-gi.html">Game Designer thực sự làm gì</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Phân biệt "tôi thích" và điều người chơi thật sự cảm nhận</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Nghe người chơi đúng cách: họ chỉ ra vấn đề, designer tìm lời giải</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Nhận diện thiên kiến khi tự đánh giá game của chính mình</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-dau">Ngọn đồi không leo được</h2>
+        <div class="callout" data-kind="example">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Super Mario 64, 1996</p>
+                <p>Khi làm Super Mario 64, đội của Shigeru Miyamoto làm một việc họ không thường làm: mời khoảng 10 học sinh cấp 2 tới <span class="term" data-en="playtest">chơi thử</span> màn King Bob-omb suốt nửa ngày, rồi quan sát từ phía sau.</p>
+            </div>
+        </div>
+        <p>Con trai của Miyamoto nằm trong nhóm đó. Cậu bé cố leo một ngọn đồi không leo được hàng chục lần, hết lần này tới lần khác.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Shigeru Miyamoto — phỏng vấn 1996 (dịch trên Shmuplations)</p>
+                <p><em>"Truth be told, we did something with Mario 64 that we don't usually do: we had children playtest it."</em></p>
+                <p><strong>Dịch:</strong> Thật ra, chúng tôi đã làm một việc không thường làm với Mario 64: chúng tôi cho trẻ em chơi thử.</p>
+            </div>
+        </div>
+        <p>Miyamoto tự đùa rằng với tư cách một người cha đứng xem, ông đã nghĩ "thằng bé có não không". Nhưng khi hỏi lại, bọn trẻ nói game vui, và chúng muốn chơi lại.</p>
+        <p>Điều Miyamoto thấy khi đứng ngoài (một đứa trẻ loay hoay leo mãi không được) khác hẳn điều đứa trẻ đó cảm nhận (vui, muốn chơi tiếp). Khoảng cách này — giữa cái designer nhìn thấy và cái người chơi thật sự trải qua — là chủ đề của bài này.</p>
+
+        <h2 id="khai-niem">Game không phải là trải nghiệm</h2>
+        <p>Jesse Schell, trong chương 2 của <em>The Art of Game Design</em>, nhấn mạnh một phân biệt quan trọng:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Jesse Schell — <em>The Art of Game Design</em></p>
+                <p><em>"The game is not the experience. The game enables the experience, but it is not the experience."</em></p>
+                <p><strong>Dịch:</strong> Game không phải là trải nghiệm. Game tạo điều kiện cho trải nghiệm xảy ra, nhưng bản thân nó không phải là trải nghiệm.</p>
+            </div>
+        </div>
+        <p>Bạn thiết kế ra luật, hệ thống, màn chơi — nhưng trải nghiệm thật chỉ tồn tại trong đầu người chơi khi họ chơi. Tracy Fullerton gọi thẳng vai trò của designer trước hết thảy là gì:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Tracy Fullerton — <em>Game Design Workshop</em>, 2nd ed. (2008)</p>
+                <p><em>"The role of the game designer is, first and foremost, to be an advocate for the player."</em></p>
+                <p><strong>Dịch:</strong> Vai trò của game designer, trước hết và trên hết, là làm người đại diện cho người chơi.</p>
+            </div>
+        </div>
+        <p>Fullerton gọi cách làm việc này là <span class="term" data-en="playcentric design">thiết kế lấy người chơi làm trung tâm</span>: đưa người chơi thật vào quy trình càng sớm càng tốt, rồi lặp đi lặp lại vòng thiết kế — test — đánh giá xuyên suốt quá trình làm game, mỗi lần cải thiện gameplay hơn một chút.</p>
+        <p>Vấn đề là: designer rất khó tự đánh giá khách quan chính game của mình. Celia Hodent — tiến sĩ tâm lý học, cựu VP UX tại Epic Games (Fortnite) — gọi tên hiện tượng này:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Celia Hodent — phỏng vấn DigiPen (2018)</p>
+                <p><em>"You know your design, so it's really hard to have objective knowledge of it — because you can't step back. This is called 'the curse of knowledge'."</em></p>
+                <p><strong>Dịch:</strong> Bạn biết rõ thiết kế của mình, nên rất khó có cái nhìn khách quan về nó — vì bạn không thể lùi lại được. Đây gọi là "<span class="term" data-en="curse of knowledge">lời nguyền của kiến thức</span>".</p>
+            </div>
+        </div>
+        <p>Hodent kể một ví dụ cụ thể trong phỏng vấn: một tài sản đồ họa chỉ mang tính trang trí lại khiến người chơi hiểu lầm là mục tiêu gameplay thật — điều này được phát hiện qua video playtest.</p>
+        <p>Hiện tượng này không chỉ riêng trong game. Nielsen Norman Group, một tổ chức nghiên cứu UX, gọi đây là một câu quen thuộc trong ngành:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Nielsen Norman Group</p>
+                <p>Câu <em>"you are not the user"</em> (dịch: bạn không phải là người dùng) đã trở thành một "mantra" của ngành UX nói chung, không riêng game. Bài viết không gán câu này cho một cá nhân cụ thể nào.</p>
+            </div>
+        </div>
+        <p>Cơ chế đứng sau câu nói đó có tên là <span class="term" data-en="false-consensus effect">hiệu ứng đồng thuận giả</span>: xu hướng tâm lý khiến con người mặc định rằng người khác cũng nghĩ và hành xử giống mình. Designer thích thể loại nào, quen tay với cơ chế nào, dễ vô thức cho rằng người chơi cũng vậy — trong khi phần lớn người chơi chưa từng đứng ở vị trí "biết hết luật chơi" như designer.</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Ý định designer<small>Điều bạn muốn người chơi cảm thấy</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Game<small>Luật, màn chơi, giao diện thật đã dựng</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Người chơi cảm nhận<small>Điều họ thật sự nghĩ và làm</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Quan sát / playtest<small>Nhìn hành vi thật, không chỉ nghe lời kể</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Sửa<small>Chỉnh game cho khớp với ý định ban đầu</small></div>
+            </div>
+            <div class="loop-return">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                <span>Quay lại Ý định designer — kiểm tra tiếp xem đã khớp với người chơi chưa</span>
+            </div>
+            <figcaption>Sơ đồ minh hoạ của bộ tài liệu, dựng theo ý của Hodent: phải liên tục kiểm chứng điều designer định (ý định) có khớp với điều người chơi thật sự cảm nhận hay không — bằng quan sát, không phải đoán.</figcaption>
+        </figure>
+
+        <h2 id="vi-du-da-the-loai">Bốn game, bốn cách đặt người chơi vào trung tâm</h2>
+        <p>Đây đều là những case đã được chính studio hoặc báo chí công bố — không phải suy đoán. Halo 3 và Half-Life 2 là thay đổi nhờ playtest; Celeste và The Last of Us Part II là lựa chọn thiết kế cho nhiều kiểu người chơi.</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Game</th><th>Nền tảng</th><th>Điều đã phát hiện / đã làm</th></tr></thead>
+                <tbody>
+                    <tr><td>Halo 3 (Microsoft Game Studios User Research)</td><td>Console</td><td>Hơn 3.000 giờ chơi, khoảng 600 người chơi thường; lựu đạn không đủ dễ thấy nên bị bỏ qua; một kẻ địch hạ người chơi mới chỉ trong 3 phát bắn</td></tr>
+                    <tr><td>Half-Life 2 / Episode 2 (Valve)</td><td>PC</td><td>Playtest với người ngoài team mỗi thứ Sáu; Episode 2 thêm một cao trào combat và đoạn Alyx hỗ trợ bắn tỉa, vì playtester thấy chán ở đoạn cũ</td></tr>
+                    <tr><td>Celeste (Extremely OK Games / Matt Makes Games)</td><td>Indie, đa nền tảng</td><td>Assist Mode: đổi tên từ "Cheat Mode" vì gây cảm giác phán xét; chỉnh được tốc độ, số lần dash, stamina, bật/tắt bất tử</td></tr>
+                    <tr><td>The Last of Us Part II (Naughty Dog)</td><td>Console</td><td>Hơn 60 tùy chọn accessibility, remap toàn bộ nút bấm, preset riêng cho người khiếm thị/khiếm thính/khó vận động</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Ở Halo 3, Randy Pagulayan quan sát qua camera và thấy người chơi không nhặt lựu đạn dù đáng ra nên làm vậy — kết luận của ông không phải "người chơi dở", mà là vật phẩm chưa đủ nổi bật để mắt người chơi nhận ra.</p>
+        <p>Half-Life 2 còn có một ví dụ ngược chiều đáng chú ý: playtester muốn được đưa cây xà beng ngay trong phòng thí nghiệm của Kleiner để đập phá đồ đạc. Valve cố tình giữ lại chi tiết đó, để nhân vật Barney tự đưa xà beng cho người chơi sau. Marc Laidlaw, biên kịch của game, giải thích:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Marc Laidlaw — Valve</p>
+                <p><em>"It's about learning to have faith in the whole arc of the thing."</em></p>
+                <p><strong>Dịch:</strong> Đó là chuyện học cách tin vào toàn bộ mạch trải nghiệm.</p>
+            </div>
+        </div>
+        <p>Ở Celeste, Maddy Thorson nói rõ triết lý đứng sau Assist Mode:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Maddy Thorson — phỏng vấn Vice (2018)</p>
+                <p><em>"we want to empower the player and give them a good experience, and sometimes that means letting go."</em></p>
+                <p><strong>Dịch:</strong> Chúng tôi muốn trao quyền cho người chơi và mang lại trải nghiệm tốt cho họ, và đôi khi điều đó nghĩa là phải buông tay.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Ghi chú về The Last of Us Part II</p>
+                <p>Đây là khoản đầu tư <span class="term" data-en="accessibility">accessibility</span> chủ động từ đầu của Naughty Dog, không phải trường hợp "đoán sai rồi sửa" — nguồn công bố chính thức không nói theo hướng đó. Ngành game còn có các bộ hướng dẫn riêng cho việc này, như Game Accessibility Guidelines, hoạt động từ 2012.</p>
+            </div>
+        </div>
+
+        <h2 id="lens">Lens người chơi</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Lens người chơi</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Ai sẽ chơi game này?</li>
+                <li><span class="q-icon">?</span> Họ thích và ghét gì?</li>
+                <li><span class="q-icon">?</span> Họ mong đợi gì?</li>
+                <li><span class="q-icon">?</span> Nếu ở vị trí họ, bạn cảm thấy thế nào?</li>
+            </ul>
+            <p class="lens-source">Gợi ý từ Lens of the Player trong sách của Jesse Schell.</p>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <p>4 hiểu lầm dưới đây là phân tích tổng hợp của bộ tài liệu, dựa trên các khái niệm và case ở trên — không phải trích nguyên văn từ một nguồn duy nhất.</p>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">"Mình thích thì người khác cũng thích"</p>
+                <p>Đây chính là false-consensus effect. Gu của designer không phải gu của toàn bộ người chơi mục tiêu — nhất là khi designer đã quá quen với game của chính mình.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Người chơi nói muốn gì thì làm cái đó</p>
+                <p>Mark Rosewater (Head Designer, Magic: The Gathering) ví việc này như một buổi khám bệnh: bác sĩ luôn hỏi bạn cảm thấy thế nào trước — vì bạn là người hiểu rõ nhất cảm giác của chính mình — nhưng không hỏi bạn cách chữa. Ông viết:</p>
+                <p><em>"Your audience is good at recognizing problems and bad at solving them."</em></p>
+                <p><strong>Dịch:</strong> Khán giả của bạn giỏi phát hiện vấn đề và kém giải quyết chúng.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Người chơi không hiểu là do họ kém</p>
+                <p>Liên hệ trực tiếp curse of knowledge: designer biết quá rõ hệ thống của mình nên khó thấy được cái khó của người mới — như lựu đạn trong Halo 3, vấn đề nằm ở thiết kế, không nằm ở người chơi.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Chỉ cần nghe người chơi, không cần chủ kiến riêng</p>
+                <p>Chiều ngược lại cũng sai. Như ví dụ xà beng ở Half-Life 2: Valve nghe playtester, nhưng vẫn giữ quyết định của mình khi nó phục vụ đúng nhịp trải nghiệm đã định. Designer vẫn là người ra quyết định cuối cùng.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Một câu trích cần cẩn thận: "faster horses"</p>
+                <p>Câu "nếu hỏi khách hàng muốn gì, họ sẽ nói ngựa nhanh hơn" hay bị gán cho Henry Ford để biện minh cho việc "đừng nghe khách hàng". Theo Quote Investigator, lần đầu câu này bị gán cho Ford là khoảng 1999–2001, tức hơn 50 năm sau khi ông qua đời — và nó không nằm trong bộ trích dẫn đã xác thực của Bảo tàng Henry Ford. Dùng câu này để bác bỏ việc lắng nghe người chơi là dựa trên một trích dẫn không có bằng chứng.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Thực hành</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">15 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Quan sát một người chơi thử game</h3>
+                <ol class="steps">
+                    <li>Nhờ một người bạn hoặc người thân chơi thử một game họ chưa từng chơi (hoặc bản thử của chính bạn) trong khoảng 15 phút. Không hướng dẫn, không nhắc bài — để họ tự loay hoay.</li>
+                    <li>Ghi chú theo 2 cột song song: <strong>hành vi bạn quan sát được</strong> (họ bấm gì, đi đâu, khựng lại ở đâu) và <strong>điều họ nói ra miệng</strong> (than phiền, khen, đoán mò).</li>
+                    <li>Với mỗi ghi chú, đánh dấu rõ: đây là <strong>vấn đề</strong> họ chỉ ra, hay <strong>giải pháp</strong> họ đề xuất.</li>
+                    <li>Viết một câu về điều khiến bạn bất ngờ nhất — thường là chỗ lệch giữa điều bạn tưởng sẽ xảy ra và điều thật sự xảy ra.</li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nếu người chơi nói "cho tôi nút to hơn" — đó là giải pháp họ đề xuất. Vấn đề thật đứng sau có thể là "tôi không tìm thấy nút" — giống cách Pagulayan đọc ra vấn đề thật đứng sau việc người chơi không nhặt lựu đạn trong Halo 3.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="kiem-tra">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Trong case Halo 3, nguyên nhân chính khiến người chơi không nhặt lựu đạn là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Người chơi không đủ giỏi để dùng lựu đạn</button>
+                <button data-opt="b"><span class="badge">B</span> Lựu đạn không đủ dễ thấy trong game</button>
+                <button data-opt="c"><span class="badge">C</span> Người chơi cố tình tránh dùng lựu đạn</button>
+            </div>
+            <div class="explain" hidden><p>Randy Pagulayan quan sát và kết luận vấn đề nằm ở khả năng nhìn thấy vật phẩm ("the grenades aren't visible enough"), không phải kỹ năng của người chơi.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Mark Rosewater, người chơi (audience) giỏi ở việc gì, và kém ở việc gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Giỏi đề xuất giải pháp, kém phát hiện vấn đề</button>
+                <button data-opt="b"><span class="badge">B</span> Giỏi phát hiện vấn đề, kém đề xuất giải pháp</button>
+                <button data-opt="c"><span class="badge">C</span> Giỏi cả hai như nhau</button>
+            </div>
+            <div class="explain" hidden><p>Rosewater viết: "Your audience is good at recognizing problems and bad at solving them." Nghe feedback để tìm vấn đề, nhưng đừng làm y nguyên giải pháp họ đề xuất.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">"Curse of knowledge" theo Celia Hodent nghĩa là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Designer biết quá rõ thiết kế của mình nên khó có cái nhìn khách quan, khó "lùi lại" để thấy như người chơi mới</button>
+                <button data-opt="b"><span class="badge">B</span> Designer thiếu kiến thức chuyên môn cần thiết</button>
+                <button data-opt="c"><span class="badge">C</span> Người chơi không chịu đọc hướng dẫn trong game</button>
+            </div>
+            <div class="explain" hidden><p>Hodent: "You know your design, so it's really hard to have objective knowledge of it — because you can't step back." Biết quá rõ khiến bạn không còn thấy được cái khó của người mới.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Ví dụ cây xà beng trong Half-Life 2 (Valve giữ lại khoảnh khắc Barney đưa xà beng, thay vì đặt sẵn ở phòng thí nghiệm như playtester muốn) cho thấy điều gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Valve luôn làm đúng theo mọi đề xuất của playtester</button>
+                <button data-opt="b"><span class="badge">B</span> Đôi khi designer nên giữ chủ kiến về nhịp trải nghiệm, dù playtester đề xuất khác</button>
+                <button data-opt="c"><span class="badge">C</span> Playtest không có giá trị gì với Half-Life 2</button>
+            </div>
+            <div class="explain" hidden><p>Laidlaw: "It's about learning to have faith in the whole arc of the thing." Valve vẫn playtest đều đặn, nhưng không làm y lời đề xuất khi nó phá vỡ chủ đích thiết kế.</p></div>
+        </div>
+
+        <h2 id="on-nhanh">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Curse of knowledge</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Designer biết quá rõ game của mình nên khó khách quan — không "lùi lại" được để thấy như người chơi mới (Hodent).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>False-consensus effect</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Xu hướng mặc định người khác nghĩ và hành xử giống mình — gốc của "mình thích thì người khác cũng thích".</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Advocate for the player</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vai trò designer theo Fullerton: nhìn thế giới game qua mắt người chơi trước tiên.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Playtest</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Cho người chơi thật thử game và quan sát hành vi thật, thay vì chỉ hỏi họ nghĩ gì.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Assist Mode (Celeste)</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Tùy chỉnh tốc độ, dash, bất tử — để nhiều kiểu người chơi hơn trải nghiệm trọn game.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Vấn đề vs giải pháp</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Người chơi giỏi chỉ ra cái gì đang sai; designer mới là người tìm cách sửa (Rosewater).</span>
+                </span>
+            </button>
+        </div>
+
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Điều designer thấy khi đứng ngoài khác điều người chơi thật sự cảm nhận — playtest để thu hẹp khoảng cách đó, không đoán.</li>
+                <li><span class="n">2</span> Nghe đúng cách: người chơi giỏi chỉ ra vấn đề, không giỏi đề xuất giải pháp — designer vẫn phải tự tìm lời giải.</li>
+                <li><span class="n">3</span> Curse of knowledge và false-consensus effect là hai thiên kiến khiến designer đánh giá sai chính game của mình.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-sach">Sách</span>
+                <span class="reading-title">Game Design Workshop: A Playcentric Approach to Creating Innovative Games</span>
+                <span class="reading-meta">Tracy Fullerton</span>
+                <p class="reading-why">Chương 1, mục "An Advocate for the Player", và cách tiếp cận playcentric xuyên suốt sách.</p>
+            </li>
+            <li>
+                <span class="pill type-sach">Sách</span>
+                <span class="reading-title">The Art of Game Design: A Book of Lenses</span>
+                <span class="reading-meta">Jesse Schell</span>
+                <p class="reading-why">Chương "The Designer Creates an Experience" và Lens of the Player nói kỹ hơn về khoảng cách designer-người chơi.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.digipen.edu/showcase/news/dr-celia-hodent-brings-ux-insight-from-fortnite-to-digipen" target="_blank" rel="noopener">Dr. Celia Hodent Brings UX Insight from Fortnite to DigiPen</a>
+                <span class="reading-meta">DigiPen, 2018</span>
+                <p class="reading-why">Nguồn của trích dẫn "curse of knowledge" và ví dụ tài sản đồ họa gây hiểu lầm.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.nngroup.com/articles/false-consensus/" target="_blank" rel="noopener">You Are Not the User: The False-Consensus Effect</a>
+                <span class="reading-meta">Nielsen Norman Group, 2017</span>
+                <p class="reading-why">Giải thích rõ cơ chế tâm lý false-consensus effect, không riêng cho game.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://magic.wizards.com/en/news/making-magic/twenty-years-twenty-lessons-part-3-2016-06-13" target="_blank" rel="noopener">Twenty Years, Twenty Lessons—Part 3</a>
+                <span class="reading-meta">Mark Rosewater · Making Magic, 2016</span>
+                <p class="reading-why">Nguồn "Lesson 19" — audience giỏi phát hiện vấn đề, kém đề xuất giải pháp.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.vice.com/en/article/celeste-difficulty-assist-mode/" target="_blank" rel="noopener">Why The Very Hard 'Celeste' is Perfectly Fine With You Breaking Its Rules</a>
+                <span class="reading-meta">Vice, 2018 — phỏng vấn Maddy Thorson</span>
+                <p class="reading-why">Câu chuyện đầy đủ vì sao Celeste đổi "Cheat Mode" thành "Assist Mode".</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://shmuplations.com/mario64/" target="_blank" rel="noopener">Super Mario 64 – 1996 Developer Interviews</a>
+                <span class="reading-meta">Shmuplations (bản dịch)</span>
+                <p class="reading-why">Nguồn đầy đủ câu chuyện playtest với trẻ em mở đầu bài này.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/production/-i-half-life-2-i-devs-explore-when-developers-should-ignore-playtester-feedback" target="_blank" rel="noopener">Half-Life 2 devs explore when developers should ignore playtester feedback</a>
+                <span class="reading-meta">Game Developer, 2019</span>
+                <p class="reading-why">Câu chuyện xà beng đầy đủ và tư duy của Marc Laidlaw.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://blog.playstation.com/2020/06/09/the-last-of-us-part-ii-accessibility-features-detailed/" target="_blank" rel="noopener">The Last of Us Part II: Accessibility features detailed</a>
+                <span class="reading-meta">PlayStation Blog, 2020</span>
+                <p class="reading-why">Danh sách đầy đủ hơn 60 tùy chọn accessibility của Naughty Dog.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://quoteinvestigator.com/2011/07/28/ford-faster-horse/" target="_blank" rel="noopener">Quote Origin: My Customers Would Have Asked For a Faster Horse</a>
+                <span class="reading-meta">Quote Investigator, 2011</span>
+                <p class="reading-why">Vì sao câu này không có bằng chứng là lời Henry Ford.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

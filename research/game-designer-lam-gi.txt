@@ -1,0 +1,603 @@
+NGHIÊN CỨU & FACT-CHECK: "GAME DESIGNER THỰC SỰ LÀM GÌ"
+(Nguồn cho bài giảng tiếng Việt — Tầng 0, Bài 2 — người mới học Game Design)
+Ngày thực hiện: 2026-09-15
+
+MỤC LỤC
+1. Định nghĩa vai trò designer từ sách nền tảng (Schell, Fullerton, Sylvester, Rogers)
+2. Hiểu lầm "idea guy" — nguồn nói thẳng
+3. Phân biệt design với programming và art
+4. Các chuyên môn designer trong studio thật (job listing)
+5. Công việc hàng ngày thật — AAA lớn vs indie nhỏ
+6. Công cụ designer hay dùng
+7. Ví dụ đa thể loại — quyết định design cụ thể có nguồn gốc (GDC/postmortem)
+8. Hiểu lầm phổ biến của người mới về nghề designer
+9. Tổng hợp mọi mục [CHƯA VERIFY]
+
+================================================================
+1. ĐỊNH NGHĨA VAI TRÒ DESIGNER TỪ SÁCH NỀN TẢNG
+================================================================
+
+(a) Jesse Schell — "The Art of Game Design: A Book of Lenses", chương 1
+"In the Beginning, There Is the Designer".
+Đã đọc trực tiếp nội dung chương qua bản scan công khai trên Yumpu
+(https://www.yumpu.com/en/document/view/64734112/jesse-schell-the-art-of-game-design-a-book-of-lbookfi/51)
+— trang hiển thị đúng nội dung chương 1.
+
+Nội dung đã verify:
+- Schell liệt kê một danh sách dài các lĩnh vực mà hiểu biết sẽ giúp ích cho
+  designer — bao gồm cả lĩnh vực kỹ thuật (toán, khoa học máy tính), sáng tạo
+  (mỹ thuật, âm nhạc) lẫn liên-cá-nhân (tâm lý học, nói trước công chúng).
+  Nguyên văn về mục "Games" trong danh sách này: "Naturally, familiarity with
+  games will be of great use to you, but not just familiarity with the kind
+  of games you intend to create." Schell thừa nhận không ai giỏi hết mọi
+  lĩnh vực, nhưng sự thoải mái với nhiều lĩnh vực khác nhau giúp ích cho năng
+  lực thiết kế.
+- Kỹ năng quan trọng nhất theo Schell KHÔNG phải sáng tạo hay logic, mà là
+  LISTENING (lắng nghe). Nguyên văn được xác nhận qua nhiều nguồn trích dẫn
+  khớp nhau (search kết quả trực tiếp trích câu của Schell, khớp với nội
+  dung đọc được trên Yumpu):
+  "The most important skill for a game designer is listening."
+  Schell phân biệt "nghe bề mặt" và "nghe sâu": "By listening, I don't mean
+  merely hearing what is said. I mean a deeper listening, a thoughtful
+  listening." — minh họa bằng ví dụ nhân vật "Fred": ngôn ngữ cơ thể, giọng
+  điệu, hàm ý truyền tải nhiều hơn lời nói.
+- 5 loại lắng nghe designer cần: TEAM (đội ngũ), AUDIENCE (người chơi/khán
+  giả), GAME (bản thân game — nó đang "nói" gì qua playtest), CLIENT (khách
+  hàng/nhà phát hành/stakeholder), SELF (bản thân — trực giác của chính
+  mình). Đã verify khớp giữa nội dung đọc trực tiếp và các trích dẫn khác
+  ngoài Yumpu.
+- Nguồn tham chiếu thêm (chưa tự mở, chỉ để đối chiếu chéo): trang tóm tắt
+  sách trên game-studies.fandom.com, bookey.app — nội dung khớp với những gì
+  đọc được trên Yumpu.
+
+(b) Tracy Fullerton (với Christopher Swain, Steven S. Hoffman) — "Game
+Design Workshop: A Playcentric Approach to Creating Innovative Games",
+2nd Edition (2008), Morgan Kaufmann/Elsevier.
+Đã đọc trực tiếp PDF sample chapters (front matter + mục lục + Foreword +
+Introduction đầy đủ) từ trang mẫu chính thức của Elsevier:
+https://booksite.elsevier.com/samplechapters/9780240809748/Sample_Chapters/01~Front_Matter.pdf
+
+Nội dung đã verify NGUYÊN VĂN (đọc trực tiếp từ Introduction, trang xix):
+"Part engineer, part entertainer, part mathematician, and part social
+director, the role of the game designer is to craft a set of rules within
+which there are means and motivation to play."
+→ Vai trò designer: một phần kỹ sư, một phần người giải trí, một phần nhà
+toán học, một phần "giám đốc xã hội" (social director) — công việc là tạo
+ra một bộ luật chơi (rules) mà bên trong đó có phương tiện và động lực để
+chơi.
+
+Xác nhận qua mục lục (Table of Contents, đã đọc trực tiếp): Chương 1 có
+tên chính xác là "The Role of the Game Designer", với mục con đầu tiên tên
+là "An Advocate for the Player" (trang 2) — xác nhận cách gọi designer là
+"advocate for the player" đúng là tên một mục con trong sách (không phải
+suy diễn từ nguồn thứ cấp). Mục con tiếp theo là "Passions and Skills"
+(trang 5), "A Playcentric Design Process" (trang 10, có mục nhỏ "Designers
+You Should Know" và "The Iterative Design Process"), "Designing for
+Innovation" (trang 21).
+ĐÃ VERIFY NGUYÊN VĂN câu mở đầu mục "An Advocate for the Player" (trang 2)
+— mở được qua proxy đọc text r.jina.ai trên bản dokumen.pub (host bản
+text/PDF đầy đủ sách 2nd edition; mở trực tiếp bị lỗi 403 Forbidden, nhưng
+qua proxy đọc được nội dung thật của trang):
+Link: https://r.jina.ai/https://dokumen.pub/game-design-workshop-a-playcentric-approach-to-creating-innovative-games-2nbsped-9780240809748-2007040857.html
+
+Nguyên văn (đã đọc trực tiếp):
+"The role of the game designer is, first and foremost, to be an advocate
+for the player. The game designer must look at the world of games through
+the player's eyes."
+[CHƯA VERIFY: phần còn lại của mục này (sau 2 câu mở đầu, tới hết trang
+2-4) — chỉ mới xác nhận được đúng 2 câu mở đầu qua proxy, chưa đọc hết
+toàn bộ thân mục].
+
+Về "playcentric approach": đã đọc qua bài trích đoạn chính thức của Fullerton
+trên Game Developer (5th edition, 2024):
+https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+Nội dung xác nhận: playcentric approach nghĩa là "involving the player in
+your design process from conception through completion" — luôn đặt player
+experience ở trung tâm, đặt ra experience goals (ví dụ mẫu được paraphrase
+từ bài: "players will have to cooperate to win, but the game will be
+structured so they can never trust each other"), ưu tiên làm physical
+prototype (giấy, thẻ bài, nhập vai) ngay sau brainstorm để lấy feedback
+sớm trước khi có code/art.
+[CHƯA VERIFY nguyên văn]: câu trích trên là bài viết diễn giải/paraphrase
+của biên tập Game Developer dựa trên sách, KHÔNG phải trích nguyên văn có
+ngoặc kép — chỉ dùng làm minh họa khái niệm "playcentric", không trích dẫn
+trực tiếp trong bài giảng.
+
+3 bước tổng quát của quy trình theo Fullerton (đọc trực tiếp từ
+Introduction, đã verify nguyên văn cấu trúc — paraphrase ý, giữ số bước):
+Step 1: hiểu cách game vận hành (rules, procedures, objectives).
+Step 2: học conceptualize, prototype, playtest game gốc của mình.
+Step 3: hiểu ngành công nghiệp và vị trí của designer trong đó — từ đây có
+thể theo đuổi kỹ năng chuyên biệt khác trong ngành như producing,
+programming, art, hay marketing, hoặc trở thành lead designer.
+Nguyên văn liên quan (đã đọc trực tiếp, trang xx):
+"Understand the industry and the place of the game designer in it... From
+there you can pursue the specialized skills used in the game industry. For
+example, you can pursue producing, programming, art, or marketing."
+→ Đây là nguồn gốc trực tiếp, có ngoặc kép thật, cho việc PHÂN BIỆT rạch
+ròi vai trò designer với producing/programming/art/marketing như những
+"specialized skills" khác trong ngành.
+
+(c) Tynan Sylvester — "Designing Games: A Guide to Engineering
+Experiences" (O'Reilly, 2013).
+Đã thử mở PDF đầy đủ (bản scan lưu trên archive.org) nhưng công cụ chỉ đọc
+được phần mục lục/hyperlink, KHÔNG trích xuất được nội dung văn bản đầy đủ
+của các chương liên quan trong phiên này.
+[CHƯA VERIFY nguyên văn]: câu định nghĩa cụ thể công việc designer.
+Qua kết quả tìm kiếm (không phải đọc trực tiếp nguyên văn, nên KHÔNG dùng
+làm trích dẫn có ngoặc kép trong bài giảng), Sylvester được mô tả là định
+nghĩa game là "an artificial system for generating experiences", và việc
+của designer là tìm ra thiết kế (trong "Library of Play" — ý tưởng ẩn dụ
+của tác giả) sao cho phù hợp với mục đích của game đó; công việc gắn với
+việc "engineer mechanics that result in meaningful play". Đây là diễn giải
+từ các bài tóm tắt/review sách, chưa tự đọc trực tiếp đoạn văn gốc.
+[CHƯA VERIFY — chỉ nêu ý tưởng, KHÔNG trích nguyên văn có ngoặc kép].
+
+(d) Scott Rogers — "Level Up! The Guide to Great Video Game Design"
+(Wiley).
+Không tìm được trích đoạn cụ thể nào (nguyên văn định nghĩa designer, hay
+danh sách "các loại designer") từ nguồn có thể mở đọc được trong phiên
+nghiên cứu này — chỉ có mô tả chung chung về nội dung sách (tác giả có 25+
+năm kinh nghiệm, từng làm Pac-Man World, Maximo, God of War, Drawn to
+Life, Darksiders, Warhammer 40K) từ các trang bán sách/tóm tắt.
+[CHƯA VERIFY hoàn toàn — KHÔNG dùng làm nguồn trích dẫn cho bài giảng, chỉ
+có thể nêu tên sách + tác giả nếu cần liệt kê "đọc thêm"].
+
+================================================================
+2. HIỂU LẦM "IDEA GUY" — NGUỒN NÓI THẲNG
+================================================================
+
+(a) Stanislav Costiuc, Game Developer (gamedeveloper.com), đăng
+28/10/2019. Đã đọc trực tiếp bài qua WebFetch.
+Link: https://www.gamedeveloper.com/design/idea-people-so-you-wanna-be-a-game-designer-1-
+(tên đầy đủ bài: "Idea People? | So You Wanna Be A Game Designer? (#1)")
+
+Trích nguyên văn (đã đọc trực tiếp):
+"A Game Designer is NOT an idea person. The job is not about spitting out
+ideas."
+
+Ý chính của bài (paraphrase từ nội dung đã đọc): công việc thật của designer
+là GIẢI QUYẾT VẤN ĐỀ — trả lời hàng loạt câu hỏi thiết kế phát sinh từ các
+hệ thống khác nhau trong game (ví dụ: ngay việc thêm một cánh cửa vào game
+cũng đòi hỏi nhiều quyết định thiết kế cụ thể: cửa có khóa không, ai mở
+được, mở bằng cách nào, ảnh hưởng gì tới pacing). Designer đóng vai trò
+"người cân bằng lợi ích" giữa các bộ phận (lập trình, họa sĩ, âm nhạc...),
+đồng thời lọc ý tưởng để chỉ giữ lại những gì phù hợp tầm nhìn sáng tạo
+chung của game.
+
+(b) Kimberly Unger — "The 'Ideas' Guy", Game Developer (gamedeveloper.com),
+đăng 10/03/2009. Đã đọc trực tiếp bài qua WebFetch.
+Link: https://www.gamedeveloper.com/design/the-ideas-guy
+
+Trích nguyên văn (đã đọc trực tiếp):
+"Ideas, I hate to say, are a dime a dozen, especially in an industry as
+creative as our inherently tends to be."
+
+Ý chính: ý tưởng không thiếu; cái thiếu là khả năng biến ý tưởng thành hiện
+thực — kỹ năng giao tiếp/thuyết phục người khác đầu tư thời gian & nguồn
+lực, kỹ năng "bán" ý tưởng cho producer/đồng đội, và kỹ năng viết — đặc
+biệt viết design document tốt (không lỗi chính tả/ngữ pháp, mô tả sống
+động) vì tài liệu này phải "tự nói" thay tác giả khi họ không có mặt.
+
+(c) Tadhg Kelly — "The 'Game Designer Polymath' Myth", Game Developer
+(gamedeveloper.com), đăng 18/11/2010. Đã đọc trực tiếp bài qua WebFetch.
+Link: https://www.gamedeveloper.com/design/the-quot-game-designer-polymath-quot-myth
+
+Ý chính (paraphrase từ nội dung đã đọc trực tiếp): Kelly phản bác quan
+niệm designer phải là "polymath" (thông thạo văn học, triết học, lý thuyết
+âm nhạc...). Ông liệt kê 7 kỹ năng thực sự cần: Imagination (khả năng nghĩ
+ra ý tưởng đủ tốt để thu hút người chơi), Coherence (diễn đạt ý tưởng rõ
+ràng, chia nhỏ được thành phần production), Leadership (khiến đội tin
+tưởng vào tầm nhìn, không phải kiểu đồng thuận nhạt nhòa), Technical
+Awareness (hiểu giới hạn lập trình dù không cần biết code), "Eye for
+Elegance" (thiết kế hệ thống hiệu quả, tạo ra emergent gameplay có ý
+nghĩa), "Ear for People" (hiểu người chơi thật sự trải nghiệm game thế
+nào), Self-Esteem (khả năng chịu đựng chỉ trích/nghi ngờ). Kelly phê phán
+việc designer cố tỏ ra trí thức thường trở nên "xa cách, kiểu cách" và kém
+hiệu quả hơn người tập trung vào thực thi + đồng cảm với người chơi.
+Lưu ý: bài này liên quan trực tiếp tới cả mục 2 (idea guy myth) lẫn mục 1
+(kỹ năng designer cần) — tên bài "Polymath Myth" gần nghĩa với phê phán
+kiểu "idea guy toàn năng".
+
+================================================================
+3. PHÂN BIỆT DESIGN VỚI PROGRAMMING VÀ ART
+================================================================
+
+Nguồn trực tiếp mạnh nhất đã verify: Tracy Fullerton, Introduction, "Game
+Design Workshop" 2nd ed. (xem mục 1b) — liệt kê designer như MỘT trong các
+"specialized skills" của ngành, tách bạch với producing/programming/
+art/marketing — tức là designer không tự động kiêm các vai trò đó, dù có
+thể học thêm để làm nhiều vai trò khi cần (ví dụ ở studio nhỏ, xem mục 5).
+
+Nguồn bổ sung — Bruno Valenti (NGD Studios), "Day In The Life: Bruno
+Valenti, Mobile Game Designer", Game Developer. Đã đọc trực tiếp qua
+WebFetch.
+Link: https://www.gamedeveloper.com/design/day-in-the-life-bruno-valenti-mobile-game-designer
+
+Trích nguyên văn liên quan tới ranh giới designer-programmer (đã đọc trực
+tiếp):
+"...programmers are as logical and exact as their programs, so they will
+find errors...in even the most detailed design documents."
+Và về ranh giới designer-artist (đã đọc trực tiếp, paraphrase kèm trích
+đoạn nghi vấn của Valenti):
+"How do I, although having little eye for art...tell him, an artist, that
+his job needs corrections?"
+→ Ý chính rút ra: designer là người ra QUYẾT ĐỊNH THIẾT KẾ (thế nào là
+đúng cho gameplay/trải nghiệm), programmer chịu trách nhiệm hiện thực hóa
+đúng-logic (và có quyền "bắt lỗi" thiết kế không khả thi kỹ thuật), artist
+chịu trách nhiệm thực thi thẩm mỹ hình ảnh — designer critique art dựa trên
+mục tiêu gameplay/thẩm mỹ chung chứ không thay artist làm việc của họ.
+Đây là ví dụ THỰC TẾ (không phải lý thuyết) về cách 3 vai trò cọ xát nhau
+hàng ngày.
+
+================================================================
+4. CÁC CHUYÊN MÔN DESIGNER TRONG STUDIO THẬT (JOB LISTING)
+================================================================
+
+Ghi chú chung: job listing hay bị gỡ/thay đổi liên tục. Các link dưới đây
+được truy cập/tìm thấy trong phiên nghiên cứu ngày 2026-09-15. Một số nội
+dung chi tiết (bullet Responsibilities/Requirements) không lấy được đầy đủ
+do trang là ứng dụng JS-rendered (WebFetch chỉ đọc được HTML tĩnh) — những
+chỗ này đánh dấu rõ [KHÔNG LẤY ĐƯỢC CHI TIẾT].
+
+(a) Riot Games — nhiều vị trí "Game Designer" cho League of Legends,
+VALORANT, Teamfight Tactics, Riftbound (card game).
+- Ví dụ chức danh tìm thấy: "Game Designer III (Card Rules) - Riftbound",
+  "Senior Game Designer, Generalist - Unpublished R&D Product", "Game
+  Designer - League of Legends PC, Teamfight Tactics and VALORANT",
+  "Principal Game Designer, Competitive Systems - VALORANT", "Game
+  Designer - VALORANT".
+- Link ví dụ: https://www.riotgames.com/en/work-with-us/job/7093426/game-designer-valorant-los-angeles-usa
+  [KHÔNG LẤY ĐƯỢC CHI TIẾT Responsibilities/Requirements — trang yêu cầu
+  JavaScript, WebFetch chỉ trả về danh sách điều hướng].
+- Mô tả trách nhiệm chung (tổng hợp từ nhiều trang tuyển dụng Riot qua kết
+  quả tìm kiếm, KHÔNG phải trích nguyên văn 1 job cụ thể — dùng thận trọng,
+  đánh dấu [CHƯA VERIFY nguyên văn]): designer tại Riot "design and improve
+  the player experience", phân tích mechanics/systems để tìm điểm cần cải
+  thiện, làm việc liên phòng ban (interdisciplinary), tham gia playtest và
+  feedback session dùng data.
+
+(b) Supercell — nhiều vị trí designer cho Clash Royale, Clash of Clans,
+dự án mới.
+- Chức danh tìm thấy: "Senior Technical Designer, New Game Team", "Senior
+  Gameplay Designer", "Game Designer, Clash Royale" (link đã tìm thấy
+  nhưng khi fetch lại thì KHÔNG còn trong danh sách 44 vị trí hiện tại —
+  có thể đã bị gỡ), "Senior Game Designer, Project R.I.S.E", "Game Design
+  Lead, Clash of Clans", "Game Systems Designer, Clash of Clans".
+- Trang careers gốc: https://supercell.com/en/careers/
+  [Chi tiết Responsibilities của "Game Designer, Clash Royale" — KHÔNG LẤY
+  ĐƯỢC, vị trí có vẻ đã bị gỡ khỏi trang tại thời điểm truy cập].
+- Mô tả chung (từ kết quả tìm kiếm, paraphrase): Senior Gameplay Designer
+  cần kỹ năng "từ phát triển concept đầu tiên tới giao feature hoàn chỉnh,
+  đánh bóng trong môi trường live-game"; Senior Technical Designer "lead
+  thiết kế và phát triển hệ thống/cơ chế game sâu, vững chắc cho core
+  gameplay gồm combat, di chuyển và tương tác của player". Công ty có văn
+  hóa phi thứ bậc, không dùng tiền tố "senior/junior/principal/director"
+  trong title nội bộ [theo mô tả văn hóa công ty trên trang careers, qua
+  kết quả tìm kiếm — chưa tự đọc trực tiếp câu này].
+
+(c) Ubisoft — nhiều vị trí Level Designer / Technical Level Designer /
+Systems Designer tại các studio khác nhau (Toronto, Montreal, Sofia,
+Bucharest...).
+- Chức danh tìm thấy: "Level Designer", "Technical Level Designer",
+  "Level Designer (f/m/d)", "Team Lead Level Designer [Splinter Cell
+  Remake]", "Level Designer – Mission", "Lead System Designer".
+- Link trực tiếp thử fetch: https://www.ubisoft.com/en-us/company/careers/search/744000116430617-level-designer
+  → khi fetch lại, trang trả về LỖI 404 ("THE INFO YOU ARE LOOKING FOR IS
+  NOT HERE") — vị trí đã bị gỡ giữa lúc search và lúc fetch.
+  [KHÔNG LẤY ĐƯỢC nội dung job listing đầy đủ].
+- Mô tả chung (từ kết quả tìm kiếm, paraphrase — [CHƯA VERIFY nguyên văn]):
+  Level Designer chịu trách nhiệm thiết kế quest/level xuyên suốt chu trình
+  sản xuất (từ ý tưởng tới hoàn thiện), hiểu và hiện thực hóa gameplay mong
+  muốn, cân bằng readability/độ khó/khả năng tiếp cận, phối hợp với team
+  Creative/Art/Gameplay Programming; làm việc trong khuôn khổ luật/cơ chế/
+  logic game có sẵn để tạo trải nghiệm gợi đúng cảm xúc mong muốn. Technical
+  Level Designer là "cầu nối giữa tech và design" — cài đặt các yếu tố
+  system design vào game. Lead Systems Designer cần ít nhất 5 năm kinh
+  nghiệm, nhấn mạnh tinh thần đổi mới/đồng cảm/hợp tác, kỹ năng mentor và
+  giao tiếp.
+
+(d) CD Projekt Red — Quest Designer / Senior Narrative Designer (The
+Witcher, Cyberpunk 2077).
+- Link Quest Designer: https://www.cdprojektred.com/en/jobs/19963-quest-designer
+  → khi fetch lại: vị trí đã bị gỡ ("this position is no longer open to
+  applicants and has been removed"). [KHÔNG LẤY ĐƯỢC bản đầy đủ trực tiếp
+  — nội dung dưới đây lấy qua kết quả tìm kiếm tổng hợp, không phải đọc
+  trực tiếp trang còn sống].
+- Mô tả chung (paraphrase, [CHƯA VERIFY nguyên văn]):
+  Quest Designer: "creates the storyline on a detailed level and designs
+  quests and implements them using a proprietary toolset" — bao gồm lên kế
+  hoạch asset cần thiết, phối hợp với phòng ban khác, tích hợp asset được
+  giao (gameplay elements, locations, characters, dialogue) thành trải
+  nghiệm liền mạch. Yêu cầu tối thiểu 3 năm kinh nghiệm Quest/Mission
+  Design, khả năng viết scenario/screenplay/short story, thành thạo visual
+  scripting tool.
+  Senior Narrative Designer: thiết kế/triển khai/dẫn dắt story trong thế
+  giới game CD Projekt Red qua quest, NPC community, sự kiện open-world;
+  triển khai nội dung bằng visual scripting trong UE5; RÕ RÀNG PHÂN BIỆT:
+  vai trò này KHÔNG bao gồm việc viết lời thoại/kịch bản (writing) — tách
+  bạch "narrative DESIGN" (thiết kế cấu trúc/luồng) khỏi "writing"
+  (nội dung câu chữ) — đây là điểm quan trọng để dạy học viên phân biệt
+  Narrative Designer khác Writer/Scriptwriter.
+
+(e) UX Designer trong game studio (tổng hợp từ nhiều nguồn qua tìm kiếm,
+không phải 1 job listing cụ thể — dùng mô tả vai trò chung, [CHƯA VERIFY
+nguyên văn 1 job cụ thể]):
+Game UX Designer thiết kế lớp giao diện giữa player và game mechanics: HUD,
+menu, settings, control mapping, onboarding/tutorial, accessibility, feedback
+trong-game — mục tiêu giảm ma sát (friction) để người chơi tập trung vào
+gameplay. Ở studio lớn, UX và UI tách thành 2 vai trò riêng; ở studio nhỏ
+thường gộp làm một. UX/UI designer thường báo cáo cho lead game designer,
+làm việc với artist/engineer/QA.
+Nguồn tổng hợp: ScreenSkills (screenskills.com/careers/job-profiles/games/
+design/user-experience-ux-designer/) — nguồn nghề nghiệp ngành (Anh),
+không phải 1 job listing studio cụ thể.
+
+(f) LiveOps / Monetization Designer (mobile F2P) — tổng hợp từ nhiều job
+listing thật (UserWise, Gameloft, CrazyLabs — qua kết quả tìm kiếm, KHÔNG
+tự mở đọc trực tiếp từng trang), [CHƯA VERIFY nguyên văn]:
+Trách nhiệm điển hình: thiết kế và cân bằng LiveOps event (tập trung vào
+engagement/retention), thiết kế và cân bằng "game economy" (giá hard
+currency, sinks/taps, kiểm soát lạm phát trong economy), thiết kế
+offer/monetization loop/itemization, tối ưu hiệu năng monetization (IAP,
+in-app ads), dùng data để validate giả định thiết kế, A/B test post-launch.
+Yêu cầu điển hình: 3-5 năm kinh nghiệm design game F2P mobile, có game đã
+ra mắt, kinh nghiệm LiveOps, quen thuộc balancing/pacing/monetization
+strategy cho F2P.
+
+================================================================
+5. CÔNG VIỆC HÀNG NGÀY THẬT — AAA LỚN VS INDIE NHỎ
+================================================================
+
+Nguồn chính: Bruno Valenti, "Day In The Life: Bruno Valenti, Mobile Game
+Designer" (NGD Studios, Argentina), Game Developer. Đã đọc trực tiếp qua
+WebFetch.
+Link: https://www.gamedeveloper.com/design/day-in-the-life-bruno-valenti-mobile-game-designer
+
+Nội dung công việc trong ngày (đã đọc trực tiếp, tóm tắt theo mốc giờ nêu
+trong bài):
+- 9:10-11:00: check email từ publisher, nhận audio asset từ sound designer
+  freelance, xem bug tracker để ưu tiên việc, viết feasibility report cho
+  dự án mới (ví dụ: chuyển ý tưởng show truyền hình thực tế thành thiết kế
+  game khả thi) — cân bằng giữa yêu cầu tức thời của client và mục tiêu
+  thiết kế khả thi.
+- 11:00-12:00: làm việc sát với artist (Nacho) về hướng hình ảnh; khó khăn
+  khi phải góp ý cho artist dù bản thân "little eye for art"; giải thích
+  giới hạn kỹ thuật (dung lượng file, số frame animation) cho artist khi
+  giới hạn này chặn tham vọng sáng tạo.
+- 12:00-15:00: dựng graphic prototype, edit level game (ví dụ sửa lỗi thiết
+  kế môi trường quá đối xứng khiến cảm giác giả tạo), viết nội dung song
+  ngữ (Tây Ban Nha/Anh) cho help screen và tài liệu quảng bá.
+- 16:00-17:00: tương tác designer-programmer — programmer thường xuyên đặt
+  câu hỏi/bắt lỗi các quyết định thiết kế, buộc designer phải giải thích
+  logic; kết luận: hợp tác cởi mở tuy dân chủ nhưng đòi hỏi designer vừa
+  giữ vững ý đồ thiết kế vừa lắng nghe góp ý của team.
+
+→ Đây là ví dụ CỤ THỂ, có nguồn, cho việc designer ở studio NHỎ (mobile,
+NGD Studios) phải kiêm nhiều việc: viết doc, dựng prototype, chỉnh level,
+viết nội dung UI, họp giải trình với dev, làm việc sát art — khác với các
+job listing AAA ở mục 4 vốn mô tả vai trò CHUYÊN MÔN HÓA hẹp hơn (ví dụ
+riêng Level Designer, riêng Quest Designer, riêng Systems Designer).
+[PHÂN TÍCH — không từ nguồn]: sự đối lập "AAA chuyên môn hóa hẹp vs indie/
+nhỏ kiêm nhiều vai" là suy luận từ việc so sánh 2 loại nguồn trên (job
+listing AAA tách vai trò rất rõ theo mục 4, còn nhật ký công việc thực tế ở
+NGD Studios cho thấy 1 người làm nhiều việc) — bản thân không có 1 nguồn
+nào phát biểu thẳng câu so sánh này.
+
+Nguồn khác đã tìm nhưng KHÔNG dùng: "Day in the Life: John Molloy, Games
+Design & Development Student" (sinh viên, không phải designer hành nghề —
+loại khỏi phạm vi); "A day in the life of a video game producer" (vai trò
+producer, không phải designer — loại khỏi phạm vi).
+
+================================================================
+6. CÔNG CỤ DESIGNER HAY DÙNG
+================================================================
+
+Trong phiên nghiên cứu này KHÔNG tìm được nguồn chuyên biệt (bài viết/GDC
+talk) liệt kê rõ bộ công cụ designer dùng kèm trích dẫn xác thực. Thông
+tin dưới đây chỉ SUY RA gián tiếp từ các job listing/bài đã đọc ở mục 4-5:
+
+- Spreadsheet: ngụ ý qua mô tả công việc "cấu hình dữ liệu", cân bằng
+  economy (mục 4f) — nhưng KHÔNG có câu trích dẫn trực tiếp nào nói
+  "designer dùng Excel/Google Sheets". [PHÂN TÍCH — không từ nguồn].
+- Visual scripting tool trong game engine (UE5): XÁC NHẬN qua job listing
+  CD Projekt Red (mục 4d) — Quest Designer/Narrative Designer "proficiency
+  with visual scripting tools" / "proficiency with UE5".
+- Bug tracker: XÁC NHẬN qua bài Bruno Valenti (mục 5) — "reviews the bug
+  tracker to prioritize tasks".
+[CHƯA VERIFY]: Miro, Confluence/Notion, Machinations — KHÔNG tìm được
+nguồn cụ thể nào trong phiên này xác nhận designer thật dùng các công cụ
+này (dù đây là các công cụ phổ biến được biết tới rộng rãi trong ngành,
+không có trích dẫn xác thực để đưa vào bài — nên BỎ QUA hoặc chỉ nêu như
+gợi ý chung không trích nguồn cụ thể).
+
+================================================================
+7. VÍ DỤ ĐA THỂ LOẠI — QUYẾT ĐỊNH DESIGN CỤ THỂ CÓ NGUỒN GỐC
+================================================================
+
+(a) Slay the Spire (Mega Crit Games, PC/console/mobile, indie deck-builder
+roguelike) — GDC 2019, Anthony Giovannetti, "'Slay the Spire': Metrics
+Driven Design and Balance". Đã đọc trực tiếp bài Game Developer tổng hợp
+nội dung talk qua WebFetch.
+Link bài đọc: https://www.gamedeveloper.com/design/how-i-slay-the-spire-i-s-devs-use-data-to-balance-their-roguelike-deck-builder
+Link GDC Vault (chưa tự xem video, chỉ xác nhận tồn tại): https://www.gdcvault.com/play/1025731/-Slay-the-Spire-Metrics
+Link slide PDF gốc (chưa tự mở, chỉ xác nhận tồn tại):
+https://media.gdcvault.com/gdc2019/presentations/Giovannetti_Anthony_SlayTheSpire.pdf
+
+Trích nguyên văn đã đọc trực tiếp:
+"We have so many cards and so many interactions that even though we have a
+pretty strong card game background there's no way we can intuitively do it
+all correctly."
+"I said at one point, 'look, we're not going to reasonably be able to
+balance this many cards, we don't have a team of people to do this'…[so]
+we took a data-driven approach."
+"The numbers are really useful but they're not telling us how things feel,
+so we think it's still really important."
+
+Quyết định design cụ thể (đã đọc trực tiếp): họ theo dõi 2 chỉ số chính —
+pick rate (tỉ lệ chọn khi được offer) và win rate (tỉ lệ xuất hiện trong
+run thắng). Ví dụ cụ thể: thẻ "Dual Wield" ban đầu nhân đôi lá bài TRÊN
+CÙNG của deck; khi đổi cơ chế thành nhân đôi BẤT KỲ lá nào trên tay, dữ
+liệu ngay lập tức cho thấy quá mạnh (overpowered) — designer chỉnh lại chỉ
+cho nhân đôi thẻ loại "Skill" dựa trên winrate quan sát được. Casey Yano
+(đồng đội, được trích trong bài): "The first time we made our metrics, we
+had three graphs; now we have at least 90."
+
+(b) Clash Royale (Supercell, mobile, F2P) — GDC talk của Stefan Engblom
+(designer balance card). Đã đọc trực tiếp bài Game Developer qua WebFetch.
+Link: https://www.gamedeveloper.com/design/-i-clash-royale-i-s-card-balancing-guru-leans-less-on-metrics-more-on-design-intuition
+Link GDC Vault liên quan (chưa tự xem, chỉ xác nhận tồn tại — có thể là
+một session khác "Quest for the Healthy Metagame"): https://www.gdcvault.com/play/1024272/Quest-for-the-Healthy-Metagame
+
+Trích nguyên văn đã đọc trực tiếp:
+"We tend to just put stuff in the game that we tested to see how it
+feels."
+"It's mostly looking at use rates and win rates... ultimately down to
+intuition and knowing your game."
+
+Ý chính (đã đọc trực tiếp): team Clash Royale chỉ có 16 người — quy mô nhỏ
+giúp iterate nhanh. Nguyên tắc balance: Fun (thẻ phải "cảm giác" mạnh
+trong đúng bối cảnh của nó), Variety (nhiều chiến thuật khả thi), Freshness
+(metagame đổi mới đều đặn). Engblom xem data (use rate/win rate) là công cụ
+HỖ TRỢ, quyết định cuối vẫn dựa trực giác + hiểu sâu game — ĐỐI LẬP RÕ với
+cách tiếp cận thuần data của Slay the Spire (mục 7a) — 2 game khác quy mô/
+thể loại (F2P mobile PvP realtime vs indie roguelike deckbuilder single-
+player) dẫn tới 2 triết lý balance khác nhau, cả 2 đều có nguồn GDC xác
+thực.
+
+(c) Into the Breach (Subset Games, PC/console/mobile, indie tactics) —
+GDC 2019, "'Into the Breach' Design Postmortem", Matthew Davis. Đã đọc
+trực tiếp bài Game Developer tổng hợp qua WebFetch.
+Link: https://www.gamedeveloper.com/design/video-how-subset-games-designed-i-into-the-breach-i-
+Link GDC Vault (chưa tự xem video, chỉ xác nhận tồn tại): https://gdcvault.com/play/1026333/-Into-the-Breach-Design
+
+Nội dung xác nhận (đã đọc trực tiếp, paraphrase): Subset Games mất 4 năm
+phát triển Into the Breach sau khi hoàn thành FTL. Talk trình bày "years of
+cut content and iteration" — quá trình thử-sai kéo dài. Các chủ đề cụ thể
+được nêu: quyết định CẮT tính năng, cân nhắc lượng RNG (random number
+generation) nên dùng bao nhiêu để giữ game vừa chiến thuật vừa có yếu tố
+bất ngờ, quá trình đi tới thiết kế UI cuối cùng, và các điều chỉnh balance
+ở giai đoạn polish.
+[CHƯA VERIFY chi tiết]: câu chuyện gốc "mechs vs monsters where collateral
+damage matters" và ảnh hưởng từ XCOM: Enemy Unknown — lấy từ tóm tắt tìm
+kiếm, chưa tự mở xem video/đọc slide gốc để đối chiếu nguyên văn.
+
+(d) Celeste (Extremely OK Games/Matt Makes Games, PC/console, indie
+platformer) — GDC 2017, "Level Design Workshop: Designing Celeste", Matt
+Thorson (nay là Maddy Thorson) & Noel Berry.
+[CHƯA VERIFY nguyên văn — chỉ có tóm tắt qua kết quả tìm kiếm, KHÔNG tự mở
+đọc bài viết/video gốc trong phiên này]. Ý chính theo tóm tắt: làm game
+"holistically" — phát triển story song song gameplay cho từng khu vực, hai
+bên chỉnh sửa lẫn nhau; playtest theo kiểu ngồi cùng người chơi tại nhà
+riêng để quan sát phản ứng trực tiếp, real-time; mỗi level là một câu
+chuyện nhỏ, tự khép kín.
+
+(e) Hades (Supergiant Games, PC/console, indie roguelike action-RPG) —
+GDC talk của Greg Kasavin (creative director) về phát triển qua Early
+Access.
+[CHƯA VERIFY nguyên văn — chỉ có tóm tắt qua kết quả tìm kiếm]. Ý chính
+theo tóm tắt: đây là game roguelike đầu tiên của Supergiant và cũng là lần
+đầu họ làm Early Access community-driven; dù đã có cấu trúc đầy đủ, họ
+muốn dành nhiều thời gian để iterate/cải thiện mọi khía cạnh; Early Access
+— vốn thường bị coi không hợp với game nặng narrative — lại trở thành lợi
+thế lớn cho phần kể chuyện của Hades (vì mỗi lần chết/quay lại hub đều có
+thoại NPC mới, feedback người chơi giúp tinh chỉnh nhịp kể chuyện).
+
+================================================================
+8. HIỂU LẦM PHỔ BIẾN CỦA NGƯỜI MỚI VỀ NGHỀ DESIGNER
+================================================================
+
+1) "Designer là người nghĩ ý tưởng, người khác thực hiện" (idea guy).
+   SAI theo nhiều nguồn xác thực (mục 2): Costiuc (Game Developer, 2019)
+   nói thẳng "A Game Designer is NOT an idea person"; Unger (Game
+   Developer, 2009): "Ideas...are a dime a dozen"; Kelly (Game Developer,
+   2010) phê phán quan niệm designer phải là polymath toàn năng chỉ ngồi
+   nghĩ ý tưởng.
+
+2) "Designer tự do sáng tạo, không bị ràng buộc kỹ thuật/nguồn lực."
+   SAI theo ví dụ thực tế Bruno Valenti (mục 5): designer phải giải thích
+   giới hạn kỹ thuật (dung lượng file, số frame animation) cho artist,
+   và liên tục bị programmer "bắt lỗi" tính khả thi của thiết kế.
+   [PHÂN TÍCH dựa trên nguồn cụ thể ở mục 3 và 5].
+
+3) "Balance game chỉ cần cảm giác/trực giác cá nhân là đủ" HOẶC ngược lại
+   "chỉ cần đủ data là balance đúng."
+   Cả hai đều PHIẾN DIỆN theo đối chiếu 2 case GDC có nguồn (mục 7a, 7b):
+   Slay the Spire dùng cách tiếp cận data-driven vì số lượng thẻ bài quá
+   lớn để làm bằng trực giác thuần túy ("there's no way we can intuitively
+   do it all correctly" — Giovannetti), NHƯNG vẫn nhấn mạnh "numbers...
+   they're not telling us how things feel". Ngược lại Clash Royale (team
+   nhỏ, real-time PvP) dùng data chỉ để HỖ TRỢ, quyết định cuối dựa trực
+   giác ("ultimately down to intuition and knowing your game" — Engblom).
+   → Không có công thức chung; cách chọn phụ thuộc quy mô game/team/thể
+   loại. [PHÂN TÍCH dựa trên đối chiếu 2 nguồn cụ thể].
+
+4) "Ở studio nào designer cũng làm giống nhau."
+   SAI theo đối chiếu mục 4 (job listing AAA chuyên môn hóa hẹp: riêng
+   Level Designer, riêng Quest Designer không kiêm writing — CD Projekt
+   Red mục 4d) và mục 5 (một designer ở studio nhỏ như NGD Studios kiêm
+   viết doc, prototype, level, UI text, họp kỹ thuật). [PHÂN TÍCH dựa trên
+   đối chiếu 2 loại nguồn].
+
+5) "Narrative Designer = người viết truyện/lời thoại (writer)."
+   SAI theo job listing CD Projekt Red đã đọc (mục 4d): mô tả rõ Senior
+   Narrative Designer "does not include writing responsibilities" — tách
+   bạch DESIGN (cấu trúc quest, luồng sự kiện, cách triển khai bằng visual
+   scripting) khỏi WRITING (nội dung lời thoại/kịch bản, do vai trò Writer
+   riêng đảm nhiệm ở studio lớn).
+
+================================================================
+9. TỔNG HỢP MỌI MỤC [CHƯA VERIFY]
+================================================================
+
+- [ĐÃ VERIFY một phần] 2 câu mở đầu mục "An Advocate for the Player"
+  (Fullerton) đã đọc nguyên văn qua proxy r.jina.ai trên dokumen.pub; phần
+  còn lại của mục (trang 2-4) vẫn CHƯA đọc hết (mục 1b).
+  Bài diễn giải trên Game Developer (5th edition) về playcentric approach:
+  là paraphrase của biên tập, KHÔNG phải trích nguyên văn có ngoặc kép từ
+  sách (mục 1b).
+- Tynan Sylvester, "Designing Games": câu định nghĩa "an artificial system
+  for generating experiences" và mô tả công việc designer — chỉ lấy được
+  qua tóm tắt/review, chưa tự đọc trực tiếp đoạn văn gốc dù đã cố mở PDF
+  đầy đủ (mục 1c).
+- Scott Rogers, "Level Up!": không tìm được trích đoạn cụ thể nào về định
+  nghĩa designer/các loại designer trong phiên này — KHÔNG dùng làm nguồn
+  trích dẫn (mục 1d).
+- Mô tả trách nhiệm chung của designer tại Riot Games: tổng hợp từ nhiều
+  trang tuyển dụng qua kết quả tìm kiếm, KHÔNG phải trích nguyên văn 1 job
+  listing cụ thể do trang là ứng dụng JS-rendered, WebFetch không lấy được
+  nội dung chi tiết (mục 4a).
+- Job "Game Designer, Clash Royale" (Supercell): link tìm thấy nhưng khi
+  fetch lại không còn trong danh sách vị trí hiện tại — có thể đã bị gỡ
+  (mục 4b).
+- Job Level Designer Ubisoft (link cụ thể đã thử fetch): trả về lỗi 404,
+  vị trí đã bị gỡ giữa lúc search và lúc fetch (mục 4c).
+- Job Quest Designer CD Projekt Red (link cụ thể đã thử fetch): trang báo
+  "position is no longer open... has been removed" — mô tả trách nhiệm ở
+  mục 4d lấy qua kết quả tìm kiếm tổng hợp, KHÔNG phải đọc trực tiếp trang
+  còn sống (mục 4d).
+- Văn hóa "không dùng tiền tố senior/junior/principal/director trong title
+  nội bộ" của Supercell: qua kết quả tìm kiếm, chưa tự đọc trực tiếp câu
+  này trên trang chính thức (mục 4b).
+- Mô tả vai trò UX Designer trong game: dùng nguồn nghề nghiệp ngành
+  (ScreenSkills) và tổng hợp tìm kiếm, không phải 1 job listing studio cụ
+  thể (mục 4e).
+- Mô tả vai trò LiveOps/Monetization Designer: tổng hợp từ nhiều job
+  listing (UserWise, Gameloft, CrazyLabs) qua kết quả tìm kiếm, KHÔNG tự
+  mở đọc trực tiếp từng trang riêng lẻ (mục 4f).
+- Công cụ designer hay dùng (Miro, Confluence/Notion, Machinations,
+  spreadsheet nói chung): không tìm được nguồn cụ thể xác nhận trong
+  phiên này — chỉ có 2 điểm xác nhận được (visual scripting/UE5 qua CD
+  Projekt Red, bug tracker qua Bruno Valenti) (mục 6).
+- Chi tiết GDC talk Celeste (Matt/Maddy Thorson, Noel Berry) và Hades
+  (Greg Kasavin): chỉ có tóm tắt qua kết quả tìm kiếm, CHƯA tự mở xem
+  video hay đọc bài viết gốc để đối chiếu nguyên văn (mục 7d, 7e).
+- Chi tiết câu chuyện gốc "mechs vs monsters where collateral damage
+  matters" (Into the Breach) và ảnh hưởng từ XCOM: Enemy Unknown — lấy từ
+  tóm tắt tìm kiếm, chưa đối chiếu trực tiếp với video/slide GDC gốc
+  (mục 7c).
+- Không đưa số liệu lương/khảo sát ngành vào bài theo yêu cầu phạm vi
+  nghiên cứu (không nằm trong danh mục nội dung cần research) — nếu bài
+  giảng sau này cần trích GDC "State of the Game Industry" hoặc "Game
+  Developer Salary Survey", PHẢI research riêng với link + năm cụ thể,
+  không dùng số liệu tổng hợp qua tìm kiếm ở phiên này.

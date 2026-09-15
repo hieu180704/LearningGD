@@ -14,41 +14,41 @@ window.CURRICULUM = [
             {
                 slug: "tang-0/01-game-la-gi",
                 title: "Game là gì",
-                summary: "Định nghĩa game qua luật chơi, mục tiêu và phản hồi — nền để phân tích mọi thể loại.",
+                summary: "So sánh các định nghĩa game nổi tiếng (Suits, Juul, Salen & Zimmerman...) và dùng chúng làm công cụ phân tích, không phải câu trả lời đúng duy nhất.",
                 goals: [
-                    "Phân biệt game với đồ chơi và câu đố",
-                    "Nhận ra 4 thành phần cốt lõi: luật, mục tiêu, thử thách, phản hồi",
-                    "Áp dụng định nghĩa để phân tích một game bất kỳ"
+                    "Nêu và so sánh được vài định nghĩa game nổi tiếng",
+                    "Dùng 6 đặc điểm của Juul để xét một sản phẩm có phải game kinh điển hay là ca ranh giới",
+                    "Dùng 8 formal elements của Fullerton để soi một ý tưởng game đang thiếu gì"
                 ],
-                minutes: 10,
+                minutes: 18,
                 level: "Cơ bản",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-0/02-game-designer-lam-gi",
                 title: "Game Designer thực sự làm gì",
-                summary: "Phân biệt design với lập trình, đồ họa; công việc hàng ngày của một designer thật.",
+                summary: "Designer không phải người chỉ nghĩ ý tưởng — phân biệt design với lập trình, đồ họa, các chuyên môn thật trong studio và một ngày làm việc thật.",
                 goals: [
-                    "Phân biệt vai trò designer, lập trình viên, họa sĩ",
-                    "Liệt kê sản phẩm đầu ra thật của designer (tài liệu, spec, số liệu balance)",
-                    "Tránh ngộ nhận designer chỉ 'nghĩ ý tưởng hay'"
+                    "Hiểu vì sao designer không phải là người chỉ 'nghĩ ý tưởng hay'",
+                    "Phân biệt trách nhiệm của design với lập trình và đồ họa",
+                    "Nhận diện các chuyên môn designer trong studio thật"
                 ],
-                minutes: 9,
+                minutes: 12,
                 level: "Cơ bản",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-0/03-tu-duy-nguoi-choi",
                 title: "Tư duy lấy người chơi làm trung tâm",
                 summary: "Luôn thiết kế từ trải nghiệm người chơi, thay vì từ sở thích cá nhân của designer.",
                 goals: [
-                    "Phân biệt 'tôi thích' và 'người chơi cần'",
-                    "Dùng persona/player type để ra quyết định thiết kế",
-                    "Nhận diện thiên kiến khi tự chơi game của chính mình"
+                    "Phân biệt 'tôi thích' và điều người chơi thật sự cảm nhận",
+                    "Nghe người chơi đúng cách: họ chỉ ra vấn đề, designer tìm lời giải",
+                    "Nhận diện thiên kiến khi tự đánh giá game của chính mình"
                 ],
-                minutes: 11,
+                minutes: 12,
                 level: "Cơ bản",
-                status: "planned"
+                status: "ready"
             }
         ]
     },

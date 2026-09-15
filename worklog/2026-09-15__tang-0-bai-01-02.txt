@@ -1,0 +1,9 @@
+SUMMARY: Tầng 0 — research 3 bài + dựng bài 01 Game là gì, 02 Game Designer thực sự làm gì (user đã duyệt cả 2); check-site 0 lỗi; main tự xem ảnh mobile (01 sáng, 02 tối) — ảnh desktop CHỈ subagent xem; quiz/flashcard CHƯA bấm thử trình duyệt thật. Bài 03 CHƯA dựng.
+
+Đã làm:
+- Research + 2 lượt fact-check bổ sung → research/game-la-gi.txt, game-designer-lam-gi.txt, tu-duy-nguoi-choi.txt. Dàn ý 3 bài đã được user duyệt.
+- Bài 01 (lessons/tang-0/01-game-la-gi.html, 18 phút): main sửa 8 chỗ lệch nguồn (ý Juul về SimCity, câu không nguồn). User nhận xét bài dài → CLAUDE.md §5 đổi thành 10–14 phút + quy tắc trích ngắn.
+- Bài 02 (lessons/tang-0/02-game-designer-lam-gi.html, 12 phút): main sửa quan hệ nhân quả không nguồn (Clash Royale "vì team nhỏ"), viết lại quiz 1.
+- curriculum.js: tang-0/01, 02 status "ready". tools/shoot.ps1: thêm 2 entry trang bài.
+
+Quyết định mặc định cho bài 03 (user không phản đối): không có ví dụ mobile (không tìm được case tin cậy); nguyên văn Schell/Fullerton đọc từ PDF lậu → Đọc thêm chỉ ghi tên sách, không link; tên tác giả Celeste ghi Maddy Thorson.

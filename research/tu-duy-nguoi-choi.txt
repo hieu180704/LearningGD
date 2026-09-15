@@ -1,0 +1,630 @@
+NGHIÊN CỨU & FACT-CHECK: TƯ DUY LẤY NGƯỜI CHƠI LÀM TRUNG TÂM
+(Nguồn cho bài giảng tiếng Việt — Tầng 0, Bài 3 — người mới học Game Design)
+Ngày thực hiện: 2026-09-15
+
+MỤC LỤC
+1. Tracy Fullerton — "Playcentric design", designer là "advocate for the player"
+2. Jesse Schell — "Game không phải là experience", Lens of the Player, audience/psychographics
+3. Celia Hodent — "Curse of knowledge", khoảng cách designer-player, gốc "You are not the user" trong UX
+4. Case thật: designer đoán sai, sửa nhờ quan sát người chơi
+5. "Lấy người chơi làm trung tâm" KHÁC "chiều mọi mong muốn" — quote Rosewater, apocryphal Henry Ford
+6. Target audience — game không thể dành cho mọi người
+7. Đồng cảm với nhiều loại người chơi — accessibility (GAG, AbleGamers, Xbox Accessibility Guidelines)
+8. Hiểu lầm phổ biến ở người mới
+9. Tổng hợp mọi mục [CHƯA VERIFY]
+
+================================================================
+1. TRACY FULLERTON — "PLAYCENTRIC DESIGN", DESIGNER LÀ "ADVOCATE FOR THE PLAYER"
+================================================================
+
+Nguồn sách: Tracy Fullerton, "Game Design Workshop: A Playcentric Approach to
+Creating Innovative Games" (bản in mới nhất: 5th Edition, Routledge/CRC Press,
+4/2024). Bà là giáo sư, cựu giám đốc chương trình USC Games, đoạt giải
+Games for Change Game of the Year với game độc lập "Walden, a game".
+- Trang sách/nhà xuất bản: https://www.routledge.com/Game-Design-Workshop-A-Playcentric-Approach-to-Creating-Innovative-Games/Fullerton/p/book/9781032607009
+- Trang cá nhân: https://www.tracyfullerton.com/writing
+- Trang dự án sách: https://www.gamedesignworkshop.com/
+
+ĐÃ MỞ ĐỌC (qua WebFetch, trích đoạn từ bài "Book Excerpt: Game Design
+Workshop" trên Game Developer — bài trích chính thức từ ấn bản mới của
+sách):
+Link: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+Nguyên văn (đã đọc trực tiếp qua trích đoạn này):
+"the sooner you can bring the player into the equation, the better"
+→ càng đưa người chơi vào quy trình sớm càng tốt.
+
+"design, test, and evaluate the results over and over again throughout
+the development of your game, each time improving upon the gameplay."
+→ vòng lặp thiết kế – test – đánh giá lặp lại xuyên suốt quá trình phát
+triển, mỗi lần cải thiện gameplay hơn.
+
+Về việc "get inside the heads of the players" (nguyên văn từ trích đoạn):
+designer cần đặt experience goal — mục tiêu trải nghiệm mong muốn — và tập
+trung vào cách người chơi sẽ NGHĨ/CẢM NHẬN, "not focusing on the features
+of the game as you intend to design it" (không chăm chăm vào tính năng
+theo ý định ban đầu của designer).
+
+Ví dụ experience goal minh họa trong trích đoạn: "players will have to
+cooperate to win, but the game will be structured so they can never trust
+each other."
+
+ĐÃ VERIFY NGUYÊN VĂN câu chứa "advocate for the player" — mở lại được qua
+proxy đọc text r.jina.ai trên bản dokumen.pub (host bản text/PDF đầy đủ
+sách 2nd edition; mở trực tiếp bị lỗi 403 Forbidden, nhưng qua proxy đọc
+được nội dung thật của trang, không phải diễn giải của bên thứ ba):
+Link: https://r.jina.ai/https://dokumen.pub/game-design-workshop-a-playcentric-approach-to-creating-innovative-games-2nbsped-9780240809748-2007040857.html
+
+Nguyên văn (đã đọc trực tiếp), mở đầu mục "An Advocate for the Player",
+Chương 1:
+"The role of the game designer is, first and foremost, to be an advocate
+for the player. The game designer must look at the world of games through
+the player's eyes."
+
+→ Có thể dùng nguyên văn này trong ngoặc kép, trích Tracy Fullerton, "Game
+Design Workshop" (2nd ed., 2008), chương 1, mục "An Advocate for the
+Player".
+
+Ý cốt lõi để dùng trong bài (an toàn, đã có nguồn xác nhận qua trích đoạn
+chính thức ở trên): playcentric design = quy trình đặt trải nghiệm người
+chơi làm trung tâm xuyên suốt từ ý tưởng đến hoàn thiện, đưa người chơi
+thật vào test càng sớm càng tốt, lặp lại vòng thiết kế-test nhiều lần.
+
+================================================================
+2. JESSE SCHELL — "GAME KHÔNG PHẢI LÀ EXPERIENCE", LENS OF THE PLAYER,
+   AUDIENCE/PSYCHOGRAPHICS
+================================================================
+
+Nguồn: Jesse Schell, "The Art of Game Design: A Book of Lenses" (đã có 3
+bản: 2008, 2nd ed. 2014, 3rd/10th-anniversary ed. 2019/2020).
+
+(a) Câu "the game is not the experience":
+ĐÃ MỞ ĐỌC TRỰC TIẾP bản PDF đầy đủ cuốn sách (bản scan/text lưu công khai
+tại một trang lưu trữ cá nhân — không phải nguồn thứ cấp tóm tắt, mà là
+chính văn bản sách; WebFetch không tự parse được PDF này nên phải đọc qua
+proxy trích xuất text r.jina.ai, nhưng nội dung trả về LÀ nguyên văn từ
+file PDF, không phải diễn giải):
+Link: https://rsd2-alert-durden-connections.weebly.com/uploads/6/7/1/6/6716949/3-the-art-of-game-design-a-book-of-lenses_3.pdf
+
+Nguyên văn (đã đọc trực tiếp), nằm trong Chương 2 "The Designer Creates an
+Experience", dưới tiêu đề mục nhỏ "The Game Is Not the Experience":
+"We must be absolutely clear on this point before we can proceed. The
+game is not the experience. The game enables the experience, but it is
+not the experience. This is a hard concept for some people to grasp."
+
+→ ĐÃ VERIFY NGUYÊN VĂN: câu trích dùng phổ biến trong ngành ("The game is
+not the experience. The game enables the experience, but it is not the
+experience.") khớp chính xác 100% với nguyên văn sách gốc — không còn là
+trích dẫn qua nguồn thứ cấp. (Đối chiếu thêm: trang tóm tắt notesbylex.com
+— https://notesbylex.com/the-art-of-game-design-a-book-of-lenses-2nd-edition-by-jesse-schell.html
+— cũng trích khớp y hệt, dùng làm nguồn tham chiếu chéo.)
+
+(b) "Lens of the Player":
+Tồn tại thật trong sách (là 1 trong 100 lens của cuốn sách, chủ đề chương
+nói về việc thiết kế phải xuất phát từ và quay lại phục vụ người chơi thật
+sự, không phải người chơi tưởng tượng trong đầu designer).
+[CHƯA VERIFY số thứ tự lens chính xác và số chương — các nguồn thứ cấp tìm
+được mâu thuẫn nhau (một nguồn nói Lens #19/chương 9, một nguồn khác nói
+Lens #16/chương 9, mục lục sách online cho thấy chương có tên gần đúng là
+chương 10 "The Game Is Made for a Player"). Không tự tay mở được bản gốc
+để đối chiếu số chính xác trong phiên này — KHÔNG dùng số lens/chương cụ
+thể trong bài giảng cho đến khi verify lại.]
+
+Nội dung câu hỏi cốt lõi của lens này (theo mô tả nhất quán từ các nguồn
+thứ cấp, dùng làm ý minh họa — không trích nguyên văn số thứ tự câu hỏi):
+hỏi designer "Ai sẽ chơi game này? Họ thích và ghét điều gì? Họ mong đợi
+gì? Bạn sẽ cảm thấy thế nào nếu ở vị trí của họ?"
+
+(c) Demographics vs Psychographics:
+Theo các nguồn thứ cấp tổng hợp (chưa mở được nguyên văn sách gốc, xem
+mục CHƯA VERIFY ở (a)): Schell phân biệt "demographics" (nhóm theo tuổi/
+giới tính — ví dụ mô tả trẻ 10-13 tuổi ở giai đoạn "ham mê" trò chơi) với
+"psychographics" (nhóm người chơi theo sở thích, lối sống, điều họ thấy
+thú vị) — psychographics được cho là cách nhìn "sắc hơn" để hiểu người
+chơi thay vì chỉ dựa tuổi/giới tính.
+[CHƯA VERIFY nguyên văn — chỉ có qua tổng hợp thứ cấp, không tự mở được
+sách gốc để đối chiếu].
+
+================================================================
+3. CELIA HODENT — "CURSE OF KNOWLEDGE", KHOẢNG CÁCH DESIGNER-PLAYER,
+   GỐC "YOU ARE NOT THE USER" TRONG UX
+================================================================
+
+Celia Hodent — Tiến sĩ tâm lý học, cựu VP UX tại Epic Games (Fortnite),
+tác giả sách "The Gamer's Brain: How Neuroscience and UX Can Impact Video
+Game Design" (CRC Press, 2017).
+
+ĐÃ MỞ ĐỌC TRỰC TIẾP — bài phỏng vấn trên trang DigiPen (đăng 17/10/2018):
+Link: https://www.digipen.edu/showcase/news/dr-celia-hodent-brings-ux-insight-from-fortnite-to-digipen
+
+Nguyên văn trích dẫn Hodent (đã đọc trực tiếp qua bài này):
+"You know your design, so it's really hard to have objective knowledge of
+it — because you can't step back. This is called 'the curse of
+knowledge'."
+
+"You have to make sure that what your intention is is what the players
+are going to be perceiving."
+
+Bài phỏng vấn còn mô tả cách bà làm việc: đưa người chơi mục tiêu vào test
+sớm để quan sát cách họ tự nhiên tương tác với game, từ đó xác định cần
+chỉnh gì để giữ đúng trải nghiệm dự định — có ví dụ cụ thể: một tài sản
+đồ họa trang trí (decorative asset) khiến người chơi hiểu lầm là mục tiêu
+gameplay thật, phát hiện qua đoạn phim playtest.
+
+QUAN TRỌNG — cụm "you are not your player": KHÔNG tìm thấy Hodent dùng
+đúng cụm này (đã tìm cả trên trang cá nhân celiahodent.com, sách, và các
+bài phỏng vấn) — [CHƯA VERIFY cụm này là của Hodent]. Ý tương đương gần
+nhất, có nguyên văn xác nhận, là khái niệm "curse of knowledge" nêu trên.
+KHÔNG nên đặt "You are not your player" trong ngoặc kép và gán cho Hodent
+trong bài giảng.
+
+GỐC CỤM "YOU ARE NOT THE USER" (UX nói chung — không riêng game):
+Đã mở đọc trực tiếp bài Nielsen Norman Group (NN/g):
+Link: https://www.nngroup.com/articles/false-consensus/
+
+Nguyên văn (đã đọc trực tiếp): "By now you probably have heard the phrase
+'you are not the user' — it's become one of the mantras of user
+experience."
+
+Bài này KHÔNG gán cụm này cho một cá nhân cụ thể, chỉ gọi đây là một
+"mantra" chung của ngành UX, và giải thích cơ chế tâm lý đứng sau nó là
+"false-consensus effect" (hiệu ứng đồng thuận giả — xu hướng con người mặc
+định người khác nghĩ/hành xử giống mình).
+
+Nguyên văn định nghĩa false-consensus effect (đã đọc trực tiếp):
+"The false-consensus effect refers to people's tendency to assume that
+others share their beliefs and will behave similarly in a given context."
+
+"Assuming that you are your user is a fallacy that is ingrained in the
+human mind. It even has a name in social psychology — it's called the
+false-consensus effect."
+
+[CHƯA VERIFY việc gán cụm "you are not the user" cho Don Norman cụ thể —
+một số bài blog khác (Medium, UX Magazine — nguồn thứ cấp, chưa mở đọc kỹ
+trong phiên này) có nhắc tên Don Norman gắn với cụm này, nhưng bài NN/g
+(nguồn uy tín nhất đã mở đọc) KHÔNG xác nhận tác giả cụ thể — nên KHÔNG
+gán chắc cho Don Norman trong bài giảng, chỉ nói đây là "mantra phổ biến
+trong ngành UX" như NN/g mô tả].
+
+================================================================
+4. CASE THẬT: DESIGNER ĐOÁN SAI, SỬA NHỜ QUAN SÁT NGƯỜI CHƠI
+================================================================
+
+(a) Microsoft Game Studios User Research — Halo 3 (2007)
+Bài Wired: "Halo 3: How Microsoft Labs Invented a New Science of Play",
+tác giả Clive Thompson (nhà báo công nghệ, cộng tác viên Wired), đăng
+8/2007. Gốc wired.com: http://www.wired.com/gaming/virtualworlds/magazine/15-09/ff_halo
+(wired.com và web.archive.org đều KHÔNG truy cập được qua công cụ trong
+phiên này).
+
+ĐÃ MỞ ĐỌC TRỰC TIẾP bản đăng lại CHÍNH THỨC của cùng bài báo (ABC News có
+thỏa thuận syndication nội dung với Wired thời điểm đó — đây là bản in lại
+đầy đủ, không phải tóm tắt):
+Link: https://abcnews.com/Technology/story?id=3506473&page=1
+
+Nguyên văn/chi tiết đã đọc trực tiếp:
+- Quy mô test: "more than 3,000 hours of Halo 3 played by some 600
+  everyday gamers, tracking everything from favored weapons to how and
+  where — down to the square foot — players most frequently get killed."
+- Randy Pagulayan quan sát qua gương một chiều, phòng gắn camera có thể
+  xoay để quay biểu cảm người chơi hoặc xem nút bấm trên tay cầm: "The
+  room we're monitoring is wired with video cameras that Pagulayan can
+  swivel around to record the player's expressions or see which buttons
+  they're pressing on the controller."
+- Ví dụ cụ thể một buổi test: người chơi không nhặt/dùng lựu đạn dù đáng
+  ra nên làm vậy — Pagulayan nhận định nguyên nhân là do thiết kế:
+  "She ought to be picking those up and using them, he says, but the
+  grenades aren't visible enough." → vấn đề nằm ở khả năng NHÌN THẤY vật
+  phẩm trong game, không phải người chơi "không biết chơi".
+- Một vấn đề balance khác được nêu: có kẻ địch có thể hạ người chơi mới
+  chỉ trong 3 phát bắn ("kill the player in three shots"), cho thấy độ khó
+  chưa phù hợp người chơi mới.
+[CHƯA VERIFY: chi tiết "Dennis Wixon — 8.000 người chơi/năm" từ bản tổng
+hợp WebSearch trước đây KHÔNG xuất hiện trong bản ABC News đã đọc — có thể
+nằm ở đoạn khác của bài Wired gốc mà bản mirror này không có, hoặc là chi
+tiết nhầm lẫn; KHÔNG dùng con số này trong bài giảng cho đến khi verify lại
+qua chính bài Wired gốc.]
+
+(b) Valve — playtesting Half-Life 2 và Portal
+Nguồn sơ cấp: Mike Ambinder (Valve, Research Scientist), GDC 2009,
+"Valve's Approach to Playtesting: the Application of Empiricism". Slide
+PDF gốc tồn tại tại
+https://cdn.fastly.steamstatic.com/apps/valve/2009/GDC2009_ValvesApproachToPlaytesting.pdf
+nhưng công cụ trong phiên này KHÔNG tự đọc được nội dung PDF (chỉ lấy được
+metadata/tiêu đề) dù đã thử cả WebFetch trực tiếp lẫn qua proxy r.jina.ai
+— [CHƯA VERIFY nguyên văn trực tiếp từ chính slide này].
+
+ĐÃ MỞ ĐỌC TRỰC TIẾP 2 nguồn khác dẫn lại nội dung có trích dẫn xác thực:
+
+- gamedeveloper.com, "Half-Life 2 devs explore when developers should
+  ignore playtester feedback" — đã đọc trực tiếp, có trích nguyên văn
+  Marc Laidlaw (Valve writer, Half-Life 2):
+  "It's about learning to have faith in the whole arc of the thing. We're
+  pacing it, holding back for the payoff."
+  Ví dụ cụ thể (Laidlaw, đã đọc trực tiếp): playtester muốn được đưa cây
+  xà beng (crowbar) ngay để đập phá phòng thí nghiệm Kleiner, nhưng Valve
+  cố tình GIỮ LẠI khoảnh khắc đó để Barney tự đưa xà beng cho player sau —
+  "People would have been happy just to be given a crowbar in Kleiner's
+  lab, so they could go around smashing glassware. But they wouldn't have
+  had the moment where Barney drops it to you. And a lot of people love
+  that moment." → bài học: đừng làm theo mọi phản hồi playtester theo
+  nghĩa đen, nhất là khi phản hồi đó phá vỡ nhịp kể chuyện có chủ đích.
+  Link: https://www.gamedeveloper.com/production/-i-half-life-2-i-devs-explore-when-developers-should-ignore-playtester-feedback
+
+- book.leveldesignbook.com/process/blockout/playtesting — đã đọc trực
+  tiếp, trang này dẫn lại cụ thể nội dung talk Phil Co & Mike Ambinder GDC
+  2009 nói trên: team ("cabal") Valve có 6-8 người; quy trình lặp hàng
+  tuần "Every Friday, we would playtest the section of the game that
+  we're responsible for with someone from outside the team" và "Everything
+  we do during the week is focused on that Friday playtest"; thứ Hai họp
+  để quyết định mục tiêu playtest tuần đó. Ví dụ cụ thể: Half-Life 2:
+  Episode 2 được chỉnh sửa dựa trên việc playtester mệt mỏi/chán ở một
+  đoạn — Valve thêm "a combat high moment" và một khu vực "you pop the
+  roof panels off so that Alyx can help you with the sniper rifle" DỰA
+  TRÊN feedback playtest.
+  Link: https://book.leveldesignbook.com/process/blockout/playtesting
+
+[CHƯA VERIFY: 2 câu "players don't learn when stressed" / "players don't
+look up" — KHÔNG tìm lại được nguồn Valve chính thức cho 2 câu này trong
+phiên verify này; vẫn coi là diễn giải phổ biến trong cộng đồng, KHÔNG đặt
+trong ngoặc kép gán cho Valve trong bài giảng. Con số "mỗi chapter Half-
+Life 2 có ~100 playtester" cũng CHƯA verify lại được nguồn trực tiếp trong
+phiên này (chưa mở lại được bài "Thinking With Portals" gốc).]
+
+(c) Celeste — Assist Mode (Extremely OK Games / Matt Makes Games, 2018)
+ĐÃ MỞ ĐỌC TRỰC TIẾP bài Vice có phỏng vấn Maddy Thorson (khi đó dùng tên
+Matt Thorson) — bài viết về Assist Mode:
+Link: https://www.vice.com/en/article/celeste-difficulty-assist-mode/
+
+Nguyên văn Thorson (đã đọc trực tiếp):
+- Về việc đổi tên từ "Cheat Mode" sang "Assist Mode" vì cảm giác phán xét:
+  "That judgmental feeling really was what drove us to continue
+  workshopping the name." (Super Mario Odyssey ra mắt ngay sau khi nhóm
+  chốt tên, cũng dùng đúng tên "Assist Mode" cho tính năng tương tự —
+  Thorson nói điều này khiến nhóm thấy yên tâm khi trùng hướng đi với
+  Nintendo.)
+- Về mục tiêu/triết lý tính năng: "we want to empower the player and give
+  them a good experience, and sometimes that means letting go." và "We
+  want people to come out of this game feeling capable and powerful, so
+  that means we have to teach them, challenge them, and support them
+  through the failures along the way."
+- Về việc tính năng này có "phá" chủ đích thiết kế ban đầu (độ khó cao)
+  không: "Assist Mode breaks the game. I spent many hours fine-tuning the
+  difficulty of Celeste, so it's easy for me to feel precious about my
+  designs." — nhưng Thorson không coi đây là vi phạm ý đồ nghệ thuật, mà
+  hình dung nó như "a fluid experience where players are safe to float
+  around between loosely-defined difficulty levels."
+
+Nội dung cơ chế Assist Mode (chỉnh tốc độ game, số lần dash trên không,
+stamina, bật/tắt khả năng chết) khớp với các nguồn khác (Game Accessibility
+Guidelines case study: https://gameaccessibilityguidelines.com/celeste-assist-mode/
+— [CHƯA VERIFY: chưa tự mở đọc trực tiếp trang này trong phiên verify này,
+chỉ dùng làm tham chiếu chéo cơ chế, không trích nguyên văn từ đó]).
+
+(d) The Last of Us Part II — accessibility options (Naughty Dog, 2020)
+ĐÃ XÁC NHẬN qua nhiều nguồn tin cậy khớp nhau (PlayStation Blog, Naughty
+Dog blog chính thức, Game Developer, Engadget) — đây là công bố CHÍNH
+THỨC của studio, không phải giai thoại:
+Link chính thức: https://blog.playstation.com/2020/06/09/the-last-of-us-part-ii-accessibility-features-detailed/
+Link Naughty Dog: https://www.naughtydog.com/blog/the_last_of_us_part_ii_accessibility_features_detailed
+
+Nội dung xác nhận: hơn 60 tùy chọn accessibility, mục tiêu công bố là để
+người chơi "create a gameplay experience that's right for them"; lần đầu
+tiên Naughty Dog cho remap toàn bộ nút bấm (kể cả touchpad swipe, rung
+tay cầm); có preset nhanh cho người chơi khiếm thị/khiếm thính/khó vận
+động; tùy biến phụ đề sâu (cỡ chữ, màu, nền tối, tên người nói, mũi tên chỉ
+hướng nhân vật ngoài khung hình, kể cả phụ đề cho thoại NPC hệ thống lúc
+lén lút/combat — lần đầu có ở game Naughty Dog); 5 mức độ khó (Very Light
+→ Survivor) với khả năng tùy biến riêng từng khía cạnh (sát thương nhận
+vào, hiệu quả địch/đồng minh, stealth, tài nguyên).
+[CHƯA VERIFY: đây có phải case "designer đoán sai rồi sửa" theo đúng nghĩa
+hẹp hay không — nguồn chỉ xác nhận ĐÂY LÀ ĐẦU TƯ CHỦ ĐỘNG cho accessibility
+từ đầu, không có bằng chứng cụ thể trong các nguồn đã xem về việc ban đầu
+designer giả định sai rồi mới đổi hướng].
+
+(e) Shigeru Miyamoto — quan sát trẻ em playtest Super Mario 64
+Nguồn: phỏng vấn gốc tiếng Nhật trong sách hướng dẫn chiến thuật (1996),
+được dịch và đăng lại trên Shmuplations (trang chuyên dịch phỏng vấn game
+Nhật cũ, cộng đồng game design coi là nguồn dịch đáng tin — Shmuplations
+là bên dịch lại, không phải bản gốc tiếng Nhật).
+ĐÃ MỞ ĐỌC TRỰC TIẾP: https://shmuplations.com/mario64/
+
+Nguyên văn (đã đọc trực tiếp):
+"Truth be told, we did something with Mario 64 that we don't usually do:
+we had children playtest it. We had a row of about 10 middle schoolers,
+and had them play around on the King Bob-omb's stage for half a day,
+while we observed from behind.
+
+My child was one of them, actually… but seeing him try dozens of times,
+over and over, to get up this unclimbable hill, as a parent I couldn't
+help but think, 'Geez, does this kid have any brains?' (laughs)
+Afterwards we asked the children what they thought of the game, and they
+said it was fun, and that they wanted to play it again."
+
+→ ĐÃ VERIFY NGUYÊN VĂN VÀ NGỮ CẢNH ĐẦY ĐỦ: đúng là 10 học sinh cấp 2 (gồm
+cả con Miyamoto) chơi thử màn Bob-omb Battlefield ("King Bob-omb's
+stage") nửa ngày, quan sát từ phía sau; ý chính khớp với bản tóm tắt cũ —
+Miyamoto tự trào phúng phản ứng của bản thân với tư cách phụ huynh, nhưng
+kết luận rút ra là trẻ vẫn thấy vui và muốn chơi lại, ủng hộ việc tin vào
+phản ứng thật của người chơi hơn đánh giá chủ quan của designer khi quan
+sát từ ngoài.
+
+(f) League of Legends (Riot Games) — dữ liệu về toxicity khác giả định
+ban đầu
+Nguồn tổng hợp qua WebSearch (chưa tự mở bài gốc — [CHƯA VERIFY trực
+tiếp], nhưng nội dung phù hợp với các bài nói/viết công khai đã biết của
+Jeffrey Lin, cựu Lead Game Designer for Social Systems tại Riot):
+- Giả định ban đầu bị Riot thách thức: cho rằng độc hại (toxicity) là
+  "chuyện đương nhiên phải chấp nhận" trong game online.
+- Theo trích dẫn gán cho Phroxzon (Lead Gameplay Designer): 95% hành vi
+  gây rối được Riot ghi nhận đến từ người chơi nhìn chung tích cực/trung
+  tính, chỉ đang có ngày tệ hoặc bực bội nhất thời — KHÔNG phải nhóm nhỏ
+  "toxic kinh niên" như giả định ban đầu.
+- Từ phát hiện này, Riot chuyển hướng: thay vì chỉ trừng phạt nặng nhóm
+  tệ nhất, tạo hệ thống "Honor" dùng phản hồi tích cực (Helpful, Friendly,
+  Honorable Opponent) để "nudge" nhẹ nhóm đa số — vì tác động lớn hơn.
+[CHƯA VERIFY: chưa mở trực tiếp bài phỏng vấn/blog gốc chứa số liệu 95% —
+chỉ có qua tổng hợp search, cần verify lại số liệu và nguồn chính (có thể
+là GDC talk của Jeffrey Lin "Riot Games Presents: Player Behavior") trước
+khi dùng số liệu cụ thể trong bài giảng].
+
+(g) Mobile/F2P — case cụ thể có nguồn thật
+KHÔNG TÌM ĐƯỢC case mobile/F2P cụ thể, có tên game rõ ràng và nguồn chính
+thức/đã verify, cho thấy dữ liệu người chơi khác kỳ vọng designer, trong
+phạm vi phiên nghiên cứu này. Các kết quả tìm được đều là bài blog tổng
+hợp kinh nghiệm chung chung (Medium, Tenjin, DEV Community) hoặc paper
+học thuật (survival analysis game "Dealers Only Squad" — bản thân tên
+game này khả năng là ví dụ minh họa trong paper học thuật, không phải
+case công khai nổi tiếng).
+[CHƯA VERIFY — KHÔNG đưa case mobile/F2P cụ thể nào vào bài giảng cho đến
+khi tìm được nguồn thật đáng tin cậy hơn. Nếu cần ví dụ mobile, nên dùng
+case Riot (f) hoặc để trống mảng này ở bài này, chuyển sang bài UX/dark
+patterns sau].
+
+================================================================
+5. "LẤY NGƯỜI CHƠI LÀM TRUNG TÂM" KHÁC "CHIỀU MỌI MONG MUỐN" —
+   QUOTE ROSEWATER, APOCRYPHAL HENRY FORD
+================================================================
+
+(a) Mark Rosewater (Head Designer, Magic: The Gathering, Wizards of the
+Coast) — GDC 2016, talk "Twenty Years, Twenty Lessons Learned":
+
+ĐÃ MỞ ĐỌC TRỰC TIẾP nguồn sơ cấp — cột "Making Magic" chính chủ của
+Rosewater trên magic.wizards.com (bài viết đăng lại chuỗi bài học từ đúng
+talk GDC 2016 "Twenty Years, Twenty Lessons Learned", chia 3 phần):
+Link đã mở (Phần 3 — chứa Lesson 19): https://magic.wizards.com/en/news/making-magic/twenty-years-twenty-lessons-part-3-2016-06-13
+(Phần 1: https://magic.wizards.com/en/news/making-magic/twenty-years-twenty-lessons-part-1-2016-05-30
+Phần 2: https://magic.wizards.com/en/news/making-magic/twenty-years-twenty-lessons-part-2-2016-06-06
+— đã mở cả 2 phần này, không chứa Lesson 19, xác nhận đúng nó nằm ở Phần 3)
+
+Nguyên văn ĐÃ ĐỌC TRỰC TIẾP — tiêu đề mục, khớp CHÍNH XÁC 100% với câu
+vẫn được trích dẫn phổ biến trong ngành:
+"Lesson #19: Your audience is good at recognizing problems and bad at
+solving them."
+
+Đoạn giải thích đầy đủ (nguyên văn đã đọc trực tiếp):
+"My metaphor for this lesson is a doctor's appointment. What does a
+doctor always do first? They ask you how you're feeling. Why? Because
+you're the expert on you. No one else better understands how you feel.
+However, the doctor doesn't often ask you how to solve any problems that
+you might have because they're better equipped than you to do that. The
+same is true in game design.
+
+Your players have a better understanding of how they feel about your
+game than you do. They can tell easier when something is wrong and
+they're excellent at identifying problems, but they're not as equipped to
+solve the problems. They don't know the restrictions you're under or what
+needs you have to fulfill. They see the game from their perspective, but
+your job is to understand the perspective of all the players. So use your
+audience as a resource to help figure out what is wrong with your game,
+but take it with a grain of salt when they offer you solutions."
+
+→ ĐÃ VERIFY NGUYÊN VĂN 100% từ nguồn chính chủ Rosewater — không còn cần
+gắn nhãn CHƯA VERIFY. Câu "Your audience is good at recognizing problems
+and bad at solving them" dùng được trong ngoặc kép, trích Mark Rosewater,
+"Making Magic" (magic.wizards.com), 13/6/2016 — dựa trên talk GDC 2016
+"Twenty Years, Twenty Lessons Learned".
+
+(b) Henry Ford — "faster horses" — ĐÃ XÁC NHẬN LÀ APOCRYPHAL (không có
+bằng chứng Ford từng nói câu này).
+ĐÃ MỞ ĐỌC TRỰC TIẾP: Quote Investigator.
+Link: https://quoteinvestigator.com/2011/07/28/ford-faster-horse/
+
+Tóm tắt đã verify:
+- KHÔNG có bằng chứng thuyết phục Henry Ford nói/viết câu "If I had asked
+  people what they wanted, they would have said faster horses" (hay các
+  biến thể tương tự).
+- Ý tưởng gốc ("nếu chỉ lai tạo ngựa nhanh hơn thì sẽ không có phát minh
+  lớn") đã xuất hiện từ 1930 (Edward J. v. K. Menge) và 1946 (Lewis
+  Mumford) — KHÔNG liên quan Ford.
+- Lần đầu gán trực tiếp cho Ford: 1999, trên một tạp chí ngành du lịch
+  biển (cruise industry) — nhà thiết kế tàu John McNeece suy đoán về việc
+  Ford, và câu nói KHÔNG được trích trực tiếp là lời Ford lúc đó.
+- Gán chắc chắn hơn cho Ford: một lá thư gửi tạp chí Marketing Week năm
+  2001 — tức GẦN 55 NĂM sau khi Ford qua đời (1947).
+- Câu này KHÔNG có trong cơ sở dữ liệu khoảng 200 câu trích dẫn đã xác
+  thực của Bảo tàng Henry Ford (Henry Ford Museum of American Innovation),
+  và không xuất hiện trong tự truyện của ông.
+- Trớ trêu: có bằng chứng Ford thực sự tin điều NGƯỢC LẠI — được trích
+  trong sách của Dale Carnegie: "If there is any one secret of success,
+  it lies in the ability to get the other person's point of view and see
+  things from their angle." (Ford nói về tầm quan trọng của việc hiểu góc
+  nhìn người khác — ngược hẳn với hàm ý "đừng nghe khách hàng" mà câu
+  "faster horses" thường bị dùng để biện minh).
+
+→ Kết luận dùng cho bài giảng: câu "faster horses" là ví dụ TỐT để dạy về
+việc quote giả/apocryphal bị dùng sai mục đích — nhiều người dùng câu này
+để biện minh cho việc "đừng nghe người chơi", nhưng bản thân câu đó không
+có thật, và Ford thật sự có vẻ nghĩ ngược lại.
+
+================================================================
+6. TARGET AUDIENCE — GAME KHÔNG THỂ DÀNH CHO MỌI NGƯỜI
+================================================================
+
+[CHƯA VERIFY nguyên văn cụ thể — không tìm được câu trích trực tiếp nào
+của Schell hoặc Fullerton mang đúng ý "a game cannot be for everyone" dưới
+dạng quote có thể trích trong ngoặc kép, dù đã tìm nhiều biến thể từ khoá.
+Đã thử: WebSearch nhiều lần với các cụm khác nhau, không ra kết quả khớp
+trực tiếp với nguyên văn.]
+
+Ý dùng được cho bài giảng, dựa trên nội dung ĐÃ XÁC NHẬN gián tiếp ở mục 1
+và 2 (Fullerton về player experience goal cụ thể; Schell về demographics/
+psychographics để hiểu RÕ một nhóm người chơi cụ thể thay vì mơ hồ "ai
+cũng chơi được"):
+[PHÂN TÍCH — không từ nguồn cụ thể]: việc cả Fullerton (đặt experience
+goal cụ thể ngay từ đầu) và Schell (phân loại người chơi theo demographics/
+psychographics) đều dùng công cụ PHÂN LOẠI người chơi mục tiêu — cho thấy
+ngầm định chung trong ngành: thiết kế tốt đòi hỏi biết RÕ đang làm cho AI,
+không phải "ai cũng được". Đây là suy luận hợp lý từ 2 nguồn đã có, nhưng
+KHÔNG phải trích dẫn trực tiếp nói "game không dành cho mọi người".
+
+Nên diễn đạt trong bài giảng bằng Ý (không dùng ngoặc kép gán cho Schell
+hay Fullerton) — ví dụ: "Cả Fullerton lẫn Schell đều nhấn mạnh: thiết kế
+tốt bắt đầu từ việc hiểu rõ BẠN ĐANG LÀM CHO AI (qua experience goal cụ
+thể, hoặc qua phân loại demographics/psychographics) — không phải cố làm
+hài lòng một đám đông mơ hồ."
+
+================================================================
+7. ĐỒNG CẢM VỚI NHIỀU LOẠI NGƯỜI CHƠI — ACCESSIBILITY
+   (GAME ACCESSIBILITY GUIDELINES, ABLEGAMERS, XBOX ACCESSIBILITY
+   GUIDELINES)
+================================================================
+
+(a) Game Accessibility Guidelines (gameaccessibilityguidelines.com)
+ĐÃ MỞ ĐỌC TRỰC TIẾP trang chủ.
+Link: https://gameaccessibilityguidelines.com/
+
+Nội dung xác nhận: đây là "nỗ lực hợp tác giữa các studio, chuyên gia và
+học viên" (a collaborative effort between studios, accessibility
+specialists and academics — diễn giải từ bản đã đọc) nhằm tạo tài liệu
+tham khảo dễ dùng cho nhà phát triển, tránh loại trừ không cần thiết
+người chơi khuyết tật/hạn chế khác, "đảm bảo game vui cho phạm vi người
+chơi rộng nhất có thể". Trang ghi đã hoạt động hỗ trợ ngành từ năm 2012.
+
+(b) AbleGamers (tổ chức phi lợi nhuận)
+Xác nhận qua WebSearch (chưa tự mở trực tiếp trang chủ ablegamers.org
+trong phiên này — [CHƯA VERIFY mức độ chi tiết, nhưng thông tin khớp nhau
+giữa nhiều nguồn thứ cấp gồm Wikipedia và trang GuideStar/tổ chức từ
+thiện chính thức]):
+- Tổ chức từ thiện phi lợi nhuận 501(c)(3), hoạt động từ 2004.
+- Mục tiêu: mở rộng phạm vi game có thể tiếp cận được cho người khuyết
+  tật; tư vấn miễn phí cho studio AAA/indie; có review database game theo
+  tiêu chí accessibility; cấp grant thiết bị hỗ trợ (assistive tech).
+- Có tài liệu "Includification" — hướng dẫn thực hành accessibility cho
+  ngành: https://accessible.games/wp-content/uploads/2018/11/AbleGamers_Includification.pdf
+  (chưa tự mở đọc nội dung PDF này trong phiên này — [CHƯA VERIFY nội
+  dung chi tiết]).
+
+(c) Xbox Accessibility Guidelines (XAG) — Microsoft
+Xác nhận qua WebSearch trên trang chính thức Microsoft Learn (chưa tự mở
+trực tiếp bằng WebFetch trong phiên này, nhưng đây LÀ nguồn sơ cấp chính
+chủ của Microsoft — [tin cậy cao dù chưa tự mở]):
+Link: https://learn.microsoft.com/en-us/xbox/accessibility/guidelines
+
+Nội dung: bộ best practice phát triển cùng chuyên gia ngành và cộng đồng
+Gaming & Disability; dùng làm nguồn cảm hứng cho designer, "guardrail" cho
+developer, checklist cho test team. Ghi rõ: XAG KHÔNG nhằm mục đích làm
+checklist tuân thủ pháp lý/compliance chính thức, mà để đảm bảo trải
+nghiệm chơi được và thú vị cho càng nhiều người càng tốt. Có các nhóm
+guideline như: audio accessibility, input methods, time limits, focus
+indicators...
+
+Ý dùng cho bài giảng: đồng cảm với người chơi không chỉ là "đoán tâm lý"
+mà còn là thiết kế cho SỰ ĐA DẠNG THẬT của khả năng người chơi (thị giác,
+thính giác, vận động, nhận thức) — có hẳn 3 tổ chức/bộ guideline lớn của
+ngành (GAG, AbleGamers, Xbox) chuyên về việc này, cho thấy đây không phải
+việc "nice to have" mà là một nhánh chuyên môn thật của UX game.
+
+================================================================
+8. HIỂU LẦM PHỔ BIẾN Ở NGƯỜI MỚI
+   [PHẦN LỚN LÀ PHÂN TÍCH — không từ nguồn cụ thể, trừ khi ghi chú khác]
+================================================================
+
+1) "Làm game mình thích thì người khác cũng thích."
+[PHÂN TÍCH — không từ nguồn cụ thể]: đây là hệ quả trực tiếp của
+"false-consensus effect" đã xác nhận ở mục 3 (nguồn NN/g) — hiệu ứng tâm
+lý khiến người ta mặc định người khác nghĩ/thích giống mình. Đây là cơ chế
+tâm lý CÓ THẬT, dùng được, nhưng việc áp nó vào "designer mới thường nghĩ
+vậy" là suy luận hợp lý, không phải trích dẫn trực tiếp từ nghiên cứu về
+riêng giới game designer.
+
+2) "Người chơi nói muốn gì thì làm cái đó."
+Có nguồn hỗ trợ trực tiếp: xem mục 5(a) — Rosewater phân biệt rõ "audience
+giỏi phát hiện vấn đề, không giỏi đề xuất giải pháp" — tức lắng nghe
+FEEDBACK (có vấn đề gì) khác với làm y nguyên GIẢI PHÁP người chơi đề
+xuất.
+
+3) "Người chơi lười/ngu nếu không hiểu."
+[PHÂN TÍCH — không từ nguồn cụ thể, nhưng có liên hệ gián tiếp]: liên hệ
+trực tiếp tới khái niệm "curse of knowledge" của Hodent (mục 3, đã verify
+nguyên văn) — designer biết quá rõ hệ thống của mình nên không còn thấy
+được cái khó của người mới; khi người chơi "không hiểu", nhiều khả năng
+vấn đề nằm ở thiết kế/truyền đạt thông tin, không nằm ở người chơi.
+
+4) "Chỉ cần quan sát/nghe người chơi là đủ, không cần chủ kiến riêng của
+designer."
+[PHÂN TÍCH — không từ nguồn cụ thể]: đây là hiểu lầm THEO CHIỀU NGƯỢC LẠI,
+cần cảnh báo cân bằng trong bài — chính mục 5(a) (Rosewater) cho thấy
+ngành đã có nhận thức rõ: lấy người chơi làm trung tâm KHÔNG đồng nghĩa
+để người chơi tự thiết kế game. Designer vẫn là người ra quyết định cuối
+cùng, chỉ là quyết định đó phải dựa trên hiểu biết thật về người chơi,
+không phải cảm tính cá nhân của designer.
+
+================================================================
+9. TỔNG HỢP MỌI MỤC [CHƯA VERIFY]
+================================================================
+
+- [ĐÃ VERIFY — không còn CHƯA VERIFY] Câu chứa cụm "advocate for the
+  player" trong sách Fullerton: đã mở đọc trực tiếp nguyên văn qua proxy
+  r.jina.ai trên bản dokumen.pub (mục 1).
+- [ĐÃ VERIFY — không còn CHƯA VERIFY] Câu "The game is not the experience.
+  The game enables the experience, but it is not the experience." (Schell):
+  đã mở đọc trực tiếp nguyên văn từ bản PDF sách gốc, Chương 2 (mục 2a).
+- Số lens và số chương chính xác của "Lens of the Player" trong sách
+  Schell: các nguồn thứ cấp mâu thuẫn nhau (Lens #16 vs #19, chương 9 vs
+  10) — KHÔNG dùng số cụ thể cho tới khi verify lại (mục 2b).
+- Nội dung demographics/psychographics của Schell: chỉ có qua tổng hợp
+  thứ cấp, chưa đối chiếu nguyên văn sách gốc (mục 2c).
+- Cụm "you are not your player" gán cho Hodent: KHÔNG xác nhận được bà
+  dùng đúng cụm này — chỉ có "curse of knowledge" là nguyên văn xác nhận
+  (mục 3).
+- Gán "you are not the user" cho Don Norman cụ thể: nguồn tốt nhất (NN/g)
+  KHÔNG xác nhận tác giả, chỉ gọi là "mantra" chung của ngành UX — một số
+  nguồn khác (chưa mở đọc kỹ) có nhắc Norman nhưng chưa đối chiếu (mục 3).
+- [ĐÃ VERIFY một phần] Case Wired/Halo 3: wired.com và web.archive.org vẫn
+  KHÔNG truy cập được qua công cụ, nhưng đã mở đọc trực tiếp bản đăng lại
+  chính thức trên ABC News (syndication cùng thời với Wired) — lấy được
+  chi tiết cụ thể (3.000 giờ/600 người chơi, ví dụ lựu đạn không đủ rõ để
+  nhận biết). Riêng chi tiết "Dennis Wixon — 8.000 người chơi/năm" KHÔNG
+  xuất hiện trong bản đã đọc — vẫn CHƯA VERIFY, không dùng con số này
+  (mục 4a).
+- [ĐÃ VERIFY một phần] Case Valve (Half-Life 2, Portal): đã mở đọc trực
+  tiếp 2 nguồn dẫn lại có trích nguyên văn (gamedeveloper.com trích Marc
+  Laidlaw; leveldesignbook.com dẫn chi tiết cụ thể từ GDC 2009 Ambinder/
+  Phil Co). Slide GDC gốc (PDF) vẫn KHÔNG tự đọc được nội dung. Hai câu
+  "players don't learn when stressed" / "players don't look up" VẪN CHƯA
+  VERIFY nguồn Valve chính thức (mục 4b).
+- [ĐÃ VERIFY] Case Celeste Assist Mode: đã mở đọc trực tiếp bài Vice có
+  trích nguyên văn Maddy (Matt) Thorson (mục 4c).
+- [ĐÃ VERIFY] Case Miyamoto/Super Mario 64: đã mở đọc trực tiếp trang
+  Shmuplations, nguyên văn và ngữ cảnh khớp với bản tóm tắt trước đó
+  (mục 4e).
+- Case Riot Games/League of Legends (số liệu 95%): chưa mở bài/talk gốc
+  của Jeffrey Lin hay Phroxzon — chỉ qua tổng hợp WebSearch, cần verify
+  lại số liệu trước khi dùng (mục 4f).
+- Case mobile/F2P cụ thể: KHÔNG tìm được case nào đủ tin cậy trong phiên
+  này — mục này để trống, không đưa case mobile/F2P vào bài giảng (mục
+  4g).
+- [ĐÃ VERIFY — không còn CHƯA VERIFY] Rosewater "Lesson 19": đã mở đọc
+  trực tiếp bài "Making Magic" chính chủ (magic.wizards.com, Phần 3,
+  13/6/2016) — nguyên văn khớp 100% với câu vẫn được trích dẫn phổ biến
+  (mục 5a).
+- Câu "a game cannot be for everyone" gán cho Schell/Fullerton: không tìm
+  được nguyên văn nào khớp — mục 6 chỉ đưa ra phân tích suy luận từ nội
+  dung đã có, không phải trích dẫn trực tiếp.
+- AbleGamers: thông tin tổ chức chỉ qua tổng hợp WebSearch (Wikipedia,
+  GuideStar), chưa tự mở trang chủ chính thức của tổ chức trong phiên này
+  (mục 7b). Tài liệu "Includification" chưa mở đọc nội dung.
+- Xbox Accessibility Guidelines: nội dung tổng hợp qua WebSearch trên
+  trang Microsoft Learn (nguồn sơ cấp, tin cậy cao) nhưng chưa tự mở trực
+  tiếp bằng WebFetch trong phiên này (mục 7c).

@@ -71,7 +71,10 @@ $pages = @(
     @{ name = "lo-trinh"; file = "lo-trinh.html" },
     @{ name = "components"; file = "components.html" },
     # Bai hoc that: cao hon nhieu (nhieu section dai) nen can height rieng, xem heightOverride ben duoi.
-    @{ name = "lesson-tang-1-01-mda"; file = "lessons/tang-1/01-mda.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } }
+    @{ name = "lesson-tang-1-01-mda"; file = "lessons/tang-1/01-mda.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
+    @{ name = "lesson-tang-0-01-game-la-gi"; file = "lessons/tang-0/01-game-la-gi.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
+    @{ name = "lesson-tang-0-02-game-designer-lam-gi"; file = "lessons/tang-0/02-game-designer-lam-gi.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
+    @{ name = "lesson-tang-0-03-tu-duy-nguoi-choi"; file = "lessons/tang-0/03-tu-duy-nguoi-choi.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } }
 )
 $viewports = @(
     @{ name = "desktop"; width = 1440; height = 2600 },

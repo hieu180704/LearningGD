@@ -112,7 +112,9 @@ Thứ tự bắt buộc, không đảo:
 11. `.reading` — đọc thêm
 12. `.lesson-foot`
 
-Độ dài mục tiêu: 10–20 phút đọc.
+Độ dài mục tiêu: 10–14 phút đọc (thân bài ~1.500–1.900 chữ). Ngắn gọn, dễ hiểu để người đọc
+không chán: trích nguyên văn chỉ lấy câu ngắn nhất mang ý chính, mỗi khái niệm tối đa 1 trích
+dẫn, đoạn văn ≤ 3–4 câu, ưu tiên bảng/list/sơ đồ thay đoạn văn dài.
 
 ## 6. Quy trình viết một bài
 
