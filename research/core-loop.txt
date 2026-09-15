@@ -1,0 +1,606 @@
+NGHIÊN CỨU & FACT-CHECK: CORE LOOP (CORE GAMEPLAY LOOP)
+(Nguồn cho bài giảng tiếng Việt — Tầng 1, Bài 2 — người mới học Game Design)
+Ngày thực hiện: 2026-09-15
+
+MỤC LỤC
+1. Định nghĩa "core loop" — nguồn gốc thuật ngữ, có/không một định nghĩa chuẩn
+2. Meta loop / metagame, nested loops, compulsion loop — phân biệt với core loop
+3. Daniel Cook / Lostgarden — "Loops and Arcs" và "skill atoms"
+4. Adams & Dormans, "Game Mechanics: Advanced Game Design" — feedback loop
+5. "30 seconds of fun" — Jaime Griesemer, Halo
+6. Tiêu chí một loop "vui khi lặp lại"
+7. Ví dụ core loop cụ thể có nguồn, đa thể loại
+8. Hiểu lầm phổ biến ở người mới về core loop
+9. Tổng hợp mọi mục [CHƯA VERIFY]
+
+================================================================
+1. ĐỊNH NGHĨA "CORE LOOP" — NGUỒN GỐC THUẬT NGỮ
+================================================================
+
+KHÔNG tìm được một định nghĩa học thuật/chuẩn duy nhất được cả ngành công
+nhận, có nguồn gốc rõ ràng (ai đặt ra thuật ngữ, năm nào) — [CHƯA VERIFY].
+Chỉ có qua WebSearch (nguồn thứ cấp tổng hợp — gamedesignskills.com,
+GameAnalytics — chưa tự mở đọc trực tiếp được các trang này trong phiên
+này, WebFetch trả về lỗi 403 kể cả qua proxy r.jina.ai):
+- Link (chưa mở được): https://gamedesignskills.com/game-design/core-loops-in-gameplay/
+- Link (chưa mở được): https://www.gameanalytics.com/blog/how-to-perfect-your-games-core-loop
+
+Nội dung tổng hợp từ các nguồn thứ cấp này (KHÔNG có nguyên văn để trích
+dẫn, chỉ dùng làm ý tham khảo, gắn nhãn [CHƯA VERIFY]):
+- Khái niệm "gameplay loop" được cho là có gốc từ arcade thập niên 1970
+  (Space Invaders, Pac-Man) — nhà phát triển thời đó "hiểu trực giác" tâm
+  lý vòng lặp dù chưa gọi tên "core gameplay loop".
+- Bản thân cụm từ "core gameplay loop" được cho là chỉ xuất hiện phổ biến
+  từ những năm 2000.
+- Một nguồn (gamedesignskills.com, qua tóm tắt WebSearch, chưa tự mở đọc)
+  cho rằng bản ghi chép sớm nhất nhắc tới khái niệm này có thể từ sách
+  Richard Rouse III, "Game Design: Theory and Practice" — nhưng bản thân
+  nguồn đó cũng chỉ suy đoán ("likely older"), không khẳng định chắc chắn.
+[CHƯA VERIFY toàn bộ đoạn trên — không dùng số năm/tên sách cụ thể trong
+bài giảng cho tới khi verify lại bằng cách tự mở đọc trực tiếp].
+
+ĐỊNH NGHĨA HỌC THUẬT GẦN NHẤT ĐÃ VERIFY — Miguel Sicart, paper "Loops and
+Metagames: Understanding Game Design Structures", trình bày tại hội nghị
+FDG (Foundations of Digital Games) 2015:
+ĐÃ MỞ ĐỌC TRỰC TIẾP qua proxy r.jina.ai (PDF gốc bị lỗi certificate khi mở
+trực tiếp bằng WebFetch, nhưng nội dung lấy qua proxy là văn bản thật của
+paper, không phải diễn giải thứ ba):
+Link: http://www.fdg2015.org/papers/fdg2015_paper_22.pdf
+
+Nguyên văn (đã đọc trực tiếp) — Sicart gọi khái niệm này là "game loop"
+(không dùng chữ "core"):
+"a level of abstraction that describes player input through game
+mechanics, system processing (evaluation of input matched to the game
+state and the rules of the game), and feedback output."
+
+Và (đã re-verify 2026-09-15 qua proxy r.jina.ai, PHÁT HIỆN THIẾU MỘT VẾ so
+với bản trong file trước đây — đã sửa lại theo nguồn): "A game loop is a
+composite of game mechanics, computing operations, and feedback
+mechanisms that is repeated until a break condition is reached, either in
+the game mechanics or in the computing operations."
+
+→ Đây là định nghĩa học thuật có nguồn hội nghị khoa học (FDG 2015), có
+thể trích trong bài giảng, ghi rõ tác giả Miguel Sicart, FDG 2015 — nhưng
+lưu ý ông dùng thuật ngữ "game loop", không phải "core loop"/"core
+gameplay loop" (thuật ngữ phổ biến trong ngành công nghiệp game, không
+xuất phát từ đây).
+
+Wikipedia (mục "Compulsion loop", xem thêm mục 2) coi 3 tên gọi là đồng
+nghĩa: "A compulsion loop, reward loop or core loop is a habitual chain of
+activities that a user may feel compelled to repeat." — nhưng đây là bài
+Wikipedia (không phải nguồn sơ cấp), chỉ dùng làm tham chiếu chéo cách
+dùng từ trong ngành, KHÔNG dùng làm "định nghĩa chuẩn" để trích dẫn.
+
+================================================================
+2. META LOOP / METAGAME, NESTED LOOPS, COMPULSION LOOP —
+   PHÂN BIỆT VỚI CORE LOOP
+================================================================
+
+(a) Miguel Sicart, FDG 2015 (ĐÃ MỞ ĐỌC TRỰC TIẾP qua proxy — cùng nguồn
+mục 1, link: http://www.fdg2015.org/papers/fdg2015_paper_22.pdf):
+
+Nguyên văn định nghĩa metagame:
+"any aspect external to interacting with game loops that influences the
+play experience of a game."
+
+Sicart chia metagame thành 5 loại (theo tóm tắt từ bài đã đọc — chưa có
+nguyên văn từng câu định nghĩa riêng cho từng loại): informational,
+fictional, economical, performative, physical.
+
+→ Phân biệt theo Sicart: "game loop" = trực tiếp input người chơi → cơ chế
+game → xử lý hệ thống → phản hồi. "Metagame" = mọi thứ NGOÀI vòng tương
+tác trực tiếp đó nhưng vẫn ảnh hưởng tới trải nghiệm chơi (ví dụ: đọc
+guide, nói chuyện cộng đồng, theo dõi bảng xếp hạng).
+
+(b) Cách hiểu phổ biến trong ngành công nghiệp (KHÔNG có nguồn học thuật
+cụ thể — chỉ tổng hợp qua WebSearch nhiều bài blog/case study khớp nhau về
+ý, [CHƯA VERIFY] từng câu chữ cụ thể, nhưng ý chung lặp lại nhất quán ở
+nhiều nguồn độc lập):
+- Core loop = vòng lặp NGẮN, xảy ra liên tục trong một phiên chơi (ví dụ:
+  đánh quái → nhặt đồ → mạnh hơn → đánh quái tiếp).
+- Meta loop = vòng lặp DÀI hơn, thường xuyên qua nhiều phiên chơi, gắn với
+  mục tiêu dài hạn: mở khóa, nâng cấp vĩnh viễn, tiến trình cốt truyện,
+  bảng xếp hạng.
+- Ví dụ cụ thể có nguồn (xem thêm mục 7 — Clash Royale): bài phân tích
+  Deconstructor of Fun mô tả rõ Clash Royale có "game loop" (trận đấu) và
+  "meta-game" (xây và nâng cấp deck) là hai tầng riêng biệt nhưng gắn chặt
+  vào nhau — đây LÀ ví dụ đã verify (xem mục 7).
+
+(c) Compulsion loop — ĐÃ MỞ ĐỌC TRỰC TIẾP Wikipedia:
+Link: https://en.wikipedia.org/wiki/Compulsion_loop
+
+Nguyên văn định nghĩa (đã đọc trực tiếp): "A compulsion loop, reward loop
+or core loop is a habitual chain of activities that a user may feel
+compelled to repeat."
+
+Bài không xác định rõ ai đặt ra thuật ngữ này hay chính xác từ năm nào —
+[CHƯA VERIFY nguồn gốc thuật ngữ]. Bài chỉ liên hệ cơ chế tâm lý học đứng
+sau tới các thí nghiệm operant conditioning của B. F. Skinner (nghiên cứu
+hành vi học nền tảng, không phải nguồn gốc trực tiếp của thuật ngữ hiện
+đại "compulsion loop").
+
+Tranh cãi đạo đức (đã đọc trực tiếp từ Wikipedia, có trích dẫn nguồn trong
+bài — [CHƯA VERIFY nội dung các nguồn gốc mà Wikipedia trích, chỉ ghi lại
+ý Wikipedia tổng hợp]):
+- Loot box: "Controversy arose in 2018 around loot boxes with several
+  experts, governments, and concerned citizens fearing that loot boxes
+  could lead to gambling, particularly in youth." Cơ chế được so sánh với
+  "variable rate reinforcement" (cùng nguyên lý tâm lý học với máy đánh
+  bạc).
+- Nghiện game/internet: bài nêu compulsion loop có thể góp phần gây
+  "video game addiction" / "internet addiction disorder" — nhưng cũng ghi
+  rõ APA (American Psychological Association) năm 2019 khẳng định KHÔNG có
+  bằng chứng liên hệ trực tiếp compulsion loop với xu hướng bạo lực.
+→ Ý dùng cho bài giảng: compulsion loop là một NHÁNH gây tranh cãi đạo đức
+của core loop — khi loop được thiết kế cố tình khai thác tâm lý hơn là tạo
+niềm vui thật. Bài học sinh Tầng 1 chỉ cần biết khái niệm tồn tại và có
+tranh cãi, KHÔNG cần đi sâu (theo đúng phạm vi yêu cầu).
+
+================================================================
+3. DANIEL COOK / LOSTGARDEN — "LOOPS AND ARCS" VÀ "SKILL ATOMS"
+================================================================
+
+(a) "Loops and Arcs" (Lostgarden, đăng 30/4/2012)
+ĐÃ MỞ ĐỌC TRỰC TIẾP:
+Link: https://lostgarden.com/2012/04/30/loops-and-arcs/
+
+Nguyên văn mô hình loop (đã đọc trực tiếp, ghép từ cấu trúc 4 bước của
+bài):
+"The player starts with a mental model that prompts them to... Apply an
+action to... The game system and in return... Receives feedback that...
+Updates their mental model and starts the loop all over again."
+
+Đặc điểm loop (nguyên văn đã đọc trực tiếp):
+"These loops are fractal and occur at multiple levels and frequencies
+throughout a game." — nghĩa là loop tồn tại LỒNG NHAU (nested), ở nhiều
+tầng và tần suất khác nhau trong cùng một game (khớp với ý "core loop vs
+meta loop" ở mục 2).
+
+"Loops tend to deliver value through the act of being exercised." → giá
+trị của loop nằm ở chính hành động LẶP LẠI nó, không phải ở kết quả một
+lần.
+
+Ba yếu tố loop tốt (nguyên văn đã đọc trực tiếp, liệt kê trong bài):
+"Interrelated actions that trigger multiple loops", "Systems of crisply
+defined cause and effect", "Functional feedback that helps players
+understand causation."
+
+Định nghĩa "arc" — đối lập với loop (nguyên văn đã đọc trực tiếp):
+"An arc is a broken loop you exit immediately." và "Arcs are well suited
+for delivering a payload of pre-processed information." Ví dụ arc: xem
+cutscene, đọc một đoạn hội thoại — hành động đơn giản, một lần, mang
+thông tin/cảm xúc đã được "đóng gói sẵn", không lặp lại có ý nghĩa như
+loop.
+
+Bài có nhắc tới "skill atoms" (nguyên văn đã đọc trực tiếp câu dẫn, nhưng
+bài "Loops and Arcs" không định nghĩa lại chi tiết, chỉ tham chiếu): "...
+should be very familiar to those who have looked into [skill atoms]" —
+xem định nghĩa đầy đủ ở mục (b) dưới.
+
+(b) "Skill atoms" — nguồn gốc bài "The Chemistry of Game Design"
+Bài gốc của Daniel Cook đăng lần đầu trên Gamasutra (nay là Game
+Developer), 19/7/2007 (đối chiếu bản đăng lại trên Lostgarden, ngày trên
+Lostgarden: 19/7/2007 — trùng khớp).
+ĐÃ MỞ ĐỌC TRỰC TIẾP bản đăng trên Game Developer:
+Link: https://www.gamedeveloper.com/design/the-chemistry-of-game-design
+
+Nguyên văn định nghĩa (đã đọc trực tiếp): "A skill atom feedback loop is
+composed of four main elements" — 4 thành phần:
+1. Action — người chơi thực hiện một hành động.
+2. Simulation — hệ thống game cập nhật trạng thái dựa trên hành động đó.
+3. Feedback — game trả phản hồi (hình ảnh/âm thanh/cảm giác) cho hành
+   động đó.
+4. Modeling — người chơi cập nhật mô hình tinh thần (mental model) của họ
+   dựa trên phản hồi, cảm nhận tiến bộ hay thất vọng.
+Sơ đồ chính tắc trong bài được vẽ dạng hình vuông 4 góc nối thành chu kỳ.
+
+→ Ý dùng cho bài giảng: "skill atom" là đơn vị NHỎ NHẤT của một vòng lặp
+học kỹ năng (Cook, 2007) — về cấu trúc gần giống "loop" trong bài "Loops
+and Arcs" (2012) nhưng skill atom tập trung vào việc NGƯỜI CHƠI HỌC một kỹ
+năng cụ thể, còn "loop" (2012) là khung tổng quát hơn áp dụng cho mọi tầng
+của game. Hai bài cùng tác giả, bài sau (2012) xây trên nền bài trước
+(2007) — [PHÂN TÍCH: đây là suy luận từ việc bài 2012 tự trích dẫn bài
+2007, không phải Cook tự phát biểu rõ mối quan hệ này bằng một câu duy
+nhất].
+
+================================================================
+4. ADAMS & DORMANS, "GAME MECHANICS: ADVANCED GAME DESIGN" — FEEDBACK LOOP
+================================================================
+
+Sách: Ernest Adams, Joris Dormans, "Game Mechanics: Advanced Game Design"
+(New Riders / Pearson, 2012).
+
+ĐÃ MỞ ĐỌC TRỰC TIẾP một phần — sample pages chính thức do Pearson phát
+hành (PDF; WebFetch không tự đọc được nội dung PDF nhị phân, phải qua
+proxy r.jina.ai để trích xuất text — nội dung trả về LÀ văn bản gốc từ
+chính file PDF sample của nhà xuất bản, không phải diễn giải bên thứ ba):
+Link: https://ptgmedia.pearsoncmg.com/images/9780321820273/samplepages/0321820274.pdf
+
+Nguyên văn đã đọc trực tiếp (positive/negative feedback):
+"Positive feedback creates an exponential curve" — dùng minh họa "arms
+race" giữa người chơi (ví dụ: thu thập tài nguyên trong StarCraft).
+
+"Negative feedback (as discussed in Chapter 3) is used to create
+stability in dynamic systems. Negative feedback makes a system resistant
+to changes."
+
+Nguyên văn đã đọc trực tiếp (core mechanics — không phải "core loop"):
+"[core mechanics are] the living world of the game; they generate active
+challenges for players to solve in the game world, and they determine the
+effects of the players' actions on that world."
+
+Lưu ý QUAN TRỌNG: trong đoạn sample pages đã đọc được, thuật ngữ "core
+loop" KHÔNG xuất hiện — sách này dùng khung khái niệm riêng: "engine"
+(Static/Dynamic/Converter Engine — chỉ thấy tên gọi, chưa có định nghĩa
+đầy đủ trong đoạn đã đọc), "feedback loop" (positive/negative), "core
+mechanics" — không trùng khung "core loop" phổ biến trong ngành công
+nghiệp. [CHƯA VERIFY định nghĩa đầy đủ "engine"/"Machinations" — chỉ đọc
+được sample pages giới hạn, không phải toàn sách].
+
+Ví dụ negative feedback cụ thể trong sách (qua tổng hợp WebSearch trước
+khi mở sample pages, khớp với chủ đề sách — [CHƯA VERIFY nguyên văn chính
+xác, chỉ có qua tóm tắt thứ cấp]): "negative feedback basketball" — cứ mỗi
+5 điểm đội dẫn trước, đội bị dẫn được thêm 1 cầu thủ trên sân.
+
+→ Ý dùng cho bài giảng: positive feedback loop (thắng → mạnh hơn → càng dễ
+thắng tiếp) có thể khiến game MẤT CÂN BẰNG nếu không kiểm soát; negative
+feedback loop (thua/yếu → được hỗ trợ nhiều hơn) giúp GIỮ ỔN ĐỊNH. Core
+loop của một game thường là hỗn hợp cả hai loại feedback — khái niệm này
+từ Adams & Dormans bổ sung góc nhìn kỹ thuật/hệ thống cho khái niệm "core
+loop" vốn mang tính trực giác hơn trong ngành công nghiệp.
+
+================================================================
+5. "30 SECONDS OF FUN" — JAIME GRIESEMER, HALO
+================================================================
+
+Người nói: Jaime Griesemer, cựu Design Lead tại Bungie (thời Halo). Câu
+nói gắn với bài thuyết trình GDC "The Illusion of Intelligence: The
+Integration of AI and Level Design in Halo" (đồng trình bày cùng Chris
+Butcher, lập trình viên Bungie), theo tóm tắt WebSearch — [CHƯA VERIFY năm
+chính xác của talk GDC này, thường được ghi là khoảng 2002 qua các nguồn
+thứ cấp, chưa tự mở được slide/video gốc của talk trong phiên này].
+
+ĐÃ MỞ ĐỌC TRỰC TIẾP bài phỏng vấn Griesemer trên Engadget (người phỏng
+vấn: Ludwig Kietzmann, đăng 14/7/2011) — RE-VERIFY 2026-09-15, cả 3 câu
+nguyên văn dưới đây khớp đúng từng chữ với bản đã ghi trước đó, tác giả
+bài viết xác nhận đúng là Ludwig Kietzmann:
+Link: https://www.engadget.com/2011-07-14-half-minute-halo-an-interview-with-jaime-griesemer.html
+
+Nguyên văn câu gốc (theo tóm tắt của chính Griesemer trong bài phỏng vấn
+này, ông nhắc lại câu mình từng nói):
+"In Halo 1, there was maybe 30 seconds of fun that happened over and over
+and over and over again. And so, if you can get 30 seconds of fun, you
+can pretty much stretch that out to be an entire game."
+
+QUAN TRỌNG — Griesemer nói rõ trong bài phỏng vấn này rằng câu trên bị
+hiểu SAI rộng rãi. Nguyên văn đã đọc trực tiếp:
+"Everyone uses it to mean exactly the opposite of what I meant when I said
+it!"
+
+Phần THỨ HAI của ý gốc (thường bị lược bỏ khi người khác trích dẫn),
+nguyên văn đã đọc trực tiếp: ông nói về việc lấy 30 giây vui đó và
+"playing it in different environments, with different weapons, different
+vehicles, against different enemies, against different combinations of
+enemies." và nhấn mạnh: "No 30 second stretch of Halo is ever repeated;
+the missions are constantly changing the context on you."
+
+→ Ý dùng cho bài giảng (QUAN TRỌNG, tránh lặp lại hiểu lầm phổ biến): câu
+"30 seconds of fun" KHÔNG có nghĩa là "chỉ cần một core loop vui rồi lặp y
+nguyên mãi là đủ". Ý gốc của Griesemer là: thiết kế một core loop đủ vui
+trong khoảng thời gian ngắn (30 giây), RỒI liên tục thay đổi NGỮ CẢNH
+xung quanh loop đó (môi trường, vũ khí, kẻ địch, cách kết hợp kẻ địch) để
+loop không bị nhàm — đây là minh họa trực tiếp cho tiêu chí "biến thiên"
+ở mục 6.
+
+================================================================
+6. TIÊU CHÍ MỘT LOOP "VUI KHI LẶP LẠI"
+================================================================
+
+(a) Raph Koster, "A Theory of Fun for Game Design" (Paraglyph Press,
+2004) — về mastery/pattern recognition:
+ĐÃ MỞ ĐỌC TRỰC TIẾP trang tổng hợp quote sách trên Goodreads (trang liệt
+kê nguyên văn trích từ sách, không phải bài viết diễn giải — nhưng CHƯA tự
+đối chiếu lại với chính văn bản sách gốc trong phiên này, nên vẫn gắn
+[CHƯA VERIFY mức tuyệt đối 100%] dù độ tin cậy cao vì Goodreads quote pages
+thường trích trực tiếp từ sách có người dùng đóng góp):
+Link: https://www.goodreads.com/work/quotes/19639-a-theory-of-fun-for-game-design
+
+Nguyên văn (đã đọc trực tiếp trên trang này):
+"Fun is just another word for learning."
+"My personal breakdown would look a lot like Lazzaro's: Fun is the act of
+mastering a problem mentally."
+"Boredom is the opposite of learning."
+"Games that fail to exercise the brain become boring."
+"Based on my reading, the human brain is mostly a voracious consumer of
+patterns, a soft pudgy gray Pac-Man of concepts."
+
+RE-VERIFY 2026-09-15: đã thử tìm nguồn chính chủ (raphkoster.com,
+theoryoffun.com) để đối chiếu lại đúng câu "Fun is just another word for
+learning." Kết quả:
+- ĐÃ MỞ ĐỌC TRỰC TIẾP trang https://www.raphkoster.com/2012/01/24/an-atomic-theory-of-fun-game-design/
+  (bài viết chính Koster, trên site của ông) — không có câu "Fun is just
+  another word for learning" nguyên văn, nhưng có câu liên quan cùng ý,
+  nguyên văn đã đọc trực tiếp: "fun is the feeling you get when you are
+  exercising your brain by solving a cognitive puzzle."
+- ĐÃ MỞ ĐỌC TRỰC TIẾP transcript bài nói "Ten Lessons Learned" (GDC talk,
+  đăng lại trên chính site raphkoster.com):
+  Link: https://www.raphkoster.com/games/presentations/ten-lessons-learned-2/
+  Nguyên văn đã đọc trực tiếp (chính Koster nói): "I concluded it's about
+  learning. It's about forms of deliberate practice" và "We use it to
+  solve boredom."
+- KHÔNG tìm thấy cụm chính xác "Fun is just another word for learning."
+  trên chính trang của Koster trong phiên này — cụm này nhiều khả năng nằm
+  trong chính văn bản sách (không có bản online chính chủ để đối chiếu) —
+  vẫn giữ [CHƯA VERIFY mức tuyệt đối 100% cho ĐÚNG CỤM TỪ NÀY], nhưng Ý gốc
+  ("fun = học/giải câu đố nhận thức, chán khi đã học xong") nay đã có xác
+  nhận TRỰC TIẾP từ 2 nguồn chính chủ khác của chính Koster (không chỉ qua
+  Goodreads), nên độ tin cậy của Ý này (không phải của đúng câu chữ) cao
+  hơn trước.
+
+→ Ý dùng cho bài giảng: theo Koster, một loop hết vui KHI người chơi đã
+"học" xong pattern của nó — bộ não không còn gì mới để nhận diện/thành
+thạo. Đây là lý do vì sao một core loop cần liên tục tạo pattern mới (qua
+biến thiên, thử thách tăng dần) để không trở nên nhàm.
+
+(b) Adams & Dormans — positive/negative feedback (xem mục 4): một loop cần
+cân bằng feedback để vừa có cảm giác TIẾN BỘ (positive) vừa không mất kiểm
+soát/quá dễ hoặc quá khó (negative điều tiết).
+
+(c) Jaime Griesemer/Halo (xem mục 5) — minh họa cụ thể cho tiêu chí BIẾN
+THIÊN NGỮ CẢNH: giữ core action (30 giây combat) nhưng đổi môi trường/kẻ
+địch/vũ khí liên tục.
+
+(d) [PHÂN TÍCH — tổng hợp thứ cấp, không trích nguyên văn cụ thể của một
+tác giả]: nhiều nguồn thứ cấp độc lập (GameAnalytics, gamedesignskills.com
+— chưa tự mở đọc trực tiếp được trong phiên này, chỉ qua tóm tắt WebSearch)
+đồng thuận về các yếu tố sau khiến một loop "hấp dẫn khi lặp lại", nhưng
+KHÔNG có một câu trích dẫn nguyên văn cụ thể để gán cho một tác giả — nên
+dùng dưới dạng Ý tổng hợp, không đặt trong ngoặc kép:
+- Lựa chọn có ý nghĩa mỗi vòng lặp (mỗi lần quay lại đầu loop, người chơi
+  phải ra một quyết định thật sự ảnh hưởng tới vòng tiếp theo — không chỉ
+  bấm lặp lại một thao tác).
+- Phản hồi rõ ràng, tức thời cho hành động (feedback — khớp với khung
+  skill atom của Daniel Cook, mục 3b).
+- Tăng thử thách/độ phức tạp theo đúng tốc độ người chơi thành thạo (khớp
+  Koster, mục 6a).
+- Phần thưởng không hoàn toàn đoán trước được (yếu tố bất ngờ có kiểm
+  soát) — ý này lặp lại nhất quán ở nhiều bài phân tích Candy Crush (xem
+  mục 7), nhưng bản thân các bài đó cũng là nguồn thứ cấp (blog phân
+  tích), không phải phát biểu chính thức từ King.
+
+================================================================
+7. VÍ DỤ CORE LOOP CỤ THỂ CÓ NGUỒN, ĐA THỂ LOẠI
+================================================================
+
+(a) Clash Royale (Supercell) — mobile/F2P
+ĐÃ MỞ ĐỌC TRỰC TIẾP bài phân tích chuyên sâu Deconstructor of Fun:
+Link: https://www.deconstructoroffun.com/blog//2016/02/clash-royale-next-billion-dollar-game.html
+
+Nguyên văn đã đọc trực tiếp: "Royale's game loop has two pieces: battle
+and meta-game of building and updating card deck." → đây LÀ ví dụ trực
+tiếp minh họa phân biệt core loop (battle) vs meta loop (xây/nâng cấp
+deck) đã nêu ở mục 2.
+
+Các bước cụ thể (đã đọc trực tiếp, tóm tắt từ bài): (1) đấu PvP thời gian
+thực — thắng được Trophy, thua bị trừ Trophy; (2) thắng nhận rương
+(chest), phải chờ 3-8 tiếng mới mở được; (3) mở rương ra thẻ bài (card) và
+Gold; (4) dùng Gold + thẻ để nâng cấp bài — nguyên văn đã đọc trực tiếp:
+"Upgrading Cards costs ever-increasing amounts of cards and Gold"; (5) xây
+lại bộ bài (deck) 8 lá rồi quay lại bước (1).
+
+Điểm thiết kế đáng chú ý (nguyên văn đã đọc trực tiếp): "Because Battle
+doesn't consume resources" — việc CHIẾN ĐẤU (core loop) hoàn toàn miễn phí
+tài nguyên, chỉ có phần NÂNG CẤP (meta loop) mới tốn tài nguyên/thời gian
+chờ — đây là điểm khác biệt được bài phân tích nhấn mạnh so với các game
+build-and-battle mobile khác cùng thời.
+
+(b) Monster Hunter (Capcom) — console
+ĐÃ TỔNG HỢP QUA WEBSEARCH (WebFetch bị chặn 403 với Forbes.com kể cả qua
+proxy r.jina.ai trong phiên này — [CHƯA VERIFY nguyên văn trực tiếp]):
+Link (chưa tự mở được): https://www.forbes.com/sites/kevinmurnane/2018/01/29/monster-hunter-world-a-guide-to-quests-and-the-gameplay-loop/
+
+Nội dung tổng hợp (qua WebSearch, ý lặp lại nhất quán ở nhiều nguồn về
+Monster Hunter: World, nhưng KHÔNG có nguyên văn xác nhận trực tiếp):
+core loop = đi săn quái (hunt) → nhận nguyên liệu (loot: da, sừng, đuôi...)
+→ chế tạo/nâng cấp vũ khí-giáp tại Smithy → đủ mạnh để săn quái khó hơn →
+lặp lại. Trang bị hầu hết phải CHẾ TẠO từ nguyên liệu săn được, không mua
+thẳng bằng tiền (Zenny) như đa số game khác.
+[CHƯA VERIFY — chỉ dùng làm ví dụ minh họa chung trong bài giảng, không
+trích nguyên văn nào từ nguồn cụ thể].
+
+(c) Stardew Valley (ConcernedApe) — PC/indie
+ĐÃ TỔNG HỢP QUA WEBSEARCH (chưa tự mở trực tiếp một nguồn cụ thể nào trong
+phiên này — các kết quả đều từ blog/Reddit/ResetEra phân tích, không phải
+phát biểu chính thức của nhà phát triển — [CHƯA VERIFY, chỉ dùng minh họa
+chung, không trích nguyên văn]):
+core loop hằng ngày = thức dậy → lên kế hoạch trong ngày → chăm sóc
+cây/vật nuôi → khám phá/đào hầm mỏ → xây dựng quan hệ với NPC → về nhà
+ngủ trước khi kiệt sức → ngày mới. Vòng lặp kinh tế lồng bên trên: trồng
+trọt → bán nông sản → có tiền → nâng cấp nông trại/công cụ → trồng hiệu
+quả hơn (đây là ví dụ về nested loop — loop ngắn "một ngày" lồng trong
+loop dài hơn "kinh tế nông trại", khớp ý "fractal" của Daniel Cook, mục
+3a).
+
+(d) Dead Cells (Motion Twin) — PC/indie, roguelike-metroidvania
+RE-VERIFY 2026-09-15 — ĐÃ MỞ ĐỌC TRỰC TIẾP qua proxy r.jina.ai (trang gốc
+PocketGamer.biz trả về lỗi 403 khi mở trực tiếp bằng WebFetch, nội dung
+qua proxy là bài tường thuật buổi nói chuyện post-mortem của Sébastien
+Bénard, Motion Twin, tại Pocket Gamer Connects Helsinki 2018, đăng
+14/12/2018):
+Link: https://www.pocketgamer.biz/video-a-dead-cells-post-mortem-from-motion-twins-sebastian-bernard/
+
+Nguyên văn đã đọc trực tiếp (Bénard nói về core loop của Dead Cells):
+"This game is basically jumping around and killing bad guys" — và đội ngũ
+đã dành "quite a lot of time, I think half of the development, making
+sure this thing was fun as it was really the core of the game."
+
+Nguyên văn đã đọc trực tiếp (lời khuyên thiết kế đi kèm): "When you make
+any kind of game, try to understand what your player is trying to do. Is
+it meant to be a challenge or is it just part of the flow of the game? If
+not, make sure they succeed." Và: "make sure that every basic action the
+player performs from beginning to end is made as fun as possible."
+
+→ Ý dùng cho bài giảng: Motion Twin tự xác nhận core loop của Dead Cells
+(di chuyển + chiến đấu, "jumping around and killing bad guys") LÀ trọng
+tâm phát triển — họ dành khoảng NỬA thời gian làm game chỉ để tinh chỉnh
+cho loop này đủ vui, trước khi tính tới các lớp meta (roguelike run, mở
+khóa vĩnh viễn). Đây là ví dụ nguồn sơ cấp (chính nhà phát triển tự nói)
+cho luận điểm ở mục 8.1 (giá trị core loop nằm ở việc LẶP LẠI action cơ
+bản, phải làm cho đúng TRƯỚC khi thêm lớp phức tạp khác).
+
+Phần mô tả cấu trúc run/permadeath/cells vẫn GIỮ NGUYÊN — đó là mô tả cơ
+chế chung của thể loại, không phải trích dẫn trực tiếp từ Bénard trong bài
+đã đọc: một lượt chơi (run) → chết (permadeath) → mất phần lớn tài nguyên
+thu được trong run đó, nhưng giữ lại một số nâng cấp vĩnh viễn (cells) →
+dùng để mở khóa trang bị mới cho run tiếp theo → bắt đầu run mới với map
+được tạo ngẫu nhiên (procedural generation) khác. [CHƯA VERIFY riêng phần
+mô tả cơ chế run/cells này bằng trích dẫn trực tiếp — chỉ phần "core loop"
+ở trên là đã có nguyên văn xác nhận].
+
+(e) Vampire Survivors (poncle) — PC/mobile, indie hiện tượng
+ĐÃ TỔNG HỢP QUA WEBSEARCH (chưa tự mở trực tiếp nguồn nào trong phiên này
+— các kết quả là bài phân tích của bên thứ ba như Kokutech, Goombastomp,
+NME — [CHƯA VERIFY nguyên văn, chỉ dùng minh họa chung]):
+core loop = né/di chuyển giữa đàn quái đông đúc → tự động tấn công (vũ khí
+tự bắn) → nhặt kinh nghiệm (gems) quái rơi ra → lên cấp → chọn 1 trong
+3-4 lựa chọn vũ khí/passive → mạnh hơn → sống sót lâu hơn giữa đàn quái
+ngày càng đông. Vòng lặp meta bên trên: gom vàng (gold) trong mỗi lượt →
+tiêu ở menu chính để mở khóa nhân vật mới/buff vĩnh viễn → lượt chơi sau
+mạnh hơn từ đầu.
+Một nguồn (theo tổng hợp WebSearch — insurance.docstore.port.ac.uk, một
+blog học thuật) nói nhà thiết kế Luca Galante từng làm việc trong ngành
+cờ bạc (gambling industry) và áp dụng hiểu biết đó vào thiết kế game —
+[CHƯA VERIFY, chưa tự mở đọc nguồn này trực tiếp, và đây là claim khá nhạy
+cảm cần verify kỹ trước khi đưa vào bài giảng nếu có ý định dùng].
+
+(f) Hades (Supergiant Games) — PC/console, indie
+RE-VERIFY 2026-09-15 — ĐÃ MỞ ĐỌC TRỰC TIẾP qua proxy r.jina.ai (trang gốc
+gamedeveloper.com, WebFetch trực tiếp trả về nội dung tóm tắt hợp lý
+nhưng để chắc câu nguyên văn đã đối chiếu thêm lần nữa qua proxy — nội dung
+khớp nhau giữa 2 lần đọc):
+Link: https://www.gamedeveloper.com/design/how-supergiant-weaves-narrative-rewards-into-i-hades-i-cycle-of-perpetual-death
+
+Nguyên văn đã đọc trực tiếp (Greg Kasavin, Creative Director, Supergiant
+Games — nay CÓ THỂ dùng trong ngoặc kép):
+"It was an explicit goal of our early development, to take the pain out
+of dying and having to restart. If the whole game is structured around
+dying and restarting, then we had to make sure the moment of death isn't
+about rage-quitting. You have to be compelled to explore further and
+feel the time you spent wasn't a waste of your time."
+
+Lưu ý: bài KHÔNG mô tả nguyên văn từng bước chi tiết "rời nhà → chiến đấu
+→ Boon → trùm cuối → chết/thắng → về nhà" — đoạn mô tả các bước dưới đây
+vẫn là mô tả cơ chế game chung (đã biết qua chơi/xem game, không phải
+trích dẫn từ bài), CHỈ RIÊNG câu quote trên là nguyên văn đã xác nhận:
+core loop = rời khỏi nhà (House of Hades) → chiến đấu qua các phòng (room)
+→ chọn nâng cấp (Boon) từ các vị thần sau mỗi phòng → gặp trùm cuối mỗi
+khu vực → chết hoặc thắng → quay về nhà, gặp NPC, nhận tiến triển CỐT
+TRUYỆN (dù thất bại) → bắt đầu lượt mới. Điểm đặc biệt: "chết" trong Hades
+không phải mất mát thuần túy mà LUÔN đi kèm phần thưởng tường thuật
+(narrative reward) — khớp với câu quote đã verify ở trên (mục tiêu thiết
+kế là "lấy đi cảm giác đau đớn của việc chết").
+
+(g) Candy Crush Saga (King) — mobile/F2P
+ĐÃ TỔNG HỢP QUA WEBSEARCH (không có nguồn phát biểu chính thức từ King
+được mở trực tiếp trong phiên này — chỉ có các bài blog phân tích thứ cấp
+— [CHƯA VERIFY, chỉ dùng minh họa chung]):
+core loop mỗi màn = xem mục tiêu màn (ví dụ: đạt điểm số, thu thập X viên
+kẹo trong Y lượt) → ghép ≥3 viên kẹo cùng loại → tạo combo/kẹo đặc biệt
+→ đạt mục tiêu hoặc hết lượt → thắng (qua màn, có thể lên tới 3 sao) hoặc
+thua (chơi lại/mua thêm lượt). Vòng lặp meta: tiến trên bản đồ màn chơi,
+xin/tặng mạng chơi (lives) qua bạn bè hoặc chờ hồi, mua vật phẩm hỗ trợ
+(booster). Nhiều nguồn (không verify trực tiếp) nhấn mạnh yếu tố "bất ngờ
+có kiểm soát" của phần thưởng match làm loop hấp dẫn (xem mục 6d).
+
+================================================================
+8. HIỂU LẦM PHỔ BIẾN Ở NGƯỜI MỚI VỀ CORE LOOP
+   [TOÀN BỘ MỤC NÀY LÀ PHÂN TÍCH — không từ một nguồn học thuật/phỏng vấn
+   cụ thể nói riêng về "hiểu lầm của người mới", trừ phần đã có liên hệ
+   trực tiếp tới nguồn ở mục 5]
+================================================================
+
+1) "Core loop chỉ cần vui MỘT LẦN là đủ, không cần nghĩ tới việc lặp lại
+nhiều lần có còn vui không."
+[PHÂN TÍCH]: ngược với chính bản chất "loop" theo Daniel Cook (mục 3a) —
+"loops tend to deliver value through the act of being exercised" — giá
+trị nằm ở việc LẶP LẠI, không phải một lần trải nghiệm.
+
+2) "Cứ có core loop vui là đủ, không cần core loop THAY ĐỔI/biến thiên gì
+thêm."
+Có liên hệ trực tiếp tới nguồn đã verify: đây chính là cách hiểu SAI mà
+Griesemer đã tự nói rõ trong bài phỏng vấn Engadget (mục 5) — "Everyone
+uses it to mean exactly the opposite of what I meant when I said it" —
+người mới (và cả một phần ngành) thường chỉ nhớ nửa đầu câu "30 seconds
+of fun" mà quên phần biến thiên ngữ cảnh.
+
+3) "Core loop và meta loop là một, hoặc không cần phân biệt."
+[PHÂN TÍCH, có cơ sở gián tiếp từ mục 2]: nhầm lẫn phổ biến vì trong nhiều
+game, ranh giới core loop/meta loop không rõ ràng bằng ví dụ Clash Royale
+(mục 7a) — nhưng theo khung Sicart (mục 2a) hai khái niệm khác nhau về
+BẢN CHẤT (tương tác trực tiếp vs. mọi thứ bên ngoài ảnh hưởng tới trải
+nghiệm), không chỉ khác về độ dài thời gian.
+
+4) "Thiết kế core loop = vẽ sơ đồ vòng tròn đẹp là xong, không cần test
+xem người chơi có thực sự MUỐN lặp lại không."
+[PHÂN TÍCH]: liên hệ gián tiếp tới Koster (mục 6a, "boredom is the
+opposite of learning") — một core loop trên giấy có vẻ hợp lý vẫn có thể
+nhàm chán thực tế nếu không tạo đủ pattern mới cho người chơi học.
+
+================================================================
+9. TỔNG HỢP MỌI MỤC [CHƯA VERIFY]
+================================================================
+
+- Nguồn gốc lịch sử thuật ngữ "core loop"/"core gameplay loop" (arcade
+  1970s, Richard Rouse III...): KHÔNG có nguồn sơ cấp đã tự mở đọc — toàn
+  bộ chỉ qua tóm tắt WebSearch của bài gamedesignskills.com/GameAnalytics
+  (bản thân hai trang này cũng KHÔNG mở được trực tiếp, kể cả qua proxy)
+  (mục 1).
+- 5 loại metagame của Sicart (informational, fictional, economical,
+  performative, physical): đã đọc trực tiếp TÊN các loại nhưng chưa có
+  nguyên văn định nghĩa riêng từng loại (mục 2a).
+- Nguồn gốc thuật ngữ "compulsion loop" (ai đặt ra, năm nào): Wikipedia
+  không xác nhận — [CHƯA VERIFY] (mục 2c).
+- Năm chính xác của talk GDC "The Illusion of Intelligence" (Griesemer/
+  Butcher) — thường ghi khoảng 2002 qua nguồn thứ cấp, chưa tự mở được
+  slide/video gốc (mục 5).
+- Mối quan hệ trực tiếp giữa "skill atom" (Cook 2007) và "loop" (Cook
+  2012) — chỉ là suy luận từ việc bài sau tự trích bài trước, Cook không
+  phát biểu rõ một câu duy nhất về mối quan hệ này (mục 3b).
+- Định nghĩa đầy đủ "Engine" (Static/Dynamic/Converter) và công cụ
+  Machinations trong Adams & Dormans: chỉ đọc được sample pages giới hạn,
+  chưa đọc toàn sách (mục 4).
+- Câu "negative feedback basketball" (Adams & Dormans): lấy qua tóm tắt
+  WebSearch trước khi mở sample pages, chưa đối chiếu lại nguyên văn chính
+  xác trong đoạn đã đọc được (mục 4).
+- Quote Raph Koster "Fun is just another word for learning.": qua trang
+  Goodreads vẫn CHƯA đối chiếu được với văn bản sách gốc hay trang chính
+  chủ trong phiên này (mục 6a) — RE-VERIFY 2026-09-15: đã mở trực tiếp 2
+  trang chính chủ raphkoster.com (bài blog "An atomic theory of fun game
+  design" và transcript "Ten Lessons Learned") nhưng KHÔNG tìm thấy đúng
+  cụm từ này ở đó; chỉ tìm thấy câu diễn đạt tương đương ý, do chính Koster
+  viết/nói ("fun is the feeling you get when you are exercising your brain
+  by solving a cognitive puzzle"; "I concluded it's about learning...";
+  "We use it to solve boredom"). → Ý gốc nay có xác nhận trực tiếp từ
+  chính Koster, nhưng ĐÚNG CỤM TỪ "Fun is just another word for learning."
+  vẫn [CHƯA VERIFY] ở mức nguyên văn tuyệt đối (nhiều khả năng nằm trong
+  chính sách in giấy, không có bản online chính chủ để đối chiếu).
+- Ví dụ Monster Hunter, Stardew Valley, Vampire Survivors, Candy Crush:
+  vẫn CHỈ qua tổng hợp WebSearch (blog/bài phân tích bên thứ ba), KHÔNG có
+  nguồn nào trong nhóm này được tự mở đọc trực tiếp — [CHƯA VERIFY] (mục
+  7b, 7c, 7e, 7g). RE-VERIFY 2026-09-15: Clash Royale (Deconstructor of
+  Fun, mục 7a), Dead Cells (PocketGamer.biz — Sébastien Bénard, mục 7d) và
+  Hades (gamedeveloper.com — Greg Kasavin, mục 7f) nay ĐÃ mở đọc trực tiếp
+  với nguyên văn xác nhận, không còn nằm trong danh sách chưa verify.
+- Claim "Luca Galante (poncle) từng làm trong ngành gambling" cho Vampire
+  Survivors: chưa mở nguồn trực tiếp, claim khá nhạy cảm, cần verify kỹ
+  trước khi dùng nếu có ý định đưa vào bài (mục 7e).
+- Câu trích Greg Kasavin (Hades) về "take the pain out of dying": RE-VERIFY
+  2026-09-15 — ĐÃ MỞ ĐỌC TRỰC TIẾP qua proxy r.jina.ai, nguyên văn đầy đủ
+  đã xác nhận và CÓ THỂ dùng trong ngoặc kép (xem mục 7f). Không còn nằm
+  trong danh sách chưa verify.
+- Câu Sicart "A game loop is a composite..." (mục 1): RE-VERIFY 2026-09-15
+  phát hiện bản ghi trước THIẾU vế cuối "either in the game mechanics or
+  in the computing operations." — đã sửa lại theo nguồn trong mục 1.
+- Tiêu chí "lựa chọn có ý nghĩa / phần thưởng bất ngờ có kiểm soát" (mục
+  6d): tổng hợp từ nhiều nguồn thứ cấp đồng thuận về Ý, không có nguyên
+  văn cụ thể gán được cho một tác giả/nguồn sơ cấp nào.

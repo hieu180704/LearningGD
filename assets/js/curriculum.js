@@ -68,7 +68,7 @@ window.CURRICULUM = [
                     "Gọi tên cảm xúc mục tiêu bằng 8 kiểu Aesthetics",
                     "Truy ngược từ trải nghiệm ra luật cần sửa"
                 ],
-                minutes: 18,
+                minutes: 14,
                 level: "Cơ bản",
                 status: "ready"
             },

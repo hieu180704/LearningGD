@@ -62,7 +62,7 @@
             <h1>MDA Framework: nhìn game qua ba lớp</h1>
             <p class="dek">Vì sao hai game có luật na ná nhau lại cho cảm giác khác hẳn? MDA tách game thành ba lớp — luật, hành vi khi chơi và cảm xúc — để bạn phân tích game của người khác và thiết kế game của mình có chủ đích.</p>
             <div class="lesson-meta">
-                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 18 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 14 phút đọc</span>
                 <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Cơ bản</span>
                 <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: Không</span>
             </div>
@@ -82,23 +82,20 @@
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Ví dụ trong game</p>
-                <p>Bốn người bạn ngồi xuống chơi Monopoly. Nửa giờ đầu rất vui: tung xúc xắc, tranh nhau mua đất, cười đùa mỗi lần ai đó phải trả tiền thuê. Nhưng sau khoảng một tiếng, một người đã sở hữu cả dãy phố đắt tiền nhất bàn cờ. Ba người còn lại, mỗi lượt đi qua đó chỉ còn biết trả tiền. Ai cũng đoán được ai sẽ thắng, nhưng ván chơi vẫn phải tiếp tục — mọi người bắt đầu cầm điện thoại lên bấm bấm trong lúc chờ tới lượt.</p>
+                <p>Bốn người bạn chơi Monopoly. Nửa giờ đầu rất vui: tung xúc xắc, tranh mua đất, cười mỗi lần ai đó trả tiền thuê. Sau khoảng một tiếng, một người đã sở hữu cả dãy phố đắt nhất bàn cờ; ba người còn lại mỗi lượt đi qua chỉ biết trả tiền. Ai cũng đoán được ai thắng, nhưng ván vẫn phải chơi tiếp — mọi người bắt đầu bấm điện thoại chờ tới lượt.</p>
             </div>
         </div>
-        <p>Không ai viết ra luật "sau một tiếng thì game sẽ chán". Vậy cái chán đó đến từ đâu? Và nếu bạn là designer của Monopoly, bạn sẽ sửa ở chỗ nào — luật mua đất, cách thu tiền thuê, hay thứ gì khác? MDA là công cụ để trả lời những câu hỏi kiểu này, và chính paper gốc cũng dùng Monopoly làm ví dụ minh họa.</p>
-        <p>MDA do Robin Hunicke, Marc LeBlanc và Robert Zubek trình bày trong paper <em>"MDA: A Formal Approach to Game Design and Game Research"</em> tại AAAI Workshop năm 2004. Trước đó, framework này đã được xây dựng và giảng dạy trong Game Design and Tuning Workshop tại GDC (San Jose) từ 2001 đến 2004.</p>
+        <p>Không ai viết luật "sau một tiếng thì game sẽ chán". Cái chán đó đến từ đâu, và nếu là designer, bạn sẽ sửa ở chỗ nào? MDA là công cụ trả lời câu hỏi kiểu này — chính paper gốc cũng dùng Monopoly làm ví dụ. MDA do Robin Hunicke, Marc LeBlanc và Robert Zubek trình bày trong paper <em>"MDA: A Formal Approach to Game Design and Game Research"</em> tại AAAI Workshop 2004, sau khi giảng dạy tại GDC (San Jose) từ 2001–2004.</p>
 
         <h2 id="ba-lop">Ba lớp của một game</h2>
-        <p>MDA tách một game ra làm ba lớp: <span class="chip mda-m">Mechanics</span>, <span class="chip mda-d">Dynamics</span> và <span class="chip mda-a">Aesthetics</span>. Mỗi lớp trả lời một câu hỏi khác nhau về cùng một game.</p>
+        <p>MDA tách một game làm ba lớp: <span class="chip mda-m">Mechanics</span>, <span class="chip mda-d">Dynamics</span>, <span class="chip mda-a">Aesthetics</span> — mỗi lớp trả lời một câu hỏi khác nhau về cùng một game.</p>
 
         <div class="callout" data-kind="note">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title"><span class="chip mda-m">Mechanics</span></p>
                 <p><em>"Mechanics describes the particular components of the game, at the level of data representation and algorithms."</em></p>
-                <p><strong>Dịch:</strong> Mechanics mô tả các thành phần cụ thể của game, ở mức biểu diễn dữ liệu và thuật toán.</p>
-                <p><strong>Hiểu đơn giản:</strong> luật, con số, những hành động người chơi được phép làm — thứ designer viết ra và lập trình trực tiếp.</p>
-                <p><strong>Monopoly:</strong> tung 2 xúc xắc để di chuyển; mua đất; thu tiền thuê khi người khác dừng ở đất của mình; nhận tiền khi đi qua ô Go.</p>
+                <p><strong>Dịch:</strong> các thành phần cụ thể của game ở mức dữ liệu và thuật toán — luật, con số, hành động người chơi được phép làm, thứ designer viết và lập trình trực tiếp (xem ví dụ Monopoly ở bảng dưới).</p>
             </div>
         </div>
 
@@ -107,9 +104,7 @@
             <div class="callout-body">
                 <p class="callout-title"><span class="chip mda-d">Dynamics</span></p>
                 <p><em>"Dynamics describes the run-time behavior of the mechanics acting on player inputs and each others' outputs over time."</em></p>
-                <p><strong>Dịch:</strong> Dynamics mô tả hành vi khi game đang chạy: mechanics phản ứng với thao tác của người chơi và với kết quả của nhau theo thời gian.</p>
-                <p><strong>Hiểu đơn giản:</strong> điều <strong>nảy sinh</strong> khi luật gặp người chơi thật. Không ai viết thẳng ra dynamics — nó chỉ xuất hiện khi game được chơi.</p>
-                <p><strong>Monopoly:</strong> người dẫn đầu càng giàu thì càng thu được nhiều tiền thuê, người nghèo càng nghèo thêm; người chơi bắt đầu mặc cả, đổi đất cho nhau.</p>
+                <p><strong>Dịch:</strong> hành vi khi game đang chạy, mechanics phản ứng với thao tác người chơi và kết quả của nhau theo thời gian — điều <strong>nảy sinh</strong> khi luật gặp người chơi thật, không ai viết thẳng ra được.</p>
             </div>
         </div>
 
@@ -118,9 +113,7 @@
             <div class="callout-body">
                 <p class="callout-title"><span class="chip mda-a">Aesthetics</span></p>
                 <p><em>"Aesthetics describes the desirable emotional responses evoked in the player, when she interacts with the game system."</em></p>
-                <p><strong>Dịch:</strong> Aesthetics mô tả những phản ứng cảm xúc mong muốn được khơi gợi ở người chơi khi họ tương tác với hệ thống game.</p>
-                <p><strong>Hiểu đơn giản:</strong> người chơi <strong>cảm thấy</strong> gì. Không phải đồ họa.</p>
-                <p><strong>Monopoly:</strong> đầu ván là hồi hộp, cạnh tranh; cuối ván — với nhóm đã bị bỏ xa — là mất hứng.</p>
+                <p><strong>Dịch:</strong> những phản ứng cảm xúc mong muốn được khơi gợi ở người chơi khi tương tác với hệ thống game — người chơi <strong>cảm thấy</strong> gì, không phải đồ họa.</p>
             </div>
         </div>
 
@@ -150,7 +143,7 @@
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Điều đáng nhớ</p>
-                <p>Paper nhấn mạnh <em>"games are more like artifacts than media"</em> — game giống một vật được chế tác hơn là một phương tiện truyền tải: nội dung thật của game là hành vi xảy ra khi chơi, không phải thứ được chiếu sẵn ra như phim. Vì vậy designer không thể "đặt" cảm xúc vào game được; họ chỉ dựng luật, rồi cảm xúc đến qua hành vi khi chơi.</p>
+                <p>Paper nhấn mạnh <em>"games are more like artifacts than media"</em> — game giống vật chế tác hơn phương tiện truyền tải: nội dung thật là hành vi khi chơi, không phải thứ chiếu sẵn như phim. Designer không "đặt" cảm xúc vào game được, chỉ dựng luật rồi cảm xúc đến qua hành vi khi chơi.</p>
             </div>
         </div>
 
@@ -159,8 +152,8 @@
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Nguyên văn paper</p>
-                <p><em>"From the designer's perspective, the mechanics give rise to dynamic system behavior, which in turn leads to particular aesthetic experiences. From the player's perspective, aesthetics set the tone, which is born out in observable dynamics and eventually, operable mechanics."</em></p>
-                <p><strong>Dịch:</strong> Từ góc nhìn của designer, mechanics làm nảy sinh hành vi vận hành của hệ thống (dynamics), rồi hành vi đó dẫn tới những trải nghiệm cảm xúc (aesthetics) cụ thể. Từ góc nhìn của người chơi, aesthetics định ra tông cảm xúc, tông đó thể hiện qua các dynamics quan sát được, và cuối cùng mới tới các mechanics có thể thao tác được.</p>
+                <p><em>"From the designer's perspective, the mechanics give rise to dynamic system behavior, which in turn leads to particular aesthetic experiences."</em></p>
+                <p><strong>Dịch:</strong> Từ góc nhìn designer, mechanics làm nảy sinh dynamics rồi dẫn tới aesthetics — người chơi thì cảm nhận theo chiều ngược lại (xem sơ đồ dưới).</p>
             </div>
         </div>
 
@@ -184,53 +177,44 @@
             <figcaption>Designer đi từ luật tới cảm xúc; người chơi cảm nhận theo chiều ngược lại.</figcaption>
         </figure>
 
-        <p>Khi mở một game ra chơi, người chơi cảm nhận không khí trước, rồi thấy các hành vi diễn ra, cuối cùng mới hiểu được luật đứng sau. Designer thì ngược lại — họ chỉ trực tiếp chỉnh được lớp luật. Paper nêu hai hệ quả từ chiều ngược nhau này:</p>
-        <ol>
-            <li>Một thay đổi nhỏ ở một lớp có thể lan sang các lớp khác.</li>
-            <li>Nghĩ từ phía người chơi khuyến khích lối thiết kế <em>"experience-driven (as opposed to feature-driven) design"</em> — thiết kế hướng theo trải nghiệm, thay vì hướng theo tính năng.</li>
-        </ol>
-        <p>Ứng dụng thực tế: trước khi nghĩ ra tính năng mới, hãy thử viết một câu "Người chơi nên cảm thấy …" rồi suy ngược ra dynamics cần có và mechanics tạo ra dynamics đó. Một chi tiết thú vị: chính paper phân tích ví dụ theo thứ tự Aesthetics → Dynamics → Mechanics, dù tên framework viết theo thứ tự M-D-A.</p>
+        <p>Người chơi cảm nhận không khí trước, hiểu luật sau; designer thì ngược lại, chỉ trực tiếp chỉnh được lớp luật. Paper nêu hai hệ quả: một thay đổi nhỏ ở một lớp có thể lan sang lớp khác, và nghĩ từ phía người chơi khuyến khích lối <em>"experience-driven (as opposed to feature-driven) design"</em> — hướng theo trải nghiệm, không phải tính năng. Ứng dụng: trước khi nghĩ tính năng mới, viết một câu "Người chơi nên cảm thấy …" rồi suy ngược ra dynamics và mechanics tạo ra nó.</p>
 
         <div class="callout" data-kind="note">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Ghi chú</p>
-                <p>Paper gọi mỗi lớp trong ba lớp M-D-A là một "lens" (góc nhìn). Đừng nhầm với "thẻ Lens" dùng trong bộ tài liệu này — thẻ Lens là bộ câu hỏi tự soi, phỏng theo lối trình bày trong sách của Jesse Schell.</p>
+                <p>Paper gọi mỗi lớp M-D-A là một "lens" — đừng nhầm với "thẻ Lens" trong bộ tài liệu này, phỏng theo lối trình bày của Jesse Schell.</p>
             </div>
         </div>
 
         <h2 id="tam-kieu-aesthetics">Đừng nói "vui" nữa: 8 kiểu Aesthetics</h2>
-        <p>Chữ "vui" không giúp designer ra quyết định gì cụ thể. Paper viết: <em>"we want to move away from words like 'fun' and 'gameplay' towards a more directed vocabulary."</em> — nghĩa là nhóm tác giả muốn rời xa những từ như "fun" và "gameplay" để hướng tới một bộ từ vựng cụ thể hơn. Từ đó, paper đưa ra bộ từ vựng 8 kiểu Aesthetics, và nói rõ bộ này "includes but is not limited to" — tức bao gồm nhưng không giới hạn ở 8 kiểu này.</p>
+        <p>Chữ "vui" không giúp designer ra quyết định gì cụ thể. Paper viết: <em>"we want to move away from words like 'fun' and 'gameplay' towards a more directed vocabulary."</em> — muốn rời xa những từ như "fun", "gameplay" để hướng tới một bộ từ vựng cụ thể hơn. Từ đó paper đưa ra 8 kiểu Aesthetics, nói rõ danh sách "includes but is not limited to" — bao gồm nhưng không giới hạn ở 8 kiểu này.</p>
 
         <div class="table-wrap">
             <table class="compare">
-                <thead><tr><th>Kiểu</th><th>Paper mô tả</th><th>Hiểu đơn giản</th><th>Bạn hay gặp ở đâu</th></tr></thead>
+                <thead><tr><th>Kiểu</th><th>Paper mô tả</th><th>Hiểu đơn giản</th></tr></thead>
                 <tbody>
-                    <tr><td>Sensation</td><td><em>Game as sense-pleasure</em></td><td>Sướng mắt, tai, tay</td><td>Đòn đánh có rung, âm thanh "đã tai"</td></tr>
-                    <tr><td>Fantasy</td><td><em>Game as make-believe</em></td><td>Được sống trong vai khác, thế giới khác</td><td>Nhập vai hiệp sĩ, phi hành gia</td></tr>
-                    <tr><td>Narrative</td><td><em>Game as drama</em></td><td>Bị cuốn theo câu chuyện có cao trào</td><td>Game cốt truyện, plot twist</td></tr>
-                    <tr><td>Challenge</td><td><em>Game as obstacle course</em></td><td>Vượt qua thử thách</td><td>Boss khó, puzzle hóc</td></tr>
-                    <tr><td>Fellowship</td><td><em>Game as social framework</em></td><td>Gắn kết, phối hợp với người khác</td><td>Co-op, party game</td></tr>
-                    <tr><td>Discovery</td><td><em>Game as uncharted territory</em></td><td>Khám phá điều chưa biết</td><td>Bản đồ mở, bí mật ẩn</td></tr>
-                    <tr><td>Expression</td><td><em>Game as self-discovery</em></td><td>Thể hiện bản thân, để lại dấu ấn</td><td>Tạo nhân vật, xây nhà</td></tr>
-                    <tr><td>Submission</td><td><em>Game as pastime</em></td><td>Thư giãn, giết thời gian</td><td>Game nhẹ nhàng lúc rảnh</td></tr>
+                    <tr><td>Sensation</td><td><em>Game as sense-pleasure</em></td><td>Sướng mắt, tai, tay</td></tr>
+                    <tr><td>Fantasy</td><td><em>Game as make-believe</em></td><td>Được sống trong vai khác, thế giới khác</td></tr>
+                    <tr><td>Narrative</td><td><em>Game as drama</em></td><td>Bị cuốn theo câu chuyện có cao trào</td></tr>
+                    <tr><td>Challenge</td><td><em>Game as obstacle course</em></td><td>Vượt qua thử thách</td></tr>
+                    <tr><td>Fellowship</td><td><em>Game as social framework</em></td><td>Gắn kết, phối hợp với người khác</td></tr>
+                    <tr><td>Discovery</td><td><em>Game as uncharted territory</em></td><td>Khám phá điều chưa biết</td></tr>
+                    <tr><td>Expression</td><td><em>Game as self-discovery</em></td><td>Thể hiện bản thân, để lại dấu ấn</td></tr>
+                    <tr><td>Submission</td><td><em>Game as pastime</em></td><td>Thư giãn, giết thời gian</td></tr>
                 </tbody>
             </table>
         </div>
-        <p><em>Cột "Bạn hay gặp ở đâu" là minh họa của bộ tài liệu, không phải nguyên văn paper.</em></p>
-
-        <p>Trong paper, mỗi ví dụ game được gắn với nhiều kiểu Aesthetics cùng lúc:</p>
-        <p><strong>Charades:</strong> <span class="chip">Fellowship</span> <span class="chip">Expression</span> <span class="chip">Challenge</span></p>
-        <p><strong>Quake:</strong> <span class="chip">Challenge</span> <span class="chip">Sensation</span> <span class="chip">Competition</span> <span class="chip">Fantasy</span></p>
-        <p><strong>The Sims:</strong> <span class="chip">Discovery</span> <span class="chip">Fantasy</span> <span class="chip">Expression</span> <span class="chip">Narrative</span></p>
-        <p><strong>Final Fantasy:</strong> <span class="chip">Fantasy</span> <span class="chip">Narrative</span> <span class="chip">Expression</span> <span class="chip">Discovery</span> <span class="chip">Challenge</span> <span class="chip">Submission</span></p>
-        <p>Mỗi game theo đuổi nhiều aesthetic với mức độ khác nhau — paper viết Charades đặt Fellowship lên trên Challenge, còn Quake lấy Challenge làm yếu tố chính.</p>
+        <p>Mỗi game trong paper gắn nhiều kiểu Aesthetics cùng lúc:</p>
+        <p><strong>Charades:</strong> <span class="chip">Fellowship</span> <span class="chip">Expression</span> <span class="chip">Challenge</span> · <strong>Quake:</strong> <span class="chip">Challenge</span> <span class="chip">Sensation</span> <span class="chip">Competition</span> <span class="chip">Fantasy</span></p>
+        <p><strong>The Sims:</strong> <span class="chip">Discovery</span> <span class="chip">Fantasy</span> <span class="chip">Expression</span> <span class="chip">Narrative</span> · <strong>Final Fantasy:</strong> <span class="chip">Fantasy</span> <span class="chip">Narrative</span> <span class="chip">Expression</span> <span class="chip">Discovery</span> <span class="chip">Challenge</span> <span class="chip">Submission</span></p>
+        <p>Charades đặt Fellowship trên Challenge; Quake lấy Challenge làm yếu tố chính — mức độ khác nhau ở mỗi game.</p>
 
         <div class="callout" data-kind="note">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Để ý chữ Competition</p>
-                <p>Ví dụ Quake ở trên dùng nhãn "Competition" — nhãn này không nằm trong danh sách 8 kiểu. Kết hợp với câu "includes but is not limited to", hãy coi 8 kiểu là bộ từ vựng gợi ý để mô tả cảm xúc, không phải một danh sách đóng buộc phải chọn đúng một ô.</p>
+                <p>Ví dụ Quake dùng nhãn "Competition" — không nằm trong danh sách 8 kiểu, cho thấy chính tác giả cũng dùng bộ từ vựng này linh hoạt.</p>
             </div>
         </div>
 
@@ -238,13 +222,12 @@
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Điều đáng nhớ</p>
-                <p>Paper khẳng định không có công thức nào cho "fun": <em>"there is no Grand Unified Theory of games or formula that details the combination and proportion of elements that will result in 'fun'"</em> — không có một lý thuyết thống nhất nào về game, hay công thức nào mô tả cách kết hợp và tỷ lệ các yếu tố để tạo ra "vui". Bộ từ vựng 8 kiểu chỉ giúp mô tả vì sao các game khác nhau hấp dẫn những người chơi khác nhau, chứ không phải công thức để tạo ra game hay.</p>
+                <p>Paper khẳng định: <em>"there is no Grand Unified Theory of games or formula that details the combination and proportion of elements that will result in 'fun'"</em> — không có công thức nào cho cách kết hợp các yếu tố để ra "vui".</p>
             </div>
         </div>
 
         <h2 id="sua-monopoly">MDA khi làm việc thật: sửa Monopoly</h2>
-        <p>Quay lại ví dụ mở bài. Đi từng lớp theo đúng cách paper trình bày:</p>
-        <p><strong>Bước 1 — Aesthetic mong muốn:</strong> giữ được căng thẳng kịch tính, để mọi người còn quan tâm tới ván chơi cho tới tận cuối.</p>
+        <p>Quay lại ví dụ mở bài. <strong>Bước 1 — Aesthetic mong muốn:</strong> giữ căng thẳng kịch tính, để mọi người còn quan tâm ván chơi tới tận cuối.</p>
 
         <p><strong>Bước 2 — Dynamic đang phá hỏng nó:</strong> một <span class="term" data-en="feedback loop" tabindex="0">vòng phản hồi</span>. Paper viết:</p>
         <div class="callout" data-kind="note">
@@ -252,9 +235,8 @@
             <div class="callout-body">
                 <p class="callout-title">Nguyên văn paper</p>
                 <p><em>"In Monopoly, as the leader or leaders become increasingly wealthy, they can penalize players with increasing effectiveness. Poorer players become increasingly poor."</em></p>
-                <p><strong>Dịch:</strong> Trong Monopoly, khi (những) người dẫn đầu ngày càng giàu lên, họ có thể phạt những người chơi khác với hiệu quả ngày càng tăng. Người chơi nghèo hơn thì ngày càng nghèo thêm.</p>
-                <p><em>"As the gap widens, only a few (and sometimes only one) of the players is really invested. Dramatic tension and agency are lost."</em></p>
-                <p><strong>Dịch:</strong> Khi khoảng cách nới rộng, chỉ còn một vài người chơi (đôi khi chỉ một người) thực sự còn để tâm vào ván chơi. Sự căng thẳng kịch tính và cảm giác được làm chủ ván chơi bị mất đi.</p>
+                <p><strong>Dịch:</strong> Người dẫn đầu càng giàu càng phạt người khác hiệu quả hơn; người nghèo càng nghèo thêm.</p>
+                <p>Paper nói tiếp: khi khoảng cách giãn ra, chỉ vài người còn thật sự quan tâm tới ván chơi — mất đúng căng thẳng kịch tính đã đặt ở Bước 1.</p>
             </div>
         </div>
 
@@ -272,24 +254,21 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
                 <span>Quay lại ô đầu tiên — vòng lặp tự nuôi chính nó</span>
             </div>
-            <figcaption>Paper so sánh vòng phản hồi này với một hệ phản hồi quen thuộc là máy điều nhiệt (thermostat). Cách nói "giàu càng giàu" là diễn giải của bộ tài liệu.</figcaption>
+            <figcaption>Paper so sánh với hệ phản hồi quen thuộc: máy điều nhiệt (thermostat). "Giàu càng giàu" là diễn giải của bộ tài liệu.</figcaption>
         </figure>
 
-        <p>Trước khi playtest, designer có thể dựng mô hình để dự đoán dynamic sẽ ra sao. Paper dùng mô hình xác suất của 2 xúc xắc 6 mặt để ước lượng thời gian trung bình một người đi hết một vòng bàn cờ. (Tính nhanh: với 2 xúc xắc, tổng 7 là kết quả hay gặp nhất — 6 trên 36 khả năng.)</p>
-
-        <p><strong>Bước 3 — Đổi Mechanics.</strong> Paper nêu hai hướng: thưởng cho người đi sau để họ không bị bỏ quá xa, hoặc làm người giàu khó tiến lên hơn. Cụ thể:</p>
+        <p><strong>Bước 3 — Đổi Mechanics.</strong> Paper nêu hai hướng, mỗi hướng kèm ví dụ cụ thể:</p>
         <ul>
-            <li>Trợ cấp cho người nghèo và đánh thuế người giàu — có thể tính khi đi qua ô Go, khi ra tù, hoặc khi một người độc quyền vượt qua một ngưỡng giá trị nào đó.</li>
-            <li>Tạo áp lực thời gian: đánh thuế đều đặn làm tài nguyên cạn dần, nhân đôi mọi khoản thu từ độc quyền, hoặc chia ngẫu nhiên lại các bất động sản dưới một ngưỡng giá trị.</li>
+            <li>Trợ cấp người nghèo, đánh thuế người giàu — tính khi qua ô Go, ra tù, hoặc khi độc quyền vượt một ngưỡng giá trị.</li>
+            <li>Tạo áp lực thời gian: thuế đều đặn, nhân đôi khoản thu từ độc quyền, hoặc chia ngẫu nhiên lại bất động sản dưới ngưỡng giá trị.</li>
         </ul>
-        <p>Paper cũng thừa nhận đánh đổi: sửa như vậy có thể làm game bớt giống thực tế của việc độc quyền — nhưng như paper viết, <em>"reality isn't always 'fun'"</em>, nghĩa là thực tế thì không phải lúc nào cũng "vui".</p>
-        <p><strong>Bước 4 — Tuning:</strong> chỉnh con số cụ thể rồi playtest lại, xem dynamic và cảm xúc có đổi đúng như dự đoán không.</p>
+        <p>Đánh đổi: cách này làm game bớt giống thực tế độc quyền — nhưng <em>"reality isn't always 'fun'"</em>. <strong>Bước 4 — Tuning:</strong> chỉnh con số rồi playtest lại, xem dynamic và cảm xúc có đổi đúng dự đoán không.</p>
 
         <div class="callout" data-kind="insight">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Điều đáng nhớ</p>
-                <p>Đây là toàn bộ cách dùng MDA trong một ví dụ thật: bắt đầu từ cảm xúc mong muốn (A), tìm hành vi gây lệch (D), sửa luật (M), rồi thử lại.</p>
+                <p>Cách dùng MDA trong ví dụ thật: bắt đầu từ cảm xúc mong muốn (A), tìm hành vi gây lệch (D), sửa luật (M), rồi thử lại.</p>
             </div>
         </div>
 
@@ -298,7 +277,7 @@
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Ghi chú</p>
-                <p>Phần này là phân tích minh họa của bộ tài liệu, không trích từ paper. Bạn hoàn toàn có thể phân tích khác.</p>
+                <p>Phần này là phân tích minh họa của bộ tài liệu, không trích từ paper.</p>
             </div>
         </div>
         <div class="table-wrap">
@@ -307,53 +286,34 @@
                 <tbody>
                     <tr>
                         <td>Hades<br><small>roguelike, PC/console</small></td>
-                        <td>Chết là quay về nhà, mất lượt chơi nhưng giữ tài nguyên để nâng cấp vĩnh viễn; mỗi lần về có thoại mới</td>
-                        <td>Chơi các lượt ngắn liên tục, mỗi lần thua lại mạnh hơn và biết thêm chuyện</td>
+                        <td>Chết là về nhà, mất lượt nhưng giữ tài nguyên nâng cấp vĩnh viễn</td>
+                        <td>Chơi lượt ngắn liên tục, mỗi lần thua lại mạnh hơn</td>
                         <td><span class="chip">Challenge</span> <span class="chip">Narrative</span> <span class="chip">Discovery</span></td>
                     </tr>
                     <tr>
-                        <td>Among Us<br><small>social deduction, mobile/PC</small></td>
-                        <td>Vai trò ẩn (Crewmate/Impostor), họp và bỏ phiếu, danh sách nhiệm vụ chung</td>
-                        <td>Nghi ngờ, buộc tội, nói dối trong các cuộc họp</td>
-                        <td><span class="chip">Fellowship</span> <span class="chip">Challenge</span></td>
-                    </tr>
-                    <tr>
                         <td>Stardew Valley<br><small>mô phỏng nông trại, PC/console/mobile</small></td>
-                        <td>Năng lượng giới hạn mỗi ngày, cây có thời gian lớn, điểm thân thiết với dân làng</td>
-                        <td>Lên kế hoạch mỗi ngày, nông trại lớn dần qua nhiều mùa</td>
+                        <td>Năng lượng giới hạn mỗi ngày, cây có thời gian lớn, điểm thân thiết dân làng</td>
+                        <td>Lên kế hoạch mỗi ngày, nông trại lớn dần</td>
                         <td><span class="chip">Expression</span> <span class="chip">Submission</span> <span class="chip">Discovery</span></td>
                     </tr>
                     <tr>
                         <td>Elden Ring<br><small>action RPG thế giới mở, PC/console</small></td>
-                        <td>Mọi đòn đánh, né đều tốn stamina; thế giới mở ít chỉ đường; nhiều khu vực và boss đi theo thứ tự tùy ý</td>
-                        <td>Tự mò đường, thử thách vượt sức, thua nhiều lần để học cách boss ra đòn</td>
+                        <td>Đòn đánh, né tốn stamina; thế giới mở ít chỉ đường; boss theo thứ tự tùy ý</td>
+                        <td>Tự mò đường, thua nhiều lần để học boss ra đòn</td>
                         <td><span class="chip">Challenge</span> <span class="chip">Discovery</span> <span class="chip">Fantasy</span></td>
-                    </tr>
-                    <tr>
-                        <td>Monument Valley<br><small>giải đố, mobile</small></td>
-                        <td>Xoay, trượt các khối kiến trúc để nối lối đi dựa trên ảo giác hình học</td>
-                        <td>Thử xoay, quan sát lối mới hiện ra, lời giải đến từ việc đổi góc nhìn</td>
-                        <td><span class="chip">Discovery</span> <span class="chip">Sensation</span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <h2 id="gioi-han">MDA không phải là tất cả</h2>
-        <p>MDA rất hữu dụng, nhưng không phải góc nhìn duy nhất về thiết kế game:</p>
+        <p>MDA hữu dụng, nhưng không phải góc nhìn duy nhất:</p>
         <ul>
-            <li><strong>Duarte</strong> ("Revisiting the MDA framework", Game Developer): với board game, người chơi phải học luật trước mới chơi được, nên hành trình Aesthetics → Dynamics → Mechanics không đúng với mọi loại game; ông cho rằng MDA thiên về game điện tử và nên được dùng linh hoạt.</li>
-            <li><strong>DDE — Design, Dynamics, Experience</strong> (Walk, Görlich, Barrett, 2017): cho rằng MDA bỏ qua nhiều khía cạnh thiết kế và tập trung quá nhiều vào mechanics; đề xuất mô hình hóa trải nghiệm người chơi chi tiết hơn.</li>
-            <li><strong>Elemental Tetrad</strong> (Jesse Schell, <em>The Art of Game Design</em>, 2008): một góc nhìn khác chia game thành 4 thành tố Mechanics, Story, Aesthetics, Technology.</li>
+            <li><strong>Duarte</strong> ("Revisiting the MDA framework", Game Developer): board game buộc học luật trước, nên hành trình A → D → M không đúng với mọi loại game; MDA thiên về game điện tử.</li>
+            <li><strong>DDE — Design, Dynamics, Experience</strong> (Walk, Görlich, Barrett, 2017): nhóm tác giả cho rằng MDA bỏ qua nhiều khía cạnh thiết kế, quá tập trung vào mechanics; đề xuất mô hình hóa trải nghiệm chi tiết hơn.</li>
+            <li><strong>Elemental Tetrad</strong> (Jesse Schell, <em>The Art of Game Design</em>, 2008): chia game thành 4 thành tố Mechanics, Story, Aesthetics, Technology — chữ "Aesthetics" ở đây là cảm quan nhìn/nghe, khác nghĩa "cảm xúc" trong MDA.</li>
         </ul>
-        <div class="callout" data-kind="note">
-            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
-            <div class="callout-body">
-                <p class="callout-title">Ghi chú</p>
-                <p>Chữ "Aesthetics" trong Elemental Tetrad của Schell chỉ cảm quan nhìn/nghe của game — khác nghĩa "cảm xúc người chơi" trong MDA. Đọc tài liệu nào thì hiểu chữ đó theo đúng định nghĩa của tài liệu ấy.</p>
-            </div>
-        </div>
-        <p>MDA là công cụ tư duy để đặt câu hỏi đúng, không phải một định luật.</p>
+        <p>MDA là công cụ đặt câu hỏi đúng, không phải một định luật.</p>
 
         <h2 id="lens">Mang theo khi thiết kế</h2>
         <div class="lens">
@@ -375,28 +335,28 @@
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Nhầm Aesthetics với đồ họa</p>
-                <p>Trong MDA, Aesthetics là cảm xúc; phần nhìn–nghe của game chỉ gần với một kiểu duy nhất trong 8 kiểu, là Sensation.</p>
+                <p>Trong MDA, Aesthetics là cảm xúc; phần nhìn–nghe chỉ gần với một kiểu duy nhất — Sensation.</p>
             </div>
         </div>
         <div class="callout" data-kind="mistake">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Coi 8 kiểu là danh sách đóng</p>
-                <p>Không phải chọn đúng một ô trong 8 kiểu. Paper nói rõ danh sách này mở, và game nào cũng theo đuổi nhiều kiểu cùng lúc.</p>
+                <p>Không phải chọn đúng một ô. Paper nói rõ danh sách này mở, và game nào cũng theo đuổi nhiều kiểu cùng lúc.</p>
             </div>
         </div>
         <div class="callout" data-kind="mistake">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Coi MDA là công thức ra game hay</p>
-                <p>Paper nói rõ không có công thức nào cho "fun". MDA giúp mô tả, phân tích và chỉnh sửa có hướng — không đảm bảo kết quả hay.</p>
+                <p>Không có công thức nào cho "fun". MDA giúp mô tả và chỉnh sửa có hướng — không đảm bảo kết quả hay.</p>
             </div>
         </div>
         <div class="callout" data-kind="mistake">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Thiết kế từ tính năng, không từ cảm xúc</p>
-                <p>"Thêm hệ thống pet cho vui" mà không nói rõ cảm xúc mục tiêu là gì — đó đúng là kiểu feature-driven design mà paper khuyên nên tránh.</p>
+                <p>"Thêm hệ thống pet cho vui" mà không nói rõ cảm xúc mục tiêu — đúng kiểu feature-driven design mà paper khuyên tránh.</p>
             </div>
         </div>
 
