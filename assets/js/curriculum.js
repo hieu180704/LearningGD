@@ -164,13 +164,13 @@ window.CURRICULUM = [
                 title: "Vòng lặp iteration",
                 summary: "Thiết kế — thử — đo — sửa liên tục để cải thiện game từng bước.",
                 goals: [
-                    "Vẽ vòng lặp thiết kế-thử-đo-sửa",
-                    "Ưu tiên thay đổi nào nên test trước",
-                    "Tránh bẫy sửa quá nhiều thứ cùng một lúc"
+                    "Vẽ vòng lặp prototype – test – phân tích – sửa",
+                    "Hiểu vì sao vòng lặp càng ngắn càng tốt",
+                    "Biết khi nào nên dừng lặp hoặc bỏ hẳn một ý tưởng"
                 ],
                 minutes: 11,
                 level: "Trung bình",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-2/04-tai-lieu-thiet-ke",

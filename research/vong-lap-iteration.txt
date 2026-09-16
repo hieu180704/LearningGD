@@ -1,0 +1,225 @@
+TIÊU ĐỀ: Research — Vòng lặp iteration (prototype–test–phân tích–sửa, vì sao ngắn tốt hơn, khi nào dừng)
+Ngày research: 2026-09-16
+Trạng thái: 7 nguồn ([Z][S][F][C][SC][T][HL]) đã tự mở đọc nguyên văn (main curl + grep khớp
+nguyên văn, 2026-09-16). Một số nguồn khác đã thử nhưng KHÔNG verify được ở mức đưa vào bài —
+xem mục 6 "ĐÃ LOẠI". Nếu bài dùng sơ đồ vòng lặp, hay tiêu chí "chọn thay đổi rủi ro nhất test
+trước" / "chỉ đổi một thứ mỗi lần" — đây là phân tích của người viết, không theo nguồn nào —
+xem mục 7.
+
+MỤC LỤC
+1. Vòng lặp iteration là gì (Z, S, F)
+2. Vòng lặp ngắn giảm rủi ro, sai lầm lớn (S, C)
+3. Khi nào dừng lặp hoặc bỏ hẳn một ý tưởng (S, C, SC)
+4. Ví dụ game: Threes (T)
+5. Ví dụ game: Half-Life (HL)
+6. ĐÃ LOẠI
+7. KHÔNG CÓ NGUỒN — CHỈ LÀ PHÂN TÍCH CỦA NGƯỜI VIẾT
+8. GHI CHÚ DÙNG TRONG BÀI
+
+================================================================
+1. VÒNG LẶP ITERATION LÀ GÌ (Z, S, F)
+================================================================
+
+[Z] Nguồn: Eric Zimmerman, "Play as Research: The Iterative Design Process", final draft 2003.
+URL: https://ericzimmerman.com/assets/pdfs/Iterative_Design.pdf (PDF trên site tác giả) — ĐÃ
+MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn: "Iterative design is a design methodology based on a cyclic process of
+prototyping, testing, analyzing, and refining a work in progress."
+Dịch: "Thiết kế lặp (iterative design) là một phương pháp thiết kế dựa trên một quá trình
+mang tính chu kỳ: dựng prototype, test, phân tích, và tinh chỉnh một tác phẩm đang trong quá
+trình hoàn thiện."
+
+Nguyên văn: "Test; analyze; refine. And repeat."
+Dịch: "Test; phân tích; tinh chỉnh. Rồi lặp lại."
+
+Nguyên văn: "In this way, the project develops through an ongoing dialogue between the
+designers, the design, and the testing audience."
+Dịch: "Theo cách này, dự án phát triển thông qua một cuộc đối thoại liên tục giữa các nhà
+thiết kế, bản thiết kế, và những người tham gia test."
+
+Nguyên văn (ngữ cảnh: đối lập lối làm truyền thống viết tài liệu đầy đủ trước): "A more
+iterative design process, on the other hand, will not only streamline development resources,
+but will also result in a more robust and successful final product."
+Dịch: "Ngược lại, một quy trình thiết kế mang tính lặp nhiều hơn không chỉ giúp tinh gọn
+nguồn lực phát triển, mà còn cho ra một sản phẩm cuối cùng vững chắc và thành công hơn."
+
+CẢNH BÁO: bài KHÔNG có tiêu chí dừng lặp tường minh — không suy diễn thêm.
+
+[S] Nguồn: Ian Schreiber, "Level 2: Game Design / Iteration and Rapid Prototyping", Game
+Design Concepts, 2009.
+URL: https://gamedesignconcepts.wordpress.com/2009/07/02/level-2-game-design-iteration-and-rapid-prototyping/
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn: "The purpose of iteration is to lower design risk."
+Dịch: "Mục đích của việc lặp (iteration) là để giảm rủi ro thiết kế."
+
+Nguyên văn: "In general, the more times you iterate, the better your final game will be."
+Dịch: "Nhìn chung, càng lặp nhiều lần, game cuối cùng của bạn sẽ càng tốt."
+
+Nguyên văn: "If you decide the game is good enough, then that is that."
+Dịch: "Nếu bạn quyết định game đã đủ tốt, thì vậy là xong."
+
+Nguyên văn (ngữ cảnh: nếu thấy cần thay đổi thì quay lại bước thiết kế, sửa, đánh giá lại):
+"Continue doing this until the game is ready."
+Dịch: "Tiếp tục làm như vậy cho đến khi game đã sẵn sàng."
+
+CẢNH BÁO: bài KHÔNG nói "đổi một thứ mỗi lần", KHÔNG nói độ dài vòng lặp tối ưu — không thêm.
+
+[F] Nguồn: Tracy Fullerton, trích Game Design Workshop (5th ed.), đăng trên Game Developer.
+URL: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop — ĐÃ MỞ ĐỌC TRỰC
+TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn: "Iteration is deeply important to the playcentric process."
+Dịch: "Việc lặp (iteration) có vai trò vô cùng quan trọng đối với quy trình lấy người chơi
+làm trung tâm (playcentric process)."
+
+Nguyên văn định nghĩa: "you design, test, and evaluate the results over and over again
+throughout the development of your game, each time improving upon the gameplay or features,
+until the player experience meets your criteria."
+Dịch: "bạn thiết kế, test, và đánh giá kết quả lặp đi lặp lại trong suốt quá trình phát triển
+game, mỗi lần đều cải thiện gameplay hoặc tính năng, cho đến khi trải nghiệm người chơi đáp
+ứng được tiêu chí của bạn."
+
+Nguyên văn: "This process is repeated until solutions are found and the design is deemed to
+meet the goals"
+Dịch: "Quá trình này được lặp lại cho đến khi tìm ra giải pháp và bản thiết kế được xem là đã
+đáp ứng mục tiêu."
+
+================================================================
+2. VÒNG LẶP NGẮN GIẢM RỦI RO, SAI LẦM LỚN (S, C)
+================================================================
+
+Xem [S] mục 1 ở trên: "The purpose of iteration is to lower design risk." (mục đích của việc
+lặp là để giảm rủi ro thiết kế).
+
+[C] Nguồn: Daniel Cook, "Rockets, Cars and Gardens: Visualizing waterfall, agile and stage
+gate", Lost Garden, 2007.
+URL: https://lostgarden.com/2007/02/19/rockets-cars-and-gardens-visualizing-waterfall-agile-and-stage-gate/
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+NGỮ CẢNH: nói về quy trình phát triển sản phẩm nói chung (agile), không riêng game.
+
+Nguyên văn: "The short feedback cycles ensures the big mistakes happen far less often."
+Dịch: "Các chu kỳ phản hồi ngắn giúp những sai lầm lớn xảy ra ít hơn hẳn."
+
+Nguyên văn: "Instead of taking 12 to 18 months to create and evaluate a new concept, they
+build and put new version in front of users every 2 to 4 weeks."
+Dịch: "Thay vì mất 12 đến 18 tháng để tạo ra và đánh giá một ý tưởng mới, họ xây dựng và đưa
+phiên bản mới ra trước người dùng mỗi 2 đến 4 tuần."
+
+Nguyên văn: "If they veer off a little bit to the left, that's fine. They rapidly learn it
+was a bad idea and correct their efforts."
+Dịch: "Nếu họ lệch nhẹ sang trái một chút, điều đó không sao. Họ nhanh chóng nhận ra đó là
+một ý tưởng tồi và điều chỉnh lại nỗ lực của mình."
+
+================================================================
+3. KHI NÀO DỪNG LẶP HOẶC BỎ HẲN MỘT Ý TƯỞNG (S, C, SC)
+================================================================
+
+Xem [S] mục 1 ở trên: "If you decide the game is good enough, then that is that." và
+"Continue doing this until the game is ready." — tiêu chí dừng của Schreiber là "đủ tốt" /
+"đã sẵn sàng", không có công thức cụ thể hơn.
+
+[C] Kill Gates — Nguyên văn: "gates every few iterations that kill poorly performing
+projects"
+Dịch: "những 'cổng' (gate) sau mỗi vài vòng lặp, dùng để loại bỏ những dự án hoạt động kém."
+
+[SC] Nguồn: Kris Graft, "Maybe it's time to kill your game and move on: Supercell on cutting
+its losses", Game Developer, 2016.
+URL: https://www.gamedeveloper.com/design/maybe-it-s-time-to-kill-your-game-and-move-on-supercell-on-cutting-its-losses
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Tường thuật (không phải nguyên văn): Jonathan Dower (game lead & artist, Supercell) kể tại
+GDC rằng trong 10 game gần nhất của studio, 7 bị kill ở giai đoạn prototype, 2 bị kill ở soft
+launch, 1 (Clash Royale) ra mắt toàn cầu. Đội của Dower cùng quyết định kill Smash Land (game
+đã soft launch).
+
+Tường thuật (lời phóng viên, không phải nguyên văn Dower): quyết định sống/chết do chính đội
+làm game đưa ra, không phải lãnh đạo; metrics có được xét nhưng cuối cùng dựa vào cảm nhận
+của đội nhỏ nhiều kinh nghiệm.
+
+Nguyên văn (Dower): "at some point you have to think [whether or not] you can fix it"
+Dịch: "đến một lúc nào đó bạn phải nghĩ xem [liệu] mình có thể sửa được nó hay không."
+
+Nguyên văn (Dower): "once you get that feeling about the 'other game,' or about the game you
+'should' be making, in your mind, you've probably already killed your game."
+Dịch: "một khi bạn có cảm giác đó về 'trò chơi khác', hay về trò chơi mà bạn 'nên' làm, trong
+đầu bạn, thì có lẽ bạn đã giết chết trò chơi hiện tại của mình rồi."
+
+Ngữ cảnh/giới hạn: bài nhấn mạnh đây là cách của Supercell, không áp dụng cho mọi loại game;
+nhiều studio không đủ tài chính để bỏ game như vậy.
+
+================================================================
+4. VÍ DỤ GAME: THREES (T)
+================================================================
+
+[T] Nguồn: Alex Wawro, "Threes co-creator Wohlwend on the value of minimalist game design",
+Game Developer, 2014 (dẫn phỏng vấn Re/code).
+URL: https://www.gamedeveloper.com/design/-i-threes-i-co-creator-wohlwend-on-the-value-of-minimalist-game-design
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Tường thuật (không phải nguyên văn Wohlwend): Wohlwend và Asher Vollmer thử nghiệm thiết kế
+game trượt ô số hơn sáu tháng; thử thêm chướng ngại vật, quái vật, ký hiệu hào nhoáng để giữ
+người chơi, rồi nhận ra thử thách cơ bản (trượt ô số trong không gian hẹp để đạt điểm cao
+nhất) đã đủ hấp dẫn.
+
+Nguyên văn (câu trích nổi bật trong bài): "If the game isn't compelling enough to hold
+someone's attention, then the game needs to be better."
+Dịch: "Nếu game không đủ cuốn hút để giữ chân sự chú ý của ai đó, thì game đó cần phải tốt
+hơn."
+
+CẢNH BÁO: trang KHÔNG ghi nền tảng (không viết "iOS"/"mobile" như một fact theo nguồn).
+
+================================================================
+5. VÍ DỤ GAME: HALF-LIFE (HL)
+================================================================
+
+[HL] Nguồn: Ken Birdwell, "The Cabal: Valve's Design Process For Creating Half-Life", Game
+Developer (năm đăng chưa verify).
+URL: https://www.gamedeveloper.com/design/the-cabal-valve-s-design-process-for-creating-i-half-life-i-
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn: "Over the course of the project we ended up doing more than 200 play-test
+sessions, about half of them with repeat players."
+Dịch: "Trong suốt dự án, cuối cùng chúng tôi đã thực hiện hơn 200 buổi playtest, khoảng một
+nửa trong số đó là với những người chơi quay lại nhiều lần."
+
+Tường thuật: phản hồi từ các buổi test được đưa ngược vào quy trình Cabal, giúp loại bỏ sớm
+thiết kế không hiệu quả.
+
+================================================================
+6. ĐÃ LOẠI
+================================================================
+
+- Supercell: câu "beta targets were not met..." — KHÔNG có trên trang, do WebFetch bịa/tóm
+  tắt sai → không đưa vào bài.
+- Daniel Cook, "Managing game design risk" Part I/II — không có ý "risk-first" (chọn rủi ro
+  test trước) như dự định dùng → loại.
+- Daniel Cook, "Managing game design risk" Part III — không mở được / không có đoạn phù hợp
+  → loại.
+- Richard Lemarchand — không mở được nguồn phù hợp về chủ đề vòng lặp trong phiên verify này
+  → loại.
+- Vlambeer, "The Art of Screenshake" (talk) — không mở được transcript/nội dung phù hợp →
+  loại.
+- Nuclear Throne — không mở được nguồn phù hợp → loại.
+- Spelunky — không mở được nguồn phù hợp → loại.
+
+================================================================
+7. KHÔNG CÓ NGUỒN — CHỈ LÀ PHÂN TÍCH CỦA NGƯỜI VIẾT
+================================================================
+
+Hai ý sau KHÔNG có trong bất kỳ nguồn nào ở trên, chỉ là phân tích của người viết. Nếu đưa
+vào bài phải đánh dấu rõ bằng callout `note`, không để người đọc lẫn với nội dung "theo
+nguồn":
+
+- Chọn thay đổi rủi ro nhất để test trước.
+- Chỉ đổi một thứ mỗi lần giữa hai vòng test.
+
+================================================================
+8. GHI CHÚ DÙNG TRONG BÀI
+================================================================
+
+Bài dùng phương án goals mới:
+1. Vẽ vòng lặp prototype–test–phân tích–sửa.
+2. Hiểu vì sao vòng lặp càng ngắn càng tốt.
+3. Biết khi nào nên dừng lặp hoặc bỏ hẳn một ý tưởng.

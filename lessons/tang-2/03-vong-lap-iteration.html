@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vòng lặp iteration — Xưởng Game Design</title>
+<meta name="description" content="Hai người làm Threes thử nghiệm hơn sáu tháng, thêm vào rồi bỏ đi nhiều thứ. Vòng lặp iterative design của Zimmerman: dựng bản thử, test, phân tích, sửa — và biết khi nào nên dừng hoặc bỏ hẳn một ý tưởng.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-2/03-vong-lap-iteration" class="tier-2">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-2">Tầng 2 · Nghề</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 2 · Bài 03</p>
+            <h1>Vòng lặp iteration</h1>
+            <p class="dek">Không ai làm đúng ngay từ lần đầu — thứ quyết định là lặp lại bao nhiêu vòng, và biết khi nào nên dừng.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 11 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Trung bình</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Nên đọc trước: <a href="02-playtest.html">Playtest</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Vẽ vòng lặp prototype – test – phân tích – sửa</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Hiểu vì sao vòng lặp càng ngắn càng tốt</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Biết khi nào nên dừng lặp hoặc bỏ hẳn một ý tưởng</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Thử thách cơ bản đã đủ hấp dẫn</h2>
+        <p>Asher Vollmer và Greg Wohlwend dành hơn sáu tháng thử nghiệm thiết kế cho Threes — trò chơi giải đố trượt ô số. Theo tường thuật của Game Developer, trong quãng thời gian đó cả hai thử thêm chướng ngại vật, quái vật, những ký hiệu hào nhoáng, với hy vọng giữ chân người chơi lâu hơn.</p>
+        <p>Rồi họ nhận ra thử thách cơ bản — trượt các ô số trong một không gian hẹp để đạt điểm cao nhất — đã đủ hấp dẫn. Câu trích nổi bật trong bài viết: <em>"If the game isn't compelling enough to hold someone's attention, then the game needs to be better."</em></p>
+        <p>Cách người viết bài đọc câu chuyện này: thiết kế cuối cùng không nằm sẵn trong đầu từ đầu, mà lộ ra qua việc làm, chơi, thấy chưa ổn, sửa, rồi thử lại. Vòng lặp đó có tên gọi riêng: <span class="term" data-en="iterative design">thiết kế lặp</span>.</p>
+
+        <h2 id="khai-niem">Vòng lặp: làm, thử, phân tích, sửa</h2>
+        <p>Eric Zimmerman mô tả quy trình này gọn trong ba bước lặp lại: <em>"Test; analyze; refine. And repeat."</em> Nói đầy đủ hơn, iterative design là một phương pháp thiết kế dựa trên vòng lặp liên tục: dựng một bản thử, kiểm thử nó, phân tích kết quả thu được, rồi tinh chỉnh lại bản đang làm — theo cách Zimmerman định nghĩa.</p>
+        <p>Bước "kiểm thử" trong vòng lặp này chính là buổi playtest đã nói ở bài trước — xem lại <a href="02-playtest.html">bài Playtest</a> nếu cần ôn lại cách chuẩn bị và quan sát một buổi test.</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Prototype
+                    <small>Dựng bản thử, dù thô sơ.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Test
+                    <small>Đưa người chơi thật vào thử.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Phân tích &amp; sửa
+                    <small>Đọc kết quả, tinh chỉnh lại bản thử.</small>
+                </div>
+            </div>
+            <figcaption>Sơ đồ do người viết bài tổng hợp theo định nghĩa của Zimmerman; mũi tên cuối quay lại bước đầu.</figcaption>
+        </figure>
+        <p>Vì sao phải lặp thay vì cố làm đúng ngay từ lần đầu? Ian Schreiber trả lời ngắn gọn: <em>"The purpose of iteration is to lower design risk."</em> Càng lặp nhiều, bạn càng chắc luật chơi của mình thật sự hoạt động — trước khi đổ quá nhiều công sức vào một hướng có thể sai.</p>
+
+        <h2 id="vong-lap-ngan">Vòng lặp càng ngắn, sai lầm càng rẻ</h2>
+        <p>Daniel Cook, viết về quy trình phát triển sản phẩm nói chung chứ không riêng game, so sánh hai cách làm: một bên mất 12 đến 18 tháng để hoàn thiện một ý tưởng trước khi đưa cho người dùng thấy; bên kia dựng bản mới và đưa ra trước người dùng mỗi 2 đến 4 tuần.</p>
+        <p>Cook giải thích vì sao cách thứ hai an toàn hơn: <em>"The short feedback cycles ensures the big mistakes happen far less often."</em> Nếu một đội đi lệch hướng một chút, họ nhanh chóng nhận ra đó là ý tưởng tồi và sửa lại hướng đi — thay vì phát hiện sai lầm sau khi đã đổ cả năm trời công sức vào đó.</p>
+
+        <h2 id="khi-nao-dung">Khi nào dừng lặp, khi nào bỏ hẳn</h2>
+        <p>Vòng lặp không lặp mãi mãi. Schreiber gói gọn tiêu chí dừng trong một câu: <em>"If you decide the game is good enough, then that is that."</em> Fullerton diễn đạt gần tương tự: quá trình thiết kế – test – đánh giá được lặp lại nhiều lần, cho tới khi thiết kế được xem là đã đáp ứng mục tiêu đề ra.</p>
+        <p>Nhưng đôi khi câu trả lời không phải "dừng vì đã đủ tốt", mà là "dừng vì ý tưởng này không đáng làm tiếp". Cook gọi những điểm dừng đó là kill gate: <em>"gates every few iterations that kill poorly performing projects"</em> — những chốt chặn sau mỗi vài vòng lặp, nơi các dự án hoạt động kém bị dừng hẳn thay vì tiếp tục đổ thêm công sức.</p>
+
+        <h2 id="vi-du">Ba game, ba cách lặp</h2>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Phân tích minh hoạ</p>
+                <p>Cột "Lặp thế nào" gom lại các chi tiết đã kể ở trên và diễn giải thêm; cột "Theo nguồn" là nơi trích dẫn nguyên văn hoặc chỉ nguồn cụ thể.</p>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Game</th><th>Lặp thế nào</th><th>Theo nguồn</th></tr></thead>
+                <tbody>
+                    <tr><td>Threes (indie)</td><td>Hơn sáu tháng thử nhiều hướng — chướng ngại vật, quái vật, ký hiệu hào nhoáng — trước khi quay về thử thách cơ bản</td><td>Game Developer, 2014 — bài dẫn lời phỏng vấn với Wohlwend trên Re/code</td></tr>
+                    <tr><td>Supercell (studio game mobile)</td><td>Trong 10 game gần nhất: 7 bị bỏ ở giai đoạn prototype, 2 bị bỏ ở soft launch, 1 ra mắt toàn cầu (Clash Royale). Smash Land đã soft launch rồi vẫn bị chính đội làm game quyết định bỏ, dựa trên cảm nhận của một đội nhỏ nhiều kinh nghiệm hơn là chỉ dựa vào chỉ số</td><td>Game Developer, 2016 — Kris Graft viết từ bài nói GDC và phỏng vấn Jonathan Dower</td></tr>
+                    <tr><td>Half-Life (PC)</td><td>Hơn 200 buổi playtest, khoảng một nửa với người chơi quay lại nhiều lần; phản hồi được đưa ngược vào quy trình thiết kế của đội Cabal</td><td>Game Developer — Ken Birdwell, "The Cabal: Valve's Design Process For Creating Half-Life"</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="lens">Soi một vòng lặp</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Bộ câu hỏi</span><h3>Soi một vòng lặp</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Vòng lặp lần này đang kiểm tra giả thuyết gì cụ thể?</li>
+                <li><span class="q-icon">?</span> Bạn có đang chỉ đổi đúng một thứ giữa hai lần test, để biết chính xác điều gì tạo ra khác biệt không?</li>
+                <li><span class="q-icon">?</span> Vòng lặp này mất bao lâu — có cách nào rút ngắn hơn không?</li>
+                <li><span class="q-icon">?</span> Kết quả vòng vừa rồi cho thấy thiết kế đã "đủ tốt", hay vẫn cần lặp tiếp?</li>
+                <li><span class="q-icon">?</span> Nếu ý tưởng ban đầu sai hướng, bạn có sẵn sàng bỏ nó để làm hướng khác không?</li>
+                <li><span class="q-icon">?</span> Ai là người quyết định dừng lặp, và quyết định đó dựa trên điều gì?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Viết bản thiết kế đầy đủ rồi mới đem đi test</p>
+                <p>Zimmerman kể lối làm game bán lẻ thường gặp: nghĩ ra một concept hoàn chỉnh, viết tài liệu thiết kế chi tiết mọi khía cạnh, rồi mới làm. Ông so sánh: <em>"A more iterative design process, on the other hand, will not only streamline development resources, but will also result in a more robust and successful final product."</em> Càng chờ lâu mới đưa bản thử ra test, càng phát hiện vấn đề muộn.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Đổi nhiều thứ cùng lúc giữa hai vòng test</p>
+                <p>Phân tích của người viết, không trích nguồn: nếu một vòng lặp vừa đổi độ khó combat, vừa đổi UI, vừa đổi cách bố trí màn chơi, bạn sẽ không biết thay đổi nào thật sự tạo ra khác biệt ở lần test sau. Đổi đúng một thứ mỗi vòng giúp kết quả dễ đọc hơn nhiều.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Không dám bỏ ý tưởng dù đã thấy dấu hiệu xấu</p>
+                <p>Jonathan Dower (Supercell), khi được hỏi lúc nào nên bỏ một game đang làm: <em>"once you get that feeling about the 'other game,' or about the game you 'should' be making, in your mind, you've probably already killed your game."</em> Nguồn nhấn mạnh đây là cách làm của riêng Supercell, không áp dụng cho mọi studio — nhiều studio không đủ tài chính để bỏ hẳn một game như vậy.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">3 vòng lặp cho prototype giấy</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">40 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>3 vòng lặp cho prototype giấy</h3>
+                <ol class="steps">
+                    <li>Lấy bản prototype giấy đã làm ở bài Prototype trên giấy (hoặc dựng nhanh một bản mới nếu chưa có).</li>
+                    <li>Vòng 1: viết ra giả thuyết đang muốn kiểm tra, thực hiện đúng 1 thay đổi trên bản thử, chơi lại và ghi kết quả.</li>
+                    <li>Vòng 2: dựa trên kết quả vòng 1, viết giả thuyết mới, đổi đúng 1 thứ khác, chơi lại và ghi kết quả.</li>
+                    <li>Vòng 3: lặp lại một lần nữa — giả thuyết mới, 1 thay đổi, kết quả.</li>
+                    <li>Nhìn lại cả 3 vòng: thiết kế đã tốt hơn rõ rệt chưa, hay bạn nên dừng và thử một hướng khác hẳn?</li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Kẻ sẵn một bảng 3 cột (giả thuyết / thay đổi / kết quả) trước khi bắt đầu, mỗi vòng ghi vào một hàng — nhờ vậy dễ so sánh cả 3 vòng cùng lúc. Nếu sau 3 vòng vẫn không thấy khá hơn, đó có thể là dấu hiệu nên bỏ hướng này thay vì lặp tiếp.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="c">
+            <p class="q">Theo Zimmerman, ba bước lặp lại trong iterative design là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Lên kế hoạch, viết tài liệu, triển khai</button>
+                <button data-opt="b"><span class="badge">B</span> Brainstorm, chọn ý tưởng, hoàn thiện</button>
+                <button data-opt="c"><span class="badge">C</span> Test; analyze; refine — rồi lặp lại</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên văn Zimmerman: "Test; analyze; refine. And repeat." — kiểm thử, phân tích, tinh chỉnh, rồi lặp lại toàn bộ vòng.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Vì sao Cook cho rằng vòng lặp ngắn (2-4 tuần) an toàn hơn vòng dài (12-18 tháng)?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Phản hồi tới nhanh hơn, nên sai lầm lớn xảy ra ít hơn</button>
+                <button data-opt="b"><span class="badge">B</span> Vì làm nhanh thì đội đỡ tốn lương hơn</button>
+                <button data-opt="c"><span class="badge">C</span> Vì người chơi thích bản cập nhật thường xuyên</button>
+            </div>
+            <div class="explain" hidden><p>Cook viết: "The short feedback cycles ensures the big mistakes happen far less often." — chu kỳ phản hồi ngắn giúp phát hiện sai lầm lớn sớm hơn, trước khi đổ quá nhiều công sức vào một hướng sai.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Schreiber, khi nào nên dừng lặp?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Khi hết ngân sách của dự án</button>
+                <button data-opt="b"><span class="badge">B</span> Khi bạn quyết định game đã đủ tốt</button>
+                <button data-opt="c"><span class="badge">C</span> Sau đúng 10 vòng lặp, không hơn không kém</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên văn Schreiber: "If you decide the game is good enough, then that is that." — không có con số vòng lặp cố định, quyết định dừng nằm ở việc bạn thấy game đã đủ tốt hay chưa.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Cook mô tả "kill gate" là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Điểm chốt sau mỗi vài vòng lặp, nơi dự án hoạt động kém bị dừng hẳn</button>
+                <button data-opt="b"><span class="badge">B</span> Buổi họp cuối dự án để tổng kết bài học</button>
+                <button data-opt="c"><span class="badge">C</span> Bước kiểm tra lỗi kỹ thuật trước khi phát hành</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên văn Cook: "gates every few iterations that kill poorly performing projects" — những chốt chặn định kỳ để dừng hẳn các dự án không đạt, thay vì tiếp tục đổ công sức.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Iterative design</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vòng lặp: dựng bản thử, test, phân tích kết quả, tinh chỉnh — rồi lặp lại toàn bộ quy trình.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Mục đích của iteration (Schreiber)</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Hạ thấp rủi ro thiết kế — kiểm tra giả thuyết trước khi đổ nhiều công sức vào một hướng có thể sai.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Vòng lặp ngắn (Cook)</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">2-4 tuần thay vì 12-18 tháng: chu kỳ phản hồi ngắn giúp sai lầm lớn xảy ra ít hơn.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Khi nào dừng lặp</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Khi thiết kế đã đáp ứng mục tiêu đề ra, hoặc khi bạn thấy game đã "đủ tốt".</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Kill gate</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Điểm chốt sau mỗi vài vòng lặp, nơi dự án hoạt động kém bị dừng hẳn thay vì tiếp tục đổ công sức.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Iterative design là vòng lặp: dựng bản thử, test, phân tích, sửa — rồi lặp lại, không phải làm đúng ngay từ lần đầu.</li>
+                <li><span class="n">2</span> Vòng lặp càng ngắn, sai lầm lớn càng ít xảy ra — vì phản hồi tới nhanh hơn.</li>
+                <li><span class="n">3</span> Biết dừng khi thiết kế đã đủ tốt, và dám bỏ hẳn ý tưởng khi thấy dấu hiệu nó không đáng làm tiếp.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-paper">Paper</span>
+                <a class="reading-title" href="https://ericzimmerman.com/assets/pdfs/Iterative_Design.pdf" target="_blank" rel="noopener">Play as Research: The Iterative Design Process</a>
+                <span class="reading-meta">Eric Zimmerman · 2003</span>
+                <p class="reading-why">Định nghĩa gốc của iterative design và vòng "Test; analyze; refine" dùng xuyên suốt bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gamedesignconcepts.wordpress.com/2009/07/02/level-2-game-design-iteration-and-rapid-prototyping/" target="_blank" rel="noopener">Level 2: Game Design / Iteration and Rapid Prototyping</a>
+                <span class="reading-meta">Ian Schreiber · Game Design Concepts, 2009</span>
+                <p class="reading-why">Giải thích vì sao mục đích của iteration là hạ thấp rủi ro thiết kế.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop" target="_blank" rel="noopener">Book Excerpt: Game Design Workshop</a>
+                <span class="reading-meta">Tracy Fullerton · Game Developer (trích sách, bản thứ 5)</span>
+                <p class="reading-why">Trích chương về playcentric process, mô tả vòng thiết kế – test – đánh giá lặp đi lặp lại.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://lostgarden.com/2007/02/19/rockets-cars-and-gardens-visualizing-waterfall-agile-and-stage-gate/" target="_blank" rel="noopener">Rockets, Cars and Gardens: Visualizing waterfall, agile and stage gate</a>
+                <span class="reading-meta">Daniel Cook · Lost Garden, 2007</span>
+                <p class="reading-why">So sánh vòng lặp ngắn với quy trình dài, và khái niệm kill gate.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/maybe-it-s-time-to-kill-your-game-and-move-on-supercell-on-cutting-its-losses" target="_blank" rel="noopener">Maybe it's time to kill your game and move on: Supercell on cutting its losses</a>
+                <span class="reading-meta">Kris Graft · Game Developer, 2016</span>
+                <p class="reading-why">Cách Supercell quyết định bỏ hẳn một game đang làm — và vì sao cách này không hợp với mọi studio.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
