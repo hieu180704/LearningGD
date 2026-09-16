@@ -1,0 +1,33 @@
+SUMMARY: Dựng xong Tầng 2 bài 01 Prototype trên giấy (06e6efa) + bài 02 Playtest (9315d11), kèm research; user đã duyệt cả 2 — check-site 0 lỗi, div cân bằng (45/45, 46/46); main tự đọc toàn bộ thân bài + tự curl/grep nguyên văn mọi câu trích. Ảnh: bài 01 xem mobile sáng từ đầu đến cuối, desktop sáng phần đầu + phần sai lầm/thực hành (bản trước khi sửa sơ đồ), desktop tối đoạn giữa, mobile tối đoạn giữa; bài 02 xem mobile sáng tới giữa Đọc thêm + desktop tối phần đầu, CHƯA xem desktop sáng, mobile tối, cuối trang mobile sáng. Quiz/flashcard CHƯA bấm thử trên trình duyệt thật (tồn 4 session). CHƯA push.
+
+ĐÃ LÀM
+- research/prototype-giay.txt (191 dòng) + lessons/tang-2/01-prototype-giay.html: Fullerton (trích đoạn GDW 5th ed. trên Game Developer), Lemarchand (phỏng vấn Games User Research 2021), Hearthstone (Kotaku 2014, đọc qua web.archive.org), Soulsmith (Game Developer 2018), George Fan (Destructoid 2018). Phần "giấy không test được gì" không có nguồn -> ghi rõ là phân tích của người viết.
+- research/playtest.txt (224 dòng) + lessons/tang-2/02-playtest.html: Schreiber Game Design Concepts L14 (2009), Nielsen (NN/g 2001, 2012), Bromley (4 bài), Halo 3 (Clive Thompson/Wired, đọc bản đăng lại ABC News), Portal (Sheffield, Game Developer 2008), King's Ascent postmortem (Sharon Hoosein, 2013).
+- curriculum.js: 2 bài status ready. shoot.ps1: thêm 2 dòng chụp.
+- Loại: Schell (tip prototype, Lens of the Toy — chỉ nguồn thứ cấp, mâu thuẫn 8/10 tip), 4 bước Foundation/Structure/Formal Details/Refinement (chỉ blog), Invisible Inc, Hodent, Rosewater, Miyamoto/Mario 64.
+
+LỖI ĐÃ BẮT & SỬA
+- Agent research: câu Hearthstone trên wiki bị trình bày như nguyên văn Kotaku; Soulsmith "phát hiện lỗi comeback" (nguồn chỉ nói loại lỗi cần nhiều ván); ngày đăng bài trích Fullerton (2024-04-18) bị hiểu là năm sách; câu Nielsen think-aloud bị cắt làm ngược nghĩa (nguồn: prompts "are usually necessary, but from an untrained facilitator..."); câu Schreiber bị gộp 2 mệnh đề; King's Ascent bị gán studio King + mobile (trang không xác nhận).
+- Agent dựng HTML: "không hề mở máy tính", "chỉ sau khi bản giấy ổn mới làm Flash", "diễn tay" cho acted out, gán Fullerton ý "chưa cần đẹp", meta description nói PvZ bắt đầu bằng giấy (sai: đó là game gopher); Halo 3 "không biết mình bị quan sát", "vài phút sau", gán "are getting massacred" cho Pagulayan; persistent bị hiểu là "lặp lại ở nhiều người" (nguồn: lặp lại với chính người chơi đó), gọi là câu hỏi thứ hai (thực ra thứ ba).
+- Sơ đồ .mda-diagram 4 block rớt dòng trên desktop 1440 (mũi tên thừa cuối hàng) -> gộp còn 3 block.
+
+VẤP MỚI
+- Kotaku/wired chặn 403 với cả WebFetch lẫn curl, nhưng curl `https://web.archive.org/web/2014/<url>` lấy được toàn văn.
+- Trang gamedeveloper.com nhúng text trong JSON escape -> grep cần thay `\"` và `&#x27;` trước khi so nguyên văn.
+- Subagent research đều hết 12-15 lượt mạng chỉ ra 1-3 nguồn đạt; nguồn sách (O'Reilly, Google Books, MIT Press) gần như không mở được -> ưu tiên bài/phỏng vấn của chính tác giả.
+- Tách file VERIFIED-FACTS (scratch) làm nguồn duy nhất cho cả doc-writer và code-writer chạy song song: hiệu quả, agent tuân CẢNH BÁO tốt; lỗi còn lại chủ yếu là câu diễn giải viết quá nguồn -> main vẫn phải đọc hết bài.
+
+CẦN USER QUYẾT (KHÔNG tự sửa - global rule 7) — VẪN TREO:
+- 5 mục từ worklog 2026-09-16__tang-1-game-feel.txt (CLAUDE.md §8 check-site không bắt thẻ lệch/tràn ngang; shoot.ps1 dòng 1 comment phạm vi stale; bài 03 Tầng 1 lệch thứ tự §5; thiếu repo-params.json; độ dài bài vượt mục tiêu).
+- MỚI: Tầng 2 bài 01 và 02 chưa đạt đa thể loại §1 (thiếu mobile/indie có nguồn verify) — chấp nhận hay research bù.
+- MỚI: .mda-diagram 4 block rớt dòng desktop — có nên ghi vào CLAUDE.md §8 (giới hạn 3 block) không.
+
+DOC-SYNC (floor grep theo diff c9ece08..9315d11)
+- CLAUDE.md:26,47,51,130,181 nhắc curriculum.js — NO-CHANGE: mô tả vai trò/quy trình, diff chỉ đổi dữ liệu 2 bài.
+- CLAUDE.md:54,133,160,163,183 nhắc shoot.ps1 — NO-CHANGE: diff chỉ thêm dòng danh sách trang.
+- components.html/index.html/lo-trinh.html chỉ có script tag curriculum.js — NO-CHANGE.
+- prototype-giay / playtest / tang-2: không doc sống nào nhắc.
+
+SHA
+- 06e6efa Tầng 2: bài 01 Prototype trên giấy + research
+- 9315d11 Tầng 2: bài 02 Playtest + research
