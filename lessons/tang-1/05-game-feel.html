@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Feel — Xưởng Game Design</title>
+<meta name="description" content="Vì sao cùng một luật chơi, một game bấm thấy đã tay còn game khác thấy rời rạc: ba trụ cột game feel của Steve Swink, bộ sáu metric để mổ xẻ cảm giác điều khiển, độ trễ đo thật trên console, và ranh giới giữa polish và accessibility.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-1/05-game-feel" class="tier-1">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-1">Tầng 1 · Cốt lõi</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 1 · Bài 05</p>
+            <h1>Game Feel</h1>
+            <p class="dek">Cùng một luật chơi, một game bấm thấy đã tay, một game thấy rời rạc — khác nhau ở chỗ này.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 14 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Cơ bản</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Nên đọc trước: <a href="01-mda.html">MDA</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Gọi tên ba trụ cột tạo nên game feel</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Mổ xẻ cảm giác điều khiển của một game bằng bộ 6 metric của Swink</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Biết vì sao thêm hiệu ứng không đồng nghĩa với feel tốt hơn</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Cùng luật chơi, khác hẳn cảm giác</h2>
+        <p>Hai game bắn súng nhìn từ trên xuống, cùng một bộ số: nhân vật 100 máu, súng gây 20 sát thương mỗi phát, đạn bay cùng tốc độ. Chơi game A, bấm phát nào cũng thấy "đã tay". Chơi game B, luật y hệt, lại thấy rời rạc, vô hồn.</p>
+        <p>Khác biệt không nằm ở luật chơi (rules) — hai game cùng một bộ số. Nó nằm ở một lớp khác, quyết định cảm giác ngay lúc ngón tay chạm nút. Lớp đó có tên gọi và có cách mổ xẻ.</p>
+
+        <h2 id="game-feel-la-gi">Game Feel là gì</h2>
+        <p>Steve Swink gọi tên lớp cảm giác này trong sách <em>Game Feel: A Game Designer's Guide to Virtual Sensation</em> (Morgan Kaufmann, 2009). Trong chương 1 "Defining Game Feel", ông chốt lại bằng một định nghĩa, nguyên văn:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Steve Swink — Game Feel, chương 1 "Defining Game Feel", 2009</p>
+                <p><em>"Real-time control of virtual objects in a simulated space, with interactions emphasized by polish."</em></p>
+            </div>
+        </div>
+        <p>Ba cụm trong câu đó là ba trụ cột: <strong>real-time control</strong> — người chơi điều khiển liên tục, bấm là thấy phản ứng; <strong>simulated space</strong> — một không gian có luật vật lý, va chạm riêng của chính game; <strong>polish</strong> — lớp hiệu ứng nhấn nhá làm tương tác đó trở nên rõ ràng, đã tay hơn.</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Real-time control
+                    <small>Người chơi điều khiển liên tục, bấm là thấy vật thể phản ứng.</small>
+                </div>
+                <div class="mda-block loop">Simulated space
+                    <small>Không gian có luật vật lý, va chạm riêng của chính game đó.</small>
+                </div>
+                <div class="mda-block loop">Polish
+                    <small>Hiệu ứng âm thanh, hạt, rung làm tương tác trở nên rõ ràng, đã tay hơn.</small>
+                </div>
+            </div>
+            <figcaption>Ba trụ cột của game feel (Steve Swink, <em>Game Feel</em>, chương 1, 2009).</figcaption>
+        </figure>
+        <p>Heading bên trong chương gọi thẳng đây là "The Three Building Blocks of Game Feel", nguyên văn: <em>"Game feel, as experienced by players, is built from three parts: real-time control, simulated space and polish."</em></p>
+        <div class="callout" data-kind="insight">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Năm mảnh cảm nhận hợp thành game feel</p>
+                <p>Cuối chương 1, Swink liệt kê năm loại trải nghiệm mà game feel mang lại: cảm giác thẩm mỹ của việc điều khiển (<em>the aesthetic sensation of control</em>); niềm vui học — luyện — thành thạo một kỹ năng (<em>learning, practicing and mastering a skill</em>); mở rộng giác quan (<em>extension of the senses</em>); mở rộng bản dạng (<em>extension of identity</em>); và tương tác với một thực tại vật lý riêng trong game (<em>a unique physical reality within the game</em>).</p>
+                <p>Nguyên văn câu chốt: <em>"Of these five experiences, no single experience encompasses game feel. Rather, game feel is all of these experiences simultaneously."</em> Lúc chơi, trải nghiệm này nổi lên thì trải nghiệm kia lùi lại, nhưng không cái nào một mình là game feel.</p>
+            </div>
+        </div>
+
+        <h2 id="sau-metric">Mổ xẻ bằng sáu metric</h2>
+        <p>Năm 2007, Swink viết bài "Game Feel: The Secret Ingredient" trên Gamasutra, đưa ra bộ sáu thứ để mổ xẻ cảm giác điều khiển thay vì chỉ nói chung chung "thấy đã" hay "thấy nhạt". Mở đầu bài, nguyên văn:</p>
+        <p><em>"The tactile sensation of manipulating a digital agent. The thing that makes your mom lean in her chair as she plays Rad Racer. Proxied embodiment."</em></p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Metric</th><th>Hỏi gì</th><th>Nhìn vào đâu trong game</th></tr></thead>
+                <tbody>
+                    <tr><td>Input</td><td>Người chơi "nói" với game qua thiết bị gì, thiết bị đó cho biểu đạt tới đâu?</td><td>Tay cầm, chuột, màn hình cảm ứng: nút bấm, cần analog, độ nhạy</td></tr>
+                    <tr><td>Response</td><td>Game xử lý và biến lệnh thành chuyển động ra sao, ngay lúc đó?</td><td>Đường cong gia tốc, thời gian dừng lại</td></tr>
+                    <tr><td>Context</td><td>Không gian xung quanh có tương tác lại với vật thể không?</td><td>Va chạm, trọng lực, ma sát, chướng ngại vật</td></tr>
+                    <tr><td>Polish</td><td>Hiệu ứng nhấn nhá nào bao quanh mỗi hành động?</td><td>Âm thanh, hạt, rung tay cầm, screen shake</td></tr>
+                    <tr><td>Metaphor</td><td>Vật thể trên màn hình gợi liên tưởng gì tới vật thật?</td><td>Hình dáng khiến người chơi đoán trước được cách nó hành xử</td></tr>
+                    <tr><td>Rules</td><td>Mục tiêu dài hơn nào cho việc điều khiển thêm ý nghĩa?</td><td>Mục tiêu, thử thách, cách thưởng cho sự thành thạo</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Tên metric thứ tư là <strong>Polish</strong> — đúng như bài gốc của Swink và tên chương sách, không phải "Aesthetic" như một số nguồn tổng hợp ghi.</p>
+
+        <h2 id="do-tre">Điều khiển thời gian thực và độ trễ</h2>
+        <p>Với real-time control, câu hỏi đầu tiên là độ trễ: bấm nút xong bao lâu thì thấy phản hồi đầu tiên. Người chơi thường không gọi tên được nó, chỉ thấy "sao chậm chậm".</p>
+        <p>Adeel Soomro, trên trang DisplayLag, đo con số này bằng cách quay lại lúc bấm phím, nguyên văn: <em>"By recording a key press with the game running, I am able to calculate the exact difference between the key lighting up and the first action that appears in-game."</em> Màn hình dùng để test, BenQ RL2755HM, tự có độ trễ riêng khoảng 10ms.</p>
+        <ul>
+            <li>PS4, Destiny — 107ms</li>
+            <li>PS4, Killzone: Shadow Fall — 119ms</li>
+            <li>PS4, Mortal Kombat X — 107ms</li>
+            <li>Xbox One, Killer Instinct — 81ms</li>
+            <li>Xbox One, Forza Horizon 2 — 149ms</li>
+        </ul>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Đây là độ trễ cả dây chuyền, không phải riêng code game</p>
+                <p>Các con số trên đo từ lúc ngón tay chạm nút tới lúc màn hình đổi hình — đi qua tay cầm, hệ máy, engine, rồi tới màn hình. Không tách riêng được phần do code xử lý input trong game gây ra. Đừng đem so trực tiếp với một con số đo nội bộ trong engine — hai thứ không cùng đơn vị đo.</p>
+            </div>
+        </div>
+        <p>Một cách trả quyền điều khiển sớm hơn cho người chơi: <span class="term" data-en="animation cancel">huỷ animation</span> — cắt ngang một animation trước khi nó chạy hết, để người chơi lấy lại quyền điều khiển sớm hơn thay vì phải đợi animation kết thúc.</p>
+        <p>Celeste đi theo hướng khác: nới rộng cửa sổ nhận lệnh. Maddy Thorson, nhà phát triển game, mô tả trong một thread năm 2020. Về <span class="term" data-en="coyote time">coyote time</span>, nguyên văn: <em>"You can still jump for a short time after leaving a ledge."</em> Về <span class="term" data-en="jump buffering">jump buffering</span>, nguyên văn: <em>"If you press and hold the jump button a short time before landing, you will jump on the exact frame that you land."</em></p>
+        <p>Câu tổng kết triết lý đứng sau cả hai kỹ thuật, nguyên văn: <em>"All are centered around widening timing/positioning windows, so that everything is fudged a tiny bit in the player's favor."</em> Thread không đưa con số frame hay mili-giây cụ thể cho coyote time/jump buffering của Celeste — con số lan truyền ở nơi khác cần tự kiểm tra nguồn.</p>
+
+        <h2 id="vi-du">Ba game, ba kiểu "đã tay"</h2>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Phân tích minh hoạ, không phải trích nguồn</p>
+                <p>Bảng dưới đây là phân tích tự làm của người viết bài để minh hoạ ba trụ cột, không trích từ tài liệu nào.</p>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Game (nền tảng/thể loại)</th><th>Trụ cột nổi bật</th><th>Cảm giác nó tạo ra</th></tr></thead>
+                <tbody>
+                    <tr><td>Celeste (PC/console, platformer indie)</td><td>Real-time control</td><td>Nhân vật dừng gần như tức thì, cú dash có khựng khung hình ngắn rồi bật ra</td></tr>
+                    <tr><td>Street Fighter 6 (arcade/console/PC, đối kháng)</td><td>Real-time control + rules</td><td>Huỷ đòn và cửa sổ nhận lệnh cho phép nối chuỗi, thưởng cho tay bấm chính xác</td></tr>
+                    <tr><td>Brawl Stars (mobile, bắn top-down)</td><td>Polish</td><td>Mỗi phát trúng có hiệu ứng, âm thanh, rung ngay dưới ngón tay, bù cho cảm ứng kém chính xác hơn tay cầm</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="lens">Soi game feel qua ba trụ cột</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Bộ câu hỏi</span><h3>Soi game feel qua ba trụ cột (Steve Swink)</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Bấm nút xong bao lâu thì thấy phản hồi đầu tiên?</li>
+                <li><span class="q-icon">?</span> Người chơi có bị khoá trong animation quá lâu trước khi lấy lại quyền điều khiển không?</li>
+                <li><span class="q-icon">?</span> Vật thể trong game có va chạm, có trọng lượng thuyết phục không?</li>
+                <li><span class="q-icon">?</span> Camera phản ứng thế nào khi nhân vật tăng tốc hoặc đổi hướng đột ngột?</li>
+                <li><span class="q-icon">?</span> Bỏ hết hiệu ứng đi thì điều khiển còn thấy đã không?</li>
+                <li><span class="q-icon">?</span> Hiệu ứng đang nhấn đúng khoảnh khắc quan trọng, hay chỉ đang che chỗ trống?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Nhầm lẫn phổ biến: cứ thêm juice là feel tốt lên</p>
+                <p>Polish là trụ cột thứ ba, không phải trụ cột duy nhất. Chồng screen shake, hạt, chớp sáng lên một nền điều khiển đang trễ thì chỉ làm nhiễu, không sửa được gốc vấn đề. Phép thử đơn giản: tắt hết hiệu ứng, nếu điều khiển vẫn thấy đã thì nền tốt — hiệu ứng chỉ đang nhấn nhá thêm.</p>
+            </div>
+        </div>
+        <p>Polish quá tay còn kéo theo một vấn đề khác: accessibility. Xbox Accessibility Guideline 117 (Microsoft) khuyến nghị, nguyên văn: <em>"Avoid the use of camera shake, camera bobbing effects, motion blur, mouse blur, and more or provide an option to turn off these behaviors."</em> Lý do, nguyên văn: <em>"This mismatch between the visual perception of body movement and actual body movement contributes to feelings of motion sickness among players."</em></p>
+        <p>Theo mô tả của Microsoft, Halo Infinite có thanh trượt 0-100% cho screen shake và các hiệu ứng toàn màn hình; Elder Scrolls Online có thanh trượt cho head bob. Đưa tuỳ chọn tắt các hiệu ứng này là việc tối thiểu phải làm, không phải phần thưởng thêm.</p>
+
+        <h2 id="thuc-hanh">Chấm game feel của một game bạn đang chơi</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">20 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Chấm game feel của một game bạn đang chơi</h3>
+                <ol class="steps">
+                    <li>Chọn 1 game, chọn 1 hành động bạn lặp nhiều nhất trong game đó (bắn/nhảy/đánh).</li>
+                    <li>Quay màn hình 60fps, đếm số khung hình từ lúc bấm tới lúc thấy phản hồi đầu tiên.</li>
+                    <li>Chấm hành động đó theo 6 metric (Input, Response, Context, Polish, Metaphor, Rules), mỗi metric viết 1 câu.</li>
+                    <li>Tắt hết hiệu ứng có thể tắt được trong phần cài đặt, chơi lại 5 phút, ghi lại cảm giác thay đổi thế nào.</li>
+                    <li>Viết 1 câu: nếu chỉ được sửa MỘT thứ để hành động đó đã tay hơn, bạn sửa gì.</li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Ở 60fps mỗi khung hình dài khoảng 16,7ms — đếm khung là cách ước lượng độ trễ không cần thiết bị đo chuyên dụng. Nhớ rằng con số đếm được gồm cả độ trễ màn hình và thiết bị bạn đang dùng, không phải riêng của game.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Ba trụ cột của game feel theo Swink là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Input, Response, Polish</button>
+                <button data-opt="b"><span class="badge">B</span> Real-time control, simulated space, polish</button>
+                <button data-opt="c"><span class="badge">C</span> Mechanics, Dynamics, Aesthetics</button>
+            </div>
+            <div class="explain" hidden><p>Ba trụ cột đúng theo định nghĩa gốc là real-time control, simulated space và polish. Input/Response là hai trong sáu metric dùng để mổ xẻ, không phải trụ cột. Mechanics/Dynamics/Aesthetics là khung MDA, một công cụ khác không liên quan trực tiếp tới game feel.</p></div>
+        </div>
+        <div class="quiz" data-answer="c">
+            <p class="q">Metric thứ tư trong bộ sáu của Swink tên là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Aesthetic</button>
+                <button data-opt="b"><span class="badge">B</span> Context</button>
+                <button data-opt="c"><span class="badge">C</span> Polish</button>
+            </div>
+            <div class="explain" hidden><p>Bài gốc của Swink trên Gamasutra và tên chương sách đều dùng "Polish". "Aesthetic" là cách gọi sai xuất hiện ở một số nguồn tổng hợp.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Con số 107ms đo cho Destiny trên PS4 nghĩa là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Độ trễ do riêng code xử lý input trong game gây ra</button>
+                <button data-opt="b"><span class="badge">B</span> Độ trễ toàn pipeline, từ lúc bấm nút tới lúc thấy phản hồi trên màn hình</button>
+                <button data-opt="c"><span class="badge">C</span> Thời gian tải màn hình của game</button>
+            </div>
+            <div class="explain" hidden><p>Số đo của DisplayLag tính từ lúc bấm phím tới lúc thấy hành động đầu tiên trên màn hình — đi qua tay cầm, hệ máy, engine, màn hình. Nó không tách riêng được phần do code game gây ra.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Một game bắn cảm giác rời rạc, nhóm quyết định thêm screen shake và hạt lửa. Vấn đề của cách làm này là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Đó là bổ sung đúng, nên làm ngay</button>
+                <button data-opt="b"><span class="badge">B</span> Đó là xử lý ở lớp polish trong khi gốc vấn đề có thể nằm ở phản hồi/độ trễ, và thiếu tuỳ chọn tắt còn gây khó chịu cho một số người chơi</button>
+                <button data-opt="c"><span class="badge">C</span> Screen shake luôn làm game feel tệ đi, nên tránh hoàn toàn</button>
+            </div>
+            <div class="explain" hidden><p>Polish là trụ cột thứ ba, không sửa được mọi thứ — nếu gốc là độ trễ hay phản hồi kém, thêm hiệu ứng chỉ che chứ không sửa. Hiệu ứng như screen shake cũng cần tuỳ chọn tắt vì có thể gây khó chịu, thậm chí say tàu xe, cho một số người chơi.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Định nghĩa Game Feel (Swink)</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Điều khiển vật thể ảo trong thời gian thực, trong một không gian mô phỏng, với các tương tác được nhấn nhá bằng polish.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Ba trụ cột</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Real-time control, simulated space, polish — ghép lại thành một trải nghiệm điều khiển.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Sáu metric (đúng thứ tự)</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Input, Response, Context, Polish, Metaphor, Rules.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Coyote time là gì</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vẫn còn nhảy được trong một khoảng thời gian ngắn sau khi đã rời bệ. Thread của Maddy Thorson không đưa con số frame/ms cụ thể.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Jump buffering là gì</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Bấm giữ nút nhảy một chút trước khi chạm đất vẫn được tính — nhân vật nhảy ngay đúng khung hình chạm đất.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Theo Swink, game feel = điều khiển thời gian thực + không gian mô phỏng + polish, ghép thành một trải nghiệm.</li>
+                <li><span class="n">2</span> Polish là lớp nhấn, không phải lớp sửa. Nền điều khiển trễ thì thêm hiệu ứng chỉ làm nhiễu.</li>
+                <li><span class="n">3</span> Muốn sửa feel thì phải mổ xẻ được: dùng sáu metric để chỉ đúng chỗ đang hỏng, thay vì nói chung chung "thấy chưa đã".</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-sach">Sách</span>
+                <a class="reading-title" href="http://mycours.es/gamedesign2014/files/2014/10/Game-Feel-Steve-Swink-chapter-1.pdf" target="_blank" rel="noopener">Game Feel: A Game Designer's Guide to Virtual Sensation (chương 1)</a>
+                <span class="reading-meta">Steve Swink · Morgan Kaufmann, 2009</span>
+                <p class="reading-why">Bản chương 1 đọc được công khai — nguồn gốc định nghĩa và ba trụ cột dùng trong bài này.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/game-feel-the-secret-ingredient" target="_blank" rel="noopener">Game Feel: The Secret Ingredient</a>
+                <span class="reading-meta">Steve Swink · Gamasutra, 2007</span>
+                <p class="reading-why">Bản ngắn, nơi bộ sáu metric xuất hiện.</p>
+            </li>
+            <li>
+                <span class="pill type-video">Video</span>
+                <a class="reading-title" href="https://www.youtube.com/watch?v=AJdEqssNZ-U" target="_blank" rel="noopener">Jan Willem Nijman - Vlambeer - "The art of screenshake" at INDIGO Classes 2013</a>
+                <span class="reading-meta">Dutch Game Garden · 44 phút</span>
+                <p class="reading-why">Talk xoay quanh câu hỏi: vì sao một game chơi rất đã, còn một game tương tự lại thấy tệ.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://learn.microsoft.com/en-us/gaming/accessibility/xbox-accessibility-guidelines/117" target="_blank" rel="noopener">Xbox Accessibility Guideline 117</a>
+                <span class="reading-meta">Microsoft</span>
+                <p class="reading-why">Danh sách hiệu ứng cần cho tuỳ chọn tắt, kèm lý do.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://displaylag.com/console-latency-exploring-video-game-input-lag/" target="_blank" rel="noopener">Console Latency: Exploring Video Game Input Lag</a>
+                <span class="reading-meta">Adeel Soomro · DisplayLag</span>
+                <p class="reading-why">Cách đo độ trễ bằng camera, và số đo thật trên các máy console.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

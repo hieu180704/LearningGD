@@ -114,15 +114,15 @@ window.CURRICULUM = [
             {
                 slug: "tang-1/05-game-feel",
                 title: "Game Feel",
-                summary: "Cảm giác điều khiển tức thời: input, phản hồi, polish.",
+                summary: "Vì sao cùng luật chơi mà game này bấm đã tay, game kia rời rạc: ba trụ cột và sáu metric của Swink.",
                 goals: [
-                    "Liệt kê yếu tố tạo game feel (input, camera, hiệu ứng)",
-                    "Phân tích vì sao một điều khiển 'đã tay'",
-                    "Thử tinh chỉnh một thông số để cải thiện cảm giác điều khiển"
+                    "Gọi tên ba trụ cột tạo nên game feel",
+                    "Mổ xẻ cảm giác điều khiển bằng sáu metric của Swink",
+                    "Biết vì sao thêm hiệu ứng không đồng nghĩa với feel tốt hơn"
                 ],
                 minutes: 14,
                 level: "Cơ bản",
-                status: "planned"
+                status: "ready"
             }
         ]
     },

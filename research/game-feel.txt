@@ -1,0 +1,197 @@
+TIÊU ĐỀ: Research — Game Feel (Swink, độ trễ, animation cancel, screen shake/juice)
+Ngày research: 2026-09-16
+Trạng thái: Định nghĩa và 3 building blocks của Swink đã verify bằng cách tự mở đọc
+nguyên văn PDF chương 1 sách gốc. Bài Gamasutra của Swink, số đo độ trễ DisplayLag,
+thread Maddy Thorson (Celeste) và Xbox Accessibility Guideline 117 đều đã tự mở đọc
+trực tiếp. Talk "The Art of Screenshake" chỉ xác nhận được metadata (tên, URL, kênh,
+ngày đăng), KHÔNG lấy được nội dung/transcript — chỉ dùng làm mục đọc thêm. Talk "Juice
+It or Lose It" KHÔNG verify được ở mức đưa vào bài — xem mục 7.
+
+MỤC LỤC
+1. Steve Swink — Game Feel (sách, 2009): định nghĩa và Three Building Blocks
+2. Steve Swink — "Game Feel: The Secret Ingredient" (Gamasutra, 2007): định nghĩa báo
+   chí và bộ 6 metric
+3. Độ trễ đo thật — DisplayLag (Adeel Soomro)
+4. Maddy Thorson (Celeste) — coyote time và jump buffering
+5. Xbox Accessibility Guideline 117 — screen shake và say tàu xe
+6. "The Art of Screenshake" (Jan Willem Nijman) — chỉ dùng làm nguồn đọc thêm
+7. TỔNG HỢP — KHÔNG VERIFY ĐƯỢC (không đưa vào bài)
+8. PHÂN TÍCH MINH HOẠ (không phải theo nguồn)
+
+================================================================
+1. STEVE SWINK — GAME FEEL (SÁCH, 2009): ĐỊNH NGHĨA VÀ THREE BUILDING BLOCKS
+================================================================
+Nguồn: Steve Swink, "Game Feel: A Game Designer's Guide to Virtual Sensation" (Morgan
+Kaufmann, 2009), Chương 1 "Defining Game Feel". Bản PDF toàn văn chương 1 tải từ
+http://mycours.es/gamedesign2014/files/2014/10/Game-Feel-Steve-Swink-chapter-1.pdf —
+ĐÃ MỞ ĐỌC TRỰC TIẾP (tải file, trích xuất text bằng pdftotext), truy cập 2026-09-16.
+Tên chương khớp mục lục chính thức của Library of Congress:
+https://catdir.loc.gov/catdir/toc/ecip0825/2008035742.html
+
+Câu nối trước định nghĩa, NGUYÊN VĂN:
+"Assembling these three elements--real-time control, simulated space and
+polish--into a single experience, we arrive at a basic, workable definition of game
+feel:"
+
+Định nghĩa lõi, NGUYÊN VĂN (xuất hiện 2 lần trong chương, gồm cả mục Summary):
+"Real-time control of virtual objects in a simulated space, with interactions
+emphasized by polish."
+
+Heading thật trong chương là "The Three Building Blocks of Game Feel" (đây là HEADING
+BÊN TRONG chương 1, KHÔNG phải tên chương — tên chương 1 là "Defining Game Feel"). Câu
+dẫn ngay dưới heading, NGUYÊN VĂN:
+"Game feel, as experienced by players, is built from three parts: real-time control,
+simulated space and polish."
+
+Năm loại trải nghiệm, liệt kê ở mục Summary cuối chương 1, NGUYÊN VĂN từng dòng:
+"The aesthetic sensation of control"
+"The pleasure of learning, practicing and mastering a skill"
+"Extension of the senses"
+"Extension of identity"
+"Interaction with a unique physical reality within the game"
+Câu chốt, NGUYÊN VĂN:
+"Of these five experiences, no single experience encompasses game feel. Rather, game
+feel is all of these experiences simultaneously."
+
+================================================================
+2. STEVE SWINK — "GAME FEEL: THE SECRET INGREDIENT" (GAMASUTRA, 2007): ĐỊNH NGHĨA
+   BÁO CHÍ VÀ BỘ 6 METRIC
+================================================================
+Nguồn: Steve Swink, "Game Feel: The Secret Ingredient", Gamasutra/gamedeveloper.com,
+đăng 2007-11-23. URL: https://www.gamedeveloper.com/design/game-feel-the-secret-ingredient
+— ĐÃ MỞ ĐỌC TRỰC TIẾP, truy cập 2026-09-16.
+
+Định nghĩa kiểu văn phong báo chí, NGUYÊN VĂN, 3 câu liền nhau (phần mở đầu bài):
+"The tactile sensation of manipulating a digital agent. The thing that makes your mom
+lean in her chair as she plays Rad Racer. Proxied embodiment."
+
+Bộ 6 metric để mổ xẻ game feel, ĐÚNG thứ tự liệt kê trong bài: Input, Response,
+Context, Polish, Metaphor, Rules.
+
+GHI CHÚ BẮT BUỘC khi viết bài: Wikipedia liệt kê metric thứ 4 là "Aesthetic" — SAI.
+Nguồn sơ cấp (chính Swink viết, bài này) dùng "Polish", và khớp tên chương sách (Ch6
+Input Metrics, Ch7 Response Metrics, Ch8 Context Metrics, Ch10 Metaphor Metrics, Ch11
+Rules Metrics theo mục lục LOC ở mục 1; trang mục lục LOC không hiện rõ tên chương 9,
+vị trí lẽ ra là "Polish Metrics"). Bài học dùng "Polish", không dùng "Aesthetic".
+
+================================================================
+3. ĐỘ TRỄ ĐO THẬT — DISPLAYLAG (ADEEL SOOMRO)
+================================================================
+Nguồn: Adeel Soomro, DisplayLag, "Console Latency: Exploring Video Game Input Lag".
+URL: https://displaylag.com/console-latency-exploring-video-game-input-lag/ — ĐÃ MỞ
+ĐỌC TRỰC TIẾP, truy cập 2026-09-16. Trang chỉ ghi thời điểm đăng là "11 years ago",
+KHÔNG có ngày tháng chính xác → KHÔNG ghi năm cụ thể trong bài.
+
+Phương pháp, NGUYÊN VĂN:
+"By recording a key press with the game running, I am able to calculate the exact
+difference between the key lighting up and the first action that appears in-game."
+
+Màn hình dùng để test: BenQ RL2755HM, "an average input lag of approximately 10ms".
+
+Số đo (input-to-action, đơn vị ms):
+- PS4, Destiny: 107
+- PS4, Killzone: Shadow Fall: 119
+- PS4, Mortal Kombat X: 107
+- Xbox One, Killer Instinct: 81
+- Xbox One, Forza Horizon 2: 149
+
+CẢNH BÁO PHẢI GHI RÕ KHI ĐƯA VÀO BÀI: đây là độ trễ TOÀN PIPELINE (tay cầm → hệ máy →
+engine → màn hình), KHÔNG phải "độ trễ do code game" — không được viết như thể đây là
+con số đo riêng phần xử lý input của game.
+
+================================================================
+4. MADDY THORSON (CELESTE) — COYOTE TIME VÀ JUMP BUFFERING
+================================================================
+Nguồn: Maddy Thorson (nhà phát triển Celeste), thread trên X/Twitter đăng 2020-03-12.
+Bản mirror đã mở đọc: https://threadreaderapp.com/thread/1238338574220546049.html —
+ĐÃ MỞ ĐỌC TRỰC TIẾP, truy cập 2026-09-16. Lưu ý: thread đăng dưới handle cũ; trong bài
+gọi tác giả là "Maddy Thorson", không dùng tên/handle cũ.
+
+Coyote time, NGUYÊN VĂN:
+"You can still jump for a short time after leaving a ledge."
+
+Jump buffering, NGUYÊN VĂN:
+"If you press and hold the jump button a short time before landing, you will jump on
+the exact frame that you land."
+
+Câu tổng kết triết lý thiết kế, NGUYÊN VĂN:
+"All are centered around widening timing/positioning windows, so that everything is
+fudged a tiny bit in the player's favor."
+
+Thread KHÔNG đưa số frame hay số ms cụ thể cho coyote time/jump buffer của Celeste. Có
+nhắc khoảng cách tính bằng pixel (wall jump "2 pixels", super wall jump khoảng "5
+pixels") trong bối cảnh game độ phân giải 320x180 — không phải số đo thời gian.
+
+================================================================
+5. XBOX ACCESSIBILITY GUIDELINE 117 — SCREEN SHAKE VÀ SAY TÀU XE
+================================================================
+Nguồn: Microsoft Learn, "Xbox Accessibility Guidelines 117". URL:
+https://learn.microsoft.com/en-us/gaming/accessibility/xbox-accessibility-guidelines/117
+— ĐÃ MỞ ĐỌC TRỰC TIẾP, truy cập 2026-09-16.
+
+Khuyến nghị chính, NGUYÊN VĂN:
+"Avoid the use of camera shake, camera bobbing effects, motion blur, mouse blur, and
+more or provide an option to turn off these behaviors."
+
+Lý do (cơ chế gây say do lệch tiền đình), NGUYÊN VĂN:
+"This mismatch between the visual perception of body movement and actual body
+movement contributes to feelings of motion sickness among players."
+
+Ví dụ game, do CHÍNH TRANG MICROSOFT mô tả (paraphrase của Microsoft, KHÔNG phải lời
+trích trực tiếp từ nhà phát triển game):
+- Halo Infinite: thanh trượt 0-100% cho radial blur / screen shake / hiệu ứng toàn màn
+  hình / speed lines.
+- Cyberpunk 2077: chỉnh lượng "additive" camera motion.
+- Elder Scrolls Online: thanh trượt chỉnh cường độ head bob góc nhìn thứ nhất.
+- Minecraft: FOV chỉnh tới 110°, trang giải thích rõ FOV cao gây hiệu ứng "fishbowl".
+- Assassin's Creed Valhalla: bật/tắt camera gần (close camera).
+- Sea of Thieves: tự căn giữa camera (auto-center) + chỉnh delay/tốc độ.
+
+================================================================
+6. "THE ART OF SCREENSHAKE" (JAN WILLEM NIJMAN) — CHỈ DÙNG LÀM NGUỒN ĐỌC THÊM
+================================================================
+Talk này CHỈ dùng làm mục Đọc thêm trong bài, KHÔNG trích nội dung — vì không lấy được
+transcript/slide gốc (xem mục 7).
+
+Metadata đã tự verify từ trang YouTube, truy cập 2026-09-16:
+- Tiêu đề chính xác: "Jan Willem Nijman - Vlambeer - 'The art of screenshake' at
+  INDIGO Classes 2013"
+- URL: https://www.youtube.com/watch?v=AJdEqssNZ-U
+- Kênh: Dutch Game Garden. Đăng: 2013-12-16. Thời lượng: 2649 giây (44 phút 09 giây).
+- Mô tả video, NGUYÊN VĂN: "INDIGO Classes 2013: Jan Willem Nijman is 50% of indie
+  power house Vlambeer. He talks about 'The Art of Screenshake'. Why is it that one
+  game plays great and another, similar game feels terrible?"
+
+GHI RÕ khi đưa vào bài: talk trình bày tại INDIGO Classes 2013, KHÔNG phải Nordic Game
+Jam (nhầm lẫn phổ biến).
+
+================================================================
+7. TỔNG HỢP — KHÔNG VERIFY ĐƯỢC (KHÔNG ĐƯA VÀO BÀI)
+================================================================
+1. Danh sách thủ thuật trong talk "The Art of Screenshake" (Nijman): không lấy được
+   transcript/slide gốc. Phụ đề YouTube chỉ có bản tự sinh (ASR), endpoint timedtext bị
+   chặn (404). Một trang thứ ba liệt kê 30 bước nhưng là tóm tắt của người khác, không
+   phải lời Nijman → không trích. Nguồn đã thử và fail: archive.org (bản trình chiếu
+   không có text), notebook.maryrosecook.com (certificate expired), gamedev.city (404).
+2. Talk "Juice It or Lose It" (Martin Jonasson & Petri Purho, GDC Europe 2012, GDC
+   Vault ID 1016789): chỉ xác nhận được bối cảnh, không lấy được danh sách kỹ thuật từ
+   nguồn gốc. longwelwind.net là demo người khác tự làm lại, không phải trình tự trên
+   sân khấu. grapefrukt.com đã thử trả 404. → KHÔNG đưa vào bài, kể cả mục Đọc thêm.
+3. Ngưỡng ms mà người chơi bắt đầu cảm nhận được độ trễ: không mở được nguồn học thuật
+   gốc (MacKenzie & Ware 1993 — yorku.ca lỗi SSL, ResearchGate 403). KHÔNG dùng bất kỳ
+   con số ngưỡng nào trong bài.
+4. Số frame cụ thể của coyote time / jump buffer trong Celeste: không có trong nguồn
+   gốc. Một trang claim con số nhưng khi mở đọc thật thì không có → loại.
+5. Các game khác có tuỳ chọn tắt screen shake ngoài danh sách mục 5 (Hollow Knight,
+   Stray, Rainbow Six Siege, v.v.): chỉ thấy qua đoạn tổng hợp của công cụ tìm kiếm,
+   chưa mở trang nào verify → không dùng.
+6. Số trang in tuyệt đối trong ấn bản Morgan Kaufmann của các trích dẫn ở mục 1 (bản
+   PDF không có trang bìa/bản quyền để đối chiếu).
+
+================================================================
+8. PHÂN TÍCH MINH HOẠ (KHÔNG PHẢI THEO NGUỒN)
+================================================================
+Phần này là phân tích tự làm để minh hoạ, không trích từ nguồn nào — khi đưa vào bài
+phải tách bạch rõ với các phần "theo nguồn" ở trên.
+
+Ví dụ minh hoạ sẽ do main chọn khi dựng bài.
