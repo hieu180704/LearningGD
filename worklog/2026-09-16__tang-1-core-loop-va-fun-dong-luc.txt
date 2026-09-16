@@ -1,0 +1,30 @@
+SUMMARY: Dựng xong 2 bài Tầng 1 — 02 Core Loop (d74b8ec) và 03 Fun và động lực người chơi (ebaa887), user đã duyệt cả hai. check-site 0 lỗi; main tự fact-check từng câu trích với research và tự xem ảnh MOBILE (sáng + tối) của cả 2 bài. CHƯA verify: ảnh desktop cả 2 theme, và quiz/flashcard chưa bấm thử trên trình duyệt thật lần nào. CHƯA push lên remote (2 commit đang chờ).
+
+Đã làm:
+- lessons/tang-1/02-core-loop.html (12 phút, 1.661 chữ thân bài): 21 câu trích khớp nguyên văn
+  research/core-loop.txt. Main sửa 6 chỗ subagent làm lệch nguồn: bỏ năm "Bungie, 2001" không có
+  nguồn; "dẫn dắt thiết kế combat" → "Design Lead của Bungie thời Halo"; bỏ dấu chấm thừa trong
+  quote skill atom; bỏ nhãn "roguelite" cho Dead Cells (research ghi roguelike-metroidvania);
+  bảng so sánh 4 cột → 3 cột vì mobile 400px ép chữ vỡ 1-2 từ mỗi dòng.
+- research/fun-dong-luc.txt (594 dòng, 8 mục): nguồn sơ cấp đã mở đọc thật gồm PDF gốc Lazzaro
+  (xeodesign.com), paper SDT 2006 (selfdeterminationtheory.org), Lepper 1973 (PDF MIT),
+  Bartle 1996 (mud.co.uk) + phỏng vấn 2012, developer commentary Portal, phỏng vấn Hanke (VICE).
+- lessons/tang-1/03-fun-dong-luc.html (13 phút): 29 câu trích khớp nguyên văn. Loại toàn bộ
+  nội dung [CHƯA VERIFY]: 4 câu gán cho Koster (gồm "Fun is just another word for learning"),
+  và trích lời Jenova Chen về Journey (nguồn chỉ là blog fan tường thuật GDC talk — Journey vẫn
+  ở trong bài nhưng chỉ mô tả cơ chế). Main sửa 6 chỗ: lẫn năm quan sát MUD với năm công bố bài
+  Bartle (2 chỗ); bỏ claim "Lazzaro nhấn mạnh cân bằng độ khó" không có trong phần đã verify;
+  ghi đúng tên bài nói của Koster; rút đoạn sau bảng 4 Keys từ 5 trích dẫn xuống 2 (CLAUDE.md §5
+  quy định mỗi khái niệm tối đa 1 trích); bảng Bartle 2 cột → danh sách vì nguyên văn dài bị cắt
+  ngang trên mobile.
+- curriculum.js: 02 và 03 đổi status "planned" → "ready" (sau khi file bài đã tồn tại thật).
+  tools/shoot.ps1: thêm 2 bài mới vào danh sách chụp.
+
+Cần user quyết (KHÔNG tự sửa — global rule 7):
+- research/core-loop.txt mục 1 thiếu tiêu đề paper của Sicart. Session này tự mở PDF verify được:
+  "Loops and Metagames: Understanding Game Design Structures", Miguel Sicart, Center for Computer
+  Games Research, IT University of Copenhagen, FDG 2015. Nên bổ sung vào research kèm dấu
+  ĐÃ VERIFY 2026-09-16.
+
+Git: 2 commit d74b8ec + ebaa887 đã tạo, CHƯA push. Push phải do user tự chạy vì shell của session
+không đọc được credential GitHub: ! git -C D:/Project/GD push
