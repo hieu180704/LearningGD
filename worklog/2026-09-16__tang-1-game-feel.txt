@@ -1,0 +1,38 @@
+SUMMARY: Dựng xong Tầng 1 bài 05 Game Feel + research (e9a357d), user đã duyệt — check-site 0 lỗi, div 46/46; main tự xem ảnh mobile sáng (trừ đoạn quiz/flashcard), 1 đoạn mobile tối, đầu trang desktop tối; CHƯA xem ảnh desktop sáng; quiz/flashcard CHƯA bấm thử trên trình duyệt thật (tồn 3 session). CHƯA push. Tầng 1 đã đủ 5/5 bài.
+
+ĐÃ LÀM
+- research/game-feel.txt (197 dòng): Swink "Game Feel" ch.1 (định nghĩa lõi, "The Three Building Blocks of Game Feel", 5 loại trải nghiệm) — main tự curl PDF + pdftotext đối chiếu nguyên văn; Swink Gamasutra 2007 (6 metric Input/Response/Context/Polish/Metaphor/Rules + mô tả từng metric) — main tự mở; DisplayLag (số đo end-to-end) và thread Maddy Thorson (coyote time, jump buffering) — main tự mở; Xbox Accessibility Guideline 117 — subagent mở.
+- Loại khỏi bài: nội dung talk "The Art of Screenshake" (INDIGO Classes 2013, KHÔNG phải Nordic Game Jam) và "Juice It or Lose It" — không lấy được transcript/slide gốc; chỉ giữ video Nijman ở mục Đọc thêm (metadata main verify từ trang YouTube). Không dùng con số ngưỡng ms cảm nhận độ trễ (không có nguồn mở được).
+- lessons/tang-1/05-game-feel.html (365 dòng, ~2.560 chữ đếm thô cả câu trích EN — dài hơn bài 04 ~10%, vượt mục tiêu 1.500-1.900; user đã duyệt nguyên độ dài). .lens dựng từ 3 trụ cột Swink, KHÔNG gán số hiệu Schell. Bảng 3 game (Celeste/Street Fighter 6/Brawl Stars) là phân tích minh hoạ, có callout note tách bạch.
+- curriculum.js: summary/goals khớp objectives bài, status ready. shoot.ps1: thêm dòng chụp bài 05.
+
+LỖI ĐÃ BẮT & SỬA
+- Subagent báo tên chương 1 là "The Three Building Blocks of Game Feel" — sai: tên chương là "Defining Game Feel" (mục lục LOC), "Three Building Blocks" là heading bên trong chương.
+- Bảng 6 metric agent viết lệch nghĩa Input (là thiết bị nhập — "the player's organ of expression", không phải độ trễ) và Rules ("longer-period objectives", không phải điều kiện thắng/thua).
+- Câu dẫn nối animation cancel với thread Thorson làm người đọc tưởng coyote time là animation cancel -> tách 2 hướng.
+- 7 chỗ viết quá nguồn ("phải đủ cả năm", "thiếu trụ cột nào cũng hỏng", h2 "trụ cột dễ hỏng nhất", "đo được bằng số", "thanh trượt riêng", "head bob góc nhìn thứ nhất", mô tả nội dung talk screenshake ở Đọc thêm) -> sửa.
+- Pill "Cần biết trước: MDA Framework: nhìn game qua ba lớp" tràn ngang mobile, lệch quy ước bài 02-04 -> đổi "Nên đọc trước: MDA". check-site KHÔNG bắt lỗi này, chỉ lộ qua ảnh.
+
+VẤP MỚI
+- Subagent research 1 mảng lớn chết vì "Prompt is too long" (WebFetch PDF/trang lớn). Cách chạy được: chia 1 agent/1 mảng, trần 10-12 lượt fetch, cấm fetch PDF sách dài; PDF cần verify thì main curl về rồi `pdftotext -layout` (có sẵn trong Git Bash).
+- YouTube: trang watch có captionTracks (ASR) nhưng endpoint timedtext trả 404 khi curl -> không lấy được transcript talk.
+- Hết quota Sonnet tuần giữa lúc subagent dựng HTML: agent chết sau khi đã ghi file nhưng TRƯỚC bước tự kiểm tra -> main phải đọc lại toàn bộ. Agent chết != file hỏng, nhưng cũng != file đã kiểm.
+- Cắt ảnh dài để xem: System.Drawing Clone theo tile 2600px (ảnh mobile 32000px đọc nguyên bị thu quá nhỏ).
+- Trong .reading, mục có tiêu đề ngắn (Xbox Accessibility Guideline 117) nằm chung dòng với pill, lệch so với các mục khác — chưa rõ hành vi CSS sẵn có hay lỗi, CHƯA sửa.
+
+CẦN USER QUYẾT (KHÔNG tự sửa - global rule 7) — 4 mục từ worklog 2026-09-16__tang-1-flow-do-kho.txt VẪN TREO, user chưa trả lời:
+- CLAUDE.md mục 8 bổ sung: check-site.js không bắt thẻ không cân bằng (session này thêm: cũng không bắt tràn ngang mobile).
+- tools/shoot.ps1 dòng 1: comment phạm vi stale.
+- lessons/tang-1/03-fun-dong-luc.html lệch thứ tự mục 5 (main đề xuất giữ nguyên).
+- Repo chưa có repo-params.json cho skill session-close.
+- MỚI: độ dài bài 05 vượt mục tiêu CLAUDE.md mục 5 (bài 04 cũng vượt khi đếm cùng cách) — cân nhắc chỉnh mục tiêu hoặc cách đếm.
+
+DOC-SYNC (floor grep theo diff e9a357d)
+- CLAUDE.md:26,47,51,130,181 nhắc curriculum.js — NO-CHANGE: mô tả vai trò file/quy trình, diff chỉ đổi dữ liệu bài 05.
+- CLAUDE.md:54,133,160,163,183 nhắc shoot.ps1 — NO-CHANGE: mô tả công cụ/cách dùng, diff chỉ thêm 1 dòng danh sách trang.
+- lessons/_lesson-starter.html:10,13,14 — NO-CHANGE: hướng dẫn quy trình chung.
+- Các file .html khác chỉ có script tag curriculum.js — NO-CHANGE.
+- game-feel / 05-game-feel: không doc sống nào nhắc.
+
+SHA
+- e9a357d Tầng 1: bài 05 Game Feel + research
