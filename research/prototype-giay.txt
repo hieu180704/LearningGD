@@ -1,0 +1,163 @@
+TIÊU ĐỀ: Research — Prototype trên giấy (Fullerton, Lemarchand, Hearthstone, Soulsmith, George Fan)
+Ngày research: 2026-09-16
+Trạng thái: 5 nguồn chính (Fullerton, Lemarchand, Hearthstone, Soulsmith, George Fan) đã tự
+mở đọc nguyên văn (main curl + grep), riêng Hearthstone/Kotaku đọc qua bản lưu
+web.archive.org vì trang gốc trả 403. Các nguồn thứ cấp (Schell, quy trình 4 bước của
+Fullerton, tên chương sách Lemarchand, một số game minh hoạ, vài chi tiết lẻ) KHÔNG
+verify được ở mức đưa vào bài — xem mục 6. Giới hạn của paper prototype (không test được
+real-time/feel) KHÔNG có nguồn — nếu viết phải ghi rõ là phân tích của người viết — xem
+mục 7.
+
+MỤC LỤC
+1. Tracy Fullerton — "Book Excerpt: Game Design Workshop, 5th Edition"
+2. Richard Lemarchand — phỏng vấn "Playtesting and a Playful Production Process"
+3. Hearthstone (Blizzard, 2014) — Kotaku, "Pens, Paper And Envelopes"
+4. Soulsmith — blog "Play(test)ing Paper Prototype"
+5. George Fan (Plants vs. Zombies) — Destructoid
+6. TỔNG HỢP — KHÔNG VERIFY ĐƯỢC (không đưa vào bài)
+7. CHƯA CÓ NGUỒN — giới hạn của paper prototype (chỉ phân tích của người viết)
+
+================================================================
+1. TRACY FULLERTON — "BOOK EXCERPT: GAME DESIGN WORKSHOP, 5TH EDITION"
+================================================================
+Nguồn: Tracy Fullerton, "Book Excerpt: Game Design Workshop, 5th Edition", Game
+Developer, đăng 2024-04-18.
+URL: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop — ĐÃ MỞ ĐỌC
+TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Lưu ý: 2024-04-18 là ngày đăng bài trích, KHÔNG phải năm xuất bản sách — năm bản 5th
+CHƯA CHỐT, không ghi năm sách trong bài.
+
+Nguyên văn (liền nhau trong trang):
+"A physical prototype can use paper and pen or index cards or even be acted out. It is
+meant to be played by the designer and her friends. The goal is to play and perfect
+this simplistic model before a single line of code or art asset is ever made."
+
+Phụ (từ research agent, KHÔNG main tự mở): bản 5th có chương 9 "Prototyping"
+(taylorfrancis.com); bản ~2008 chương 7 "Prototyping", chương 8 "Digital Prototyping"
+(catdir.loc.gov). Không đưa số chương vào bài.
+
+================================================================
+2. RICHARD LEMARCHAND — PHỎNG VẤN "PLAYTESTING AND A PLAYFUL PRODUCTION PROCESS"
+================================================================
+Nguồn: Richard Lemarchand, phỏng vấn "Richard Lemarchand – Playtesting and a Playful
+Production Process", Games User Research (người phỏng vấn/tác giả trang: Steve
+Bromley), đăng 2021-12-08.
+URL: https://gamesuserresearch.com/richard-lemarchand-playtesting-and-a-playful-production-process/
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn: "I tell my students that when they're prototyping, looking for interesting
+game verbs that might lead them to a more fully developed game design, it's usually
+much better to make a toy than it is a game."
+
+Nguyên văn (liên quan playtest — dùng cho bài 02, hạn chế dùng ở bài này): "I think that
+no matter how small and clunky, and maybe un-gamelike a prototype that you make is,
+there's incredible value in putting it in front of somebody else, and just seeing how
+they react, seeing how they approach it, seeing if they can work out the controls that
+you haven't properly explained, seeing what they can get just through play."
+
+Sách của ông: "A Playful Production Process: For Game Designers (and Everyone)", MIT
+Press, 2021 — KHÔNG trích nội dung sách (không mở được).
+
+================================================================
+3. HEARTHSTONE (BLIZZARD, 2014) — KOTAKU, "PENS, PAPER AND ENVELOPES"
+================================================================
+Nguồn: Mark Serrels, "Pens, Paper And Envelopes: The Making Of Hearthstone", Kotaku,
+đăng 2014-05-04.
+URL gốc: https://kotaku.com/pens-paper-and-envelopes-the-making-of-hearthstone-1571690185
+(gốc trả 403; main đọc bản lưu https://web.archive.org/web/2014/<url gốc>) — ĐÃ MỞ ĐỌC
+TRỰC TIẾP (main curl + grep nguyên văn) qua bản web.archive.org, truy cập 2026-09-16.
+
+Nguyên văn:
+- "Eric and Ben took blank pieces of paper. Literal pieces of paper. They drew funny
+  pictures and they wrote numbers above those funny pictures."
+- "For the longest time, Eric and Ben worked almost exclusively with pen and paper."
+- Hamilton Chu: "they took those funny drawings, cut them into cards and tried a whole
+  lot of bad ideas on the way to some great ideas"
+- "They had essentially prototyped and then built everything Hearthstone was going to
+  be in Flash."
+- "It was the kind of work that couldn't be done on pen and paper." (ngữ cảnh chưa rõ —
+  KHÔNG dùng)
+
+Vai trò: Eric Dodds = Director của game; Hamilton Chu = Executive Producer; Ben Brode
+(không ghi chức danh trong câu đã grep).
+
+CẢNH BÁO: câu "For a long time Dodds and Brode used only pen and paper..." trên
+hearthstone.wiki.gg KHÔNG phải nguyên văn Kotaku — không dùng.
+
+================================================================
+4. SOULSMITH — BLOG "PLAY(TEST)ING PAPER PROTOTYPE"
+================================================================
+Nguồn: Oleksandr Tkachenko, "Play(test)ing Paper Prototype", Game Developer, đăng
+2018-03-08.
+URL: https://www.gamedeveloper.com/design/play-test-ing-paper-prototype — ĐÃ MỞ ĐỌC
+TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Studio: chỉ ghi được "small indie studio from Ukraine" (tên "Coffee Owl Games" KHÔNG
+thấy trong trang — không dùng tên studio).
+
+Nguyên văn:
+- "We are small indie studio from Ukraine focused on Soulsmith card game creation. In
+  this article we would like to share our experience of testing early paper prototypes
+  and what we have learned from it."
+- "Difficulties with ending the game when one player is far ahead, lack of comeback
+  mechanics in certain situations, dumb dominant strategies, stalemate scenarios, and
+  many other nasty things can be found only after dozens or even hundreds of playing
+  sessions if your game is deep enough."
+- "It's better to find and solve core gameplay problems in a paper prototype and not
+  when everything is coded."
+
+CẢNH BÁO: bài KHÔNG nói bản giấy của họ đã phát hiện cụ thể lỗi comeback — chỉ nói các
+loại lỗi này cần nhiều ván mới lộ. Không viết quá.
+
+================================================================
+5. GEORGE FAN (PLANTS VS. ZOMBIES) — DESTRUCTOID
+================================================================
+Nguồn: "Plants vs. Zombies creator George Fan on past success, future risks, and drafts
+with Edmund McMillen", Destructoid, đăng 2018-02-01.
+URL: https://www.destructoid.com/plants-vs-zombies-creator-george-fan-on-past-success-future-risks-and-drafts-with-edmund-mcmillen/
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn: "I remember cutting up index cards to do a paper prototype of what would
+end up being a simple puzzle game where you play as a gopher, trying to eat all the
+cabbages in a path without backtracking."
+
+Tên game: research agent gọi là "Wrath of the Gopher" — tên này main CHƯA thấy trong
+trang → trong bài KHÔNG ghi tên game, chỉ mô tả "một game puzzle nhỏ về con chuột túi
+(gopher)". Không nói nó ra trước Plants vs. Zombies bao lâu.
+
+================================================================
+6. TỔNG HỢP — KHÔNG VERIFY ĐƯỢC (KHÔNG ĐƯA VÀO BÀI)
+================================================================
+1. Jesse Schell — "The Art of Game Design": tip prototype và "Lens of the Toy" — chỉ
+   tìm được qua notesbylex.com (ghi chú cá nhân của một người đọc, tự nhận "2nd
+   Edition"), không phải trang sách gốc; số Lens/số chương có thể lệch giữa các edition.
+   CIRCA (circa.cs.ualberta.ca), nguồn học thuật đáng tin hơn, bị lỗi kết nối không mở
+   được. → LOẠI, không dùng.
+2. Quy trình 4 bước Foundation / Structure / Formal Details / Refinement của Fullerton:
+   chỉ thấy qua blog review gbgames.com (người đọc tóm tắt lại 3rd edition), không phải
+   nguyên văn sách. Trang O'Reilly chứa chương gốc (K22093_C007.xhtml) trả 403/paywall.
+   → LOẠI, không dùng.
+3. Tên chương sách Lemarchand ("Game Prototyping: An Overview", "Making a Digital Game
+   Prototype"): chỉ thấy trong search snippet, chưa mở được trang mục lục gốc
+   (mitpress.mit.edu trả 403, mitpress.ublish.com lỗi kết nối) → không dùng.
+4. Các game khác được cân nhắc minh hoạ nhưng KHÔNG đủ nguồn/không đúng bản chất paper
+   prototype: Invisible Inc (chỉ "card game style", không phải bản giấy), Slay the
+   Spire, XCOM, Into the Breach, Monument Valley, Diablo, Frozen Synapse, Civilization
+   → LOẠI, không dùng.
+5. Câu "It was the kind of work that couldn't be done on pen and paper" (Kotaku,
+   Hearthstone, mục 3): ngữ cảnh chưa rõ khi grep — KHÔNG dùng.
+6. Câu trên hearthstone.wiki.gg ("For a long time Dodds and Brode used only pen and
+   paper...") — KHÔNG phải nguyên văn Kotaku, không dùng.
+7. Tên studio "Coffee Owl Games" cho Soulsmith (mục 4) — không thấy trong bài gốc
+   gamedeveloper.com, không dùng.
+8. Tên game "Wrath of the Gopher" (George Fan, mục 5) — research agent gọi vậy nhưng
+   main chưa thấy trong trang Destructoid, không dùng.
+
+================================================================
+7. CHƯA CÓ NGUỒN — GIỚI HẠN CỦA PAPER PROTOTYPE (CHỈ PHÂN TÍCH CỦA NGƯỜI VIẾT)
+================================================================
+Không tìm được nguồn nào (đã mở đọc, nguyên văn) nói rõ paper prototype KHÔNG test được
+gì. Nếu bài muốn nói giấy không test được real-time, feel, timing, độ trễ — đây phải là
+"phân tích của người viết", tách bạch bằng callout note, không gán cho bất kỳ tác giả
+nào ở các mục trên.

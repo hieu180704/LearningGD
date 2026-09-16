@@ -144,7 +144,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 12,
                 level: "Trung bình",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-2/02-playtest",
