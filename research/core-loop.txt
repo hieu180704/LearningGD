@@ -42,6 +42,8 @@ bài giảng cho tới khi verify lại bằng cách tự mở đọc trực ti�
 ĐỊNH NGHĨA HỌC THUẬT GẦN NHẤT ĐÃ VERIFY — Miguel Sicart, paper "Loops and
 Metagames: Understanding Game Design Structures", trình bày tại hội nghị
 FDG (Foundations of Digital Games) 2015:
+Affiliation tác giả (theo trang đầu PDF): Center for Computer Games
+Research, IT University of Copenhagen. Re-verify 2026-09-16.
 ĐÃ MỞ ĐỌC TRỰC TIẾP qua proxy r.jina.ai (PDF gốc bị lỗi certificate khi mở
 trực tiếp bằng WebFetch, nhưng nội dung lấy qua proxy là văn bản thật của
 paper, không phải diễn giải thứ ba):
