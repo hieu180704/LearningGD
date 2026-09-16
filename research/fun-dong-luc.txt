@@ -1,0 +1,594 @@
+NGHIÊN CỨU & FACT-CHECK: FUN VÀ ĐỘNG LỰC NGƯỜI CHƠI
+(Nguồn cho bài giảng tiếng Việt — Tầng 1, Bài 03 — người mới học Game Design)
+Ngày thực hiện: 2026-09-16
+
+MỤC LỤC
+1. Raph Koster — "A Theory of Fun for Game Design": fun = học/nhận diện pattern
+2. Nicole Lazzaro — "4 Keys to Fun" (XEODesign)
+3. Self-Determination Theory trong game — Ryan, Rigby, Przybylski (2006)
+4. Động lực nội tại vs ngoại tại — overjustification effect
+5. Bartle player types — Achievers, Explorers, Socialisers, Killers
+6. Ví dụ game cụ thể minh hoạ các loại fun / nhu cầu tâm lý (đa thể loại)
+7. Hiểu lầm phổ biến của người mới về "fun" và động lực
+8. Tổng hợp mọi mục [CHƯA VERIFY]
+
+================================================================
+1. RAPH KOSTER — "A THEORY OF FUN FOR GAME DESIGN": FUN = HỌC/NHẬN DIỆN PATTERN
+================================================================
+
+(a) ĐÃ MỞ ĐỌC TRỰC TIẾP (re-verify 2026-09-16):
+Link: https://www.raphkoster.com/2012/01/24/an-atomic-theory-of-fun-game-design/
+
+Nguyên văn (đã đọc trực tiếp, chính Koster viết trên site của ông):
+"fun is the feeling you get when you are exercising your brain by solving
+a cognitive puzzle."
+
+Đã thử tìm thêm các cụm cụ thể "learning is entertainment" và "mastery of
+problems" trên chính trang này — KHÔNG tìm thấy nguyên văn hai cụm đó ở
+đây [CHƯA VERIFY hai cụm này, dù chúng xuất hiện trong vài bài tóm tắt
+thứ cấp qua WebSearch — không dùng làm trích dẫn].
+
+(b) ĐÃ MỞ ĐỌC TRỰC TIẾP TỪ RESEARCH TRƯỚC (research/core-loop.txt, mục 6a
+— phiên này KHÔNG re-fetch lại, chỉ dẫn lại vì cùng chủ đề):
+Link: https://www.raphkoster.com/games/presentations/ten-lessons-learned-2/
+(transcript bài nói "Ten Lessons Learned", đăng lại trên chính site
+raphkoster.com)
+
+Nguyên văn (đã đọc trực tiếp ở phiên trước, chính Koster nói): "I
+concluded it's about learning. It's about forms of deliberate practice"
+và "We use it to solve boredom."
+
+(c) Câu "Fun is just another word for learning." — GIỮ NGUYÊN trạng thái
+[CHƯA VERIFY] như đã kết luận ở research trước: chỉ thấy trên trang quote
+tổng hợp Goodreads (https://www.goodreads.com/work/quotes/19639-a-theory-
+of-fun-for-game-design), KHÔNG tìm thấy trên raphkoster.com hay
+theoryoffun.com. Phiên này thử lại lần nữa — vẫn không tìm thấy nguồn
+chính chủ xác nhận cụm từ này. Không dùng trong ngoặc kép cho bài giảng.
+
+(d) Thử thêm nguồn chính chủ khác — theoryoffun.com và
+raphkoster.com/games/theory-of-fun/:
+ĐÃ MỞ ĐỌC TRỰC TIẾP nhưng KHÔNG chứa định nghĩa cụ thể nào có thể trích —
+chỉ là trang giới thiệu sách, mô tả ngắn "An exploration of what fun is,
+and why games matter" (blurb sách, không phải câu Koster tự viết để định
+nghĩa fun một cách học thuật) — không dùng làm trích dẫn học thuật.
+
+(e) Một số câu khác lưu hành qua WebSearch (KHÔNG tự mở đọc trực tiếp
+được nguồn gốc trong phiên này, chỉ là tóm tắt tổng hợp — [CHƯA VERIFY]):
+"the human brain is mostly a voracious consumer of patterns... Games are
+just exceptionally tasty patterns to eat up." — LƯU Ý: vế đầu ("voracious
+consumer of patterns... Pac-Man of concepts") ĐÃ được verify qua Goodreads
+ở research trước, nhưng vế sau ("Games are just exceptionally tasty
+patterns to eat up") KHÔNG có trong bản đã verify trước đó — có thể là
+diễn giải/ghép câu của bên tổng hợp thứ cấp, không dùng trong ngoặc kép.
+
+→ Ý dùng cho bài giảng: Koster có ÍT NHẤT 3 câu nguyên văn xác nhận trực
+tiếp từ chính ông (raphkoster.com): "fun is the feeling you get when you
+are exercising your brain by solving a cognitive puzzle", "I concluded
+it's about learning. It's about forms of deliberate practice", "We use it
+to solve boredom." Ba câu này đủ để dựng luận điểm "fun = quá trình não bộ
+học pattern mới; hết pattern mới để học thì thành nhàm/chán" mà KHÔNG cần
+câu "Fun is just another word for learning." (vẫn chưa verify được).
+
+================================================================
+2. NICOLE LAZZARO — "4 KEYS TO FUN" (XEODESIGN)
+================================================================
+
+ĐÃ MỞ ĐỌC TRỰC TIẾP (tải file PDF gốc về máy và trích xuất bằng
+pdftotext — văn bản thô 100% từ chính file PDF, không qua mô hình tóm
+tắt trung gian):
+Link: http://xeodesign.com/xeodesign_whyweplaygames.pdf
+Tên file/version trong chính PDF: "xeodesign_whyweplaygames201n061205.pdf
+v.2.01", Copyright 2004–2005 XEODesign, Inc.
+
+Tiêu đề đầy đủ (nguyên văn, trang bìa): "Why We Play Games: Four Keys to
+More Emotion Without Story" — "Abstract March 8, 2004" — tác giả: Nicole
+Lazzaro, President, XEODesign.
+
+QUAN TRỌNG — TÊN 4 KEY TRONG ĐÚNG BẢN NÀY (2004/2005), khác với tên phổ
+biến hiện nay đang lưu hành trên mạng ("Hard Fun, Easy Fun, Serious Fun,
+People Fun"):
+1. "Hard Fun" — "Emotions from Meaningful Challenges, Strategies, and
+   Puzzles"
+2. "Easy Fun" — "Grab Attention with Ambiguity, Incompleteness, and
+   Detail"
+3. "Altered States" — "Generate Emotion with Perception, Thought,
+   Behavior, and Other People"
+4. "The People Factor" — "Create Opportunities for Player Competition,
+   Cooperation, Performance, and Spectacle."
+
+[CHƯA VERIFY] năm chính xác đổi tên "Altered States" → "Serious Fun" và
+"The People Factor" → "People Fun": các bản tóm tắt/poster sau này (ví dụ
+poster "4 Keys 2 Fun" trên nicolelazzaro.com khoảng 2012, theo WebSearch,
+CHƯA tự mở đọc trực tiếp bản poster đó trong phiên này) dùng tên mới, cùng
+định nghĩa tinh thần nhưng khác chữ. → Trong bài giảng PHẢI ghi rõ đang
+dùng bản gốc 2004, tên gọi phổ biến hơn ngày nay có thể khác chữ nhưng
+cùng khái niệm.
+
+Nguyên văn định nghĩa từng key (đã đọc trực tiếp từ PDF, trích đoạn
+chính):
+
+Hard Fun: "For many players overcoming obstacles is why they play. Hard
+Fun creates emotion by structuring experience towards the pursuit of a
+goal... It rewards the player with feedback on progress and success...
+Dominant emotions" gồm "Frustration and Fiero (an Italian word for
+personal triumph)."
+
+Easy Fun: "Easy Fun maintains focus with player attention rather than a
+winning condition... It entices the player to consider options and find
+out more. Ambiguity, incompleteness, and detail combine to create a
+living world. The sensations of Wonder, Awe, and Mystery can be very
+intense."
+
+Altered States: "This aspect of the player's experience is the way in
+which perception, behavior, and thought combine in a social context to
+produce emotions and other internal sensations most frequently those of
+Excitement and Relief."
+
+The People Factor: "Many player comments center on the enjoyment from
+playing with others inside or outside the game... Dominant emotions
+include Amusement, Schadenfreude, and Naches."
+
+Phương pháp nghiên cứu (nguyên văn đã đọc trực tiếp từ PDF, mục "Research
+Methodology"):
+"XEODesign performed a field study in which 30 adults were asked to share
+their thoughts and feelings while playing their favorite PC, console,
+handheld, or internet games." Cụ thể: "15 hardcore gamers, 15 casual
+gamers, plus 15 non-players" (non-players được PHỎNG VẤN, không chơi).
+Thời lượng mỗi buổi: "90 to 120 minutes." Phương pháp: "Using Contextual
+Inquiry as well as our own XEOAnalysisTM methods." Dữ liệu thu thập:
+"video recordings... (45 hours)... We analyzed over 2,000 observations
+from video transcripts, facial expressions, questionnaire responses, and
+session notes." Thời điểm: "Abstract March 8, 2004."
+
+Lưu ý phạm vi tự bài báo nêu rõ (nguyên văn): "It is beyond the
+methodology and scope of this study to produce statistically significant
+results; or draw causal relationships between the biological,
+developmental, or cultural reasons people play." → chính Lazzaro tự thừa
+nhận đây là nghiên cứu ĐỊNH TÍNH (qualitative), không phải nghiên cứu
+thống kê có ý nghĩa — cần nói rõ điều này nếu trích trong bài giảng.
+
+→ Ý dùng cho bài giảng: 4 Keys của Lazzaro (bản gốc 2004: Hard Fun/Easy
+Fun/Altered States/The People Factor) minh hoạ trực tiếp cho luận điểm
+"fun không chỉ có MỘT loại" — phản bác thẳng hiểu lầm phổ biến (xem mục
+7). Có thể map: Hard Fun ≈ vui vì chinh phục thử thách, Easy Fun ≈ vui vì
+tò mò/khám phá không cần thắng, Altered States ≈ vui vì thay đổi trạng
+thái nội tâm, The People Factor ≈ vui vì tương tác người khác — LƯU Ý ghi
+rõ đây là bản gốc 2004, dùng tên gọi khác bản phổ biến hiện nay.
+
+================================================================
+3. SELF-DETERMINATION THEORY TRONG GAME — RYAN, RIGBY, PRZYBYLSKI (2006)
+================================================================
+
+ĐÃ MỞ ĐỌC TRỰC TIẾP (tải PDF về máy, trích xuất bằng pdftotext — văn bản
+thô từ chính file PDF gốc do trang chủ chính thức của Self-Determination
+Theory lưu trữ, không qua mô hình tóm tắt trung gian):
+Link: https://selfdeterminationtheory.org/SDT/documents/2006_RyanRigbyPrzybylski_MandE.pdf
+
+Trích dẫn đầy đủ: Ryan, R. M., Rigby, C. S., & Przybylski, A. (2006). "The
+Motivational Pull of Video Games: A Self-Determination Theory Approach."
+Motivation and Emotion, DOI 10.1007/s11031-006-9051-8. (Bản PDF ghi rõ
+Copyright Springer Science+Business Media, LLC 2006.)
+
+Nguyên văn Abstract (đã đọc trực tiếp): "Four studies apply
+self-determination theory (SDT; Ryan & Deci, 2000) in investigating
+motivation for computer game play, and the effects of game play on
+well-being... Results show that SDT's theorized needs for autonomy,
+competence, and relatedness independently predict enjoyment and future
+game play."
+
+Định nghĩa 3 nhu cầu tâm lý cơ bản (nguyên văn đã đọc trực tiếp, mục
+"Autonomy and competence" và "Gaming and well-being"):
+
+- Autonomy: "Autonomy within SDT concerns a sense of volition or
+  willingness when doing a task (Deci & Ryan, 1980; 2000). When
+  activities are done for interest or personal value, perceived autonomy
+  is high."
+
+- Competence: "a second psychological need discussed within CET is that
+  for competence, a need for challenge and feelings of effectance (White,
+  1959; Deci, 1975)."
+
+- Relatedness: "Relatedness is experienced when a person feels connected
+  with others (La Guardia, Ryan, Couchman, & Deci, 2000; Ryan & Deci,
+  2001)."
+
+Kết luận chính (nguyên văn đã đọc trực tiếp, phần General discussion):
+"we found that both game enjoyment and preference for future play were
+significantly accounted for by psychological need satisfactions."
+Và về "presence" (cảm giác đắm chìm): "presence was associated with need
+satisfaction, such that in games where people felt greater autonomy to
+pursue in-game goals and interests and the competence to carry out
+effective actions, feelings of presence were heightened."
+
+Về well-being ngắn hạn (nguyên văn đã đọc trực tiếp): "People who
+experienced autonomy and competence in playing showed more positive
+outcomes, helping again to explain why, for some people, games may
+provide a source of pleasure and perhaps restoration."
+
+GIỚI HẠN nghiên cứu tự bài báo nêu rõ (nguyên văn đã đọc trực tiếp, quan
+trọng để tránh phóng đại kết luận): "we only examined short-term outcomes
+and not long-term effects or the effects of issues such as aggression or
+game 'addiction'." → bài KHÔNG kết luận gì về nghiện game hay bạo lực,
+CHỈ về enjoyment/well-being ngắn hạn — đúng phạm vi bài giảng Tầng 1 (bài
+Tầng 4 mới đào sâu dark patterns/nghiện).
+
+Ghi chú thú vị: chính bài báo này trích dẫn và mở rộng mô hình Bartle
+(1996) — xem mục 5 — coi đây là một trong những lý thuyết động lực chơi
+game sớm có ảnh hưởng, nhưng đề xuất SDT là khung "theo chiều nhu cầu tâm
+lý" thay vì "theo chiều phân loại hành vi".
+
+→ Ý dùng cho bài giảng: 3 nhu cầu autonomy/competence/relatedness là
+khung học thuật có PAPER PEER-REVIEW đứng sau (khác Bartle/Lazzaro vốn từ
+quan sát thực hành ngành). Dùng để giải thích "vì sao thêm điểm/huy hiệu
+không tự động tạo động lực" (mục 4, 7) — phần thưởng ngoài chỉ có tác
+dụng nếu nó CỦNG CỐ cảm giác autonomy/competence, không kiểm soát người
+chơi.
+
+================================================================
+4. ĐỘNG LỰC NỘI TẠI VS NGOẠI TẠI — OVERJUSTIFICATION EFFECT
+================================================================
+
+(a) Lepper, Greene & Nisbett (1973) — "Undermining Children's Intrinsic
+Interest with Extrinsic Reward: A Test of the 'Overjustification'
+Hypothesis", Journal of Personality and Social Psychology, Vol. 28, No.
+1, 129–137.
+ĐÃ MỞ ĐỌC TRỰC TIẾP (tải PDF về máy, trích xuất bằng pdftotext — văn bản
+thô từ chính file PDF do MIT lưu trữ cho mục đích học thuật):
+Link: https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Motivation/Lepper_et_al_Undermining_Childrens_Intrinsic_Interest.pdf
+
+Nguyên văn định nghĩa "overjustification hypothesis" (đã đọc trực tiếp,
+Abstract): "the 'overjustification' hypothesis suggested by
+self-perception theory—the proposition that a person's intrinsic
+interest in an activity may be decreased by inducing him to engage in
+that activity as an explicit means to some extrinsic goal."
+
+Thiết kế thí nghiệm (nguyên văn đã đọc trực tiếp, Abstract): trẻ em có
+hứng thú nội tại sẵn với một hoạt động (vẽ tranh) được chia 3 nhóm —
+"expected-award" (biết trước sẽ được thưởng), "unexpected-award" (được
+thưởng bất ngờ, không biết trước), "no-award" (không thưởng).
+
+Kết quả chính (nguyên văn đã đọc trực tiếp, Abstract): "The results
+supported the prediction that subjects in the expected-award condition
+would show less subsequent intrinsic interest in the target activity
+than subjects in either of the other two conditions."
+
+(b) Deci (1971) — "Effects of Externally Mediated Rewards on Intrinsic
+Motivation", Journal of Personality and Social Psychology.
+KHÔNG tự mở đọc trực tiếp được bản PDF gốc bài báo 1971 trong phiên này.
+Thay vào đó, ĐÃ MỞ ĐỌC TRỰC TIẾP một bài tổng thuật chi tiết (2019) do
+chính đồng sáng lập Self-Determination Theory viết, đăng trên trang chủ
+chính thức của SDT (tải PDF về máy, trích xuất bằng pdftotext):
+Link: https://selfdeterminationtheory.org/wp-content/uploads/2019/03/2019_RyanRyanDiDomencio_Deci1971.pdf
+Tác giả: Richard M. Ryan, William S. Ryan, & Stefano I. Di Domenico —
+"Beyond Reinforcement: Deci (1971) on the Effects of Rewards on
+Self-Determination and Intrinsic Motivation."
+[CHƯA VERIFY bằng chính văn bản gốc 1971 — đây là nguồn thứ cấp CHẤT
+LƯỢNG CAO (do người đồng sáng lập lý thuyết viết lại, đăng trên trang chủ
+chính thức của lý thuyết đó), nhưng KHÔNG phải bản thân bài báo gốc].
+
+Nguyên văn mô tả thí nghiệm SOMA puzzle (đã đọc trực tiếp): "Deci (1971)
+had two groups of participants work on interesting spatial puzzles over
+three sessions... The task was called a SOMA puzzle... In a second
+session, participants in the experimental group were offered rewards for
+completing these puzzles ($1 for each puzzle solved -- remember it's
+1970!)... " Kết quả: "participants who had received extrinsic rewards for
+solving these interesting puzzles spent much less time working on the
+puzzles during the final free-choice period than they had in the initial
+one... These results were interpreted by Deci to represent the
+undermining of intrinsic motivation by the financial rewards."
+
+Bài tổng thuật cũng lưu ý hạn chế thống kê của nghiên cứu gốc (đã đọc
+trực tiếp): "By any modern view this initial study was quite
+statistically underpowered -- and with only 24 participants, the effects
+of this first study were only marginally significant."
+
+(c) TRANH CÃI về mức áp dụng vào game (QUAN TRỌNG — đúng yêu cầu đề bài):
+ĐÃ MỞ ĐỌC TRỰC TIẾP:
+Link: https://www.psychologyofgames.com/2016/10/the-overjustification-effect-and-game-achievements/
+Tác giả: Jamie Madigan (tác giả blog "The Psychology of Games", không
+phải một nghiên cứu học thuật gốc — đây là bài phân tích/ý kiến áp dụng
+lý thuyết tâm lý học vào bối cảnh game).
+
+Nguyên văn kết luận của Madigan (đã đọc trực tiếp): "Trophies and
+achievements may actually hurt in the long run" — lý do: khi phần thưởng
+ngoài (trophy) biến mất/đã đạt hết, "a player's motivation to keep
+experimenting and noodling with the game" có thể suy giảm.
+
+Nguyên văn thừa nhận GIỚI HẠN bằng chứng (đã đọc trực tiếp, quan trọng):
+"While this has been studied extensively in other contexts it hasn't
+really been studied enough in the context of games or gamification." —
+tác giả chỉ trích dẫn được MỘT nghiên cứu ứng dụng trực tiếp: Hanus, M.
+D., & Fox, J. (2015), "Assessing the effects of gamification in the
+classroom: A longitudinal study on motivation, satisfaction, effort, and
+grades" [CHƯA VERIFY riêng nghiên cứu Hanus & Fox 2015 — chỉ biết qua
+trích dẫn của Madigan, chưa tự mở đọc bài gốc này].
+
+Phản biện trong phần bình luận bài viết (đã đọc trực tiếp, một độc giả
+tên Pawel Strojny): vấn đề không hẳn là "có phần thưởng ngoài hay không"
+mà là achievement có được người chơi cảm nhận là "part of the game" (một
+phần tự nhiên của game) hay là một hình thức kiểm soát từ bên ngoài.
+
+→ Ý dùng cho bài giảng: (1) Lepper 1973 và Deci 1971 là nghiên cứu tâm lý
+học NGOÀI game (trẻ em vẽ tranh; người lớn giải đố hình khối) — kết quả
+gốc không nói riêng về game. (2) Việc áp dụng trực tiếp vào thiết kế game
+(ví dụ: hệ thống achievement/badge) vẫn ĐANG TRANH CÃI và CHƯA có đủ
+nghiên cứu thực nghiệm riêng cho bối cảnh game — phải nói rõ ranh giới
+này, không khẳng định chắc "thêm điểm sẽ luôn giết chết động lực". (3)
+Có thể dùng để phản bác hiểu lầm "cứ thêm điểm/huy hiệu là người chơi sẽ
+chơi tiếp" (mục 7) nhưng với thái độ THẬN TRỌNG, không tuyệt đối hoá.
+
+================================================================
+5. BARTLE PLAYER TYPES — ACHIEVERS, EXPLORERS, SOCIALISERS, KILLERS
+================================================================
+
+ĐÃ MỞ ĐỌC TRỰC TIẾP (tải trang HTML gốc về máy bằng curl, đọc thẳng mã
+nguồn HTML — không qua mô hình tóm tắt trung gian):
+Link: https://mud.co.uk/richard/hcds.htm
+Bài gốc: Richard Bartle, "Hearts, Clubs, Diamonds, Spades: Players Who
+Suit MUDs" (1996).
+
+Bối cảnh ra đời (nguyên văn đã đọc trực tiếp): mô hình xuất phát từ một
+cuộc tranh luận trên bulletin-board giữa khoảng 15–30 người chơi kỳ cựu
+của MỘT MUD thương mại cụ thể ở Anh (Bartle, 1985), quanh câu hỏi "What do
+people want out of a MUD?"
+
+Nguyên văn định nghĩa 4 nhóm hành vi người chơi thích (đã đọc trực tiếp):
+i) "Achievement within the game context. Players give themselves
+game-related goals, and vigorously set out to achieve them."
+ii) "Exploration of the game. Players try to find out as much as they can
+about the virtual world."
+iii) "Socialising with others. Players use the game's communicative
+facilities, and apply the role-playing that these engender, as a context
+in which to converse (and otherwise interact) with their fellow
+players."
+iv) "Imposition upon others. Players use the tools provided by the game
+to cause distress to (or, in rare circumstances, to help) other
+players."
+
+Nguyên văn cách gán tên/suit bài Tây (đã đọc trực tiếp): "achievers are
+Diamonds (they're always seeking treasure); explorers are Spades (they
+dig around for information); socialisers are Hearts (they empathise with
+other players); killers are Clubs (they hit people with them)."
+
+GIỚI HẠN PHẠM VI — chính Bartle tự nói rõ (nguyên văn đã đọc trực tiếp,
+đúng yêu cầu đề bài):
+"Note that although this MUD was one in which player-killing was
+allowed, the taxonomy which is about to be described does (as will be
+explained later) apply equally to 'social' MUDs. The advice concerning
+changes which can be made to affect the player make-up of a MUD is,
+however, less useful to social MUDs, or to ones with a heavy
+role-playing component. Also, the original discussion concerned only
+non-administrative aspects of MUDding."
+Và về mô hình động lực học 4 loại (nguyên văn đã đọc trực tiếp): "The
+dynamics model is, however, imprecise: it takes no account of outside
+factors which may influence player types."
+
+Người chơi KHÔNG cố định 100% vào một loại — nguyên văn đã đọc trực tiếp
+(quan trọng để phản bác hiểu lầm ở mục 7): "these areas cross over, and
+players will often drift between all four, depending on their mood or
+current playing style. However, my experience having observed players in
+the light of this research suggests that many (if not most) players do
+have a primary style."
+
+BARTLE TỰ NÓI VỀ VIỆC MÔ HÌNH BỊ DÙNG NGOÀI PHẠM VI GỐC (không phải trong
+bài 1996, mà trong một phỏng vấn sau này về gamification):
+ĐÃ MỞ ĐỌC TRỰC TIẾP (tải trang HTML gốc về máy bằng curl):
+Link: https://www.gamified.uk/2012/12/31/an-interview-with-richard-bartle-about-gamification/
+(phỏng vấn Richard Bartle, đăng 31/12/2012, người phỏng vấn: tác giả blog
+Gamified UK)
+
+Nguyên văn (đã đọc trực tiếp, chính Bartle nói): "Using player type
+theory for gamification is like using animal skins. Sure, it seems to
+work, but if you knew what about it was important for gamification, you
+could perhaps distil that idea and make wool instead." Và: "All I would
+ask is that if someone does come up with a theory, it IS actually a
+theory and not merely a categorisation."
+
+Về phong trào gamification áp dụng lý thuyết của ông tràn lan (nguyên văn
+đã đọc trực tiếp): "Obviously there's a bandwagon at the moment, with
+people diving in who don't know what they're doing, and they'll hang
+around only until the next bandwagon comes along. It's a bubble and it
+will burst."
+
+Lưu ý: đây là phỏng vấn về GAMIFICATION (áp dụng kỹ thuật game vào
+phi-game), không phải riêng "áp dụng player types vào các game khác ngoài
+MUD" — nhưng cùng tinh thần cảnh báo: mô hình 1996 được xây cho MUD cụ
+thể, bị mở rộng dùng cho những bối cảnh rất khác nguyên gốc mà không hiểu
+rõ TẠI SAO nó từng đúng.
+
+→ Ý dùng cho bài giảng: (1) Bartle đưa nguyên văn 4 định nghĩa — dùng
+được trực tiếp. (2) Chính Bartle nói rõ mô hình chỉ quan sát trên MỘT MUD
+cụ thể, không phải universal, và người chơi DRIFT giữa các loại chứ không
+cố định — phản bác trực tiếp hiểu lầm "player type là bất biến" (mục 7).
+(3) Lời Bartle về "bandwagon"/"animal skins" dùng để cảnh báo người mới:
+áp dụng một mô hình phổ biến (dù có sức hút truyền thông) mà không hiểu
+gốc rễ TẠI SAO nó đúng thì dễ dùng sai.
+
+================================================================
+6. VÍ DỤ GAME CỤ THỂ MINH HOẠ CÁC LOẠI FUN / NHU CẦU TÂM LÝ (ĐA THỂ LOẠI)
+================================================================
+
+(a) Portal (Valve, 2007) — PC, thể loại puzzle-platformer
+ĐÃ MỞ ĐỌC TRỰC TIẾP (tải trang wiki lưu transcript developer commentary
+chính thức của Valve về máy bằng curl, đọc thẳng mã nguồn — bản thân
+developer commentary LÀ phát biểu trực tiếp của các nhà thiết kế Valve,
+được phát hành kèm game, wiki chỉ chép lại nguyên văn):
+Link: https://combineoverwiki.net/wiki/Developer_commentary/Portal
+
+Nguyên văn lời Kim Swift (node prtl-Comment021, đã đọc trực tiếp): "It's
+absolutely critical that players quickly wrap their heads around what a
+portal is. We noticed early playtesters grasped the concept much more
+quickly when they caught a glimpse of themselves through a portal. So we
+deliberately positioned this first portal to ensure that players will
+invariably see themselves."
+
+Nguyên văn lời Robin Walker (node prtl-Comment023, đã đọc trực tiếp):
+"Because we very deliberately introduce and train each gameplay concept,
+once players reach this spot, we're confident that they know what a
+portal is and roughly how it works... The puzzle you just finished was
+designed so that stumbling around will virtually always lead to a dead
+end. Completing the puzzle requires walking through a minimum of five
+portals in a specific order. This kind of gating, in which a solid
+understanding of key gameplay concepts is required for success, helped
+standardize the learning curve of the game tremendously."
+
+→ Ý dùng cho bài giảng: đây là minh hoạ TRỰC TIẾP cho Koster (mục 1) —
+Valve tự thiết kế từng puzzle để dạy một "pattern" mới rồi bắt người chơi
+áp dụng nó ngay, đúng cơ chế "fun = học pattern". Cũng khớp Competence
+(SDT, mục 3) — cảm giác tự mình giải ra được portal puzzle.
+
+(b) Dark Souls / Sekiro: Shadows Die Twice (FromSoftware) — console/PC,
+thể loại action RPG khó
+ĐÃ MỞ QUA PROXY r.jina.ai (trang gốc GameSpot — curl trực tiếp bị lỗi kết
+nối trong phiên này; nội dung qua proxy khớp nguyên văn giữa 2 lần fetch
+độc lập, và khớp với phần tóm tắt WebSearch độc lập trước đó — độ tin cậy
+cao dù chưa đối chiếu được bằng HTML thô):
+Link: https://www.gamespot.com/articles/heres-why-dark-souls-bloodborne-and-sekiro-dont-ha/1100-6459827/
+
+Nguyên văn lời Hidetaka Miyazaki (Giám đốc sáng tạo, FromSoftware), giải
+thích vì sao game không có tùy chọn độ khó: "We don't want to include a
+difficulty selection because we want to bring everyone to the same level
+of discussion and the same level of enjoyment." Và: "We want everyone to
+feel that sense of accomplishment. We want everyone to feel elated and to
+join that discussion on the same level."
+
+→ Ý dùng cho bài giảng: minh hoạ Competence (SDT, mục 3) theo hướng CỰC
+ĐOAN — Miyazaki cố tình KHÔNG cho chọn độ khó vì tin rằng cảm giác thành
+tựu (accomplishment) chỉ trọn vẹn khi thử thách là thật, đồng đều cho mọi
+người. Đối lập thú vị với Lazzaro Hard Fun (mục 2) vốn nhấn mạnh "balance
+difficulty with player skill" — có thể dùng làm góc nhìn tranh luận trong
+bài (không phải mọi nhà thiết kế đồng ý về cách cân bằng độ khó).
+
+(c) Journey (thatgamecompany, 2012) — PS3/PC, indie
+ĐÃ MỞ QUA PROXY r.jina.ai (nguồn là blog fan tường thuật lại GDC 2013 talk
+"Designing Journey" của Jenova Chen — các câu trong ngoặc kép trong bài là
+lời Chen được trích lại, KHÔNG phải transcript chính thức đầy đủ; chưa
+đối chiếu được với video/slide gốc GDC Vault trong phiên này):
+Link: https://journey-archive.fandom.com/wiki/User_blog:JAlbor/GDC_2013:_Designing_Journey_with_Jenova_Chen
+(GDC talk gốc lưu tại: https://gdcvault.com/play/1017700/Designing —
+[CHƯA VERIFY trực tiếp nội dung tại GDC Vault, cần tài khoản/trả phí để
+xem đầy đủ])
+
+Trích lời Jenova Chen (qua bài tường thuật, đặt trong ngoặc kép trong bài
+gốc): "The more I played this game [World of Warcraft], the more people I
+encountered, the more I realized I had no connection with any of these
+people." Và về mục tiêu thiết kế Journey: "I really wanted to see a game
+where there's no difference in gender or age" — hướng tới tạo kết nối
+giữa người chơi lạ mặt mà không cần chat/giao tiếp trực tiếp.
+
+→ Ý dùng cho bài giảng: minh hoạ Relatedness (SDT, mục 3) — Chen thiết kế
+Journey CHÍNH vì nhận ra chơi online nhiều (WoW) không tự động tạo kết nối
+thật, nên cố tình bỏ chat, ẩn danh người chơi khác để tạo một dạng kết nối
+khác: đồng hành thầm lặng. [CHƯA VERIFY mức độ nguyên văn tuyệt đối của
+đoạn trích — chỉ ở mức "ĐÃ MỞ QUA PROXY" cho nguồn thứ cấp tường thuật lại
+GDC talk, KHÔNG phải chính transcript GDC].
+
+(d) Pokémon GO (Niantic, 2016) — mobile, AR
+ĐÃ MỞ ĐỌC TRỰC TIẾP (tải trang HTML gốc về máy bằng curl, đọc thẳng mã
+nguồn HTML — không qua mô hình tóm tắt trung gian):
+Link: https://www.vice.com/en/article/day-one-success-and-server-distress-discussing-pokemon-go-with-niantics-john-hanke/
+(phỏng vấn John Hanke, CEO Niantic, do Willie Clark thực hiện, VICE/
+Waypoint, đăng 08/02/2017)
+
+Nguyên văn lời John Hanke (đã đọc trực tiếp): "The priority for Pokémon
+Go now is to build in features that reward co-operative gameplay,
+offering more depth than just the capturing mechanic." Và: "But, to me,
+that would be the best demonstration of the vision of this company, which
+is all about playing games together, outside, with other people."
+
+→ Ý dùng cho bài giảng: minh hoạ The People Factor (Lazzaro, mục 2) và
+Relatedness (SDT, mục 3) trong bối cảnh mobile/AR — Hanke tự nói tầm nhìn
+cốt lõi của Niantic là chơi CÙNG NHAU ngoài đời thật, không chỉ là cơ chế
+bắt Pokémon (capturing mechanic) một mình.
+
+================================================================
+7. HIỂU LẦM PHỔ BIẾN CỦA NGƯỜI MỚI VỀ "FUN" VÀ ĐỘNG LỰC
+================================================================
+
+1) "Vui = có nhiều phần thưởng."
+[PHÂN TÍCH, có cơ sở từ mục 4]: Lepper 1973 và Deci 1971 cho thấy phần
+thưởng NGOÀI (extrinsic) — nếu được kỳ vọng trước và cảm nhận như một
+hình thức kiểm soát — có thể làm GIẢM hứng thú nội tại chứ không phải
+tăng. "Nhiều phần thưởng" không đồng nghĩa "nhiều fun".
+
+2) "Cứ thêm điểm/huy hiệu (points/badges) là người chơi sẽ chơi tiếp."
+Có liên hệ trực tiếp tới nguồn đã verify: SDT (mục 3) cho thấy động lực
+chơi tiếp gắn với autonomy/competence/relatedness được THỎA MÃN, không
+phải gắn trực tiếp với số lượng phần thưởng. Bartle (mục 5) qua lời cảnh
+báo về "bandwagon"/"animal skins" cũng ngụ ý: bắt chước cơ chế bề mặt
+(điểm, badge) mà không hiểu TẠI SAO nó từng hiệu quả ở một số game/bối
+cảnh cụ thể dễ dẫn tới áp dụng sai.
+
+3) "Fun chỉ có một loại — cứ 'vui' là giống nhau hết."
+Phản bác trực tiếp bằng Lazzaro (mục 2): ít nhất 4 loại fun khác hẳn nhau
+về cảm xúc (Fiero của Hard Fun khác Wonder của Easy Fun khác Amusement
+của People Factor) — thiết kế nhắm sai loại fun cho đúng nhóm người chơi
+dễ khiến game "có vẻ ổn" nhưng không ai thấy vui.
+
+4) "Player type (kiểu người chơi) là bất biến — một người luôn chỉ thuộc
+một nhóm duy nhất."
+Phản bác trực tiếp bằng chính lời Bartle (mục 5): "these areas cross
+over, and players will often drift between all four" — người chơi
+CHUYỂN ĐỘNG giữa các nhóm tùy tâm trạng/giai đoạn chơi, chỉ có xu hướng
+NGHIÊNG về một kiểu chính, không phải nhãn cố định.
+
+5) [PHÂN TÍCH, không từ một nguồn cụ thể] "Chỉ cần một cơ chế thưởng
+mạnh (dopamine, combo, biến ngẫu nhiên...) là đủ, không cần quan tâm
+người chơi thật sự MUỐN cái gì (autonomy)."
+Liên hệ gián tiếp SDT (mục 3): nghiên cứu chỉ ra autonomy — cảm giác
+được TỰ CHỌN — dự đoán enjoyment độc lập với competence/relatedness;
+thiết kế ép buộc (dù có thưởng hấp dẫn) vẫn có thể làm giảm động lực nếu
+người chơi cảm thấy bị kiểm soát.
+
+================================================================
+8. TỔNG HỢP MỌI MỤC [CHƯA VERIFY]
+================================================================
+
+- Câu "Fun is just another word for learning." (Koster) — vẫn KHÔNG tìm
+  được nguồn chính chủ (raphkoster.com/theoryoffun.com) xác nhận nguyên
+  văn tuyệt đối, dù đã thử lại trong phiên này. Chỉ có trên trang quote
+  tổng hợp Goodreads. → KHUYẾN NGHỊ: không dùng trong ngoặc kép; nếu cần
+  ý tương đương, dùng "fun is the feeling you get when you are exercising
+  your brain by solving a cognitive puzzle" (đã verify trực tiếp) (mục
+  1c).
+- Cụm "Games are just exceptionally tasty patterns to eat up." (gán cho
+  Koster) — chỉ thấy qua tóm tắt WebSearch, không khớp hoàn toàn với bản
+  đã verify trước đó qua Goodreads, nghi ngờ bị ghép câu. → KHUYẾN NGHỊ:
+  loại khỏi bài (mục 1e).
+- Cụm "learning is entertainment" và "mastery of problems" (gán cho
+  Koster) — không tìm thấy trên raphkoster.com khi tự mở đọc trực tiếp
+  trong phiên này. → KHUYẾN NGHỊ: loại khỏi bài, hoặc chỉ dùng như Ý diễn
+  giải không đặt trong ngoặc kép (mục 1a).
+- Năm chính xác đổi tên 4 Keys của Lazzaro từ "Altered States/The People
+  Factor" (2004) sang "Serious Fun/People Fun" (tên phổ biến hiện nay) —
+  chưa tự mở đọc được bản poster/tài liệu có ghi năm đổi tên cụ thể. →
+  KHUYẾN NGHỊ: trong bài chỉ dùng tên bản gốc 2004 đã verify, có thể chú
+  thích ngắn "tên gọi có thể khác ở các bản tóm tắt sau này" mà không nêu
+  năm cụ thể (mục 2).
+- Bài báo gốc Deci (1971) "Effects of Externally Mediated Rewards on
+  Intrinsic Motivation" — KHÔNG tự mở đọc được bản PDF gốc 1971 trong
+  phiên này, chỉ có qua bài tổng thuật 2019 của chính nhóm SDT (đáng tin
+  cao nhưng không phải bản gốc). → KHUYẾN NGHỊ: khi trích trong bài giảng,
+  ghi rõ "theo mô tả lại của Ryan, Ryan & Di Domenico (2019)", không ghi
+  như thể đã đọc trực tiếp bài 1971 (mục 4b).
+- Nghiên cứu Hanus, M. D., & Fox, J. (2015) về gamification trong lớp
+  học, được Jamie Madigan trích dẫn làm bằng chứng cho overjustification
+  effect trong bối cảnh có tính "game" — CHƯA tự mở đọc bài gốc này. →
+  KHUYẾN NGHỊ: không trích chi tiết, chỉ nói chung "có tranh cãi, bằng
+  chứng trong bối cảnh game còn ít" (mục 4c).
+- Đoạn trích Jenova Chen về Journey — nguồn là blog fan tường thuật GDC
+  talk (đã mở qua proxy), KHÔNG phải transcript chính thức GDC Vault
+  (link gốc cần trả phí/tài khoản, chưa tự mở được). → KHUYẾN NGHỊ: nếu
+  dùng, ghi rõ nguồn là "theo tường thuật của một người tham dự GDC 2013",
+  không ghi như transcript chính thức (mục 6c).
+- Đoạn trích Hidetaka Miyazaki (Dark Souls/Sekiro, GameSpot) — chỉ mở
+  được qua proxy r.jina.ai (curl trực tiếp bị lỗi kết nối, không phải lỗi
+  403/cert cụ thể — có thể do mạng/DNS tại thời điểm chạy), CHƯA đối chiếu
+  được với bản HTML thô. Độ tin cậy được nâng lên nhờ 2 lần fetch độc lập
+  (WebSearch tóm tắt + WebFetch qua proxy) cho cùng một câu chữ giống hệt
+  nhau. → Có thể dùng nhưng nên ghi "theo phỏng vấn với GameSpot", tránh
+  khẳng định tuyệt đối 100% từng dấu câu (mục 6b).
+- 5 loại metagame/ngữ cảnh khác không thuộc phạm vi bài này không được
+  liệt kê lại ở đây — xem file research/core-loop.txt cho các mục
+  [CHƯA VERIFY] liên quan tới core loop/meta loop (đã tách bạch, không lặp
+  lại phạm vi).

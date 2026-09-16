@@ -96,7 +96,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 13,
                 level: "Cơ bản",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-1/04-flow-do-kho",

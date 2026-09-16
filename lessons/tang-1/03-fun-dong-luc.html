@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fun và động lực người chơi — Xưởng Game Design</title>
+<meta name="description" content="Vì sao chơi game lại vui, và cái gì khiến người chơi quay lại: fun như quá trình học pattern, bốn loại fun của Lazzaro, ba nhu cầu tâm lý trong Self-Determination Theory, và giới hạn của phần thưởng ngoài.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-1/03-fun-dong-luc" class="tier-1">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-1">Tầng 1 · Cốt lõi</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 1 · Bài 03</p>
+            <h1>Fun và động lực người chơi</h1>
+            <p class="dek">"Vui" không phải một thứ duy nhất, và phần thưởng không tự động tạo ra động lực.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 13 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Cơ bản</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Nên đọc trước: <a href="02-core-loop.html">Core Loop</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Phân biệt động lực nội tại và ngoại tại</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Liệt kê vài loại "fun" phổ biến (thử thách, khám phá, xã hội…)</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Áp dụng để giải thích vì sao một cơ chế hấp dẫn</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Cái portal đầu tiên trong Portal</h2>
+        <p>Trong Portal (Valve, 2007), cái portal đầu tiên người chơi gặp được đặt sao cho họ nhìn thấy chính mình xuyên qua nó. Không phải ngẫu nhiên.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Kim Swift — Valve, developer commentary chính thức của Portal</p>
+                <p><em>"It's absolutely critical that players quickly wrap their heads around what a portal is. We noticed early playtesters grasped the concept much more quickly when they caught a glimpse of themselves through a portal. So we deliberately positioned this first portal to ensure that players will invariably see themselves."</em></p>
+            </div>
+        </div>
+        <p>Khoảnh khắc "à, mình hiểu rồi" đó mới là thứ tạo ra niềm vui — không phải điểm số hay phần thưởng. Vậy rốt cuộc "vui" là gì, và cái gì khiến người chơi quay lại?</p>
+
+        <h2 id="fun-la-gi">Fun là gì</h2>
+        <p>Raph Koster, tác giả sách A Theory of Fun for Game Design, viết trên trang riêng, nguyên văn:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Raph Koster — raphkoster.com</p>
+                <p><em>"fun is the feeling you get when you are exercising your brain by solving a cognitive puzzle."</em></p>
+            </div>
+        </div>
+        <p>Trong một bài nói của mình, ông nói thêm, nguyên văn:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Raph Koster — bài nói “Ten Lessons Learned” (raphkoster.com)</p>
+                <p><em>"I concluded it's about learning. It's about forms of deliberate practice"</em></p>
+                <p><em>"We use it to solve boredom."</em></p>
+            </div>
+        </div>
+        <p>Diễn giải: vui là lúc não đang học một <span class="term" data-en="pattern">pattern</span> mới. Học xong hết pattern thì hết vui, thành chán.</p>
+        <p>Nối lại Portal — Robin Walker (Valve) mô tả cách họ dạy người chơi, nguyên văn (cắt gọn đúng phần này):</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Robin Walker — Valve</p>
+                <p><em>"Because we very deliberately introduce and train each gameplay concept, once players reach this spot, we're confident that they know what a portal is and roughly how it works"</em></p>
+                <p><em>"This kind of gating, in which a solid understanding of key gameplay concepts is required for success, helped standardize the learning curve of the game tremendously."</em></p>
+            </div>
+        </div>
+        <p>Diễn giải: mỗi câu đố dạy đúng một pattern rồi bắt người chơi dùng nó ngay — đúng cơ chế mà Koster mô tả.</p>
+
+        <h2 id="bon-loai-fun">Fun không chỉ có một loại</h2>
+        <p>Nicole Lazzaro (XEODesign), trong bài "Why We Play Games: Four Keys to More Emotion Without Story" (2004), mô tả 4 loại fun.</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Loại fun</th><th>Vui vì cái gì</th><th>Cảm xúc chính</th></tr></thead>
+                <tbody>
+                    <tr><td>"Hard Fun"</td><td>Vượt chướng ngại, theo đuổi mục tiêu</td><td>Frustration và Fiero</td></tr>
+                    <tr><td>"Easy Fun"</td><td>Tò mò, khám phá, không cần điều kiện thắng</td><td>Wonder, Awe, Mystery</td></tr>
+                    <tr><td>"Altered States"</td><td>Thay đổi trạng thái bên trong người chơi</td><td>Excitement và Relief</td></tr>
+                    <tr><td>"The People Factor"</td><td>Chơi cùng/đối đầu người khác</td><td>Amusement, Schadenfreude, Naches</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Hai loại đầu là cặp đối nhau rõ nhất. "Hard Fun" — nguyên văn Lazzaro: <em>"For many players overcoming obstacles is why they play."</em> Còn "Easy Fun" thì không cần thắng gì cả: <em>"Easy Fun maintains focus with player attention rather than a winning condition"</em>. Cùng một game có thể phục vụ cả hai, nhưng người chơi tìm đến vì những lý do khác hẳn nhau.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Về bảng trên</p>
+                <p>Đây là tên gọi trong bản gốc 2004; các bản tóm tắt sau này dùng tên khác cho 2 loại cuối, nhưng cùng khái niệm.</p>
+                <p>Chính Lazzaro ghi rõ giới hạn nghiên cứu, nguyên văn: <em>"It is beyond the methodology and scope of this study to produce statistically significant results"</em> — đây là nghiên cứu định tính, quan sát 30 người chơi, phân tích 45 giờ video, không phải nghiên cứu thống kê.</p>
+            </div>
+        </div>
+
+        <h2 id="ba-nhu-cau">Cái gì giữ người chơi lại</h2>
+        <p>Ryan, Rigby & Przybylski, trong bài "The Motivational Pull of Video Games: A Self-Determination Theory Approach" (Motivation and Emotion, 2006), đề xuất ba nhu cầu tâm lý: <span class="term" data-en="autonomy">tự chủ</span>, <span class="term" data-en="competence">năng lực</span> và <span class="term" data-en="relatedness">kết nối</span>. Kết luận nguyên văn trong abstract:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Ryan, Rigby & Przybylski — Motivation and Emotion, 2006</p>
+                <p><em>"Results show that SDT's theorized needs for autonomy, competence, and relatedness independently predict enjoyment and future game play."</em></p>
+            </div>
+        </div>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Autonomy
+                    <small>Tự chủ — cảm thấy được tự nguyện chọn, không bị ép.</small>
+                    <small>Ví dụ: tự chọn lối chơi lén lút hay đối đầu trực diện.</small>
+                    <small><em>"Autonomy within SDT concerns a sense of volition or willingness when doing a task"</em></small>
+                </div>
+                <div class="mda-block loop">Competence
+                    <small>Năng lực — cảm thấy mình đang giỏi lên, làm được việc khó.</small>
+                    <small>Ví dụ: hạ được một con boss khó sau nhiều lần thua.</small>
+                    <small><em>"a need for challenge and feelings of effectance"</em></small>
+                </div>
+                <div class="mda-block loop">Relatedness
+                    <small>Kết nối — cảm thấy gắn kết với người khác.</small>
+                    <small>Ví dụ: một nhóm bạn hợp sức vượt qua thử thách.</small>
+                    <small><em>"Relatedness is experienced when a person feels connected with others"</em></small>
+                </div>
+            </div>
+            <figcaption>Ba nhu cầu tâm lý theo Self-Determination Theory (Ryan, Rigby & Przybylski, 2006).</figcaption>
+        </figure>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Giới hạn của nghiên cứu</p>
+                <p>Chính bài báo nêu rõ, nguyên văn: <em>"we only examined short-term outcomes and not long-term effects or the effects of issues such as aggression or game 'addiction'."</em> Nói rõ: bài báo không kết luận gì về nghiện game hay bạo lực.</p>
+            </div>
+        </div>
+
+        <h2 id="phan-thuong-ngoai">Phần thưởng ngoài có thể phản tác dụng</h2>
+        <p>Trước khi vào phần này, cần phân biệt hai loại động lực: <span class="term" data-en="intrinsic motivation">động lực nội tại</span> — làm vì bản thân việc đó thú vị — và <span class="term" data-en="extrinsic motivation">động lực ngoại tại</span> — làm để lấy một thứ khác (điểm, tiền, huy hiệu).</p>
+        <p>Lepper, Greene & Nisbett (1973), trong bài "Undermining Children's Intrinsic Interest with Extrinsic Reward: A Test of the 'Overjustification' Hypothesis", định nghĩa nguyên văn:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Lepper, Greene & Nisbett — Journal of Personality and Social Psychology, 1973</p>
+                <p><em>"the 'overjustification' hypothesis suggested by self-perception theory—the proposition that a person's intrinsic interest in an activity may be decreased by inducing him to engage in that activity as an explicit means to some extrinsic goal."</em></p>
+            </div>
+        </div>
+        <p>Thí nghiệm: trẻ em vốn thích vẽ, chia 3 nhóm — biết trước sẽ được thưởng (expected-award), được thưởng bất ngờ (unexpected-award), không thưởng (no-award). Kết quả nguyên văn:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p><em>"The results supported the prediction that subjects in the expected-award condition would show less subsequent intrinsic interest in the target activity than subjects in either of the other two conditions."</em></p>
+            </div>
+        </div>
+        <p>Thí nghiệm SOMA puzzle của Deci (1971) — theo mô tả lại của Ryan, Ryan & Di Domenico (2019), không phải đọc từ bản gốc 1971. Người tham gia giải đố hình khối; nhóm được trả tiền cho mỗi câu giải được về sau dành ít thời gian tự nguyện chơi tiếp hơn. Bài tổng thuật 2019 nêu luôn giới hạn của nghiên cứu gốc, nguyên văn:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Ryan, Ryan & Di Domenico (2019), tổng thuật lại Deci (1971)</p>
+                <p><em>"By any modern view this initial study was quite statistically underpowered -- and with only 24 participants, the effects of this first study were only marginally significant."</em></p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Đừng suy thẳng ra thiết kế game</p>
+                <p>Cả hai nghiên cứu trên đều ngoài game: trẻ em vẽ tranh, người lớn giải đố. Việc áp thẳng vào thiết kế game (achievement, huy hiệu, điểm) vẫn đang tranh cãi, bằng chứng thực nghiệm riêng cho game còn ít. Không thể kết luận "thêm điểm là giết chết động lực".</p>
+                <p>Cách dùng đúng (diễn giải của bài): phần thưởng ngoài có ích khi nó củng cố cảm giác năng lực/tự chủ, có hại khi người chơi thấy mình bị kiểm soát.</p>
+            </div>
+        </div>
+
+        <h2 id="bartle">Bartle player types và giới hạn của nó</h2>
+        <p>Richard Bartle, trong bài "Hearts, Clubs, Diamonds, Spades: Players Who Suit MUDs" (1996), chia người chơi MUD thành 4 kiểu — nguyên văn định nghĩa của ông:</p>
+        <ul>
+            <li><strong>Achievers</strong> — <em>"Achievement within the game context. Players give themselves game-related goals, and vigorously set out to achieve them."</em></li>
+            <li><strong>Explorers</strong> — <em>"Exploration of the game. Players try to find out as much as they can about the virtual world."</em></li>
+            <li><strong>Socialisers</strong> — <em>"Socialising with others. Players use the game's communicative facilities, and apply the role-playing that these engender, as a context in which to converse (and otherwise interact) with their fellow players."</em></li>
+            <li><strong>Killers</strong> — <em>"Imposition upon others. Players use the tools provided by the game to cause distress to (or, in rare circumstances, to help) other players."</em></li>
+        </ul>
+        <div class="callout" data-kind="insight">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Giới hạn của mô hình</p>
+                <p>Mô hình này sinh ra từ một cuộc tranh luận giữa những người chơi kỳ cựu của một MUD thương mại cụ thể ở Anh, rồi được Bartle viết lại thành bài năm 1996 — không phải chân lý cho mọi game. Chính Bartle viết, nguyên văn: <em>"these areas cross over, and players will often drift between all four, depending on their mood or current playing style."</em> Người chơi không bị đóng khung một nhãn cố định.</p>
+                <p>Trong một phỏng vấn năm 2012 về gamification, chính ông nói, nguyên văn: <em>"Using player type theory for gamification is like using animal skins. Sure, it seems to work, but if you knew what about it was important for gamification, you could perhaps distil that idea and make wool instead."</em></p>
+            </div>
+        </div>
+        <p>Bài học rút ra (diễn giải của bài): bắt chước bề mặt một mô hình nổi tiếng mà không hiểu vì sao nó từng đúng thì rất dễ dùng sai.</p>
+
+        <h2 id="vi-du">Bốn game, bốn kiểu động lực</h2>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Game (nền tảng/thể loại)</th><th>Nhắm vào cái gì</th><th>Ghi chú</th></tr></thead>
+                <tbody>
+                    <tr><td>Portal (PC, puzzle)</td><td>Học pattern (Koster) + competence</td><td>Cảm giác tự mình giải ra được</td></tr>
+                    <tr><td>Sekiro / Dark Souls (console/PC, action RPG)</td><td>Competence đẩy tới cực đoan</td><td>FromSoftware cố tình không cho chọn độ khó</td></tr>
+                    <tr><td>Pokémon GO (mobile, AR)</td><td>Relatedness + The People Factor</td><td>Chơi cùng người khác ngoài đời thực</td></tr>
+                    <tr><td>Journey (indie)</td><td>Relatedness kiểu khác</td><td>Không chat, đồng hành ẩn danh, chỉ có tín hiệu đơn giản</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Sekiro / Dark Souls: Hidetaka Miyazaki nói trong một phỏng vấn với GameSpot, nguyên văn: <em>"We want everyone to feel that sense of accomplishment."</em> Đây là một lựa chọn gây tranh cãi: nhiều nhà thiết kế cho rằng nên để người chơi tự chọn độ khó, FromSoftware thì tin cảm giác thành tựu chỉ trọn vẹn khi thử thách là như nhau với tất cả mọi người.</p>
+        <p>Pokémon GO: John Hanke (CEO Niantic) nói trong phỏng vấn với VICE (2017), nguyên văn: <em>"The priority for Pokémon Go now is to build in features that reward co-operative gameplay, offering more depth than just the capturing mechanic."</em> và <em>"But, to me, that would be the best demonstration of the vision of this company, which is all about playing games together, outside, with other people."</em></p>
+        <p>Journey: game cố tình không có chat, người đồng hành ẩn danh, chỉ giao tiếp bằng tín hiệu đơn giản — một cách khác để thoả mãn relatedness, không cần lời nói.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Về các trích dẫn ở trên</p>
+                <p>Chỉ câu trong ngoặc kép mới là nguyên văn; phần mô tả game là phân tích minh hoạ của bài. Riêng Journey: hoàn toàn là phân tích, không có trích dẫn.</p>
+            </div>
+        </div>
+
+        <h2 id="lens">Soi động lực trong game của bạn</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Soi động lực trong game của bạn</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Người chơi có được tự chọn cách giải quyết, hay chỉ có đúng một đường?</li>
+                <li><span class="q-icon">?</span> Họ có cảm thấy mình đang giỏi lên, hay chỉ đang cày cho đủ số?</li>
+                <li><span class="q-icon">?</span> Game có chỗ nào để chơi cùng/khoe/đùa với người khác không?</li>
+                <li><span class="q-icon">?</span> Nếu gỡ hết điểm, huy hiệu, bảng xếp hạng ra — còn ai muốn chơi nữa không?</li>
+            </ul>
+        </div>
+
+        <h2 id="thuc-hanh">Mổ động lực của một game</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">15 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Mổ động lực của một game</h3>
+                <ol class="steps">
+                    <li>Chọn 1 game bạn chơi nhiều.</li>
+                    <li>Nó nhắm chủ yếu vào loại fun nào trong 4 loại của Lazzaro?</li>
+                    <li>Nó thoả mãn nhu cầu nào trong 3 nhu cầu SDT, nhu cầu nào nó bỏ trống?</li>
+                    <li>Liệt kê mọi phần thưởng ngoài trong game đó, rồi hỏi: gỡ chúng ra thì bạn còn chơi không?</li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Làm mẫu bằng Portal: Hard Fun + Easy Fun; competence mạnh, relatedness gần như không có; gần như không có phần thưởng ngoài — vẫn cuốn.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Koster, "fun" gắn với quá trình gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Não nghỉ ngơi, không xử lý gì</button>
+                <button data-opt="b"><span class="badge">B</span> Não đang học/giải một câu đố nhận thức</button>
+                <button data-opt="c"><span class="badge">C</span> Cơ thể được thư giãn</button>
+                <button data-opt="d"><span class="badge">D</span> Đạt điểm số cao nhất</button>
+            </div>
+            <div class="explain" hidden><p>Koster viết nguyên văn: "fun is the feeling you get when you are exercising your brain by solving a cognitive puzzle." Vui gắn với việc não đang học một pattern mới, không phải điểm số hay nghỉ ngơi.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Loại fun nào của Lazzaro gắn với cảm xúc Fiero?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Hard Fun</button>
+                <button data-opt="b"><span class="badge">B</span> Easy Fun</button>
+                <button data-opt="c"><span class="badge">C</span> Altered States</button>
+                <button data-opt="d"><span class="badge">D</span> The People Factor</button>
+            </div>
+            <div class="explain" hidden><p>Lazzaro gắn "Hard Fun" với "Frustration and Fiero (an Italian word for personal triumph)" — cảm xúc khi vượt qua chướng ngại.</p></div>
+        </div>
+        <div class="quiz" data-answer="c">
+            <p class="q">Self-Determination Theory nêu ba nhu cầu tâm lý nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Điểm số, huy hiệu, bảng xếp hạng</button>
+                <button data-opt="b"><span class="badge">B</span> Thử thách, khám phá, xã hội</button>
+                <button data-opt="c"><span class="badge">C</span> Autonomy, competence, relatedness</button>
+                <button data-opt="d"><span class="badge">D</span> Hard Fun, Easy Fun, Altered States</button>
+            </div>
+            <div class="explain" hidden><p>Ryan, Rigby & Przybylski kết luận: "SDT's theorized needs for autonomy, competence, and relatedness independently predict enjoyment and future game play." Ba nhu cầu là tự chủ, năng lực, kết nối — không phải các loại fun của Lazzaro.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Nghiên cứu overjustification (Lepper và cộng sự, 1973) cho thấy gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Nhóm trẻ biết trước sẽ được thưởng về sau ít hứng thú với hoạt động hơn hai nhóm còn lại</button>
+                <button data-opt="b"><span class="badge">B</span> Thưởng luôn làm tăng hứng thú với hoạt động</button>
+                <button data-opt="c"><span class="badge">C</span> Thưởng bất ngờ cũng có hại như thưởng biết trước</button>
+                <button data-opt="d"><span class="badge">D</span> Nghiên cứu được làm trực tiếp trên người chơi game</button>
+            </div>
+            <div class="explain" hidden><p>Kết quả nguyên văn: nhóm expected-award "show less subsequent intrinsic interest in the target activity than subjects in either of the other two conditions." Đây là nghiên cứu ngoài game (trẻ em vẽ tranh), không suy thẳng ra thiết kế game được.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Động lực nội tại vs ngoại tại</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Nội tại: làm vì bản thân việc đó thú vị. Ngoại tại: làm để lấy một thứ khác (điểm, tiền, huy hiệu).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Overjustification effect</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Biết trước sẽ được thưởng cho một việc vốn thích làm có thể giảm hứng thú nội tại với việc đó (Lepper, Greene & Nisbett, 1973).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>4 Keys to Fun (Lazzaro)</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Hard Fun, Easy Fun, Altered States, The People Factor — bốn loại fun quan sát được (2004).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>3 nhu cầu SDT</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Autonomy (tự chủ), competence (năng lực), relatedness (kết nối) — cùng dự đoán mức độ thích thú và khả năng chơi tiếp.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Bartle player types</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Achievers, Explorers, Socialisers, Killers — sinh ra từ một MUD cụ thể, bài viết năm 1996; chính Bartle nói người chơi thường trôi giữa các kiểu, không bị đóng khung.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Vui là lúc não đang học một pattern mới; hết thứ để học là hết vui.</li>
+                <li><span class="n">2</span> Không có một loại vui — người chơi tìm những thứ rất khác nhau trong cùng một game.</li>
+                <li><span class="n">3</span> Phần thưởng ngoài không tạo ra động lực; nó chỉ khuếch đại (hoặc phá hỏng) động lực có sẵn.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.raphkoster.com/2012/01/24/an-atomic-theory-of-fun-game-design/" target="_blank" rel="noopener">An atomic theory of fun game design</a>
+                <span class="reading-meta">Raph Koster · raphkoster.com, 2012</span>
+                <p class="reading-why">Chính Koster viết lại cách nhìn fun như quá trình não giải câu đố nhận thức.</p>
+            </li>
+            <li>
+                <span class="pill type-paper">Paper</span>
+                <a class="reading-title" href="http://xeodesign.com/xeodesign_whyweplaygames.pdf" target="_blank" rel="noopener">Why We Play Games: Four Keys to More Emotion Without Story</a>
+                <span class="reading-meta">Nicole Lazzaro · XEODesign, 2004</span>
+                <p class="reading-why">Nguồn đầy đủ của 4 loại fun và giới hạn nghiên cứu định tính đứng sau nó.</p>
+            </li>
+            <li>
+                <span class="pill type-paper">Paper</span>
+                <a class="reading-title" href="https://selfdeterminationtheory.org/SDT/documents/2006_RyanRigbyPrzybylski_MandE.pdf" target="_blank" rel="noopener">The Motivational Pull of Video Games: A Self-Determination Theory Approach</a>
+                <span class="reading-meta">Ryan, Rigby & Przybylski · Motivation and Emotion, 2006</span>
+                <p class="reading-why">Nguồn gốc ba nhu cầu autonomy, competence, relatedness dùng trong bài này.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://mud.co.uk/richard/hcds.htm" target="_blank" rel="noopener">Hearts, Clubs, Diamonds, Spades: Players Who Suit MUDs</a>
+                <span class="reading-meta">Richard Bartle, 1996</span>
+                <p class="reading-why">Nguồn gốc 4 kiểu người chơi và câu nói của chính Bartle về giới hạn mô hình.</p>
+            </li>
+            <li>
+                <span class="pill type-paper">Paper</span>
+                <a class="reading-title" href="https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Motivation/Lepper_et_al_Undermining_Childrens_Intrinsic_Interest.pdf" target="_blank" rel="noopener">Undermining Children's Intrinsic Interest with Extrinsic Reward</a>
+                <span class="reading-meta">Lepper, Greene & Nisbett · Journal of Personality and Social Psychology, 1973</span>
+                <p class="reading-why">Nghiên cứu gốc của overjustification effect, dẫn cẩn thận vì đây là nghiên cứu ngoài game.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
