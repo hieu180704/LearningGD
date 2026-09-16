@@ -83,7 +83,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 12,
                 level: "Cơ bản",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-1/03-fun-dong-luc",

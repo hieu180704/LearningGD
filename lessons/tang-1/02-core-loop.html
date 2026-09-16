@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Core Loop — Xưởng Game Design</title>
+<meta name="description" content="Vòng lặp hành động lặp lại tạo nên xương sống của gameplay: core loop, meta loop, và cách đánh giá một loop có vui khi lặp lại hay không.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-1/02-core-loop" class="tier-1">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-1">Tầng 1 · Cốt lõi</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 1 · Bài 02</p>
+            <h1>Core Loop</h1>
+            <p class="dek">Vì sao người chơi bấm cùng một nút hàng trăm lần trong một game mà vẫn thấy vui, thay vì chán ngay từ lần thứ mười.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 12 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Cơ bản</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Nên đọc trước: <a href="01-mda.html">MDA</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Vẽ được core loop của một game cụ thể</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Phân biệt core loop và meta loop</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Đánh giá một loop có "vui khi lặp lại" hay không</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Nút bấm bạn nhấn cả nghìn lần</h2>
+        <p>Trong Halo (Bungie), người chơi lặp lại đúng vài thao tác suốt cả game: ngắm, bắn, ném lựu đạn, đánh giáp lá cà khi hết đạn. Không có nút bấm mới, không có cơ chế cốt lõi nào khác — vậy mà rất nhiều người chơi hết game vẫn thấy vui.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Jaime Griesemer — Design Lead, Bungie · phỏng vấn Engadget (2011)</p>
+                <p><em>"In Halo 1, there was maybe 30 seconds of fun that happened over and over and over and over again. And so, if you can get 30 seconds of fun, you can pretty much stretch that out to be an entire game."</em></p>
+            </div>
+        </div>
+        <p>Griesemer là Design Lead của Bungie thời Halo. Ý ông: chỉ cần khoảng 30 giây gameplay đủ vui, rồi kéo dài 30 giây đó ra thành nguyên một game. Vậy 30 giây đó thật ra là cái gì, và vì sao lặp đi lặp lại mà người chơi vẫn thấy vui chứ không chán?</p>
+
+        <h2 id="khai-niem">Vòng lặp game là gì</h2>
+        <p>Trong ngành game, khối lặp lại đó gọi là <span class="term" data-en="game loop">vòng lặp game</span>. Miguel Sicart, nhà nghiên cứu thiết kế game, đưa ra định nghĩa học thuật tại hội nghị FDG 2015:</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Miguel Sicart — FDG 2015</p>
+                <p><em>"A game loop is a composite of game mechanics, computing operations, and feedback mechanisms that is repeated until a break condition is reached, either in the game mechanics or in the computing operations."</em></p>
+            </div>
+        </div>
+        <p>Diễn giải: một loop là gói gồm luật chơi, phần máy tính xử lý, và <span class="term" data-en="feedback">phản hồi</span> gửi lại cho người chơi — lặp cho tới khi có điều kiện dừng. Lưu ý: Sicart dùng chữ "game loop", không dùng "core loop" — "core loop" là thuật ngữ phổ biến trong ngành công nghiệp game, không xuất phát từ bài báo này.</p>
+        <p>Daniel Cook, trong bài "The Chemistry of Game Design" (2007), mô tả đơn vị nhỏ nhất của một loop gồm 4 bước, thứ ông gọi là <span class="term" data-en="skill atom">skill atom</span>: <em>"A skill atom feedback loop is composed of four main elements"</em>.</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Hành động<small>Người chơi ngắm và bóp cò</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Hệ thống xử lý<small>Game tính sát thương, va chạm</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Phản hồi<small>Máu địch giảm, tiếng súng, hit marker</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Cập nhật mô hình tinh thần<small>Người chơi học tầm bắn, thời điểm nên núp</small></div>
+            </div>
+            <div class="loop-return">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                <span>Quay lại Hành động — người chơi mang theo mô hình tinh thần vừa cập nhật</span>
+            </div>
+            <figcaption>4 bước của một skill atom (Daniel Cook, 2007), minh hoạ bằng ví dụ Halo.</figcaption>
+        </figure>
+        <p>Cook, trong bài sau "Loops and Arcs" (2012), viết: <em>"These loops are fractal and occur at multiple levels and frequencies throughout a game."</em> Nghĩa là một game không chỉ có một loop — có nhiều loop ở nhiều tầng thời gian khác nhau, lồng vào nhau.</p>
+
+        <h2 id="core-meta-loop">Core loop và meta loop</h2>
+        <p><span class="term" data-en="core loop">Core loop</span> là vòng ngắn, lặp liên tục trong một phiên chơi — như 30 giây của Griesemer. <span class="term" data-en="meta loop">Meta loop</span> là vòng dài hơn, thường vắt qua nhiều phiên chơi: mở khoá, nâng cấp vĩnh viễn, tiến trình cốt truyện.</p>
+        <p>Theo khung của Sicart, hai thứ này khác nhau về bản chất, không chỉ về độ dài. Ông định nghĩa "metagame" là: <em>"any aspect external to interacting with game loops that influences the play experience of a game."</em> Core loop là tương tác trực tiếp với loop; metagame (meta loop) là mọi thứ bên ngoài loop đó nhưng vẫn ảnh hưởng tới trải nghiệm chơi.</p>
+        <p>Cook còn đặt tên cho thứ đối lập với loop: <span class="term" data-en="arc">arc</span>.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Daniel Cook — "Loops and Arcs" (2012)</p>
+                <p><em>"An arc is a broken loop you exit immediately."</em></p>
+                <p>Ví dụ arc: xem một đoạn cutscene, đọc một đoạn hội thoại — trải nghiệm một lần rồi thôi, không quay lại.</p>
+            </div>
+        </div>
+
+        <h2 id="tieu-chi">Loop nào thì vui khi lặp lại</h2>
+        <p>Chạy đúng cơ chế chưa chắc đã vui khi lặp lại hàng chục lần. Có 4 tiêu chí giúp đánh giá.</p>
+        <p><strong>1. Đổi ngữ cảnh.</strong> Griesemer nói rõ cách giữ 30 giây đó không nhàm: chơi nó <em>"playing it in different environments, with different weapons, different vehicles, against different enemies, against different combinations of enemies."</em> Ông nhấn mạnh thêm: <em>"No 30 second stretch of Halo is ever repeated; the missions are constantly changing the context on you."</em></p>
+        <p><strong>2. Còn thứ để học.</strong> Raph Koster, tác giả sách A Theory of Fun for Game Design, viết trên trang riêng: <em>"fun is the feeling you get when you are exercising your brain by solving a cognitive puzzle."</em> Loop hết vui khi người chơi đã học xong pattern của nó — não không còn gì mới để nhận diện.</p>
+        <p><strong>3. Phản hồi rõ ràng.</strong> Theo Cook, một loop tốt cần <em>"Systems of crisply defined cause and effect"</em> và <em>"Functional feedback that helps players understand causation."</em> Người chơi phải đọc được vì sao mình thắng hay thua.</p>
+        <p><strong>4. Cân bằng phản hồi dương - âm.</strong> Ernest Adams và Joris Dormans, trong sách Game Mechanics: Advanced Game Design (2012), viết: <em>"Positive feedback creates an exponential curve"</em>, còn <em>"Negative feedback (as discussed in Chapter 3) is used to create stability in dynamic systems. Negative feedback makes a system resistant to changes."</em> <span class="term" data-en="positive feedback">Dương</span> = thắng làm mạnh hơn, càng dễ thắng tiếp — dễ vỡ cân bằng. <span class="term" data-en="negative feedback">Âm</span> = bên yếu được hỗ trợ, giữ ổn định. Core loop tốt thường trộn cả hai.</p>
+
+        <h2 id="vi-du">Core loop trong 4 game khác thể loại</h2>
+        <p>Bốn ví dụ dưới đây thuộc bốn nền tảng và thể loại khác nhau, để thấy core loop và meta loop không chỉ là chuyện của một dòng game.</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Game</th><th>Core loop</th><th>Meta loop</th></tr></thead>
+                <tbody>
+                    <tr><td>Halo (console, FPS)</td><td>Ngắm, bắn, ném lựu, cận chiến trong khoảng 30 giây</td><td>Tiến qua nhiệm vụ, đổi vũ khí, xe, kẻ địch</td></tr>
+                    <tr><td>Clash Royale (mobile, F2P)</td><td>Trận PvP thời gian thực</td><td>Xây và nâng cấp bộ bài</td></tr>
+                    <tr><td>Hades (console/PC, indie roguelike)</td><td>Một lượt chạy (run) chiến đấu qua các phòng, nhận nâng cấp</td><td>Chết rồi về nhà, gặp NPC, cốt truyện tiến thêm, mở khoá vĩnh viễn</td></tr>
+                    <tr><td>Dead Cells (PC, indie)</td><td>Di chuyển và chiến đấu</td><td>Chết rồi chơi lại, giữ một phần tiến triển để mở khoá trang bị cho lượt sau</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Mỗi ví dụ dạy một điều khác nhau. Halo: giữ nguyên loop, đổi ngữ cảnh liên tục. Dead Cells: làm loop cơ bản cho thật đã tay trước khi chồng lớp meta. Hades: biến thất bại thành một phần của loop thay vì hình phạt. Clash Royale: tách rạch ròi chỗ nào miễn phí, chỗ nào tốn tài nguyên.</p>
+        <p>Về Clash Royale, bài phân tích của Deconstructor of Fun (2016) viết rõ: <em>"Royale's game loop has two pieces: battle and meta-game of building and updating card deck."</em> Và giải thích vì sao thiết kế đó hợp lý: <em>"Because Battle doesn't consume resources"</em> — chiến đấu miễn phí tài nguyên, chỉ phần nâng cấp mới tốn tài nguyên và thời gian chờ.</p>
+        <div class="callout" data-kind="example">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Greg Kasavin — Creative Director, Supergiant Games</p>
+                <p><em>"It was an explicit goal of our early development, to take the pain out of dying and having to restart. If the whole game is structured around dying and restarting, then we had to make sure the moment of death isn't about rage-quitting. You have to be compelled to explore further and feel the time you spent wasn't a waste of your time."</em></p>
+            </div>
+        </div>
+        <p>Sébastien Bénard (Motion Twin), trong buổi post-mortem tại Pocket Gamer Connects Helsinki (2018), mô tả core loop của Dead Cells rất thẳng: <em>"This game is basically jumping around and killing bad guys"</em>. Đội ngũ dành <em>"quite a lot of time, I think half of the development, making sure this thing was fun as it was really the core of the game."</em></p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Về các trích dẫn ở trên</p>
+                <p>Chỉ những câu đặt trong ngoặc kép mới là phát biểu nguyên văn của tác giả hoặc nhà phát triển. Phần mô tả core loop và meta loop của từng game trong bảng là phân tích minh hoạ của bài, không phải trích dẫn.</p>
+            </div>
+        </div>
+
+        <h2 id="lens">Soi core loop của bạn</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Soi core loop của bạn</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Mỗi vòng lặp, người chơi ra quyết định gì thật sự ảnh hưởng tới vòng sau?</li>
+                <li><span class="q-icon">?</span> Lặp tới lần thứ 20, còn thứ gì mới để học không?</li>
+                <li><span class="q-icon">?</span> Người chơi có đọc được vì sao mình thắng hay thua không?</li>
+                <li><span class="q-icon">?</span> Cái gì đẩy người chơi mạnh lên, cái gì kéo lại để game không vỡ?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">"Vui một lần là đủ"</p>
+                <p>Ngược với bản chất loop. Cook viết: <em>"Loops tend to deliver value through the act of being exercised."</em> Giá trị của loop nằm ở việc LẶP, không phải trải nghiệm một lần.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">"Có loop vui rồi thì lặp y nguyên mãi"</p>
+                <p>Chính Griesemer nói câu của mình bị hiểu ngược: <em>"Everyone uses it to mean exactly the opposite of what I meant when I said it!"</em> Người ta chỉ nhớ nửa đầu "30 giây vui", quên phần đổi ngữ cảnh.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">"Core loop với meta loop là một"</p>
+                <p>Theo cách hiểu phổ biến trong ngành, dựa trên khung của Sicart ở trên: hai thứ khác nhau về bản chất, không chỉ về độ dài — core loop là tương tác trực tiếp, meta loop là mọi thứ bên ngoài ảnh hưởng tới trải nghiệm chơi.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">"Vẽ sơ đồ vòng tròn đẹp là xong"</p>
+                <p>Một sơ đồ hợp lý trên giấy vẫn có thể nhàm khi chơi thật. Phải playtest để biết loop có thật sự vui khi lặp lại hay không.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Thực hành</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">15 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Vẽ core loop của một game bạn đang chơi</h3>
+                <ol class="steps">
+                    <li>Chọn 1 game bạn đang chơi.</li>
+                    <li>Vẽ core loop 4 bước theo khung của Cook: hành động, hệ thống xử lý, phản hồi, cập nhật mô hình tinh thần.</li>
+                    <li>Vẽ meta loop chồng lên, nối rõ chỗ core loop đổ vào meta loop.</li>
+                    <li>Tự chấm loop đó theo 4 tiêu chí ở phần trên. Chỗ nào yếu nhất, ghi 1 câu vì sao.</li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Làm mẫu bằng Clash Royale: core loop là trận đấu; meta loop là mở rương, gom thẻ, nâng cấp, sửa bộ bài; chỗ nối là kết quả trận đấu quyết định rương người chơi nhận được.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Trong bài báo FDG 2015, Sicart dùng thuật ngữ nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Core loop</button>
+                <button data-opt="b"><span class="badge">B</span> Game loop</button>
+                <button data-opt="c"><span class="badge">C</span> Meta loop</button>
+                <button data-opt="d"><span class="badge">D</span> Skill atom</button>
+            </div>
+            <div class="explain" hidden><p>Sicart dùng chữ "game loop". "Core loop" là từ phổ biến trong ngành công nghiệp game, không xuất phát từ bài báo này. "Meta loop" là cách gọi khác của metagame; "skill atom" là khái niệm của Daniel Cook, không phải Sicart.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Trong Clash Royale, phần nào là meta loop?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Trận PvP thời gian thực</button>
+                <button data-opt="b"><span class="badge">B</span> Xây và nâng cấp bộ bài</button>
+                <button data-opt="c"><span class="badge">C</span> Màn hình chọn map</button>
+                <button data-opt="d"><span class="badge">D</span> Animation mở rương</button>
+            </div>
+            <div class="explain" hidden><p>Theo Deconstructor of Fun, game loop của Clash Royale gồm 2 phần: battle (core loop, thời gian thực) và xây/nâng cấp bộ bài (meta-game). Trận PvP là core loop, không phải meta loop.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Ý thật của Griesemer khi nói "30 seconds of fun" là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Làm một đoạn 30 giây thật vui, rồi liên tục đổi ngữ cảnh (vũ khí, kẻ địch, môi trường) xung quanh nó</button>
+                <button data-opt="b"><span class="badge">B</span> Chỉ cần lặp lại y nguyên 30 giây đó là đủ, không cần thay đổi gì</button>
+                <button data-opt="c"><span class="badge">C</span> Toàn bộ game chỉ nên dài đúng 30 giây</button>
+                <button data-opt="d"><span class="badge">D</span> 30 giây là thời lượng tối đa của một màn chơi</button>
+            </div>
+            <div class="explain" hidden><p>Griesemer từng than phiền câu nói của mình bị hiểu ngược: "Everyone uses it to mean exactly the opposite of what I meant when I said it!" Ông nhấn mạnh mission liên tục đổi ngữ cảnh, không phải lặp y nguyên.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Loop "thắng → mạnh hơn → càng dễ thắng" là loại feedback nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Negative feedback</button>
+                <button data-opt="b"><span class="badge">B</span> Positive feedback</button>
+                <button data-opt="c"><span class="badge">C</span> Skill atom</button>
+                <button data-opt="d"><span class="badge">D</span> Arc</button>
+            </div>
+            <div class="explain" hidden><p>Theo Adams & Dormans, positive feedback "creates an exponential curve" — thắng làm mạnh hơn, càng dễ thắng tiếp, dễ vỡ cân bằng. Negative feedback thì ngược lại, giữ ổn định và "makes a system resistant to changes".</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Core loop</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vòng ngắn, lặp liên tục trong một phiên chơi — như 30 giây gameplay của Griesemer.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Meta loop</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vòng dài hơn, vắt qua nhiều phiên chơi: mở khoá, nâng cấp vĩnh viễn, cốt truyện.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Arc</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Một loop bị bẻ gãy mà bạn thoát ra ngay (Cook) — ví dụ: cutscene, đoạn hội thoại một lần rồi thôi.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Skill atom</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Đơn vị nhỏ nhất của một loop (Cook): hành động, hệ thống xử lý, phản hồi, cập nhật mô hình tinh thần.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Positive vs negative feedback</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Dương: thắng càng mạnh, dễ thắng tiếp. Âm: bên yếu được hỗ trợ, giữ ổn định hệ thống (Adams & Dormans).</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Giá trị của loop nằm ở việc LẶP LẠI, không phải một lần trải nghiệm.</li>
+                <li><span class="n">2</span> Loop hết vui khi người chơi hết thứ để học — cách chữa rẻ nhất là đổi ngữ cảnh.</li>
+                <li><span class="n">3</span> Làm core loop cho đúng TRƯỚC, rồi mới chồng meta loop lên.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://lostgarden.com/2012/04/30/loops-and-arcs/" target="_blank" rel="noopener">Loops and Arcs</a>
+                <span class="reading-meta">Daniel Cook · Lostgarden, 2012</span>
+                <p class="reading-why">Nguồn của "arc" và ý loop lồng nhau ở nhiều tầng trong game.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/the-chemistry-of-game-design" target="_blank" rel="noopener">The Chemistry of Game Design</a>
+                <span class="reading-meta">Daniel Cook · Game Developer, 2007</span>
+                <p class="reading-why">Nguồn đầy đủ của khái niệm skill atom và 4 bước của một loop.</p>
+            </li>
+            <li>
+                <span class="pill type-paper">Paper</span>
+                <a class="reading-title" href="http://www.fdg2015.org/papers/fdg2015_paper_22.pdf" target="_blank" rel="noopener">Loops and Metagames: Understanding Game Design Structures</a>
+                <span class="reading-meta">Miguel Sicart · FDG 2015</span>
+                <p class="reading-why">Định nghĩa gốc của "game loop" và "metagame" dùng trong bài này.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.engadget.com/2011-07-14-half-minute-halo-an-interview-with-jaime-griesemer.html" target="_blank" rel="noopener">Half-minute Halo: An interview with Jaime Griesemer</a>
+                <span class="reading-meta">Ludwig Kietzmann · Engadget, 2011 — phỏng vấn Jaime Griesemer</span>
+                <p class="reading-why">Toàn bộ câu chuyện "30 seconds of fun" và ý thật đứng sau câu nói.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.deconstructoroffun.com/blog//2016/02/clash-royale-next-billion-dollar-game.html" target="_blank" rel="noopener">Clash Royale: The Next Billion Dollar Game?</a>
+                <span class="reading-meta">Deconstructor of Fun, 2016 — bài phân tích</span>
+                <p class="reading-why">Phân tích core loop và meta-game của Clash Royale, nguồn của các trích dẫn trong bảng.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
