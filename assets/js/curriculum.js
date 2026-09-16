@@ -105,11 +105,11 @@ window.CURRICULUM = [
                 goals: [
                     "Vẽ đồ thị flow (thử thách và kỹ năng)",
                     "Nhận diện dấu hiệu lo âu và nhàm chán",
-                    "Thiết kế đường cong độ khó tăng dần"
+                    "Thiết kế đường cong độ khó có nhịp lên xuống"
                 ],
                 minutes: 13,
                 level: "Cơ bản",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-1/05-game-feel",

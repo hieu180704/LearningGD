@@ -1,0 +1,432 @@
+TIÊU ĐỀ: Research — Tầng 1 · Bài 04 "Flow và độ khó"
+Ngày research: 2026-09-16
+Trạng thái: Mảng 1 (Flow, Csikszentmihalyi) và phần lớn mảng 3 (DDA) đã verify bằng cách tự mở
+đọc nguyên văn sách/tài liệu gốc (PDF tải trực tiếp, trích xuất bằng pdftotext, đối chiếu số trang
+in trong file). Mảng 2 (Schell) verify được qua bản PDF sách gốc. Fullerton (mảng 2), Costikyan
+(mảng 3), Resident Evil 4 gốc và Mario Kart "rubber banding" (mảng 3) KHÔNG verify được ở mức
+nguyên văn — xem mục 8 tổng hợp CHƯA VERIFY.
+
+MỤC LỤC
+1. Csikszentmihalyi — Định nghĩa Flow
+2. Flow Channel — mô hình challenge × skill (Alex chơi tennis)
+3. Tám thành tố (elements) của trải nghiệm Flow — và các con số khác nhau lưu hành trên mạng
+4. Jesse Schell — The Art of Game Design: Lens of Flow, Lens of Challenge, kỹ thuật cân bằng
+5. Tracy Fullerton — Game Design Workshop (CHƯA VERIFY phần lớn)
+6. Dynamic Difficulty Adjustment — định nghĩa và ví dụ Left 4 Dead "AI Director"
+7. DDA — các ví dụ khác: flOw (Jenova Chen, indie), Resident Evil (2/4), Mario Kart
+8. TỔNG HỢP MỌI MỤC [CHƯA VERIFY]
+
+================================================================
+1. CSIKSZENTMIHALYI — ĐỊNH NGHĨA FLOW
+================================================================
+Nguồn gốc lý thuyết: bản đầy đủ đầu tiên của mô hình Flow được công bố trong "Beyond Boredom
+and Anxiety" (Csikszentmihalyi, 1975, Jossey-Bass). Bản phổ biến nhất, viết cho đại chúng, là
+"Flow: The Psychology of Optimal Experience" (Harper & Row, 1990) — đây là bản tôi đã tải file
+PDF về và tự đọc trực tiếp (không qua tóm tắt bên thứ ba) bằng cách trích xuất text từ PDF.
+
+Định nghĩa/mô tả then chốt (nguyên văn, chương "Enjoyment and the Quality of Life", ngay trước
+đoạn liệt kê 8 thành tố, khoảng trang 49 sách in — số trang lấy từ chính header/footer in trong
+file PDF: "Mihaly Csikszentmihalyi / 49"):
+
+"In all the activities people in our study reported engaging in, enjoyment comes at a very
+specific point: whenever the opportunities for action perceived by the individual are equal to
+his or her capabilities. [...] Enjoyment appears at the boundary between boredom and anxiety,
+when the challenges are just balanced with the person's capacity to act."
+(trang ~49, chương "Enjoyment and the Quality of Life")
+
+Đây chính là câu định nghĩa "ranh giới giữa boredom và anxiety" mà mọi tài liệu game design sau
+này dẫn lại — nên trích đúng câu này khi viết bài, không cần diễn giải lại.
+
+Nguồn: file PDF "Flow: The Psychology of Optimal Experience" (Harper & Row, 1990), tải từ
+https://files.blogs.baruch.cuny.edu/wp-content/blogs.dir/2418/files/2013/04/Mihaly-Csikszentmihalyi-Flow.pdf
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (tải file, trích xuất bằng pdftotext, đọc toàn bộ đoạn liên quan, đối
+chiếu số trang in sẵn trong file).
+Nguyên văn: "Enjoyment appears at the boundary between boredom and anxiety, when the
+challenges are just balanced with the person's capacity to act."
+
+================================================================
+2. FLOW CHANNEL — MÔ HÌNH CHALLENGE × SKILL (ALEX CHƠI TENNIS)
+================================================================
+Trong sách Flow (1990), Csikszentmihalyi minh hoạ mô hình bằng ví dụ cậu bé "Alex" học chơi
+tennis (chương 3, khoảng trang 74–76 theo số trang in trong PDF). Đây LÀ ví dụ gốc mà sau này
+Jesse Schell chép gần như nguyên văn vào "The Art of Game Design" (xem mục 4).
+
+Tóm tắt cơ chế (diễn giải từ nguyên văn):
+- Trục hoành: skill (kỹ năng người chơi). Trục tung: challenge (độ khó/thử thách).
+- A1: Alex mới tập, skill thấp, challenge thấp (chỉ cần đánh bóng qua lưới) → đang trong flow.
+- Skill tăng dần nhưng challenge không đổi → rơi vào boredom (A2, "chán").
+- Hoặc gặp đối thủ giỏi hơn hẳn, challenge vượt xa skill hiện có → rơi vào anxiety (A3, "lo âu").
+- Muốn quay lại flow: nếu đang chán (A2) phải tăng challenge; nếu đang lo âu (A3) phải tăng
+  skill (hoặc giảm challenge, nhưng tác giả nói thực tế khó vì một khi đã biết thử thách tồn tại
+  thì khó lờ đi).
+- A4: trạng thái flow mới, phức tạp hơn A1 (skill và challenge đều cao hơn).
+- Cụm từ "flow channel" xuất hiện đúng ở đoạn mô tả việc Alex bị đẩy trở lại kênh flow này ở một
+  mức độ phức tạp cao hơn A4.
+
+Nguyên văn (trích đúng đoạn dùng lần đầu cụm "flow channel"):
+"So the motivation to enjoy himself again will push him to get back into the flow channel, but
+now at a level of complexity even higher than A4."
+
+Lưu ý quan trọng — mô hình ĐÃ ĐƯỢC CHỈNH SỬA theo thời gian (nằm trong phần "Notes/chú thích"
+cuối sách Flow 1990, không phải trong thân bài — cần nói rõ khi viết bài để không đơn giản hoá
+sai):
+"The balanced ratio between challenges and skills was recognized from the very beginning as one
+of the central conditions of the flow experience (e.g., Csikszentmihalyi 1975, pp. 49-54). The
+original model assumed that enjoyment would occur along the entire diagonal, that is, when
+challenges and skills were both very low, as well as when they were both very high. Empirical
+research findings later led to a modification of the model. People did not enjoy situations in
+which their skills and the outside challenges were both lower than their accustomed levels. The
+new model predicts flow only when challenges and skills are relatively in balance, and above the
+individual's mean level [...] the condition of anxiety (high challenge, low skills) is relatively
+rare in everyday life, and it is experienced as much more negative than the condition of boredom
+(low challenge, high skills)."
+
+→ Ý quan trọng cho bài viết: mô hình "đường chéo" đơn giản (thấp-thấp cũng được coi là flow) là
+bản GỐC năm 1975; bản 1990 đã sửa lại — flow chỉ xảy ra khi challenge/skill cân bằng VÀ đều ở
+trên mức trung bình quen thuộc của người đó. Đa số tài liệu game design tóm tắt chỉ vẽ sơ đồ đơn
+giản (kênh chéo), ít nhắc chi tiết chỉnh sửa này — nên nói khéo trong bài, không bắt buộc đưa
+sâu vào bài học người mới nhưng người viết bài nên biết để không phát biểu sai.
+
+Nguồn: cùng file PDF Flow (1990) nêu ở mục 1 — ĐÃ MỞ ĐỌC TRỰC TIẾP, cả phần thân sách (trang
+74-76) lẫn phần "Notes" cuối sách (ghi chú cho chương 3).
+
+================================================================
+3. TÁM THÀNH TỐ (ELEMENTS) CỦA TRẢI NGHIỆM FLOW
+================================================================
+Nguyên văn (chương 3, mục "THE ELEMENTS OF ENJOYMENT", khoảng trang 49-50 theo số trang in
+trong PDF — đoạn này nằm ngay sau footer "Mihaly Csikszentmihalyi / 49"):
+
+"As our studies have suggested, the phenomenology of enjoyment has eight major components. When
+people reflect on how it feels when their experience is most positive, they mention at least
+one, and often all, of the following. First, the experience usually occurs when we confront
+tasks we have a chance of completing. Second, we must be able to concentrate on what we are
+doing. Third and fourth, the concentration is usually possible because the task undertaken has
+clear goals and provides immediate feedback. Fifth, one acts with a deep but effortless
+involvement that removes from awareness the worries and frustrations of everyday life. Sixth,
+enjoyable experiences allow people to exercise a sense of control over their actions. Seventh,
+concern for the self disappears, yet paradoxically the sense of self emerges stronger after the
+flow experience is over. Finally, the sense of the duration of time is altered; hours pass by in
+minutes, and minutes can stretch out to seem like hours."
+
+→ 8 thành tố theo đúng thứ tự liệt kê trong câu trên (đây LÀ bản gốc, không phải diễn giải của
+bên thứ ba):
+1. Đối mặt nhiệm vụ có cơ hội hoàn thành được (a task we have a chance of completing)
+2. Có khả năng tập trung vào việc đang làm (able to concentrate)
+3. Nhiệm vụ có mục tiêu rõ ràng (clear goals)
+4. Có phản hồi tức thì (immediate feedback)
+5. Dấn thân sâu nhưng không gượng ép, quên đi lo âu đời thường (deep but effortless involvement)
+6. Cảm giác kiểm soát được hành động của mình (a sense of control)
+7. Cái tôi/sự tự-ý-thức biến mất trong lúc làm, nhưng "cái tôi" mạnh lên sau khi trải nghiệm kết
+   thúc (concern for the self disappears... sense of self emerges stronger)
+8. Cảm nhận về thời gian bị biến đổi (transformation of the sense of time)
+
+LƯU Ý QUAN TRỌNG cho người viết bài — có SỰ KHÁC NHAU giữa các nguồn liệt kê "thành tố của flow"
+trên mạng, phải chọn đúng bản và nói rõ:
+- Bản CHÍNH THỨC trong sách Flow (1990), tôi tự đọc và trích ở trên: đúng 8 thành tố, đúng câu
+  chữ như trên. Đây là bản NÊN DÙNG cho bài học vì có thể trích nguyên văn.
+- Một số trang phổ thông (yukaichou.com, medium.com, positivepsychology.com — tôi CHỈ thấy qua
+  WebSearch, CHƯA tự mở đọc kỹ) gộp/tách lại thành danh sách "8 traits" hoặc "9 components" hơi
+  khác nhau về cách đặt tên (ví dụ tách "challenge-skill balance" thành 1 mục riêng, thêm mục
+  "autotelic experience" như một thành tố riêng thay vì xem nó là hệ quả). Đây là diễn giải lại
+  của tác giả thứ ba/sách giáo khoa sau này, KHÔNG phải nguyên văn 1990. → Bài học nên dùng đúng
+  8 mục nguyên văn ở trên, không dùng số "9" hay tên gọi khác lấy từ các trang tóm tắt.
+
+Nguồn: cùng file PDF Flow (1990) — ĐÃ MỞ ĐỌC TRỰC TIẾP, trích đúng đoạn liệt kê nguyên văn.
+
+================================================================
+4. JESSE SCHELL — THE ART OF GAME DESIGN: LENS OF FLOW, LENS OF CHALLENGE
+================================================================
+Tôi tải được bản PDF đầy đủ cuốn "The Art of Game Design: A Book of Lenses" (Schell) và tự trích
+xuất text để đọc trực tiếp (không qua tóm tắt).
+
+4.1. Định nghĩa Flow của Schell (trang 118, chương "The Experience is in the Player's Mind",
+mục "Focus"):
+
+"This state of sustained focus, pleasure, and enjoyment is referred to as 'flow,' and has been
+the subject of extensive study by psychologist Mihalyi Csikszentmihalyi and many others. Flow is
+sometimes defined as 'a feeling of complete and energized focus in an activity, with a high
+level of enjoyment and fulfillment.'"
+
+Ngay sau đó, Schell tự đưa ra 4 "thành tố" của riêng ông (KHÔNG phải 8 thành tố gốc của
+Csikszentmihalyi — cần nói rõ trong bài để tránh nhầm lẫn hai danh sách):
+"Some of the key components necessary to create an activity that puts a player into a flow
+state are
+- Clear goals. [...]
+- No distractions. Distractions steal focus from our task. No focus, no flow.
+- Direct feedback. [...]
+- Continuously challenging. [...] if we start to think we can't achieve it, we feel frustrated
+  [...] if the challenge is too easy, we feel bored [...]"
+(trang 118)
+
+4.2. Flow channel theo Schell (trang 118-119) — Schell dẫn lại gần như nguyên văn ví dụ Alex
+chơi tennis của Csikszentmihalyi (xem mục 2), có trích dẫn rõ nguồn Csikszentmihalyi ở cuối sách
+(trang "notes", dòng: "Page 29 -- 'The task he has to perform...' Mihalyi Csikszentmihalyi, Flow
+(New York: Harper & Row, 1990) p. 39." — chứng tỏ Schell có trích dẫn học thuật đàng hoàng, không
+tự bịa).
+
+Sơ đồ flow channel của Schell mô tả bằng lời (trang 122, Balance Type #2 ở chương 11):
+"Anxiety" ở phía trên (challenge cao/skill thấp), "Boredom" ở phía dưới (challenge thấp/skill
+cao), "Flow channel" là dải chéo ở giữa, hai trục là "Challenges" (dọc) và "Skills" (ngang).
+
+4.3. Lens #18: The Lens of Flow (trang 122), nguyên văn đầy đủ 5 câu hỏi:
+"To use this lens, consider what is holding your player's focus. Ask yourself these questions:
+- Does my game have clear goals? If not, how can I fix that?
+- Are the goals of the player the same goals I intended?
+- Are there parts of the game that distract players to the point they forget their goal? If so,
+  can these distractions be reduced, or tied into the game goals?
+- Does my game provide a steady stream of not-too-easy, not-too-hard challenges, taking into
+  account the fact that the player's skills may be gradually improving?
+- Are the player's skills improving at the rate I had hoped? If not, how can I change that?"
+
+Ghi chú thêm của Schell về cách NHẬN RA flow khi playtest (trang 122, rất hữu ích cho phần
+.exercise của bài học): "Flow is a very hard thing to test for. You won't see it in ten minutes
+of gameplay. You must observe players for longer periods. [...] It is not always accompanied by
+external expressions of emotion -- it often involves quiet withdrawal. Players in flow playing
+solo games will often be quiet, possibly muttering to themselves."
+
+4.4. Kỹ thuật "tense and release" — nhịp lên-xuống độ khó, LÝ DO không nên tuyến tính (trang
+120-121, ngay trước khi giới thiệu Lens of Flow):
+"This cycle of 'tense and release, tense and release' comes up again and again in design. It
+seems to be inherent to human enjoyment. Too much tension, and we wear out. Too much relaxation,
+and we grow bored. When we fluctuate between the two, we enjoy both excitement and relaxation,
+and this oscillation also provides both the pleasure of variety, and the pleasure of
+anticipation."
+Ví dụ minh hoạ đi kèm (súng 3 phát → nâng cấp còn 2 phát → quái mới cần 3-4 phát...) — Schell tự
+đặt ra để minh hoạ, không phải ví dụ từ game cụ thể có thật.
+
+4.5. Balance Type #2: Challenge vs. Success (chương 11, trang 176-178) — 5 kỹ thuật cân bằng
+challenge/skill, nguyên văn tên từng kỹ thuật (tôi lược phần diễn giải dài, giữ đúng câu mở đầu
+mỗi gạch đầu dòng):
+- "Increase difficulty with each success." — mỗi màn khó hơn màn trước, nhắc lại phải dùng kèm
+  "tense and release".
+- "Let players get through easy parts fast." — để người chơi giỏi lướt nhanh qua phần dễ, tới
+  thẳng phần thử thách phù hợp với họ.
+- "Create 'layers of challenge.'" — ví dụ chấm điểm D/F phải chơi lại, C trở lên thì qua màn,
+  người chơi giỏi có thể quay lại "cày" điểm A sau.
+- "Let players choose the difficulty level." — chọn easy/medium/hard, có game (Schell nêu ví dụ
+  "many Atari 2600 games") cho đổi độ khó ngay giữa ván; nhược điểm: tốn công cân bằng nhiều bản,
+  gây tranh cãi bản nào mới là bản "thật".
+- "Playtest with a variety of players." — test với cả người mới lẫn người có kinh nghiệm.
+
+Ngay sau đó là Lens #31: The Lens of Challenge (trang 178), nguyên văn câu hỏi:
+"- What are the challenges in my game?
+- Are they too easy, too hard, or just right?
+- Can my challenges accommodate a wide variety of skill levels?
+- How does the level of challenge increase as the player succeeds?
+- Is there enough variety in the challenges?
+- What is the maximum level of challenge in my game?"
+
+Schell cũng đưa quan điểm về việc game khó dần đều đến mức nhiều người bỏ cuộc (trang 178):
+"Many designers are so afraid of players beating their game too easily that they make later
+levels so fiendishly difficult to win that 90% of players eventually give up on the game in
+frustration." — CẢNH BÁO: con số "90%" ở đây là Schell tự nêu để minh hoạ luận điểm, KHÔNG kèm
+theo trích dẫn nghiên cứu/khảo sát cụ thể nào trong đoạn văn — nên khi đưa vào bài phải ghi rõ đây
+là quan sát/ước lượng của Schell, không phải số liệu đã kiểm chứng.
+
+Nguồn (toàn bộ mục 4): PDF "The Art of Game Design: A Book of Lenses" (Jesse Schell), tải từ
+https://www.inventoridigiochi.it/wp-content/uploads/2020/07/art-of-game-design.pdf
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (tải file, trích xuất bằng pdftotext, đọc đúng đoạn, đối chiếu số trang in
+trong file PDF: 118, 119, 120, 121, 122, 176, 177, 178). Không xác định chắc đây là ấn bản thứ
+mấy (1st/2nd/3rd edition) — nội dung khớp với 2nd edition theo số trang lens quen thuộc trong các
+bản tóm tắt trên mạng, nhưng tôi không có trang bìa/copyright để xác nhận 100% ấn bản.
+
+================================================================
+5. TRACY FULLERTON — GAME DESIGN WORKSHOP (CHƯA VERIFY PHẦN LỚN)
+================================================================
+KHÔNG tìm được bản PDF/text đọc được của sách này (dokumen.pub trả 403 kể cả qua proxy
+r.jina.ai — chỉ đọc được mục lục; scribd/archive.org yêu cầu đăng nhập/mượn sách; taylorfrancis
+chỉ hiện tiêu đề chương, không có nội dung).
+
+Thông tin duy nhất xác nhận được (từ trang mục lục công khai của nhà xuất bản, KHÔNG phải trích
+nguyên văn nội dung):
+- Sách có Chapter 4 (hoặc 5 tuỳ ấn bản) tên "Working with Dramatic Elements", trang 101-133 (ấn
+  bản 5), gồm các mục con "The Paradox of Control," "The Transformation of Time," "The Dramatic
+  Arc". Nguồn: taylorfrancis.com — ĐÃ MỞ ĐỌC (chỉ thấy tiêu đề chương/mục, không có nội dung).
+- Sách bàn tới "challenge" như một khái niệm chủ quan, cải thiện theo skill, và có nhắc khái niệm
+  flow khi bàn cân bằng challenge/khả năng người chơi — [CHƯA VERIFY], đây là tóm tắt tổng hợp từ
+  kết quả WebSearch (nhiều trang tóm tắt sách, blog review), tôi KHÔNG tự đọc được câu chữ gốc.
+
+→ KHÔNG có trích dẫn nguyên văn nào từ Fullerton trong file này. Người viết bài KHÔNG nên trích
+"nguyên văn" Fullerton — nếu muốn nhắc Fullerton, chỉ nên nói chung chung kiểu "Fullerton trong
+Game Design Workshop cũng bàn về dramatic arc và cân bằng challenge" mà không đặt trong ngoặc
+kép, hoặc bỏ qua nguồn này và chỉ dùng Schell (đã verify đầy đủ) cho mảng đường cong độ khó.
+
+================================================================
+6. DYNAMIC DIFFICULTY ADJUSTMENT — ĐỊNH NGHĨA & LEFT 4 DEAD "AI DIRECTOR"
+================================================================
+6.1. Định nghĩa DDA — trích từ luận văn MFA "Flow in Games" của Jenova Chen (nhà thiết kế game,
+sau này là đồng sáng lập thatgamecompany — tác giả flOw, Flower, Journey). Đây là tài liệu tự
+tôi tải PDF về và trích xuất text để đọc trực tiếp:
+
+"Dynamic Difficulty Adjustment, also known as DDA, is a fairly straightforward and ideal concept
+in the game design field. The difficulty of a game should change dynamically based on its
+player's skill and performance. However, designing and implementing a DDA system is not
+trivial. Every so often, DDA systems take control away from the game designers, which
+potentially causes more problems than a linear game. Few commercial developers have implemented
+DDA systems for their games, and even fewer have shipped them."
+
+Nguồn: Jenova Chen, "Flow in Games" (MFA Thesis, USC Interactive Media Division), tải từ
+https://www.jenovachen.com/flowingames/Flow_in_games_final.pdf — ĐÃ MỞ ĐỌC TRỰC TIẾP (tải file,
+trích xuất bằng pdftotext, đọc toàn văn — thesis không đánh số trang trong bản PDF này, trích
+theo đúng đoạn văn liền mạch).
+Lưu ý: câu cuối cùng ("Few commercial developers...") tác giả tự dẫn nguồn phụ [Arey & Wells
+2001] trong ngoặc — tôi CHƯA tự tìm và đọc được nguồn Arey & Wells 2001 gốc, nên chỉ trích được
+câu của Jenova Chen, không xác nhận độc lập được luận điểm gốc của Arey & Wells.
+
+6.2. Left 4 Dead — "AI Director" (Valve, 2008) — ví dụ DDA/pacing động đã được CHÍNH NHÀ PHÁT
+TRIỂN xác nhận, qua slide thuyết trình GDC 2009 của Michael Booth (kỹ sư AI của Valve, tác giả hệ
+thống). Tôi tải trực tiếp file PDF slide gốc từ Valve và trích xuất text.
+
+Mục tiêu hệ thống, nguyên văn:
+"Goal: Generate dramatic game pacing
+What do we mean by 'dramatic game pacing'?
+- Algorithmically adjusting game pacing on the fly to maximize 'drama' (player
+  excitement/intensity)
+Inspired by Observations from Counter-Strike
+- Natural pacing of CS is 'spiky', with periods of quiet tension punctuated by unpredictable
+  moments of intense combat
+- Constant, unchanging combat is fatiguing
+- Long periods of inactivity are boring
+- Unpredictable peaks and valleys of intensity create a powerfully compelling and replayable
+  experience"
+
+Thuật toán "Adaptive Dramatic Pacing", nguyên văn:
+"Estimate the 'emotional intensity' of each Survivor
+Track the max intensity of all 4 Survivors
+If intensity is too high, remove major threats for awhile
+Otherwise, create an interesting population of threats"
+
+Bốn trạng thái của hệ thống (nguyên văn tên gọi, tôi giữ đúng thứ tự liệt kê trong slide):
+"Build Up" → "Sustain Peak" → "Peak Fade" → "Relax", trong đó "Relax" giữ mật độ quái tối thiểu
+"30-45 seconds, or until Survivors have traveled far enough toward the next safe room, then
+resume Build Up."
+
+CHI TIẾT QUAN TRỌNG cho bài học — Booth tự phân biệt rõ "pacing" khác "difficulty", nguyên văn
+(đây là câu tôi cho là đáng trích nhất của mục DDA, vì nó lật ngược một hiểu lầm phổ biến rằng
+AI Director "chỉnh độ khó"):
+"Algorithm adjusts pacing, not difficulty
+- Amplitude (difficulty) is not changed, frequency (pacing) is"
+
+Ngoài ra hệ thống dùng cơ chế đặt quái không thuần ngẫu nhiên, gọi là "Structured
+Unpredictability" (nguyên văn tên gọi, xuất hiện nhiều lần trong slide): "Not purely random, nor
+deterministically uniform" — "Population functions where space and/or time varies based [on
+player state]" — "Structured Unpredictability = Superposition of several of these population
+functions."
+
+Nguồn: Michael Booth (Valve), "The AI Systems of Left 4 Dead", slide thuyết trình GDC 2009, tải
+từ https://steamcdn-a.akamaihd.net/apps/valve/2009/ai_systems_of_l4d_mike_booth.pdf — ĐÃ MỞ ĐỌC
+TRỰC TIẾP (tải file PDF gốc do Valve host, trích xuất bằng pdftotext, đọc toàn bộ 729 dòng text
+trích ra). Đây là tài liệu CHÍNH THỨC do chính kỹ sư viết ra hệ thống trình bày, mức độ tin cậy
+cao nhất trong toàn bộ file research này.
+LƯU Ý: một số bài viết thứ cấp online (đã đọc qua WebSearch, không phải slide gốc) diễn giải thêm
+rằng Booth mô tả hệ thống là "a layered set of extremely simple, playtestable algorithms" — cụm
+này TÔI KHÔNG tìm thấy nguyên văn trong slide PDF gốc đã trích xuất, nên KHÔNG đưa vào như trích
+dẫn "nguyên văn" — nếu muốn dùng ý này trong bài, chỉ nên diễn giải chứ không để trong ngoặc kép.
+
+================================================================
+7. DDA — CÁC VÍ DỤ KHÁC: FLOW (JENOVA CHEN, INDIE), RESIDENT EVIL, MARIO KART
+================================================================
+7.1. flOw (Jenova Chen, 2006) — ví dụ INDIE, do chính tác giả tự thiết kế DDA và viết lại trong
+luận văn của mình (cùng nguồn PDF ở mục 6.1). Đây là ví dụ tốt để bổ sung "đa thể loại" ngoài
+AAA console, vì flOw là game Flash indie, sau này mới được thatgamecompany làm lại cho PS3.
+
+Nguyên văn mô tả cách DDA được cài vào gameplay (không phải hệ thống theo dõi số liệu ẩn, mà là
+lựa chọn nhúng thẳng vào luật chơi):
+"FlOw is divided into 20 levels. Each level introduces new creatures with new challenges.
+Different from traditional games in which players have to complete one level in order to
+progress to the next one, flOw offers player power to control their gameplay progress. By
+choosing different food to eat, players can advance to the more difficult level and return to
+the easier level at any time. The game features a minimal death penalty. If player died in one
+level, he will be pushed back to the previous level that is relatively easy."
+
+Và nguyên tắc thiết kế tổng quát tác giả rút ra (nguyên văn, phần kết luận):
+"1. Expand your game's Flow coverage by including a wide spectrum of gameplay with different
+difficulties and flavors
+2. Create an Player-oriented Active DDA system to allow different players to play in their own
+paces
+3. Embed DDA choices into the core gameplay mechanics and let player make their choices through
+play"
+
+Kết quả thực tế (số liệu tác giả tự báo cáo, không có bên thứ ba kiểm chứng độc lập, nhưng đây là
+lời tác giả trong chính luận văn nên tôi coi là verify được ở mức "tác giả tự nói", không phải
+"đã kiểm chứng độc lập"): "During the first two weeks after flOw was released online, it
+attracted more than 350,000 downloads." Game được mời trình diễn tại "Experimental Gameplay
+Workshop during the GDC 2006" và "won the Internet Game of the Month on EDGE magazine, May
+2006."
+
+Nguồn: cùng file luận văn Jenova Chen ở mục 6.1 — ĐÃ MỞ ĐỌC TRỰC TIẾP.
+
+7.2. Resident Evil 4 (Capcom, 2005) — [CHƯA VERIFY Ở MỨC "developer xác nhận"]. Nhiều bài viết
+(Engadget, CBR, SVG, Destructoid...) mô tả RE4 âm thầm tăng/giảm độ khó theo hiệu suất người chơi
+(địch đánh mạnh hơn nếu người chơi chơi tốt, đạn rơi ít hơn cho vũ khí hay dùng...). Tôi tự mở
+đọc bài Engadget và bài đó TỰ THỪA NHẬN đây không phải xác nhận chính thức, nguyên văn:
+"to Capcom's credit they've never confirmed the feature's existence — all we have are anecdotes
+and corroborating gameplay footage from the fans"
+Nguồn: https://www.engadget.com/2015-06-03-resident-evil-4-difficulty.html — ĐÃ MỞ ĐỌC TRỰC
+TIẾP. Kết luận: RE4 gốc chỉ là suy luận/quan sát của cộng đồng, KHÔNG có nguồn chính thức từ
+Capcom — không nên đưa RE4 gốc vào bài như một "case đã xác nhận", trừ khi ghi rõ "cộng đồng suy
+luận, Capcom chưa từng xác nhận".
+
+7.3. Resident Evil 2 Remake (Capcom, 2019) — CÓ xác nhận từ nhà sản xuất, mức tin cậy tốt hơn
+RE4 gốc. Producer Yoshiaki Hirabayashi trả lời phỏng vấn (gốc là VG24/7, tôi đọc lại qua bài
+đăng của PlayStation LifeStyle — xem ghi chú nguồn):
+"In terms of the standard difficulty, it does adjust based on player performance. I'd like to
+believe that you were doing really well and so the difficulty ramped up even more. But we have
+it tuned so that no matter how well you're doing, there's always going to be that sense of dread
+and tension there."
+Nguồn: https://www.playstationlifestyle.net/2018/06/25/resident-evil-2-remake-difficulty-adjusts/
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (bài này thuật lại/đăng lại phát biểu của Hirabayashi, dẫn lại từ phỏng
+vấn gốc trên VG24/7 mà tôi KHÔNG tự mở được trực tiếp — coi đây là nguồn thứ cấp đáng tin, không
+phải nguồn sơ cấp tuyệt đối).
+LƯU Ý PHÂN BIỆT: đây là RE2 REMAKE (2019), KHÔNG PHẢI RE4 GỐC (2005) — hai game khác nhau, đừng
+gộp lại khi viết bài. Nếu muốn ví dụ Resident Evil trong bài, nên dùng case RE2 Remake vì có phát
+biểu chính thức, thay vì RE4 (chỉ có suy luận cộng đồng).
+
+7.4. Mario Kart — "rubber banding"/catch-up mechanic — [CHƯA VERIFY thuật ngữ, có xác nhận gián
+tiếp về Ý ĐỒ THIẾT KẾ]. KHÔNG tìm thấy phát biểu chính thức nào của Nintendo dùng đúng từ "rubber
+banding" hay mô tả chi tiết cơ chế item theo thứ hạng. Tuy nhiên, tìm được một đoạn liên quan
+trong "Iwata Asks" (chuỗi phỏng vấn chính thức của Nintendo) cho bản Mario Kart 7, đọc qua proxy
+r.jina.ai (trang gốc không fetch được do lỗi chứng chỉ SSL):
+"It is true that when skilled players and not-so-skilled players race each other in Mario Kart,
+the more skilled player doesn't always win, so everyone who participates has to be able to enjoy
+it in accordance with their own skill levels. But the results of the race don't just depend on
+the luck of how the items appear."
+Nguồn: https://iwataasks.nintendo.com/interviews/3ds/mario-kart-7/1/0/ — lấy qua proxy
+https://r.jina.ai/, KHÔNG tự mở được bản gốc trực tiếp (lỗi "unable to verify the first
+certificate"). Câu quote xác nhận Ý ĐỊNH thiết kế (để người chơi mọi trình độ đều thấy vui, kết
+quả không thuần dựa may rủi item) nhưng KHÔNG mô tả cụ thể cơ chế "item mạnh hơn cho người đang
+thua" hay dùng từ "rubber banding" — nên khi viết bài, chỉ nên nói "Nintendo xác nhận Ý ĐỊNH cân
+bằng trải nghiệm giữa các trình độ", không nên viết như thể Nintendo xác nhận cơ chế kỹ thuật cụ
+thể.
+
+================================================================
+8. TỔNG HỢP MỌI MỤC [CHƯA VERIFY]
+================================================================
+Danh sách dưới đây liệt kê MỌI thứ trong file này KHÔNG được tự mở đọc nguyên văn tới nơi tới
+chốn — người viết bài KHÔNG được đưa các mục này vào bài như trích dẫn/khẳng định đã kiểm chứng:
+
+1. Toàn bộ nội dung Tracy Fullerton, "Game Design Workshop" (mục 5) — chỉ có tên chương/mục lục
+   công khai, KHÔNG có bất kỳ câu nguyên văn nào được xác nhận. Lý do: dokumen.pub chặn 403 (kể
+   cả qua proxy r.jina.ai), scribd/archive.org yêu cầu mượn sách, taylorfrancis chỉ hiện tiêu đề.
+2. Danh sách "8 traits"/"9 components" của flow trên các trang phổ thông (yukaichou.com,
+   medium.com/pavol-travnik, positivepsychology.com, soonersaferhappier.com...) — chỉ thấy qua
+   tóm tắt WebSearch, CHƯA tự mở đọc từng trang. Bài viết PHẢI dùng đúng 8 thành tố nguyên văn ở
+   mục 3 (đã tự đọc từ sách gốc), không dùng số liệu/tên gọi từ các trang này.
+3. Greg Costikyan, bài blog "Dynamic Difficulty Adjustment" (2004) — chỉ biết tới qua trích dẫn
+   gián tiếp trong luận văn Jenova Chen, KHÔNG tự mở đọc được (costik.com lỗi chứng chỉ SSL hết
+   hạn, web.archive.org không fetch được qua công cụ hiện có, proxy r.jina.ai trả về 404).
+4. Arey & Wells (2001) — nguồn phụ được Jenova Chen trích trong câu về "Few commercial
+   developers have implemented DDA systems" — chưa tự tìm và đọc được bài gốc.
+5. Resident Evil 4 (bản GỐC 2005) có DDA — CHỈ là suy luận/quan sát cộng đồng (Engadget tự thừa
+   nhận "Capcom chưa từng xác nhận"), KHÔNG phải phát biểu chính thức. Phân biệt với RE2 Remake
+   (mục 7.3) — có phát biểu chính thức, verify tốt hơn.
+6. Cụm "a layered set of extremely simple, playtestable algorithms" gán cho Michael Booth (L4D
+   AI Director) — không tìm thấy nguyên văn trong slide GDC gốc đã trích xuất, có thể là diễn giải
+   của một bài viết thứ cấp nào đó. Không dùng như trích dẫn nguyên văn.
+7. Mario Kart "rubber banding" — không có phát biểu chính thức nào của Nintendo dùng đúng thuật
+   ngữ này hay mô tả chi tiết cơ chế; chỉ có một câu Iwata Asks (đọc qua proxy, không mở được bản
+   gốc trực tiếp) xác nhận Ý ĐỊNH thiết kế chung chung. Cơ chế cụ thể (Blue Shell, item theo thứ
+   hạng...) chỉ được mô tả trong các nguồn cộng đồng/wiki, chưa verify tận gốc.
+8. Bản in/ấn bản chính xác của "The Art of Game Design" mà tôi trích ở mục 4 — nội dung và số
+   trang khớp với bản phổ biến trên mạng, nhưng tôi không xác nhận được đây là 1st/2nd/3rd
+   edition vì file PDF không có trang bìa/copyright đọc được.
