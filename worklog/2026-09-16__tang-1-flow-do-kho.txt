@@ -1,0 +1,35 @@
+SUMMARY: Dựng xong Tầng 1 bài 04 "Flow và độ khó" (b79c20d) + research/flow-do-kho.txt; bổ sung affiliation Sicart vào research/core-loop.txt (5edc863). check-site 0 lỗi; main tự fact-check từng câu trích với research và tự xem ảnh mobile sáng+tối, desktop sáng. CHƯA verify: ảnh desktop theme tối bài 04, và quiz/flashcard vẫn CHƯA bấm thử trên trình duyệt thật lần nào (tồn từ session trước, nay thêm bài 04). Đã push, remote ngang HEAD.
+
+ĐÃ LÀM
+- Research bài 04 (subagent Sonnet, WebSearch/WebFetch) -> research/flow-do-kho.txt, 432 dòng, 8 mục + mục lục. Verify bằng cách tải PDF gốc, trích xuất pdftotext, đối chiếu số trang in: Csikszentmihalyi (Flow 1990), Schell (The Art of Game Design), slide GDC 2009 của Michael Booth, luận văn MFA Jenova Chen. KHÔNG verify được: Fullerton (mọi nguồn chặn), RE4 bản gốc, Mario Kart rubber-banding, Costikyan, Arey & Wells -> đã loại hết khỏi bài.
+- Dựng lessons/tang-1/04-flow-do-kho.html (364 dòng, 2.224 từ toàn article). Đủ 12 phần theo CLAUDE.md muc 5, lần này callout mistake nằm SAU .lens (đúng thứ tự).
+- curriculum.js: sửa goal 3 thành "Thiết kế đường cong độ khó có nhịp lên xuống" (bài dạy ngược với "tăng dần đều"), flip status planned -> ready sau khi file đã tồn tại. shoot.ps1 thêm 1 dòng chụp bài 04.
+- research/core-loop.txt: thêm 2 dòng affiliation tác giả Sicart (Center for Computer Games Research, IT University of Copenhagen) + mốc re-verify.
+
+LỖI ĐÃ BẮT VÀ SỬA TRONG SESSION
+- Subagent nối 2 dòng bullet rời trong slide GDC của Booth thành MỘT câu nguyên văn bằng em dash -> chế ra câu tác giả chưa từng viết liền mạch. Đã tách lại đúng thành hai câu, ở CẢ 2 chỗ (thân bài dòng 199 và phần giải thích quiz dòng 255) - chỗ thứ hai suýt sót.
+- Callout ghi câu của Hirabayashi (RE2 Remake) là "dựa trên tài liệu chính thức của studio", thực ra là bài báo PlayStation LifeStyle thuật lại phỏng vấn VG24/7 mà research không mở được. Đã ghi rõ là nguồn thứ cấp.
+- Main tự làm vỡ layout: sửa file bằng awk 'NR==178' nhưng đếm lệch 1 dòng so với lúc đọc bằng sed -n -> ghi đè mất thẻ </div> -> callout không đóng, nuốt luôn khối .lens và cả section DDA, chữ bóp thành cột một-từ-một-dòng ở mobile. Đã khôi phục, div cân bằng 47/47, chụp lại và tự xem đã đúng.
+
+VẤP MỚI - ĐÁNG GHI NHỚ
+- tools/check-site.js KHÔNG kiểm tra cân bằng thẻ HTML: báo "0 lỗi" trong lúc file thiếu một thẻ đóng </div>. Chỉ phát hiện được nhờ tự xem ảnh mobile. => Sau mỗi lần sửa HTML nên đối chiếu thêm: số '<div' so với số '</div>'. Rủi ro cao nhất khi sửa bằng awk 'NR==<số dòng>' - đọc lại đúng dòng định sửa ngay trước khi ghi.
+
+CẦN USER QUYẾT (KHÔNG tự sửa - global rule 7)
+- CLAUDE.md muc 8 "Những điều đã biết / đã vấp" nên bổ sung mục check-site.js không bắt thẻ không cân bằng (xem phần VẤP MỚI ở trên).
+- tools/shoot.ps1 dòng 1: comment mô tả phạm vi vẫn ghi "chup headless Chrome index/lo-trinh/components", trong khi thực tế đã chụp cả lessons/ từ nhiều session trước. Stale, không phải do session này gây ra.
+- lessons/tang-1/03-fun-dong-luc.html lệch thứ tự CLAUDE.md muc 5: callout mistake ở dòng 205 nằm TRƯỚC phần ví dụ đa thể loại và .lens (đúng thứ tự phải là ví dụ -> lens -> mistake). Session này đã bàn và main đề xuất GIỮ NGUYÊN vì callout đó mở đầu bằng "Cả hai nghiên cứu trên..." - tách ra sẽ mất chỗ dựa của chữ "trên"; sửa cho đúng muc 5 thì phải viết thêm section mới cho một bài đã duyệt và đã commit. User chưa ra quyết định cuối.
+- Repo chưa có repo-params.json cho skill session-close; session này suy param từ CLAUDE.md muc 3 (worklogDir=worklog/, handoffsDir trống). CLAUDE.md muc 3 cấm tạo file ngoài danh sách nên KHÔNG tự tạo.
+
+DOC-SYNC (diff-derived, bước 1b/1c của /newsession)
+- research/fun-dong-luc.txt:31,592 trỏ research/core-loop.txt -> NO-CHANGE: diff chỉ thêm affiliation, không đụng mục mà nó trỏ tới.
+- CLAUDE.md:26,47,51,130,181 nhắc curriculum.js -> NO-CHANGE: chỉ đổi 1 goal + status của 1 entry, "6 tầng x 26 bài" vẫn đúng.
+- CLAUDE.md:54,133,160,163,183 nhắc tools/shoot.ps1 -> NO-CHANGE: chỉ thêm 1 dòng danh sách chụp, cơ chế DevTools Protocol không đổi.
+- index.html:131 script tag curriculum.js -> NO-CHANGE.
+- 2 mục FLAG đã ghi ở phần CẦN USER QUYẾT.
+
+SHA
+- 5edc863 Research Core Loop: bổ sung affiliation tác giả Sicart
+- b79c20d Tầng 1: bài 04 Flow và độ khó + research
+- Đã push: c09e529..b79c20d lên origin/master (gồm cả 4 commit tồn từ session trước).
+</content>
+</invoke>
