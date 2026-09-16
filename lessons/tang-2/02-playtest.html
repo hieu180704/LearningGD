@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Playtest — Xưởng Game Design</title>
+<meta name="description" content="Playtest không phải hỏi người chơi có vui không, mà là quan sát họ chơi thật. Bài học từ buổi test Halo 3 sau gương một chiều, phỏng vấn về Portal, và postmortem King's Ascent — cách chuẩn bị, quan sát và ghi chép một buổi playtest.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-2/02-playtest" class="tier-2">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-2">Tầng 2 · Nghề</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 2 · Bài 02</p>
+            <h1>Playtest</h1>
+            <p class="dek">Người chơi nói họ thích — nhưng tay họ lại kể một câu chuyện khác.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 13 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Trung bình</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Nên đọc trước: <a href="01-prototype-giay.html">Prototype trên giấy</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Chuẩn bị một buổi playtest có mục tiêu rõ ràng</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Phân biệt hành vi quan sát được và ý kiến chủ quan</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Ghi chép và tổng hợp phát hiện sau buổi test</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Người chơi không nhặt lựu đạn</h2>
+        <p>Randy Pagulayan ngồi trên ghế văn phòng, hơi cau mày, nhìn qua một tấm gương một chiều. Bên kia gương là một người chơi đang chơi Halo 3. Đây là một buổi <span class="term" data-en="playtest">playtest</span>: đưa người chơi thật vào phòng thử nghiệm để xem họ chơi ra sao, không phải hỏi họ nghĩ gì.</p>
+        <p>Người chơi đi ngang qua mấy quả lựu đạn nằm trên sàn mà không nhặt. Đáng lẽ cô ấy phải nhặt và dùng chúng, nhưng theo Pagulayan: <em>"the grenades aren't visible enough"</em> — lựu đạn không đủ nổi bật để mắt người chơi nhận ra.</p>
+        <p>Pagulayan còn mở lại video một trận đánh đầu game: người chơi mới bị tàn sát. Kẻ địch ở đó, theo lời ông, <em>"can kill the player in three shots"</em>.</p>
+        <p>Việc của Pagulayan không phải đoán xem người chơi nghĩ gì. Đó là tìm ra những lỗi mà chính người làm game — vốn đã biết rõ người chơi "nên" làm gì trong màn chơi của mình — lại không thể tự nhìn thấy.</p>
+
+        <h2 id="khai-niem">Quan sát, đừng hỏi có vui không</h2>
+        <p>Đây là sai lầm phổ biến nhất khi mới làm playtest: hỏi thẳng người chơi "game có vui không?" rồi tin câu trả lời. Ian Schreiber, trong <em>Game Design Concepts</em>, nói rõ vì sao cách đó không đáng tin.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Ian Schreiber — Game Design Concepts, 2009</p>
+                <p><em>"Don't simply ask your playtesters if your game is fun; they may not be able to tell you, and if they do, they may not give you an accurate or precise answer. Instead, watch your testers as they play, and take notes"</em></p>
+            </div>
+        </div>
+        <p>Jakob Nielsen, viết về usability nói chung chứ không riêng game, gói gọn nguyên tắc này trong một câu: <em>"Watch what people actually do."</em> Hành vi thật của người chơi đáng tin hơn lời họ kể lại sau đó.</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Mục tiêu &amp; người test
+                    <small>Muốn biết điều gì? Ai là người phù hợp để test?</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Quan sát &amp; ghi chép
+                    <small>Xem họ chơi, ghi hành vi kèm mốc thời gian.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Tổng hợp phát hiện
+                    <small>Gộp ghi chú, xếp ưu tiên vấn đề.</small>
+                </div>
+            </div>
+            <figcaption>Sơ đồ do người viết bài tổng hợp.</figcaption>
+        </figure>
+
+        <h2 id="chuan-bi">Chuẩn bị một buổi playtest</h2>
+        <p>Steve Bromley gọi danh sách "muốn học được gì từ buổi test này" là <span class="term" data-en="research objectives">mục tiêu nghiên cứu</span> — và nó phải là thứ cả đội phát triển cùng đồng ý, phản ánh ưu tiên hiện tại của cả team, không phải riêng ý một người.</p>
+        <p>Đừng test bằng bạn bè. Bromley thẳng thắn: <em>"Your friends are too nice"</em> — họ ngại làm bạn buồn, và kể cả khi nói thật lòng, họ thường không phải nhóm người chơi mục tiêu của game.</p>
+        <p>Bản test cũng không cần hoàn chỉnh. Richard Lemarchand khuyên: dù bản dựng có <em>"small and clunky"</em> đến đâu, đưa nó cho người khác chơi thử vẫn luôn có giá trị — bạn sẽ thấy họ phản ứng ra sao, có tự tìm ra cách điều khiển mà bạn chưa kịp giải thích hay không.</p>
+
+        <h2 id="hanh-vi">Hành vi hay ý kiến</h2>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Phân tích minh hoạ</p>
+                <p>Bảng dưới là ví dụ tự viết của người viết bài, để làm rõ khác biệt giữa hai loại ghi chú — không trích từ nguồn nào.</p>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Ghi theo hành vi</th><th>Ghi theo ý kiến</th></tr></thead>
+                <tbody>
+                    <tr><td>Đi qua 3 quả lựu đạn không nhặt</td><td>Người chơi nói lựu đạn chán</td></tr>
+                    <tr><td>Bấm nút nhảy 5 lần liên tiếp không qua được đoạn nhảy</td><td>Người chơi nói đoạn này khó vô lý</td></tr>
+                    <tr><td>Dừng 40 giây trước cửa, không tìm ra cách mở</td><td>Người chơi nói câu đố dễ đoán</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Muốn ghi được hành vi chính xác, kỹ thuật hay dùng là <span class="term" data-en="think-aloud">think-aloud</span>: yêu cầu người chơi nói to suy nghĩ trong lúc chơi — verbalize từng ý nghĩ khi họ thao tác qua giao diện.</p>
+        <p>Nếu tester chơi sai luật bạn định sẵn, đừng vội sửa lưng họ. Schreiber: <em>"Resist the temptation to stop them."</em> Đó có thể chính là cách người chơi thật sẽ chơi nếu game ra mắt lúc này. Còn khi họ buột miệng nêu ý kiến, Bromley gợi ý hỏi lại một câu ngắn: <em>"why do you feel that?"</em> — để tìm ra vấn đề hành vi đứng sau ý kiến đó.</p>
+
+        <h2 id="vi-du">Ba game, ba bài học từ quan sát</h2>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Phân tích minh hoạ</p>
+                <p>Cột "Quan sát thấy gì" gom lại các chi tiết đã kể ở trên và diễn giải thêm; cột "Theo nguồn" là nơi trích/dẫn nguyên văn.</p>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Game (thể loại)</th><th>Quan sát thấy gì</th><th>Theo nguồn</th></tr></thead>
+                <tbody>
+                    <tr><td>Halo 3 (FPS, Xbox 360)</td><td>Không nhặt lựu đạn; kẻ địch đầu game hạ gục người chơi mới quá nhanh</td><td>ABC News/Wired, 2007 — đội của Pagulayan đã phân tích <em>"more than 3,000 hours of Halo 3 played by some 600 everyday gamers"</em></td></tr>
+                    <tr><td>Portal (puzzle, PC)</td><td>Cuối buổi test, đội bảo người chơi kể lại cốt truyện vừa trải qua</td><td>Game Developer, 2008 — hai nhà thiết kế kể lại: chi tiết nào nhiều người không để ý thì <em>"either cut it"</em> hoặc làm tốt hơn</td></tr>
+                    <tr><td>King's Ascent (platformer có cốt truyện)</td><td>Playtest cho thấy cutscene quá dài</td><td>Game Developer, 2013 — thoại đã thu âm xong nên đội <em>"had to drastically cut out recorded dialogue"</em></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="ghi-chep">Ghi chép và tổng hợp</h2>
+        <p>Bromley khuyên bấm giờ ngay từ đầu buổi test. Mỗi khi thấy một vấn đề, ghi kèm mốc thời gian lúc đó xảy ra — nhờ vậy sau này xem lại bản ghi hình, bạn tìm đúng đoạn ngay lập tức thay vì tua lại từ đầu.</p>
+        <p>Không phải vấn đề nào cũng đáng sửa ngay. Bromley gợi ý câu hỏi đầu tiên khi xếp ưu tiên: <em>"Is this a core part of the experience?"</em> Ông còn hỏi vấn đề có khó vượt qua không, và có lặp lại với chính người chơi đó không — gọi là <strong>persistent</strong>. Ví dụ: người chơi không biết cách nâng cấp nhân vật — nếu chỉ một lần rồi họ nhớ, đó không phải vấn đề persistent; nhưng nếu họ cứ quên đi quên lại, đó mới là vấn đề cần ưu tiên sửa.</p>
+        <p>Với King's Ascent, đội kết hợp ghi chép quan sát với một buổi phỏng vấn tiếp theo. Theo postmortem của họ: <em>"Jotting down observational notes with a follow up interview is an effective method of pinpointing the causes of memorable joy/frustration."</em></p>
+
+        <h2 id="lens">Soi một buổi playtest</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Bộ câu hỏi</span><h3>Soi một buổi playtest</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Cả đội có đồng ý về mục tiêu nghiên cứu trước khi bắt đầu không?</li>
+                <li><span class="q-icon">?</span> Người test có phải người chưa từng chơi bản này, và không phải bạn bè của đội?</li>
+                <li><span class="q-icon">?</span> Bạn đang ghi lại hành vi (họ làm gì), hay chỉ đang ghi ý kiến (họ nói gì)?</li>
+                <li><span class="q-icon">?</span> Khi người chơi kẹt hoặc chơi sai luật, bạn có nhảy vào giúp ngay không?</li>
+                <li><span class="q-icon">?</span> Mỗi ghi chú có kèm mốc thời gian để tìm lại đúng đoạn không?</li>
+                <li><span class="q-icon">?</span> Vấn đề bạn định sửa trước có thuộc trải nghiệm cốt lõi, và có lặp lại với chính người chơi đó không?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Hỏi "có vui không" rồi tin câu trả lời</p>
+                <p>Người chơi không phải lúc nào cũng biết diễn đạt điều họ đang cảm thấy, và thường muốn lịch sự hơn là thành thật. Hành vi lúc họ chơi — đi qua món đồ không nhặt, bấm nút không có phản ứng — đáng tin hơn nhiều so với câu trả lời miệng.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Nhảy vào giải thích khi người chơi kẹt</p>
+                <p>Nielsen viết: <em>"Prompts and clarifying questions are usually necessary, but from an untrained facilitator, such interruptions can very easily change user behavior."</em> Câu hỏi gợi mở đôi khi cần thiết — nhưng người điều phối thiếu kinh nghiệm rất dễ vô tình dẫn dắt hành vi người chơi, khiến kết quả test không còn đáng tin.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Tự tổ chức một buổi playtest nhỏ</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">45 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Tự tổ chức một buổi playtest nhỏ</h3>
+                <ol class="steps">
+                    <li>Viết 1 mục tiêu nghiên cứu cho bản game hoặc prototype bạn đang có.</li>
+                    <li>Tìm 2 người chưa từng chơi bản này (không phải bạn thân trong đội).</li>
+                    <li>Quan sát họ chơi, không giúp đỡ, bấm giờ ngay từ lúc bắt đầu.</li>
+                    <li>Ghi chú kèm mốc thời gian, tách rõ cột hành vi và cột ý kiến.</li>
+                    <li>Xếp 3 vấn đề vừa ghi được theo mức ưu tiên: vấn đề thuộc trải nghiệm cốt lõi và cứ lặp lại với cùng một người thì ưu tiên cao nhất.</li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Kẻ sẵn bảng 2 cột (hành vi / ý kiến) trước khi bắt đầu, để không phải phân loại lại sau. Nếu người chơi hỏi "làm vậy đúng không?", trả lời bằng một câu trung lập và để họ tự quyết định tiếp.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Vì sao Schreiber khuyên không nên chỉ hỏi người chơi "game có vui không?"</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Vì câu hỏi đó quá dài, tester sẽ chán</button>
+                <button data-opt="b"><span class="badge">B</span> Vì họ có thể không tự nhận ra, hoặc trả lời không chính xác — quan sát hành vi đáng tin hơn</button>
+                <button data-opt="c"><span class="badge">C</span> Vì luật chơi chưa hoàn chỉnh nên câu hỏi vô nghĩa</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên văn Schreiber: người chơi "may not be able to tell you" hoặc "may not give you an accurate or precise answer" — nên hãy quan sát và ghi chép thay vì chỉ hỏi.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Ghi chú nào dưới đây thuộc loại "hành vi" chứ không phải "ý kiến"?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Người chơi bấm nút nhảy 5 lần liên tiếp không qua được đoạn nhảy</button>
+                <button data-opt="b"><span class="badge">B</span> Người chơi nói đoạn này khó vô lý</button>
+                <button data-opt="c"><span class="badge">C</span> Người chơi nói thích đồ hoạ của game</button>
+            </div>
+            <div class="explain" hidden><p>Hành vi là thứ bạn quan sát được trực tiếp (bấm nút bao nhiêu lần, có qua được hay không). Hai lựa chọn còn lại là lời người chơi tự kể lại cảm nhận — thuộc loại ý kiến.</p></div>
+        </div>
+        <div class="quiz" data-answer="c">
+            <p class="q">Khi tester chơi sai luật bạn định sẵn, Schreiber khuyên gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Dừng ngay để giải thích lại luật cho đúng</button>
+                <button data-opt="b"><span class="badge">B</span> Kết thúc buổi test sớm vì dữ liệu không còn giá trị</button>
+                <button data-opt="c"><span class="badge">C</span> Để họ tiếp tục chơi — "Resist the temptation to stop them"</button>
+            </div>
+            <div class="explain" hidden><p>Cách họ chơi khi hiểu sai luật rất có thể là cách người chơi thật sẽ chơi nếu game ra mắt ngay lúc này — đó là dữ liệu đáng ghi lại, không phải lỗi cần chặn ngay.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo cách xếp ưu tiên của Bromley, vấn đề nào nên ưu tiên sửa cao hơn?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Người chơi quên cách nâng cấp nhân vật một lần, sau khi được chỉ thì nhớ luôn</button>
+                <button data-opt="b"><span class="badge">B</span> Người chơi cứ quên đi quên lại cách nâng cấp nhân vật dù đã được chỉ</button>
+                <button data-opt="c"><span class="badge">C</span> Người chơi thắc mắc về màu sắc của thanh máu</button>
+            </div>
+            <div class="explain" hidden><p>Bromley gọi vấn đề lặp lại là "persistent" — ví dụ nguyên văn: nếu người chơi "keep forgetting how to do it", đó là persistent và đáng ưu tiên hơn vấn đề chỉ xảy ra một lần rồi thôi.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Playtest</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Đưa người chơi thật vào chơi bản game, quan sát hành vi thật của họ — thay vì chỉ hỏi họ nghĩ gì.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Hành vi vs. ý kiến</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Hành vi là thứ quan sát được trực tiếp (họ làm gì). Ý kiến là lời họ tự kể lại (họ nói gì) — kém tin cậy hơn.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Think-aloud</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Yêu cầu người chơi nói to suy nghĩ trong lúc chơi, giúp người quan sát hiểu vì sao họ hành động như vậy.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Persistent (Bromley)</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vấn đề lặp lại nhiều lần dù đã được chỉ dẫn — khác với vấn đề chỉ xảy ra một lần rồi người chơi tự nhớ được.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Research objectives</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Danh sách "muốn học được gì từ buổi test này" mà cả đội phát triển cùng đồng ý trước khi bắt đầu.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Đừng hỏi "có vui không" rồi tin câu trả lời — quan sát hành vi thật của người chơi đáng tin hơn lời họ kể lại.</li>
+                <li><span class="n">2</span> Chuẩn bị mục tiêu nghiên cứu cả đội đồng ý, tìm người chơi thật (không phải bạn bè), rồi để họ chơi mà không can thiệp.</li>
+                <li><span class="n">3</span> Ghi chú kèm mốc thời gian, tách hành vi khỏi ý kiến, rồi ưu tiên vấn đề thuộc trải nghiệm cốt lõi và lặp lại nhiều lần.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://abcnews.com/Technology/story?id=3506473" target="_blank" rel="noopener">Halo 3: How Microsoft Labs Invented a New Science of Play</a>
+                <span class="reading-meta">Clive Thompson · Wired, 2007</span>
+                <p class="reading-why">Câu chuyện đầy đủ về buổi playtest Halo 3 sau gương một chiều, dùng làm ví dụ mở bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/business/still-alive-kim-swift-and-erik-wolpaw-talk-portal" target="_blank" rel="noopener">Still Alive: Kim Swift And Erik Wolpaw Talk Portal</a>
+                <span class="reading-meta">Brandon Sheffield · Game Developer, 2008</span>
+                <p class="reading-why">Phỏng vấn hai nhà thiết kế Portal kể lại cách họ dùng playtest để quyết định giữ hay cắt nội dung.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gamedesignconcepts.wordpress.com/2009/08/13/level-14-playing-with-non-designers/" target="_blank" rel="noopener">Level 14: Playing with Non-Designers</a>
+                <span class="reading-meta">Ian Schreiber · Game Design Concepts, 2009</span>
+                <p class="reading-why">Nguồn gốc lời khuyên "quan sát, đừng chỉ hỏi có vui không" dùng xuyên suốt bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gamesuserresearch.com/a-simple-process-to-find-playtesters/" target="_blank" rel="noopener">How to find playtesters</a>
+                <span class="reading-meta">Steve Bromley · Games User Research, 2022</span>
+                <p class="reading-why">Lý do vì sao không nên test bằng bạn bè, và cách tìm người chơi phù hợp hơn.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/" target="_blank" rel="noopener">Thinking Aloud: The #1 Usability Tool</a>
+                <span class="reading-meta">Jakob Nielsen · Nielsen Norman Group, 2012</span>
+                <p class="reading-why">Giải thích kỹ thuật think-aloud và vì sao người điều phối thiếu kinh nghiệm dễ làm lệch kết quả.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

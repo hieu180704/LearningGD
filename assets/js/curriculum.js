@@ -157,7 +157,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 13,
                 level: "Trung bình",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-2/03-vong-lap-iteration",

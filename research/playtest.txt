@@ -1,0 +1,238 @@
+TIÊU ĐỀ: Research — Playtest (quan sát hành vi, think-aloud, chuẩn bị, ghi chép, ví dụ Halo 3/Portal/King's Ascent)
+Ngày research: 2026-09-16
+Trạng thái: 12 trích dẫn (P1-P12) đã tự mở đọc nguyên văn (main curl + grep) hoặc kế thừa từ
+bài 01 (P11, P12 — xem research/prototype-giay.txt). Một số trích dẫn có CẢNH BÁO đi kèm về
+giới hạn khi grep (không cắt câu sai, không gộp câu, không gán nhầm tác giả, không suy diễn
+phần chưa xác nhận) — giữ nguyên các cảnh báo này khi viết bài. Nhiều nguồn khác đã thử nhưng
+KHÔNG verify được ở mức đưa vào bài — xem mục 6. Nếu bài dùng bảng so sánh hành vi/ý kiến, sơ
+đồ quy trình playtest, hoặc khung "Lens" — đây là phân tích của người viết, không theo nguồn
+nào — xem mục 7.
+
+MỤC LỤC
+1. Quan sát hành vi thay vì hỏi ý kiến (P1, P7)
+2. Think-aloud protocol (P2)
+3. Chuẩn bị playtest & chọn người test (P3, P4, P11, P12)
+4. Ghi chép quan sát & xếp ưu tiên vấn đề (P5, P6)
+5. Ví dụ game: Halo 3, Portal, King's Ascent (P8, P9, P10)
+6. KHÔNG VERIFY ĐƯỢC (không đưa vào bài)
+7. PHÂN TÍCH MINH HOẠ — không theo nguồn (chỉ của người viết)
+
+================================================================
+1. QUAN SÁT HÀNH VI THAY VÌ HỎI Ý KIẾN (P1, P7)
+================================================================
+
+[P1] Nguồn: Jakob Nielsen, "First Rule of Usability? Don't Listen to Users", Nielsen Norman
+Group, đăng 04/08/2001.
+URL: https://www.nngroup.com/articles/first-rule-of-usability-dont-listen-to-users/ — ĐÃ MỞ
+ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn: "Watch what people actually do."
+CẢNH BÁO: câu tiếp theo "Do not believe what people say they do." — main CHỈ grep thấy câu
+đầu; nếu dùng câu sau phải kiểm lại. Mặc định CHỈ dùng câu đầu.
+Lưu ý: nguồn usability web nói chung, không riêng game.
+
+[P7] Nguồn: Ian Schreiber, "Level 14: Playing with Non-Designers", Game Design Concepts,
+đăng 13/08/2009.
+URL: https://gamedesignconcepts.wordpress.com/2009/08/13/level-14-playing-with-non-designers/
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn: "Don't simply ask your playtesters if your game is fun; they may not be able to
+tell you, and if they do, they may not give you an accurate or precise answer. Instead, watch
+your testers as they play, and take notes"
+Nguyên văn (ngữ cảnh: tester chơi sai luật): "Resist the temptation to stop them."
+Nguyên văn: "this is likely how people would play if you released your game at this moment,
+and this is something that is important for you to see, so that you can clarify the rules and
+game components later."
+CẢNH BÁO: KHÔNG gộp 2 câu đầu thành "Don't simply ask ... fun; instead, watch..." — không
+đúng nguyên văn.
+
+================================================================
+2. THINK-ALOUD PROTOCOL (P2)
+================================================================
+
+Nguồn: Jakob Nielsen, "Thinking Aloud: The #1 Usability Tool", Nielsen Norman Group, đăng
+2012.
+URL: https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/ — ĐÃ MỞ ĐỌC TRỰC
+TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn định nghĩa: "you ask test participants to use the system while continuously
+thinking out loud — that is, simply verbalizing their thoughts as they move through the user
+interface."
+Nguyên văn: "Prompts and clarifying questions are usually necessary, but from an untrained
+facilitator, such interruptions can very easily change user behavior."
+CẢNH BÁO: KHÔNG cắt câu thành "prompts ... can very easily change user behavior" — nguồn nói
+câu hỏi thường CẦN, nhưng người hỏi thiếu kinh nghiệm dễ làm lệch hành vi.
+
+================================================================
+3. CHUẨN BỊ PLAYTEST & CHỌN NGƯỜI TEST (P3, P4, P11, P12)
+================================================================
+
+[P3] Nguồn: Steve Bromley, "How To Run A Games User Research Playtest", Games User Research.
+URL: https://gamesuserresearch.com/how-to-run-a-games-user-research-playtest/ — ĐÃ MỞ ĐỌC
+TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn: "Research objectives are the agreed list of 'what do we want to learn from our
+playtest', and should reflect the current priorities of your whole development team."
+
+[P4] Nguồn: Steve Bromley, "How to find playtesters", Games User Research, 2022.
+URL: https://gamesuserresearch.com/a-simple-process-to-find-playtesters/ — ĐÃ MỞ ĐỌC TRỰC
+TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn: "Your friends are too nice – they don't want to hurt your feelings. And even if
+they can overcome that to say negative things, they are unlikely to be the target audience
+for your game"
+
+[P11] Nguồn: Richard Lemarchand, phỏng vấn "Richard Lemarchand – Playtesting and a Playful
+Production Process", Games User Research (Steve Bromley), đăng 2021-12-08 — đã verify ở bài
+01 (xem research/prototype-giay.txt).
+URL: https://gamesuserresearch.com/richard-lemarchand-playtesting-and-a-playful-production-process/
+
+Nguyên văn: "I think that no matter how small and clunky, and maybe un-gamelike a prototype
+that you make is, there's incredible value in putting it in front of somebody else, and just
+seeing how they react, seeing how they approach it, seeing if they can work out the controls
+that you haven't properly explained, seeing what they can get just through play."
+Nguyên văn: "Finding playtesters is a solvable problem."
+
+[P12] Nguồn: Tracy Fullerton, trích đoạn "Book Excerpt: Game Design Workshop, 5th Edition",
+Game Developer — đã verify ở bài 01 (xem research/prototype-giay.txt).
+
+Nguyên văn: "Another key component to playcentric design is that ideas should be prototyped
+and playtested early."
+
+================================================================
+4. GHI CHÉP QUAN SÁT & XẾP ƯU TIÊN VẤN ĐỀ (P5, P6)
+================================================================
+
+[P5] Nguồn: Steve Bromley, "Some things I've learned about observing playtesting sessions",
+stevebromley.com, đăng 2015.
+URL: https://www.stevebromley.com/blog/2015/03/19/some-things-ive-learned-about-observing-playtesting-sessions/
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn:
+- "Most qualitative studies do not have enough users to find reliable opinion data. Instead
+  questions about what people thought of the game should be saved for a quantitative study."
+- "When opinions do arise, a good moderator should reply to opinions with a probing statement
+  like "why do you feel that?" to identify if a usability issue is causing the opinion, which
+  will help increase the quality of the notes taken."
+- "Start a timer as soon as recording starts at the beginning of the session. Then, when
+  issues occur, add to your note the time that it occurred, from the timer."
+
+CẢNH BÁO: đoạn diễn giải "ghi chú chỉ 'khó tìm mục tiêu' là chưa đủ — cần ghi có tìm ra không,
+mất bao lâu, có cần trợ giúp không" là do agent research đưa ra; main CHƯA tự grep được đoạn
+này trong trang → KHÔNG liệt kê chi tiết cụ thể đó, nếu viết chỉ nói chung chung "ghi đủ chi
+tiết, không chỉ ghi tên vấn đề".
+
+[P6] Nguồn: Steve Bromley, "How to prioritise playtest issues and player feedback", Games
+User Research, 2023.
+URL: https://gamesuserresearch.com/how-to-prioritise-playtest-issues-and-player-feedback/ —
+ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn heading: "Is this a core part of the experience?"
+Ví dụ persistent (nguyên văn): "the player doesn't know how to upgrade their character – if
+you show them, and they know it from now on, that is not persistent." / "if they keep
+forgetting how to do it – it is persistent."
+CẢNH BÁO: ba câu hỏi xếp ưu tiên chỉ diễn giải được — main chỉ grep nguyên văn được câu hỏi 1
++ ví dụ persistent; hai câu hỏi còn lại (có khó vượt qua? có lặp lại?) là diễn giải, không có
+nguyên văn để trích.
+
+================================================================
+5. VÍ DỤ GAME: HALO 3, PORTAL, KING'S ASCENT (P8, P9, P10)
+================================================================
+
+[P8] Halo 3 (Bungie / Microsoft, Xbox 360, 2007)
+Nguồn: Clive Thompson, "Halo 3: How Microsoft Labs Invented a New Science of Play" (bài gốc
+Wired) — main đọc bản đăng lại trên ABC News.
+URL: https://abcnews.com/Technology/story?id=3506473 — ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep
+nguyên văn), truy cập 2026-09-16 (đọc bản đăng lại trên ABC News).
+
+Nguyên văn:
+- "Sitting in an office chair and frowning slightly, Randy Pagulayan peers through a one-way
+  mirror."
+- "She ought to be picking those up and using them, he says, but the grenades aren't visible
+  enough."
+- "That enemy can kill the player in three shots," (Pagulayan, về cảnh chạm trán đầu game:
+  "Neophyte players are getting massacred.")
+- "It is his job to find flaws in Halo 3 that its creators, who know what players should do,
+  might not be able to see."
+- "Pagulayan and his team have now analyzed more than 3,000 hours of Halo 3 played by some
+  600 everyday gamers"
+
+CẢNH BÁO: bản đọc được KHÔNG nói đội đã sửa gì cụ thể → không viết "đã sửa".
+
+[P9] Portal (Valve, PC, 2007)
+Nguồn: Brandon Sheffield, "Still Alive: Kim Swift And Erik Wolpaw Talk Portal", Game
+Developer (Gamasutra), đăng 25/03/2008.
+URL: https://www.gamedeveloper.com/business/still-alive-kim-swift-and-erik-wolpaw-talk-portal
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn:
+- "We were always very deliberately watching our players to see how we could make the
+  experience better for them."
+- "The playtesting helps test the gameplay, but at the end of the playtest, we'd also ask
+  people to tell us the story back."
+- "If enough people weren't picking up on things, generally speaking, it was an indication to
+  us that they just didn't care about it, which meant we should probably either cut it or in
+  some cases where we didn't really want to let it go..."
+- "The length of the game mainly came out of our playtesting."
+
+CẢNH BÁO: chưa gán chính xác câu nào của Kim Swift, câu nào của Erik Wolpaw → viết "hai nhà
+thiết kế kể lại" / "theo phỏng vấn", không gán tên cụ thể cho từng câu.
+
+[P10] King's Ascent (King, platformer có narrative)
+Nguồn: Sharon Hoosein, "King's Ascent Postmortem: What we learned from creating a unique
+platformer with a narrative", Game Developer, đăng 25/07/2013.
+URL: https://www.gamedeveloper.com/production/king-s-ascent-postmortem-what-we-learned-from-creating-a-unique-platformer-with-a-narrative
+— ĐÃ MỞ ĐỌC TRỰC TIẾP (main curl + grep nguyên văn), truy cập 2026-09-16.
+
+Nguyên văn:
+- "It wasn't until after both recording sessions that playtests revealed our cutscenes were
+  too long. We were not able to re-record, so we had to drastically cut out recorded
+  dialogue."
+- "Jotting down observational notes with a follow up interview is an effective method of
+  pinpointing the causes of memorable joy/frustration."
+
+CẢNH BÁO: "King" ở đây — main CHƯA xác nhận trong trang rằng studio là King (công ty Candy
+Crush). Không ghi "King (Candy Crush)"; chỉ ghi tên game + "game mobile" nếu trang xác nhận
+nền tảng — CHƯA xác nhận nền tảng → ghi "platformer có cốt truyện" và để nguyên tên bài.
+
+================================================================
+6. KHÔNG VERIFY ĐƯỢC (KHÔNG ĐƯA VÀO BÀI)
+================================================================
+
+1. Celia Hodent (celiahodent.com) — quan sát vs phỏng vấn: chỉ có kết quả tìm kiếm tổng hợp
+   (snippet), chưa mở được trang gốc để trích nguyên văn.
+2. Brian Cronin, "Playtesting Process for Ultra Small Teams" (GDC Festival of Gaming) — chỉ
+   có bản tường thuật lại của Danielle Riendeau trên gamedeveloper.com, không phải bài Cronin
+   tự viết.
+3. Mark Rosewater, "Playtesting" (magic.wizards.com) — ngày đăng bài bất thường (gần trùng
+   ngày hiện tại), main chưa tự xác minh lại → không dùng.
+4. Tracy Fullerton, Chris Swain, Steven Hoffman, "Improving Player Choices", Gamasutra, 2004
+   — main chưa tự mở/grep trong phiên verify này → không dùng.
+5. Jakob Nielsen, "Severity Ratings for Usability Problems" (thang 0-4), 1994 — main chưa
+   grep, và nguồn thiên về usability web nói chung, không riêng game → không dùng.
+6. Nintendo / Miyamoto quan sát chơi thử Super Mario 64 (đồi Bob-omb Battlefield) — chỉ có
+   nguồn thứ cấp (không phải interview/sách gốc) → không dùng.
+7. Richard Lemarchand, talk GDC 2012 "Attention, Not Immersion..." — chỉ thấy tiêu đề, không
+   mở được transcript/nội dung (GDC Vault trả phí, MIT Press 403) → không dùng.
+8. Daniel Cook (lostgarden.com) — không tìm được bài viết riêng, chuyên về playtest.
+9. Brenda Romero — chương "Production and Playtesting" (sách Game Balance, CRC Press) là
+   sách trả phí, không mở đọc được → không dùng.
+10. Jesse Schell — không có bài viết mở độc lập về playtest ngoài sách The Art of Game
+    Design (không mở đọc được).
+11. Celeste — không tìm được bài postmortem/interview chính chủ nói cụ thể về quan sát
+    playtest → phát hiện vấn đề → sửa gì.
+12. Half-Life 2, Hades, Destiny, Fortnite, Assassin's Creed, Insomniac, Supercell — chưa kịp
+    nghiên cứu (hết ngân sách lượt mạng), không phải loại vì sai mà vì chưa kiểm tra.
+
+================================================================
+7. PHÂN TÍCH MINH HOẠ — KHÔNG THEO NGUỒN (CHỈ CỦA NGƯỜI VIẾT)
+================================================================
+
+Nếu bài dùng:
+- Bảng so sánh "hành vi quan sát được" vs "ý kiến chủ quan" (ví dụ minh hoạ cụ thể theo
+  từng cột),
+- Sơ đồ quy trình playtest (chuẩn bị → quan sát → ghi chép → xếp ưu tiên),
+- Khung "Lens" để phân tích playtest,
+
+thì đây là PHÂN TÍCH CỦA NGƯỜI VIẾT, không gán cho bất kỳ tác giả nào ở các mục trên. Phải
+tách bạch rõ bằng callout `note`, không để người đọc lẫn với nội dung "theo nguồn".
