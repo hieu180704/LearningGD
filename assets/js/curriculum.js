@@ -216,9 +216,9 @@ window.CURRICULUM = [
                     "Nhận diện vòng phản hồi dương và âm",
                     "Dự đoán hệ quả không mong muốn của một hệ thống"
                 ],
-                minutes: 16,
+                minutes: 14,
                 level: "Trung bình",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-3/02-economy-sources-sinks",

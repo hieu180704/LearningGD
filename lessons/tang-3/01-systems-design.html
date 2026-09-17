@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Systems design — Xưởng Game Design</title>
+<meta name="description" content="Trong Monopoly, người dẫn đầu càng giàu thì càng phạt nặng người khác, người nghèo càng lúc càng nghèo — không ai ép luật đó, nó tự nảy sinh. Vì sao một hệ thống lại tự đẩy trận đấu theo một hướng như vậy?">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-3/01-systems-design" class="tier-3">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-3">Tầng 3 · Chuyên sâu</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 3 · Bài 01</p>
+            <h1>Systems design</h1>
+            <p class="dek">Người dẫn đầu Monopoly càng giàu càng phạt nặng người khác — không ai ép luật đó, nó tự nảy sinh từ cách vài mechanic cộng dồn theo thời gian. Học cách đọc và dự đoán những hệ thống như vậy.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 14 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Trung bình</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="../tang-1/01-mda.html">MDA</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Vẽ sơ đồ hệ thống với biến và quan hệ nhân quả</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Nhận diện vòng phản hồi dương và âm</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Dự đoán hệ quả không mong muốn của một hệ thống</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Vì sao người giàu cứ giàu thêm</h2>
+        <p>Chơi Monopoly vài ván, bạn sẽ thấy một hiện tượng lặp đi lặp lại: người đang dẫn đầu ngày càng giàu, còn người phía sau ngày càng khó gượng dậy. Không có luật nào ghi thẳng "người thắng được ưu ái" — nó tự nảy ra từ cách vài mechanic nhỏ cộng dồn theo thời gian.</p>
+        <p>Hunicke, LeBlanc và Zubek mô tả đúng hiện tượng đó trong paper MDA năm 2004: <em>"In Monopoly, as the leader or leaders become increasingly wealthy, they can penalize players with increasing effectiveness. Poorer players become increasingly poor."</em> (khi người dẫn đầu ngày càng giàu, họ càng phạt được người khác hiệu quả hơn — người nghèo thì càng lúc càng nghèo đi.)</p>
+        <p>Câu hỏi đáng đặt ra không phải "luật nào gây ra chuyện này", mà là: cả cụm luật cộng lại tạo ra hành vi gì mà từng luật riêng lẻ không có? Trả lời được câu này là bạn đang học systems design.</p>
+
+        <h2 id="co-che-va-he-thong">Từ cơ chế đơn lẻ tới hệ thống</h2>
+        <p>Ở Tầng 1 bạn đã học MDA: Mechanics là luật, Dynamics là hành vi phát sinh khi luật đó chạy thật. Systems design đào sâu vào chỗ nối hai tầng ấy — nơi nhiều mechanic rời rạc gộp thành một <span class="term" data-en="system">hệ thống</span>.</p>
+        <p>Hunicke, LeBlanc và Zubek định nghĩa mechanic ở mức cụ thể: <em>"Mechanics describes the particular components of the game, at the level of data representation and algorithms."</em> (các thành phần cụ thể của game, ở cấp dữ liệu và thuật toán.) Một mechanic đơn lẻ — "mỗi lượt tung xúc xắc" — chỉ là một mảnh rời.</p>
+        <p>Hệ thống xuất hiện khi các mảnh rời đó tương tác qua thời gian: <em>"Dynamics describes the run-time behavior of the mechanics acting on player inputs and each other's outputs over time."</em> (hành vi lúc chạy thật, khi các mechanic tác động lên input người chơi và lên nhau, theo thời gian.) Nói ngắn gọn: <em>"the mechanics give rise to dynamic system behavior, which in turn leads to particular aesthetic experiences."</em> (mechanic sinh ra hành vi hệ thống, hành vi đó dẫn tới trải nghiệm cảm xúc cụ thể.)</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Cơ chế rời<small>Luật, dữ liệu, thuật toán</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Tương tác theo thời gian<small>Nhiều mechanic tác động lẫn nhau</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Hành vi hệ thống<small>Điều bạn không thấy trong luật gốc</small></div>
+            </div>
+            <figcaption>Theo cách mô tả mechanics/dynamics của Hunicke, LeBlanc và Zubek (2004) — hệ thống không nằm trong một dòng luật nào cả.</figcaption>
+        </figure>
+
+        <h2 id="doc-so-do-he-thong">Đọc một sơ đồ hệ thống</h2>
+        <p>Ernest Adams giới thiệu khung Machinations để vẽ đúng phần khó thấy nhất của một hệ thống: dòng tài nguyên chảy qua các mắt xích. Ông viết: <em>"The Machinations framework is designed to model activity, interaction, and communication between the parts of a game's internal economy."</em> (mô tả hoạt động, tương tác và trao đổi giữa các phần trong nền kinh tế nội bộ của game.) Lý do cần một ngôn ngữ hình riêng: <em>"A game's economic system is dominated by the flow of resources."</em> (hệ thống kinh tế của game bị chi phối bởi <span class="term" data-en="resource flow">dòng chảy tài nguyên</span>.)</p>
+        <p>Bạn chưa cần tính số liệu (bài sau mới tới) — chỉ cần đọc 4 ký hiệu cốt lõi, và hiểu mũi tên là một dòng tài nguyên đang chảy.</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Ký hiệu</th><th>Nghĩa</th></tr></thead>
+                <tbody>
+                    <tr><td>Source — tam giác hướng lên</td><td>Nút tạo ra tài nguyên mới, không cần tiêu gì để có nó</td></tr>
+                    <tr><td>Pool — vòng tròn rỗng</td><td>Nơi tài nguyên tụ lại và được đếm, ví dụ thanh máu, số vàng</td></tr>
+                    <tr><td>Drain</td><td>Nút tiêu huỷ tài nguyên vĩnh viễn, mất hẳn khỏi hệ thống</td></tr>
+                    <tr><td>Converter — tam giác chỉ sang phải có vạch dọc</td><td>Đổi tài nguyên loại này thành loại khác, ví dụ vàng đổi thành trang bị</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Source<small>Kiếm được vàng</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Pool<small>Túi vàng của bạn</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Drain<small>Trả phí sửa đồ</small></div>
+            </div>
+            <figcaption>Ví dụ đơn giản đọc theo ký hiệu Machinations của Ernest Adams (2011): một nguồn tạo tài nguyên, đổ vào một kho, một phần bị tiêu huỷ vĩnh viễn.</figcaption>
+        </figure>
+
+        <h2 id="vong-phan-hoi">Vòng phản hồi: dương và âm</h2>
+        <p>Xoáy càng ngày càng giàu trong Monopoly có tên gọi: một <span class="term" data-en="positive feedback loop">vòng phản hồi dương</span>. Ian Schreiber định nghĩa rạch ròi cả hai chiều: <em>"positive feedback loop" means that receiving a power reward makes it more likely that you'll receive more, in other words it rewards you for doing well and punishes you for doing poorly; "negative feedback loop" is the opposite, where receiving a power reward makes it less likely you'll receive more, so it punishes you for doing well and rewards you for doing poorly.</em> (vòng dương: thưởng càng nhiều càng dễ nhận thêm — ưu ái người đang tốt. <span class="term" data-en="negative feedback loop">Vòng phản hồi âm</span> thì ngược lại: cản người đang tốt, ưu ái người đang kém.)</p>
+        <p>David Sirlin đặt tên dễ nhớ hơn. Vòng dương ông gọi là "dốc trơn": <em>"If a game has slippery slope, it means that falling behind causes you to fall even further behind."</em> (tụt lại sẽ khiến bạn tụt càng xa hơn) — <em>"a loop that amplifies itself as in a nuclear reaction"</em> (tự khuếch đại như phản ứng hạt nhân). Vòng âm, ông gọi "lội ngược liên tục", ví như nhiệt kế điều nhiệt: <em>"A thermostat uses negative feedback to keep the temperature of a room from spiraling out of control."</em> (giữ nhiệt độ phòng không vọt mất kiểm soát.)</p>
+        <p>Vài ví dụ: vỏ rùa xanh Mario Kart — <em>"The further behind you are, the more powerful the items you get"</em> (càng sau càng nhận vật phẩm mạnh) — là vòng âm. Mutator Fatboy trong Unreal Tournament (giết địch thì to hơn, dễ trúng đạn hơn) là vòng âm "mềm". Ngược lại, Sirlin xác nhận <em>"StarCraft and Chess both have slippery slope"</em> (đều có dốc trơn) — sai lầm nhỏ đầu ván có thể quyết định cả trận, rất lâu trước nước chiếu bí.</p>
+        <p>Game đua xe gọi chung hiệu ứng vòng âm này là rubber-banding. Dave Mark: <em>"If you are doing well, the competition starts doing well. If you are sucking badly, so do they."</em> (bạn chơi tốt thì đối thủ tốt lên, bạn tệ thì họ cũng tệ theo.)</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Thắng thêm</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Mạnh hơn</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Dễ thắng tiếp</div>
+            </div>
+            <div class="loop-return">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                <span>Quay lại "Thắng thêm" — vòng tự khuếch đại (Sirlin gọi là slippery slope)</span>
+            </div>
+            <figcaption>Vòng phản hồi dương: mỗi lượt qua vòng, khoảng cách với người phía sau càng rộng thêm.</figcaption>
+        </figure>
+
+        <h2 id="chon-vong-nao">Khi nào dùng vòng nào</h2>
+        <p>Vòng dương không mặc định xấu, vòng âm không mặc định tốt — cả hai là công cụ, dùng đúng lúc mới có giá trị.</p>
+        <p>Cờ vua gần như toàn vòng dương, trừ một ngoại lệ có chủ đích: phong hậu. Schreiber: <em>"Chess does have one positive-sum element, pawn promotion, but that generally happens rarely and only in the end game, and serves the important purpose of adding a positive feedback loop to bring the game to a close."</em> (phong hậu hiếm khi xảy ra, chỉ ở cuối ván, thêm một vòng dương để kết thúc ván đấu — không có nó, ván ngang sức có thể kéo dài vô ích.)</p>
+        <p>Ngược lại, vòng âm giữ trận sát nút tới cuối. Sirlin: <em>"it makes games closer, and small early mistakes are not crippling"</em> (ván đấu sít sao hơn, sai lầm nhỏ đầu trận không định đoạt cả trận). Riot Games, nhà phát triển League of Legends, mô tả việc cân hai lực này trong một game PvP thật: <em>"Comeback mechanics allow losing teams an achievable but difficult path back into the game. When tuned correctly, they help to balance snowballing, but it's a very fine line."</em> (cơ chế comeback cho đội thua một đường trở lại khó nhưng khả thi — chỉnh đúng thì cân được snowball, nhưng là ranh giới rất mong manh.)</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Vòng dương</th><th>Vòng âm</th></tr></thead>
+                <tbody>
+                    <tr><td>Khuếch đại người đang thắng ("slippery slope")</td><td>Kéo người đang thua lại gần ("perpetual comeback")</td></tr>
+                    <tr><td>Dùng để chốt ván nhanh, vd phong hậu trong cờ vua</td><td>Dùng để giữ trận sát nút, vd rubber-banding, blue shell</td></tr>
+                    <tr><td>Rủi ro: dẫn trước là thắng luôn, không ai gỡ lại được</td><td>Rủi ro: dẫn trước sớm mất hết ý nghĩa</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="callout" data-kind="insight">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Điều đáng nhớ</p>
+                <p>Riot Phroxzon nói thẳng cái giá của việc nghiêng quá tay: <em>"Leaning too hard in either direction can lead to game states where early leads don't matter (i.e. when comeback mechanics are too strong), or where comebacks never get to happen (i.e. when snowballing mechanics are too strong)."</em> (nghiêng quá tay bên nào cũng hỏng: quá comeback thì dẫn trước vô nghĩa, quá snowball thì không ai lội ngược được.) Câu hỏi đúng không phải "dương hay âm", mà là hệ thống này cần chốt ván hay cần giữ sát nút.</p>
+            </div>
+        </div>
+
+        <h2 id="he-qua-ngoai-du-tinh">Khi hệ thống vượt khỏi tay bạn</h2>
+        <p>Đôi khi hệ thống tạo ra hành vi mà chính người thiết kế cũng không lường trước. Jesper Juul gọi đây là <span class="term" data-en="emergent behavior">hành vi nổi lên</span>: <em>"Emergence games often surprise players and even the designers of the game."</em> (làm bất ngờ cả người chơi lẫn chính người thiết kế.) Lý do nằm ở bản chất luật chơi: <em>"a game is specified as a small number of rules that combine and yield large numbers of game variations, which the players then design strategies for dealing with."</em> (một số ít luật cộng dồn sinh ra vô số biến thể — người chơi tự nghĩ chiến thuật đối phó.)</p>
+        <p>Không phải hành vi nổi lên nào cũng đáng giữ. Sirlin gọi trường hợp xấu là <span class="term" data-en="degenerate strategy">chiến thuật thoái hoá</span>: <em>"When a game doesn't hold up to expert play, it's degenerate in some way. There's only one good move or one good character, or one good strategy, or something like that."</em> (game không trụ được trước lối chơi trình độ cao — chỉ còn đúng một nước đi, một nhân vật, hay một chiến thuật tốt.)</p>
+        <p>Có loại hành vi nổi lên không nằm trong luật nào cả — nó sinh từ chính người chơi. Schreiber: <em>"everyone by default will gang up on the leader"</em> (mặc định xúm lại đánh hội đồng người dẫn đầu). Đây là một vòng âm tự phát, nhưng dễ quá đà: <em>"players tend to overshoot"</em> (ra tay quá tay), khiến chơi tốt lại giống như bị trừng phạt.</p>
+        <p>Ranh giới giữa "hành vi thú vị" và lỗ hổng cần vá gọi là exploit: <em>"the use of a feature that gives a substantial unfair advantage to players using it."</em> (dùng một tính năng để có lợi thế không công bằng đáng kể.) Nó có thể là một mechanic có chủ đích bị lạm dụng, hoặc là tác dụng phụ ngoài ý muốn của một bug hay glitch.</p>
+        <p>Ví dụ rõ nhất cho một hành vi nhận hai quyết định khác nhau là wavedashing trong Super Smash Bros. Melee. Sakurai xác nhận đội biết từ lúc dev: <em>"Of course, we noticed that you could do that during the development period."</em> (biết ngay từ khi phát triển.) Nhưng tới Brawl, ông bỏ nó — không vì coi là bug, mà vì <em>"there was a growing gap between beginners and advanced players, and taking that out helps to level the playing field"</em> (khoảng cách người mới và người giỏi ngày càng rộng, bỏ nó để san bằng sân chơi). Cùng một hành vi, hai mục tiêu thiết kế khác nhau.</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Ví dụ</th><th>Designer đã làm gì</th></tr></thead>
+                <tbody>
+                    <tr><td>Rocket jump (Quake, Team Fortress 2)</td><td>Giữ lại, chính thức hoá — TF2 để lớp Soldier dùng rocket jump như một tính năng có chủ đích</td></tr>
+                    <tr><td>Wavedashing (Melee → Brawl)</td><td>Biết từ lúc dev; giữ ở Melee vì thêm chiều sâu kỹ thuật, bỏ ở Brawl để san bằng sân chơi</td></tr>
+                    <tr><td>Skiing (Starsiege: Tribes)</td><td>Giữ lại, biến thành bản sắc thương hiệu ở mọi bản sau</td></tr>
+                    <tr><td>Corrupted Blood (World of Warcraft)</td><td>Vá — designer quên gắn công tắc tắt debuff sau khi trận trùm kết thúc</td></tr>
+                    <tr><td>Custom Combo (Street Fighter Alpha 2)</td><td>Không vá chính thức; để cộng đồng thi đấu tự quyết cấm hay không</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="lens">Soi lại một hệ thống bạn đang chơi</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Soi một game qua khung "hệ thống"</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Biến nào trong game này tự nuôi chính nó — càng nhiều lại càng dễ có thêm?</li>
+                <li><span class="q-icon">?</span> Khi bạn đang thắng, bạn được lợi gì mà người khác không có?</li>
+                <li><span class="q-icon">?</span> Nếu bạn dẫn trước quá xa, hệ thống có cơ chế nào kéo bạn lại gần đối thủ không?</li>
+                <li><span class="q-icon">?</span> Bạn từng thấy hành vi nào người chơi tự nghĩ ra, không nằm trong luật gốc?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Thiết kế cơ chế rời, mong chúng tự thành hệ thống</p>
+                <p>Vẽ xong cơ chế nhặt vàng, cơ chế mua đồ, cơ chế lên cấp — rồi kỳ vọng ba thứ đó tự tạo ra một nền kinh tế cân bằng. Nhưng dynamics chỉ sinh ra khi các mechanic thật sự tương tác qua thời gian; không mô phỏng trước, bạn chỉ biết hệ thống chạy ra sao sau khi người chơi thật đã vọc nó.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Mặc định vòng dương là xấu, vòng âm là tốt</p>
+                <p>Phong hậu là vòng dương có chủ đích để chốt ván nhanh. Riot Games nói thẳng: nghiêng quá tay về comeback (vòng âm) khiến dẫn trước sớm mất hết ý nghĩa. Câu hỏi đúng không phải "dương hay âm", mà là hệ thống này cần chốt ván hay cần giữ sát nút.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Thấy hành vi ngoài dự tính là vá ngay</p>
+                <p>Rocket jump và skiing đều bắt đầu ngoài kịch bản gốc. Vá ngay, Quake mất một kỹ năng làm nên bản sắc dòng game, Tribes mất luôn thứ khiến nó khác biệt. Trước khi vá, hỏi trước: hành vi này có đang làm game hay hơn không?</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Vẽ một hệ thống bạn đang chơi</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">25 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Vẽ sơ đồ một hệ thống và đoán hệ quả không mong muốn</h3>
+                <ol class="steps">
+                    <li><span>Chọn một game bạn đang chơi tuần này.</span></li>
+                    <li><span>Chọn một hệ thống cụ thể trong đó (kinh tế vàng, điểm sát thương, xếp hạng...) và vẽ nó bằng 4 ký hiệu vừa học: <strong>source, pool, drain, converter</strong>.</span></li>
+                    <li><span>Đánh dấu trên sơ đồ: chỗ nào là <strong>vòng phản hồi dương</strong>, chỗ nào là <strong>vòng phản hồi âm</strong>.</span></li>
+                    <li><span>Đoán một <strong>hệ quả không mong muốn</strong> — hành vi nào người chơi có thể tự nghĩ ra, không nằm trong ý định ban đầu của designer.</span></li>
+                    <li><span>Tự hỏi: nếu hệ quả đó xảy ra thật, bạn sẽ <strong>giữ nó hay vá nó</strong>? Vì sao?</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nếu bí ở bước 2, bắt đầu từ tài nguyên bạn thấy số đếm tăng/giảm rõ nhất trên màn hình — đó thường chính là một pool.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Hunicke, LeBlanc và Zubek, dynamics là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Các thành phần dữ liệu và thuật toán được lập trình sẵn</button>
+                <button data-opt="b"><span class="badge">B</span> Hành vi lúc chạy thật của các mechanic khi tác động lên nhau, theo thời gian</button>
+                <button data-opt="c"><span class="badge">C</span> Cảm xúc người chơi cảm nhận được sau khi chơi xong</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên văn: "Dynamics describes the run-time behavior of the mechanics acting on player inputs and each other's outputs over time." Đáp án A mô tả mechanics (tầng thấp hơn dynamics), đáp án C mô tả aesthetics.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Trong khung Machinations của Ernest Adams, "drain" dùng để làm gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Tạo ra tài nguyên mới trong hệ thống</button>
+                <button data-opt="b"><span class="badge">B</span> Tiêu huỷ tài nguyên vĩnh viễn khỏi hệ thống</button>
+                <button data-opt="c"><span class="badge">C</span> Đổi tài nguyên loại này thành loại khác</button>
+            </div>
+            <div class="explain" hidden><p>Adams: "Drains are nodes that consume resources; a resource that goes into a drain disappears permanently." Đáp án A mô tả source, đáp án C mô tả converter.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Ian Schreiber, vì sao phong hậu vẫn tồn tại trong cờ vua dù là một yếu tố "tổng dương"?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Vì nó xảy ra thường xuyên nên không ảnh hưởng cân bằng</button>
+                <button data-opt="b"><span class="badge">B</span> Vì nó hiếm khi xảy ra và thêm một vòng phản hồi dương để kết thúc ván đấu</button>
+                <button data-opt="c"><span class="badge">C</span> Vì luật cờ vua không cho phép loại bỏ nó</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên văn: "...that generally happens rarely and only in the end game, and serves the important purpose of adding a positive feedback loop to bring the game to a close." Đáp án A sai vì Schreiber nói nó hiếm khi xảy ra, không phải thường xuyên. Đáp án C không phải lý do được nêu.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Jesper Juul, điều gì đặc trưng cho game theo lối "emergence"?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Toàn bộ biến thể đều được liệt kê sẵn trong luật chơi</button>
+                <button data-opt="b"><span class="badge">B</span> Biến thể sinh ra từ tương tác giữa các thành phần, thường làm bất ngờ cả người chơi lẫn người thiết kế</button>
+                <button data-opt="c"><span class="badge">C</span> Người chơi không thể tự nghĩ ra chiến thuật ngoài dự tính của designer</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên văn: "Emergence games often surprise players and even the designers of the game." Đáp án A và C mô tả đúng loại game đối lập — progression game, nơi biến thể đã được định trước.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Mechanic vs hệ thống</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Mechanic là một mảnh rời — data và thuật toán. Hệ thống là hành vi sinh ra khi nhiều mechanic tác động qua lại theo thời gian (Hunicke, LeBlanc, Zubek, 2004).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Source / Pool / Drain / Converter</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">4 ký hiệu cốt lõi của Machinations: source tạo tài nguyên, pool là nơi tài nguyên tụ lại, drain tiêu huỷ vĩnh viễn, converter đổi loại tài nguyên này thành loại khác (Ernest Adams, 2011).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Vòng phản hồi dương / âm</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vòng dương thưởng người đang thắng, khuếch đại khoảng cách ("slippery slope" — Sirlin). Vòng âm thưởng người đang thua, kéo họ lại gần ("perpetual comeback" — Sirlin; negative feedback loop — Schreiber).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Degenerate strategy / Exploit</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Degenerate: game không trụ được trước lối chơi trình độ cao, chỉ còn một nước đi tốt (Sirlin). Exploit: dùng một tính năng để có lợi thế không công bằng — có thể là mechanic bị lạm dụng hoặc tác dụng phụ của bug.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Hệ thống không phải tổng các mechanic — nó là hành vi sinh ra khi các mechanic tương tác qua thời gian (Hunicke, LeBlanc, Zubek).</li>
+                <li><span class="n">2</span> Đọc sơ đồ hệ thống qua 4 ký hiệu source, pool, drain, converter (Adams) — và nhận diện vòng phản hồi dương (khuếch đại người thắng) hay âm (kéo người thua lại gần) (Schreiber, Sirlin).</li>
+                <li><span class="n">3</span> Hệ thống có thể tạo hành vi bất ngờ cả người thiết kế (Juul) — trước khi vá, hỏi nó có đang làm game hay hơn không, như rocket jump và skiing được giữ lại, còn Corrupted Blood bị vá.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-paper">Paper</span>
+                <a class="reading-title" href="https://users.cs.northwestern.edu/~hunicke/MDA.pdf" target="_blank" rel="noopener">MDA: A Formal Approach to Game Design and Game Research</a>
+                <span class="reading-meta">Hunicke, LeBlanc, Zubek · 2004</span>
+                <p class="reading-why">Nguồn định nghĩa mechanics/dynamics và ví dụ Monopoly mở đầu bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/the-designer-s-notebook-machinations-a-new-way-to-design-game-mechanics" target="_blank" rel="noopener">The Designer's Notebook: Machinations, A New Way to Design Game Mechanics</a>
+                <span class="reading-meta">Ernest Adams · Game Developer, 2011</span>
+                <p class="reading-why">Nguồn 4 ký hiệu đọc sơ đồ hệ thống: source, pool, drain, converter.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.sirlin.net/articles/slippery-slope-and-perpetual-comeback" target="_blank" rel="noopener">Slippery Slope and Perpetual Comeback</a>
+                <span class="reading-meta">David Sirlin, 2014</span>
+                <p class="reading-why">Tên gọi dễ nhớ cho vòng dương/âm, ẩn dụ nhiệt kế điều nhiệt, ví dụ Mario Kart, Fatboy, Chess, StarCraft.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gamebalanceconcepts.wordpress.com/2010/08/18/level-7-advancement-progression-and-pacing/" target="_blank" rel="noopener">Level 7: Advancement, Progression and Pacing</a>
+                <span class="reading-meta">Ian Schreiber · Game Balance Concepts, 2010</span>
+                <p class="reading-why">Định nghĩa chính của positive/negative feedback loop, ví dụ phong hậu trong cờ vua.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gamebalanceconcepts.wordpress.com/2010/09/08/level-10-final-boss/" target="_blank" rel="noopener">Level 10: Final Boss</a>
+                <span class="reading-meta">Ian Schreiber · Game Balance Concepts, 2010</span>
+                <p class="reading-why">Nguồn ví dụ đánh hội đồng người dẫn đầu — vòng âm tự phát từ hành vi người chơi.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.leagueoflegends.com/en-us/news/dev/quick-gameplay-thoughts-2-25-comeback-mechanics/" target="_blank" rel="noopener">Quick Gameplay Thoughts 2/25: Comeback Mechanics</a>
+                <span class="reading-meta">Riot Phroxzon · dev blog League of Legends, 2022</span>
+                <p class="reading-why">Góc nhìn từ chính nhà thiết kế một game PvP thương mại về cân bằng comeback và snowballing.</p>
+            </li>
+            <li>
+                <span class="pill type-sach">Sách</span>
+                <a class="reading-title" href="https://half-real.net/dictionary/" target="_blank" rel="noopener">Half-Real — Dictionary</a>
+                <span class="reading-meta">Jesper Juul, 2005</span>
+                <p class="reading-why">Định nghĩa emergence — hành vi nổi lên có thể làm bất ngờ cả người thiết kế.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.sirlin.net/articles/playing-to-win" target="_blank" rel="noopener">Playing to Win</a>
+                <span class="reading-meta">David Sirlin</span>
+                <p class="reading-why">Khái niệm degenerate strategy, và cách cộng đồng thi đấu tự quyết cấm một lỗ hổng như Custom Combo.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

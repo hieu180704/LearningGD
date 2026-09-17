@@ -1,0 +1,345 @@
+RESEARCH — Tầng 3 bài 01: Systems design
+Ngày: 2026-09-17 | Trạng thái: ĐÃ VERIFY (main tự curl + so khớp nguyên văn từng ký tự bằng
+node — strip tag, decode entity, normalize nháy cong/thẳng). Mục không verify được nằm ở
+mục 9 và 10.
+
+MỤC LỤC
+1. Phạm vi bài
+2. Nền tảng: system là gì
+3. Ký hiệu sơ đồ hệ thống — Machinations (goal 1)
+4. Vòng phản hồi dương / âm (goal 2)
+5. Khi nào dùng dương, khi nào dùng âm (goal 2)
+6. Hệ quả không mong muốn (goal 3)
+7. Ví dụ game thật — bảng "giữ hay vá"
+8. Ghi chú: bài KHÔNG có ví dụ mobile
+9. Ghi chú nguồn cần thận trọng
+10. KHÔNG DÙNG ĐƯỢC — đã thử, session sau khỏi làm lại
+
+---
+
+## 1. Phạm vi bài
+
+Bài này dạy cách đọc và nghĩ về một hệ thống game: ký hiệu sơ đồ hoá (Machinations),
+vòng phản hồi dương/âm, và hệ quả không mong muốn (unintended consequences) khi hệ
+thống vận hành.
+
+RANH GIỚI: nội dung economy sources/sinks và cân bằng số (balancing bằng số liệu) thuộc
+bài tang-3/02, KHÔNG nằm trong file research này.
+
+---
+
+## 2. Nền tảng: system là gì
+
+### Hunicke, LeBlanc, Zubek — "MDA: A Formal Approach to Game Design and Game Research" (2004)
+Nguồn: https://users.cs.northwestern.edu/~hunicke/MDA.pdf   [HTTP 200]
+Loại nguồn: paper học thuật gốc, đọc trực tiếp PDF 5 trang từ trang tác giả.
+
+Ý chính:
+- Mechanic = thành phần rời (data/thuật toán); hệ thống (dynamics) = hành vi sinh ra khi
+  các mechanic tác động qua lại theo thời gian.
+- Dùng để phân biệt "mechanic đơn lẻ" vs "hệ thống", làm cầu nối sang phần vòng phản hồi.
+
+NGUYÊN VĂN (đã verify):
+[V1] "Mechanics describes the particular components of the game, at the level of data
+representation and algorithms."
+[V2] "Dynamics describes the run-time behavior of the mechanics acting on player inputs
+and each other's outputs over time."
+[V3] "From the designer's perspective, the mechanics give rise to dynamic system behavior,
+which in turn leads to particular aesthetic experiences."
+[V4] "In Monopoly, as the leader or leaders become increasingly wealthy, they can penalize
+players with increasing effectiveness. Poorer players become increasingly poor."
+
+LƯU Ý KHI VIẾT: bài đã dạy MDA ở Tầng 1 — chỉ nhắc lại 1 câu, không dạy lại. [V4] dùng làm
+cầu nối sang phần vòng phản hồi (mục 3 dưới).
+
+---
+
+## 3. Ký hiệu sơ đồ hệ thống — Machinations (goal 1)
+
+### Ernest Adams — "The Designer's Notebook: Machinations, A New Way to Design Game Mechanics", Game Developer (Gamasutra cũ), 2011
+Nguồn: https://www.gamedeveloper.com/design/the-designer-s-notebook-machinations-a-new-way-to-design-game-mechanics   [HTTP 200]
+Loại nguồn: bài viết chuyên ngành trên Game Developer.
+
+CÁCH CITE (bắt buộc): phải ghi là BÀI VIẾT 2011 của Ernest Adams, KHÔNG ghi là sách
+"Game Mechanics" (2012) — chưa đối chiếu được với ấn bản sách (xem mục 10).
+
+Ý chính:
+- Machinations mô hình hoá hoạt động, tương tác, giao tiếp giữa các phần trong nền kinh
+  tế nội tại (internal economy) của game.
+- 4 ký hiệu cốt lõi: pool (nơi tài nguyên tụ lại), source (tạo tài nguyên), drain (tiêu
+  huỷ tài nguyên vĩnh viễn), converter (đổi loại tài nguyên); gate phân phối lại tài
+  nguyên chứ không tích trữ.
+
+NGUYÊN VĂN (đã verify):
+[V5] "The Machinations framework is designed to model activity, interaction, and
+communication between the parts of a game's internal economy."
+[V6] "A game's economic system is dominated by the flow of resources."
+[V7] "A pool is a location in the diagram where resources gather. Pools are represented
+as open circles, while the resources that are stored in a pool are represented as smaller
+circles that stack on them."
+[V8] "Sources are nodes that create resources. They are represented as a triangle
+pointing upward."
+[V9] "Drains are nodes that consume resources; a resource that goes into a drain
+disappears permanently."
+[V10] "In contrast to a pool, a gate does not collect resources. Instead, it immediately
+redistributes them. Gates are represented as diamond shapes that often have multiple
+outputs."
+[V11] "Converters convert one resource into another. They are represented as a triangle
+pointing to the right with a vertical line through it."
+
+DÙNG ĐỂ: figure.diagram dạy 4 ký hiệu cốt lõi (source / pool / drain / converter) + mũi
+tên = dòng tài nguyên. Gate có thể lược nếu thiếu chỗ.
+
+RANH GIỚI: CHỈ dạy ký hiệu + cách đọc sơ đồ. KHÔNG đi vào cân bằng số, sources/sinks
+kinh tế — đó là bài tang-3/02.
+
+---
+
+## 4. Vòng phản hồi dương / âm (goal 2)
+
+### David Sirlin — "Slippery Slope and Perpetual Comeback", sirlin.net, 11/08/2014
+Nguồn: https://www.sirlin.net/articles/slippery-slope-and-perpetual-comeback   [HTTP 200]
+Loại nguồn: bài viết của một game designer/nhà thiết kế cạnh tranh có tên tuổi (David Sirlin).
+
+NGUYÊN VĂN (đã verify):
+[V12] "If a game has slippery slope, it means that falling behind causes you to fall even
+further behind."
+[V13] "Slippery slope is another name for positive feedback—a loop that amplifies itself
+as in a nuclear reaction."
+[V14] "The opposite of slippery slope, I call perpetual comeback. That's just a more
+descriptive term for negative feedback."
+[V15] "A thermostat uses negative feedback to keep the temperature of a room from
+spiraling out of control. Perpetual comeback, then, is a quality in which being behind
+actually gives you an advantage."
+
+### Ian Schreiber — "Level 7: Advancement, Progression and Pacing", Game Balance Concepts, 08/2010
+Nguồn: https://gamebalanceconcepts.wordpress.com/2010/08/18/level-7-advancement-progression-and-pacing/   [HTTP 200]
+Loại nguồn: bài viết chuyên ngành trên blog Game Balance Concepts (Ian Schreiber).
+
+NGUYÊN VĂN (đã verify):
+[V16] "\"positive feedback loop\" means that receiving a power reward makes it more
+likely that you'll receive more, in other words it rewards you for doing well and
+punishes you for doing poorly; \"negative feedback loop\" is the opposite, where
+receiving a power reward makes it less likely you'll receive more, so it punishes you for
+doing well and rewards you for doing poorly."
+[V17] "they will increase more when behind, and decrease more when ahead" (nói về power
+curve dưới negative feedback)
+
+DÙNG ĐỂ: định nghĩa chính lấy [V16] (rõ, cân đối 2 chiều). [V12]-[V15] làm tên gọi dễ nhớ
++ ẩn dụ thermostat. [V4] (mục 2) làm ví dụ mở đầu bằng Monopoly.
+
+---
+
+## 5. Khi nào dùng dương, khi nào dùng âm (goal 2)
+
+### Ian Schreiber — Level 7 (cùng nguồn mục 4)
+[V18] "Chess does have one positive-sum element, pawn promotion, but that generally
+happens rarely and only in the end game, and serves the important purpose of adding a
+positive feedback loop to bring the game to a close."
+-> Vòng dương dùng CÓ CHỦ Ý để chốt ván, tránh kéo dài vô ích.
+
+### David Sirlin — slippery-slope (cùng nguồn mục 4)
+[V19] "it makes games closer, and small early mistakes are not crippling"
+-> Vòng âm giữ trận sát nút, sai lầm sớm không định đoạt cả trận.
+
+### Riot Phroxzon — "Quick Gameplay Thoughts 2/25: Comeback Mechanics", dev blog chính thức League of Legends, 25/02/2022
+Nguồn: https://www.leagueoflegends.com/en-us/news/dev/quick-gameplay-thoughts-2-25-comeback-mechanics/   [HTTP 200]
+Loại nguồn: dev blog chính thức của Riot Games (lời một nhà thiết kế game thương mại).
+
+NGUYÊN VĂN (đã verify):
+[V20] "Comeback mechanics allow losing teams an achievable but difficult path back into
+the game. When tuned correctly, they help to balance snowballing, but it's a very fine
+line."
+[V21] "Leaning too hard in either direction can lead to game states where early leads
+don't matter (i.e. when comeback mechanics are too strong), or where comebacks never get
+to happen (i.e. when snowballing mechanics are too strong)."
+[V22] "A winning team has earned an advantage, not a victory"
+
+DÙNG ĐỂ: [V21] là câu chốt cho cả phần — lệch bên nào cũng hỏng. Rất hợp làm
+callout[data-kind="insight"] vì là phát biểu của chính nhà thiết kế game thương mại.
+
+---
+
+## 6. Hệ quả không mong muốn (goal 3)
+
+### Jesper Juul
+Nguồn 1: https://jesperjuul.net/text/openandtheclosed.html   [HTTP 200]
+Nguồn 2: https://half-real.net/dictionary/   [HTTP 200]
+Loại nguồn: trang cá nhân + dictionary học thuật của Jesper Juul.
+
+NGUYÊN VĂN (đã verify):
+[V23] "a game is specified as a small number of rules that combine and yield large
+numbers of game variations, which the players then design strategies for dealing with"
+[V24] "Game type where variation appears by the interaction between elements in the
+game. Emergence games often surprise players and even the designers of the game. The
+opposite of progression games (Half-Real, chapter 3)."
+(LƯU Ý: bản fetch ban đầu cắt cụt ở "progression games." — nguyên văn còn đuôi
+"(Half-Real, chapter 3)". Bản trên đã sửa đủ.)
+
+### David Sirlin — "Playing to Win" (overview)
+Nguồn: https://www.sirlin.net/articles/playing-to-win   [HTTP 200]
+[V25] "When a game doesn't hold up to expert play, it's degenerate in some way. There's
+only one good move or one good character, or one good strategy, or something like that."
+
+### Ian Schreiber — "Level 10: Final Boss", Game Balance Concepts, 08/09/2010
+Nguồn: https://gamebalanceconcepts.wordpress.com/2010/09/08/level-10-final-boss/   [HTTP 200]
+[V26] "One common problem in games where players can directly attack each other,
+especially when it's very clear who is in the lead, is that everyone by default will gang
+up on the leader."
++ "this can serve as a useful negative feedback loop to your game, making sure no one
+gets too much ahead"
++ "players tend to overshoot (so the leader isn't just kept in check, they're totally
+destroyed), and it ends up feeling like a punishment to be doing well"
+
+DÙNG ĐỂ: [V24] là câu quan trọng nhất của bài — hệ thống có thể làm BẤT NGỜ chính người
+thiết kế ra nó. [V25] cho khái niệm "degenerate". [V26] cho ví dụ vòng âm tự phát từ hành
+vi người chơi (không nằm trong luật) — cũng là nguồn thay thế cho "runaway leader problem"
+(xem mục 10).
+
+---
+
+## 7. Ví dụ game thật — bảng "giữ hay vá"
+
+Đa thể loại đã verify: FPS (PC) · fighting (arcade/console) · platform-fighter (console) ·
+MMO (PC) · racing (console) · MOBA (PC). KHÔNG có ví dụ mobile — xem mục 8.
+
+### [V27] Rocket jumping — Quake / Team Fortress 2 — GIỮ LẠI, chính thức hoá
+Nguồn: https://en.wikipedia.org/wiki/Rocket_jumping   [HTTP 200]
+"Rocket jumping was kept as an intentional mechanic for the following games in the Quake
+series."
++ "the Soldier class can use his rockets to rocket jump. This is an intentional feature
+with several mechanics associated with it."
+
+CẢNH BÁO: chính Wikipedia nói nguồn gốc rocket jump "unclear" → KHÔNG viết "ban đầu là
+bug". KHÔNG dùng câu gán cho John Romero "We didn't know there was rocket-jumping"
+(không verify được, xem mục 10).
+
+### [V28] Wavedashing — Super Smash Bros. Melee → Brawl — BIẾT TRONG LÚC DEV, GIỮ ở Melee, BỎ ở Brawl
+Nguồn: Masahiro Sakurai, phỏng vấn Nintendo Power #228 (5/2008), bản chép lại Source
+Gaming. URL gốc sourcegaming.info trả HTTP 406 khi curl; lấy được qua
+https://web.archive.org/web/2020/https://sourcegaming.info/2015/09/06/nintendopower228/   [HTTP 200]
+"Of course, we noticed that you could do that during the development period."
++ "With Super Smash Bros. Brawl, it wasn't a matter of, "OK, do we leave it in or do we
+take it out?" We really just wanted this game, again, to appeal to and be played by
+gamers of all different levels. We felt that there was a growing gap between beginners
+and advanced players, and taking that out helps to level the playing field."
+
+Đây là ví dụ tốt nhất của bài: cùng một hành vi, hai quyết định khác nhau, lý do rõ ràng.
+
+### [V29] Skiing — Starsiege: Tribes (1998) — GIỮ LẠI, biến thành bản sắc thương hiệu
+Nguồn: https://www.escapistmagazine.com/8-videogame-glitches-that-became-features/   [HTTP 200]
+"due to a quirk in the game's physics, you could rapidly tap the jump button while
+running down a steep slope to quickly accelerate"
++ "This was dubbed "Skiing," and it quickly became necessary if you wanted to be
+competitive."
++ "Developer Dynamix took note of this, and instead of patching it out, embraced the idea
+as a way to set Tribes apart, making skiing a part of the game in every subsequent
+release."
+
+### [V30] Corrupted Blood — World of Warcraft (2005) — VÁ, không giữ
+Nguồn: https://en.wikipedia.org/wiki/Corrupted_Blood_incident   [HTTP 200]
+"These pets were subsequently re-activated after the completion of the boss battle, but
+developers had forgotten to include an "off-switch" that would recognize the conclusion
+of the raid and remove the debuff from companions."
+
+### [V31] Custom Combo bug — Street Fighter Alpha 2 — không vá, cộng đồng tự quyết
+Nguồn: https://www.sirlin.net/ptw-book/what-should-be-banned   [HTTP 200]
+"In the fighting game Street Fighter Alpha 2, there is a bug that allows the player to
+activate a very damaging move (called "Custom Combo") against an opponent who is
+standing up (not crouching)."
++ "The designers surely intended a standing opponent to be able to crouch and block this
+move upon seeing it, but if executed correctly, he cannot."
+
+### [V32]-[V33] Blue shell — Mario Kart (catch-up)
+Nguồn: https://en.wikipedia.org/wiki/Blue_shell   [HTTP 200]
+[V32] "mechanic, with racers ranked towards the bottom having a better chance of it
+spawning when driving into item boxes, giving them a better chance at diminishing the
+lead of the racer in top position."
+[V33] Sirlin: "A similar example is any version of Mario Kart. The further behind you
+are, the more powerful the items you get." / "In last place, you can get the powerful
+blue turtle shell which has homing powers to zero in on the first place racer.
+Meanwhile, the first place racer gets only weak items."
+
+### [V34] Fatboy mutator — Unreal Tournament (vòng âm "mềm")
+Nguồn: sirlin.net slippery-slope (URL như mục 4)   [HTTP 200]
+"when you kill an enemy, you become fatter and easier to hit. When you die, you become
+skinnier and harder to hit"
+
+### [V35] Chess / StarCraft có slippery slope mà vẫn hay
+Nguồn: sirlin.net slippery-slope (URL như mục 4)   [HTTP 200]
+"StarCraft and Chess both have slippery slope."
++ "It's pretty hard to make a comeback in Chess, and a game is usually "won" many, many
+moves before the actual checkmate move."
+
+### [V36] Rubber-banding — định nghĩa
+Nguồn: Dave Mark — "Rubber-Banding as a Design Requirement", Game Developer, 02/06/2010
+https://www.gamedeveloper.com/design/rubber-banding-as-a-design-requirement   [HTTP 200]
+"If you are doing well, the competition starts doing well. If you are sucking badly, so
+do they."
++ "Rubber-banding is hardly new. It is often a subtle mechanism designed to keep games
+interesting and competitive. It is especially prevalent in racing games."
+
+### [V37] Exploit — định nghĩa vỡ lòng
+Nguồn: https://en.wikipedia.org/wiki/Video_game_exploit   [HTTP 200]
+"the use of a feature that gives a substantial unfair advantage to players using it. An
+exploit can either be an intended game mechanic being abused, or an unintended side
+effect from a bug or glitch being performed."
+(Nguồn tổng hợp — dùng làm định nghĩa nhập môn, KHÔNG gắn tên tác giả.)
+
+---
+
+## 8. Ghi chú: bài KHÔNG có ví dụ mobile
+
+Theo CLAUDE.md §1, ví dụ minh hoạ phải đa thể loại (PC, console, indie, mobile). Đã tìm
+nhưng KHÔNG verify được case mobile nào (catch-up/exploit farming): Mario Kart Tour,
+Clash Royale, Clash of Clans, Pokémon GO đều chưa fact-check được nguồn.
+
+QUYẾT ĐỊNH: user đã chấp nhận viết bài Tầng 3 · 01 "Systems design" KHÔNG có ví dụ mobile.
+Đây là quyết định có ý thức, không phải bỏ sót — ghi lại để session sau không tốn công
+research bù lại trừ khi user yêu cầu khác.
+
+---
+
+## 9. Ghi chú nguồn cần thận trọng
+
+- Wikipedia "Kingmaker scenario" (https://en.wikipedia.org/wiki/Kingmaker_scenario,
+  HTTP 200): câu định nghĩa khớp nguyên văn, NHƯNG trang mang banner bảo trì "original
+  research" từ 04/2022 -> KHÔNG dùng làm nguồn định nghĩa trong bài. Nếu cần nói về
+  kingmaking, dùng [V26] Schreiber (mục 6) thay thế.
+- Escapist (8 Videogame Glitches) là nguồn phổ thông, không học thuật — dùng được cho MÔ
+  TẢ SỰ KIỆN skiing, không dùng cho định nghĩa khái niệm.
+- Wikipedia (rocket jumping / corrupted blood / blue shell / exploit) — dùng cho mô tả sự
+  kiện + cơ chế, không dùng cho định nghĩa lý thuyết.
+- TÁCH BẠCH theo CLAUDE.md §6.3: mọi ví dụ game trong bài đều CÓ NGUỒN ở mục 7. Nếu khi
+  viết cần thêm ví dụ tự phân tích (không nguồn), phải bọc trong callout note và ghi rõ là
+  phân tích minh hoạ.
+
+---
+
+## 10. KHÔNG DÙNG ĐƯỢC — đã thử, session sau khỏi làm lại
+
+- Salen & Zimmerman "Rules of Play", định nghĩa system / emergence / chương 18 "Games as
+  Cybernetic Systems": không có bản đọc online hợp lệ ngắn. PDF toàn sách
+  (s3.amazonaws.com) = PDF dài, cấm. Chương 28 trên dourish.com mở được (HTTP 200) nhưng
+  là "Games as Social Play" — SAI chủ đề. Câu "emergence cannot be designed. Only the
+  conditions for its appearance can be." lặp ở nhiều nguồn thứ cấp nhưng CHƯA verify bản
+  gốc -> KHÔNG trích trong ngoặc kép.
+- Adams & Dormans "Game Mechanics" (2012), bản sách: sample PDF chính thức của Pearson
+  chỉ có mục lục + chương 1, chưa tới feedback loop. Bản đầy đủ trên academia.edu/
+  dokumen.pub = PDF dài, cấm. -> Trích Machinations phải cite bài Adams 2011 (mục 3),
+  không cite sách.
+- "Runaway leader problem": không có nguồn đủ uy tín để trích nguyên văn (chỉ blog cộng
+  đồng board game). Dùng [V26] Schreiber (mục 6) thay thế.
+- Catan (robber nhắm leader, khó trade khi dẫn đầu): chỉ có tóm tắt search engine, chưa mở
+  được bài gốc.
+- Ví dụ mobile (catch-up / exploit farming): KHÔNG tìm được case nào đã fact-check. Mario
+  Kart Tour, Clash Royale, Clash of Clans, Pokémon GO — đều chưa verify. -> Bài này KHÔNG
+  có ví dụ mobile. Xem mục 8.
+- Câu gán cho John Romero "We didn't know there was rocket-jumping": không tìm được nguồn
+  gốc mở đọc được. KHÔNG dùng.
+- Dormans, AAAI 2011 "Simulating Mechanics to Study Emergence in Games": URL sống
+  (HTTP 200) nhưng WebFetch không parse được PDF. Còn bỏ ngỏ nếu session sau cần định
+  nghĩa formal "internal economy".
+- gamebalanceconcepts URL đoán sai (404): .../2010/07/29/level-6-more-cost-curves/ và
+  .../2010/08/04/level-7-... — URL ĐÚNG của Level 7 là ngày 08/18, Level 10 là 09/08.
+- sourcegaming.info chặn curl (HTTP 406) — phải đi qua web.archive.org.
