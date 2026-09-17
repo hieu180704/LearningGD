@@ -87,6 +87,7 @@ $pages = @(
     @{ name = "lesson-tang-3-01-systems-design"; file = "lessons/tang-3/01-systems-design.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
     @{ name = "lesson-tang-3-02-economy-sources-sinks"; file = "lessons/tang-3/02-economy-sources-sinks.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
     @{ name = "lesson-tang-3-03-balance-spreadsheet"; file = "lessons/tang-3/03-balance-spreadsheet.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
+    @{ name = "lesson-tang-3-04-progression-phan-thuong"; file = "lessons/tang-3/04-progression-phan-thuong.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
     @{ name = "lesson-tang-4-01-f2p-liveops"; file = "lessons/tang-4/01-f2p-liveops.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
     @{ name = "lesson-tang-4-02-metrics-ab-test"; file = "lessons/tang-4/02-metrics-ab-test.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } }
 )

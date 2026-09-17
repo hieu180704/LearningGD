@@ -1,0 +1,483 @@
+RESEARCH — Progression và phần thưởng
+(Tầng 3 bài 04 · tổng hợp 4 vòng research · đã fact-check)
+
+MỤC LỤC
+0. Trạng thái verify
+1. Nguồn đã verify
+2. Cấu trúc progression — emergence vs progression (Juul)
+3. Gate — cơ chế chặn và mở
+4. Skill tree phân nhánh
+5. Lịch trình phần thưởng
+6. Phần thưởng vô nghĩa / trùng lặp
+7. Ví dụ game theo thể loại
+8. Bẫy khái niệm — phải đọc trước khi viết bài
+9. Phạm vi — đã dạy ở bài khác, không dạy lại
+10. Nhận định không có nguồn (phân tích minh hoạ)
+11. Không dùng được (đã thử — session sau khỏi thử lại)
+12. Lỗi agent đã mắc trong 4 vòng research này
+
+---
+
+## 0. TRẠNG THÁI VERIFY
+
+- Tổng số nguồn gốc đã mở đọc: 11 (4 vòng research A/B/C/D, đã bỏ trùng — Ian Schreiber xuất
+  hiện ở cả file A và B cùng một bài "Level 7", tính 1 lần).
+- Tổng số quote nguyên văn: 32. Đã verify từng quote (mở trang gốc + grep lại nguyên văn,
+  hoặc pdftotext đối chiếu ký tự với PDF sample pages của Adams & Dormans): 32/32.
+- Nguồn cần header browser mới fetch được: theoryoffun.com (Raph Koster, "A Theory of Fun")
+  — curl với User-Agent mặc định trả về HTTP 406, phải thêm header giả lập trình duyệt mới
+  đọc được trang.
+- Nguồn chỉ có SAMPLE PAGES công khai, không phải bản đầy đủ: Adams & Dormans, "Game
+  Mechanics: Advanced Game Design" — chỉ đọc được Chapter 4 "Internal Economy" đầy đủ (Pearson
+  phát hành công khai làm mẫu), KHÔNG có Chapter 11 "Progression Mechanisms" (trang 247–270,
+  gồm mục "Lock-and-Key Mechanisms" và "Emergent Progression" — đúng trọng tâm nhất cho bài
+  04 nhưng chưa từng mở đọc được, chỉ biết tên mục qua mục lục sách).
+
+## 1. NGUỒN ĐÃ VERIFY
+
+### (a) Nguồn học thuật / sách
+
+- Ernest Adams & Joris Dormans · "Game Mechanics: Advanced Game Design", Chapter 4 "Internal
+  Economy" · 2012 · New Riders/Peachpit (Pearson sample pages, phát hành công khai)
+  URL: https://ptgmedia.pearsoncmg.com/images/9780321820273/samplepages/0321820274.pdf
+  [HTTP 200] · Kiểu nguồn: sách (sample chương do NXB công khai, không phải bản lậu)
+  Nội dung dùng được: mục "Use an Internal Economy to Influence Progression" (ability = nguồn
+  sản xuất resource trừu tượng "access") và mục "Deadlock Resolution in Zelda" (renewable
+  source chống deadlock, ví dụ nồi đất). Trang v ghi rõ khái niệm nền của sách dựa trên phân
+  biệt "emergence vs progression" của Jesper Juul.
+
+- Aniket Nagle, Peter Wolf, Robert Riener, Domen Novak · "The Use of Player-centered Positive
+  Reinforcement to Schedule In-game Rewards Increases Enjoyment and Performance in a Serious
+  Game" · International Journal of Serious Games, Vol. 1 No. 4 · 2014-10-31 · DOI:
+  10.17083/ijsg.v1i4.47
+  URL: https://journal.seriousgamessociety.org/index.php/IJSG/article/view/47   [HTTP 200]
+  Kiểu nguồn: paper học thuật, open access (CC BY-NC-ND)
+  Nội dung dùng được: thực nghiệm 210 người chơi, so sánh fixed-ratio vs variable-ratio reward
+  schedule trong serious game thật — nguồn định lượng duy nhất cho claim "variable mạnh hơn
+  fixed". Chỉ đọc được abstract/landing page, chưa mở full-text PDF.
+
+- Jesper Juul · "The Open and the Closed: Games of Emergence and Games of Progression" · 2002
+  · Computer Games and Digital Cultures Conference Proceedings (ed. Frans Mäyrä), Tampere
+  University Press, tr. 323–329
+  URL: https://jesperjuul.net/text/openandtheclosed.html   [HTTP 200]
+  Kiểu nguồn: paper hội thảo, tác giả tự đăng full text trên site riêng
+  Nội dung dùng được: định nghĩa gốc "games of emergence" vs "games of progression", ví dụ cụ
+  thể từng loại, EverQuest như game lai, tiêu chí walkthrough vs strategy guide.
+
+- Raph Koster · "A Theory of Fun for Game Design" (trích chương 1) · 2004/2005 ·
+  theoryoffun.com (trang chính thức của cuốn sách, do chính Koster vận hành)
+  URL: https://www.theoryoffun.com/excerpt.shtml   [HTTP 200 — cần header browser, UA mặc
+  định của curl bị trả 406]
+  Kiểu nguồn: sách, trích đoạn trên trang chính thức của tác giả
+  Nội dung dùng được: "cỗ máy dạy pattern" — học xong pattern (tic-tac-toe) thì hết vui dù
+  luật không đổi; áp cho reward lặp lại không dạy gì mới.
+
+### (b) Blog của chính tác giả
+
+- Ian Schreiber · "Game Balance Concepts, Level 7: Advancement, Progression, and Pacing" ·
+  2010 · https://gamebalanceconcepts.wordpress.com/2010/08/18/level-7-advancement-progression-and-pacing/
+  [HTTP 200] · Kiểu nguồn: blog tác giả (khoá học/ebook miễn phí của chính Ian Schreiber)
+  Nội dung dùng được: "skill gating" (chuỗi thử thách tăng dần độ khó thay vì dạy trực tiếp);
+  mục "Rewards in PvE" — reward schedule/risk-reward cycle, cặp cảnh báo thưởng quá thưa/quá
+  dày, câu "random reward schedule mạnh hơn fixed" (không kèm nguồn tâm lý học cụ thể), đường
+  cong pacing cho level transition; power-progression khác nhau theo thể loại (Space Invaders).
+
+- Ian Schreiber · "Game Balance Concepts, Level 2: Numeric Relationships" · 2010 ·
+  https://gamebalanceconcepts.wordpress.com/2010/07/14/level-2-numeric-relationships/
+  [HTTP 200] · Kiểu nguồn: blog tác giả
+  Nội dung dùng được: ví dụ số học Baldur's Gate: Dark Alliance (PS2) — quan hệ XP-to-Level và
+  Level-to-UpgradePoint đều dạng triangular.
+
+- Celia Hodent · "The Gamer's Brain, part 3: The UX of Engagement and Immersion (or
+  Retention)" · đăng 5/3/2017, cập nhật 1/2/2022 ·
+  https://celiahodent.com/gamers-brain-part-3-ux-engagement-immersion-retention-gdc17-talk/
+  [HTTP 200] · Kiểu nguồn: blog của chính tác giả (PhD tâm lý học, cựu UX lead Fortnite/Epic)
+  Nội dung dùng được: khung 4 ô fixed interval / variable interval / fixed ratio / variable
+  ratio, mỗi ô kèm ví dụ game cụ thể; so sánh tác động hành vi (response rate) của từng loại.
+  Không nhắc từ "dopamine" trong bài (đã full-text search, không có).
+
+- Soren Johnson · "Game Developer Column 17: Water Finds a Crack" · 2011 (đăng lại trên
+  designer-notes.com) · https://www.designer-notes.com/game-developer-column-17-water-finds-a-crack/
+  [HTTP 200] · Kiểu nguồn: blog cá nhân của chính tác giả (cựu lead designer Civilization
+  III/IV, Spore, Offworld Trading Company)
+  Nội dung dùng được: người chơi luôn tối ưu hoá lối chơi hiệu quả nhất, kể cả khi phá vỡ cái
+  vui — áp cho reward: thưởng ép theo một lối chơi tối ưu duy nhất sẽ tự triệt tiêu ý nghĩa.
+
+- Daniel Cook (Danc) · "Value chains — A method for creating and balancing faucet-and-drain
+  game economies" · 12/12/2021 · Lostgarden · https://lostgarden.com/2021/12/12/value-chains/
+  [HTTP 200] · Kiểu nguồn: blog cá nhân của chính tác giả (cựu design director Spry Fox)
+  Nội dung dùng được: phần thưởng như "value chain" dẫn tới "psychological anchor" (tiến bộ,
+  quyền lực, thẩm mỹ, kết nối xã hội); chuỗi đứt/mất cân bằng → phần thưởng đầu chuỗi mất giá
+  trị. GHI CHÚ: bài này dùng KHÁC đoạn với bài 02 — xem mục 9.
+
+### (c) Dev blog studio
+
+- Blizzard Entertainment · "World of Warcraft: Dragonflight Talent Preview" · 2022-06-03 ·
+  Blizzard News · https://news.blizzard.com/en-us/world-of-warcraft/23797209/world-of-warcraft-dragonflight-talent-preview
+  [HTTP 302 → 200 sau redirect] · Kiểu nguồn: dev blog chính thức của studio
+  Nội dung dùng được: lý do chọn cấu trúc cây phân nhánh (visual, dependency/magnitude), cơ
+  chế prerequisite bằng mũi tên, tách class tree + spec tree, choice node, row gating.
+
+### (d) Blog cá nhân cross-post
+
+- Josh Bycer (Game-Wisdom) · "Examining Gating in Game Design" · Featured Blog trên
+  gamedeveloper.com, đăng June 28, 2016 (byline "Bycer, Blogger")
+  URL: https://www.gamedeveloper.com/design/examining-gating-in-game-design   [HTTP 200]
+  Kiểu nguồn: blog cá nhân (Josh Bycer, chủ trang Game-Wisdom) đăng lại/cross-post dưới dạng
+  "Featured Blog" trên gamedeveloper.com — KHÔNG phải bài do toà soạn tự viết.
+  Nội dung dùng được: gating theo nghĩa THỨ TỰ TIẾT LỘ cơ chế/nội dung (khác nghĩa "khoá tiến
+  trình" của Adams & Dormans). Ví dụ: Path of Exile (end-game gate không báo trước — phê
+  bình), Portal 1&2 (kỹ thuật di chuyển gate qua level design), Offworld Trading Company
+  (tutorial gate thông tin theo thứ tự).
+
+## 2. CẤU TRÚC PROGRESSION — EMERGENCE VS PROGRESSION (JUUL)
+
+QUOTE: "The point of this paper is frightfully simple: That most computer games are the combination of two different ways of presenting the player with a challenge, one which I will term emergence (simple rules combining, leading to variation) and one of progression (serially introduced challenges)."
+NGUỒN: Jesper Juul, "The Open and the Closed", https://jesperjuul.net/text/openandtheclosed.html
+DÙNG ĐỂ: mở đầu khái niệm trục cấu trúc emergence vs progression trong bài.
+
+QUOTE: "Emergence is the primordial game structure, where a game is specified as a small number of rules that combine and yield large numbers of game variations, which the players then design strategies for dealing with. This is found in card and board games and in most action and all strategy games. Emergence games tend to be replayable and tend to foster tournaments and strategy guides."
+NGUỒN: Jesper Juul, "The Open and the Closed"
+DÙNG ĐỂ: định nghĩa "games of emergence".
+
+QUOTE: "Progression is the historically newer structure that entered the computer game through the adventure genre. In progression games, the player has to perform a predefined set of actions in order to complete the game."
+NGUỒN: Jesper Juul, "The Open and the Closed"
+DÙNG ĐỂ: định nghĩa "games of progression".
+
+QUOTE: "In a pure progression game, the player is simply presented with a series of challenges where all of the options and solutions have been explicitly described in the game rules."
+NGUỒN: Jesper Juul, "The Open and the Closed"
+DÙNG ĐỂ: nhấn mạnh đặc điểm "được kiểm soát trước" của progression.
+
+QUOTE: "Progression games are also characterised by the fact that they can be completed, and that their replayability is subsequently very low."
+NGUỒN: Jesper Juul, "The Open and the Closed"
+DÙNG ĐỂ: hệ quả thiết kế của cấu trúc progression (đối lập emergence có replayability cao).
+
+QUOTE: "As a rule of thumb, the simplest way to tell games of emergence from games of progression is to find guides for them on the net. Progression games have walkthroughs: lists of actions to perform to complete the game. Emergence games have strategy guides: rules of thumb, general tricks."
+NGUỒN: Jesper Juul, "The Open and the Closed"
+DÙNG ĐỂ: tiêu chí thực dụng, dễ hiểu cho người mới.
+
+QUOTE: "EverQuest is a game of emergence, with embedded progression structures."
+NGUỒN: Jesper Juul, "The Open and the Closed"
+DÙNG ĐỂ: ví dụ game hiện đại pha trộn cả hai cấu trúc.
+
+Bảng so sánh (chỉ điền ô có nguồn):
+
+| Tiêu chí | Games of emergence | Games of progression | Nguồn |
+|---|---|---|---|
+| Cách luật hoạt động | Số luật nhỏ kết hợp, sinh nhiều biến thể | Chuỗi thử thách định sẵn, mọi lựa chọn/lời giải đã mô tả rõ trong luật | jesperjuul.net/text/openandtheclosed.html |
+| Độ chơi lại (replayability) | Cao (tend to be replayable) | Rất thấp, vì game "có thể hoàn thành" | jesperjuul.net/text/openandtheclosed.html |
+| Ai kiểm soát trình tự | không có nguồn ghi rõ đối lập trực tiếp cho emergence | Nhà thiết kế kiểm soát mạnh trình tự sự kiện | jesperjuul.net/text/openandtheclosed.html |
+| Loại hướng dẫn cộng đồng tạo ra | Strategy guide (mẹo, nguyên tắc chung) | Walkthrough (danh sách hành động) | jesperjuul.net/text/openandtheclosed.html |
+| Ví dụ thể loại | Card/board game, hầu hết action, toàn bộ strategy game | Adventure game, branching narrative | jesperjuul.net/text/openandtheclosed.html |
+| Nguồn gốc lịch sử | Cấu trúc nguyên thuỷ nhất của game (kể cả phi điện tử) | Xuất hiện muộn hơn, qua thể loại adventure | jesperjuul.net/text/openandtheclosed.html |
+
+Ví dụ số học minh hoạ progression tuyến tính kiểu "bậc thang" (không phải lý thuyết Juul,
+chỉ là ví dụ số liệu thật cho progression tuyến tính — người chơi đi qua tuần tự, không rẽ
+nhánh):
+
+QUOTE: "Here’s another example, from the PS2 game Baldur’s Gate: Dark Alliance. In this action-RPG, you get XP from defeating enemies, which in turn causes you to level up. The XP-to-Level relationship is triangular: going from Level 1 to Level 2 requires 1000 XP, Level 2 to Level 3 costs 2000 XP, rising to Level 4 costs 3000 XP, and so on."
+NGUỒN: Ian Schreiber, "Level 2: Numeric Relationships", https://gamebalanceconcepts.wordpress.com/2010/07/14/level-2-numeric-relationships/
+DÙNG ĐỂ: ví dụ số liệu thật cho progression tuyến tính kiểu "level ladder" — mỗi cấp là một bậc thang cố định.
+
+QUOTE: "Each time you level up, you get a number of upgrade points to spend on special abilities. These also follow a triangular progression: at Level 2 you get 1 upgrade point; at Level 3 you get 2 points; the next level gives you 3 points, then the next gives you 4 points, and so on."
+NGUỒN: Ian Schreiber, "Level 2: Numeric Relationships"
+DÙNG ĐỂ: bổ sung ngữ cảnh — cho thấy trong hệ tuyến tính vẫn có thể có lựa chọn nhỏ (điểm nâng cấp kỹ năng) dù khung cấp độ chính vẫn là bậc thang thẳng.
+
+## 3. GATE — CƠ CHẾ CHẶN VÀ MỞ
+
+QUOTE: "What if you don’t want the player to increase in skill quickly, because you want the game to last longer? If you want the player to learn more slowly, you can instead use “skill gating” as I’ve heard it called. That is, you don’t necessarily teach the player how to play your game, or hold their hand through it. Instead, you simply offer a set of progressively harder challenges, so you are at least guaranteed that if a player completes one challenge, they are ready for the next: each challenge is essentially a signpost that says “you must be at least THIS GOOD to pass.”"
+NGUỒN: Ian Schreiber, "Level 7: Advancement, Progression, and Pacing", https://gamebalanceconcepts.wordpress.com/2010/08/18/level-7-advancement-progression-and-pacing/
+DÙNG ĐỂ: gate theo nghĩa "skill gate" (chặn bằng độ khó, không phải khoá vật phẩm) — tại sao chặn người chơi lại có ích (kiểm soát nhịp học, kéo dài thời lượng chơi).
+
+QUOTE: "The internal economy of a game can also be used to influence progression through a game that involves movement. For example, power-ups and unique weapons can play a special role in an action game’s economy. They can be used to gain access to new locations. A double-jump ability in a platform game will allow the player to reach higher platforms that were initially unreachable. In economic terms, you can think of these abilities as new resources to produce the abstract resource access."
+NGUỒN: Ernest Adams & Joris Dormans, "Game Mechanics: Advanced Game Design", Chapter 4 "Internal Economy" (Pearson sample pages)
+DÙNG ĐỂ: định nghĩa cơ chế GATE bằng ngôn ngữ economy: ability = nguồn sản xuất ra "access", access = thứ mở khu vực/nội dung mới.
+
+QUOTE: "In many Zelda games, players frequently must use consumable items—arrows or bombs—to gain access to new areas. This creates a risk of deadlocks, if the player runs out of the items needed. The designers of Zelda games prevent these no-win situations by making sure there are plenty of renewable sources for the required resources."
+NGUỒN: Ernest Adams & Joris Dormans, Chapter 4, mục "Deadlock Resolution in Zelda"
+DÙNG ĐỂ: rủi ro của gate (deadlock) và cách xử lý.
+Ghi chú (MAIN SỬA — ghi chú của agent SAI): agent bảo pdftotext trả về "--" và chỉ "nhiều khả năng" bản in dùng em-dash. Main đã tự chạy pdftotext -enc UTF-8 và so khớp cả hai biến thể: bản em-dash — KHỚP, bản "--" LỆCH tại ký tự 65. PDF có em-dash thật. Quote trên đã đúng, giữ nguyên em-dash. Cũng sửa: "action game’s" (trong quote phía trên) dùng nháy CONG trong PDF (grep 1 hit cong / 0 hit thẳng), agent gõ thẳng — đã sửa lại thành nháy cong. Bài Bycer CÓ ngày: June 28, 2016, byline "Bycer, Blogger" (agent trước từng ghi nhầm là không có ngày).
+
+QUOTE: "Dungeons are littered with useful pots that yield these resources if the player destroys them (Figure 4.10). Broken pots are mysteriously restored as the player moves from room to room, creating a source that is replenished from time to time."
+NGUỒN: Ernest Adams & Joris Dormans, Chapter 4, mục "Deadlock Resolution in Zelda"
+DÙNG ĐỂ: ví dụ cụ thể cho cơ chế "renewable source" chống deadlock.
+
+Bổ sung (không có QUOTE nguyên văn, chỉ mô tả có nguồn): Josh Bycer định nghĩa gate theo nghĩa
+THỨ TỰ TIẾT LỘ nội dung cho người chơi (khác nghĩa "khoá tiến trình" ở trên) — ví dụ Path of
+Exile (end-game dungeon chỉ mở sau khi hoàn thành 6 dungeon phụ ở Act 1–3, tác giả phê bình vì
+game không báo trước), Portal 1&2 (kỹ thuật di chuyển nâng cao được gate qua thiết kế level),
+Offworld Trading Company (tutorial chia nhỏ theo thứ tự gate thông tin). Nguồn:
+gamedeveloper.com/design/examining-gating-in-game-design.
+
+## 4. SKILL TREE PHÂN NHÁNH
+
+QUOTE: "Visually, trees are still an intuitive way to represent the different paths one could follow while making many choices about a character. Trees also communicate dependencies and magnitude intuitively, without a lot of added rules."
+NGUỒN: Blizzard Entertainment, "World of Warcraft: Dragonflight Talent Preview", https://news.blizzard.com/en-us/world-of-warcraft/23797209/world-of-warcraft-dragonflight-talent-preview
+DÙNG ĐỂ: lý do thiết kế chọn hình dạng "cây phân nhánh" cho progression (góc nhìn dev blog chính thức).
+
+QUOTE: "Most talents have prerequisites (these will be indicated by arrows in the final UI). If a talent has any arrows leading to it, you must have fully purchased at least one of those previous talents to access it."
+NGUỒN: Blizzard Entertainment, "World of Warcraft: Dragonflight Talent Preview"
+DÙNG ĐỂ: mô tả cơ chế kỹ thuật cụ thể của progression phân nhánh (lock-and-key giữa các node).
+
+Chi tiết khác cùng trang (đã grep xác nhận có trong trang, không trích nguyên văn):
+- Cây tách làm hai: "class tree" (chung cho cả class) và "specialization tree" (riêng theo
+  spec) — giữ lựa chọn ở cả mảng utility lẫn sức mạnh chính mà không phải đánh đổi.
+- Node dạng "choice node" hình bát giác: chỉ được chọn 1 trong 2 lựa chọn tại node đó.
+- Một số hàng trong cây bị khoá cho đến khi đã tiêu đủ N điểm ở hàng trước (row gating).
+
+## 5. LỊCH TRÌNH PHẦN THƯỞNG
+
+QUOTE: "In PvE games especially, progression is strongly related to what is sometimes called the “reward schedule” or “risk/reward cycle.” The idea is that you don’t just want the player to progress, you want them to feel like they are being rewarded for playing well."
+NGUỒN: Ian Schreiber, "Level 7: Advancement, Progression and Pacing"
+DÙNG ĐỂ: định nghĩa mở đầu khái niệm reward schedule.
+
+QUOTE: "Giving too few rewards, or spacing them out for too long so that the player goes for long stretches without feeling any sense of progression, is usually a bad thing. The player is demoralized and may start to feel like if they aren’t making progress, they’re playing the game wrong (even if they’re really doing fine)."
+NGUỒN: Ian Schreiber, "Level 7: Advancement, Progression and Pacing"
+DÙNG ĐỂ: cảnh báo lịch trình thưởng quá thưa.
+
+QUOTE: "Ironically, giving too many rewards can also be hazardous. One of the things we’ve learned from psychology is that happiness comes from experiencing some kind of gain or improvement, so many little gains produce a lot more happiness than one big gain, even if they add up to the same thing. Giving too many big rewards in a small space of time diminishes their impact."
+NGUỒN: Ian Schreiber, "Level 7: Advancement, Progression and Pacing"
+DÙNG ĐỂ: cảnh báo cực còn lại — thưởng quá dày.
+
+QUOTE: "Another thing we know from psychology is that a random reward schedule is more powerful than a fixed schedule."
+NGUỒN: Ian Schreiber, "Level 7: Advancement, Progression and Pacing"
+DÙNG ĐỂ: dẫn vào khái niệm fixed vs variable schedule. LƯU Ý: Schreiber không trích nguồn tâm lý học cụ thể cho câu này — chỉ nói chung "we know from psychology". Ghi nhận là phát biểu của Schreiber, không gắn tên Skinner/variable ratio vào miệng ông.
+
+QUOTE: "It is far more powerful to reward the player because of their deliberate action in the game, than to reward them for something they didn’t know about and weren’t even trying for."
+NGUỒN: Ian Schreiber, "Level 7: Advancement, Progression and Pacing"
+DÙNG ĐỂ: nguyên tắc thiết kế reward gắn với hành động có chủ đích.
+
+QUOTE: "Progression through level transitions – that is, progression to a new area – is a special kind of reward, because it makes the player feel like they’re moving ahead (and they are!). You want these spaced out a bit so the player isn’t so overwhelmed by changes that they feel like the whole game is always moving ahead without them; a rule of thumb is to offer new levels or areas on a slightly increasing curve, where each level takes a little bit longer than the last."
+NGUỒN: Ian Schreiber, "Level 7: Advancement, Progression and Pacing"
+DÙNG ĐỂ: nguồn cụ thể nhất cho "đường cong pacing tăng dần" — đúng trọng tâm bài.
+
+QUOTE: "In Fortnite you get a reward every day if you log in. In Clash of Clans, you get your reward after a set amount of time (once the building is built)."
+NGUỒN: Celia Hodent, "The Gamer's Brain, part 3"
+DÙNG ĐỂ: ví dụ game thật cho fixed interval schedule.
+
+QUOTE: "You know the cherry bonus is going to appear at some point in Pacman, but you don’t know when."
+NGUỒN: Celia Hodent, "The Gamer's Brain, part 3"
+DÙNG ĐỂ: ví dụ game thật cho variable interval schedule.
+
+QUOTE: "Rewards for quests and abilities unlocked in skill trees are examples of fixed ratio: you need to do a certain number of actions to get the reward."
+NGUỒN: Celia Hodent, "The Gamer's Brain, part 3"
+DÙNG ĐỂ: ví dụ game thật cho fixed ratio schedule.
+
+QUOTE: "It’s gambling. Slot machines. You want something valuable to you, but you never know when you’re gonna get it."
+NGUỒN: Celia Hodent, "The Gamer's Brain, part 3"
+DÙNG ĐỂ: ví dụ game thật cho variable ratio schedule (Hodent nối tiếp bằng "loot crates, card packs, chests in world" như ví dụ khác cùng loại — không trích nguyên văn phần đó vì chỉ là liệt kê rời rạc).
+
+QUOTE: "Fixed: Behavior pauses after reinforcement (more actions to reward leads to longer pause)."
+NGUỒN: Celia Hodent, "The Gamer's Brain, part 3"
+DÙNG ĐỂ: hệ quả hành vi của fixed schedule.
+
+QUOTE: "Variable rewards overall lead to the most steady response rate. Rewards based on ratio (player action) creates higher response rate than if based on time. Highest and most steady response rate comes with variable ratio rewards."
+NGUỒN: Celia Hodent, "The Gamer's Brain, part 3"
+DÙNG ĐỂ: câu tổng kết so sánh 4 loại schedule — chốt lý thuyết. LƯU Ý: đây là 3 gạch đầu dòng liền kề trong bài gốc (list <li>), không phải một câu văn liên tục — khi trích trong bài học nên giữ dạng liệt kê hoặc ghi rõ là 3 ý tách rời.
+
+QUOTE: "On average, the variable-ratio schedule was better in the outcome measures than the fixed-ratio schedule."
+NGUỒN: Nagle, Wolf, Riener, Novak (2014), International Journal of Serious Games
+DÙNG ĐỂ: bằng chứng định lượng (thực nghiệm) cho việc variable schedule mạnh hơn fixed schedule — nguồn mạnh nhất để đỡ cho phát biểu định tính của Schreiber/Hodent.
+
+Bảng phân loại (theo CƠ CHẾ lịch trình, không phải nội dung phần thưởng):
+
+| Loại | Mô tả | Ví dụ game | Nguồn |
+|---|---|---|---|
+| Fixed interval | Thưởng sau một mốc thời gian biết trước | Fortnite (login hằng ngày), Clash of Clans (xây công trình đúng giờ) | celiahodent.com |
+| Variable interval | Biết thưởng sẽ đến, không biết chính xác lúc nào | Pacman (cherry bonus) | celiahodent.com |
+| Fixed ratio | Cần đủ một số hành động cố định | Quest, mở khoá skill tree | celiahodent.com |
+| Variable ratio | Số hành động cần thay đổi ngẫu nhiên mỗi lần | Slot machine, loot crate, card pack | celiahodent.com |
+| Reward gắn chuyển màn (progression-as-reward) | Bước sang khu vực mới là một dạng thưởng, giãn cách theo đường cong tăng dần | (nguyên tắc chung, không gắn tên game cụ thể) | gamebalanceconcepts.wordpress.com |
+
+## 6. PHẦN THƯỞNG VÔ NGHĨA / TRÙNG LẶP
+
+QUOTE: "Given the opportunity, players will optimize the fun out of a game."
+NGUỒN: Soren Johnson, "Game Developer Column 17: Water Finds a Crack", designer-notes.com
+DÙNG ĐỂ: cảnh báo — nếu phần thưởng gắn với MỘT lối chơi tối ưu duy nhất, người chơi sẽ lặp lại lối đó dù chán, phần thưởng thành nghĩa vụ chứ không còn là lựa chọn có ý nghĩa.
+
+QUOTE: "If the chain is broken, imbalanced or obfuscated in some way, players will stop finding value in the early steps of the chain."
+NGUỒN: Daniel Cook, "Value chains", lostgarden.com
+DÙNG ĐỂ: giải thích vì sao một phần thưởng "nhỏ" (early-game) có thể trở nên vô nghĩa — không phải vì bản thân nó tệ, mà vì không còn dẫn tới thứ người chơi thực sự muốn ở cuối chuỗi.
+
+QUOTE: "If you don’t identify how each node serves your psychological anchors, you’ll very likely end up with disconnected nodes of isolated atomic meaning."
+NGUỒN: Daniel Cook, "Value chains", lostgarden.com
+DÙNG ĐỂ: câu định nghĩa "phần thưởng vô nghĩa" gọn nhất — dùng làm tiêu chí "phần thưởng có ý nghĩa".
+
+QUOTE: "That extended moment when tic-tac-toe ceased to interest them was a moment of great fascination to me. Why, I asked myself, did mastery and understanding come so suddenly?"
+NGUỒN: Raph Koster, "A Theory of Fun for Game Design" (trích chương 1), theoryoffun.com
+DÙNG ĐỂ: minh hoạ nguyên lý "học xong pattern thì hết vui" — áp cho reward lặp lại: phần thưởng không dạy thêm gì thì cũng chịu số phận giống tic-tac-toe, dù hình thức vẫn là "phần thưởng".
+
+Bảng các kiểu phần thưởng sai:
+
+| Kiểu sai | Biểu hiện | Hệ quả | Nguồn |
+|---|---|---|---|
+| Thưởng ép theo lối chơi tối ưu duy nhất | Chỉ một cách chơi cho reward tốt nhất | Người chơi "tối ưu hoá cái vui ra khỏi game" | Soren Johnson, designer-notes.com |
+| Node phần thưởng không nối tới nhu cầu tâm lý nào | Phần thưởng tồn tại đơn lẻ, không dẫn tới tiến bộ/quyền lực/thẩm mỹ/kết nối xã hội | "disconnected nodes of isolated atomic meaning" | Daniel Cook, lostgarden.com |
+| Chuỗi phần thưởng bị đứt/mất cân bằng | Bước đầu chuỗi không còn dẫn rõ tới phần thưởng lớn hơn ở cuối | Người chơi ngừng thấy giá trị ở các bước đầu | Daniel Cook, lostgarden.com |
+| Phần thưởng lặp lại không dạy gì mới | Cùng dạng thưởng, cùng cách đạt được, lặp đi lặp lại | Mất hứng thú kiểu tic-tac-toe effect, số liệu vẫn tăng nhưng cảm giác thì không | Raph Koster, theoryoffun.com |
+
+Case thật — game sửa hệ thống phần thưởng: World of Warcraft (Blizzard) bỏ cơ chế
+Titanforging/Warforging trong Shadowlands (2020). Từ Legion (2017), mọi item rơi ra có xác
+suất "forge" ngẫu nhiên lên item level cao hơn — mục đích tăng lý do farm lại content cũ,
+nhưng hệ quả là gần như mọi item đều "có thể là phần thưởng tốt hơn", khiến loot mất ý nghĩa
+rõ ràng (cảm giác bị pha loãng). Ion Hazzikostas (Game Director) công bố bỏ hẳn
+Titanforging/Warforging/Corruption ngẫu nhiên trong Shadowlands, quay về "loot is loot",
+đồng thời giảm số lượng loot rơi ra. [CHƯA VERIFY Ở MỨC "nguồn gốc"] — nguồn là phỏng vấn
+Twitch với streamer Sloot, được các trang tin thuật lại (blizzardwatch.com [HTTP 200],
+wowhead.com [HTTP 202]), KHÔNG phải patch note/dev blog chính thức của Blizzard — đã thử tìm
+trên news.blizzard.com và worldofwarcraft.com, không ra kết quả.
+
+## 7. VÍ DỤ GAME THEO THỂ LOẠI
+
+| Game | Thể loại/nền tảng | Dùng minh hoạ điều gì | Có nguồn / phân tích minh hoạ | Nguồn (URL) |
+|---|---|---|---|---|
+| Baldur's Gate: Dark Alliance | Action-RPG, PS2 (console) | Progression tuyến tính, XP-to-Level dạng triangular | CÓ NGUỒN | gamebalanceconcepts.wordpress.com/2010/07/14/level-2-numeric-relationships/ |
+| Space Invaders | Arcade shooter | Không có gate/unlock nội dung, chỉ tăng độ khó trong 1 ván | CÓ NGUỒN | gamebalanceconcepts.wordpress.com/2010/08/18/level-7-advancement-progression-and-pacing/ |
+| Zelda (dungeon nói chung) | Action-adventure, console | Gate bằng vật phẩm tiêu hao + renewable source chống deadlock | CÓ NGUỒN | Adams & Dormans, Game Mechanics ch.4 (Pearson sample) |
+| Prince of Persia: The Sands of Time | Action-adventure, PC/console | Resource "sand" người chơi tự quyết đầu tư | CÓ NGUỒN | Adams & Dormans, Game Mechanics ch.4 |
+| Path of Exile | Action-RPG, PC | Gate end-game không báo trước (phê bình) | CÓ NGUỒN | gamedeveloper.com/design/examining-gating-in-game-design |
+| Portal 1 & 2 | Puzzle, PC/console | Kỹ thuật di chuyển gate qua thiết kế level | CÓ NGUỒN | gamedeveloper.com/design/examining-gating-in-game-design |
+| Offworld Trading Company | Strategy, PC | Tutorial gate thông tin theo thứ tự | CÓ NGUỒN | gamedeveloper.com/design/examining-gating-in-game-design |
+| Fortnite | Battle royale, PC/console/mobile | Fixed interval reward (login hằng ngày) | CÓ NGUỒN | celiahodent.com/gamers-brain-part-3-... |
+| Clash of Clans | Mobile strategy | Fixed interval reward (xây công trình đúng giờ) | CÓ NGUỒN | celiahodent.com/gamers-brain-part-3-... |
+| Pacman | Arcade | Variable interval reward (cherry bonus) | CÓ NGUỒN | celiahodent.com/gamers-brain-part-3-... |
+| Serious game thử nghiệm (Nagle et al.) | Serious game học thuật, online 210 người chơi | So sánh fixed-ratio vs variable-ratio vs player-centered | CÓ NGUỒN | journal.seriousgamessociety.org/.../47 |
+| World of Warcraft | MMO, PC | Bỏ Titanforging/Warforging, quay về "loot is loot" | CÓ NGUỒN qua báo chí — [CHƯA VERIFY nguồn gốc, không phải dev blog chính thức] | blizzardwatch.com/2020/04/10/warforging-wow-shadowlands/, wowhead.com/news/... |
+| World of Warcraft (Dragonflight talent tree) | MMO, PC | Skill tree phân nhánh: class tree + spec tree, choice node, row gating | CÓ NGUỒN | news.blizzard.com/.../dragonflight-talent-preview |
+| EverQuest | MMO, PC | Game of emergence có progression (quest) lồng bên trong | CÓ NGUỒN | jesperjuul.net/text/openandtheclosed.html |
+| Quake III (rocket-jumping) | FPS, PC | Ví dụ "rule interaction" — chưa hẳn là emergence thật theo Juul | CÓ NGUỒN | jesperjuul.net/text/openandtheclosed.html |
+| Deus Ex (proximity mine climbing) | Action-RPG, PC | Ví dụ Harvey Smith gọi "undesirable emergence"; Juul phản biện là rule interaction, không phải emergence đúng nghĩa | CÓ NGUỒN | jesperjuul.net/text/openandtheclosed.html |
+| Counter-Strike | FPS multiplayer | Ví dụ emergent strategy (teamplay), mẫu hình lặp lại dù luật không quy định | CÓ NGUỒN | jesperjuul.net/text/openandtheclosed.html |
+| Monopoly | Board game (phi điện tử) | Ví dụ emergence — kết cục "luôn có người phá sản" dù luật không viết ra | CÓ NGUỒN | jesperjuul.net/text/openandtheclosed.html |
+| Branching narrative (thể loại chung) | Adventure/narrative | Ví dụ THUẦN NHẤT của progression — KHÔNG PHẢI "progression phân nhánh", xem mục 8 | CÓ NGUỒN | jesperjuul.net/text/openandtheclosed.html |
+| Path of Exile / Diablo II (skill tree dạng web lớn) | Action-RPG, PC | Skill tree phân nhánh quy mô lớn (1000+ node) | PHÂN TÍCH MINH HOẠ — nguồn tìm được chỉ là blog liệt kê, không đạt chuẩn | — |
+| Metroid / Metroidvania nói chung | Action-adventure | Ability-gated progression, đặc điểm định danh thể loại | PHÂN TÍCH MINH HOẠ — không tìm được nguồn gốc đủ chuẩn | — |
+
+## 8. BẪY KHÁI NIỆM — PHẢI ĐỌC TRƯỚC KHI VIẾT BÀI
+
+- **Mâu thuẫn "branching" giữa 2 vòng research:** vòng A đã LOẠI các talk "branching
+  narrative" (GDC Vault "Finding the Right Branching Narrative Structure For Your RPG", Ken
+  Levine "Narrative Lego"...) vì cho là lạc đề (branching NARRATIVE, không phải branching
+  PROGRESSION). Nhưng vòng D lại tìm thấy Juul dùng chính "branching narrative" làm ví dụ
+  THUẦN NHẤT của progression — tức cực TUYẾN TÍNH/định trước, không phải rẽ nhánh mở. Nguyên
+  văn Juul (đã sửa lỗi trích lệch của agent — xem mục 12): "Branching narratives are probably
+  the purest example of this: Everything that happens in a branching narrative is explicitly
+  pre-determined." Hai chỗ dùng chữ "branching" theo nghĩa NGƯỢC nhau: (1) branching narrative
+  = nhánh cốt truyện/dialogue, một dạng nội dung — Juul xếp nó vào progression vì mọi nhánh
+  đều được định trước sẵn trong luật; (2) "progression phân nhánh" mà bài 04 muốn dạy (skill
+  tree, gate mở nhiều hướng) là một khái niệm KHÁC, không phải thuật ngữ của Juul. **Khi viết
+  bài: không được lấy quote "branching narrative" của Juul để minh hoạ cho "progression phân
+  nhánh" — hai thứ ngược hướng nhau.**
+- Ánh xạ "games of emergence / games of progression" (Juul) sang "tuyến tính / phân nhánh"
+  (khung bài học đang cần) là DIỄN GIẢI DO NGƯỜI VIẾT BÀI TỰ LÀM, KHÔNG PHẢI thuật ngữ Juul
+  dùng nguyên văn. Juul không dùng "linear" hay "branching" trong bài của ông; ông đặt
+  emergence/progression như hai TRỤC KHÁC NHAU (cách luật sinh ra thử thách), không hẳn trùng
+  khớp 100% với trục tuyến tính/phân nhánh. Viết bài cần callout rõ đây là suy diễn.
+- **Không nhắc dopamine, không gán variable-ratio cho Skinner:** cả bài Hodent lẫn bài
+  Schreiber đều 0 lần nhắc "dopamine" (đã full-text search). Schreiber dùng cụm chung chung
+  "we know from psychology" cho câu "random reward schedule is more powerful than a fixed
+  schedule" mà KHÔNG kèm nguồn tâm lý học cụ thể nào — phải ghi đây là phát biểu của
+  Schreiber, dùng paper IJSG (Nagle et al. 2014) làm chỗ đỡ định lượng, không tự gán tên
+  Skinner/variable-ratio reinforcement vào phát biểu của ông.
+
+## 9. PHẠM VI — ĐÃ DẠY Ở BÀI KHÁC, KHÔNG DẠY LẠI
+
+- Bài 02 (Economy sources và sinks): economy, faucet/sink, lạm phát tiền tệ, premium
+  currency, 4 kiểu sink của Daniel Cook.
+- Bài 03 (Balance bằng spreadsheet): cost curve, expected value, spreadsheet, Monte Carlo.
+- Bài 04 dùng CÙNG nguồn Daniel Cook "Value chains" như bài 02 nhưng KHÁC đoạn: bài 02 lấy 4
+  kiểu sink của Cook; bài 04 lấy khái niệm value chain + psychological anchor (2 quote ở mục
+  6 phía trên). Main đã grep xác nhận 2 quote của bài 04 KHÔNG xuất hiện trong nội dung bài 02
+  — không trùng lặp, an toàn để dùng cả hai.
+
+## 10. NHẬN ĐỊNH KHÔNG CÓ NGUỒN (PHÂN TÍCH MINH HOẠ)
+
+- Path of Exile / Diablo II — skill tree phân nhánh dạng "web" lớn (Path of Exile hơn 1000
+  node, các lớp nhân vật xuất phát ở vị trí khác nhau trên cùng cây). Mô tả phổ biến trong
+  cộng đồng nhưng nguồn chỉ là blog liệt kê/listicle — không đạt chuẩn trích dẫn, chỉ dùng
+  làm ví dụ phân tích, không cite.
+- Metroid / Metroidvania nói chung — ability-gated progression là đặc điểm định danh thể
+  loại, nhưng không tìm được nguồn gốc đủ chuẩn (chỉ Wikipedia, itch.io devlog).
+- Cây kỹ năng phân nhánh (WoW, Path of Exile, ARPG khác) như một dạng cụ thể hoá của
+  "progression có kiểm soát nhưng cho phép rẽ nhánh" — phân tích minh hoạ của người viết,
+  không phải phát biểu trực tiếp từ Blizzard hay Juul.
+- Nhiều game gacha/live-service mobile hiện đại (không nêu tên cụ thể) áp dụng cùng lúc cả 4
+  loại lịch trình phần thưởng trong bảng mục 5 (login = fixed interval, event có hạn = fixed
+  interval dài hơn, gacha pull = variable ratio, daily quest = fixed ratio) — suy luận ghép
+  các loại đã có nguồn lại, không phải nhận định đã được một nguồn cụ thể phát biểu về game đó.
+- "Phần thưởng dày ở đầu game rồi thưa dần" có thể diễn giải rộng hơn nguyên văn Schreiber
+  (ông chỉ nói cụ thể về khoảng cách giữa các LEVEL TRANSITION tăng dần, không khái quát cho
+  mọi loại phần thưởng trong game) — cần cẩn thận không mở rộng phát biểu của ông ra ngoài
+  phạm vi ông thực sự nói.
+- "Variable ratio dễ gây nghiện hơn / liên quan cờ bạc" — không có quote nào khẳng định trực
+  tiếp trong research này; Hodent chỉ mô tả cơ chế hành vi (response rate), không dùng từ
+  "nghiện". Nếu bài muốn bàn khía cạnh đạo đức/addiction cần tìm nguồn riêng.
+- Ví dụ "achievement thưởng lại đúng danh hiệu đã có" hoặc "level up thưởng đúng loại currency
+  đã đầy kho" — suy diễn minh hoạ cho khái niệm "phần thưởng trùng lặp", không lấy từ nguồn nào.
+- Tiêu chí "phần thưởng có ý nghĩa = mở lựa chọn mới HOẶC đổi cách chơi, không chỉ là số to
+  hơn" — tự diễn giải/tổng hợp từ "psychological anchor" (Cook) và "pattern học xong thì hết
+  vui" (Koster); không phải quote của ai, cần tự paraphrase lại khi viết bài.
+- Gọi cảm giác "loot pha loãng" trong WoW là ví dụ trực quan cho "lạm phát phần thưởng" (khác
+  lạm phát tiền tệ ở bài 02) — cách gọi tên và khung so sánh này là phân tích của người viết,
+  không phải nguyên văn từ Hazzikostas hay Blizzard.
+
+## 11. KHÔNG DÙNG ĐƯỢC (ĐÃ THỬ — SESSION SAU KHỎI THỬ LẠI)
+
+- oldschool.runescape.wiki — HTTP 403 Cloudflare, không thử lại.
+- gamerant.com, ludolib.net, forststories.com, gamedesigning.org, g2a.com/news, medium.com
+  (bài skill tree của Krisnamughni) — blog liệt kê/listicle tổng hợp về skill tree, không
+  phải nguồn gốc, không đạt chuẩn trích dẫn.
+- "Jesse Schell Art of Game Design branching progression skill tree quote" / chương reward
+  của Schell — không tìm được bản đọc hợp pháp đủ để trích nguyên văn (Google Books giới hạn
+  trang, O'Reilly/archive.org yêu cầu đăng nhập); các kết quả tìm được chỉ là bài phân tích/
+  tóm tắt của người khác, không phải nguyên văn từ sách.
+- Adams & Dormans, "Game Mechanics" Chương 11 "Progression Mechanisms" (trang 247–270, gồm
+  "Lock-and-Key Mechanisms" và "Emergent Progression") — chương ĐÚNG TRỌNG TÂM nhất nhưng
+  KHÔNG có trong sample pages công khai của Pearson. dokumen.pub và academia.edu có bản full
+  nhưng là scan lậu, không dùng vì không rõ tính hợp pháp.
+- GDC Vault "Finding the Right Branching Narrative Structure For Your RPG", Ken Levine
+  "Narrative Lego", "Branching on a Budget" và các talk branching narrative khác — về
+  BRANCHING NARRATIVE (nhánh cốt truyện/dialogue), không phải branching PROGRESSION (cấu trúc
+  mở khoá/tiến trình gameplay) — lạc chủ đề. (Xem cảnh báo mâu thuẫn "branching" ở mục 8.)
+- itch.io devlog posts về Metroidvania — không có tác giả/uy tín rõ ràng để trích dẫn học
+  thuật, chỉ dùng tham khảo ý tưởng.
+- https://www.sciencedirect.com/science/article/pii/S0306460323000217 ("Engineered highs:
+  Reward variability and frequency as potential prerequisites of behavioural addiction") —
+  HTTP 403 (paywall/chặn bot), không đọc được.
+- https://celiahodent.com/understanding-the-success-of-fortnite-ux/ — mở được (HTTP 200)
+  nhưng không có nội dung cụ thể về reward types/schedule, chỉ bàn động lực nội tại/cosmetic.
+- gamedeveloper.com/business/why-diablo-3-shut-down-the-auction-house — repost blog cá nhân
+  geeksmirage.com, quote không tồn tại trong trang — không thử lại.
+- Diablo III "Loot 2.0" (Travis Day, Reaper of Souls) — không tìm được URL blog thiết kế gốc
+  còn sống hoặc bản Wayback đã mở đọc, chỉ ra wiki/bài tưởng niệm gamedeveloper.com.
+- news.blizzard.com / worldofwarcraft.com tìm bài dev blog/patch note chính thức công bố bỏ
+  Titanforging trong Shadowlands — không tìm ra URL bài gốc, chỉ ra các trang tin thuật lại
+  phỏng vấn Sloot.
+- gamedesigning.org/learn/skill-trees, gdkeys.com/keys-to-meaningful-skill-trees,
+  adriancrook.com/skill-tree-design-ultimate-guide-for-freemium-games,
+  dev.to/gamepill/level-up-the-art-of-designing-game-progression-and-player-rewards-2603,
+  forums.rpgmakerweb.com/threads/skill-tree-theory-and-design,
+  ttrpg-games.com/blog/skill-trees-in-ttrpgs-basics-and-design,
+  gamineai.com/blog/how-to-design-skill-trees-and-progression-systems-that-keep-players-hooked
+  — listicle/blog phân tích/hướng dẫn bên thứ ba, không phải nguồn gốc hay dev blog chính thức.
+- pathofexile.com/forum/view-thread/332148 — forum thread người chơi đề xuất redesign, không
+  phải phát biểu chính thức của Grinding Gear Games. Chris Wilson phỏng vấn qua báo chí/X —
+  cũng không phải dev blog chính thức, không trích.
+- reddit, fandom wiki (pathofexile.fandom.com), Wikipedia, TV Tropes — không đạt chuẩn nguồn
+  gốc theo yêu cầu chung.
+
+## 12. LỖI AGENT ĐÃ MẮC TRONG 4 VÒNG RESEARCH NÀY
+
+- 2 agent gõ nháy thẳng thay nháy cong trong lúc chép quote (Adams & Dormans "action game's",
+  Daniel Cook "don't/you'll") — main đã phát hiện và sửa lại thành nháy cong khớp nguyên văn
+  nguồn gốc.
+- 1 agent ghi chú SAI rằng pdftotext trả về "--" cho em-dash và chỉ "nhiều khả năng" bản in
+  dùng em-dash thật. Main đã tự chạy lại pdftotext -enc UTF-8, so khớp cả hai biến thể: bản
+  em-dash khớp hoàn toàn, bản "--" lệch tại ký tự 65 — PDF có em-dash thật, không phải suy đoán.
+- 1 agent báo "trang không ghi ngày xuất bản rõ" cho bài Josh Bycer, trong khi byline trên
+  trang ghi rõ June 28, 2016.
+- 1 agent báo theoryoffun.com trả HTTP 200 nhưng thực tế curl với User-Agent mặc định trả về
+  406 — phải thêm header giả lập trình duyệt mới fetch được.
+- 1 agent trích lệch câu của Jesper Juul thành "Probably the purest example" — nguyên văn đầy
+  đủ và đúng thứ tự là "Branching narratives are probably the purest example of this: ..." —
+  main đã sửa lại đúng nguyên văn khi ghép vào mục 4/8 của file này.

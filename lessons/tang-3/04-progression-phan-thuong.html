@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Progression và phần thưởng — Xưởng Game Design</title>
+<meta name="description" content="Lên cấp liên tục mà không thấy mạnh hơn, nhận thưởng mà không biết để làm gì — vì sao? Học cách phân biệt hai cấu trúc tiến trình, dựng lịch trình phần thưởng hợp lý, và tránh phần thưởng vô nghĩa theo Jesper Juul, Ian Schreiber, Celia Hodent.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-3/04-progression-phan-thuong" class="tier-3">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-3">Tầng 3 · Chuyên sâu</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 3 · Bài 04</p>
+            <h1>Progression và phần thưởng</h1>
+            <p class="dek">Lên cấp liên tục không có nghĩa là mạnh hơn, và nhận thưởng không có nghĩa là có ý nghĩa — bài này chỉ ra khi nào tiến trình và phần thưởng thật sự cộng hưởng với nhau.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 14 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Trung bình</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="03-balance-spreadsheet.html">Balance bằng spreadsheet</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Phân biệt progression tuyến tính và phân nhánh</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Thiết kế lịch trình phần thưởng hợp lý</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Tránh phần thưởng vô nghĩa hoặc trùng lặp</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Lên cấp mà vẫn thấy yếu</h2>
+        <p>Bạn cày liên tục hai tiếng, cấp độ tăng đều, nhưng mở kho đồ ra vẫn thấy mình chẳng mạnh hơn hồi nãy. Hoặc vừa mở một rương, nhận một món đồ lấp lánh, rồi tự hỏi: cái này để làm gì?</p>
+        <p>Cả hai là lỗi phối hợp giữa <span class="term" data-en="progression">tiến trình</span> — con đường người chơi đi qua — và phần thưởng, thứ họ nhận được trên đường đó. Bài này đi vào cách hai thứ ăn khớp, hoặc lệch nhau.</p>
+
+        <h2 id="hai-cau-truc">Hai cấu trúc của tiến trình</h2>
+        <p>Cờ vây chơi cả đời không chán, ván nào cũng khác; một game phiêu lưu tuyến tính thì chơi lại lần hai đã thuộc lòng đường đi. Jesper Juul gọi tên khác biệt này: hầu hết game kết hợp hai cách đưa thử thách cho người chơi — <span class="term" data-en="emergence">phát sinh</span>, luật đơn giản kết hợp ra biến thể, và <span class="term" data-en="progression">tiến trình</span>, thử thách được đưa ra tuần tự.</p>
+
+        <figure class="diagram wide">
+            <p><strong>Progression — một đường thử thách nối tiếp</strong></p>
+            <div class="mda-diagram">
+                <div class="mda-block loop">Thử thách 1</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Thử thách 2</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Thử thách 3</div>
+            </div>
+            <p><strong>Emergence — luật cố định, kết quả khác mỗi ván</strong></p>
+            <div class="mda-diagram">
+                <div class="mda-block loop">Luật đơn giản</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Biến thể (khác mỗi ván)</div>
+            </div>
+            <figcaption>Mỗi sơ đồ đứng ngay dưới nhãn của nó: progression là chuỗi thử thách định trước, đi hết là xong; emergence chỉ cố định luật, còn kết quả để mỗi ván tự sinh ra. Minh hoạ của bài học, không phải sơ đồ gốc.</figcaption>
+        </figure>
+
+        <p>Tiêu chí thực dụng để phân biệt hai loại, theo Juul: <em>"As a rule of thumb, the simplest way to tell games of emergence from games of progression is to find guides for them on the net. Progression games have walkthroughs: lists of actions to perform to complete the game. Emergence games have strategy guides: rules of thumb, general tricks."</em> (cách dễ nhất: tìm hướng dẫn trên mạng — game progression có walkthrough, danh sách hành động cần làm; game emergence có strategy guide, mẹo và nguyên tắc chung.) Hệ quả: game progression có thể hoàn thành trọn vẹn nên <span class="term" data-en="replayability">độ chơi lại</span> rất thấp; game emergence thì luật không đổi nhưng ván nào cũng ra kết quả khác, nên chơi được mãi.</p>
+        <p>Không phải game nào cũng thuần một loại — Juul lấy ví dụ: <em>"EverQuest is a game of emergence, with embedded progression structures."</em> (EverQuest là game emergence — thế giới mở — có cấu trúc progression, tức hệ quest, lồng bên trong, như nhiều MMO hiện đại.)</p>
+
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Cách gọi trong bài này</p>
+                <p>Bài gọi "games of progression" là tiến trình tuyến tính, "games of emergence" là tiến trình mở/phân nhánh cho dễ hình dung — đây là diễn giải của bài, KHÔNG phải thuật ngữ Juul dùng. Juul không viết "linear" hay "branching" theo nghĩa này. Một bẫy cần tránh: theo Juul, branching narrative (cốt truyện rẽ nhánh) lại là ví dụ thuần nhất của progression — mọi thứ trong đó đều định trước hết, không phải "phân nhánh" kiểu cây kỹ năng. Hai chữ "phân nhánh" ở hai chỗ mang nghĩa khác nhau, đừng lẫn.</p>
+            </div>
+        </div>
+
+        <h2 id="cay-ky-nang">Tiến trình phân nhánh trong thực tế: cây kỹ năng</h2>
+        <p>Cách phổ biến nhất để làm progression phân nhánh là <span class="term" data-en="skill tree">cây kỹ năng</span>. Blizzard giải thích lý do chọn hình cây cho talent của World of Warcraft: trực quan hoá các nhánh lựa chọn khi xây nhân vật, truyền đạt quan hệ phụ thuộc lẫn độ mạnh yếu mà không cần thêm luật. Mỗi talent có <span class="term" data-en="prerequisite">điều kiện tiên quyết</span> vẽ bằng mũi tên — phải mua xong ít nhất một talent phía trước mới mở khoá được cái tiếp theo.</p>
+        <p>Đối lập là bậc thang thẳng: Baldur's Gate: Dark Alliance (PS2) quy XP thành cấp theo mẫu tam giác — Level 2 cần 1000 XP, Level 3 cần thêm 2000, Level 4 thêm 3000 (Ian Schreiber). Không nhánh nào để chọn, ai cũng đi đúng một đường, chỉ khác tốc độ.</p>
+
+        <h2 id="gate">Gate: chặn để mở</h2>
+        <p>Tiến trình luôn cần chỗ chặn tạm thời — <span class="term" data-en="gate">cửa chặn</span>. Adams &amp; Dormans mô tả bằng ngôn ngữ economy: một ability đặc biệt, như double-jump, là nguồn sản xuất ra resource trừu tượng gọi là <span class="term" data-en="access">access</span> — quyền đi tới khu vực trước đó chưa tới được. Cách khác không cần vật phẩm: Schreiber gọi là <span class="term" data-en="skill gating">chặn theo độ khó</span> — thả chuỗi thử thách tăng dần, kéo dài thời lượng chơi bằng cách kiểm soát tốc độ học thay vì khoá vật phẩm.</p>
+        <p>Gate bằng vật phẩm có rủi ro riêng, theo Adams &amp; Dormans: Zelda hay dùng vật phẩm tiêu hao — mũi tên, bom — làm chìa khoá; hết giữa chừng là <span class="term" data-en="deadlock">kẹt cứng</span>. Zelda tránh việc này bằng nguồn tái sinh, ví dụ nồi đất tự hồi vật phẩm khi người chơi rời phòng rồi quay lại.</p>
+
+        <h2 id="lich-trinh-thuong">Lịch trình phần thưởng</h2>
+        <p>Ian Schreiber gọi nhịp thưởng trong game là <span class="term" data-en="reward schedule">lịch trình phần thưởng</span> — không chỉ muốn người chơi tiến bộ, mà muốn họ cảm thấy đang được thưởng vì chơi giỏi. Có hai cực cần tránh. Thưởng quá thưa: <em>"Giving too few rewards, or spacing them out for too long so that the player goes for long stretches without feeling any sense of progression, is usually a bad thing. The player is demoralized and may start to feel like if they aren’t making progress, they’re playing the game wrong (even if they’re really doing fine)."</em> (thưởng quá thưa khiến người chơi nản, tưởng mình đang chơi sai dù thực ra vẫn ổn.) Thưởng quá dày cũng hại không kém — nhiều phần thưởng lớn dồn dập trong thời gian ngắn làm giảm giá trị cảm nhận của từng phần thưởng, dù cộng dồn lại vẫn ra đúng số đó.</p>
+        <p>Ngẫu nhiên hay cố định cũng tạo cảm giác khác nhau: <em>"Another thing we know from psychology is that a random reward schedule is more powerful than a fixed schedule."</em> (lịch trình thưởng ngẫu nhiên có sức tác động mạnh hơn cố định — Schreiber không dẫn nguồn tâm lý học cụ thể, chỉ nói chung "từ psychology".)</p>
+
+        <p>Celia Hodent chia lịch trình phần thưởng thành bốn kiểu, theo hai trục thời gian/hành động và cố định/biến thiên: fixed interval là mốc thời gian biết trước (Fortnite thưởng mỗi ngày đăng nhập, Clash of Clans thưởng khi công trình xây xong đúng giờ); variable interval biết thưởng sẽ tới nhưng không biết lúc nào (cherry bonus trong Pacman); fixed ratio cần đủ một số hành động cố định (nhiệm vụ, mở khoá skill tree); variable ratio thì số hành động đó ngẫu nhiên mỗi lần (slot machine, loot crate). Thưởng theo hành động (ratio) tạo tần suất cao hơn thưởng theo thời gian, và variable ratio ổn định nhất trong cả bốn, theo Hodent — một nghiên cứu trên 210 người chơi thật xác nhận điều này: <em>"On average, the variable-ratio schedule was better in the outcome measures than the fixed-ratio schedule."</em> (lịch trình biến thiên cho kết quả tốt hơn lịch trình cố định — Nagle, Wolf, Riener, Novak, 2014.)</p>
+        <p>Chuyển màn hoặc khu vực mới cũng là một dạng thưởng — Schreiber khuyên giãn theo đường cong tăng dần, màn sau dài hơn màn trước một chút; và thưởng cho hành động chủ động có sức nặng hơn thưởng cho thứ người chơi không biết mình đang làm.</p>
+
+        <h2 id="vo-nghia">Khi phần thưởng trở nên vô nghĩa</h2>
+        <p>Daniel Cook mô tả phần thưởng như một chuỗi dẫn tới một <span class="term" data-en="psychological anchor">neo tâm lý</span> — nhu cầu thật của người chơi: tiến bộ, quyền lực, thẩm mỹ, kết nối xã hội. Nếu một phần thưởng không nối tới neo nào: <em>"If you don’t identify how each node serves your psychological anchors, you’ll very likely end up with disconnected nodes of isolated atomic meaning."</em> (không xác định mỗi node phục vụ neo tâm lý nào, bạn sẽ có một đống phần thưởng rời rạc, mỗi cái tự mang một mẩu ý nghĩa cô lập.) Chuỗi bị đứt hoặc mập mờ cũng vậy — người chơi ngừng thấy giá trị ở những bước đầu, vì nó không còn dẫn rõ tới thứ họ thực sự muốn ở cuối chuỗi.</p>
+        <p>Lặp lại cũng làm phần thưởng mất giá. Raph Koster từng quan sát trẻ con chơi tic-tac-toe: trò chơi đột nhiên hết hấp dẫn ngay khi chúng đã học xong hết mọi nước đi. Phần thưởng cũng vậy — não học hết pattern thì thưởng lặp lại y hệt không còn dạy thêm gì mới, số liệu vẫn tăng nhưng cảm giác thì không.</p>
+        <p>Một dạng vô nghĩa khác: chỉ một lối chơi cho phần thưởng tốt nhất. Soren Johnson, từ Civilization: <em>"Given the opportunity, players will optimize the fun out of a game."</em> (hễ có cơ hội, người chơi sẽ tối ưu hoá đến mức loại bỏ cái vui ra khỏi game.) Người chơi lặp lại lối đó dù chán, vì phần thưởng ép họ vào một đường duy nhất — gộp lại (tổng hợp của bài, không phải quote của ai): phần thưởng có nghĩa khi mở lựa chọn mới hoặc đổi cách hành động, không chỉ là số to hơn.</p>
+
+        <h2 id="lens">Soi tiến trình và phần thưởng của một game</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Đọc cấu trúc tiến trình và phần thưởng</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Game này đi theo progression, emergence, hay lồng cả hai như EverQuest?</li>
+                <li><span class="q-icon">?</span> Cửa chặn hiện tại chặn bằng gì — vật phẩm, độ khó, hay cả hai? Có rủi ro kẹt cứng không?</li>
+                <li><span class="q-icon">?</span> Lịch trình phần thưởng rơi vào ô nào trong bốn ô — người chơi có thấy nhịp đó hợp lý không?</li>
+                <li><span class="q-icon">?</span> Phần thưởng gần nhất bạn nhận được nối tới neo tâm lý nào, hay chỉ là một con số rời rạc?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Gate mà không báo trước cho người chơi</p>
+                <p>Path of Exile từng khoá end-game sau khi hoàn thành 6 dungeon phụ ở Act 1–3, nhưng game không hề nói trước. Josh Bycer (blog cá nhân Game-Wisdom, cross-post gamedeveloper.com, 28/6/2016) gọi đây là gate tệ: người chơi không biết mình bị chặn, không biết phải làm gì để mở khoá.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Dồn hết thưởng vào đầu game</p>
+                <p>Rải thưởng lớn dày đặc vài giờ đầu rồi tắt hẳn khiến phần sau trống rỗng — người chơi quen nhịp thưởng dày, nay chỉ còn số liệu tăng chậm, không gì mới để mở khoá.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Thưởng trùng thứ người chơi đã có</p>
+                <p>Lên cấp mà chỉ nhận thêm currency đã đầy kho, hoặc unlock đúng thứ đã sở hữu — không mở lựa chọn mới nào, chỉ là một con số tăng lên trong lúc người chơi mong đợi thứ khác.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Soi 5 phần thưởng đầu tiên</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">20 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Vẽ trục thời gian phần thưởng và kiểm tra ý nghĩa</h3>
+                <ol class="steps">
+                    <li><span>Chọn một game đang chơi.</span></li>
+                    <li><span>Liệt kê 5 phần thưởng đầu tiên bạn nhận được, đúng thứ tự thời gian.</span></li>
+                    <li><span>Xác định mỗi phần thưởng thuộc ô nào trong bốn ô: fixed/variable interval, fixed/variable ratio.</span></li>
+                    <li><span>Với mỗi cái, tự hỏi: nó nối tới neo tâm lý nào — tiến bộ, quyền lực, thẩm mỹ, kết nối xã hội — hay chỉ là một con số rời rạc?</span></li>
+                    <li><span>Đánh dấu phần thưởng không nối tới neo nào — đó là ứng viên cần thiết kế lại.</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nếu khó xác định neo tâm lý, thử hỏi: phần thưởng này có đổi được cách bạn chơi ở màn tiếp theo không? Không đổi gì cả thì nhiều khả năng nó không nối tới neo nào.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Jesper Juul, cách thực dụng nhất để phân biệt một game thuộc "progression" hay "emergence" là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Xem thời lượng chơi trung bình của một ván</button>
+                <button data-opt="b"><span class="badge">B</span> Tìm hướng dẫn trên mạng: progression có walkthrough, emergence có strategy guide</button>
+                <button data-opt="c"><span class="badge">C</span> Đếm số nhân vật có thể chọn trong game</button>
+            </div>
+            <div class="explain" hidden><p>Juul chỉ ra progression sinh ra walkthrough — danh sách hành động cố định để hoàn thành game — còn emergence sinh ra strategy guide — mẹo và nguyên tắc chung, không có một đường duy nhất. Đáp án A không phải tiêu chí Juul đưa ra, thời lượng chơi không nói lên cấu trúc luật. Đáp án C cũng không liên quan, số nhân vật không quyết định game thuộc loại nào.</p></div>
+        </div>
+        <div class="quiz" data-answer="c">
+            <p class="q">Trong khung bốn ô của Celia Hodent, phần thưởng kiểu slot machine — không biết bao giờ mới trúng, và số lần cần thử thay đổi mỗi lần — thuộc loại lịch trình nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Fixed interval</button>
+                <button data-opt="b"><span class="badge">B</span> Fixed ratio</button>
+                <button data-opt="c"><span class="badge">C</span> Variable ratio</button>
+            </div>
+            <div class="explain" hidden><p>Variable ratio là khi số hành động cần để nhận thưởng thay đổi ngẫu nhiên mỗi lần — đúng cơ chế slot machine. Fixed interval (A) là thưởng theo mốc thời gian cố định, không liên quan tới số lần thử. Fixed ratio (B) cũng cần số hành động cố định, khác hẳn "không biết bao giờ mới trúng" của variable ratio.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Trong các dungeon Zelda, cách nào giúp tránh kẹt cứng khi cửa chặn khoá bằng vật phẩm tiêu hao như mũi tên hay bom?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Xoá bỏ hoàn toàn cửa chặn khỏi thiết kế</button>
+                <button data-opt="b"><span class="badge">B</span> Đặt sẵn nguồn tái sinh liên tục cho vật phẩm, ví dụ nồi đất tự hồi lại</button>
+                <button data-opt="c"><span class="badge">C</span> Giới hạn số lần người chơi được thử lại một khu vực</button>
+            </div>
+            <div class="explain" hidden><p>Adams &amp; Dormans chỉ ra Zelda đặt sẵn các nguồn tái sinh — như nồi đất tự hồi vật phẩm khi người chơi rời rồi quay lại phòng — để không bao giờ hết sạch thứ cần cho cửa chặn. Đáp án A né tránh vấn đề thay vì giải quyết nó, cửa chặn vẫn cần thiết để kiểm soát tiến trình. Đáp án C không giải quyết nguyên nhân gốc là thiếu tài nguyên, chỉ giới hạn thêm cơ hội của người chơi.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Daniel Cook, điều gì khiến một phần thưởng trở nên vô nghĩa với người chơi?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Phần thưởng đó có giá trị số liệu thấp</button>
+                <button data-opt="b"><span class="badge">B</span> Phần thưởng không nối tới bất kỳ neo tâm lý nào, trở thành một mẩu ý nghĩa cô lập</button>
+                <button data-opt="c"><span class="badge">C</span> Phần thưởng đó xuất hiện quá thường xuyên</button>
+            </div>
+            <div class="explain" hidden><p>Cook mô tả phần thưởng như một chuỗi dẫn tới neo tâm lý — nhu cầu thật như tiến bộ, quyền lực, thẩm mỹ, kết nối xã hội. Một node không nối tới neo nào sẽ trở thành mảnh ý nghĩa cô lập, không cộng dồn thành gì cả. Đáp án A sai vì giá trị số liệu không phải tiêu chí của Cook — một phần thưởng nhỏ vẫn có nghĩa nếu nối đúng neo. Đáp án C nhầm sang vấn đề nhịp độ mà Schreiber bàn, không phải cơ chế "vô nghĩa" của Cook.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Games of emergence</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vài luật đơn giản kết hợp, sinh ra vô số biến thể mà người chơi phải tự nghĩ chiến lược đối phó. Chơi lại được nhiều lần, sinh ra strategy guide chứ không phải walkthrough (Jesper Juul, 2002).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Games of progression</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Chuỗi thử thách định sẵn, mọi lựa chọn và lời giải đã được mô tả rõ trong luật. Có thể hoàn thành trọn vẹn nên độ chơi lại thấp, sinh ra walkthrough (Jesper Juul, 2002).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Gate / access</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Cửa chặn — một ability hay vật phẩm đóng vai trò nguồn sản xuất ra "access", quyền đi tới khu vực mới. Có thể chặn bằng vật phẩm hoặc bằng độ khó tăng dần (Adams &amp; Dormans; Ian Schreiber).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Deadlock</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Kẹt cứng — khi vật phẩm cần để mở cửa chặn đã hết sạch, người chơi không còn cách nào tiến tiếp. Zelda tránh bằng nguồn tái sinh liên tục, như nồi đất tự hồi lại (Adams &amp; Dormans).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Reward schedule</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Lịch trình phần thưởng — cố định hay biến thiên, theo thời gian hay theo hành động. Bốn tổ hợp: fixed/variable interval, fixed/variable ratio. Variable ratio tạo tần suất hành động ổn định nhất (Ian Schreiber; Celia Hodent).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Psychological anchor</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Neo tâm lý — nhu cầu thật mà một chuỗi phần thưởng phải dẫn tới: tiến bộ, quyền lực, thẩm mỹ, kết nối xã hội. Node không nối tới neo nào là phần thưởng rời rạc, vô nghĩa (Daniel Cook).</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Progression và emergence là hai cách khác nhau để đưa thử thách (Jesper Juul) — walkthrough vs strategy guide là cách dễ nhất để phân biệt; gate, dù bằng vật phẩm hay độ khó, đều cần tránh kẹt cứng bằng nguồn tái sinh.</li>
+                <li><span class="n">2</span> Lịch trình phần thưởng có bốn kiểu — fixed/variable interval, fixed/variable ratio; không quá thưa (nản), không quá dày (giảm giá trị); variable ratio tạo tần suất hành động ổn định nhất (Ian Schreiber; Celia Hodent).</li>
+                <li><span class="n">3</span> Phần thưởng chỉ có nghĩa khi nối tới một neo tâm lý thật hoặc mở ra lựa chọn mới — lặp lại không dạy gì mới, hay chỉ tối ưu một lối chơi duy nhất, đều làm nó mất giá trị (Daniel Cook; Raph Koster; Soren Johnson).</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-paper">Paper</span>
+                <a class="reading-title" href="https://jesperjuul.net/text/openandtheclosed.html" target="_blank" rel="noopener">The Open and the Closed: Games of Emergence and Games of Progression</a>
+                <span class="reading-meta">Jesper Juul · Computer Games and Digital Cultures Conference Proceedings, 2002</span>
+                <p class="reading-why">Nguồn gốc của toàn bộ khung emergence vs progression dùng xuyên bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://news.blizzard.com/en-us/world-of-warcraft/23797209/world-of-warcraft-dragonflight-talent-preview" target="_blank" rel="noopener">World of Warcraft: Dragonflight Talent Preview</a>
+                <span class="reading-meta">Blizzard Entertainment · dev blog chính thức, 2022</span>
+                <p class="reading-why">Studio tự giải thích lý do chọn hình cây và cơ chế prerequisite cho hệ thống talent.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gamebalanceconcepts.wordpress.com/2010/08/18/level-7-advancement-progression-and-pacing/" target="_blank" rel="noopener">Level 7: Advancement, Progression, and Pacing</a>
+                <span class="reading-meta">Ian Schreiber · Game Balance Concepts, 2010</span>
+                <p class="reading-why">Nguồn khái niệm reward schedule, skill gating, và pacing chuyển màn dùng xuyên bài.</p>
+            </li>
+            <li>
+                <span class="pill type-sach">Sách</span>
+                <a class="reading-title" href="https://ptgmedia.pearsoncmg.com/images/9780321820273/samplepages/0321820274.pdf" target="_blank" rel="noopener">Game Mechanics: Advanced Game Design — Chapter 4, Internal Economy</a>
+                <span class="reading-meta">Ernest Adams &amp; Joris Dormans · New Riders/Peachpit, 2012</span>
+                <p class="reading-why">Định nghĩa gate bằng ngôn ngữ economy và ví dụ deadlock/renewable source trong Zelda.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/examining-gating-in-game-design" target="_blank" rel="noopener">Examining Gating in Game Design</a>
+                <span class="reading-meta">Josh Bycer · blog cá nhân Game-Wisdom, cross-post gamedeveloper.com, 2016</span>
+                <p class="reading-why">Case Path of Exile gate không báo trước người chơi, dùng trong phần sai lầm hay gặp.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://celiahodent.com/gamers-brain-part-3-ux-engagement-immersion-retention-gdc17-talk/" target="_blank" rel="noopener">The Gamer's Brain, part 3: The UX of Engagement and Immersion (or Retention)</a>
+                <span class="reading-meta">Celia Hodent · blog tác giả, bản viết lại từ GDC17, 2017/2022</span>
+                <p class="reading-why">Khung bốn ô fixed/variable interval/ratio với ví dụ Fortnite, Clash of Clans, Pacman, slot machine.</p>
+            </li>
+            <li>
+                <span class="pill type-paper">Paper</span>
+                <a class="reading-title" href="https://journal.seriousgamessociety.org/index.php/IJSG/article/view/47" target="_blank" rel="noopener">The Use of Player-centered Positive Reinforcement to Schedule In-game Rewards Increases Enjoyment and Performance in a Serious Game</a>
+                <span class="reading-meta">Nagle, Wolf, Riener, Novak · International Journal of Serious Games, 2014</span>
+                <p class="reading-why">Bằng chứng định lượng: variable-ratio cho kết quả tốt hơn fixed-ratio trên 210 người chơi.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://lostgarden.com/2021/12/12/value-chains/" target="_blank" rel="noopener">Value chains — A method for creating and balancing faucet-and-drain game economies</a>
+                <span class="reading-meta">Daniel Cook · Lostgarden, 2021</span>
+                <p class="reading-why">Nguồn khái niệm psychological anchor và lý do phần thưởng rời rạc mất ý nghĩa.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.designer-notes.com/game-developer-column-17-water-finds-a-crack/" target="_blank" rel="noopener">Game Developer Column 17: Water Finds a Crack</a>
+                <span class="reading-meta">Soren Johnson · designer-notes.com, 2011</span>
+                <p class="reading-why">Nguồn câu "players will optimize the fun out of a game", dùng cho sai lầm thưởng ép một lối chơi.</p>
+            </li>
+            <li>
+                <span class="pill type-sach">Sách</span>
+                <a class="reading-title" href="https://www.theoryoffun.com/excerpt.shtml" target="_blank" rel="noopener">A Theory of Fun for Game Design (trích chương 1)</a>
+                <span class="reading-meta">Raph Koster · theoryoffun.com, 2004/2005</span>
+                <p class="reading-why">Nguồn ví dụ tic-tac-toe minh hoạ vì sao phần thưởng lặp lại hết dạy được gì mới.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
