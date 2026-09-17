@@ -1311,6 +1311,9 @@ button.flash.is-flipped .flash-inner { transform: rotateY(180deg); }
     button.flash.is-flipped .flash-inner { transform: none; }
     button.flash.is-flipped .front { display: none; }
     button.flash:not(.is-flipped) .back { display: none; }
+    /* Reduce motion: chuyen mat bang display, nen phai bo xoay/backface —
+       neu khong, mat sau van quay lung lai va bi an hoan toan (the trong rong). */
+    .flash .back { transform: none; backface-visibility: visible; }
 }
 
 /* ===== 21. RECAP ===== */
