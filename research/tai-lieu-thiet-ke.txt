@@ -1,0 +1,240 @@
+RESEARCH — BÀI "VIẾT TÀI LIỆU THIẾT KẾ (ONE-PAGER, GDD, SPEC)"
+Tầng 2 · Bài 04. Dữ liệu gốc: VERIFIED-FACTS.txt, verify ngày 2026-09-17 (main agent tự
+curl + grep raw HTML từng câu trích).
+Quy ước: [NV] = nguyên văn (trích trong ngoặc kép). [DG] = diễn giải, không đóng ngoặc kép.
+
+MỤC LỤC
+1. One-sheet / pitch doc
+2. One-page design — Stone Librande
+3. GDD — Tim Ryan và phê phán GDD dày
+4. Spec — functional vs technical (Tim Ryan)
+5. Tài liệu thiết kế thật đã công bố
+6. Không dùng được / chưa verify
+
+=========================================================
+1. ONE-SHEET / PITCH DOC
+=========================================================
+Nguồn: Press Start Leadership — "From One Sheet to Pitch Deck and Beyond".
+URL: https://pressstartleadership.com/from-one-sheet-to-pitch-deck-and-beyond-building-game-pitches-that-land-deals/
+
+[NV] "A one-sheet (also called a one-pager) is the foundation of your pitch ecosystem.
+It's not just a summary, it's a distillation of your vision into something so tight and so
+clear that anyone can grasp the essence of your game in 30 seconds or less."
+
+[DG] 5 phần của one-sheet: Game Title / Elevator Pitch / Overview / Key Features /
+Optional Visuals. Người đọc nhắm tới: publisher, investor, đội nội bộ.
+
+XẾP HẠNG NGUỒN: đây là blog nghề nghiệp, KHÔNG phải nguồn học thuật/GDC. Chỉ dùng để mô
+tả thực hành phổ biến trong ngành, phải ghi rõ xuất xứ khi trích, không dùng làm định
+nghĩa lý thuyết gốc.
+
+=========================================================
+2. ONE-PAGE DESIGN — STONE LIBRANDE
+=========================================================
+One-page design khác one-sheet ở mục 1: tài liệu 1 trang cho ĐỘI DEV dùng nội bộ, không
+phải tài liệu pitch cho nhà đầu tư/publisher.
+
+2.1. GDC Vault — session "One-Page Designs", GDC 2010. Speaker: Stone Librande, company
+ghi trên trang: EA/Maxis.
+URL: https://gdcvault.com/play/1012356/One-Page
+
+[NV] (đây là MÔ TẢ SESSION do GDC viết, dạng câu hỏi tu từ — KHÔNG phải lời Librande nói
+trực tiếp, luôn phải ghi rõ điều này khi trích dẫn):
+"In an effort to communicate more effectively and concisely, Stone has been experimenting
+with a style of design documentation that he calls a one page design. As the name implies,
+this is a document that is exactly one page long. After all, why create a document with
+more than one page if most people only read the first page anyway?"
+
+[NV] "During this talk Stone will show numerous examples of one page designs from
+Diablo III, The Simpsons and Spore."
+
+CẢNH BÁO — MINH HOẠ THEO NĂM: talk 2010 minh hoạ bằng Diablo III / The Simpsons / Spore.
+SimCity thuộc một talk KHÁC, năm 2013 ("Simulating a City - One Page at a Time") — không
+được gộp chung hai talk này khi viết bài.
+
+2.2. Game Developer — bài tổng thuật talk trên, tác giả Danielle Riendeau.
+URL: https://www.gamedeveloper.com/design/-the-goal-of-design-is-to-efficiently-communicate-ideas-
+
+[NV] "Responding to the age-old design problems of thick "design bibles" and the
+disconnected nature of design wikis, Librande draws on inspiration from such sources as
+architectural blueprints, children's placemats, engineering schematics, and timeline
+graphics..."
+
+CẢNH BÁO — CẤM GÁN CÂU TIÊU ĐỀ: câu "The goal of design is to efficiently communicate
+ideas" chỉ xuất hiện đúng 1 lần trên trang, ở vị trí TIÊU ĐỀ bài viết. Không xác nhận được
+đây là nguyên văn lời Librande nói — CẤM trích dẫn và gán câu này cho ông.
+
+2.3. Wikipedia — Stone Librande.
+URL: https://en.wikipedia.org/wiki/Stone_Librande
+
+[NV] "He was the lead designer of Diablo III at Blizzard Entertainment and creative
+director of SimCity at Electronic Arts."
+
+=========================================================
+3. GDD — TIM RYAN VÀ PHÊ PHÁN GDD DÀY
+=========================================================
+3.1. Tim Ryan — "The Anatomy of a Design Document, Part 1: Documentation Guidelines for
+the Game Concept and Proposal", Gamasutra, 19/10/1999. Nguồn sơ cấp, chắc nhất về GDD.
+URL: https://www.gamedeveloper.com/design/the-anatomy-of-a-design-document-part-1-documentation-guidelines-for-the-game-concept-and-proposal
+
+[NV] "In broad terms, the purpose of documentation is to communicate the vision in
+sufficient detail to implement it."
+
+[NV] "A design document is a bible from which the producer preaches the goal, through
+which the designers champion their ideas, and from which the artists and programmers get
+their instructions..."
+
+[NV] "Design documents merely express the consensus, flesh out the ideas, and eliminate
+the vagueness. They themselves are discussion pieces. Though they strive to cement ideas
+and plans, they are not carved in stone."
+
+[NV] Mục của Game Concept: "Introduction / Background (optional) / Description / Key
+features / Genre / Platform(s) / Concept art (optional)"
+
+[NV] Mục của Game Proposal: "Revised game concept / Market analysis / Technical analysis /
+Legal analysis (if applicable) / Cost and revenue projections / Art"
+
+3.2. Codecks blog — "Writing Modern Game Design Documents". Blog của công ty làm tool
+quản lý dự án game; không xác định được tên tác giả cụ thể.
+URL: https://www.codecks.io/blog/writing-modern-game-design-documents/
+
+[NV] "In doubt your game is your GDD."
+[NV] "Large documents with dozens of pages can be hard to read."
+[NV] "get out of sync immediately"
+
+3.3. Mark Cerny — "The Method", trình bày tại D.I.C.E Summit 2002.
+NGUỒN LÀ BÀI TÓM TẮT BÊN THỨ BA, không phải bản ghi gốc: Iterative (tác giả Joe Mahoney),
+đăng 29/7/2022.
+URL: https://iterative.co.nz/mark-cerny-method
+
+[NV trên trang tóm tắt] "production is easy, but pre-production is hard"
+[NV] "At the D.I.C.E Summit in 2002 Mark Cerny presented his..."
+
+CẢNH BÁO — NGUỒN THỨ CẤP + SAI SỰ KIỆN NẾU GHI NHẦM: câu "production is easy, but
+pre-production is hard" đến từ bài tóm tắt bên thứ ba viết năm 2022, KHÔNG phải bản ghi
+gốc lời Mark Cerny. Talk diễn ra tại D.I.C.E Summit 2002, KHÔNG phải GDC. Khi dùng, phải
+ghi rõ đây là lời thuật lại của người viết bài 2022 — không được viết "Cerny nói:" kèm
+ngoặc kép như thể trích trực tiếp.
+
+3.4. Rob Sandberg — "Why Game Design Docs Still Matter, Even for LiveOps", Production
+Alchemist, 23/4/2025.
+URL: https://www.productionalchemist.com/p/why-game-design-docs-still-matter
+
+[NV] "...when stakeholders like publishers, licensors, or investors need updates, your GDD
+helps show the thinking behind what is being built. It becomes a tool for visibility and
+trust."
+
+[NV] "LiveOps, on the other hand, runs on speed and iteration. The documentation needs to
+be lean and modular, focused on the update, the goal, and the technical setup."
+
+=========================================================
+4. SPEC — FUNCTIONAL VS TECHNICAL (TIM RYAN)
+=========================================================
+Tim Ryan — "The Anatomy of a Design Document, Part 2: Documentation Guidelines for the
+Functional and Technical Specifications", Gamasutra, 17/12/1999.
+URL: https://www.gamedeveloper.com/design/the-anatomy-of-a-design-document-part-2-documentation-guidelines-for-the-functional-and-technical-specifications
+(Ghi chú kỹ thuật: URL này do main agent tự tìm ra; một agent research trước đó từng kết
+luận nhầm là bài đã không còn tồn tại — không lặp lại kết luận đó.)
+
+[NV] "In short, what goes into the game and what it does is documented in the functional
+specification. This is often written from the perspective of the user. How it is
+implemented and how it performs the function is documented in the technical specification.
+This is often written from the system perspective."
+
+[NV] "...the functional specification should have joint ownership. This keeps people from
+feeling isolated and more a part of the process, and it makes the documents feel less like
+marching orders and more like a plan. The team members are also much more likely to read
+something that they helped put together."
+
+[NV] "Traditionally in the game industry, there was only one spec. How technical it was
+depended on who wrote it."
+
+=========================================================
+5. TÀI LIỆU THIẾT KẾ THẬT ĐÃ CÔNG BỐ
+=========================================================
+Tất cả URL trong mục này đã tự curl, trả về HTTP 200.
+
+5.1. Doom Bible — Tom Hall, id Software. Ngày ghi trên trang: 1992-11-28. Loại: design
+bible.
+URL: https://archive.org/details/doombible_202504
+
+[NV mô tả trang, do người upload viết] "This is The Doom Bible made by Tom Hall in 1992.
+Tom was Doom's original Creative Director, before getting fired unanimously by the other
+founding members of Id Software."
+
+[DG] Dạy học: tài liệu ý tưởng giai đoạn sớm, khác XA game cuối cùng thực tế phát hành.
+
+5.2. Deus Ex — bản nháp design doc, tên nội bộ "Majestic Revolutions". Ngày: 1997-08-11.
+Tác giả ghi trên trang: Warren Spector, Dave Beyer, Chris Norden, Albert Yarusso,
+Jeremiah O'Flaherty, Kraig Count, Steve Powers.
+URL: https://archive.org/details/DeusExDesignDoc11081997
+
+[NV mô tả trang] "A draft of a design documents for the game that would have later known
+as Deus Ex"
+
+5.3. Grim Fandango — Puzzle Document. Ngày: 1996-04-30 (game phát hành 1998).
+URL: https://archive.org/details/gf_doc
+
+[NV mô tả trang] "contains designer Tim Schafer's vision of the entire game before any of
+it was built, which is remarkably consistent with what was eventually put together."
+
+[DG] Dạy học: gần với "spec cấp gameplay" nhất trong danh sách — thiết kế chi tiết từng
+câu đố.
+
+CHƯA VERIFY: con số "72 trang" (không grep được từ HTML) — không đưa số trang này vào bài.
+
+5.4. Planescape: Torment — Vision Statement, Chris Avellone, 1997.
+URL: https://gamedocs.org/planescape-torment-vision-statement/
+
+[NV trên trang] Trang mô tả tài liệu dùng để "Pitch the game to their management" và nêu
+hai câu trong tài liệu: "don't do what's been done" và "re-examine your first instinct".
+
+[DG] Dạy học: vision statement NGẮN, thiên định hướng sáng tạo, không liệt kê tính năng
+chi tiết.
+
+5.5. Bioshock — pitch document, Irrational Games, 2002 (Ken Levine và cộng sự).
+URL: https://gamehistory.org/gallery/bioshock-pitch-document/
+
+[NV trên trang] "A rare look at (most of) the original pitch document from Bioshock,
+released by Irrational Games in two parts via its blog, back in 2010."
+
+CHƯA VERIFY: con số "9 trang" và cụm "spiritual successor to System Shock 2" — không dùng
+trong bài.
+
+5.6. Diablo — pitch document, David Brevik / Condor Inc., 1994.
+URL bài phân tích (đã curl, 200): https://www.gamedeveloper.com/business/here-s-a-look-at-the-original-design-pitch-document-for-i-diablo-i-
+URL PDF gốc (CHƯA tự mở, không dùng để trích trực tiếp): http://www.graybeardgames.com/download/diablo_pitch.pdf
+
+[NV trong bài phân tích] "...in the original pitch Diablo was described as a turn-based
+role-playing game with randomly-created dungeons at its heart..."
+
+[NV] "He also described how the game came to be real-time instead of turn-based; at the
+gentle insistence of representatives from publisher (and eventual studio owner) Blizzard
+Entertainment, who were convinced that "real-time will be better.""
+
+[DG] Dạy học: pitch bán Ý TƯỞNG cốt lõi; thiết kế thật vẫn có thể đổi lớn sau khi pitch
+được duyệt (turn-based → real-time).
+
+=========================================================
+6. KHÔNG DÙNG ĐƯỢC / CHƯA VERIFY
+=========================================================
+Đã thử tìm nhưng không xác nhận được — GHI LẠI để session sau không mất công research lại:
+
+- Mọi câu trích gán cho Stone Librande kiểu "no one reads longer documentation" / "wikis
+  break core relationships" — do WebSearch tự sinh, không grep được ở bất kỳ nguồn nào.
+- Richard Lemarchand (A Playful Production Process) — không có bản đọc online mở; KHÔNG
+  lấy được nội dung nào từ nguồn này.
+- Tracy Fullerton (Game Design Workshop) — không mở được đoạn cụ thể nào nói về concept
+  document.
+- deliberategamedesign.com/one-pager/ — bị Mod_Security chặn curl; nội dung lấy qua
+  WebFetch không tự xác nhận được, không dùng.
+- gamedesignskills.com — bị Cloudflare bot-challenge chặn hoàn toàn, không truy cập được.
+- Cụm "the design document is dead" như tên một bài báo chính thức — không tồn tại, đừng
+  dùng làm câu mở bài giật tít.
+- Confluence/Notion đang thay thế GDD như một "chuẩn ngành" — chỉ có nguồn kiểu SEO
+  blog, không đủ tin cậy để đưa vào bài.
+- Phản biện/giới hạn của one-pager (khi nào one-pager KHÔNG đủ) — KHÔNG có nguồn nào nói
+  rõ điều này. Nếu bài muốn nêu ý này, phải ghi rõ đó là phân tích của người viết bài
+  (dùng callout `note`), không được gán cho Librande hay bất kỳ tác giả nào khác.
+- Giai thoại Tim Schafer lồng 2 đoạn văn vô nghĩa ở puzzle cuối cùng của Grim Fandango —
+  chưa verify được, không đưa vào bài.

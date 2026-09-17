@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viết tài liệu thiết kế (One-pager, GDD, Spec) — Xưởng Game Design</title>
+<meta name="description" content="Bản pitch Diablo 1994 mô tả một game turn-based, rồi đổi sang real-time ngay sau đó. Nếu nội dung sẽ đổi, one-pager, one-page design, GDD và spec tồn tại để giao tiếp điều gì?">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-2/04-tai-lieu-thiet-ke" class="tier-2">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-2">Tầng 2 · Nghề</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 2 · Bài 04</p>
+            <h1>Viết tài liệu thiết kế (One-pager, GDD, Spec)</h1>
+            <p class="dek">Diablo được pitch năm 1994 là game turn-based, rồi đổi sang real-time ngay sau đó — nếu nội dung sẽ đổi, tài liệu thiết kế viết ra để giao tiếp điều gì?</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 15 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Trung bình</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="03-vong-lap-iteration.html">Vòng lặp iteration</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Phân biệt one-pager, GDD, spec dùng khi nào</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Viết một spec tính năng đủ để dev implement</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Giữ tài liệu ngắn gọn và luôn cập nhật được</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Một bản pitch đổi ý ngay sau khi viết xong</h2>
+        <p>Năm 1994, David Brevik và đội Condor Inc. viết một bản pitch cho game sau này trở thành Diablo. Theo bài phân tích trên Game Developer, bản pitch gốc mô tả Diablo là một <span class="term" data-en="turn-based role-playing game">game nhập vai theo lượt</span> với dungeon sinh ngẫu nhiên ở trọng tâm.</p>
+        <p>Nhưng ngay sau đó, đại diện của nhà phát hành — và sau này là chủ sở hữu studio — Blizzard Entertainment đã thuyết phục đội đổi sang real-time, vì tin rằng "real-time will be better." Ý tưởng cốt lõi đổi ngay sau khi tài liệu vừa viết xong.</p>
+        <p>Vậy tài liệu thiết kế tồn tại để làm gì, nếu nội dung của nó rồi sẽ đổi? Câu trả lời nằm ở việc phân biệt nhiều loại tài liệu — mỗi loại phục vụ một mục đích giao tiếp khác nhau, với một nhóm người đọc khác nhau.</p>
+
+        <h2 id="khai-niem">Bốn tài liệu, bốn mục đích</h2>
+        <p>Tim Ryan mô tả mục đích chung của tài liệu thiết kế: <em>"the purpose of documentation is to communicate the vision in sufficient detail to implement it."</em> Nhưng "giao tiếp" ở đây không phải một việc duy nhất — nó khác nhau tùy người đọc là ai và họ cần biết gì.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Phân tích minh hoạ</p>
+                <p>Sơ đồ và bảng dưới do người viết bài tổng hợp lại các mô tả trong phần sau, sắp xếp theo trình tự người đọc và mục đích — không phải một sơ đồ hay bảng có sẵn từ một nguồn duy nhất.</p>
+            </div>
+        </div>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Ra ngoài đội
+                    <small>One-sheet — thuyết phục publisher, nhà đầu tư.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Trong đội
+                    <small>One-page design và GDD — thống nhất tầm nhìn.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Tới dev
+                    <small>Spec — đặc tả đủ để triển khai.</small>
+                </div>
+            </div>
+            <figcaption>Sơ đồ do người viết bài tổng hợp: càng về sau người đọc càng gần việc triển khai, tài liệu càng cụ thể.</figcaption>
+        </figure>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Tài liệu</th><th>Ai đọc</th><th>Để làm gì</th></tr></thead>
+                <tbody>
+                    <tr><td>One-sheet</td><td>Người ngoài đội: publisher, nhà đầu tư</td><td>Thuyết phục rót vốn hoặc ký hợp đồng — gói trong 1 trang</td></tr>
+                    <tr><td>One-page design</td><td>Trong đội: lập trình viên, hoạ sĩ, thiết kế khác</td><td>Truyền đạt một mảng thiết kế cụ thể trong đúng 1 trang</td></tr>
+                    <tr><td>GDD</td><td>Cả đội và producer</td><td>Thống nhất tầm nhìn chung, làm cơ sở thảo luận — nhiều mục, nhiều trang</td></tr>
+                    <tr><td>Spec</td><td>Dev — người trực tiếp triển khai</td><td>Xác định chính xác cái gì vào game và implement thế nào, theo từng tính năng</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="one-sheet">One-sheet: thuyết phục người ngoài đội</h2>
+        <p>Theo Press Start Leadership: <em>"A one-sheet (also called a one-pager) is the foundation of your pitch ecosystem. It's not just a summary, it's a distillation of your vision into something so tight and so clear that anyone can grasp the essence of your game in 30 seconds or less."</em></p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Ghi chú nguồn</p>
+                <p>Press Start Leadership là blog thực hành ngành, không phải nguồn học thuật hay GDC. Cấu trúc 5 phần dưới đây mô tả một cách làm phổ biến, không phải một định nghĩa gốc chính thức.</p>
+            </div>
+        </div>
+        <p>Một one-sheet thường gồm 5 phần:</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Phần</th><th>Nội dung</th></tr></thead>
+                <tbody>
+                    <tr><td>Game Title</td><td>Tên game</td></tr>
+                    <tr><td>Elevator Pitch</td><td>1-2 câu tóm tắt cốt lõi</td></tr>
+                    <tr><td>Overview</td><td>Bối cảnh, người chơi làm gì</td></tr>
+                    <tr><td>Key Features</td><td>Vài điểm nổi bật nhất</td></tr>
+                    <tr><td>Optional Visuals</td><td>Hình minh hoạ nếu có</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Người đọc one-sheet là publisher, nhà đầu tư — người cần quyết định có rót tiền hay không trong vài phút, không phải người sẽ làm việc hàng ngày với tài liệu.</p>
+
+        <h2 id="one-page-design">One-page design: viết cho đội, không phải để pitch</h2>
+        <p>Dễ nhầm nhất với one-sheet là <span class="term" data-en="one page design">one-page design</span> — phong cách tài liệu Stone Librande trình bày tại GDC 2010 (công ty ghi trên trang GDC Vault: EA/Maxis). Trang mô tả session viết:</p>
+        <p><em>"In an effort to communicate more effectively and concisely, Stone has been experimenting with a style of design documentation that he calls a one page design. As the name implies, this is a document that is exactly one page long. After all, why create a document with more than one page if most people only read the first page anyway?"</em></p>
+        <p>Câu hỏi tu từ cuối cùng là do GDC viết trong mô tả session, không phải lời Librande nói trực tiếp. Talk minh hoạ bằng ví dụ cụ thể: <em>"numerous examples of one page designs from Diablo III, The Simpsons and Spore."</em></p>
+        <p>Khác biệt quan trọng với one-sheet: one-page design là tài liệu dùng trong quá trình làm game, để truyền đạt một mảng thiết kế cụ thể cho chính đội — không phải để chào hàng ra ngoài. Một game có thể có nhiều one-page design, mỗi trang cho một hệ thống khác nhau.</p>
+
+        <h2 id="gdd">GDD: tài liệu để thảo luận, không phải luật cứng</h2>
+        <p>Tim Ryan, trong bài viết trên Gamasutra năm 1999, mô tả vai trò của <span class="term" data-en="Game Design Document">GDD</span> bằng hình ảnh: <em>"A design document is a bible from which the producer preaches the goal, through which the designers champion their ideas, and from which the artists and programmers get their instructions..."</em></p>
+        <p>Ryan chia tài liệu thành hai giai đoạn: <strong>Game Concept</strong> (mô tả, tính năng chính, thể loại, nền tảng, concept art) rồi tới <strong>Game Proposal</strong> (bản concept đã sửa, phân tích thị trường, phân tích kỹ thuật, dự phóng chi phí và doanh thu).</p>
+        <p>Nhưng ý quan trọng nhất cho người mới nằm ở câu này: <em>"Design documents merely express the consensus, flesh out the ideas, and eliminate the vagueness. They themselves are discussion pieces. Though they strive to cement ideas and plans, they are not carved in stone."</em> GDD ghi lại sự đồng thuận tại một thời điểm — không phải hợp đồng không được sửa.</p>
+
+        <h2 id="spec">Spec: functional và technical</h2>
+        <p>Phần 2 của loạt bài Ryan, đăng cuối năm 1999, tách <span class="term" data-en="functional specification">functional spec</span> khỏi <span class="term" data-en="technical specification">technical spec</span>: <em>"what goes into the game and what it does is documented in the functional specification. This is often written from the perspective of the user. How it is implemented and how it performs the function is documented in the technical specification. This is often written from the system perspective."</em></p>
+        <p>Nói ngắn gọn: functional spec trả lời "cái gì" từ góc người chơi/người dùng; technical spec trả lời "làm thế nào" từ góc hệ thống. Ryan cũng ghi nhận: <em>"Traditionally in the game industry, there was only one spec. How technical it was depended on who wrote it."</em> — ranh giới hai loại spec không phải lúc nào cũng rõ ràng trong thực tế.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Phân tích minh hoạ — không phải theo nguồn</p>
+                <p>Ryan không đưa ra một danh sách kiểm cho spec một tính năng. Phần dưới là cách người viết bài cụ thể hoá ý "cái gì / làm thế nào" của ông thành thứ dùng được ngay:</p>
+                <ol class="steps">
+                    <li><span><strong>Tính năng này giải quyết việc gì</strong> — một câu, từ góc người chơi.</span></li>
+                    <li><span><strong>Người chơi làm gì, game phản hồi ra sao</strong> — mô tả theo thứ tự thao tác.</span></li>
+                    <li><span><strong>Con số cụ thể</strong> — thời gian hồi, sát thương, giá tiền: ghi số, không ghi "vừa phải".</span></li>
+                    <li><span><strong>Khi nào KHÔNG được xảy ra</strong> — các trường hợp biên: hết máu giữa chừng, mất mạng, thoát game.</span></li>
+                    <li><span><strong>Dấu hiệu làm xong</strong> — điều gì phải quan sát được thì mới coi là dev đã implement đúng.</span></li>
+                </ol>
+                <p>Ba ý đầu thuộc functional spec. Việc chọn thuật toán, cấu trúc dữ liệu hay cách lưu trạng thái là technical spec — phần đó để dev quyết.</p>
+            </div>
+        </div>
+
+        <h2 id="vi-du">Bốn game, bốn kiểu tài liệu</h2>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Game</th><th>Tài liệu thế nào</th><th>Theo nguồn</th></tr></thead>
+                <tbody>
+                    <tr><td>Diablo (PC, ARPG)</td><td>Bản pitch 1994 mô tả game turn-based với dungeon sinh ngẫu nhiên; ý tưởng cốt lõi đổi thành real-time ngay sau khi pitch, dưới sức ép từ Blizzard</td><td>Game Developer — bài phân tích pitch document gốc</td></tr>
+                    <tr><td>Grim Fandango (adventure)</td><td>Puzzle Document 1996 mô tả toàn bộ câu đố của game trước khi dựng, khá nhất quán với bản game cuối cùng</td><td>archive.org — Grim Fandango Puzzle Document</td></tr>
+                    <tr><td>Doom Bible (FPS)</td><td>Tài liệu ý tưởng do Tom Hall viết năm 1992, khi ông còn là Creative Director đầu tiên của Doom — trước khi rời id Software</td><td>archive.org — The Doom Bible</td></tr>
+                    <tr><td>LiveOps mobile (chung)</td><td>Không mô tả toàn bộ game; tài liệu cho LiveOps cần lean và modular, tập trung vào update, mục tiêu, và thiết lập kỹ thuật</td><td>Rob Sandberg, Production Alchemist, 2025</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="lens">Soi một tài liệu thiết kế</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Bộ câu hỏi</span><h3>Soi một tài liệu thiết kế</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Tài liệu này viết cho ai đọc — người trong đội hay người ngoài đội?</li>
+                <li><span class="q-icon">?</span> Nếu bỏ tài liệu này đi, đội có còn biết phải làm gì tiếp theo không?</li>
+                <li><span class="q-icon">?</span> Tài liệu đang trả lời "cái gì" (functional) hay "làm thế nào" (technical) — hay lẫn cả hai?</li>
+                <li><span class="q-icon">?</span> Nếu ý tưởng cốt lõi đổi ngay ngày mai, như Diablo, tài liệu này có dễ sửa theo không?</li>
+                <li><span class="q-icon">?</span> Ai cùng sở hữu tài liệu này — chỉ một người viết, hay cả đội góp ý?</li>
+                <li><span class="q-icon">?</span> Tài liệu đang được đối xử như "discussion piece", hay như luật bất di bất dịch?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Viết GDD dày trước khi có prototype</p>
+                <p>Bài tóm tắt của Iterative (Joe Mahoney, 2022) thuật lại talk "The Method" của Mark Cerny tại D.I.C.E Summit 2002, với ý: <em>"production is easy, but pre-production is hard."</em> Đổ hết công sức viết một tài liệu dày, chi tiết mọi khía cạnh, ngay trong giai đoạn khó nhất và chưa được test — là lãng phí công sức nếu ý tưởng cốt lõi rồi sẽ phải đổi.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Tài liệu lỗi thời ngay khi vừa viết xong</p>
+                <p>Codecks cảnh báo: <em>"Large documents with dozens of pages can be hard to read"</em> và dễ <em>"get out of sync immediately"</em> — lệch khỏi thực tế game đang làm ngay khi vừa hoàn thành. Codecks gợi ý: <em>"In doubt your game is your GDD"</em> — khi nghi ngờ điều gì đúng, hãy nhìn vào chính game đang chạy, không phải tài liệu.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Viết spec một mình rồi ném cho dev</p>
+                <p>Ryan viết rằng functional spec nên có <em>"joint ownership. This keeps people from feeling isolated and more a part of the process, and it makes the documents feel less like marching orders and more like a plan."</em> Đội cũng nhiều khả năng đọc kỹ hơn một tài liệu mà chính họ góp phần viết ra.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Viết one-pager, rồi spec cho một tính năng</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">45 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Viết one-pager, rồi spec cho một tính năng</h3>
+                <ol class="steps">
+                    <li>Chọn một ý tưởng game nhỏ của chính bạn, kể cả khi chưa hoàn chỉnh.</li>
+                    <li>Viết Game Title và một Elevator Pitch — tóm tắt cốt lõi trong 1-2 câu.</li>
+                    <li>Viết Overview ngắn: bối cảnh, người chơi làm gì.</li>
+                    <li>Liệt kê 3-5 Key Features nổi bật nhất.</li>
+                    <li>Nếu có, thêm một hình minh hoạ hoặc mô tả hình ảnh (Optional Visuals).</li>
+                    <li>Ép toàn bộ vào đúng 1 trang — cắt bớt nếu tràn.</li>
+                    <li><span>Chọn <strong>một</strong> tính năng trong Key Features, viết thêm nửa trang functional spec cho riêng nó theo danh sách kiểm ở mục Spec phía trên — nhớ ghi con số cụ thể và ít nhất một trường hợp biên.</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nhớ mục tiêu của Press Start Leadership: người đọc phải nắm được bản chất game "trong 30 giây hoặc ít hơn". Nếu bạn phải giải thích thêm bằng lời mới hiểu được one-pager, nó chưa đủ tối giản.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo GDC Vault, one-page design của Stone Librande (2010) khác one-sheet ở điểm nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Dành cho publisher và nhà đầu tư bên ngoài đội</button>
+                <button data-opt="b"><span class="badge">B</span> Dùng trong quá trình làm game, cho chính đội — không phải để pitch</button>
+                <button data-opt="c"><span class="badge">C</span> Không giới hạn số trang</button>
+            </div>
+            <div class="explain" hidden><p>One-sheet (Press Start Leadership) mới là tài liệu pitch cho người ngoài đội. One-page design là "a style of design documentation" Librande dùng để truyền đạt thiết kế trong lúc làm game.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Tim Ryan, design documents nên được đối xử như thế nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Luật bất di bất dịch, không được sửa sau khi duyệt</button>
+                <button data-opt="b"><span class="badge">B</span> Discussion pieces — thể hiện đồng thuận tại một thời điểm, không "carved in stone"</button>
+                <button data-opt="c"><span class="badge">C</span> Chỉ cần viết đúng một lần, không cần cập nhật</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên văn Ryan: "They themselves are discussion pieces... they are not carved in stone." — tài liệu ghi lại sự đồng thuận, không phải hợp đồng cứng.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Theo Ryan Part 2, functional spec khác technical spec ở điểm nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Functional viết từ góc người dùng (cái gì); technical viết từ góc hệ thống (làm thế nào)</button>
+                <button data-opt="b"><span class="badge">B</span> Functional luôn dài hơn technical</button>
+                <button data-opt="c"><span class="badge">C</span> Chỉ lập trình viên mới được viết technical spec</button>
+            </div>
+            <div class="explain" hidden><p>Ryan: "what goes into the game and what it does is documented in the functional specification... written from the perspective of the user. How it is implemented... is documented in the technical specification... written from the system perspective."</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Rob Sandberg (2025), tài liệu cho LiveOps nên như thế nào so với GDD truyền thống?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Dày hơn để bao quát mọi tình huống có thể xảy ra</button>
+                <button data-opt="b"><span class="badge">B</span> Lean và modular, tập trung vào update, mục tiêu, thiết lập kỹ thuật</button>
+                <button data-opt="c"><span class="badge">C</span> Không cần viết tài liệu, chỉ cần trao đổi miệng</button>
+            </div>
+            <div class="explain" hidden><p>Sandberg: "LiveOps... runs on speed and iteration. The documentation needs to be lean and modular, focused on the update, the goal, and the technical setup."</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>One-sheet</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Tài liệu 1 trang thuyết phục người NGOÀI đội (publisher, nhà đầu tư): Game Title, Elevator Pitch, Overview, Key Features, Optional Visuals.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>One-page design</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Tài liệu 1 trang của Stone Librande (GDC 2010) — dùng cho ĐỘI trong lúc làm game, không phải để pitch.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>GDD (Tim Ryan)</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">"Discussion piece" giúp thống nhất tầm nhìn cả đội — không phải luật bất di bất dịch.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Functional vs Technical spec</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Functional: cái gì vào game, viết từ góc người dùng. Technical: làm thế nào, viết từ góc hệ thống.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Tài liệu LiveOps (Sandberg)</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Cần lean và modular, tập trung vào update, mục tiêu, thiết lập kỹ thuật — khác GDD truyền thống.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> One-sheet, one-page design, GDD và spec phục vụ 4 mục đích giao tiếp khác nhau — chọn đúng loại theo người đọc là ai.</li>
+                <li><span class="n">2</span> GDD là "discussion piece" giúp thống nhất tầm nhìn, không phải luật cứng — nội dung có thể đổi, như Diablo từng đổi từ turn-based sang real-time.</li>
+                <li><span class="n">3</span> Spec cần joint ownership và tách rõ functional (cái gì) / technical (làm thế nào) để dev implement được đúng ý.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/the-anatomy-of-a-design-document-part-1-documentation-guidelines-for-the-game-concept-and-proposal" target="_blank" rel="noopener">The Anatomy of a Design Document, Part 1</a>
+                <span class="reading-meta">Tim Ryan · Gamasutra, 1999</span>
+                <p class="reading-why">Nguồn gốc cấu trúc Game Concept / Game Proposal và câu "not carved in stone" dùng xuyên suốt bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/the-anatomy-of-a-design-document-part-2-documentation-guidelines-for-the-functional-and-technical-specifications" target="_blank" rel="noopener">The Anatomy of a Design Document, Part 2</a>
+                <span class="reading-meta">Tim Ryan · Gamasutra, 1999</span>
+                <p class="reading-why">Phân biệt functional spec và technical spec, và vì sao spec cần joint ownership.</p>
+            </li>
+            <li>
+                <span class="pill type-talk">Talk</span>
+                <a class="reading-title" href="https://gdcvault.com/play/1012356/One-Page" target="_blank" rel="noopener">One-Page Designs</a>
+                <span class="reading-meta">Stone Librande · GDC 2010</span>
+                <p class="reading-why">Trang session gốc mô tả phong cách one-page design, minh hoạ bằng Diablo III, The Simpsons, Spore.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://pressstartleadership.com/from-one-sheet-to-pitch-deck-and-beyond-building-game-pitches-that-land-deals/" target="_blank" rel="noopener">From One Sheet to Pitch Deck and Beyond</a>
+                <span class="reading-meta">Press Start Leadership</span>
+                <p class="reading-why">Mô tả thực hành phổ biến của one-sheet: 5 phần và mục tiêu "grasp the essence... in 30 seconds".</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.codecks.io/blog/writing-modern-game-design-documents/" target="_blank" rel="noopener">Writing Modern Game Design Documents</a>
+                <span class="reading-meta">Codecks</span>
+                <p class="reading-why">Vì sao tài liệu dài dễ lỗi thời, và gợi ý "in doubt your game is your GDD".</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.productionalchemist.com/p/why-game-design-docs-still-matter" target="_blank" rel="noopener">Why Game Design Docs Still Matter, Even for LiveOps</a>
+                <span class="reading-meta">Rob Sandberg · Production Alchemist, 2025</span>
+                <p class="reading-why">Vì sao tài liệu LiveOps cần lean và modular, khác GDD truyền thống.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

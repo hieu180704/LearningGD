@@ -175,7 +175,7 @@ window.CURRICULUM = [
             {
                 slug: "tang-2/04-tai-lieu-thiet-ke",
                 title: "Viết tài liệu thiết kế (One-pager, GDD, Spec)",
-                summary: "Chọn đúng loại tài liệu cho đúng mục đích giao tiếp trong đội.",
+                summary: "Chọn đúng loại tài liệu cho đúng người đọc — trong đội hay ngoài đội.",
                 goals: [
                     "Phân biệt one-pager, GDD, spec dùng khi nào",
                     "Viết một spec tính năng đủ để dev implement",
@@ -183,7 +183,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 15,
                 level: "Trung bình",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-2/05-lam-viec-voi-dev-art",
