@@ -1,0 +1,95 @@
+SUMMARY: Dựng xong Tầng 2 bài 04 Viết tài liệu thiết kế (One-pager, GDD, Spec) + research;
+user đã duyệt; check-site 0 lỗi, div cân bằng 49/49, thân bài 1.823 chữ. Main tự curl+grep
+verify nguyên văn mọi câu trích và tự đọc lại toàn bài. Ảnh: đã tự xem mobile sáng (sơ đồ,
+2 bảng, checklist spec), mobile tối (lens, 3 callout sai lầm, exercise, quiz, cuối trang +
+pager), desktop sáng (vùng spec + bảng ví dụ). Quiz/flashcard vẫn CHƯA bấm thử trên trình
+duyệt thật (tồn 6 session).
+
+ĐÃ LÀM
+- research/tai-lieu-thiet-ke.txt (240 dòng) + lessons/tang-2/04-tai-lieu-thiet-ke.html.
+- Nguồn đã verify: Tim Ryan "The Anatomy of a Design Document" Part 1 (Gamasutra
+  19/10/1999) và Part 2 (17/12/1999); GDC Vault trang session "One-Page Designs" (Stone
+  Librande, GDC 2010); Press Start Leadership (one-sheet 5 phần); Codecks blog; Rob
+  Sandberg, Production Alchemist (23/4/2025); 6 tài liệu thiết kế thật đã công bố (Doom
+  Bible 1992, Deus Ex 1997, Grim Fandango Puzzle Document 1996, Planescape Vision
+  Statement 1997, Bioshock pitch 2002, Diablo pitch 1994).
+- Ví dụ đa thể loại: Diablo (PC/ARPG), Grim Fandango (adventure), Doom Bible (FPS),
+  LiveOps mobile (Sandberg).
+- curriculum.js: bài 04 status -> ready, summary đổi thành "Chọn đúng loại tài liệu cho
+  đúng người đọc — trong đội hay ngoài đội." (summary cũ ghi "trong đội" nhưng bài nói cả
+  người ngoài đội). goals/minutes/level giữ nguyên. shoot.ps1: thêm 1 dòng chụp + dấu
+  phẩy phân cách còn thiếu ở dòng bài 03.
+- Goal #2 "Viết một spec tính năng đủ để dev implement" KHÔNG có nguồn nào verify được
+  cho checklist chi tiết. User chọn phương án A: giữ goal, dạy spec theo đúng khung
+  functional/technical của Ryan, phần checklist 5 ý để trong callout note ghi rõ là phân
+  tích của người viết.
+
+LỖI ĐÃ BẮT VÀ SỬA (agent tự báo "xong" cả 3 lần, lần nào cũng còn lỗi)
+- Agent dựng HTML gắn năm 1998 cho Grim Fandango — chuỗi "1998" xuất hiện 0 lần trên
+  trang nguồn archive.org.
+- Agent viết Doom Bible "mô tả một hướng khác hẳn game Doom cuối cùng phát hành" — trang
+  nguồn không nói gì về nội dung tài liệu so với game cuối.
+- Bảng 4 cột nhét trong figure.diagram: vượt giới hạn 3 cột (tràn ngang mobile) và lẫn
+  component (table không phải sơ đồ). Đã tách thành sơ đồ .mda-diagram 3 block + bảng
+  compare 3 cột riêng.
+- Mục tiêu bài hứa dạy viết spec nhưng cả bài không dạy; exercise chỉ có viết one-pager.
+  Đã thêm callout checklist 5 ý ở mục Spec + bước 7 trong exercise.
+- ul trần trong thân bài render không bullet, không giãn dòng, dính luôn đoạn văn ngay
+  sau.
+- ol.steps xé strong thành cột hẹp riêng trên mobile — lỗi sinh ra từ chính cách sửa lỗi
+  ul ở trên.
+
+VẤP MỚI (kỹ thuật)
+- site.css dòng 119 reset toàn cục: ul, ol { margin: 0; padding: 0; list-style: none; }
+  và KHÔNG có rule nào cho list trong thân bài. Nên mọi thẻ ul trần trong article render
+  ra không bullet, không giãn cách. Tiền lệ: lessons/tang-1/05-game-feel.html:138 cũng có
+  1 ul trần đã được duyệt.
+- site.css dòng 1162: ol.steps li { display: flex; gap; align-items: flex-start } — nên
+  MỌI thẻ inline như strong bên trong li sẽ thành một flex item riêng, bị bóp thành cột
+  hẹp trên mobile. Cách chữa không đụng CSS: bọc toàn bộ nội dung li trong một thẻ span.
+  Đã áp dụng cho 6 li của bài 04.
+- Agent research dùng WebFetch kết luận URL Tim Ryan Part 2 không còn tồn tại; main tự
+  curl thì URL sống bình thường (HTTP 200). Không tin kết luận "nguồn đã chết" của
+  subagent khi chưa tự curl.
+- Câu "most people only read the first page anyway" là mô tả session do GDC viết dạng
+  câu hỏi tu từ, KHÔNG phải lời Librande. Câu "production is easy, but pre-production is
+  hard" đến từ bài tóm tắt bên thứ ba năm 2022, không phải bản ghi gốc lời Mark Cerny;
+  talk ở D.I.C.E Summit 2002 chứ không phải GDC.
+
+KHÔNG DÙNG ĐƯỢC (đã thử, để session sau khỏi research lại)
+- Richard Lemarchand (A Playful Production Process) và Tracy Fullerton (Game Design
+  Workshop): không có bản đọc online mở, không lấy được nội dung nào.
+- Mọi câu trích gán cho Stone Librande kiểu "no one reads longer documentation": do
+  WebSearch tự sinh, không grep được ở đâu.
+- deliberategamedesign.com bị Mod_Security chặn; gamedesignskills.com bị Cloudflare
+  chặn.
+- Chi tiết đầy đủ nằm ở research/tai-lieu-thiet-ke.txt mục 6.
+
+DOC-SYNC (floor grep theo diff)
+- CLAUDE.md:26,47,51,130,181 nhắc curriculum.js — NO-CHANGE: mô tả vai trò/quy trình,
+  diff chỉ thêm dữ liệu 1 bài.
+- lessons/_lesson-starter.html:10,13,131 nhắc curriculum.js — NO-CHANGE: mô tả quy trình
+  chung, không tả bài 04.
+- components.html:388, index.html:131, lo-trinh.html:67 và các bài trong lessons/ —
+  NO-CHANGE: chỉ là thẻ script tham chiếu.
+- CLAUDE.md:54,133,160,163,183 nhắc shoot.ps1 — NO-CHANGE: diff chỉ thêm 1 dòng danh
+  sách trang, không đổi cơ chế.
+- lessons/_lesson-starter.html:14 nhắc shoot.ps1 — NO-CHANGE: mô tả quy trình.
+- lessons/tang-2/04-tai-lieu-thiet-ke.html và research/tai-lieu-thiet-ke.txt —
+  NO_CANDIDATES: diff không chạm doc sống nào khác.
+- Không có thư mục handoff trong repo -> bỏ bước handoff-stale.
+
+CẦN USER QUYẾT (KHÔNG tự sửa — global rule 7) — 9 mục treo
+- 5 mục từ worklog 2026-09-16__tang-1-game-feel.txt: CLAUDE.md §8 check-site không bắt
+  thẻ lệch/tràn ngang; shoot.ps1 dòng 1 comment phạm vi stale; bài 03 Tầng 1 lệch thứ tự
+  §5; thiếu repo-params.json; độ dài bài vượt mục tiêu.
+- Tầng 2 bài 01 và 02 chưa đạt đa thể loại §1 — chấp nhận hay research bù.
+- .mda-diagram 4 block rớt dòng desktop — có ghi giới hạn 3 block vào CLAUDE.md §8
+  không.
+- MỚI: có thêm component list cho thân bài vào site.css + components.html không (§4 bắt
+  buộc sửa cả hai file cùng lúc). Hiện chưa có, nên ul trần render trần trụi.
+- MỚI: lessons/tang-0/03-tu-duy-nguoi-choi.html có 2 thẻ strong bên trong ol.steps —
+  nhiều khả năng đang vỡ layout y hệt lỗi đã sửa ở bài 04, chưa kiểm ảnh.
+
+SHA
+- 2003c5d Tầng 2: bài 04 Viết tài liệu thiết kế + research
