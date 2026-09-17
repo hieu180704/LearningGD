@@ -1,0 +1,150 @@
+WORKLOG 2026-09-17 — Tầng 3 bài 02 "Economy" + bài 03 "Balance bằng spreadsheet"
+
+SUMMARY
+Tầng 3 xong bài 02 (Economy: sources và sinks) và bài 03 (Balance bằng spreadsheet), cộng
+sửa attribution bài 01 — đã verify: check-site 0 lỗi + tự xem ảnh mobile/desktop 2 theme;
+CHƯA verify: quiz/flashcard chưa bấm tay (treo sang session thứ 10).
+
+ĐÃ LÀM
+- fe72b4d — Tầng 3 bài 02 "Economy: sources và sinks" + research/economy-sources-sinks.txt.
+  Nguồn: Simpson (Ultima Online 1999), Ludgate/Lance Stites (faucet), Jagex OSRS (công
+  thức lạm phát), EVE MER (money supply), Daniel Cook (4 kiểu sink), Shokrizade (soft
+  gate). Ví dụ đa thể loại đủ cả mobile (Clash of Clans).
+- 2bc82c9 — sửa attribution Machinations ở bài tang-3/01: Ernest Adams · 2011 → Joris
+  Dormans · 2012 (5 chỗ tên + 3 chỗ năm), thêm ghi chú chuyên mục The Designer's Notebook
+  vào .reading-why. Lý do: trang gốc có datePublished 2012-08-16, byline "by Joris
+  Dormans", chuỗi "2011" không xuất hiện.
+- 8b0f0cc — Tầng 3 bài 03 "Balance bằng spreadsheet" + research/balance-spreadsheet.txt.
+  Nguồn: Schreiber Level 2/3/4/9/10 + 2 bài /dev của Riot. Có case số thật (cost curve
+  Magic 2011) và công thức Excel thật (=FLOOR(RAND()*6)+1, Monte Carlo).
+- Cả 2 bài: minutes hạ từ 15 và 17 xuống 14 cho khớp ngưỡng CLAUDE.md §5; status flip
+  ready SAU khi file bài tồn tại; đã thêm tay dòng $pages trong tools/shoot.ps1 cho từng
+  bài.
+
+VẤP MỚI (phần quan trọng nhất — viết đủ, đừng rút gọn)
+1. table.compare tràn mobile: ĐÃ TÌM RA ROOT CAUSE. assets/css/site.css:1121 có
+   table.compare { min-width: 480px }. Viewport mobile 400px trừ gutter còn ~368px → MỌI
+   bảng luôn tràn ~112px và đẩy cột cuối ra ngoài khung, bất kể nội dung dài hay ngắn.
+   Bằng chứng: bài 03 có bảng "Vế | Giá", main rút ô cột 1 xuống còn 12 ký tự ("Mana có
+   màu") rồi chụp lại — cột "Giá" vẫn biến mất hoàn toàn. Kết luận dứt điểm cho mục treo
+   cũ: KHÔNG phải do số cột, KHÔNG phải do độ dài chữ. Muốn sửa phải đổi cách render bảng
+   ở breakpoint nhỏ (xếp dọc dạng nhãn–giá trị) trong site.css + components.html — ảnh
+   hưởng mọi bài đã publish nên main KHÔNG tự sửa.
+2. Subagent chuẩn hoá nháy cong thành nháy thẳng. research/balance-spreadsheet.txt sinh
+   ra với 0 ký tự ’ và " ", dù chỉ thị ghi rõ nguồn Schreiber dùng nháy cong — agent còn
+   tự viết dòng "[ĐÃ SỬA — nguồn dùng ngoặc kép cong]" ngay phía trên một quote gõ nháy
+   thẳng (mâu thuẫn nội tại). Main sửa tay 19 dòng apostrophe + 9 cặp ngoặc kép, chừa
+   nguyên quote Riot (Riot dùng nháy thẳng). → Cách phát hiện nhanh: đếm
+   (t.match(/’/g)||[]).length, bằng 0 là hỏng.
+3. Bộ so khớp quote tự viết cho 3 kiểu false-negative (quote ĐÚNG bị báo sai): (a) thẻ
+   inline <em> sinh khoảng trắng — <em>n</em>-sided → "n -sided die",
+   Rock-Paper-Scissors<em>"</em> → "Rock-Paper-Scissors \""; normalize phải xoá khoảng
+   trắng trước cả " ' ) ], không chỉ ,.;:!?%. (b) quote bị wrap xuống dòng trong file .txt
+   → phải nối dòng trước khi so. (c) secure.runescape.com là windows-1252 (byte 0x92 =
+   ’), đọc UTF-8 ra mojibake → báo lệch toàn bộ; phải đọc latin1 rồi map cp1252.
+4. Nguồn agent gắn mác "báo chí độc lập" hoá ra là repost blog cá nhân.
+   gamedeveloper.com/business/why-diablo-3-shut-down-the-auction-house HTTP 200 nhưng đầu
+   bài ghi "Originally posted on my website: geeksmirage.com", và câu quote agent trích
+   không tồn tại trong trang (grep 0 hit). → Đã loại, case Diablo III bỏ khỏi bài 02.
+5. Lỗi nội dung mà bộ kiểm tự động không bắt được. Bài 03 dòng 104 agent viết "2
+   (colorless) + 3 (colored)" trong khi nguồn là "1 (baseline) + 2 + 3 (colorless)" — tức
+   2 là mana CÓ màu, 3 là KHÔNG màu. Nhãn bị đảo nhưng tổng vẫn ra 6 nên mọi script kiểm
+   đều báo OK; chỉ lộ khi main đọc và đối chiếu lại nguồn. Main sửa tay.
+6. URL loạt Game Balance Concepts của Schreiber KHÔNG đoán được theo mẫu ngày. Agent đoán
+   Level 9 = 2010/08/25/level-9-... (theo ngày liền kề Level 8) → HTTP 404; URL đúng là
+   2010/09/01/.... Loạt này cũng KHÔNG có Level 5/6 về cost curve — cost curve nằm trọn
+   trong Level 3; Level 8 là "Metrics and Statistics". Phải lấy URL từ trang listing theo
+   tháng.
+
+DOC-SYNC (bảng doc-impact đã chạy, reconcile từng mục)
+- CLAUDE.md:51 ("6 tầng × 26 bài") → NO-CHANGE: là tổng số bài cố định, session chỉ đổi
+  field của 2 entry.
+- CLAUDE.md:181 (checklist status ready) → NO-CHANGE: session tuân thủ đúng.
+- index.html, lo-trinh.html → NO-CHANGE: đã grep xác nhận render động 100% từ
+  curriculum.js, không hardcode bài tầng 3 nào.
+- File trong lessons/ và research/ → NO-CHANGE: không doc sống nào nhắc tới.
+- CLAUDE.md:54, 133, 163 (mô tả tools/shoot.ps1) → FLAG USER: doc vẫn không nói script
+  hardcode danh sách bài trong $pages. Đây đúng là mục treo đã nêu ở worklog session
+  trước mà chưa xử lý, và session này vấp lại 2 lần (phải thêm tay cho cả bài 02 và 03).
+  Main không tự sửa (global rule 7).
+- CLAUDE.md mục 8 → FLAG USER: chưa có gạch đầu dòng nào về table.compare
+  min-width: 480px (phát hiện mới, xem VẤP MỚI #1).
+
+NGUỒN ĐÃ DÙNG (đều tự curl verify, HTTP 200)
+Bài 02 — Simpson "The In-game Economics of Ultima Online" (mirror mobiledevmemo, bản gốc
+  mine-control.com đã 404) · Ludgate "The F-Words Of MMOs: Faucets" (dẫn lời Lance Stites) ·
+  Dormans "Machinations" (gamedeveloper, 2012) · Cook "Value chains" (Lostgarden 2021) ·
+  Jagex "Old School Economy - Future Plans" (2021) · CCP press release 2007 + Monthly
+  Economic Report 8/2024 · Shokrizade "The Top F2P Monetization Tricks" (2013).
+Bài 03 — Ian Schreiber "Game Balance Concepts" Level 2/3/4/5/7/8/9/10 (2010) · Riot
+  "/dev: Champion Balance Framework" (2019) · Riot "/dev: Balance Framework Update" (2020).
+Tổng 45/45 quote khớp nguyên văn sau khi main tự curl so khớp từng ký tự.
+
+KHÔNG DÙNG ĐƯỢC (đã thử, session sau khỏi research lại)
+- gamedeveloper.com/business/why-diablo-3-shut-down-the-auction-house — HTTP 200 nhưng là
+  repost blog cá nhân (geeksmirage.com), quote không tồn tại trong trang. KHÔNG phải nguồn
+  toà soạn như agent báo.
+- Bài blog gốc Blizzard đóng Auction House — redirect chain về trang chủ, nội dung đã mất.
+- GameSpot "Sink or Swim" — curl exit 7 (không kết nối được). FastCompany EVE — HTTP 403.
+- Số liệu ISK faucets/sinks chi tiết trong EVE MER — nằm trong ảnh PNG, không có text.
+- Nguồn gốc thuật ngữ "mudflation" — chỉ có wiki/fandom, không đủ chuẩn trích.
+- oldschool.runescape.wiki — HTTP 403 (Cloudflare).
+- Cặp thuật ngữ "soft currency / hard currency" — không nguồn nào dùng đúng cặp này;
+  Shokrizade dùng "premium currency".
+- DPS / TTK / EHP — từ "dps" xuất hiện đúng 1 lần trong 8 bài Schreiber, không có định
+  nghĩa công thức. Dạy như kiến thức chung, không cite.
+- URL Level 9 đoán theo mẫu ngày (2010/08/25) — HTTP 404; đúng là 2010/09/01.
+
+QUYẾT ĐỊNH CÓ Ý THỨC (không phải bỏ sót)
+- Bỏ hẳn case Diablo III khỏi bài 02: nguồn đỡ chỉ còn Time.com, và bản chất là mất giá
+  trị loot chứ không phải lạm phát tiền tệ — lệch trọng tâm bài.
+- Bài 03 chấp nhận thiếu ví dụ mobile/console (user chốt phương án a): nguồn verify chỉ
+  phủ card game, board game, MOBA PC; bù bằng callout "phân tích minh hoạ".
+- minutes hạ 15→14 (bài 02) và 17→14 (bài 03) thay vì nới ngưỡng độ dài của CLAUDE.md §5.
+- Không sửa site.css dù đã biết root cause bảng tràn mobile — đụng mọi bài đã publish,
+  để user quyết.
+
+MAIN TỰ SỬA SAU KHI AGENT BÁO XONG
+- research/economy-sources-sinks.txt: trích dẫn "Total: 888.000.000" → nguồn dùng dấu
+  phẩy, sửa thành "Total: 888,000,000".
+- Bài 02: 2 quiz explain trích lặp nguyên văn tiếng Anh (Simpson, soft gate) → diễn đạt
+  lại bằng tiếng Việt; "Faucet & Sink" → "Faucet &amp; Sink".
+- research/balance-spreadsheet.txt: 19 dòng apostrophe + 9 cặp ngoặc kép bị chuẩn hoá
+  sai thành nháy thẳng → trả về nháy cong, chừa nguyên quote Riot.
+- Bài 03: nhãn "2 (colorless) + 3 (colored)" bị đảo → sửa thành "2 (mana W có màu) +
+  3 (mana không màu)"; thêm callout note ví dụ đa thể loại mà agent bỏ qua; rút gọn 15 ô
+  bảng cho vừa mobile (không ăn thua — xem VẤP MỚI #1).
+- Bài 01: sửa attribution Machinations (agent research phát hiện, main tự curl xác nhận).
+
+CẦN USER QUYẾT
+- 5 mục từ worklog 2026-09-16__tang-1-game-feel.txt: CLAUDE.md §8 check-site không bắt
+  thẻ lệch/tràn ngang; shoot.ps1 dòng 1 comment phạm vi stale; bài 03 Tầng 1 lệch thứ tự
+  §5; thiếu repo-params.json; độ dài bài vượt mục tiêu.
+- Tầng 2 bài 01 và 02 chưa đạt đa thể loại §1 — chấp nhận hay research bù.
+- .mda-diagram 4 block rớt dòng desktop — có ghi giới hạn 3 block vào CLAUDE.md §8 không.
+- Có thêm component list cho thân bài vào site.css + components.html không (§4 bắt buộc
+  sửa cả hai file cùng lúc). Hiện chưa có, nên ul trần render trần trụi.
+- lessons/tang-0/03-tu-duy-nguoi-choi.html có 2 thẻ strong bên trong ol.steps — nhiều khả
+  năng đang vỡ layout y hệt lỗi đã sửa ở bài 04, chưa kiểm ảnh.
+- 3 bẫy công cụ ghi ở worklog Tầng 2 bài 05 (grep bash crash, heredoc nuốt escape,
+  shoot.ps1 -Only không lọc) — có ghi vào CLAUDE.md §8 không.
+- table.compare cuộn ngang mobile 400px: CẬP NHẬT — đã tìm ra root cause
+  site.css:1121 min-width: 480px; câu hỏi giờ là: có đổi sang render xếp dọc ở breakpoint
+  nhỏ không (đụng site.css + components.html, ảnh hưởng mọi bài đã publish)?
+- CLAUDE.md §3 (dòng 54) và §6 bước 5 (dòng 133) mô tả tools/shoot.ps1 mà KHÔNG nói nó
+  hardcode danh sách bài: CẬP NHẬT — đã vấp lại 2 lần trong session này, đề nghị nâng ưu
+  tiên.
+- MỚI: có ghi vào CLAUDE.md mục 8 ba bẫy công cụ mới không (nháy cong bị chuẩn hoá; 3
+  kiểu false-negative khi so khớp quote; windows-1252 ở secure.runescape.com)?
+- MỚI: bài 03 chỉ có ví dụ card game / board game / MOBA PC — thiếu mobile và
+  console/indie (nguồn verify không có). User đã chấp nhận phương án "ghi callout phân
+  tích minh hoạ", nhưng có muốn bổ sung sau không?
+
+Ngoài ra: vẫn chưa có repo-params.json ở gốc repo (mục treo cũ), nên /newsession phải
+resolve param bằng tay.
+
+TRẠNG THÁI CUỐI SESSION
+Tầng 0: 3 bài · Tầng 1: 5/5 · Tầng 2: 5/5 · Tầng 3: 3/7 (bài 01, 02, 03 xong). Tree sạch,
+3 commit local CHƯA push. Bài kế: tang-3/04-progression-phan-thuong "Progression và phần
+thưởng" — chưa research, chưa viết; lưu ý minutes trong curriculum.js nhiều khả năng lại
+vượt ngưỡng 14 như 2 bài vừa rồi. Quiz/flashcard toàn site vẫn CHƯA bấm tay verify.
