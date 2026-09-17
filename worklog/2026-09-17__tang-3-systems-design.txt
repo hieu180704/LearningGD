@@ -1,0 +1,113 @@
+WORKLOG 2026-09-17 — Tầng 3 bài 01 "Systems design"
+
+SUMMARY
+Viết xong bài Tầng 3 bài 01 "Systems design" + research, commit 5f1042d: check-site 0
+lỗi + đã tự xem ảnh desktop/mobile sáng-tối + 29/29 trích dẫn đối chiếu nguyên văn với
+nguồn gốc; quiz/flashcard CHƯA bấm tay verify.
+
+ĐÃ LÀM
+- lessons/tang-3/01-systems-design.html — bài mới, đủ 12 phần theo CLAUDE.md §5, thân
+  bài 1.756 chữ (đếm loại nguyên văn tiếng Anh).
+- research/systems-design.txt — research đã fact-check, 346 dòng, có mục lục và section
+  "KHÔNG DÙNG ĐƯỢC".
+- assets/js/curriculum.js — minutes 16 → 14, status planned → ready (đổi SAU khi file
+  bài đã tồn tại).
+- tools/shoot.ps1 — thêm bài tầng 3 vào danh sách chụp ảnh.
+- Commit: 5f1042d "Tầng 3: bài 01 Systems design + research" (4 file, +746 dòng). CHƯA
+  push — local đang trước origin/master 4 commit.
+
+NGUỒN ĐÃ DÙNG (đều tự curl verify, HTTP 200)
+MDA paper 2004 · Ernest Adams "The Designer's Notebook: Machinations" Game Developer
+2011 · Ian Schreiber "Game Balance Concepts" Level 7 và Level 10 · David Sirlin
+"Slippery Slope and Perpetual Comeback" (2014-08-11) và "Playing to Win" · Riot
+Phroxzon dev blog 2022 · Jesper Juul (jesperjuul.net + half-real.net/dictionary, ký
+"Copenhagen, November 2005") · Dave Mark "Rubber-Banding as a Design Requirement" 2010 ·
+Wikipedia (rocket jumping, Corrupted Blood, Blue shell, Video game exploit) ·
+Escapist "8 Videogame Glitches that Became Features" · Sakurai phỏng vấn Nintendo Power
+#228 (lấy qua web.archive.org vì sourcegaming.info chặn curl HTTP 406).
+
+VẤP MỚI (kỹ thuật)
+- tools/shoot.ps1 HARDCODE danh sách bài (dòng 69-86) → bài mới KHÔNG được chụp, chạy
+  xong vẫn ra đủ 64 ảnh cũ mà không có bài mới, rất dễ tưởng là đã kiểm tra xong. Phải
+  thêm tay 1 dòng cho mỗi bài mới trước khi chạy.
+- PowerShell 5.1: New-Object System.Drawing.Rectangle(0, $a, $b, $c) bị parse thành
+  Object[] → lỗi "Cannot convert System.Object[] to System.UInt32". Dùng
+  [System.Drawing.Rectangle]::new(...) thay thế. Tương tự Graphics.DrawImage với 3
+  tham số bị nhập nhằng overload → dùng Bitmap.Clone(rect, pixelFormat) để cắt ảnh.
+- Subagent research lại mắc ĐÚNG nhóm lỗi chép sai nguyên văn như session trước, main
+  phải tự curl sửa 4 chỗ: viết hoa đầu câu trích không có trong nguồn ("You could
+  rapidly..." trong khi nguồn là "...you could rapidly..."); đổi nháy kép cong thành
+  nháy đơn ('Skiing,' thay vì "Skiing,"); cắt cụt câu rồi đặt dấu chấm vào trong ngoặc
+  (an 'off-switch.' trong khi nguồn còn vế sau); cắt mất đuôi "(Half-Real, chapter 3)".
+  → Kết luận giữ nguyên: KHÔNG tin subagent báo "đã đối chiếu xong", main phải tự
+  curl + so khớp bằng script node.
+- Bộ strip-tag tự viết cho ra FALSE NEGATIVE khi nguồn có thẻ inline (<em>) giữa câu:
+  "slippery slope , it means" → phải normalize khoảng trắng trước dấu câu, nếu không sẽ
+  tưởng trích dẫn sai trong khi nó đúng.
+
+KHÔNG DÙNG ĐƯỢC (đã thử, session sau khỏi research lại)
+Ghi ngắn, chi tiết đầy đủ đã nằm ở research/systems-design.txt section cuối:
+Salen & Zimmerman "Rules of Play" (không có bản đọc online hợp lệ; chương 28 trên
+dourish.com mở được nhưng SAI chủ đề — là "Games as Social Play") · sách Adams & Dormans
+"Game Mechanics" 2012 (sample PDF Pearson chỉ tới chương 1) · "runaway leader problem"
+(chỉ blog cộng đồng) · Catan · ví dụ mobile · câu gán cho John Romero "We didn't know
+there was rocket-jumping" · Dormans AAAI 2011 (URL sống nhưng không parse được PDF).
+Ghi thêm: Wikipedia "Kingmaker scenario" trích khớp nguyên văn NHƯNG mang banner
+"original research" từ 04/2022 → không dùng làm nguồn định nghĩa.
+
+QUYẾT ĐỊNH CÓ Ý THỨC (không phải bỏ sót)
+Bài KHÔNG có ví dụ mobile — không tìm được case nào qua fact-check. User đã chấp nhận.
+Đa thể loại hiện có: board game, racing, FPS, RTS, fighting, platform-fighter, MMO, MOBA.
+
+MAIN TỰ SỬA SAU KHI AGENT BÁO XONG
+- Bảng ký hiệu Machinations: hàng Converter thiếu mô tả hình dạng trong khi Source/Pool
+  có → main tự thêm "tam giác chỉ sang phải có vạch dọc" (nguồn V11 có mô tả). Hàng
+  Drain để trống là ĐÚNG — nguồn không mô tả hình dạng của nó.
+- 4 chỗ chép sai nguyên văn của subagent research (chi tiết ở mục VẤP MỚI) — main tự
+  curl nguồn gốc rồi sửa trước khi đưa vào VERIFIED-FACTS.
+- Đã tự kiểm lại những gì agent báo thay vì tin: đếm lại số chữ thân bài (main đếm
+  1.756, agent báo 1.889 — khác bộ tách từ, cả hai đều trong khoảng cho phép); tự kiểm
+  cân bằng thẻ; tự đối chiếu 29/29 trích dẫn ngược với HTML nguồn đã tải.
+- Kiểm chứng thêm 2 thứ agent không kiểm: .loop-return và .mda-block.loop CÓ sẵn trong
+  site.css (dòng 1095, 1098) và components.html → không phải component tự chế; 5 class
+  pill type-* dùng trong bài đều tồn tại.
+
+DOC-SYNC (bước 1b/1c của /newsession — floor grep, repo chưa có docImpactCmd)
+Diff commit 5f1042d chạm 4 file; grep doc sống cho ra các ứng viên sau:
+- CLAUDE.md:51 (curriculum.js = 6 tầng x 26 bài) → NO-CHANGE: diff chỉ đổi field của 1
+  entry, không đổi số tầng/bài.
+- CLAUDE.md:181 (checklist "curriculum.js đã cập nhật ... status ready") → NO-CHANGE:
+  session này tuân thủ đúng, doc vẫn đúng.
+- CLAUDE.md:53 (check-site.js) → NO-CHANGE ở diff này; hạn chế "không bắt thẻ lệch"
+  vẫn là mục treo riêng.
+- components.html:388 → NO-CHANGE: chỉ là thẻ <script>.
+- CLAUDE.md:54 và CLAUDE.md:133 (tools/shoot.ps1) → FLAG USER: doc mô tả shoot.ps1 mà
+  KHÔNG nói nó hardcode danh sách bài; session này vấp đúng chỗ đó. Không tự sửa
+  (global rule 7) — đã đưa thành mục treo mới trong CẦN USER QUYẾT.
+
+CẦN USER QUYẾT (KHÔNG tự sửa — global rule 7) — 12 mục treo
+- 5 mục từ worklog 2026-09-16__tang-1-game-feel.txt: CLAUDE.md §8 check-site không bắt
+  thẻ lệch/tràn ngang; shoot.ps1 dòng 1 comment phạm vi stale; bài 03 Tầng 1 lệch thứ tự
+  §5; thiếu repo-params.json; độ dài bài vượt mục tiêu.
+- Tầng 2 bài 01 và 02 chưa đạt đa thể loại §1 — chấp nhận hay research bù.
+- .mda-diagram 4 block rớt dòng desktop — có ghi giới hạn 3 block vào CLAUDE.md §8 không.
+- Có thêm component list cho thân bài vào site.css + components.html không (§4 bắt buộc
+  sửa cả hai file cùng lúc). Hiện chưa có, nên ul trần render trần trụi.
+- lessons/tang-0/03-tu-duy-nguoi-choi.html có 2 thẻ strong bên trong ol.steps — nhiều khả
+  năng đang vỡ layout y hệt lỗi đã sửa ở bài 04, chưa kiểm ảnh.
+- 3 bẫy công cụ ghi ở worklog Tầng 2 bài 05 (grep bash crash, heredoc nuốt escape,
+  shoot.ps1 -Only không lọc) — có ghi vào CLAUDE.md §8 không.
+- table.compare cuộn ngang mobile 400px: dữ kiện MỚI — đã quan sát trên ảnh thật, bảng
+  2 cột CŨNG cuộn ngang, không chỉ bảng 3 cột. Quy ước "tối đa 2 cột nội dung" KHÔNG giải
+  quyết được cuộn ngang; muốn hết cuộn phải đổi cách render bảng ở breakpoint nhỏ.
+- MỚI: CLAUDE.md §3 (dòng 54) và §6 bước 5 (dòng 133) mô tả tools/shoot.ps1 mà KHÔNG nói
+  nó hardcode danh sách bài — có nên bổ sung câu cảnh báo "thêm bài mới vào $pages trước
+  khi chạy" không. (Main không tự sửa CLAUDE.md — global rule 7.)
+
+Ngoài ra: vẫn chưa có repo-params.json ở gốc repo (mục treo cũ), nên /newsession phải
+resolve param bằng tay.
+
+TRẠNG THÁI CUỐI SESSION
+Tầng 0: 3 bài · Tầng 1: 5/5 · Tầng 2: 5/5 · Tầng 3: 1/? (bài 01 xong).
+Bài kế: Tầng 3 bài 02 (economy sources/sinks) — CHƯA research, CHƯA viết.
+Quiz/flashcard toàn site vẫn CHƯA bấm tay verify (treo 8 session).
