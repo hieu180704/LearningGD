@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balance bằng spreadsheet — Xưởng Game Design</title>
+<meta name="description" content="Làm sao biết lá bài hay tướng nào quá mạnh mà không cần chơi thử cả nghìn ván? Học cách dựng cost curve, chạy mô phỏng Monte Carlo, và đọc số liệu balance theo cách Riot Games đang làm.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-3/03-balance-spreadsheet" class="tier-3">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-3">Tầng 3 · Chuyên sâu</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 3 · Bài 03</p>
+            <h1>Balance bằng spreadsheet</h1>
+            <p class="dek">Bạn không cần chơi thử một nghìn ván để biết lá bài nào quá mạnh — quy mọi con số về cùng một "giá" rồi so trên một bảng tính.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 14 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Nâng cao</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="02-economy-sources-sinks.html">Economy: sources và sinks</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Dựng bảng tính so sánh sức mạnh giữa các lựa chọn</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Dùng công thức để mô phỏng thay đổi số liệu</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Đọc kết quả mô phỏng để ra quyết định balance</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Nghìn lá bài, một câu hỏi</h2>
+        <p>Bạn đang thiết kế một bộ bài với hàng chục lá, mỗi lá vài con số: sát thương, máu, chi phí, hiệu ứng đặc biệt. Làm sao biết lá nào quá mạnh so với phần còn lại, mà không phải bày bàn chơi thử cả nghìn ván?</p>
+        <p>Câu trả lời của nghề: quy mọi thứ về một "giá" chung, rồi so sánh trên một bảng tính. Bạn đã học ở bài trước cách một economy chảy qua source và sink. Bài này đi vào công cụ cụ thể để cân bằng những con số bên trong economy đó — cost curve, mô phỏng, và cách đọc dữ liệu thật.</p>
+
+        <h2 id="cost-curve">Cost curve: quy mọi thứ về một giá</h2>
+        <p>Ian Schreiber gọi tên ý tưởng này: <em>"How do you know how much each resource is worth? That is what we call a cost curve."</em> (làm sao biết mỗi tài nguyên đáng giá bao nhiêu? đó là thứ ta gọi là cost curve.)</p>
+        <p>Nguyên tắc nền: <em>"We want the costs and benefits to be equal, numerically."</em> (ta muốn chi phí và lợi ích bằng nhau, về mặt con số.)</p>
+        <p>Mỗi lựa chọn trong game — một lá bài, một vũ khí, một tướng — đều có một tập chi phí (cost) và một tập lợi ích (benefit). Quy cả hai tập đó về cùng một đơn vị đo, bạn mới so sánh được lựa chọn nào đang lệch giá so với phần còn lại.</p>
+
+        <h2 id="dung-bang">Dựng bảng: suy ngược ra công thức</h2>
+        <p>Ian Schreiber minh hoạ bằng bộ bài Magic: The Gathering phiên bản 2011 — số liệu thật ông dùng làm ví dụ. Nhìn vào các lá creature đã phát hành, ông suy ngược ra công thức định giá ẩn bên dưới:</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Vế</th><th>Giá</th></tr></thead>
+                <tbody>
+                    <tr><td>Baseline (chỉ để tồn tại)</td><td>1</td></tr>
+                    <tr><td>Mana không màu</td><td>1</td></tr>
+                    <tr><td>Mana có màu</td><td>2</td></tr>
+                    <tr><td>Tổng mana từ 5 trở lên</td><td>+1</td></tr>
+                    <tr><td>+1 Power / +1 Toughness</td><td>1</td></tr>
+                    <tr><td>Creature Red hoặc Blue</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Định giá lá mới: một creature 4/3 màu Blue có benefit = 1 (Blue) + 4 (Power) + 3 (Toughness) = 8, nên giá kỳ vọng của nó là U4.</p>
+        <p>Soát lá đã có: một creature 1/4 giá W3 có cost = 1 (baseline) + 2 (mana W có màu) + 3 (mana không màu) = 6, nhưng benefit chỉ = 1 (power) + 4 (toughness) = 5 — lá này nằm <strong>1 điểm dưới đường cong</strong> (below the curve), tức hơi yếu so với giá phải trả.</p>
+        <p>Bảng tính không cho bạn câu trả lời cuối cùng — nó chỉ cho bạn thấy chỗ lệch để đi kiểm tra tiếp.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Phân tích minh hoạ</p>
+                <p>Cách làm này không bó hẹp trong card game. Bảng so sánh vũ khí của một game bắn súng (sát thương, tốc độ bắn, độ giật, giá tiền trong trận) hay bảng unit của một game chiến thuật đều dựng theo đúng logic đó. Đây là liên hệ minh hoạ của bài học — ví dụ có nguồn trong bài chỉ gồm card game, board game và MOBA, nên đừng gán con số cụ thể cho các game khác khi chưa tự kiểm.</p>
+            </div>
+        </div>
+
+        <h2 id="mo-phong">Mô phỏng: khi công thức không đủ</h2>
+        <p>Cost curve so sánh các lựa chọn tĩnh. Khi số liệu biến đổi theo thời gian — sát thương, máu, tốc độ đánh — nghề dùng ba công thức nền sau:</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Công thức</th><th>Trả lời gì</th></tr></thead>
+                <tbody>
+                    <tr><td>DPS = sát thương ÷ thời gian</td><td>Mạnh cỡ nào mỗi giây?</td></tr>
+                    <tr><td>TTK = máu ÷ DPS</td><td>Hạ gục mục tiêu mất bao lâu?</td></tr>
+                    <tr><td>EHP = máu ÷ (1 − tỉ lệ giảm sát thương)</td><td>Giáp quy ra bao nhiêu máu thật?</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Khi kết quả mang tính ngẫu nhiên, dùng expected value (giá trị kỳ vọng): nhân mỗi kết quả với xác suất của nó rồi cộng dồn. Ví dụ của Schreiber: tung một xúc xắc 6 mặt, trung bình là 1+2+3+4+5+6 = 21, chia 6 = <strong>3.5</strong>.</p>
+        <p>Nhưng có những bài toán quá nhiều biến để tính tay — nhiều vòng random lồng nhau. Khi đó: <em>"When you don’t know the answer so you just try it a lot, there’s a name for that: Monte Carlo simulation"</em> (khi không biết đáp án nên bạn chỉ thử thật nhiều lần — cách làm đó có tên: mô phỏng Monte Carlo.)</p>
+        <p>Công thức Excel thật của Schreiber: <code>=FLOOR(RAND()*6)+1</code> giả lập một xúc xắc 6 mặt; <code>=IF(RAND()&lt;0.1,5,0)</code> giả lập 10% khả năng được 5, còn lại 0. Copy công thức xuống vài nghìn dòng, lấy <code>AVERAGE()</code> của cả cột, rồi bấm <code>F9</code> vài lần: nếu con số nhảy quá nhiều giữa các lần bấm, tăng gấp đôi số dòng thử.</p>
+
+        <h2 id="doc-so">Đọc số để quyết buff hay nerf</h2>
+        <p>Bảng và mô phỏng cho giả thuyết trước khi ra mắt. Khi game đã live, Riot Games công khai cách họ đọc bốn chỉ số trong hai bài /dev: win rate (tỉ lệ thắng), ban rate (tỉ lệ bị cấm), pick rate (tỉ lệ được chọn), và Presence — tổng của pick rate và ban rate.</p>
+        <p>Riot chia người chơi thành bốn nhóm kỹ năng, mỗi nhóm có ngưỡng riêng để coi một tướng là quá mạnh:</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Nhóm</th><th>Ngưỡng quá mạnh</th></tr></thead>
+                <tbody>
+                    <tr><td>Average</td><td>54.5% WR (hạ tới 52.5% khi ban cao)</td></tr>
+                    <tr><td>Skilled</td><td>54% WR (hạ tới 52%)</td></tr>
+                    <tr><td>Elite</td><td>45% ban rate</td></tr>
+                    <tr><td>Professional</td><td>90% presence / patch</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Quy tắc quyết định: <em>"If a champion is overperforming in ANY of the four groups, they're in need of nerfs, and if they're underperforming in ALL of the four groups, they're ready for buffs."</em> (nếu một tướng vượt ngưỡng ở BẤT KỲ nhóm nào, cần nerf; nếu dưới ngưỡng ở CẢ BỐN nhóm, sẵn sàng để buff.)</p>
+        <p>Ở nhóm kỹ năng cao, Riot tin hành vi chọn/cấm hơn tỉ lệ thắng, vì mẫu người chơi quá nhỏ để tin cậy. Đây là lời cảnh báo cho việc chỉ nhìn một con số trung bình duy nhất.</p>
+
+        <h2 id="playtest">Bảng số không thay được playtest</h2>
+        <p>Cost curve chỉ áp dụng cho phần transitive — các lựa chọn so sánh được, cộng dồn được. Với quan hệ khắc chế vòng tròn kiểu oẳn tù tì, không có đường cong nào cả: <em>"It can’t be a cost curve, because each choice wins sometimes and loses sometimes."</em> (không thể có cost curve, vì mỗi lựa chọn lúc thắng lúc thua.)</p>
+        <p>Bảng tính cho giả thuyết, người chơi mới cho kết luận: <em>"Playtest the game with friends and challenge them to “break” the game by finding exploits and optimal strategies."</em> (chơi thử game cùng bạn bè và thách họ "phá" game bằng cách tìm lỗ hổng và chiến thuật tối ưu.) Vòng lặp thật: dựng bảng → playtest → sửa lại đường cong → lặp lại.</p>
+
+        <h2 id="lens">Soi bảng số của một game bất kỳ</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Đọc cost curve và số liệu balance</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Trong game này, cái gì đóng vai "giá"?</li>
+                <li><span class="q-icon">?</span> Hai lựa chọn cùng giá có thật sự ngang nhau không?</li>
+                <li><span class="q-icon">?</span> Nếu tôi tăng một chỉ số lên 10%, những gì khác phải đổi theo?</li>
+                <li><span class="q-icon">?</span> Con số này tôi tính ra hay đo được từ người chơi thật?</li>
+                <li><span class="q-icon">?</span> Bảng số nói lựa chọn A mạnh hơn — người chơi có thật sự chọn A không?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Tin bảng số hơn người chơi</p>
+                <p>Công thức đúng vẫn có thể bỏ sót một cách chơi tối ưu mà người chơi tự tìm ra. Bảng số là giả thuyết cần kiểm chứng, không phải kết luận cuối cùng.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Ép cost curve lên thứ không có thứ tự</p>
+                <p>Quan hệ khắc chế vòng tròn không quy về một con số duy nhất được — mỗi lựa chọn lúc mạnh lúc yếu tuỳ đối thủ. Cố gán một "giá" cho nó sẽ ra kết luận sai.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Chỉ nhìn một con số trung bình</p>
+                <p>Trung bình toàn server có thể che mất việc một lựa chọn quá mạnh ở nhóm kỹ năng cao, hoặc gần như vô dụng ở nhóm mới chơi.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Dựng bảng cost curve cho một game</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">25 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Tìm lựa chọn lệch khỏi đường cong</h3>
+                <ol class="steps">
+                    <li><span>Chọn một game có nhiều lựa chọn cùng loại — vũ khí, tướng, hoặc lá bài.</span></li>
+                    <li><span>Lập một bảng: mỗi dòng là một lựa chọn, mỗi cột là một thuộc tính (sát thương, tốc độ, tầm, độ hiếm...).</span></li>
+                    <li><span>Quy các thuộc tính về cùng một "giá" chung, rồi tính một cột tổng cho mỗi dòng.</span></li>
+                    <li><span>Tìm lựa chọn nằm lệch khỏi đường cong — cao hơn hoặc thấp hơn hẳn phần còn lại.</span></li>
+                    <li><span>Dự đoán người chơi có thật sự thấy lựa chọn đó mạnh hay yếu như bảng nói không, và nêu cách kiểm chứng dự đoán đó.</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nếu khó chọn cách quy đổi, thử gán 1 điểm "giá" cho mỗi đơn vị sát thương hoặc mỗi giây hồi chiêu — miễn nhất quán giữa các dòng trong cùng một bảng.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Trong ví dụ Magic 2011 của Schreiber, một creature W3 giá 1/4 có cost = 6, benefit = 5. Điều này nghĩa là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Lá này quá mạnh, cần nerf ngay</button>
+                <button data-opt="b"><span class="badge">B</span> Lá này nằm dưới đường cong, hơi yếu so với giá phải trả</button>
+                <button data-opt="c"><span class="badge">C</span> Lá này đúng giá hoàn hảo, không cần chỉnh gì</button>
+            </div>
+            <div class="explain" hidden><p>Cost 6 lớn hơn benefit 5 một điểm, nghĩa là lá này bắt người chơi trả nhiều hơn những gì nó mang lại — nằm dưới đường cong (below the curve), tức hơi yếu. Đáp án A ngược chiều: lệch dưới curve là yếu, không phải mạnh. Đáp án C sai vì đúng giá nghĩa là cost bằng benefit, ở đây hai số lệch nhau.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Khi bài toán ngẫu nhiên quá nhiều biến để tính expected value bằng tay, Schreiber đề xuất cách nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Bỏ qua yếu tố ngẫu nhiên, chỉ tính giá trị trung bình cố định</button>
+                <button data-opt="b"><span class="badge">B</span> Chạy mô phỏng nhiều lần bằng công thức random trong Excel, rồi lấy trung bình — Monte Carlo</button>
+                <button data-opt="c"><span class="badge">C</span> Thay expected value bằng công thức DPS/TTK/EHP</button>
+            </div>
+            <div class="explain" hidden><p>Khi không tính tay được, cách làm là thử thật nhiều lần bằng công thức ngẫu nhiên rồi lấy trung bình — đây chính là mô phỏng Monte Carlo. Đáp án A bỏ mất chính yếu tố cần mô phỏng. Đáp án C nhầm mục đích: DPS/TTK/EHP trả lời câu hỏi về tốc độ và sức bền, không thay được việc mô phỏng ngẫu nhiên.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Riot Games định nghĩa Presence của một tướng như thế nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Win rate trừ đi ban rate</button>
+                <button data-opt="b"><span class="badge">B</span> Pick rate cộng với ban rate</button>
+                <button data-opt="c"><span class="badge">C</span> Win rate nhân với pick rate</button>
+            </div>
+            <div class="explain" hidden><p>Presence gộp cả hai chiều người chơi tương tác với một tướng: chọn (pick) hoặc cấm (ban), nên là tổng của hai tỉ lệ đó. Đáp án A và C trộn win rate vào công thức, trong khi Presence không tính đến việc tướng đó thắng hay thua.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Vì sao quan hệ khắc chế vòng tròn (kiểu oẳn tù tì) không thể gán cost curve?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Vì mỗi lựa chọn thắng lúc này thua lúc khác, không có thứ tự mạnh yếu cố định để quy về một giá</button>
+                <button data-opt="b"><span class="badge">B</span> Vì cost curve chỉ dùng được cho game không có yếu tố ngẫu nhiên</button>
+                <button data-opt="c"><span class="badge">C</span> Vì Riot Games không công bố dữ liệu cho loại quan hệ này</button>
+            </div>
+            <div class="explain" hidden><p>Cost curve cần một thứ tự mạnh-yếu ổn định để so sánh. Quan hệ khắc chế vòng tròn không có thứ tự đó — thắng hay thua phụ thuộc đối thủ đang cầm gì. Đáp án B sai vì cost curve vẫn dùng được với game có ngẫu nhiên, vấn đề nằm ở tính transitive chứ không phải ngẫu nhiên. Đáp án C không liên quan đến lý do toán học ở đây.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Cost curve</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Quy chi phí và lợi ích của mỗi lựa chọn về cùng một con số, để chúng bằng nhau về mặt toán học. Lựa chọn lệch khỏi đường cong là chỗ cần kiểm tra lại (Ian Schreiber).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Expected value &amp; Monte Carlo</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Expected value: nhân mỗi kết quả với xác suất rồi cộng dồn. Khi bài toán quá rối để tính tay, chạy mô phỏng random nhiều lần rồi lấy trung bình — gọi là Monte Carlo simulation.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Presence</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Presence = pick rate + ban rate. Riot dùng chỉ số này cùng win rate và ban rate, với ngưỡng riêng cho từng nhóm kỹ năng, để quyết buff hay nerf một tướng.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Transitive vs intransitive</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Cost curve chỉ áp dụng cho phần transitive (so sánh được). Quan hệ khắc chế vòng tròn không có đường cong nào — phải kiểm bằng playtest, không phải bảng tính.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Cost curve quy chi phí và lợi ích về cùng một con số; lựa chọn lệch khỏi đường cong là chỗ cần soi lại, không phải kết luận cuối cùng (Ian Schreiber).</li>
+                <li><span class="n">2</span> Khi ngẫu nhiên quá rối để tính tay, chạy mô phỏng Monte Carlo bằng công thức random trong Excel rồi lấy trung bình của hàng nghìn dòng.</li>
+                <li><span class="n">3</span> Riot theo dõi win rate, ban rate, Presence theo bốn nhóm kỹ năng khác nhau; nhưng cost curve chỉ đúng với phần transitive — quan hệ khắc chế vòng tròn phải kiểm bằng playtest.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gamebalanceconcepts.wordpress.com/2010/07/21/level-3-transitive-mechanics-and-cost-curves/" target="_blank" rel="noopener">Level 3: Transitive Mechanics and Cost Curves</a>
+                <span class="reading-meta">Ian Schreiber · Game Balance Concepts, 2010</span>
+                <p class="reading-why">Nguồn gốc khái niệm cost curve và ví dụ Magic 2011 dùng xuyên bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gamebalanceconcepts.wordpress.com/2010/07/14/level-2-numeric-relationships/" target="_blank" rel="noopener">Level 2: Numeric Relationships</a>
+                <span class="reading-meta">Ian Schreiber · Game Balance Concepts, 2010</span>
+                <p class="reading-why">Nền tảng về quan hệ số học giữa chi phí và lợi ích trước khi vào cost curve.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gamebalanceconcepts.wordpress.com/2010/07/28/level-4-probability-and-randomness/" target="_blank" rel="noopener">Level 4: Probability and Randomness</a>
+                <span class="reading-meta">Ian Schreiber · Game Balance Concepts, 2010</span>
+                <p class="reading-why">Nguồn expected value và trích dẫn Monte Carlo simulation dùng trong bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gamebalanceconcepts.wordpress.com/2010/09/08/level-10-final-boss/" target="_blank" rel="noopener">Level 10: Final Boss</a>
+                <span class="reading-meta">Ian Schreiber · Game Balance Concepts, 2010</span>
+                <p class="reading-why">Bài hướng dẫn dùng Excel cho balance, có bài tập dựng cost curve.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.leagueoflegends.com/en-us/news/dev/dev-champion-balance-framework/" target="_blank" rel="noopener">/dev: Champion Balance Framework</a>
+                <span class="reading-meta">RiotRepertoir (Riot Games), 2019</span>
+                <p class="reading-why">Nguồn khung bốn nhóm kỹ năng và ngưỡng win rate/ban rate dùng trong bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.leagueoflegends.com/en-us/news/dev/dev-balance-framework-update/" target="_blank" rel="noopener">/dev: Balance Framework Update</a>
+                <span class="reading-meta">Summoner's Rift Team (Riot Games), 2020</span>
+                <p class="reading-why">Cập nhật khung balance, nguồn quy tắc quyết định buff/nerf trích trong bài.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

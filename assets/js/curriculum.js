@@ -242,9 +242,9 @@ window.CURRICULUM = [
                     "Dùng công thức để mô phỏng thay đổi số liệu",
                     "Đọc kết quả mô phỏng để ra quyết định balance"
                 ],
-                minutes: 17,
+                minutes: 14,
                 level: "Nâng cao",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-3/04-progression-phan-thuong",

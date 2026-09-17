@@ -1,0 +1,533 @@
+RESEARCH — Tầng 3 bài 03: Balance bằng spreadsheet
+Ngày: 2026-09-17 | Trạng thái: ĐÃ VERIFY. File này GỘP 3 file research thô của cùng một bài
+(r3-A-cost-curve.txt, r3-B-cong-thuc.txt, r3-C-ra-quyet-dinh.txt). Main đã tự curl lại 8 trang
+nguồn Schreiber + 2 trang /dev Riot, so khớp 45/45 quote từng ký tự. Hai quote bị 3 file thô
+chép sai (mục 4 và mục 5 dưới đây) đã được SỬA theo bản gốc — xem chi tiết ở mục 9.
+
+MỤC LỤC
+1. Phạm vi bài
+2. Nền tảng: cost curve là gì
+3. Công thức mô phỏng: expected value, Monte Carlo, progression curve
+4. Case study: đọc bảng ra quyết định — Magic cost curve và Riot Champion Balance Framework
+5. Nguyên tắc đọc bảng — dominant/dominated, above/below curve, spreadsheet vs playtest
+6. Phân loại đường cong: linear / exponential / triangular
+7. Ví dụ game thật — theo thể loại
+8. Ghi chú: nội dung KHÔNG dùng trong bài
+9. Ghi chú nguồn cần thận trọng
+10. KHÔNG DÙNG ĐƯỢC — đã thử, session sau khỏi làm lại
+
+---
+
+## 1. Phạm vi bài
+
+Bài này dạy: cách dựng cost curve/bảng so sánh trong spreadsheet (quy mọi cost/benefit về
+cùng một loại tài nguyên), công thức mô phỏng dùng để dự đoán trước kết quả (expected value,
+Monte Carlo, progression curve), và cách đọc bảng số ra quyết định buff/nerf — đối chiếu với
+một framework cân bằng thật đang được một studio lớn sử dụng (Riot Games).
+
+RANH GIỚI: bài KHÔNG dạy lại sơ đồ Machinations (thuộc tang-3/01) hay faucet/drain/sink
+(thuộc tang-3/02) — chỉ dùng khái niệm cost/benefit và curve ở mức bảng số/spreadsheet.
+
+Nguồn nền tảng chính của cả 3 trục: loạt blog "Game Balance Concepts" của Ian Schreiber (2010,
+8 bài, xem danh sách URL đầy đủ ở mục 9-C) và 2 bài /dev chính thức của Riot Games (xem mục 9-D).
+
+---
+
+## 2. Nền tảng: cost curve là gì
+
+Nguồn: Ian Schreiber, "Level 3: Transitive Mechanics and Cost Curves", Game Balance Concepts,
+21/07/2010.
+URL: https://gamebalanceconcepts.wordpress.com/2010/07/21/level-3-transitive-mechanics-and-cost-curves/
+[HTTP 200, đã curl đối chiếu]
+
+NGUYÊN VĂN:
+"in a transitive mechanic, everything has a set of costs and a set of benefits, and all
+in-game effects can be put in terms of one or the other."
+Gợi ý dịch: "trong một cơ chế transitive, mọi thứ đều có một tập hợp chi phí (costs) và một
+tập hợp lợi ích (benefits), và mọi hiệu ứng trong game đều có thể quy về một trong hai loại đó."
+
+"We want the costs and benefits to be equal, numerically."
+Gợi ý dịch: "ta muốn chi phí và lợi ích bằng nhau, về mặt con số."
+
+"The answer is to put everything in terms of the resource cost. For example, if we know that
+each point of extra Attack provides a linear benefit and that +1 Attack is worth 25 Gold, then
+it’s not hard to say that a sword that gives +10 Attack should cost 250 Gold. For more
+complicated objects, add up all the costs (after putting them in terms of Gold), add up all the
+benefits (again, converting them to their equivalent in Gold), and compare. How do you know how
+much each resource is worth? That is what we call a cost curve."
+Gợi ý dịch: "câu trả lời là quy mọi thứ về giá trị của resource cost. Ví dụ, nếu ta biết mỗi
+điểm Attack thêm mang lại lợi ích tuyến tính và +1 Attack đáng giá 25 Gold, thì một thanh kiếm
+cho +10 Attack nên có giá 250 Gold. Với vật phức tạp hơn, cộng dồn mọi cost (quy về Gold), cộng
+dồn mọi benefit (cũng quy về Gold), rồi so sánh. Làm sao biết mỗi đơn vị resource đáng giá bao
+nhiêu? Đó chính là cái ta gọi là cost curve."
+
+Quy trình dựng cost curve theo Schreiber (mục "Creating a Cost Curve", 2 bước):
+1. Xác định QUAN HỆ giữa cost tăng và benefit tăng (tuyến tính / tăng dần / giảm dần / tuỳ
+   biến — chi tiết ở mục 6).
+2. Liệt kê toàn bộ cost và benefit cơ bản trong game, bắt đầu từ vật chỉ làm đúng MỘT việc,
+   suy ra giá của việc đó; rồi cộng dồn dần lên các vật phức tạp hơn (đại số: biết tất cả trừ
+   1 ẩn số → giải ra ẩn số đó).
+
+Ghi chú: Schreiber trình bày cost curve bằng LẬP LUẬN + liệt kê, không vẽ ra một bảng Excel cụ
+thể với tên cột — cách "mỗi lựa chọn = 1 dòng, mỗi thuộc tính = 1 cột" là diễn giải hiện đại
+(xem mục 9-E, quyết định của user và mục 7 phần phân tích minh hoạ).
+
+---
+
+## 3. Công thức mô phỏng: expected value, Monte Carlo, progression curve
+
+Nguồn chính cho mục này: Ian Schreiber, Level 2 (14/07/2010), Level 3 (21/07/2010), Level 4
+(28/07/2010), Level 10 (08/09/2010) — URL đầy đủ ở mục 9-C, tất cả [HTTP 200].
+Charset xác nhận qua header `Content-Type: text/html; charset=UTF-8` — không phải
+windows-1252, dấu nháy cong (') trong các quote dưới đây đã decode đúng từ entity `&#8217;`.
+
+### 3.1. Expected value của một roll ngẫu nhiên (Level 4)
+
+NGUYÊN VĂN:
+"So, if you want to know the average value of a roll (also known as the “expected value” by
+probability geeks), just add up all the sides and divide by the number of sides. The average
+roll for a standard d6 is 1+2+3+4+5+6 = 21, divided by the number of sides (6), which means the
+average is 21/6 = 3.5. This is a special case, because we assume all results are equally
+likely."
+
+"This technique of computing expected value by multiplying each result by its individual
+probability also works if the results are equally probable but weighted differently, like if
+you’re rolling dice but you win more on some rolls than others."
+
+Ví dụ minh hoạ trong nguồn (thẻ "IMF Lottery", game Chron X mà Schreiber từng làm):
+"Normally, we’d approach this by finding the probability of each outcome, and multiplying by
+the outcome. So there is a 10% chance you get 0 (0.1*0 = 0). There’s a 9% chance you get 5
+resources (that’s 9%*5 = 0.45 resources). There’s an 8.1% chance you get 10 resources (8.1%*10 =
+0.81 resources total, expected value). And so on. And then we add all of these up."
+
+Công thức chung (viết lại từ mô tả văn xuôi trên, KHÔNG phải trích nguyên văn ký hiệu hoá):
+expected value = tổng của (xác suất mỗi kết quả × giá trị kết quả đó), cộng dồn qua mọi kết quả
+có thể.
+
+Công thức trung bình của xúc xắc n mặt (Level 3, bài tập cuối bài):
+"hint: if you roll an n-sided die, the average value of that die is (n+1)/2, and yes that means
+the “average” may be a fraction; if you’re rolling multiple dice, compute the average for each
+individual die and then add them all together"
+
+### 3.2. Monte Carlo trong spreadsheet (Level 4 — mạnh nhất trong toàn bộ research)
+
+NGUYÊN VĂN:
+"When you don’t know the answer so you just try it a lot, there’s a name for that: Monte Carlo
+simulation, and it’s a great thing to fall back on when you’re trying to do probability
+calculations and you find yourself in over your head. The great thing about this is, we don’t
+have to know the math behind why it works, and yet we know the answer will be “pretty good”
+because like we learned before, the more times you do something, the more it tends towards the
+average."
+
+Công thức Excel chép nguyên văn từ nguồn (mô phỏng thẻ "IMF Lottery" — 10%/lượt rời bàn, cộng
+dồn tài nguyên):
+- Mô phỏng roll xúc xắc 6 mặt: `=FLOOR(RAND()*6)+1`
+- Kiểm tra 10% khả năng xảy ra một sự kiện: `=IF(RAND()<0.1,5,0)`
+- Ô đại diện lượt đầu tiên (A1): `=IF(RAND()<0.1,0,-1)`
+- Ô lượt kế tiếp (tham chiếu A1): `=IF(A1>-1, A1, IF(RAND()<0.1,5,-1))`
+
+Quy trình mô phỏng lặp trong spreadsheet:
+"Take this row of cells, which represents a single play of the card, and copy and paste for a
+few hundred (or a few thousand) rows. We might not be able to do an infinite test for Excel
+(there are only so many cells that fit in a spreadsheet), but we can at least cover the majority
+of cases. Then, have a single cell where you take the average of the results of all the turns
+(Excel helpfully provides the AVERAGE() function for this)."
+
+Cách kiểm tra độ ổn định kết quả (reroll bằng F9):
+"In Windows, at least, you can hit F9 to reroll all your random numbers. As before, do that a
+few times and see if the values you get are similar to each other. If there’s too much variety,
+double the number of trials and try again."
+
+Nếu biết lập trình (không chỉ Excel):
+"write a program to simulate this card. You should have a while loop that initializes a
+variable to zero, rolls a random number, and 10% of the time it exits the loop. Otherwise it
+adds 5 to the variable, and iterates. When it finally breaks out of the loop, have it increment
+the total number of trials by 1, and the total number of resources by whatever the variable
+ended up as. Then, re-initialize the variable and try again. Run this a few thousand times. At
+the end, divide total number of resources by total number of trials, and that’s your Monte
+Carlo expected value."
+
+Dùng để trả lời: khi công thức xác suất lý thuyết quá phức tạp/đệ quy vô hạn (nguồn nói rõ
+trường hợp IMF Lottery "could conceivably stay in play... forever, for an infinite number of
+turns"), designer chạy lặp hàng trăm/nghìn lần trong spreadsheet để lấy giá trị trung bình xấp
+xỉ, thay vì giải công thức đóng.
+
+Liên hệ thêm — Level 8 nối "mean" với Monte Carlo:
+"You can think of the mean as a Monte Carlo calculation of expected value, except you’re using
+real-world playtest data rather than a computer simulation."
+
+### 3.3. Progression curve: linear / exponential / triangular (Level 2 — nguồn tốt nhất)
+
+Xem chi tiết công thức và ví dụ Baldur's Gate: Dark Alliance ở mục 6.
+
+### 3.4. Công thức phổ biến của nghề — DPS / TTK / EHP (KHÔNG cite được — quyết định user)
+
+DPS (damage per second) = tổng damage / thời gian thực hiện. TTK (time to kill) = HP mục tiêu /
+DPS. EHP (effective HP) = HP thực tế / (1 − % giảm sát thương).
+
+⚠️ Từ "dps" chỉ xuất hiện ĐÚNG 1 LẦN trong toàn bộ 8 bài Schreiber đã đọc (Level 3, bài tập cuối
+bài, dạng câu hỏi: "How much dps would you add or remove from each weapon to balance it?") —
+không có định nghĩa công thức đi kèm. TTK và EHP không xuất hiện lần nào. Ba công thức trên
+KHÔNG có nguồn để cite.
+
+QUYẾT ĐỊNH CỦA USER (xem mục 9-E): vẫn dạy 3 công thức này như kiến thức chung của nghề, KHÔNG
+đặt trong ngoặc kép, KHÔNG gán cho tác giả/nguồn nào.
+
+---
+
+## 4. Case study: đọc bảng ra quyết định — Magic cost curve và Riot Champion Balance Framework
+
+### Case A — Magic: the Gathering, bộ Magic 2011 (Level 3, phần "An Example: Cost Curves in Action")
+
+Có số liệu thật, cụ thể tới từng lá bài. Schreiber liệt kê 11 lá creature "trơn" (không kỹ năng
+đặc biệt) của bộ Magic 2011:
+"W, 2/1 (that is, a cost of one White mana, power of 2, toughness of 1)
+W4, 3/5
+W1, 2/2
+U4, 2/5 [...]"
+
+Từ đó suy ra công thức cost curve nháp:
+"Baseline cost = 1 (start with this, just for existing)
+Each colorless mana = 1
+Each colored mana = 2
+Total mana cost of 5 or more = +1 (or +2 for Green creatures)"
+"Our benefits are:
++1 Power or +1 Toughness = 1
+Being a Red or Blue creature = 1 (apparently this is some kind of metagame privilege)."
+
+Áp công thức để tự đề xuất giá cho lá bài mới:
+"How much would a 4/3 Blue creature cost? The benefit is 1 (Blue) + 4 (Power) + 3 (Toughness) =
+8. [...] So we would expect the cost to be U4."
+
+Soi lá có sẵn để tìm lá lệch khỏi curve:
+"What if I proposed this card: W3 for a 1/4 creature. Is that balanced? [...] the cost is 1
+(baseline) + 2 + 3 (colorless) = 6. The benefit is 1 (power) + 4 (toughness) = 5. So this
+creature is exactly 1 below the curve [...]"
+
+Với kỹ năng đặc biệt (Flying, Trample, Deathtouch, Defender...), Schreiber so hai lá gần giống
+nhau, suy ra "phần chênh" chính là giá trị của kỹ năng đó:
+"GG3, 3/5, Deathtouch [...] Benefit is 8 (power and toughness) + Deathtouch, which implies
+Deathtouch has a benefit of 3."
+
+→ Đây là ví dụ CÓ SỐ LIỆU THẬT, đủ đa dạng để làm case mở đầu cho phần "cách dựng bảng" — nên
+dùng lại nguyên bảng 11 lá bài "trơn" (dịch cột: Mana cost / Power / Toughness).
+
+### Case B — Riot Games: Champion Balance Framework (League of Legends)
+
+Nguồn: RiotRepertoir (Riot Games), "/dev: Champion Balance Framework", 30/05/2019 —
+https://www.leagueoflegends.com/en-us/news/dev/dev-champion-balance-framework/   [HTTP 200]
+Và: Summoner's Rift Team (Riot Games), "/dev: Balance Framework Update", 30/06/2020 —
+https://www.leagueoflegends.com/en-us/news/dev/dev-balance-framework-update/   [HTTP 200]
+
+Đây là framework THẬT một studio lớn dùng để buff/nerf champion — 4 chỉ số:
+
+- **Win rate (WR)**: "Win rate tells us most of what we need to know about champions' power
+  level here" (nói về nhóm Average Play).
+- **Ban rate**: "The more a champion is banned beyond the global average ban rate (ABR,
+  currently ~7%), the more we use their ban rate as an expression of the champion's power level
+  in the tier, and the tighter a band we put on their [win rate]."
+- **Pick rate**: "we notably do not consider pick rate a strong indicator of power at any other
+  solo queue tier" (ngoại trừ tier Elite); ở Elite: "we draw conclusions about power level based
+  on pick rates in addition to ban rates".
+- **Presence** = Pick rate + Ban rate: "We introduce the concept of Presence in this tier, where
+  Presence is the combined Pick and Ban rate of the champion." Dùng làm ngưỡng chính cho tier
+  Elite và Professional.
+
+Ngưỡng số cụ thể (nguyên văn, [Champion Balance Framework]):
+- Average Play — Top End: "[54.5%WR if <ABR] to [52.5%WR at 5x ABR]"; Bottom End: "49%WR".
+- Skilled Play — Top End: "[54%WR if <ABR] to [52%WR at 5x ABR]"; Bottom End: "49%WR".
+- Elite Play — Top End: "45% Ban Rate"; Bottom End: "5% Presence".
+- Professional Play — Top End: "90% Presence on the current patch OR 80% presence in
+  consecutive patches."; Bottom End: "5% Presence".
+
+Quy tắc gộp 4 nhóm ([Balance Framework Update]):
+[ĐÃ SỬA — nguồn viết HOA đầu câu, bản 3 file thô chép sai thành chữ thường "if"]
+"If a champion is overperforming in ANY of the four groups, they're in need of nerfs, and if
+they're underperforming in ALL of the four groups, they're ready for buffs."
+
+Safeguard chống buff-lệch ([Balance Framework Update]): khi "over half of our champion balance
+changes in subsequent patches are buffs — we will also explore nerfing the following: The top
+presence champion in each position in Professional play [và] The top performing champion
+(highest win rate and ban rate combination) in each position in Skilled play."
+
+---
+
+## 5. Nguyên tắc đọc bảng — dominant/dominated, above/below curve, spreadsheet vs playtest
+
+### 5.1. Above the curve / below the curve — dấu hiệu lệch cân bằng
+
+Schreiber (Level 3, xem mục 4 Case A): khi "costs are less than the benefits" đối tượng nằm
+"above the curve" (quá mạnh so với giá); ngược lại nằm "below the curve" (quá yếu so với giá).
+Đây là cách đọc bảng số để phát hiện lệch TRƯỚC KHI playtest.
+
+### 5.2. Vì sao cost curve KHÔNG áp dụng được cho cơ chế intransitive
+
+Nguồn: Ian Schreiber, "Level 9: Intransitive Mechanics", 01/09/2010 —
+https://gamebalanceconcepts.wordpress.com/2010/09/01/level-9-intransitive-mechanics/ [HTTP 200]
+
+NGUYÊN VĂN:
+"As a reminder, “intransitive” is just a geeky way of saying “games like Rock-Paper-Scissors” –
+that is, games where there is no single dominant strategy, because everything can be beaten by
+something else."
+
+"What does a “solution” look like here? It can’t be a cost curve, because each choice wins
+sometimes and loses sometimes."
+
+Ví dụ Magic (trong Level 9, không phải Level 3):
+"Sometimes it’s purely mathematical; in Magic: the Gathering, a 1/3 creature will lose in combat
+to a 3/2 creature, which loses to a 2/1 First Strike creature, which in turn loses to the
+original 1/3 creature."
+→ Bảng so sánh kiểu cost curve CHỈ áp dụng cho phần transitive của game, không áp dụng cho phần
+intransitive (khắc-chế vòng tròn, không quy về một giá trị chung được).
+
+### 5.3. Spreadsheet là điểm khởi đầu, không phải kết luận cuối
+
+Nguồn: Ian Schreiber, "Level 10: Final Boss", 08/09/2010 —
+https://gamebalanceconcepts.wordpress.com/2010/09/08/level-10-final-boss/   [HTTP 200]
+
+Schreiber mô tả quy trình làm bộ thẻ mới: "put that into Excel, and use it to create and balance
+a new set." Nhưng bước tiếp theo bắt buộc:
+[ĐÃ SỬA — nguồn dùng ngoặc kép cong quanh "break", bản 3 file thô chép nhầm nháy đơn thẳng 'break']
+"Playtest the game with friends and challenge them to “break” the game by finding exploits and
+optimal strategies. Adjust your cost curve (and cards) accordingly, and repeat the process."
+
+→ Bảng số cho giả thuyết ban đầu, playtest tìm ra strategy tối ưu mà công thức không lường
+trước, rồi quay lại sửa bảng số — một vòng lặp, không phải một lần.
+
+### 5.4. Vì sao playtest bắt buộc dù đã có spreadsheet đúng
+
+Người chơi tìm ra cách chơi tối ưu (optimal strategies) mà designer không tính hết trong công
+thức — đây chính là lý do Riot vẫn phải nhìn dữ liệu người chơi thật (win rate/ban rate) thay vì
+chỉ tin tính toán sức mạnh lý thuyết của một chỉ số/skill khi thiết kế.
+
+### 5.5. Riot: khi nào tin số liệu, khi nào tin hành vi người chơi
+
+Ở tier Elite, Riot thừa nhận không đủ dữ liệu thắng-thua đáng tin:
+"we rarely have sufficient win rate data to determine if something is too strong here (sample
+size is small due to the extremely limited size of the player audience). Even if we did, these
+players have mastered the game to such an extent that their champion select behaviors can be
+trusted as accurate representations of power level."
+Ở tier Professional cũng vậy: "determine power level based on this group's champion select
+behaviors more so than the results of the games in which they are picked."
+→ Dữ liệu thắng/thua (số) đáng tin ở nhóm đông người chơi bình thường; ở nhóm nhỏ/kỹ năng cao,
+hành vi chọn-cấm (tín hiệu định tính) đáng tin hơn số thắng/thua thô.
+
+### 5.6. Giới hạn của mô hình spreadsheet
+
+Cảnh báo công thức vỡ ở biên (Level 2): "This is actually a pretty common thing in game
+balance, that if you have a math formula the game balance will break at the mathematical
+extremes. The design solution is to set hard limits on the formula, so that you don’t ever
+reach those extremes."
+
+Cost curve cho game MỚI khó hơn reverse-engineer game đã có (Level 3), vì chưa có playtest thật:
+"Since the game doesn’t exist yet, you haven’t played it in its final form yet, which means you
+don’t have as much intuition for what the curve is or what kinds of effects are really powerful
+or really weak. This means you have to plan on doing a lot of heavy playtesting for balance
+purposes, after the core mechanics are fairly solidified..."
+
+Level 8 phân biệt "mean lý thuyết" (Monte Carlo bằng máy tính) và "mean từ dữ liệu chơi thật"
+(xem quote ở mục 3.2) — đây là chỗ gần nhất nguồn chạm tới ranh giới "spreadsheet vs chơi thật".
+
+⚠️ KHÔNG có nguồn nào trong đợt research này bàn TẬP TRUNG, tường minh về "cân bằng trên giấy
+khác cân bằng khi chơi thật" — ba ý ở mục này (công thức vỡ ở biên / game mới thiếu playtest /
+mean lý thuyết vs mean thật) là BA MẢNH RỜI được MAIN TỰ NỐI Ý lại, không phải một đoạn liền
+mạch từ một nguồn duy nhất. Xem quyết định user ở mục 9-E.
+
+---
+
+## 6. Phân loại đường cong: linear / exponential / triangular
+
+### 6.1. Ba dạng quan hệ cost-benefit (Level 3)
+
+NGUYÊN VĂN:
+"The two might scale linearly: +1 cost means +1 benefit. This relationship is pretty rare."
+"Costs might be on an increasing curve, where each additional benefit costs more than the last,
+so incremental gains get more and more expensive as you get more powerful."
+"Some games have costs on a decreasing curve instead."
+
+Ví dụ decreasing-curve (board game cụ thể):
+"wait too long to buy your favorite building in Puerto Rico and someone else might buy it
+first; or, wait too long to build new settlements in Settlers of Catan and you may find that
+other people have built in the best locations."
+
+Ví dụ "custom curve" (đường cong gãy khúc) — ví dụ Magic mana-threshold, số liệu thật:
+"If a third of your deck is cards that generate Mana, you’ll get (on average) one
+Mana-generating card every three card draws. [...] this means a player would typically gain one
+Mana per turn for the first four turns, and then one mana every three turns thereafter. Thus, we
+might expect to see a shift in the cost curve at or around five mana [...]"
+
+### 6.2. Ba dạng quan hệ số học cơ bản (Level 2 — nguồn tốt nhất cho mục này)
+
+- Linear: "A more general case of an identity relationship is the linear relationship, where the
+  conversion rate between two values is a constant."
+- Exponential: "The simplest way to do this is an exponential relationship: when you add to one
+  value, multiply the other one. An example is doubling: for each +1 you give to one value,
+  double the other one. This gives you a relationship where buying 1, 2, 3, 4 or 5 of something
+  costs 1, 2, 4, 8 or 16, respectively." Cảnh báo: "Because the numbers get prohibitively large
+  very quickly, you have to be careful when using exponential relationships."
+- Triangular (cấp số cộng dồn, KHÔNG phải exponential): "1, 3, 6, 10, 15, 21, 28, …" — "An
+  interesting thing to notice about triangular numbers is when you look at the difference
+  between each successive pair of numbers... So the successive differences are linear: they
+  follow the pattern 1, 2, 3, 4…"
+
+Vì sao chọn dạng này thay vì dạng kia: "Sometimes, a linear relationship doesn’t work for your
+game. You may have a relationship where there are either increasing or diminishing returns...
+This would be increasing returns: each extra action is more valuable than the last. You would
+therefore want the cost of each extra action to increase, as you buy more of them."
+
+Ví dụ cụ thể — EXP-to-Level triangular (Baldur's Gate: Dark Alliance, PS2, action-RPG):
+"In this action-RPG, you get XP from defeating enemies, which in turn causes you to level up.
+The XP-to-Level relationship is triangular: going from Level 1 to Level 2 requires 1000 XP,
+Level 2 to Level 3 costs 2000 XP, rising to Level 4 costs 3000 XP, and so on."
+"Each time you level up, you get a number of upgrade points to spend on special abilities. These
+also follow a triangular progression: at Level 2 you get 1 upgrade point; at Level 3 you get 2
+points; the next level gives you 3 points, then the next gives you 4 points, and so on."
+"However, these relationships chain together, since XP gives you Levels and Levels give you
+Upgrade Points. Since XP is the actual resource the player is earning, it is the XP-to-Points
+ratio we care about, and the two triangular relationships actually cancel with each other to
+form a linear relationship of 1000 XP to 1 Upgrade Point."
+→ Insight quan trọng: hai đường cong triangular chồng lên nhau (XP→Level và Level→Points) có
+thể triệt tiêu lẫn nhau thành một quan hệ linear ở tầng resource gốc (XP→Points) — đáng đưa vào
+bài như ví dụ phân tích chuỗi hệ thống, không chỉ một công thức đơn lẻ.
+
+---
+
+## 7. Ví dụ game thật — theo thể loại
+
+### Board game / Card game (TCG)
+- Magic: the Gathering, bộ Magic 2011 (TCG) — nguồn: Schreiber Level 3, xem Case A mục 4. Bảng
+  cost curve 11 lá creature "trơn", ví dụ đề xuất giá lá mới, ví dụ tìm lá lệch khỏi curve.
+- Puerto Rico, Settlers of Catan (board game) — nguồn: Schreiber Level 3, mục 6.1 — ví dụ
+  "decreasing cost curve" (chờ lâu mất cơ hội tốt nhất).
+
+### Console
+- Baldur's Gate: Dark Alliance (PS2, action-RPG) — nguồn: Schreiber Level 2, mục 6.2 — ví dụ
+  progression curve triangular (XP-to-Level, Level-to-Points) và insight hai curve triangular
+  triệt tiêu thành linear.
+
+### PC
+- League of Legends (Riot Games, MOBA) — nguồn: 2 bài /dev, xem Case B mục 4 — framework thật
+  4 chỉ số (win rate/ban rate/pick rate/presence) dùng để buff/nerf.
+
+### PHÂN TÍCH MINH HOẠ (tự phân tích, không nguồn — phải gắn callout note/example khi viết bài)
+- Bảng so sánh cụ thể (mỗi dòng = 1 lựa chọn, mỗi cột = 1 thuộc tính, cột cuối = tổng hợp) là
+  cách DIỄN GIẢI HIỆN ĐẠI của phương pháp Schreiber mô tả bằng lời — bản thân Schreiber không vẽ
+  bảng Excel trong bài, ông liệt kê danh sách và tính tay.
+- Ví dụ RTS/strategy hiện đại (so sánh unit trong StarCraft/Age of Empires bằng bảng
+  DPS-cost-HP) và ví dụ RPG (so sánh vũ khí bằng bảng damage/giá/độ hiếm) — phải gắn callout
+  "phân tích minh hoạ", KHÔNG gán số liệu cụ thể của các game này vì chưa fact-check số liệu
+  in-game hiện tại (số liệu game live-service thường đổi theo patch).
+- Hearthstone: mana-curve là biến thể trực tiếp của "mana cost" trong Magic — có thể nhắc tên
+  như analogy nhưng KHÔNG có số liệu thẻ bài cụ thể đã verify trong session này.
+
+⚠️ GHI CHÚ VỀ ĐỘ ĐA DẠNG THỂ LOẠI (xem quyết định user ở mục 9-E): nguồn đã verify cho mục này
+chỉ phủ card game (Magic), board game (Puerto Rico, Catan), console (Baldur's Gate), PC MOBA
+(League of Legends) — KHÔNG có ví dụ mobile/indie đã verify. User đã chốt: chấp nhận, ví dụ
+mobile/console (nếu cần) để ở mục phân tích minh hoạ có đánh dấu rõ, KHÔNG chạy thêm vòng
+research.
+
+---
+
+## 8. Ghi chú: nội dung KHÔNG dùng trong bài
+
+Không có. Khác với research economy-sources-sinks.txt (nơi case Diablo III bị user quyết định
+loại khỏi bài), đợt research này không phát sinh case/nội dung nào bị loại khỏi phạm vi bài.
+Giữ mục này để nhất quán khung mục giữa các file research của dự án.
+
+---
+
+## 9. Ghi chú nguồn cần thận trọng
+
+### A. Dạng ký tự thật của từng nguồn (để session sau khỏi dò lại)
+- Toàn bộ blog Schreiber (gamebalanceconcepts.wordpress.com) dùng nháy cong ' và ngoặc kép cong
+  " ". Ví dụ đúng: `It can't be a cost curve`, `challenge them to “break” the game`.
+- Hai bài /dev của Riot dùng nháy thẳng '. Ví dụ đúng: `they're in need of nerfs`.
+- Charset trang Schreiber xác nhận UTF-8 qua header `Content-Type: text/html; charset=UTF-8`
+  (khác với trang secure.runescape.com dùng ở bài tang-3/02, vốn là windows-1252 — hai trang
+  khác nhau, đừng lẫn quy tắc đọc).
+
+### B. Hai quote đã SỬA (bản trong file này là bản ĐÚNG, KHÔNG dùng bản cũ trong file thô)
+1. Mục 4, Case B (Riot, "/dev: Balance Framework Update"): file thô C chép
+   "if a champion is overperforming in ANY..." (chữ thường) — SAI. Nguồn viết HOA đầu câu:
+   "If a champion is overperforming in ANY of the four groups, they're in need of nerfs, and if
+   they're underperforming in ALL of the four groups, they're ready for buffs."
+2. Mục 5.3 (Schreiber, Level 10): file thô C chép `challenge them to 'break' the game` (nháy
+   đơn thẳng) — SAI. Nguồn dùng ngoặc kép cong:
+   "challenge them to “break” the game by finding exploits and optimal strategies."
+
+### C. Đính chính cấu trúc loạt Schreiber "Game Balance Concepts" (2010)
+Loạt này KHÔNG có Level 5/6 riêng về cost curve — cost curve nằm TRỌN trong Level 3. URL của
+loạt này KHÔNG suy ra được theo mẫu ngày liền kề (đã thử và ra 404, xem mục 10) — phải lấy từ
+trang listing theo tháng. 8 URL thật đã verify HTTP 200, dùng cho toàn bộ file này:
+- Level 2 Numeric Relationships (14/07/2010):
+  https://gamebalanceconcepts.wordpress.com/2010/07/14/level-2-numeric-relationships/
+- Level 3 Transitive Mechanics and Cost Curves (21/07/2010):
+  https://gamebalanceconcepts.wordpress.com/2010/07/21/level-3-transitive-mechanics-and-cost-curves/
+- Level 4 Probability and Randomness (28/07/2010):
+  https://gamebalanceconcepts.wordpress.com/2010/07/28/level-4-probability-and-randomness/
+- Level 5 Probability and Randomness Gone Horribly Wrong (04/08/2010):
+  https://gamebalanceconcepts.wordpress.com/2010/08/04/level-5-probability-and-randomness-gone-horribly-wrong/
+  (đã đọc để xác nhận nguồn sống; không có quote nào trích dùng trong bài này)
+- Level 7 Advancement, Progression and Pacing (18/08/2010):
+  https://gamebalanceconcepts.wordpress.com/2010/08/18/level-7-advancement-progression-and-pacing/
+  (đã đọc; KHÔNG có công thức EXP cụ thể như kỳ vọng ban đầu — nội dung chỉ ở mức khái niệm
+  pacing/reward schedule/feedback loop, không trích quote nào trong bài này)
+- Level 8 Metrics and Statistics (25/08/2010):
+  https://gamebalanceconcepts.wordpress.com/2010/08/25/level-8-metrics-and-statistics/
+- Level 9 Intransitive Mechanics (01/09/2010):
+  https://gamebalanceconcepts.wordpress.com/2010/09/01/level-9-intransitive-mechanics/
+- Level 10 Final Boss (08/09/2010):
+  https://gamebalanceconcepts.wordpress.com/2010/09/08/level-10-final-boss/
+
+### D. Nguồn Riot Games (2 bài, đều HTTP 200, nháy thẳng)
+- /dev: Champion Balance Framework, RiotRepertoir, 30/05/2019:
+  https://www.leagueoflegends.com/en-us/news/dev/dev-champion-balance-framework/
+- /dev: Balance Framework Update, Summoner's Rift Team, 30/06/2020:
+  https://www.leagueoflegends.com/en-us/news/dev/dev-balance-framework-update/
+
+### E. Quyết định của user (đã chốt — ghi vào file để không hỏi lại)
+- **DPS / TTK / EHP KHÔNG cite được.** Từ "dps" chỉ xuất hiện đúng 1 lần trong 8 bài Schreiber,
+  không có định nghĩa công thức. Đã chốt: vẫn dạy 3 công thức này như kiến thức chung của nghề
+  (mục 3.4), KHÔNG đặt trong ngoặc kép, KHÔNG gán cho tác giả nào.
+- **Ví dụ chưa đủ đa dạng thể loại**: nguồn verify chỉ cho card game (Magic), board game (Puerto
+  Rico, Catan), console (Baldur's Gate), MOBA PC (LoL) — không có mobile/indie đã verify. Đã
+  chốt phương án (a): chấp nhận, ví dụ mobile/console để ở mục phân tích minh hoạ có đánh dấu
+  rõ (mục 7), KHÔNG chạy thêm vòng research.
+- **Câu hỏi "cân bằng trên giấy khác cân bằng khi chơi thật"** (mục 5.6) KHÔNG có nguồn nào bàn
+  tập trung — chỉ ghép từ 3 mảnh rời (Level 2 công thức vỡ ở biên; Level 3 game mới thiếu
+  playtest; Level 8 mean lý thuyết vs mean playtest thật). Đây là phần MAIN TỰ NỐI Ý, đã ghi rõ
+  trong mục 5.6.
+
+### F. False-negative của bộ kiểm khi so khớp quote — ghi chú kỹ thuật
+Khi so khớp quote với HTML đã strip tag, thẻ inline `<em>` sinh khoảng trắng thừa gây báo sai
+"quote không khớp". Đã gặp 2 lần ở bài này: `Rock-Paper-Scissors <em>"</em>` → cần đọc thành
+`Rock-Paper-Scissors "`, và `<em>n</em>-sided` → cần đọc thành `n-sided die`, `(n+1)/2`. Bộ
+normalize phải xoá khoảng trắng đứng trước CẢ dấu nháy đóng và dấu ngoặc, không chỉ trước
+`,.;:!?%`. Trong file .txt còn một biến thể nữa: quote bị wrap xuống dòng cũng gây
+false-negative — phải nối dòng trước khi so khớp.
+
+### G. Nguồn đã đọc nhưng không đủ sát chủ đề — không dùng
+David Sirlin, "Playing to Win" (sirlin.net/articles/playing-to-win) — đã đọc lại, có đoạn liên
+quan tới "dominant tactic" nhưng không đủ sát mục 5 (đọc bảng ra quyết định) nên không trích.
+
+---
+
+## 10. KHÔNG DÙNG ĐƯỢC — đã thử, session sau khỏi làm lại
+
+- https://gamebalanceconcepts.wordpress.com/2010/08/25/level-9-intransitive-mechanics/ — đoán
+  sai theo mẫu ngày tháng liền kề Level 8 (25/08). HTTP 404 (curl xác nhận). URL đúng của Level 9
+  là .../2010/09/01/level-9-intransitive-mechanics/ (mục 9-C).
+- Sách Salen & Zimmerman (Rules of Play), Adams & Dormans "Game Mechanics" (2012), Schreiber &
+  Romero "Game Balance" (sách in), sourcegaming.info — nằm trong danh sách CẤM của brief nghiên
+  cứu gốc, KHÔNG động tới.
+- David Sirlin, "Slippery Slope and Perpetual Comeback" — không tìm thấy đoạn liên quan trực
+  tiếp tới đọc spreadsheet/dominant-dominated, không dùng.
+- Nguồn bên thứ ba về số liệu win rate/pick rate League of Legends — LOẠI vì không phải nguồn
+  chính chủ (quy tắc dự án: số liệu phải từ nhà phát triển hoặc nguồn đã tự mở đọc):
+  digitalgamingnews.com, boostroyal.com, sportskeeda.com, riftpatchnotes.com, itero.gg,
+  dtgre.com, albertorengifo.substack.com, researchgate.net (bài paper WPI crawler). Không trích
+  số nào từ các nguồn này vào bài.
+- PC Gamer, bài "Riot has a new method for identifying overpowered..." — báo chí diễn giải lại
+  bài /dev gốc, dùng thẳng bản /dev gốc thay thế (mục 9-D), không trích PC Gamer.
+- Không có URL nào của trục B (công thức mô phỏng) trả lỗi HTTP trong đợt research này — cả 7
+  URL Schreiber đã mở đều HTTP 200.
