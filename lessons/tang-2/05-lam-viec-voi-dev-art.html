@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Làm việc với dev và art — Xưởng Game Design</title>
+<meta name="description" content="Một designer nói 'chuẩn 4K', artist nghe thành kích thước bản đồ thật, nén sai cả tấm hình. Vì sao cùng một câu lại hiểu ra hai nghĩa — và nên nói chuyện thế nào với dev, với art?">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-2/05-lam-viec-voi-dev-art" class="tier-2">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-2">Tầng 2 · Nghề</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 2 · Bài 05</p>
+            <h1>Làm việc với dev và art</h1>
+            <p class="dek">Designer nói "chuẩn 4K" nghĩa là chất lượng cơ sở của game — artist nghe thành kích thước bản đồ thật, nén sai cả một tấm hình lục giác. Vì sao cùng một câu lại hiểu ra hai nghĩa?</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 12 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Trung bình</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="04-tai-lieu-thiet-ke.html">Viết tài liệu thiết kế</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Diễn đạt ý tưởng bằng ngôn ngữ dev/art hiểu được</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Xử lý khi kỹ thuật không đáp ứng được ý tưởng ban đầu</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Feedback art/build đúng trọng tâm, không mơ hồ</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Một câu nói, hai cách hiểu</h2>
+        <p>Một designer nói với lập trình viên: game này cần đạt "chuẩn 4K". Ý anh ta là mức chất lượng đồ hoạ cơ sở của cả game — nói tắt cho nhanh trong cuộc họp. Nhưng phía kỹ thuật lại hiểu đó là kích thước thật của bản đồ, tính bằng pixel. Kết quả: một tấm hình lục giác bị nén sai kích thước, phải dựng lại từ đầu.</p>
+        <p>Theo Theodore Beale trên Game Developer, chuyện lệch nghĩa này không hiếm, vì <em>"producers, designers, artists, and programmers all tend to speak in slightly different languages"</em> (nhà sản xuất, designer, hoạ sĩ và lập trình viên đều có xu hướng nói những "ngôn ngữ" hơi khác nhau).</p>
+        <p>Bài trước học cách viết tài liệu cho đúng người đọc. Bài này khác: không phải viết gì, mà là nói chuyện thế nào — khi bạn ngồi trước một lập trình viên hoặc một hoạ sĩ, trao đổi trực tiếp về cùng một ý tưởng.</p>
+
+        <h2 id="ai-quyet">Ai quyết cái gì</h2>
+        <p>Nhiều designer mới nghĩ mình là người ra lệnh cho cả đội. David Mullich viết ngược lại: <em>"While the game design defines what tasks the other team members need to do, the game designer is not the team's boss."</em> (Bản thiết kế game định nghĩa những việc thành viên khác cần làm, nhưng designer không phải sếp của đội.)</p>
+        <p>Vậy ai quyết việc nào làm trước, việc nào phải cắt? Mullich trả lời: <em>"It is the project manager's responsibility to provide the team with direction and support, balancing the scope of the game design against the project's time and budget constraints."</em> (Producer/project manager chịu trách nhiệm cân bằng phạm vi thiết kế với ràng buộc thời gian và ngân sách của dự án.)</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Designer
+                    <small>Định nghĩa "làm gì" trong game.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Producer / PM
+                    <small>Cân scope với thời gian, ngân sách.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Dev &amp; Art
+                    <small>Triển khai trong phạm vi đã duyệt.</small>
+                </div>
+            </div>
+            <figcaption>Sơ đồ do người viết bài tổng hợp theo vai trò Mullich (2015) mô tả — designer không nằm ở đầu chuỗi ra lệnh.</figcaption>
+        </figure>
+        <p>Nói với dev/art, bạn không ra lệnh — bạn mô tả "làm gì" trong phạm vi producer đã duyệt. Ý tưởng cần thêm thời gian hay ngân sách là chuyện ba bên: designer, producer, người triển khai.</p>
+        <div class="callout" data-kind="insight">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Điều đáng nhớ</p>
+                <p>Starr Long (producer, NCSoft), theo tường thuật của Gamasutra tại GDC Europe 2005, được dẫn lại với câu: <em>"No amount of talent is worth any amount of ego."</em> (Không tài năng nào đáng giá bằng cái tôi.) Một đội đa vai trò — designer, producer, dev, art — chỉ mạnh khi không ai đặt cái tôi lên trên mục tiêu chung.</p>
+            </div>
+        </div>
+
+        <h2 id="noi-muc-tieu">Nói mục tiêu, đừng nói cách code</h2>
+        <p>Một lập trình viên gameplay viết trên blog hỏi-đáp Ask a Game Dev: <em>"Most of the time the design goal isn't a specific and exact implementation of something, it's an attempt to craft an experience for the player."</em> (Phần lớn mục tiêu thiết kế không phải một cách hiện thực cụ thể và chính xác, mà là một nỗ lực tạo ra trải nghiệm cho người chơi.)</p>
+        <p>Hệ quả: <em>"When the end goal is as nebulous as an engaging experience, most of the time there are multiple alternative ways to reach the same goal."</em> (Khi đích đến mơ hồ như "một trải nghiệm hấp dẫn", thường có nhiều con đường khác nhau để tới cùng một đích.) Vì vậy <em>"a savvy designer will usually work with the engineer to find a '90% solution'"</em> — designer khôn ngoan sẽ làm việc cùng kỹ sư để tìm ra một <span class="term" data-en="90% solution">giải pháp 90%</span>: không đúng 100% hình dung ban đầu, nhưng giữ được cảm giác cốt lõi với chi phí kỹ thuật hợp lý.</p>
+        <p>Không phải pushback nào từ dev cũng nên bỏ qua, nhưng cũng không phải cái nào cũng nên nhượng bộ. Lý do đáng nghe: <em>"technical constraints or the task requiring too much engineering time"</em> (ràng buộc kỹ thuật thật, hoặc việc đòi hỏi quá nhiều thời gian kỹ thuật). Lý do không đáng nghe: <em>"the engineer just doesn't want to do it"</em> (lập trình viên đơn giản là không muốn làm). Khi nghe pushback, hỏi thẳng: ràng buộc cụ thể là gì?</p>
+
+        <h2 id="noi-cam-giac">Nói cảm giác, đừng vẽ hộ artist</h2>
+        <p>Designer không phải hoạ sĩ. Việc của designer là mô tả cảm giác thị giác muốn có, không phải tự vẽ hộ. Neil Blevins phân biệt ba công cụ theo giai đoạn:</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Công cụ</th><th>Dùng khi nào</th><th>Đặc điểm</th></tr></thead>
+                <tbody>
+                    <tr><td>Mood board</td><td>Giai đoạn sớm, đang tìm hướng</td><td>Ảnh reference thuần, chưa gắn concept</td></tr>
+                    <tr><td>Design packet</td><td>Concept đã chốt, bàn giao cho đội</td><td>Reference và concept ở trang riêng</td></tr>
+                    <tr><td>Callout sheet</td><td>Cần chỉ rõ từng chi tiết</td><td>Cùng trang với concept, mũi tên chỉ từng chi tiết</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Nguyên văn Blevins về callout sheet: <em>A callout sheet is very similar to a packet, except the reference tends to be on the same page as the design, and there are arrows, for you to "call out" all the little details.</em> Câu hỏi mà artist cần được trả lời trước, theo Blevins: <em>"Should I notice the size of the vehicle? The weathering on the vehicle? the way the paint on the vehicle looks?"</em> (Tôi có cần chú ý tới kích cỡ chiếc xe? Vết phong hoá trên xe? Cách sơn trông như thế nào?)</p>
+        <p>Hannah George bổ sung phía feedback: hãy <em>"clearly communicate your likes and dislikes regarding visual styles"</em> (nói rõ bạn thích và không thích gì về phong cách hình ảnh) và <em>"Use annotations or callouts..."</em> (dùng <span class="term" data-en="annotation">chú thích ngay trên ảnh</span> hoặc callout) thay vì chỉ nói chung chung. Adrian Gimate-Welsh nói rõ tác dụng: <em>"When the art team has clear and concrete references to draw from, much time in corrections is saved."</em> (Khi đội hoạ sĩ có reference rõ ràng và cụ thể để dựa vào, rất nhiều thời gian sửa lỗi được tiết kiệm.)</p>
+
+        <h2 id="readability">Readability — chỗ design gặp art</h2>
+        <p>Alex Kubodera: <em>"Readability can be broken down into telegraphing (what happens before) and expectations (what happens after)"</em> (khả năng đọc hiểu chia làm hai phần: <span class="term" data-en="telegraphing">báo trước</span> — điều xảy ra trước, và <span class="term" data-en="expectations">kỳ vọng</span> — điều xảy ra sau).</p>
+        <p>Đây là chỗ design và art gặp nhau: designer quyết định logic — khi nào phải cảnh báo, khi nào phải phản hồi — nhưng chính artist là người vẽ ra tín hiệu đó bằng màu sắc, hình dạng, animation. Adam Henry: <em>"Color cues are truly the best way to spark intuition in our players"</em> (tín hiệu màu sắc thực sự là cách tốt nhất để khơi gợi trực giác của người chơi). Nếu hai bên không thống nhất trước một bảng màu ý nghĩa, tín hiệu sẽ lẫn lộn: <em>"If cues aren't placed to reflect our design, it can cause confusion within the playground."</em> (Nếu tín hiệu không được đặt để phản ánh đúng thiết kế, nó có thể gây nhầm lẫn trong sân chơi.)</p>
+
+        <h2 id="vi-du">Ba game, một case indie</h2>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Game</th><th>Tín hiệu / cách làm</th><th>Theo nguồn</th></tr></thead>
+                <tbody>
+                    <tr><td>Mirror's Edge (platformer)</td><td>Vật màu đỏ đánh dấu đường tiến — "Each red object was essentially an advancement within the progression"</td><td>Adam Henry, 2015</td></tr>
+                    <tr><td>Portal (puzzle)</td><td>Nút bấm đổi màu báo trạng thái kích hoạt</td><td>Adam Henry, 2015</td></tr>
+                    <tr><td>Halo (FPS)</td><td>Fusion coil đổi màu theo mức máu</td><td>Adam Henry, 2015</td></tr>
+                    <tr><td>Hover Cabs (indie)</td><td>Milestone 5 giai đoạn, sprint 1 tuần, kanban 4 cột</td><td>Paolo Gambardella, 2014</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Về case indie, Paolo Gambardella viết: <em>"In game development there is not any magic formula for success; the whole process is trial -> result -> learn."</em> (không có công thức thần kỳ nào cho thành công; cả quá trình là thử → kết quả → học). Một đội nhỏ vẫn cần cấu trúc rõ ràng để designer, dev, art phối hợp — chỉ gọn hơn một studio lớn.</p>
+
+        <h2 id="lens">Soi lại một yêu cầu bạn vừa gửi</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Bộ câu hỏi</span><h3>Soi lại một yêu cầu bạn vừa gửi cho dev/art</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Yêu cầu này mô tả trải nghiệm mong muốn, hay đã áp đặt luôn cách code/vẽ cụ thể?</li>
+                <li><span class="q-icon">?</span> Nếu dev/art hỏi lại "tại sao", bạn trả lời được bằng mục tiêu, hay chỉ "vì tôi muốn vậy"?</li>
+                <li><span class="q-icon">?</span> Bạn đã gửi reference cụ thể (mood board, design packet, hay callout sheet), hay chỉ mô tả bằng lời?</li>
+                <li><span class="q-icon">?</span> Nếu kỹ thuật báo không làm đúng như hình dung, bạn có sẵn lòng cùng tìm một "90% solution"?</li>
+                <li><span class="q-icon">?</span> Bạn đã ghé hỏi họ trước khi họ đi quá xa, hay định đợi tới bản build cuối mới xem?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Giao việc rồi biến mất</p>
+                <p>Mark Acero viết về việc chủ động ghé hỏi dev/art: <em>"...asking if they need anything, have any questions or would like any feedback before they steer too far off course."</em> (...hỏi họ có cần gì không, có thắc mắc gì không, hay muốn nghe feedback gì — trước khi họ đi quá xa khỏi hướng đúng.) Đợi tới bản build cuối mới xem là quá muộn để sửa rẻ.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">"Tôi không thích, làm lại đi"</p>
+                <p>Ngược với lời khuyên của Hannah George — nói rõ thích/không thích gì và dùng annotation cụ thể — feedback kiểu này không cho artist biết phải sửa chỗ nào. Artist phải đoán, sửa sai hướng, rồi lại bị chê lần nữa.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Quên rằng asset đẹp riêng lẻ chưa chắc hợp khi vào game</p>
+                <p>Rahul Sehgal: <em>"Art assets (characters, props, buildings) may look good when seen in isolation, but that doesn't mean that they will look as good once you put them into the game."</em> (Asset — nhân vật, vật thể, công trình — có thể đẹp khi xem riêng lẻ, nhưng không có nghĩa nó sẽ đẹp như vậy khi đặt vào game.) Sehgal gợi ý review art "ideally every day, or even twice a day" (lý tưởng là mỗi ngày, thậm chí hai lần một ngày) — thay vì chỉ xem khi đã ráp gần xong.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Viết lại một yêu cầu mơ hồ</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">30 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Viết lại một yêu cầu mơ hồ thành yêu cầu dùng được</h3>
+                <ol class="steps">
+                    <li><span>Chọn một yêu cầu mơ hồ bạn từng gửi (hoặc sắp gửi) cho dev hoặc art. Ví dụ: "làm cho con boss này ngầu hơn."</span></li>
+                    <li><span>Viết lại thành <strong>mục tiêu trải nghiệm</strong> — người chơi phải cảm thấy gì, không phải nên code hay vẽ gì.</span></li>
+                    <li><span>Liệt kê <strong>ràng buộc thật</strong> đã biết: thời gian, công cụ, giới hạn kỹ thuật (nếu có).</span></li>
+                    <li><span>Viết <strong>dấu hiệu làm xong</strong> — điều gì bạn phải quan sát được trong bản build để biết đúng ý.</span></li>
+                    <li><span>Nếu yêu cầu gửi cho artist: thêm ít nhất <strong>một reference cụ thể</strong> — ảnh, game khác, cảnh phim.</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nhớ khung "90% solution": bạn không cần dev/art hiện thực đúng 100% hình dung trong đầu bạn, miễn cảm giác cốt lõi ở bước 2 vẫn còn nguyên khi lên bản build.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo David Mullich, ai chịu trách nhiệm cân bằng phạm vi thiết kế với thời gian và ngân sách của dự án?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Game designer</button>
+                <button data-opt="b"><span class="badge">B</span> Project manager / producer</button>
+                <button data-opt="c"><span class="badge">C</span> Lập trình viên trưởng</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên văn Mullich: "It is the project manager's responsibility to provide the team with direction and support, balancing the scope of the game design against the project's time and budget constraints." Designer định nghĩa "làm gì", nhưng không phải người cân scope.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo Ask a Game Dev, phần lớn design goal là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Một cách hiện thực cụ thể và chính xác</button>
+                <button data-opt="b"><span class="badge">B</span> Một nỗ lực tạo ra trải nghiệm cho người chơi</button>
+                <button data-opt="c"><span class="badge">C</span> Yêu cầu kỹ thuật phải tuân theo tuyệt đối</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên văn: "Most of the time the design goal isn't a specific and exact implementation of something, it's an attempt to craft an experience for the player." Vì vậy thường có nhiều cách khác nhau để đạt cùng một trải nghiệm.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Callout sheet khác mood board ở điểm nào, theo Neil Blevins?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Chỉ dùng ảnh thuần, chưa gắn với concept cụ thể</button>
+                <button data-opt="b"><span class="badge">B</span> Reference nằm cùng trang với concept, có mũi tên gọi tên từng chi tiết</button>
+                <button data-opt="c"><span class="badge">C</span> Không cần reference, chỉ cần mô tả bằng lời</button>
+            </div>
+            <div class="explain" hidden><p>Blevins mô tả callout sheet: reference nằm cùng trang với design, kèm mũi tên để "call out" từng chi tiết nhỏ. Mood board (đáp án A) là công cụ ở giai đoạn sớm hơn, thuần ảnh, chưa gắn concept.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Theo Rahul Sehgal, vì sao nên review art thường xuyên, thậm chí mỗi ngày?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Vì asset đẹp riêng lẻ không đảm bảo sẽ đẹp khi đặt vào game thật</button>
+                <button data-opt="b"><span class="badge">B</span> Vì hợp đồng của artist yêu cầu báo cáo hàng ngày</button>
+                <button data-opt="c"><span class="badge">C</span> Vì artist làm việc chậm nên cần giám sát sát sao</button>
+            </div>
+            <div class="explain" hidden><p>Sehgal: "Art assets... may look good when seen in isolation, but that doesn't mean that they will look as good once you put them into the game." Review sớm và thường xuyên để bắt lệch pha này trước khi quá muộn.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>90% solution</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Khi mục tiêu thiết kế mơ hồ (một trải nghiệm), designer và engineer cùng tìm cách hiện thực không hoàn hảo tuyệt đối nhưng giữ đúng cảm giác cốt lõi, với chi phí kỹ thuật hợp lý (Ask a Game Dev).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Callout sheet</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Reference và concept nằm cùng một trang, có mũi tên "gọi tên" từng chi tiết cần chú ý — khác mood board (ảnh thuần) và design packet (reference tách trang) (Neil Blevins).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Telegraphing / expectations</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Readability chia làm hai: telegraphing là điều xảy ra trước, expectations là điều xảy ra sau (Alex Kubodera). Artist vẽ tín hiệu, designer quyết logic đứng sau nó.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Producer vs Designer</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Designer định nghĩa "làm gì" nhưng không phải sếp của đội; producer/PM cân phạm vi thiết kế với thời gian và ngân sách (David Mullich).</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Designer định nghĩa "làm gì" nhưng không phải sếp của đội — producer/PM cân phạm vi với thời gian, ngân sách (Mullich).</li>
+                <li><span class="n">2</span> Nói mục tiêu trải nghiệm, đừng ép cách code cụ thể — khi có ràng buộc kỹ thuật thật, cùng dev tìm một "90% solution" (Ask a Game Dev).</li>
+                <li><span class="n">3</span> Với artist: đưa reference cụ thể (mood board → design packet → callout sheet), feedback bằng annotation, và review art thường xuyên vì asset đẹp riêng lẻ chưa chắc hợp khi ráp vào game (Blevins, George, Sehgal).</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://web.archive.org/web/20230430194734/https://askagamedev.tumblr.com/post/691127453825056768/when-a-designer-tells-a-gameplay-programmer-to" target="_blank" rel="noopener">When a designer tells a gameplay programmer to...</a>
+                <span class="reading-meta">Ask a Game Dev (lập trình viên gameplay ẩn danh), 2022 · qua Wayback Machine</span>
+                <p class="reading-why">Nguồn gốc "design goal là trải nghiệm, không phải implementation cụ thể" và khái niệm 90% solution.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/communication-the-designer-s-real-job" target="_blank" rel="noopener">Communication: The Designer's Real Job</a>
+                <span class="reading-meta">Mark Acero · Game Developer, 2009</span>
+                <p class="reading-why">Vì sao designer nên chủ động ghé hỏi dev/art sớm, trước khi họ đi quá xa khỏi hướng đúng.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://web.archive.org/web/20210513132039/http://www.neilblevins.com/art_lessons/mood_board_design_packet_callout_sheet/mood_board_design_packet_callout_sheet.htm" target="_blank" rel="noopener">Mood Boards, Design Packets and Callout Sheets</a>
+                <span class="reading-meta">Neil Blevins, 2021 · qua Wayback Machine</span>
+                <p class="reading-why">Phân biệt ba công cụ trao đổi reference với artist theo giai đoạn.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/crafting-the-perfect-game-art-brief" target="_blank" rel="noopener">Crafting the Perfect Game Art Brief</a>
+                <span class="reading-meta">Hannah George · Game Developer, 2023</span>
+                <p class="reading-why">Vì sao cần nói rõ thích/không thích và dùng annotation khi feedback art.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/visual-cues-in-level-design" target="_blank" rel="noopener">Visual Cues in Level Design</a>
+                <span class="reading-meta">Adam Henry · Game Developer, 2015</span>
+                <p class="reading-why">Nguồn ví dụ Mirror's Edge, Portal, Halo và ý "color cues are the best way to spark intuition".</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/art/five-secrets-of-game-art-direction" target="_blank" rel="noopener">Five Secrets of Game Art Direction</a>
+                <span class="reading-meta">Rahul Sehgal · Game Developer, 2020</span>
+                <p class="reading-why">Vì sao asset đẹp riêng lẻ chưa chắc hợp khi vào game, và nên review art hàng ngày.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/game-platforms/from-references-to-concept-art" target="_blank" rel="noopener">From References to Concept Art</a>
+                <span class="reading-meta">Adrian Gimate-Welsh · Game Developer, 2022</span>
+                <p class="reading-why">Reference rõ ràng, cụ thể giúp tiết kiệm thời gian sửa lỗi cho đội art.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/game-platforms/designing-for-difficulty-readability-in-arpgs" target="_blank" rel="noopener">Designing for Difficulty: Readability in ARPGs</a>
+                <span class="reading-meta">Alex Kubodera · Game Developer, 2022</span>
+                <p class="reading-why">Định nghĩa readability: telegraphing (trước) và expectations (sau).</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://davidmullich.com/2015/02/02/roles-on-a-game-development-team/" target="_blank" rel="noopener">Roles On A Game Development Team</a>
+                <span class="reading-meta">David Mullich, 2015</span>
+                <p class="reading-why">Trục chính của bài: designer định nghĩa "làm gì", producer cân scope với thời gian - ngân sách.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/production/cross-discipline-communication" target="_blank" rel="noopener">Cross-Discipline Communication</a>
+                <span class="reading-meta">Theodore Beale · Game Developer, 2017</span>
+                <p class="reading-why">Nguồn tình huống mở bài: mỗi vai trò trong đội có xu hướng nói "ngôn ngữ" hơi khác nhau.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/production/postcard-from-gdc-europe-2005-strike-teams-cross-discipline-saviors" target="_blank" rel="noopener">Postcard from GDC Europe 2005: Strike Teams</a>
+                <span class="reading-meta">Gamasutra tường thuật lời Starr Long, 2005</span>
+                <p class="reading-why">Nguồn câu "No amount of talent is worth any amount of ego."</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/production/using-scrum-in-indie-game-development" target="_blank" rel="noopener">Using SCRUM in indie game development</a>
+                <span class="reading-meta">Paolo Gambardella · Game Developer, 2014</span>
+                <p class="reading-why">Case indie Hover Cabs / Thousand Gears: milestone, sprint, kanban trong một đội nhỏ.</p>
+            </li>
+            <li>
+                <span class="pill type-talk">Talk</span>
+                <a class="reading-title" href="https://www.gdcvault.com/" target="_blank" rel="noopener">The Art of Overwatch</a>
+                <span class="reading-meta">GDC Vault (tìm theo tên talk — chỉ có abstract công khai)</span>
+                <p class="reading-why">Talk về art direction ở quy mô lớn — mở rộng thêm ngoài phạm vi đã trích trong bài.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

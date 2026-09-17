@@ -1,0 +1,66 @@
+WORKLOG 2026-09-17 — Tầng 2 bài 05 "Làm việc với dev và art"
+
+SUMMARY
+Viết xong bài 05 (bài cuối Tầng 2): research 3 mảng + 15 fact đã verify nguyên văn, dựng
+HTML 12 phần, check-site 0 lỗi, đã tự xem ảnh desktop + mobile + theme sáng/tối.
+CHƯA verify: quiz/flashcard chưa bấm tay trên trình duyệt (treo sang session thứ 7).
+
+ĐÃ LÀM
+- research/lam-viec-voi-dev-art.txt (222 dòng, 6 section) — 14 nguồn, main tự curl + grep
+  nguyên văn từng câu, 14/14 URL HTTP 200. Không nguồn nào chết.
+- lessons/tang-2/05-lam-viec-voi-dev-art.html — 12 phần đúng thứ tự §5, thân bài ~1.850 chữ.
+- curriculum.js: entry tang-2/05 cập nhật summary + status "ready" (đổi SAU khi file tồn tại).
+- tools/shoot.ps1: thêm entry lesson-tang-2-05-lam-viec-voi-dev-art (phần tử cuối, không phẩy).
+- Tầng 2 giờ đủ 5/5 bài.
+
+MAIN TỰ SỬA SAU KHI AGENT BÁO "XONG" (agent bỏ sót)
+- 6 chỗ dùng sai .term: data-en trùng y hệt text đang hiển thị (vd data-en="mood board" bọc
+  chữ "Mood board") → tooltip vô nghĩa. Bỏ .term ở 4 tên công cụ, sửa 2 chỗ thành thuật ngữ
+  tiếng Việt (chú thích ngay trên ảnh / báo trước / kỳ vọng).
+- Quiz giải thích đổi nháy kép thành nháy đơn trong trích Blevins — đúng bẫy đã ghi trong
+  VERIFIED-FACTS. Viết lại thành câu dẫn gián tiếp, giữ "call out" đúng nháy kép.
+- "each red object..." → "Each red object..." (nguyên văn viết hoa).
+- Rút ngắn cột 3 của 2 bảng compare cho đỡ bị che trên mobile (vẫn phải cuộn ngang — bản
+  chất bảng 3 cột ở 400px, .table-wrap cuộn là đúng thiết kế).
+
+VẤP MỚI (kỹ thuật)
+- grep của Git Bash trên máy này CRASH "Aborted (core dumped)" khi grep -qiF file HTML lớn.
+  Không tin kết quả grep bash; kiểm chuỗi bằng node (đọc utf8, decode entity, strip tag).
+- Heredoc bash nuốt escape: script node viết qua `cat <<'EOF'` bị hỏng regex có \b.
+  Viết script kiểm tra bằng Write tool ra scratchpad rồi `node <file>`, đừng heredoc.
+- tools/shoot.ps1 -Only "<name>" KHÔNG lọc — vẫn chụp đủ 64 ảnh. Đừng tin tham số này.
+- Bài Theodore Beale trên gamedeveloper.com có typo NGUYÊN BẢN "admitting makes"
+  (subagent đoán là lỗi OCR của tool — SAI, main curl kiểm thì trang gốc đúng là vậy).
+  Đã cấm trích câu đó trong research.
+- Câu prototype trong bài Jill Duffy thực ra là LỜI TIM LANG do Duffy dẫn ("He writes:").
+- Ví dụ Sekiro / ký tự 危 chỉ nằm ở dek giới thiệu bài Readability in ARPGs, KHÔNG có trong
+  thân bài → đã loại khỏi bài học.
+
+KHÔNG DÙNG ĐƯỢC (đã thử, session sau khỏi research lại)
+- T-shaped designer: không có nguồn game-specific đạt chuẩn.
+- Disagree and commit: khái niệm quản trị doanh nghiệp (Intel/Amazon), không phải game design.
+- Tynan Sylvester "Designing Games" chương Authority: chỉ có blog tóm tắt của người khác.
+- "Tweakable/tunable parameter, debug menu cho designer tự chỉnh số": không có nguồn nào.
+- Ranh giới "designer can thiệp art direction tới đâu": không nguồn nào trả lời thẳng.
+- Chi tiết đầy đủ ở research/lam-viec-voi-dev-art.txt mục 5 và 6.
+
+DOC-SYNC
+- Doc-impact scan: assets/js/curriculum.js và tools/shoot.ps1 có mặt trong CLAUDE.md
+  (dòng 26/47/51/130/181 và 54/133/160/163/183). Reconcile: NO-CHANGE cả hai — số bài không
+  đổi, mô tả shoot.ps1 vẫn đúng. File mới nằm đúng danh sách §3, không phát sinh mục mới.
+- Không có handoffs/ trong repo → bỏ bước handoff-stale.
+
+CẦN USER QUYẾT (KHÔNG tự sửa — global rule 7) — 11 mục treo
+- 5 mục từ worklog 2026-09-16__tang-1-game-feel.txt: CLAUDE.md §8 check-site không bắt
+  thẻ lệch/tràn ngang; shoot.ps1 dòng 1 comment phạm vi stale; bài 03 Tầng 1 lệch thứ tự
+  §5; thiếu repo-params.json; độ dài bài vượt mục tiêu.
+- Tầng 2 bài 01 và 02 chưa đạt đa thể loại §1 — chấp nhận hay research bù.
+- .mda-diagram 4 block rớt dòng desktop — có ghi giới hạn 3 block vào CLAUDE.md §8 không.
+- Có thêm component list cho thân bài vào site.css + components.html không (§4 bắt buộc sửa
+  cả hai file cùng lúc). Hiện chưa có, nên ul trần render trần trụi.
+- lessons/tang-0/03-tu-duy-nguoi-choi.html có 2 thẻ strong bên trong ol.steps — nhiều khả
+  năng đang vỡ layout y hệt lỗi đã sửa ở bài 04, chưa kiểm ảnh.
+- MỚI: có ghi 3 bẫy công cụ ở trên (grep bash crash, heredoc nuốt escape, shoot.ps1 -Only
+  không lọc) vào CLAUDE.md §8 không.
+- MỚI: bảng table.compare 3 cột luôn phải cuộn ngang ở mobile 400px — chấp nhận như hiện
+  tại, hay đặt quy ước "bảng trong bài tối đa 2 cột nội dung".

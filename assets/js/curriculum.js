@@ -188,7 +188,7 @@ window.CURRICULUM = [
             {
                 slug: "tang-2/05-lam-viec-voi-dev-art",
                 title: "Làm việc với dev và art",
-                summary: "Giao tiếp hiệu quả với lập trình viên và họa sĩ để ý tưởng thành hình.",
+                summary: "Designer không phải sếp của đội — nói mục tiêu trải nghiệm với dev, nói cảm giác bằng reference với artist.",
                 goals: [
                     "Diễn đạt ý tưởng bằng ngôn ngữ dev/art hiểu được",
                     "Xử lý khi kỹ thuật không đáp ứng được ý tưởng ban đầu",
@@ -196,7 +196,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 12,
                 level: "Trung bình",
-                status: "planned"
+                status: "ready"
             }
         ]
     },

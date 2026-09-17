@@ -1,0 +1,283 @@
+RESEARCH — Tầng 2 bài 05: Làm việc với dev và art
+Ngày: 2026-09-17 | Trạng thái: ĐÃ VERIFY (main tự curl + grep nguyên văn, 14/14 URL HTTP 200)
+
+MỤC LỤC
+1. Phạm vi bài
+2. Designer ↔ programmer
+3. Designer ↔ artist
+4. Quy trình nhóm & vai trò
+5. Đã loại — không đưa vào bài
+6. Ghi chú fact-check (bẫy đã gặp)
+
+---
+
+## 1. Phạm vi bài
+
+Bài này nói về GIAO TIẾP NGƯỜI-VỚI-NGƯỜI giữa designer và programmer/artist/producer:
+cách trao đổi ý tưởng, feedback, ranh giới vai trò, quy trình phối hợp trong nhóm.
+
+Bài KHÔNG lấn sang bài 04 (viết tài liệu thiết kế — one-pager/GDD/spec). Nội dung tài
+liệu thiết kế thuộc phạm vi bài 04, không lặp lại ở đây.
+
+---
+
+## 2. Designer ↔ programmer
+
+### [A1] Ask a Game Dev — blog Q&A ẩn danh, đăng 2022-07-29
+Bản gốc tumblr trả về 403, đọc qua Wayback.
+Nguồn: https://web.archive.org/web/20230430194734/https://askagamedev.tumblr.com/post/691127453825056768/when-a-designer-tells-a-gameplay-programmer-to
+Loại nguồn: blog Q&A ẩn danh (không gán được cho studio hay người có tên cụ thể).
+
+Ý chính:
+- Mục tiêu thiết kế thường không phải một cách triển khai (implementation) cụ thể, mà là
+  một trải nghiệm (experience) cần tạo ra cho người chơi.
+- Vì mục tiêu cuối là một trải nghiệm mơ hồ, thường có nhiều cách khác nhau để đạt được
+  cùng một kết quả.
+- Một designer khôn ngoan sẽ làm việc cùng engineer để tìm ra "giải pháp 90%" — không
+  đòi hỏi đúng 100% như hình dung ban đầu.
+- Lý do pushback (từ chối/đề nghị đổi cách) tốt: ràng buộc kỹ thuật hoặc việc cần quá
+  nhiều thời gian kỹ thuật. Lý do pushback xấu: engineer chỉ đơn giản là không muốn làm.
+
+NGUYÊN VĂN (đã verify):
+- "Most of the time the design goal isn't a specific and exact implementation of something,
+  it's an attempt to craft an experience for the player."
+- "When the end goal is as nebulous as an engaging experience, most of the time there are
+  multiple alternative ways to reach the same goal."
+- "a savvy designer will usually work with the engineer to find a '90% solution'"
+- Lý do pushback tốt: "technical constraints or the task requiring too much engineering time";
+  lý do xấu: "the engineer just doesn't want to do it".
+
+LƯU Ý KHI VIẾT: tác giả ẩn danh → ghi "một lập trình viên gameplay viết trên blog hỏi-đáp
+Ask a Game Dev", KHÔNG gán cho studio hay người có tên.
+
+### [A2] Mark Acero — "Communication: The Designer's Real Job" — Game Developer, 2009
+Nguồn: https://www.gamedeveloper.com/design/communication-the-designer-s-real-job
+Loại nguồn: bài viết chuyên ngành trên Game Developer (trước đây Gamasutra).
+
+Ý chính:
+- Designer nên chủ động ghé hỏi người thực thi sớm trong quá trình làm — xem họ có cần
+  gì, có câu hỏi gì, hay muốn feedback gì — trước khi họ đi quá xa hướng ban đầu.
+
+NGUYÊN VĂN: "...asking if they need anything, have any questions or would like any feedback
+before they steer too far off course."
+
+### [A3] Daniel Cook (Danc) — "Common Game Prototyping Pitfalls" — Lostgarden, 2005
+Nguồn: https://lostgarden.com/2005/08/21/common-game-prototyping-pitfalls/
+Loại nguồn: blog thiết kế game cá nhân, tác giả có tên tuổi trong ngành (Danc/Lostgarden).
+
+Ý chính:
+- Một dự án có "momentum" (đà tiến triển) có thể chạy qua hàng chục vòng lặp (iteration)
+  trong thời gian ngắn. Dự án thiếu momentum chỉ đạt hai ba vòng lặp trong cùng khoảng
+  thời gian đó — nhấn mạnh tầm quan trọng của việc lặp nhanh khi làm việc với programmer.
+
+NGUYÊN VĂN: "A project with momentum can go through a dozen iterations in a short period of
+time. A project without this momentum might hit two or three iterations in the same amount
+of time."
+
+### [A4] Tim Lang, do Jill Duffy dẫn lại — "5 Ways Game Designers Communicate" — Game Developer, 2008
+Nguồn: https://www.gamedeveloper.com/design/educational-feature-5-ways-game-designers-communicate
+Loại nguồn: bài viết chuyên ngành, dẫn lời một designer khác (Tim Lang) qua cụm "He writes:".
+
+Ý chính:
+- Có 5 kênh truyền đạt ý tưởng thiết kế: nói, viết, hình tĩnh, animatic, và prototype.
+- Prototype là kênh đắt nhất về thời gian nhưng cho phép người khác tương tác thật với
+  ý tưởng, thay vì chỉ hình dung qua mô tả.
+
+NGUYÊN VĂN (lời Tim Lang, Duffy dẫn bằng cụm "He writes:"):
+"Compared to the other methods of communication, prototyping is astoundingly time consuming
+to get off the ground."
+
+---
+
+## 3. Designer ↔ artist
+
+### [B1] Neil Blevins — "Mood Boards, Design Packets and Callout Sheets" — 2021
+Bản gốc lỗi SSL, đọc qua Wayback.
+Nguồn: https://web.archive.org/web/20210513132039/http://www.neilblevins.com/art_lessons/mood_board_design_packet_callout_sheet/mood_board_design_packet_callout_sheet.htm
+Loại nguồn: bài viết kỹ thuật của một art director/lecturer có tên tuổi (Neil Blevins,
+từng làm tại Pixar).
+
+Ý chính:
+- Có 3 công cụ khác nhau theo giai đoạn làm việc với artist:
+  - Mood board — thuần hình ảnh tham khảo, dùng ở giai đoạn sớm.
+  - Design packet — concept đã chốt kèm reference, dùng để bàn giao.
+  - Callout sheet — concept và reference đặt cùng trang, có mũi tên chỉ ra từng chi tiết
+    cụ thể cần chú ý.
+
+NGUYÊN VĂN:
+- "A callout sheet is very similar to a packet, except the reference tends to be on the same
+  page as the design, and there are arrows, for you to "call out" all the little details."
+  (chú ý: nguyên văn dùng nháy KÉP quanh cụm call out, không phải nháy đơn)
+- "the person who sees the reference may be asking 'Should I notice the size of the vehicle?
+  The weathering on the vehicle? the way the paint on the vehicle looks?'"
+- "include the names of the films or URLs so that the artist can use that as a springboard to
+  find more reference"
+
+### [B2] Hannah George — "Crafting the Perfect Game Art Brief" — Game Developer, 2023
+Nguồn: https://www.gamedeveloper.com/design/crafting-the-perfect-game-art-brief
+Loại nguồn: bài viết chuyên ngành trên Game Developer.
+
+Ý chính:
+- Khi viết art brief, cần nói rõ mình thích/không thích phong cách hình ảnh nào.
+- Nên dùng chú thích (annotation) hoặc callout để làm rõ ý trong brief.
+
+NGUYÊN VĂN: "clearly communicate your likes and dislikes regarding visual styles";
+"Use annotations or callouts..."
+
+### [B3] Adam Henry — "Visual Cues in Level Design" — Game Developer, 2015
+Nguồn: https://www.gamedeveloper.com/design/visual-cues-in-level-design
+Loại nguồn: bài viết chuyên ngành trên Game Developer.
+
+Ý chính:
+- Nếu các tín hiệu thị giác (visual cue) không được đặt đúng theo chủ đích thiết kế, có
+  thể gây nhầm lẫn cho người chơi trong không gian chơi (playground).
+- Màu sắc là cách hiệu quả nhất để kích hoạt trực giác của người chơi.
+- Ví dụ game có trong bài: Mirror's Edge (màu đỏ đánh dấu đường tiến — mỗi vật thể đỏ là
+  một bước tiến trong hành trình), Portal (nút đổi màu báo trạng thái), Halo (bình fusion
+  coil đổi màu theo lượng máu còn lại).
+
+NGUYÊN VĂN:
+- "If cues aren't placed to reflect our design, it can cause confusion within the playground."
+- "Each red object was essentially an advancement within the progression" (về Mirror's Edge)
+- "Color cues are truly the best way to spark intuition in our players"
+
+### [B4] Rahul Sehgal — "Five Secrets of Game Art Direction" — Game Developer, 2020
+Nguồn: https://www.gamedeveloper.com/art/five-secrets-of-game-art-direction
+Loại nguồn: bài viết chuyên ngành trên Game Developer.
+
+Ý chính:
+- Tài sản đồ hoạ (nhân vật, prop, công trình) có thể trông đẹp khi xem riêng lẻ, nhưng
+  không có nghĩa sẽ đẹp tương tự khi đặt vào trong game thật.
+- Nên review art thường xuyên — lý tưởng là mỗi ngày, thậm chí hai lần một ngày.
+
+NGUYÊN VĂN:
+- "Art assets (characters, props, buildings) may look good when seen in isolation, but that
+  doesn't mean that they will look as good once you put them into the game."
+- review art "ideally every day, or even twice a day"
+
+### [B5] Adrian Gimate-Welsh — "From References to Concept Art" — Game Developer, 2022
+Nguồn: https://www.gamedeveloper.com/game-platforms/from-references-to-concept-art
+Loại nguồn: bài viết chuyên ngành trên Game Developer.
+
+Ý chính:
+- Khi đội art có reference rõ ràng và cụ thể để dựa vào, sẽ tiết kiệm được nhiều thời
+  gian sửa lại (corrections) về sau.
+
+NGUYÊN VĂN: "When the art team has clear and concrete references to draw from, much time in
+corrections is saved."
+
+### [B6] Alex Kubodera — "Designing for Difficulty: Readability in ARPGs" — Game Developer, 2022
+Nguồn: https://www.gamedeveloper.com/game-platforms/designing-for-difficulty-readability-in-arpgs
+Loại nguồn: bài viết chuyên ngành trên Game Developer.
+
+Ý chính:
+- Tính dễ đọc (readability) của game có thể chia thành hai phần: telegraphing (những gì
+  xảy ra trước một sự kiện, báo hiệu trước) và expectation (những gì xảy ra sau đó).
+
+NGUYÊN VĂN: "Readability can be broken down into telegraphing (what happens before) and
+expectations (what happens after)"
+
+CẢNH BÁO: ví dụ Sekiro / ký tự nguy hiểm (危) KHÔNG verify được trong thân bài — chi tiết
+này chỉ xuất hiện ở dek giới thiệu bài, không có trong nội dung chính → KHÔNG dùng ví dụ đó.
+
+---
+
+## 4. Quy trình nhóm & vai trò
+
+### [C1] David Mullich — "Roles On A Game Development Team" — 2015
+Nguồn: https://davidmullich.com/2015/02/02/roles-on-a-game-development-team/
+Loại nguồn: blog cá nhân của một nhà thiết kế/producer có kinh nghiệm trong ngành.
+
+Ý chính (ĐÂY LÀ TRỤC CHÍNH CỦA BÀI):
+- Game design định nghĩa các thành viên khác trong nhóm cần làm những việc (task) gì,
+  nhưng game designer KHÔNG phải là sếp (boss) của cả nhóm.
+- Trách nhiệm của project manager là cung cấp định hướng và hỗ trợ cho nhóm, cân bằng
+  phạm vi (scope) của thiết kế game với ràng buộc thời gian và ngân sách của dự án.
+
+NGUYÊN VĂN:
+- "While the game design defines what tasks the other team members need to do, the game
+  designer is not the team's boss."
+- "It is the project manager's responsibility to provide the team with direction and support,
+  balancing the scope of the game design against the project's time and budget constraints."
+
+### [C2] Theodore Beale — "Cross-Discipline Communication" — Game Developer, 2017
+Nguồn: https://www.gamedeveloper.com/production/cross-discipline-communication
+Loại nguồn: bài viết chuyên ngành trên Game Developer.
+
+Ý chính:
+- Producer, designer, artist và programmer đều có xu hướng nói theo những "ngôn ngữ"
+  hơi khác nhau — cùng một từ có thể hiểu khác nhau giữa các vai trò.
+- Diễn giải (không trích nguyên văn): tác giả kể lại trường hợp nói "4K resolution" với ý
+  là chuẩn cơ sở của game, nhưng artist lại hiểu đó là kích thước bản đồ thật, dẫn tới
+  việc nén hình lục giác (hex) bị sai.
+
+NGUYÊN VĂN DÙNG ĐƯỢC: "producers, designers, artists, and programmers all tend to speak in
+slightly different languages"
+
+CẤM TRÍCH: câu "never be afraid of making mistakes..." — xem mục 6 (bẫy fact-check).
+
+### [C3] Starr Long (producer NCSoft), qua tường thuật Gamasutra — "Strike Teams", GDC Europe 2005
+Nguồn: https://www.gamedeveloper.com/production/postcard-from-gdc-europe-2005-strike-teams-cross-discipline-saviors
+Loại nguồn: bài tường thuật của Gamasutra (nay là Game Developer) về một talk tại GDC
+Europe 2005 — KHÔNG phải transcript gốc của Starr Long.
+
+Ý chính:
+- Không tài năng nào đáng giá bằng cái tôi (ego) mà nó đi kèm — thông điệp về việc phối
+  hợp liên ngành cần bỏ bớt cái tôi cá nhân.
+
+NGUYÊN VĂN: "No amount of talent is worth any amount of ego."
+
+LƯU Ý: đây là tường thuật của bên thứ ba (Gamasutra) về lời Starr Long tại GDC Europe
+2005, KHÔNG phải transcript gốc → khi trích phải ghi rõ "theo tường thuật của Gamasutra".
+
+### [C4] Paolo Gambardella — "Using SCRUM in indie game development" — Game Developer, 2014
+Nguồn: https://www.gamedeveloper.com/production/using-scrum-in-indie-game-development
+Loại nguồn: bài viết chuyên ngành trên Game Developer, dựa trên case thực tế của một
+studio indie.
+
+Ý chính:
+- Trong phát triển game không có công thức thần kỳ nào cho thành công; cả quá trình chỉ
+  là thử → xem kết quả → rút kinh nghiệm.
+- Case indie thật (game Hover Cabs / Thousand Gears): milestone chia 5 giai đoạn
+  (pre-prototype → prototype → demo → alpha → beta), sprint kéo dài 1 tuần, kanban board
+  4 cột.
+
+NGUYÊN VĂN: "In game development there is not any magic formula for success; the whole
+process is trial -> result -> learn."
+
+---
+
+## 5. Đã loại — không đưa vào bài
+
+- "T-shaped designer": không có nguồn game-specific đạt chuẩn. BỎ.
+- "Disagree and commit": khái niệm quản trị doanh nghiệp (Intel/Amazon), không phải game
+  design. Khuyến nghị BỎ cho gọn.
+- Tynan Sylvester "Designing Games" chương Authority: chỉ có bài blog tóm tắt của người khác. BỎ.
+- "Design by committee" (Wikipedia): chưa verify nguyên văn. BỎ.
+- GDC "The Art of Overwatch": chỉ có abstract sau tường phí → chỉ được dùng ở mục ĐỌC THÊM.
+- "Tweakable/tunable parameter, debug menu cho designer tự chỉnh số": KHÔNG có nguồn. BỎ,
+  hoặc chỉ nói chung "vòng lặp prototype nhanh" theo [A3].
+- Ranh giới "designer can thiệp art direction tới đâu, ai quyết cuối cùng": KHÔNG nguồn nào trả
+  lời thẳng → nếu viết, BẮT BUỘC bọc callout note "đây là phân tích, không phải trích nguồn".
+- Ví dụ Sekiro ký tự 危: xem cảnh báo [B6]. BỎ.
+
+---
+
+## 6. Ghi chú fact-check (bẫy đã gặp)
+
+- **[C2] Theodore Beale, gamedeveloper.com**: câu "never be afraid of making mistakes..."
+  trên trang gốc có typo "admitting makes" — đây là lỗi có sẵn TRONG BẢN GỐC của trang,
+  không phải lỗi do tool fetch gây ra. → CẤM trích câu này trong bài.
+
+- **[B1] Neil Blevins**: nguyên văn dùng NHÁY KÉP ("call out") quanh cụm "call out", không
+  phải nháy đơn ('call out'). Khi trích lại phải giữ đúng nháy kép.
+
+- **[B6] Alex Kubodera, Readability in ARPGs**: ví dụ Sekiro và ký tự nguy hiểm (危) chỉ
+  xuất hiện ở phần dek (câu giới thiệu đầu bài), KHÔNG có trong thân bài → không được
+  dùng ví dụ này khi viết, vì không verify được là nội dung chính của tác giả.
+
+- **[A4] Jill Duffy, "5 Ways Game Designers Communicate"**: câu về prototype ("Compared
+  to the other methods of communication, prototyping is astoundingly time consuming to
+  get off the ground.") thực ra là LỜI CỦA TIM LANG, được Duffy dẫn lại bằng cụm mở đầu
+  "He writes:" — không phải lời của chính Jill Duffy. Khi trích phải ghi công cho Tim Lang,
+  không gán nhầm cho Duffy.
