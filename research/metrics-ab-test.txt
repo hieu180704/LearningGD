@@ -1,0 +1,481 @@
+RESEARCH — Metrics và A/B test (dùng số liệu để ra quyết định thiết kế game)
+Ngày: 2026-09-17 | Trạng thái: các mục có "NGUYÊN VĂN" đã tự mở đọc (WebFetch hoặc curl trực
+tiếp — xem cách xử lý encoding ở mục 7). Các định nghĩa/công thức không có nguyên văn trong
+ngoặc kép là diễn giải, đã đối chiếu ít nhất 1 nguồn đã mở đọc. Mục không verify được nằm ở
+mục cuối "[CHƯA VERIFY]".
+
+MỤC LỤC
+1. Định nghĩa & phân loại metric
+2. Actionable metric vs vanity metric
+3. A/B test: nguyên lý và sai lầm kinh điển
+4. Giới hạn của số liệu trong thiết kế game
+5. Case study cụ thể
+6. Đọc thêm
+7. Ghi chú nguồn / encoding
+8. [CHƯA VERIFY]
+
+---
+
+## 1. Định nghĩa & phân loại metric
+
+### 1.1 Retention D1/D7/D30
+Nguồn: Gurinder Singh, "5 Metrics every mobile game developer must track", Game Developer,
+23/01/2014 — https://www.gamedeveloper.com/business/5-metrics-every-mobile-game-developer-must-track
+
+Định nghĩa (diễn giải sát nguyên văn): D1, D7, D30 retention là phần trăm người dùng còn hoạt
+động ("active") tại đúng mốc 1 ngày, 7 ngày, 30 ngày sau khi cài app. Công thức ví dụ trong bài:
+100 người cài app ngày 0, 40 người còn hoạt động ở ngày 1 → D1 = 40%; 20 người ở ngày 7 → D7 =
+20%; 10 người ở ngày 30 → D30 = 10%.
+Benchmark bài đưa ra (2014, đã cũ, chỉ dùng minh hoạ công thức không dùng làm benchmark hiện tại):
+D1 = 40%, D7 = 20%, D30 = 10% coi là "decent".
+
+Ý nghĩa từng mốc (diễn giải, tổng hợp nhiều nguồn thứ cấp — KHÔNG có trích dẫn nguyên văn học
+thuật riêng cho phần này, xem mục 8):
+- D1: đo chất lượng trải nghiệm lần đầu (FTUE — first-time user experience).
+- D7: đo xem người chơi có tìm thấy đủ chiều sâu/thử thách để chơi tiếp qua giai đoạn mới lạ hay không.
+- D30: đo xem game đã trở thành thói quen hay chưa; thường dùng làm tín hiệu sớm cho LTV.
+
+### 1.2 DAU / MAU / Stickiness
+Nguồn: UXCam, "DAU / MAU | Definition" — https://uxcam.com/glossary/dau-mau/
+Đối chiếu công thức "stickiness" với: Gurinder Singh, Game Developer 2014 (mục 1.1) — bài này
+gọi là "Actual Stickiness" và cho công thức: (DAU − New users) / (MAU − New users).
+
+NGUYÊN VĂN (UXCam):
+"The DAU to MAU ratio, also called stickiness, is the proportion of monthly active users that
+engage with your app in a single day."
+Gợi ý dịch: "Tỉ lệ DAU trên MAU, còn gọi là 'độ dính' (stickiness), là tỉ lệ người dùng hoạt
+động trong tháng (MAU) mà cũng hoạt động trong một ngày cụ thể."
+
+Diễn giải thêm (UXCam): DAU/MAU = 50% nghĩa là người dùng trung bình tương tác với app khoảng
+15/30 ngày trong tháng.
+
+### 1.3 ARPU / ARPDAU / ARPPU
+Nguồn: GameAnalytics, "How to calculate ARPU, ARPPU, ARPDAU and more" —
+https://www.gameanalytics.com/blog/how-to-calculate-arpu-arppu-arpdau-and-more
+
+Công thức (nguyên văn, dạng công thức ngắn trong bài):
+- ARPU (Average Revenue Per User) = "Total Revenue ÷ Total Number of Users" — tính trên TOÀN BỘ
+  người dùng (kể cả người không trả tiền).
+- ARPPU (Average Revenue Per Paying User) = "Total Revenue ÷ Number of Paying Users" — chỉ tính
+  trên người ĐÃ trả tiền ít nhất 1 lần, nên ARPPU luôn cao hơn ARPU.
+- ARPDAU (Average Revenue Per Daily Active User) = "Total Daily Revenue ÷ Daily Active Users" —
+  ARPU tính theo ngày, dùng để theo dõi biến động doanh thu gắn với mức độ engagement theo thời
+  gian.
+
+Diễn giải (bài viết): ARPU đo hiệu quả tổng thể của chiến lược monetization; ARPPU/ARPDAU nhạy
+hơn, phản ánh trực tiếp quyết định giá cả và phản ứng của người chơi.
+
+### 1.4 Churn rate
+Nguồn: Wikipedia, "Churn rate" — https://en.wikipedia.org/wiki/Churn_rate
+
+NGUYÊN VĂN:
+"Churn rate (also known as attrition rate, customer turnover, or customer defection) is a
+metric that measures the proportion of individuals (e.g. employees), customers, or items that
+leave a defined group during a specified period of time."
+
+Công thức (diễn giải theo bài): Churn = (số người rời đi trong kỳ) / (tổng số người ở đầu kỳ) ×
+100.
+Lưu ý: churn và retention là hai mặt của cùng một hiện tượng — về khái niệm, churn ≈ 100% −
+retention trong cùng khung thời gian (diễn giải, không phải trích dẫn).
+
+### 1.5 Session length / session frequency
+Nguồn: Gurinder Singh, Game Developer 2014 (mục 1.1)
+NGUYÊN VĂN: "The time a user is willing to give your app each day is a good indicator of how
+engaged a user is with your app." (nói về session length/time spent).
+Bài cũng nhắc "average sessions per user per day" như một cách đo engagement thay thế cho time
+spent (session frequency) — không có công thức riêng biệt trong bài, chỉ là khái niệm đối lập
+bổ sung cho time spent.
+
+### 1.6 Funnel / conversion rate
+Nguồn: Sam Edwards (Global Technology Partner Manager, Amplitude), Amplitude blog, 01/04/2025
+— https://amplitude.com/blog/funnel-analysis
+
+NGUYÊN VĂN:
+"Funnel analysis is a method used to analyze the sequence of events leading up to a point of
+conversion."
+Gợi ý dịch: "Funnel analysis là phương pháp phân tích chuỗi sự kiện dẫn tới một điểm chuyển đổi
+(conversion)."
+
+Về conversion rate trong funnel (diễn giải theo bài, không có công thức toán cụ thể trong
+nguồn): đo bằng số người dùng đi qua được mỗi bước của funnel (method "Conversion") hoặc theo
+dõi tỉ lệ chuyển đổi biến thiên theo thời gian (method "Conversion over time"). Công thức phổ
+quát (tự suy ra, không trích nguồn): conversion rate của một bước = (số người hoàn thành bước
+đó) / (số người bắt đầu bước đó) × 100.
+
+---
+
+## 2. Actionable metric vs vanity metric
+
+### 2.1 Nguồn gốc — Eric Ries, guest post trên blog Tim Ferriss, "Vanity Metrics vs. Actionable
+Metrics", đăng 19/05/2009
+Nguồn: https://tim.blog/2009/05/19/vanity-metrics-vs-actionable-metrics/   [đã curl trực tiếp
+để giữ đúng dấu nháy cong, xem mục 7]
+
+NGUYÊN VĂN (định nghĩa vanity metric):
+"The only metrics that entrepreneurs should invest energy in collecting are those that help
+them make decisions. Unfortunately, the majority of data available in off-the-shelf analytics
+packages are what I call Vanity Metrics. They might make you feel good, but they don’t offer
+clear guidance for what to do."
+
+NGUYÊN VĂN (ví dụ minh hoạ actionable metric — chính là một A/B test):
+"Now consider the case of an Actionable Metric. Imagine you add a new feature to your website,
+and you do it using an A/B split-test in which 50% of customers see the new feature and the
+other 50% don’t. A few days later, you take a look at the revenue you’ve earned from each set
+of customers, noticing that group B has 20% higher revenue per-customer. Think of all the
+decisions you can make: obviously, roll out the feature to 100% of your customers; continue to
+experiment with more features like this one; and realize that you’ve probably learned something
+that’s particular valuable to your customers."
+
+NGUYÊN VĂN (cảnh báo nhầm tương quan/nhân quả — liên quan trực tiếp tới "Simpson's paradox" và
+seasonal confound ở mục 3):
+"For example, here’s a pattern I’ve witnessed in companies large and small. The company
+launches a new feature or new product, and a few days later, traffic (or revenue, or customers)
+starts going up. Everyone involved with that product celebrates. In fact, I’ve noticed that
+people tend to believe that whatever they were working on that preceded the metrics improvement
+probably caused the improvement itself. So the product guys think it’s the new feature, the
+sales guys think it’s that new promotion — I’ve even seen customer service reps be convinced
+it’s due to a new customer-friendly policy. In many cases the fluctuations are random or caused
+by unrelated external events."
+
+NGUYÊN VĂN (split-test là công cụ actionable-metric mạnh nhất, kèm cảnh báo chọn hypothesis
+đáng test):
+"A/B experiments produce the most actionable of all metrics, because they explicitly refute or
+confirm a specific hypothesis. ... A good rule of thumb is to ask yourself, “if this test turns
+out differently from how I expect, will that cast serious doubts on what I think I know about my
+customers?” If not, try something bigger."
+
+NGUYÊN VĂN (nguyên tắc "Measure what matters" — ít metric nhưng đúng, liên hệ trực tiếp callout
+mistake ở mục 3-4):
+"It’s tempting to think that, because some metrics is good, more metrics is better. ... The
+truth is, the key to actionable metrics is having as few as possible."
+
+DÙNG ĐỂ: đây là văn bản gốc năm 2009 của Eric Ries (trước khi in thành chương trong "The Lean
+Startup", 2011) — dùng làm nguồn chính cho khái niệm actionable vs vanity metric, với ví dụ
+A/B test đã có sẵn trong chính định nghĩa gốc.
+
+### 2.2 Lean Analytics — Alistair Croll & Benjamin Yoskovitz (2013)
+⚠️ CHƯA tự mở đọc trực tiếp bản sách/trích đoạn có kiểm chứng nguyên văn — chỉ có qua tổng hợp
+thứ cấp (blog tóm tắt). KHÔNG đặt trong ngoặc kép. Xem mục 8.
+Diễn giải (không trích dẫn): sách đưa ra tiêu chí gần giống Ries — một metric "actionable" phải
+đi kèm hành động cụ thể thay đổi được, còn "vanity metric" chỉ tăng theo thời gian và không dẫn
+tới quyết định gì. Ví dụ vanity metric sách hay nhắc: tổng số user đăng ký, tổng pageview, tổng
+lượt tải — đều chỉ tăng, không giảm, và không phản ánh việc người dùng có còn ở lại hay không.
+
+---
+
+## 3. A/B test: nguyên lý và sai lầm kinh điển
+
+### 3.1 Nguyên lý cơ bản (tổng hợp, không trích dẫn riêng — khái niệm phổ thông trong toàn bộ
+nguồn ở mục này): chia người chơi ngẫu nhiên (random assignment) thành nhóm control (giữ
+nguyên) và nhóm variant/treatment (thay đổi 1 biến số), đo cùng một metric ở cả hai nhóm trong
+cùng khung thời gian, rồi so sánh bằng kiểm định thống kê để xác định khác biệt có phải do thay
+đổi hay do ngẫu nhiên.
+
+### 3.2 Peeking — dừng test sớm khi thấy đẹp
+Nguồn: Evan Miller, "How Not To Run An A/B Test", evanmiller.org, không ghi ngày gốc, có
+UPDATE tháng 5/2013 — https://www.evanmiller.org/how-not-to-run-an-ab-test.html   [đã curl trực
+tiếp giữ nguyên dấu nháy cong/en-dash, xem mục 7]
+
+NGUYÊN VĂN (định nghĩa vấn đề):
+"If you run A/B tests on your website and regularly check ongoing experiments for significant
+results, you might be falling prey to what statisticians call repeated significance testing
+errors."
+
+NGUYÊN VĂN (con số cụ thể — false positive rate thực tế khi peek liên tục):
+"Suppose your conversion rate is 50% and you want to test to see if a new logo gives you a
+conversion rate of more than 50% (or less). You stop the experiment as soon as there is 5%
+significance, or you call off the experiment after 150 observations. Now suppose your new logo
+actually does nothing. What percent of the time will your experiment wrongly find a significant
+result? No more than five percent, right? Maybe six percent, in light of the preceding analysis?
+Try 26.1% – more than five times what you probably thought the significance level was."
+
+NGUYÊN VĂN (bảng quy đổi — peek càng nhiều, ngưỡng "ý nghĩa thống kê" hiển thị càng phải chặt
+hơn để giữ đúng 5% thật):
+"Repeated significance testing always increases the rate of false positives ... For example, if
+you peek at an ongoing experiment ten times, then what you think is 1% significance is actually
+just 5% significance."
+Bảng: peek 1 lần → cần 2,9% reported để đạt 5% actual; 2 lần → 2,2%; 3 lần → 1,8%; 5 lần →
+1,4%; 10 lần → 1,0%.
+
+NGUYÊN VĂN (câu nhấn mạnh rủi ro cho người ra quyết định vận hành theo dashboard realtime):
+"Decide for yourself how big a problem you have, but if you run your business by constantly
+checking the results of ongoing A/B tests and making quick decisions, then this table should
+give you goosebumps."
+
+NGUYÊN VĂN (giải pháp — fix sample size trước):
+"Decide on a sample size in advance and wait until the experiment is over before you start
+believing the “chance of beating original” figures that the A/B testing software gives you.
+“Peeking” at the data is OK as long as you can restrain yourself from stopping an experiment
+before it has run its course. ... perhaps the best advice is: no peeking!"
+"Committing to a sample size completely mitigates the problem described here."
+
+NGUYÊN VĂN (giải pháp thay thế — sequential design):
+"Sequential experiment design lets you set up checkpoints in advance where you will decide
+whether or not to continue the experiment, and it gives you the correct significance levels."
+
+### 3.3 Multiple comparisons
+Diễn giải (tổng hợp khái niệm thống kê phổ thông, không gắn 1 nguồn duy nhất đã mở đọc riêng
+cho game — xem mục 8): càng test nhiều biến thể/nhiều metric cùng lúc trong 1 thí nghiệm, xác
+suất ít nhất 1 trong số đó "lên xanh" (significant) chỉ do ngẫu nhiên càng cao — cùng bản chất
+toán học với vấn đề peeking ở mục 3.2 (nhiều phép kiểm định = nhiều cơ hội để sai số loại I
+xảy ra), chỉ khác là "nhiều lần nhìn theo THỜI GIAN" (peeking) so với "nhiều biến/nhiều nhóm
+nhìn CÙNG LÚC" (multiple comparisons).
+
+### 3.4 Novelty effect
+Nguồn: LogRocket Blog, "How to catch the novelty effect in A/B testing" —
+https://blog.logrocket.com/product-management/novelty-effect-ab-testing/
+(qua WebSearch tổng hợp, CHƯA WebFetch trực tiếp trang này — xem mục 8 về mức độ tin cậy)
+
+Diễn giải: novelty effect là hiệu ứng người dùng phản ứng tích cực với một thay đổi (UI mới,
+nút mới, onboarding mới) chỉ vì nó KHÁC — không phải vì nó thực sự tốt hơn. Hiệu ứng này thường
+biến mất/đảo chiều sau khi người dùng quen (theo nguồn: khoảng 1-3 tuần đối với người dùng quay
+lại). Ứng dụng trực tiếp: nếu chỉ đo A/B test trong vài ngày đầu, có thể chọn nhầm biến thể "mới
+lạ nhất thời" thay vì biến thể tốt thật sự lâu dài.
+
+### 3.5 Simpson's paradox
+Nguồn: tổng hợp qua WebSearch (Statsig, Optimizely, các bài blog A/B testing) — CHƯA WebFetch
+trực tiếp trang gốc nào, xem mục 8.
+
+Diễn giải: Simpson's paradox là hiện tượng xu hướng ở dữ liệu TỔNG HỢP đảo ngược so với xu
+hướng ở từng NHÓM CON — ví dụ: biến thể B thắng biến thể A khi nhìn tổng số liệu, nhưng khi tách
+theo từng phân khúc (mobile riêng, desktop riêng, v.v.) thì B lại THUA A ở TẤT CẢ các phân khúc.
+Nguyên nhân thường gặp trong A/B test: có một biến gây nhiễu (confounder) phân bổ KHÔNG ĐỀU giữa
+2 nhóm — ví dụ tỉ lệ traffic chia cho control/variant thay đổi không đều theo thời gian (ví dụ:
+tuần 1 chia 99% control/1% variant, tuần 2 chia 50/50) khiến số liệu gộp bị lệch dù mỗi tuần
+riêng lẻ variant vẫn thắng. Cách phòng: giữ tỉ lệ phân bổ traffic ổn định suốt thời gian chạy
+test, và luôn kiểm tra kết quả theo từng phân khúc lớn (thiết bị, nguồn traffic, người mới/người
+cũ) trước khi kết luận.
+
+### 3.6 Đo proxy metric sai (liên hệ Goodhart's law — xem mục 4)
+Diễn giải (tổng hợp từ Ries mục 2.1 + khái niệm chung): rủi ro chọn nhầm metric ĐẠI DIỆN cho
+mục tiêu thật. Ví dụ Ries đã cảnh báo trực tiếp trong nguyên văn mục 2.1: nếu chỉ nhìn tổng
+pageview/traffic tăng ngay sau khi launch feature, có thể đang đo ĐÚNG lúc một chu kỳ mùa
+vụ/ngẫu nhiên đi lên (seasonal pattern "Disneyland calendar" ông mô tả) chứ không phải do feature
+mới — chọn sai proxy metric (đo "traffic tăng" thay vì đo "traffic tăng SO VỚI baseline kỳ vọng
+theo mùa vụ, tách theo per-customer") dẫn tới kết luận sai nhân quả.
+
+### 3.7 Kohavi, Tang, Xu — "Trustworthy Online Controlled Experiments: A Practical Guide to A/B
+Testing" (Cambridge University Press, 2020)
+⚠️ Chỉ xác nhận được sách TỒN TẠI và chủ đề (qua trang mô tả/experimentguide.com — trang chủ
+sách, đã WebFetch nhưng KHÔNG có nội dung trích dẫn cụ thể trên trang, chỉ có blurb/mua sách).
+CHƯA mở đọc được nội dung chương sách để trích nguyên văn cụ thể về "peeking", "OEC", "HiPPO".
+Xem mục 8 — dùng sách này ở mục "đọc thêm" (mục 6), KHÔNG trích dẫn nội dung cụ thể trong bài
+học.
+
+---
+
+## 4. Giới hạn của số liệu trong thiết kế game
+
+### 4.1 Goodhart's law — nguồn gốc câu nói
+Nguồn: tổng hợp WebSearch (nhiều nguồn học thuật/thứ cấp khớp nhau: PMC/NCBI, ModelThinkers,
+Wikipedia, CNA report) — CHƯA WebFetch trực tiếp bài gốc Goodhart 1975 hay bài Strathern 1997,
+xem mục 8. Độ tin cậy: TRUNG BÌNH-CAO (nhiều nguồn độc lập khớp nhau về chuỗi lịch sử).
+
+Diễn giải chuỗi lịch sử thuật ngữ (không trích nguyên văn):
+- Charles Goodhart (nhà kinh tế học Anh) nêu ý tưởng gốc trong một bài viết về chính sách tiền
+  tệ Anh, trình bày tại "Money Study Group" (LSE) năm 1975. Câu gốc của ông PHỨC TẠP hơn nhiều,
+  đại ý: "bất kỳ quy luật thống kê quan sát được nào cũng có xu hướng sụp đổ một khi bị áp lực
+  dùng cho mục đích kiểm soát."
+- Câu ngắn gọn nổi tiếng "When a measure becomes a target, it ceases to be a good measure" —
+  KHÔNG phải nguyên văn của Goodhart. Theo chuỗi trích dẫn: Keith Hoskin (1996) viết gần với ý
+  này, và nhà nhân học Marilyn Strathern (1997) là người đúc kết thành câu phổ biến ngày nay,
+  trong một bài viết phê phán việc dùng chỉ số đánh giá trong giáo dục.
+→ Khi dùng trong bài học: nên ghi "câu này thường được gọi là Goodhart's law, đúc kết lại từ ý
+tưởng gốc của Charles Goodhart (1975), qua diễn giải phổ biến hoá của Marilyn Strathern (1997)"
+— KHÔNG gán thẳng câu ngắn gọn là lời của chính Goodhart.
+
+### 4.2 Metric nói "cái gì", không nói "vì sao" — cần playtest định tính
+Nguồn: Eric Ries, tim.blog 2009 (mục 2.1) — dùng lại nguyên văn đã trích:
+"Metrics are people, too. ... Not sure what the numbers mean? Get the customers on the phone
+and ask them."
+Gợi ý dịch: "Số liệu cũng là con người. ... Không chắc con số nghĩa là gì? Gọi điện cho khách
+hàng và hỏi thẳng họ."
+→ Đây là lời khuyên trực tiếp, nguyên văn, từ chính người đặt ra khái niệm actionable/vanity
+metric: số liệu định lượng phải được bổ sung bằng hỏi/quan sát định tính khi không rõ NGUYÊN
+NHÂN đứng sau con số.
+
+Bổ sung từ case study Chess.com (mục 5.4): trưởng nhóm A/B test của Chess.com nhấn mạnh viết
+"narrative after the metric" (câu chuyện/diễn giải SAU con số) — tức con số riêng lẻ không đủ,
+phải diễn giải nó thành một câu chuyện nhân quả có thể kiểm chứng.
+
+### 4.3 Nguy cơ tối ưu hoá theo metric ngắn hạn làm hỏng trải nghiệm
+Nguồn: Growthbook, "How gaming and media companies run experiments" —
+https://www.growthbook.io/insights/gaming-media-companies-experimentation-approach
+
+NGUYÊN VĂN (nguyên tắc của Netflix về tránh tối ưu nhầm proxy metric — click thumbnail thay vì
+trải nghiệm xem thật):
+"Do not optimize thumbnail clicks while ignoring successful viewing and retention."
+→ Tuy đây là ví dụ streaming chứ không phải game thuần tuý, nhưng minh hoạ đúng nguyên tắc:
+click/impression là proxy dễ đo và dễ tối ưu, nhưng tối ưu mù quáng theo nó có thể phá trải
+nghiệm thật (người dùng bấm vào rồi thất vọng, bỏ xem giữa chừng) — tương tự rủi ro tối ưu
+"session dài hơn" bằng cách làm game khó chịu/gây nghiện thay vì thật sự hay hơn trong thiết kế
+game.
+
+---
+
+## 5. Case study cụ thể
+
+### 5.1 King — Candy Crush Saga, level 65 (mobile, match-3)
+Nguồn: phỏng vấn Jonathan Palmer (Product Director, Core Data Services, King), DataIQ, 02/2018
+— https://www.dataiq.global/articles/articles/how-king-crushing-games-data
+
+NGUYÊN VĂN:
+"It's an incredibly hard level, it had its own cult around it. We realised it was causing a lot
+of people to churn."
+"Using data, we were able to say: 'we need to drop the difficulty of this level a bit'."
+"At level 65 there used to be a steep drop in player numbers but following the tweak, they saw
+more even distribution of players."
+
+DÙNG ĐỂ: ví dụ funnel/progression analysis (mục 1.6) phát hiện điểm rò rỉ churn cụ thể (level
+65), rồi hạ độ khó và đo lại funnel để xác nhận hiệu quả — không có A/B test tách bạch rõ ràng
+trong nguồn (chỉ mô tả "before/after"), nên dùng làm ví dụ FUNNEL/CHURN chứ không gán nhãn
+"A/B test" nếu muốn chính xác tuyệt đối.
+
+### 5.2 Frenzoo — A/B test icon app trên Google Play (mobile, nhiều thể loại: 3D simulation,
+dress-up, farm, fashion)
+Nguồn: Simon Newstead, "How We A/B Test Game Art And Icons", Game Developer, 17/02/2016 —
+https://www.gamedeveloper.com/business/how-we-a-b-test-game-art-and-icons
+
+NGUYÊN VĂN các kết quả cụ thể:
+- Game mô phỏng 3D: "a single avatar and gameplay background performed best, outperforming the
+  original icon with a high degree of confidence" (test qua Google Play Store Listing
+  Experiments).
+- Game dress-up: icon mang "popstar feel" cải thiện performance "over 10% relative to the
+  original".
+
+NGUYÊN VĂN (cảnh báo phương pháp — liên hệ trực tiếp sample size ở mục 3.2):
+"don't ask players at low levels" và khuyến nghị "only gather minimum responses needed to gain
+statistical confidence".
+
+DÙNG ĐỂ: ví dụ A/B test THẬT (Google Play Store Listing Experiments) với số liệu cụ thể (>10%),
+đa dạng thể loại mobile trong cùng 1 case (studio Frenzoo làm nhiều game simulation/dress-up).
+
+### 5.3 Halo 4 (343 Industries / Microsoft) — console, live-service
+Nguồn: Microsoft Learn (archive blog, gốc từ bài keynote Strata Conference của Dave Campbell,
+Microsoft Technical Fellow), 06/03/2013 —
+https://learn.microsoft.com/en-us/archive/blogs/sqlman/case-study-on-my-two-favorite-technologies-big-data-xbox-halo
+(dẫn lại case study chính thức của Microsoft về 343 Industries/Halo 4, dùng Windows Azure
+HDInsight/Hadoop)
+
+NGUYÊN VĂN (mô tả cách dữ liệu ảnh hưởng update hằng tuần):
+"Helps Halo 4 Team Make Weekly Game Updates - can take BI data pulled from the game each day
+and identify user trends, such as the average length of a game and the specific game features
+that players use the most. By getting these insights, the Halo 4 team can make frequent updates
+to the game."
+
+NGUYÊN VĂN (trích lời nhân sự — dùng tool quen thuộc để ra quyết định, không cần biết kỹ thuật
+Hadoop):
+"By hooking Hadoop into a set of tools that are already familiar, such as Microsoft Excel or
+Microsoft SharePoint, people can take advantage of the power of Hadoop without needing to know
+the technical ins and outs," — lời của Vayman (nhân sự nhắc tới trong case study gốc, không có
+tên đầy đủ/chức danh trong bài này).
+
+DÙNG ĐỂ: ví dụ CONSOLE/LIVE-SERVICE — dùng session length + feature-usage data để quyết định
+NỘI DUNG update hằng tuần, khác chất với 2 case mobile ở trên (không phải A/B test cổ điển, mà
+là data-driven content decision theo telemetry).
+
+### 5.4 Chess.com — PC/web, phân khúc theo trình độ khi A/B test
+Nguồn: Growthbook, "How gaming and media companies run experiments" (dẫn lời Nafis Shaikh) —
+https://www.growthbook.io/insights/gaming-media-companies-experimentation-approach
+
+Diễn giải (paraphrase từ bài, KHÔNG có nguyên văn lời Nafis Shaikh trong ngoặc kép — bài
+Growthbook diễn giải lại, không trích nguyên văn phỏng vấn): nhóm A/B test của Chess.com coi
+trình độ (skill) người chơi là một biến thí nghiệm trung tâm — phân khúc người dùng theo trình
+độ TRƯỚC khi xác định biến thể nào thắng, thay vì gộp chung tất cả người chơi. Nguyên tắc được
+nhắc tới: viết "narrative after the metric" — tức phải diễn giải con số thành câu chuyện nhân
+quả (cái gì thay đổi trong funnel, nhóm người dùng nào phản ứng, nhóm hiểu ra điều gì) thay vì
+chỉ nhìn số lên/xuống.
+
+DÙNG ĐỂ: ví dụ PC/WEB — minh hoạ trực tiếp rủi ro Simpson's paradox (mục 3.5, phân khúc có thể
+đảo ngược kết luận tổng) và nguyên tắc "metric cần diễn giải định tính" (mục 4.2).
+
+---
+
+## 6. Đọc thêm
+
+- Ron Kohavi, Diane Tang, Ya Xu — "Trustworthy Online Controlled Experiments: A Practical Guide
+  to A/B Testing" (Cambridge University Press, 2020). Trang sách:
+  https://experimentguide.com/ — CHƯA mở đọc được nội dung chương, chỉ xác nhận sách tồn tại.
+- Evan Miller — "How Not To Run An A/B Test" —
+  https://www.evanmiller.org/how-not-to-run-an-ab-test.html (đã verify toàn bộ, mục 3.2)
+- Eric Ries — "Vanity Metrics vs. Actionable Metrics" (guest post, tim.blog, 2009) —
+  https://tim.blog/2009/05/19/vanity-metrics-vs-actionable-metrics/ (đã verify toàn bộ, mục 2.1,
+  4.2) — bản đầy đủ hơn nằm trong sách "The Lean Startup" (2011), chương về vanity/actionable
+  metrics — CHƯA tự mở đọc bản sách.
+- Alistair Croll & Benjamin Yoskovitz — "Lean Analytics: Use Data to Build a Better Startup
+  Faster" (O'Reilly, 2013) — CHƯA tự mở đọc trực tiếp, xem mục 8.
+- Simon Newstead (Frenzoo), "How We A/B Test Game Art And Icons", Game Developer, 2016 —
+  https://www.gamedeveloper.com/business/how-we-a-b-test-game-art-and-icons (đã verify, mục 5.2)
+- Growthbook, "How gaming and media companies run experiments" —
+  https://www.growthbook.io/insights/gaming-media-companies-experimentation-approach (đã verify,
+  mục 4.3, 5.4)
+- GDC Vault (gdcvault.com) — kho bài nói GDC nói chung về game analytics/A-B testing; CHƯA tìm
+  được 1 bài GDC talk cụ thể đã mở nghe/đọc transcript về chủ đề này trong phiên nghiên cứu này
+  (xem mục 8).
+- Deconstructor of Fun (deconstructoroffun.com) — blog phân tích mobile F2P game bằng dữ liệu +
+  behavioral/emotional analysis; chỉ mới xem qua trang giới thiệu chung, CHƯA đọc case cụ thể
+  (xem mục 8).
+
+---
+
+## 7. Ghi chú nguồn / encoding
+
+- Hai nguồn quan trọng nhất cho trích dẫn nguyên văn (Evan Miller, Eric Ries/tim.blog) được tải
+  bằng `curl` trực tiếp (không qua WebFetch) rồi tự xử lý HTML entity (&#8217; → ’, &#8220;/
+  &#8221; → “ ”, &#8211;/&ndash; → –, &#8212;/&mdash; → —) để giữ ĐÚNG dấu nháy cong/gạch ngang
+  như bản gốc, tránh lỗi chuẩn hoá nháy cong→nháy thẳng đã từng vấp ở research khác (xem
+  MEMORY.md: "Subagent chuẩn hoá nháy cong thành thẳng").
+- Các nguồn còn lại (GameAnalytics, UXCam, Wikipedia, DataIQ, Frenzoo/Game Developer, Growthbook,
+  Amplitude, Microsoft Learn) được đọc qua WebFetch trực tiếp (không qua curl thô) — quote lấy từ
+  bản WebFetch trả về, CÓ RỦI RO nhỏ về chuẩn hoá dấu câu (WebFetch dùng model nhỏ xử lý lại nội
+  dung) dù thấp hơn nhiều so với việc không mở nguồn — nếu cần trích dẫn học thuật tuyệt đối
+  chính xác từ các nguồn này, nên curl lại trực tiếp như đã làm với Miller/Ries.
+- experimentguide.com (trang sách Kohavi/Tang/Xu): đã WebFetch, nhưng trang chỉ là landing page
+  bán sách, không có nội dung chương — không trích dẫn được gì cụ thể từ đây.
+
+---
+
+## 8. [CHƯA VERIFY]
+
+- "Lean Analytics" (Croll & Yoskovitz) — mọi câu "trích dẫn" tìm được qua WebSearch đều đến từ
+  blog tóm tắt bên thứ ba (businessbookclub.substack.com, holistics.io, sobrief.com...), KHÔNG
+  phải từ chính văn bản sách đã mở đọc. Câu hay được gán cho sách — "if you have a piece of data
+  on which you cannot act, it's a vanity metric" — CHƯA xác nhận được đây có đúng là nguyên văn
+  sách hay là diễn giải của người tóm tắt. KHÔNG dùng trong ngoặc kép nếu viết bài; nếu cần trích
+  dẫn chính xác, phải tìm bản sách/preview Google Books và tự đọc so khớp.
+- Ron Kohavi / "Trustworthy Online Controlled Experiments" — chỉ xác nhận sách tồn tại và chủ đề
+  bao quát (peeking, OEC, HiPPO là các khái niệm Kohavi nổi tiếng gắn với công trình của ông tại
+  Microsoft/Amazon) qua kiến thức nền + mô tả sách trên các trang bán sách (Goodreads, Amazon,
+  Barnes & Noble) — KHÔNG mở đọc được nội dung chương cụ thể nào để trích dẫn. Thuật ngữ "HiPPO"
+  (Highest Paid Person's Opinion) được cộng đồng gán rộng rãi cho Kohavi nhưng CHƯA tự xác nhận
+  qua nguồn gốc (bài báo/talk gốc ông dùng từ này lần đầu khi nào).
+- Novelty effect (mục 3.4) — nguồn LogRocket chỉ qua WebSearch tổng hợp (auto-summary), CHƯA tự
+  WebFetch/mở trang trực tiếp để so khớp câu chữ. Nội dung dùng là diễn giải, không phải trích
+  dẫn nguyên văn — an toàn để dùng vì không đặt trong ngoặc kép, nhưng nếu cần trích nguyên văn
+  phải mở lại trang.
+- Simpson's paradox (mục 3.5) — tương tự, chỉ qua WebSearch tổng hợp nhiều nguồn (Statsig,
+  Optimizely, Medium/HomeAway blog), CHƯA WebFetch trực tiếp trang nào. Khái niệm toán học này là
+  kiến thức phổ thông (không phải trích dẫn của một tác giả cụ thể) nên rủi ro thấp, nhưng chưa
+  có 1 nguồn "chính" đã mở đọc để cite khi viết bài — nên chọn 1 trong các link trên và tự mở đọc
+  lại trước khi viết.
+- Multiple comparisons (mục 3.3) — hoàn toàn là diễn giải khái niệm thống kê phổ thông, KHÔNG gắn
+  với nguồn cụ thể nào đã mở đọc riêng cho bối cảnh game/A-B test. Cần research thêm nếu bài đòi
+  hỏi trích dẫn nguồn cho riêng phần này.
+- Goodhart's law (mục 4.1) — chuỗi lịch sử thuật ngữ dựa trên đối chiếu NHIỀU nguồn thứ cấp
+  (PMC/NCBI, ModelThinkers, Wikipedia, CNA) qua WebSearch, CHƯA tự mở đọc bài gốc Goodhart 1975
+  hoặc bài Strathern 1997 (nhiều khả năng phải trả phí truy cập tạp chí học thuật). Độ tin cậy
+  hợp lý vì nhiều nguồn khớp nhau, nhưng CHƯA đạt chuẩn "đã mở đọc nguồn gốc thật" của dự án.
+- GDC Vault — chưa tìm/mở được bài GDC talk cụ thể nào về chủ đề metrics/A-B test trong game
+  (2 kết quả tìm được — "Deconstructor of Fun: Breaking Down Top Mobile Games" — là về phân tích
+  thiết kế game nói chung, không chuyên về metric/A-B test; chưa mở nghe/đọc transcript). Nếu bài
+  cần 1 GDC talk cụ thể, cần thêm 1 vòng tìm kiếm/đăng nhập GDC Vault.
+- Deconstructor of Fun — chỉ xem qua mô tả chung (phương pháp "arousal"/neuroscience trước khi
+  ra mắt feature), CHƯA đọc case cụ thể có số liệu. Không dùng làm case study trong mục 5, chỉ
+  liệt kê ở mục 6 "đọc thêm".
+- Riot Games "Stocking Your Shop With Data Science" (Riley Howsden, 30/04/2019, đã WebFetch) —
+  bài về recommendation system (collaborative filtering) cho item shop, KHÔNG phải case A/B
+  test/metric quyết định thiết kế theo đúng nghĩa bài học cần — đã xem nhưng KHÔNG đưa vào mục 5
+  vì lệch trọng tâm.
+- Kohavi/Bing "$100 triệu button" hoặc câu chuyện nổi tiếng tương tự — search bị lỗi công cụ
+  ("Web search error: unavailable") ở 2 lượt thử, CHƯA tìm lại được. Nếu bài cần case study kinh
+  điển ngoài game (Bing/Microsoft), cần research thêm ở session sau.

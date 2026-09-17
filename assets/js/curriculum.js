@@ -331,7 +331,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 15,
                 level: "Nâng cao",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-4/03-dao-duc-dark-patterns",
