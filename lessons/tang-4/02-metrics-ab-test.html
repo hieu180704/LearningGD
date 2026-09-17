@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metrics và A/B test — Xưởng Game Design</title>
+<meta name="description" content="Một con số tăng lên không có nghĩa là bạn đang thắng. Học cách đọc retention, ARPU, funnel, chạy một A/B test đúng cách, và tránh những cái bẫy thống kê khiến dữ liệu nói dối.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-4/02-metrics-ab-test" class="tier-4">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-4">Tầng 4 · Nâng cao</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 4 · Bài 02</p>
+            <h1>Metrics và A/B test</h1>
+            <p class="dek">Một con số tăng lên không có nghĩa là bạn đang thắng — học cách chọn đúng metric, chạy một A/B test đơn giản, và không tự lừa chính mình bằng dữ liệu nhiễu.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 15 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Nâng cao</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="../../lo-trinh.html#tang-4">F2P và LiveOps</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Chọn đúng metric cho một câu hỏi thiết kế cụ thể, thay vì con số chỉ để "thấy vui"</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Thiết kế một A/B test đơn giản: control, variant, và biết dừng đúng lúc</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Tránh kết luận sai từ dữ liệu nhiễu — peeking, novelty effect, Simpson's paradox</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Con số cho biết chỗ nào sai, không phải vì sao sai</h2>
+        <p>Candy Crush Saga có một màn từng khiến người chơi ám ảnh: level 65. Jonathan Palmer, Product Director mảng Core Data Services của King, kể lại trong một phỏng vấn (DataIQ, 2018): đây là một màn cực khó, đến mức có hẳn một cộng đồng riêng của những người bị kẹt ở đó — và dữ liệu cho thấy màn này khiến rất nhiều người chơi rời bỏ game (<span class="term" data-en="churn">churn</span>).</p>
+        <p>King không đoán mò nguyên nhân. Họ nhìn vào <span class="term" data-en="funnel">funnel</span> — biểu đồ số người chơi còn lại ở từng màn, xếp theo thứ tự chơi. Ở level 65, đường biểu đồ đó rơi thẳng đứng. Sau khi hạ độ khó, funnel phẳng lại — người chơi phân bố đều hơn qua các màn thay vì rớt hàng loạt ở một điểm.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Ghi chú</p>
+                <p>Đây KHÔNG phải một A/B test. Nguồn chỉ mô tả King so sánh funnel trước và sau khi hạ độ khó (before/after), không có nhóm control chạy song song. Phân biệt rõ hai cách này — vì phần sau của bài sẽ chỉ ra tại sao "trước/sau" đơn thuần dễ đánh lừa hơn A/B test thật.</p>
+            </div>
+        </div>
+        <p>Cả funnel lẫn A/B test đều là cách dùng số liệu để ra quyết định thiết kế thay vì cảm tính. Bài này đi qua những metric nền tảng nhất, cách chạy một A/B test cho đúng, và những cái bẫy khiến con số nói dối.</p>
+
+        <h2 id="cac-chi-so">Những con số nền: retention, DAU/MAU, ARPU, churn</h2>
+        <p><span class="term" data-en="Retention">Retention</span> (tỉ lệ giữ chân) đo phần trăm người chơi còn hoạt động đúng vào một mốc thời gian sau khi cài game. Ví dụ của Gurinder Singh (Game Developer, 2014): 100 người cài app ngày 0; 40 người còn hoạt động ở ngày 1 → D1 = 40%; 20 người ở ngày 7 → D7 = 20%; 10 người ở ngày 30 → D30 = 10%.</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Chỉ số</th><th>Công thức / cách tính</th><th>Đọc để biết điều gì</th></tr></thead>
+                <tbody>
+                    <tr><td>D1 retention</td><td>% còn hoạt động ở ngày 1 sau khi cài</td><td>Trải nghiệm lần đầu (<span class="term" data-en="First-Time User Experience">FTUE</span>) có ổn không</td></tr>
+                    <tr><td>D7 retention</td><td>% còn hoạt động ở ngày 7</td><td>Có đủ chiều sâu để chơi qua giai đoạn mới lạ không</td></tr>
+                    <tr><td>D30 retention</td><td>% còn hoạt động ở ngày 30</td><td>Game đã thành thói quen chưa — tín hiệu sớm cho LTV</td></tr>
+                    <tr><td>DAU/MAU (stickiness)</td><td>(DAU − user mới) ÷ (MAU − user mới)</td><td>Bao nhiêu % người dùng trong tháng cũng quay lại trong một ngày cụ thể</td></tr>
+                    <tr><td>ARPU</td><td>Tổng doanh thu ÷ tổng số người dùng</td><td>Hiệu quả monetization tổng thể, tính trên mọi người chơi</td></tr>
+                    <tr><td>ARPPU</td><td>Tổng doanh thu ÷ số người đã trả tiền</td><td>Phản ứng giá của riêng người trả tiền — luôn cao hơn ARPU</td></tr>
+                    <tr><td>ARPDAU</td><td>Doanh thu trong ngày ÷ DAU</td><td>Biến động doanh thu theo ngày, gắn với mức độ engagement</td></tr>
+                    <tr><td>Churn</td><td>Số người rời đi trong kỳ ÷ tổng số đầu kỳ × 100</td><td>Mặt đối lập của retention (churn ≈ 100% − retention cùng kỳ)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Ghi chú</p>
+                <p>Bài của Gurinder Singh (2014) từng gọi D1 = 40%, D7 = 20%, D30 = 10% là mức "ổn". Số này đã hơn một thập kỷ tuổi — đừng dùng làm chuẩn hiện nay, chỉ dùng để hình dung cách công thức hoạt động.</p>
+            </div>
+        </div>
+
+        <h2 id="funnel">Funnel: nhìn thấy đúng chỗ rơi rụng</h2>
+        <p>Funnel là cách phân tích chuỗi hành động dẫn tới một điểm chuyển đổi (<span class="term" data-en="conversion">conversion</span>) — mỗi bước đo được bao nhiêu người đi tiếp, bao nhiêu người rơi rụng. Conversion rate của một bước = số người hoàn thành bước đó ÷ số người bắt đầu bước đó × 100.</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Cài đặt<small>100%</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Chơi xong tutorial<small>rơi rụng?</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Quay lại D1<small>rơi rụng?</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Trả tiền lần đầu<small>rơi rụng?</small></div>
+            </div>
+            <figcaption>Funnel đơn giản hoá cho một mobile game — bốn bước minh hoạ của người viết, không phải số liệu từ một nguồn cụ thể. Bước nào có tỉ lệ rơi rụng cao nhất là nơi cần soi kỹ, giống cách King soi ra level 65.</figcaption>
+        </figure>
+
+        <h2 id="vanity-vs-actionable">Vanity metric vs actionable metric</h2>
+        <p>Eric Ries đặt tên cho hai loại metric trong một bài viết trên blog của Tim Ferriss (19/05/2009, trước khi in lại thành chương sách <em>The Lean Startup</em> năm 2011). Vanity metric là những con số chỉ tăng theo thời gian và khiến người xem thấy vui, nhưng không dẫn tới hành động nào:</p>
+        <p><em>"They might make you feel good, but they don’t offer clear guidance for what to do."</em> (chúng có thể khiến bạn thấy vui, nhưng không đưa ra hướng dẫn rõ ràng để làm gì tiếp theo — Eric Ries, tim.blog, 2009.)</p>
+        <div class="callout" data-kind="insight">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Bộ lọc thực hành</p>
+                <p>Trước khi báo cáo một con số, tự hỏi: "nếu con số này đảo ngược, tôi sẽ làm gì khác đi?" Nếu câu trả lời là "không gì cả" — đó là vanity metric. Tổng lượt tải, tổng người đăng ký thường rơi vào nhóm này vì chỉ tăng, không phản ánh việc người chơi có còn ở lại hay không.</p>
+            </div>
+        </div>
+        <p>Ries còn cảnh báo một lỗi phổ biến hơn: ra mắt tính năng mới, vài ngày sau doanh thu tăng, cả đội mừng và gán công cho tính năng đó — trong khi biến động có thể chỉ do ngẫu nhiên hoặc một yếu tố bên ngoài không liên quan (mùa vụ, sự kiện khác). Đây là lý do A/B test — có nhóm đối chứng chạy song song — đáng tin hơn nhìn "trước/sau" đơn thuần như case level 65 ở trên.</p>
+
+        <h2 id="ab-test">A/B test: chia đôi, không đoán</h2>
+        <p>Ries minh hoạ actionable metric bằng chính một A/B test: chia ngẫu nhiên khách hàng làm hai, một nửa thấy tính năng mới, nửa còn lại không đổi gì (<span class="term" data-en="control group">control</span>); vài ngày sau, nhóm thấy tính năng mới (<span class="term" data-en="variant/treatment group">variant</span>) có doanh thu bình quân đầu người cao hơn 20%. Từ đó có thể quyết ngay: tung tính năng cho toàn bộ người chơi.</p>
+        <p>Nguyên lý chung: chia ngẫu nhiên (random assignment) thành control và variant, đo cùng một metric ở cả hai nhóm trong cùng khung thời gian, rồi so sánh bằng kiểm định thống kê để biết khác biệt là do thay đổi hay do ngẫu nhiên. Ba cái bẫy hay gặp khi làm sai bước này:</p>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Peeking — dừng test sớm khi thấy đẹp</p>
+                <p>Evan Miller (evanmiller.org) tính: giả sử tỉ lệ chuyển đổi thật là 50% và một thay đổi (đổi logo) thật ra không có tác dụng gì, nhưng bạn liên tục nhìn kết quả và dừng ngay khi đạt 5% significance hoặc sau 150 lượt quan sát. Tỉ lệ thí nghiệm SAI báo "có ý nghĩa thống kê" không phải 5%, mà là:</p>
+                <p><em>"Try 26.1% – more than five times what you probably thought the significance level was."</em> (thử con số 26,1% xem — nhiều hơn gấp năm lần mức ý nghĩa thống kê mà có lẽ bạn tưởng — Evan Miller, evanmiller.org, 2013.)</p>
+                <p>Peek càng nhiều lần, ngưỡng "reported" cần đạt để giữ đúng 5% ý nghĩa thật càng phải chặt hơn: peek 1 lần cần 2,9%; 2 lần cần 2,2%; 3 lần cần 1,8%; 5 lần cần 1,4%; 10 lần chỉ còn 1,0%. Giải pháp: chốt sample size trước khi chạy, đợi đủ số đó rồi mới đọc kết quả — không dừng giữa chừng vì thấy số đẹp.</p>
+            </div>
+        </div>
+        <p><strong>Novelty effect</strong>: người chơi phản ứng tích cực với một thay đổi (UI mới, nút mới) chỉ vì nó KHÁC, không phải vì nó thực sự tốt hơn. Hiệu ứng này thường biến mất hoặc đảo chiều sau khoảng 1-3 tuần khi người dùng đã quen. Chỉ đo vài ngày đầu dễ chọn nhầm biến thể "mới lạ nhất thời" thay vì biến thể tốt thật sự lâu dài.</p>
+        <p><strong>Simpson's paradox</strong>: xu hướng ở dữ liệu gộp lại đảo ngược so với từng nhóm con. Biến thể B có thể thắng A khi nhìn tổng số liệu, nhưng khi tách theo từng phân khúc (thiết bị, người mới/người cũ, trình độ) thì B lại thua A ở mọi phân khúc — thường do tỉ lệ phân bổ traffic giữa hai nhóm thay đổi không đều theo thời gian. Case Chess.com (mục sau) là ví dụ trực tiếp cho cái bẫy này.</p>
+
+        <h2 id="vi-du">Ví dụ: mobile và console</h2>
+        <div class="callout" data-kind="example">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Mobile — Frenzoo A/B test icon trên Google Play</p>
+                <p>Studio Frenzoo (làm nhiều game mô phỏng 3D, dress-up, farm, fashion) dùng Google Play Store Listing Experiments để test icon app. Với game mô phỏng 3D, icon chỉ có một avatar và nền gameplay thắng rõ rệt so với icon gốc, với độ tin cậy thống kê cao. Với game dress-up, icon mang cảm giác "ngôi sao nhạc pop" cải thiện hiệu suất hơn 10% so với bản gốc. Newstead (Game Developer, 2016) cảnh báo: đừng hỏi người chơi mới ở level thấp, và chỉ thu thập đúng số phản hồi tối thiểu cần để đạt độ tin cậy thống kê — cùng nguyên tắc với chốt sample size trước ở phần peeking.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="example">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Console/live-service — Halo 4 và 343 Industries</p>
+                <p>Theo một case study của Microsoft (2013), đội Halo 4 kéo dữ liệu từ game mỗi ngày để xác định xu hướng người chơi — độ dài trận trung bình, những tính năng được dùng nhiều nhất — rồi dùng insight đó để ra bản cập nhật nội dung hằng tuần. Đây không phải A/B test cổ điển như Frenzoo, mà là quyết định nội dung dựa trên telemetry (dữ liệu đo từ xa) thu thập liên tục từ người chơi thật.</p>
+            </div>
+        </div>
+
+        <h2 id="lens">Đọc một con số trước khi tin nó</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Con số này đang trả lời câu hỏi gì?</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Con số này đang trả lời câu hỏi thiết kế cụ thể nào?</li>
+                <li><span class="q-icon">?</span> Nếu nó ngược lại, quyết định của tôi có đổi không?</li>
+                <li><span class="q-icon">?</span> Đây là actionable metric, hay chỉ là con số cho thấy vui?</li>
+                <li><span class="q-icon">?</span> Tôi đã peek kết quả bao nhiêu lần trước khi tin nó?</li>
+                <li><span class="q-icon">?</span> Con số này đúng ở mọi phân khúc người chơi, hay chỉ đúng khi gộp chung?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Tối ưu nhầm proxy metric</p>
+                <p>Growthbook dẫn nguyên tắc của Netflix: đừng tối ưu lượt bấm vào thumbnail mà bỏ qua việc người xem có xem trọn vẹn và quay lại thật hay không. Click là proxy dễ đo, dễ tối ưu — nhưng tối ưu mù quáng theo nó có thể phá trải nghiệm thật. Trong game, rủi ro tương tự là tối ưu "session dài hơn" bằng cách làm game khó chịu, gây nghiện, thay vì thật sự hay hơn.</p>
+                <p>Câu ngắn gọn hay được nhắc tới trong bối cảnh này — dịch nôm na: một khi phép đo bị biến thành mục tiêu để đạt, nó thôi là một phép đo tốt — thường được gọi là Goodhart's law. Cần nói rõ: câu ngắn gọn này KHÔNG phải lời của chính Charles Goodhart. Ý tưởng gốc của ông (trình bày năm 1975, về chính sách tiền tệ) phức tạp hơn nhiều; câu đúc kết phổ biến ngày nay là của nhà nhân học Marilyn Strathern (1997).</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Chỉ nhìn con số, không hỏi vì sao</p>
+                <p>Metric nói "cái gì" đang xảy ra, không nói "vì sao". Ries khuyên: khi không chắc con số nghĩa là gì, hãy gọi điện hoặc hỏi thẳng người dùng. Đội A/B test của Chess.com gọi đây là viết "câu chuyện sau con số" (narrative after the metric) — diễn giải số liệu thành một câu chuyện nhân quả kiểm chứng được, thay vì chỉ nhìn số lên hay xuống rồi kết luận.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Phác một A/B test cho game bạn quen</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">20 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Một giả thuyết, một metric, một biến</h3>
+                <ol class="steps">
+                    <li><span>Chọn một game quen thuộc, viết một giả thuyết thiết kế cụ thể (ví dụ: "rút ngắn tutorial sẽ tăng D1 retention").</span></li>
+                    <li><span>Chọn đúng MỘT metric chính để kiểm chứng giả thuyết đó — không dùng nhiều metric cùng lúc.</span></li>
+                    <li><span>Phác một A/B test: control giữ nguyên, variant chỉ đổi ĐÚNG MỘT biến số liên quan tới giả thuyết.</span></li>
+                    <li><span>Ghi trước sample size cần đạt và tiêu chí dừng, trước khi bắt đầu chạy test.</span></li>
+                    <li><span>Tự hỏi: nếu kết quả ngược với kỳ vọng, mình có thật sự tin và hành động theo nó không?</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nếu không chắc chọn metric nào, quay lại bảng ở phần “Những con số nền”: D1 hợp với thay đổi ở FTUE/tutorial, D7 hợp với thay đổi độ khó/nội dung giữa game, ARPPU hợp với thay đổi giá hoặc gói mua.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Vì sao tổng lượt tải game thường bị coi là vanity metric?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Vì nó luôn là con số nhỏ, không đáng báo cáo</button>
+                <button data-opt="b"><span class="badge">B</span> Vì nó chỉ tăng theo thời gian và không cho biết phải làm gì tiếp theo</button>
+                <button data-opt="c"><span class="badge">C</span> Vì nó không thể đo được chính xác bằng công cụ analytics</button>
+            </div>
+            <div class="explain" hidden><p>Vanity metric làm người xem thấy vui nhưng không dẫn tới hành động cụ thể nào — tổng lượt tải chỉ tăng, không nói được người chơi có ở lại hay không. Đáp án A sai vì kích thước con số không liên quan tới việc nó actionable hay không. Đáp án C sai vì tổng lượt tải hoàn toàn đo được chính xác, vấn đề nằm ở việc nó không dẫn tới quyết định.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">"Peeking" trong A/B test là lỗi gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Liên tục kiểm tra kết quả đang chạy và dừng ngay khi thấy ý nghĩa thống kê, làm tăng tỉ lệ false positive thật sự</button>
+                <button data-opt="b"><span class="badge">B</span> Chia traffic không đều giữa control và variant</button>
+                <button data-opt="c"><span class="badge">C</span> Chạy test quá lâu khiến chi phí tăng cao</button>
+            </div>
+            <div class="explain" hidden><p>Evan Miller chỉ ra: nếu liên tục nhìn và dừng ngay khi đạt 5% significance, tỉ lệ thí nghiệm sai báo "có ý nghĩa" có thể lên tới 26,1% — hơn năm lần con số 5% tưởng như đúng. Đáp án B mô tả một nguyên nhân của Simpson's paradox, không phải peeking. Đáp án C không phải vấn đề thống kê mà chỉ là chi phí vận hành.</p></div>
+        </div>
+        <div class="quiz" data-answer="c">
+            <p class="q">Đội A/B test của Chess.com phân khúc người chơi theo trình độ (skill) trước khi kết luận biến thể nào thắng. Việc này giúp tránh cái bẫy nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Novelty effect</button>
+                <button data-opt="b"><span class="badge">B</span> Peeking</button>
+                <button data-opt="c"><span class="badge">C</span> Simpson's paradox — kết luận đúng khi gộp chung có thể sai ở từng phân khúc</button>
+            </div>
+            <div class="explain" hidden><p>Nếu chỉ nhìn số liệu gộp, một biến thể có thể "thắng" trên tổng số nhưng thực ra thua ở mọi phân khúc trình độ — đó là Simpson's paradox. Phân khúc trước khi kết luận giúp phát hiện đúng bức tranh thật. Đáp án A và B là hai cái bẫy khác, không liên quan tới việc chia nhóm theo trình độ.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Vì sao "tối ưu lượt bấm vào thumbnail mà bỏ qua việc xem trọn vẹn" (nguyên tắc Netflix, dẫn qua Growthbook) là một ví dụ của proxy metric sai?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Vì lượt bấm chỉ là con số đại diện dễ đo — tối ưu mù quáng theo nó có thể phá trải nghiệm thật mà nó vốn định đo lường</button>
+                <button data-opt="b"><span class="badge">B</span> Vì lượt bấm vào thumbnail không thể theo dõi được bằng công cụ analytics thông thường</button>
+                <button data-opt="c"><span class="badge">C</span> Vì Netflix không phải công ty làm game nên nguyên tắc này không áp dụng được</button>
+            </div>
+            <div class="explain" hidden><p>Proxy metric là con số dễ đo đứng thay cho mục tiêu thật khó đo hơn (ở đây là trải nghiệm xem/chơi thật sự). Tối ưu mù quáng theo proxy — bấm vào rồi thất vọng, bỏ giữa chừng — làm hỏng đúng thứ metric đó định đại diện. Đáp án B sai vì lượt bấm hoàn toàn đo được. Đáp án C sai vì nguyên tắc chọn đúng proxy metric áp dụng chung cho mọi sản phẩm số, kể cả game.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>D1 / D7 / D30 retention</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">% người chơi còn hoạt động đúng 1/7/30 ngày sau khi cài. D1 đo FTUE, D7 đo chiều sâu qua giai đoạn mới lạ, D30 đo game đã thành thói quen hay chưa.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>DAU/MAU (stickiness)</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Tỉ lệ người dùng hoạt động trong tháng (MAU) cũng hoạt động trong một ngày cụ thể (DAU). Stickiness 50% nghĩa là người dùng trung bình vào app khoảng 15/30 ngày.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>ARPU vs ARPPU</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">ARPU = doanh thu ÷ mọi người dùng (kể cả không trả tiền). ARPPU = doanh thu ÷ chỉ người đã trả tiền — nên ARPPU luôn cao hơn ARPU.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Peeking</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Liên tục kiểm tra A/B test đang chạy và dừng khi thấy đẹp. Evan Miller: có thể đẩy tỉ lệ false positive thật lên tới 26,1%. Giải pháp: chốt sample size trước khi chạy.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Novelty effect</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Người chơi thích một thay đổi chỉ vì nó MỚI, không phải vì nó tốt hơn. Hiệu ứng này thường mất đi sau 1-3 tuần — đo quá sớm dễ chọn nhầm biến thể.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Goodhart's law</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Một khi phép đo bị biến thành mục tiêu để đạt, nó thôi là phép đo tốt. Ý tưởng gốc của Charles Goodhart (1975), câu đúc kết phổ biến là của Marilyn Strathern (1997) — không phải nguyên văn của Goodhart.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Chọn metric bằng bộ lọc của Eric Ries: nếu con số này đảo ngược, bạn có làm gì khác đi không? Không thì đó là vanity metric.</li>
+                <li><span class="n">2</span> A/B test đáng tin cần chốt sample size TRƯỚC khi chạy, và luôn kiểm tra kết quả theo từng phân khúc trước khi kết luận (tránh peeking và Simpson's paradox).</li>
+                <li><span class="n">3</span> Con số nói "cái gì", không nói "vì sao" — kết hợp playtest hoặc hỏi thẳng người chơi, và đừng tối ưu mù quáng theo một proxy metric dễ đo.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.evanmiller.org/how-not-to-run-an-ab-test.html" target="_blank" rel="noopener">How Not To Run An A/B Test</a>
+                <span class="reading-meta">Evan Miller · evanmiller.org, cập nhật 2013</span>
+                <p class="reading-why">Nguồn gốc lỗi peeking và con số 26,1% dùng xuyên bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://tim.blog/2009/05/19/vanity-metrics-vs-actionable-metrics/" target="_blank" rel="noopener">Vanity Metrics vs. Actionable Metrics</a>
+                <span class="reading-meta">Eric Ries · tim.blog, 2009</span>
+                <p class="reading-why">Bài gốc phân biệt vanity/actionable metric, có sẵn ví dụ A/B test trong chính định nghĩa.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/business/how-we-a-b-test-game-art-and-icons" target="_blank" rel="noopener">How We A/B Test Game Art And Icons</a>
+                <span class="reading-meta">Simon Newstead (Frenzoo) · Game Developer, 2016</span>
+                <p class="reading-why">Ca A/B test icon thật với số liệu cụ thể, đa dạng thể loại mobile.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.growthbook.io/insights/gaming-media-companies-experimentation-approach" target="_blank" rel="noopener">How gaming and media companies run experiments</a>
+                <span class="reading-meta">Growthbook</span>
+                <p class="reading-why">Nguồn case Chess.com và nguyên tắc proxy metric của Netflix dùng trong bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/business/5-metrics-every-mobile-game-developer-must-track" target="_blank" rel="noopener">5 Metrics every mobile game developer must track</a>
+                <span class="reading-meta">Gurinder Singh · Game Developer, 2014</span>
+                <p class="reading-why">Nguồn công thức và ví dụ số D1/D7/D30 retention dùng trong bài.</p>
+            </li>
+            <li>
+                <span class="pill type-sach">Sách</span>
+                <a class="reading-title" href="https://experimentguide.com/" target="_blank" rel="noopener">Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing</a>
+                <span class="reading-meta">Ron Kohavi, Diane Tang, Ya Xu · Cambridge University Press, 2020</span>
+                <p class="reading-why">Sách kinh điển về A/B test quy mô lớn — bài này chưa trích nội dung chương, chỉ dùng làm gợi ý đọc sâu hơn.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
