@@ -1,0 +1,32 @@
+SUMMARY: Dựng xong Tầng 2 bài 03 Vòng lặp iteration (68c87bb) + research; user đã duyệt; check-site 0 lỗi, div cân bằng 43/43; main tự curl+grep verify nguyên văn mọi câu trích và tự đọc lại toàn bài. Ảnh: đã xem mobile sáng toàn trang, desktop sáng nửa đầu, desktop tối đoạn giữa, mobile tối đoạn giữa; CHƯA xem nửa cuối desktop sáng/tối và cuối trang mobile tối. Quiz/flashcard CHƯA bấm thử trên trình duyệt thật (tồn 5 session). Đã push lên origin/master.
+
+ĐÃ LÀM
+- research/vong-lap-iteration.txt (185 dòng) + lessons/tang-2/03-vong-lap-iteration.html: nguồn Eric Zimmerman "Play as Research" (2003, PDF trên site tác giả), Ian Schreiber Game Design Concepts Level 2 (2009), Tracy Fullerton (trích Game Design Workshop 5th ed. trên Game Developer), Daniel Cook "Rockets, Cars and Gardens" (Lost Garden 2007), Supercell/Smash Land (Kris Graft, Game Developer 2016), Threes (Alex Wawro, Game Developer 2014), Half-Life Cabal (Ken Birdwell, Game Developer, năm chưa verify).
+- Ví dụ đa thể loại: Threes (indie), Supercell (studio mobile), Half-Life (PC) — khắc phục thiếu sót đa thể loại của bài 01-02.
+- curriculum.js: bài 03 đổi goals theo phương án C, summary đổi thành "Prototype — test — phân tích — sửa...", status ready. shoot.ps1: thêm 1 dòng chụp.
+- Đổi tiêu đề mục ví dụ "Ba game, ba cách lặp" -> "Ba đội, ba cách lặp" (vì Supercell là studio, không phải game).
+- 2 ý goals cũ ("ưu tiên thay đổi nào test trước", "tránh sửa nhiều thứ cùng lúc") KHÔNG tìm được nguồn gốc nào verify được -> user chọn phương án C: đổi goals cho khớp nguồn hiện có; ý "đổi một thứ mỗi vòng" giữ lại nhưng ghi rõ trong bài là phân tích của người viết.
+
+LỖI ĐÃ BẮT & SỬA (main sửa 15 chỗ sau khi đọc lại toàn bài)
+- Agent research: quote Supercell "beta targets were not met..." KHÔNG có trên trang (WebFetch tự sinh) -> loại.
+- Agent dựng HTML: thiếu tên Greg của Wohlwend; tự gán chức danh "nhà nghiên cứu" cho Zimmerman; ghi năm 1999 cho bài Half-Life dù chưa verify; thêm chữ "ban đầu" vào ý Fullerton; hiểu ngược ngữ cảnh câu Zimmerman ở phần sai lầm (tưởng ông đối lập cách làm sai, thực ra ông tả lối làm game bán lẻ truyền thống rồi so sánh); gán cho Schreiber ý "mỗi vòng lặp kiểm tra một giả thuyết" (không có trên trang, đã thay bằng ý đúng: càng lặp càng chắc luật chơi hoạt động); bảng ví dụ thiếu nhãn mobile cho Supercell và thiếu số liệu 7/2/1.
+
+VẤP MỚI
+- Zimmerman chỉ có bản PDF: phải tải về rồi pdftotext mới grep được nguyên văn; grep -F trên text PDF bị lệch do xuống dòng, phải dùng grep -o theo cụm.
+- WebFetch của subagent sinh ra câu trích KHÔNG có trên trang (case Supercell) -> bắt buộc main curl + grep raw HTML mới được dùng trích dẫn.
+- Nguồn cho 2 ý "ưu tiên thay đổi nào test trước" và "đổi một thứ mỗi lần": 15 lượt mạng không ra nguồn gốc nào.
+
+CẦN USER QUYẾT (KHÔNG tự sửa - global rule 7) — VẪN TREO 7 mục:
+- 5 mục từ worklog 2026-09-16__tang-1-game-feel.txt (CLAUDE.md §8 check-site không bắt thẻ lệch/tràn ngang; shoot.ps1 dòng 1 comment phạm vi stale; bài 03 Tầng 1 lệch thứ tự §5; thiếu repo-params.json; độ dài bài vượt mục tiêu).
+- Tầng 2 bài 01 và 02 chưa đạt đa thể loại §1 — chấp nhận hay research bù (bài 03 đã tự khắc phục cho riêng nó).
+- .mda-diagram 4 block rớt dòng desktop — có ghi giới hạn 3 block vào CLAUDE.md §8 không.
+
+DOC-SYNC (floor grep theo diff 911ea89..HEAD)
+- CLAUDE.md:26,47,51,130,181 nhắc curriculum.js — NO-CHANGE: mô tả vai trò/quy trình, diff chỉ đổi dữ liệu 1 bài.
+- CLAUDE.md:54,133,160,163,183 và lessons/_lesson-starter.html:14 nhắc shoot.ps1 — NO-CHANGE: diff chỉ thêm 1 dòng danh sách trang.
+- tools/check-site.js, lessons/_lesson-starter.html:10,13,131 nhắc curriculum.js — NO-CHANGE: mô tả schema/quy trình chung, không mô tả bài 03.
+- components.html/index.html/lo-trinh.html/site.js và các bài trong lessons/ — NO-CHANGE: chỉ là thẻ script tham chiếu.
+- Không có thư mục handoff trong repo -> bỏ bước handoff-stale.
+
+SHA
+- 68c87bb Tầng 2: bài 03 Vòng lặp iteration + research (đã push lên origin/master)

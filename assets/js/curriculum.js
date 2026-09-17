@@ -162,7 +162,7 @@ window.CURRICULUM = [
             {
                 slug: "tang-2/03-vong-lap-iteration",
                 title: "Vòng lặp iteration",
-                summary: "Thiết kế — thử — đo — sửa liên tục để cải thiện game từng bước.",
+                summary: "Prototype — test — phân tích — sửa liên tục để cải thiện game từng bước.",
                 goals: [
                     "Vẽ vòng lặp prototype – test – phân tích – sửa",
                     "Hiểu vì sao vòng lặp càng ngắn càng tốt",
