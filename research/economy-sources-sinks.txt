@@ -1,0 +1,580 @@
+RESEARCH — Tầng 3 bài 02: Economy — sources và sinks
+Ngày: 2026-09-17 | Trạng thái: ĐÃ VERIFY. Ba quote OSRS ở mục 3 đã được main tự curl lại và
+sửa (trang gốc dùng encoding windows-1252, xem mục 9) — bản trong mục 3 là bản ĐÚNG, không
+dùng bản cũ trong file research thô B. Các quote còn lại kế thừa verify từ 3 file nghiên cứu
+thô (research-A-source-sink.txt, research-B-lam-phat.txt, research-C-thiet-ke-sink.txt).
+Mục không verify được / cần thận trọng nằm ở mục 9 và 10.
+
+MỤC LỤC
+1. Phạm vi bài
+2. Nền tảng: faucet/drain/sink là gì
+3. Lạm phát: nguyên nhân và dấu hiệu nhận biết
+4. Case study lạm phát: OSRS / EVE / Diablo III
+5. Thiết kế sink — nguyên tắc
+6. Phân loại sink
+7. Ví dụ game thật — theo thể loại
+8. Ghi chú: case Diablo III KHÔNG dùng trong bài
+9. Ghi chú nguồn cần thận trọng
+10. KHÔNG DÙNG ĐƯỢC — đã thử, session sau khỏi làm lại
+
+---
+
+## 1. Phạm vi bài
+
+Bài này dạy: nguồn gốc và định nghĩa faucet/drain/sink, nguyên nhân lạm phát tiền tệ trong
+game, case study thực tế, và nguyên tắc + cách phân loại khi thiết kế sink.
+
+RANH GIỚI: ký hiệu sơ đồ Machinations tổng quát (pool/gate/converter) và vòng phản hồi
+dương/âm thuộc bài tang-3/01 "Systems design" — KHÔNG lặp lại ở đây, chỉ dùng lại phần liên
+quan trực tiếp tới node source/drain khi cần định nghĩa.
+
+---
+
+## 2. Nền tảng: faucet/drain/sink là gì
+
+### 2.1 Nguồn gốc thuật ngữ — Zachary Booth Simpson, "The In-game Economics of Ultima Online" (viết 1999, trình bày CGDC San Jose 03/2000)
+Nguồn dùng để trích dẫn (còn sống): https://mobiledevmemo.com/wp-content/uploads/2021/09/The-In-game-Economics-of-Ultima-Online.pdf
+(bản mirror; PDF 24 trang — xem cảnh báo link ở mục 9)
+Tác giả: Zachary Booth Simpson, "Origin Research Fellow" (Origin Systems, hãng làm Ultima Online).
+
+NGUYÊN VĂN:
+"At the top, new resources are created out of thin air (the "faucet") and flow into the
+world at a more or less constant rate. While this solves the deflationary problem, it does
+not solve the server congestion problem; the server backups are still growing and some sort
+of improvement in the drains will have to be created sooner or later."
+Gợi ý dịch: "Ở phía trên, tài nguyên mới được tạo ra từ hư không (cái 'vòi') và chảy vào thế
+giới với tốc độ gần như không đổi. Cách này giải quyết được vấn đề giảm phát, nhưng không giải
+quyết được vấn đề nghẽn server; dữ liệu backup vẫn phình to và kiểu gì cũng cần cải thiện các
+'ống thoát' (drains) sớm muộn."
+
+"This item drain is not a true sink of goods because it involves printing gold to pay for
+the goods."
+Gợi ý dịch: "'Ống thoát vật phẩm' này (bán đồ cho NPC) không phải là một sink thật sự, vì nó
+đi kèm việc 'in' thêm gold để trả cho món đồ."
+→ Đây là văn bản SỚM NHẤT (1999) phân biệt "drain bề mặt" (item biến mất) với "sink thật"
+(tài nguyên bị huỷ ròng, không phát sinh thêm currency ở đầu kia) — dùng để dạy học viên phân
+biệt hai khái niệm này.
+
+DÙNG ĐỂ: mở đầu khái niệm — kể Ultima Online như ví dụ nền tảng, dẫn ra faucet/drain từ 1999
+trước khi khái quát hoá bằng các nguồn hiện đại hơn.
+
+### 2.2 Faucet/drain theo góc nhìn MMO hiện đại — Simon Ludgate, "The F-Words Of MMOs: Faucets", Game Developer, 21/07/2011
+Nguồn: https://www.gamedeveloper.com/design/the-f-words-of-mmos-faucets   [HTTP 200]
+Tác giả: Simon Ludgate — từng làm ở Strategy First, EA, Gameloft.
+
+NGUYÊN VĂN:
+"The faucet is the continued injection of 'currency', such as gold being acquired killing
+monsters or completing quests," explains Lance Stites, when discussing the economy of
+NCsoft's Aion. "That influx continues and fills the tub, so without the drain, the inflation
+would be extreme -- creating a world difficult for new players to ever break in to."
+Gợi ý dịch: "'Vòi' (faucet) là việc liên tục bơm 'currency' vào, ví dụ vàng kiếm được từ giết
+quái hoặc hoàn thành nhiệm vụ," Lance Stites giải thích, khi bàn về kinh tế Aion (NCsoft).
+"Dòng chảy đó cứ tiếp diễn và làm đầy bồn, nên nếu không có ống thoát (drain), lạm phát sẽ
+trở nên cực đoan — tạo ra một thế giới khó mà người chơi mới chen chân vào."
+
+"These depict a game's MIMO model: money-in, money-out, the faucets and drains."
+Gợi ý dịch: "Những sơ đồ này mô tả mô hình MIMO của game: tiền vào, tiền ra — các faucet và
+drain."
+
+### 2.3 Định nghĩa formal source/drain — Joris Dormans, "The Designer's Notebook: Machinations, A New Way to Design Game Mechanics", chuyên mục "The Designer's Notebook" của Ernest Adams, Game Developer, 2012
+Nguồn: https://www.gamedeveloper.com/design/the-designer-s-notebook-machinations-a-new-way-to-design-game-mechanics   [HTTP 200]
+Metadata trang: datePublished 2012-08-16, byline "by Joris Dormans". Chuỗi "2011" KHÔNG xuất
+hiện trên trang.
+CÁCH CITE ĐÚNG (đã main chốt): Joris Dormans, đăng trong chuyên mục "The Designer's Notebook"
+của Ernest Adams, Game Developer, 2012 — KHÔNG ghi Ernest Adams là tác giả, KHÔNG ghi năm 2011.
+
+NGUYÊN VĂN:
+"Sources are nodes that create resources. They are represented as a triangle pointing
+upward. Like any other node in a Machinations diagram, sources can be automatic (the
+default), interactive, passive, or it can activate once before a diagram starts. An example
+of an automatic source is the steady regeneration of the protective shields of the player's
+star fighter in Star Wars: X-Wing Alliance. The action to build armies in Risk would be
+modeled as an interactive source of armies, and passing Go in Monopoly would be a passive
+source of money that is triggered by a game event."
+
+"Drains are nodes that consume resources; a resource that goes into a drain disappears
+permanently. The Machinations framework includes a special drain node represented as a
+triangle pointing downward. The rate of a drain is determined by the flow rate of its input
+resource connection."
+
+"Fallout 3, in which all traders' supplies are limited, is a good example."
+
+DÙNG ĐỂ: định nghĩa formal source/drain dưới dạng node hệ thống, có 3 activation mode
+(automatic/interactive/passive) minh hoạ bằng X-Wing Alliance / Risk / Monopoly — nếu bài cần
+đi sâu. Fallout 3 dùng làm ví dụ phụ đa thể loại (console/PC RPG).
+
+### 2.4 Định nghĩa node-based hiện đại — Daniel Cook, "Value chains – A method for creating and balancing faucet-and-drain game economies", Lostgarden, 12/12/2021
+Nguồn: https://lostgarden.com/2021/12/12/value-chains/   [HTTP 200]
+Tác giả: Daniel Cook — đồng sáng lập Spry Fox (Cozy Grove, Alphabear, Triple Town).
+
+NGUYÊN VĂN:
+"Tokens: Resource tokens that flow between various nodes in the network of player or system
+operations. Sources: A node that creates new tokens and add them to the flow. Pools: Nodes
+that accumulate or hold some number of tokens Transforms: Nodes that transform of tokens
+into other tokens Sink: Nodes that destroy those tokens."
+Gợi ý dịch: Token là tài nguyên chảy qua các node. Source tạo token mới. Pool tích trữ token.
+Transform biến đổi token này thành token khác. Sink là node phá huỷ token.
+(Lưu ý: bài gốc dùng số ít "Sink" làm nhãn dù các nhãn khác để số nhiều — cách viết gốc,
+không phải lỗi gõ.)
+
+"However, value chains focus on a simplified cartoon economy known as a faucet-and-drain
+economy, defined by strong sources and strong sinks, limited object lifespans and limited
+circulation of goods."
+
+"Faucets: Resources in the game are generated from nothing as needed. They are virtual so we
+can make as many as we want (or as few)"
+"Drains: We get rid of excess materials. Again, they are digital so there's no unexpected
+externalities like pollution or landfills. We press a button and boop, they are erased from
+existence."
+
+DÙNG ĐỂ: cách diễn đạt gần gũi, dễ hiểu cho người mới — dùng làm định nghĩa "chốt" của bài,
+đối chiếu với định nghĩa gốc 1999 (Simpson) và định nghĩa formal (Dormans).
+
+---
+
+## 3. Lạm phát: nguyên nhân và dấu hiệu nhận biết
+
+### Old School RuneScape — Jagex, dev blog chính thức, "Old School Economy - Future Plans", 04/11/2021
+Nguồn: https://secure.runescape.com/m=news/old-school-economy---future-plans?oldschool=1   [HTTP 200]
+Tác giả: Jagex (Old School RuneScape dev team).
+Loại nguồn: bài "đề xuất" (proposal) để cộng đồng góp ý, không phải báo cáo kết quả sau
+triển khai.
+
+⚠️ 3 quote dưới đây (đánh dấu ĐÃ SỬA) khác với bản trong file research thô — main đã tự curl
+lại trang gốc và so khớp từng ký tự, phát hiện file thô chép sai. Dùng bản dưới đây, KHÔNG
+dùng bản cũ.
+
+NGUYÊN VĂN (verbatim):
+1. "If there is more gold coming into the game than there is leaving, then we experience
+   inflation."
+   → Gợi ý dịch: "Nếu có nhiều vàng đi vào game hơn là đi ra, chúng ta sẽ có lạm phát."
+2. "Old School has almost no mechanisms whereby such items may be removed from the game."
+   → Gợi ý dịch: "Old School gần như không có cơ chế nào để loại các vật phẩm đó khỏi game."
+3. [ĐÃ SỬA — nháy cong đúng bản gốc] "We’re thinking of adding a tax amount of 2% that would
+   be removed from the final sale value."
+   → Gợi ý dịch: "Chúng tôi đang cân nhắc thêm một khoản thuế 2% bị trừ khỏi giá trị bán cuối
+   cùng."
+4. [ĐÃ SỬA — nguyên văn là đoạn GIỮA CÂU, chữ thường, không viết hoa đầu câu như file thô cũ]
+   "the tax cost is always passed on to the seller"
+   → Gợi ý dịch: "chi phí thuế luôn được chuyển sang cho người bán" (trích đoạn giữa câu, khi
+   dùng trong bài nên đặt trong câu văn của mình, không viết hoa chữ đầu như thể là câu độc
+   lập).
+5. [ĐÃ SỬA — file thô cắt cụt, thiếu vế sau] "we could use the tax collected from Grand
+   Exchange sales to purchase items from other players with the simple intention of deleting
+   said items once the purchase is complete."
+   → Gợi ý dịch: "chúng tôi có thể dùng khoản thuế thu được từ Grand Exchange để mua lại vật
+   phẩm từ người chơi khác, với mục đích đơn giản là xoá các vật phẩm đó ngay khi giao dịch
+   hoàn tất."
+6. "If the virtual coffer has enough funds...we delete the item, and immediately pay the
+   player a number of coins (minus the Grand Exchange's tax)."
+   → Gợi ý dịch: "Nếu quỹ ảo có đủ tiền... chúng tôi xoá vật phẩm, và trả ngay cho người chơi
+   một số tiền vàng (đã trừ thuế Grand Exchange)."
+7. Chi phí nâng bank space (816 → 1200 slot), 9 block tăng dần: Block 1 = 1.000.000 coins (40
+   ô) ... Block 9 = 500.000.000 coins; tổng — nguyên văn nguồn dùng dấu phẩy: "Total: 888,000,000".
+
+Ghi chú: Grand Exchange tax sau đó được triển khai ở mức 1% theo tin thứ cấp (primagames,
+mmorpg.com) — CHƯA tự mở đọc bài công bố chính thức, xem mục 10.
+
+### EVE Online — CCP, thông cáo bổ nhiệm economist, khoảng 26-27/06/2007
+Nguồn: https://community.eveonline.com/news/news-channels/press-releases/eve-online-appoints-in-world-economist-1/   [HTTP 200]
+
+NGUYÊN VĂN:
+"Economic information is the lifeblood of the game and I believe that, by ensuring everyone
+has access to the same data, we will enhance the player experience and facilitate economic
+stability in EVE." — Dr. Eyjólfur Guðmundsson (CCP lead economist)
+Gợi ý dịch: "Thông tin kinh tế là mạch sống của trò chơi, và tôi tin rằng bằng cách đảm bảo
+mọi người đều có quyền tiếp cận cùng một bộ dữ liệu, chúng tôi sẽ nâng cao trải nghiệm người
+chơi và thúc đẩy sự ổn định kinh tế trong EVE."
+
+"Players operate vast corporations whose shares are traded in-game among players so economic
+strength and agility is key to their success." — Hilmar Pétursson (CEO, CCP Games)
+
+Ghi chú: bài xác nhận CCP có economist chính thức từ 2007, công bố báo cáo định kỳ theo dõi
+inflation/economic growth/price trends (paraphrase, KHÔNG trích nguyên văn).
+
+### EVE Online — Monthly Economic Report, August 2024
+Nguồn: https://www.eveonline.com/news/view/monthly-economic-report-august-2024   [HTTP 200]
+
+NGUYÊN VĂN:
+"In August, we observed a significant upward trend in the money supply, reaching 2,190T ISK.
+By the end of the month, this represented a 1.5% increase compared to the end of July, when
+the supply was 2,158T ISK."
+→ Gợi ý dịch: "Trong tháng 8, chúng tôi ghi nhận xu hướng tăng đáng kể của lượng tiền lưu hành
+(money supply), đạt 2.190 nghìn tỷ ISK. Đến cuối tháng, con số này tăng 1,5% so với cuối tháng
+7 (2.158 nghìn tỷ ISK)."
+
+Hạn chế: số liệu faucet/sink chi tiết và biểu đồ money velocity nằm dưới dạng ảnh (PNG), không
+trích xuất được text — KHÔNG dùng số đó.
+
+### Dấu hiệu nhận biết (tổng hợp từ nguồn đã verify)
+- Money supply / lượng tiền lưu hành theo thời gian: EVE MER công bố con số tuyệt đối (vd
+  2.158T → 2.190T ISK, +1,5%/tháng).
+- Công thức nguồn > sink: theo Jagex, "nếu vàng vào nhiều hơn vàng ra thì có lạm phát" — so
+  sánh trực tiếp lượng faucet vs sink trong cùng kỳ.
+- Thiếu cơ chế xoá tài nguyên có chủ đích: game vận hành lâu mà "gần như không có cơ chế loại
+  item/tiền khỏi game" (theo lời Jagex) là tiền đề dẫn tới lạm phát tích luỹ.
+- Không có nguồn verify: "giá trung bình vật phẩm", "tỉ lệ faucet/drain" cụ thể (Adam4EVE,
+  EVE Consumer Price Index) — chỉ nhắc khái niệm chung nếu cần, xem mục 10.
+
+---
+
+## 4. Case study lạm phát: OSRS / EVE / Diablo III
+
+### Case A — Diablo III: Auction House (real-money + gold) — [XEM MỤC 8, KHÔNG DÙNG TRONG BÀI]
+- Chuyện gì xảy ra: Blizzard mở Auction House (kể cả Real-Money Auction House) khi ra mắt
+  game 2012. Tháng 9/2013 công bố đóng cửa hoàn toàn AH vào 18/3/2014.
+- Nguyên nhân cấu trúc (theo nguồn): AH không phải sink/source kinh điển kiểu tiền tệ, mà là
+  kênh khiến item tốt nhất luôn có thể MUA thay vì phải cày — giá trị của gameplay (giết quái
+  lấy đồ) bị "short-circuit" bởi kênh trao đổi hiệu quả hơn.
+- Trích dẫn (CHỈ CÒN 1 NGUỒN — xem cảnh báo dưới): time.com, "The Reaper Finally Comes For
+  Diablo 3's Auction House", 18/03/2014
+  https://time.com/28519/the-reaper-finally-comes-for-diablo-3s-auction-house/   [HTTP 200]
+  NGUYÊN VĂN: "it ultimately undermines Diablo's core game play: kill monsters to get cool
+  loot"
+  Gợi ý dịch: "cuối cùng nó làm suy yếu chính lối chơi cốt lõi của Diablo: giết quái để lấy đồ
+  ngon."
+  ⚠️ CẢNH BÁO: file research thô (B) từng trích thêm nguồn thứ hai
+  (gamedeveloper.com/business/why-diablo-3-shut-down-the-auction-house) coi là "nguồn báo chí
+  độc lập" khớp với Time. Main đã tự curl và xác định đây là REPOST BLOG CÁ NHÂN (đầu bài ghi
+  "Originally posted on my website: http://geeksmirage.com/..."), tác giả Vikrant Agarwal —
+  KHÔNG phải bài của toà soạn. Câu "It ultimately undermines Diablo's core game play." mà file
+  thô trích KHÔNG tồn tại trong trang (grep 0 hit). Nguồn này đã bị loại, xem mục 10. Case A
+  hiện chỉ đứng trên MỘT nguồn (Time.com), không phải hai nguồn độc lập như file thô mô tả.
+
+### Case B — Old School RuneScape: thiếu gold sink có chủ đích, giải pháp thuế + item sink
+- Chuyện gì xảy ra: năm 2021 Jagex công khai thừa nhận OSRS "gần như không có cơ chế loại
+  vàng/item khỏi game" (mục 3, quote #2), dẫn tới đề xuất Grand Exchange tax 2% + hệ thống tự
+  mua-xoá item bằng quỹ thuế + tăng giá bank space cực cao (888.000.000 coin cho full upgrade).
+- Nguyên nhân cấu trúc (quote #1, mục 3): "If there is more gold coming into the game than
+  there is leaving, then we experience inflation" — Jagex tự định nghĩa lạm phát bằng đúng
+  công thức source > sink.
+- Đây là case MẠNH NHẤT: nguồn chính chủ (nhà phát triển), còn sống, có công thức rõ ràng, có
+  con số cụ thể, có cơ chế sink cụ thể.
+
+### Case C — EVE Online: theo dõi kinh tế bằng economist chính thức + Monthly Economic Report
+- Chuyện gì xảy ra: CCP là studio đầu tiên (2007) thuê hẳn một nhà kinh tế học (Dr. Eyjólfur
+  Guðmundsson) theo dõi kinh tế trong game, duy trì báo cáo kinh tế định kỳ công khai số liệu
+  money supply, faucets, sinks.
+- Nguyên nhân cấu trúc: không có quote "nguyên nhân" trực tiếp đã verify (các bài phỏng vấn
+  GameSpot/FastCompany không mở đọc được, xem mục 10); dùng số liệu money supply (mục 3) làm
+  minh hoạ "chỉ số designer thực sự theo dõi", không dùng để khẳng định nguyên nhân cụ thể.
+- Hạn chế: case về CÔNG CỤ giám sát, không có quote nguyên văn về "tại sao lạm phát xảy ra" —
+  nếu cần diễn giải nguyên nhân, dựa vào công thức ở Case B thay vì gán cho EVE.
+
+---
+
+## 5. Thiết kế sink — nguyên tắc
+
+### Daniel Cook, "Value chains" (nguồn như mục 2.4)
+NGUYÊN VĂN — cấu trúc 3 giai đoạn và "anchor motivation":
+"Early stage of the value chain has sources: Players perform actions (the core gameplay!)
+and generate a steady flow of base resources. Mid stage of the value chain transforms
+resources: Those resources are transformed into a very small number of intermediate
+resources. End stage of the value chain has sinks: Finally players pay resources into sinks
+that help them gain access to whatever their anchor motivations might be. As a result, there
+is a steady stream of goods being destroyed."
+
+Cảnh báo sink bị thoả mãn quá nhanh:
+"It may be trivial to satisfy or even exhaust their motivational anchors. If you are
+motivated by status and you can instantly buy all the high status clothing, why bother
+continuing to exercise that value chain? There is no longer a pull on the earlier nodes in
+your value chain that produce that resource. If you have all the sticks you'll ever need,
+why bother ever harvesting another dirt pile?"
+Dịch ý: nếu sink liên quan status bị thoả mãn quá nhanh/dễ, người chơi hết động lực quay lại
+vòng lặp tạo ra tài nguyên đó — sink phải "giữ giá" đủ lâu để còn kéo được motivation.
+
+Pattern "lock-and-key choices" — sink gắn với player agency:
+"Earlier we covered how a single currency can lead to choices where players pick the most
+efficient path and ignore the rest. In a large, loosely controlled economy, this can cause
+major balance issues. However, there are more controlled variants where the player's choice
+of how to spend esources are the most interesting part of the game." [nguyên văn gốc có lỗi
+chính tả "esources" — giữ nguyên]
+
+"Key resource: There's a capped source producing a resource. This is the metaphorical 'key'
+in a 'lock-and-key' node-resource pair. Lock node: Gated nodes are unlocked with key
+resources. Choice: There are always more available lock nodes than key resources, so players
+need to make clear choices about which option to invest in. Opportunity costs: By selecting
+a node to invest in, you lose the option of gaining resources from the other lock nodes."
+
+Ví dụ minh hoạ pattern (nguyên văn Cook): "Say you have some players who love to decorate and
+others who like to progress. You want both to keep performing the core loop of killing
+monsters. So you use this structure to pull gems from the core activity, but then give them a
+choice on how they want to spend their hard won resources. Each path is anchored on a
+different motivation."
+
+### Ramin Shokrizade, "The Top F2P Monetization Tricks", Game Developer, 26/06/2013
+Nguồn: https://www.gamedeveloper.com/business/the-top-f2p-monetization-tricks   [HTTP 200]
+⚠️ Bài mang tính PHÊ PHÁN — tác giả (Virtual Economist) mô tả kỹ thuật monetization "coercive"
+như một CẢNH BÁO, không phải khuyến nghị. Dùng cho callout "sai lầm hay gặp", không dùng làm
+mẫu hình nên theo.
+
+NGUYÊN VĂN — progress gate hard/soft:
+"Now let's break progress gates into "hard" and "soft" types. A hard gate is one where you
+cannot advance if you do not pay up. The central buildings in Zynga builder type games are a
+good example. All other buildings in a town/city/base are capped by the level of the central
+building, forcing a hard progress gate."
+"A soft gate is one where the player can get past the gate, eventually. Clash of Clans uses
+this type in making building times ever longer and allowing the user to spend to complete
+them."
+
+NGUYÊN TẮC TỔNG HỢP:
+- Sink phải gắn với "anchor motivation" của người chơi, không chỉ là số trừ đi — sink hiệu
+  quả nhất nằm ở cuối value chain, nơi tài nguyên đổi lấy thứ người chơi THỰC SỰ muốn.
+- Sink không nên dễ thoả mãn quá nhanh — nếu thoả mãn động lực (status) ngay lập tức, người
+  chơi mất lý do quay lại vòng lặp gameplay tạo ra tài nguyên đó.
+- Sink tự nguyện + có CHOICE thực sự (agency) hiệu quả hơn sink áp đặt — pattern "lock-and-key
+  choices" cho người chơi ít tài nguyên hơn số lựa chọn khả dụng, buộc họ CHỌN. Ngược lại,
+  "hard gate" (Shokrizade) là sink/gate KHÔNG có agency thật — chỉ có ảo giác lựa chọn.
+- Cảnh báo: sink giả trang dưới cơ chế mù mờ (reward removal + soft gate — game cố ý để tài
+  nguyên "kiếm được" tăng nhanh hơn khả năng tiêu, sau đó lấy lại nếu không trả tiền) là ví dụ
+  sink được thiết kế để THAO TÚNG cảm xúc (sợ mất), nên đưa vào "sai lầm hay gặp", không phải
+  mẫu hình nên theo.
+
+---
+
+## 6. Phân loại sink
+
+### Daniel Cook — 4 loại sink chính (nguồn như mục 2.4)
+NGUYÊN VĂN: "The 4 major types of sinks: Fixed, Repeatable, Exponential, Competitive"
+
+"The simplest sink is the fixed sink. When an action on a node in the value chain occurs, a
+fixed amount of resource is removed from the game. This is not repeatable. This is the mirror
+of a capped source."
+
+"The mirror of a trickle source is a repeatable sink. Every time the action for a node is
+performed, a fixed amount is removed. However, unlike a fixed sink, the action can be
+repeated multiple times."
+
+"The mirror of the investment source is the exponential sink. In this sink, to get the next
+incremental (linear) increase in output, we logarithmically or geometrically increase the
+input quantity. This means there's always room to sop up more."
+
+"There's a specific type of sink that doesn't have a clear mirror source. A competitive sink
+is a form of adaptive sink. In a competition between multiple players, whoever puts in the
+largest amount of a resource gets the largest prize."
+Kèm nhận xét: "Pro: The nice thing about this sort of sink is there's no top end so it can
+suck up lots of resources. Con: However, it can only be paired with competitive motivational
+anchors. And only a tiny percentage of the population is motivated by competition (mostly
+young males). So there are limited types of games you can use this."
+
+Pattern "overflow" (sink chuyển đổi giữa các chain):
+"Killing a monster gives gems Players can spend gems to level up. However leveling up is
+capped at level 10 Once players finish leveling, they can pour excess gems into crafting
+decorations." ... "This overflow pattern is useful when you have fixed sinks. You set up
+cascading pools so that when one is filled, the excess can flow into others."
+
+### Đối chiếu với 4 nhãn phổ biến trong cộng đồng thiết kế
+⚠️ KHÔNG tìm được nguồn đã verify nào dùng đúng 4 nhãn "sink bắt buộc / sink tự nguyện / sink
+theo thời gian / sink chuyển đổi". Đây là cách gọi phổ biến trong cộng đồng (blog/wiki/forum)
+nhưng không có bài gốc/tên tác giả cụ thể đã mở đọc verify dùng chính xác 4 nhãn này. Đề xuất:
+dùng khung Fixed/Repeatable/Exponential/Competitive (có nguồn Cook) làm xương sống lý thuyết,
+ánh xạ sang 4 khái niệm quen thuộc ở phần PHÂN TÍCH MINH HOẠ — tách bạch rõ "theo nguồn" vs
+"phân tích":
+- Sink bắt buộc (repair, phí giao dịch, thuế, hao mòn): khớp "fixed sink" hoặc "repeatable
+  sink" — VD repair cost là repeatable sink (mỗi lần chiến đấu tốn tiền sửa đồ, lặp vô hạn).
+- Sink tự nguyện (cosmetic, mount, nhà cửa, vanity): khớp ví dụ "high status clothing" và
+  "crafting decorations" của Cook — cần cảnh báo "dễ thoả mãn quá nhanh thì mất động lực"
+  (mục 5).
+- Sink theo thời gian (vé/lượt chơi hồi lại — energy/stamina): khớp trực tiếp "stamina" trong
+  Puzzle & Dragons và "soft gate" (Clash of Clans build timer) từ Shokrizade — ví dụ
+  MOBILE/F2P duy nhất verify được cho nhóm này.
+- Sink chuyển đổi (converter — đổi tài nguyên A lấy B): gần nhất với pattern "overflow" và
+  "lock-and-key choices" của Cook.
+
+Ghi chú: "soft currency / hard currency" — KHÔNG tìm được nguồn verify dùng đúng cặp thuật
+ngữ này. Shokrizade dùng "premium currency":
+"Research has shown that putting even one intermediate currency between the consumer and real
+money, such as a "game gem" (premium currency), makes the consumer much less adept at
+assessing the value of the transaction."
+"Having the user see their amount of premium currency in the interface is also much less
+anxiety generating, compared to seeing a real money balance. If real money was used (no
+successful game developer does this) then the consumer would see their money going down as
+they play and become apprehensive."
+→ Cặp soft/hard currency chỉ là cách gọi thông dụng trong ngành, KHÔNG cite được nguồn học
+thuật/chuyên ngành đã verify.
+
+---
+
+## 7. Ví dụ game thật — theo thể loại
+
+### PC / Console
+- Ultima Online (PC, MMO, Origin Systems 1997) — nguồn: Simpson 1999/2000 (mục 2.1). Source:
+  mine cho ra quặng, quái vật rơi loot. Drain: decay, giới hạn item trong nhà, PK/trộm cắp,
+  consumption, bán đồ cho NPC (Simpson lưu ý: "is not a true sink" vì NPC in tiền trả). Gold
+  drain: thuế bảo trì nhà, thuê chỗ vendor. → Ví dụ tốt để dạy phân biệt "trông giống sink
+  nhưng thực ra là chuyển đổi tài nguyên".
+- Aion (PC, MMORPG, NCsoft) — nguồn: Ludgate 2011 (mục 2.2). Faucet = vàng từ giết quái/nhiệm
+  vụ; không có drain đi kèm → lạm phát cực đoan.
+- Fallout 3 (PC/console, RPG, Bethesda) — nguồn: Dormans 2012 (mục 2.3) — trader có nguồn
+  hàng giới hạn (ví dụ phụ, không hẳn source/sink thuần).
+- Star Wars: X-Wing Alliance (PC, flight sim) — nguồn: Dormans 2012 — ví dụ source tự động
+  (khiên tàu tự hồi).
+- EVE Online (PC, MMO, CCP) — nguồn: mục 3, 4 (Case C) — economist chính thức + Monthly
+  Economic Report theo dõi money supply.
+- Old School RuneScape (PC, MMO, Jagex) — nguồn: mục 3, 4 (Case B) — Grand Exchange tax +
+  item sink chủ đích.
+
+### Indie
+- Cozy Grove (Spry Fox, life-sim kiểu Animal Crossing) — nguồn: Daniel Cook 2021, chính là
+  nhà thiết kế của game này:
+  "Recently I was designing the harvesting and crafting system for our Animal Crossing-like
+  game Cozy Grove when I ran into a problem: picking up a stick is not that fun."
+  "For example, in Cozy Grove, we made harvesting very reliable. Most sources were capped
+  daily so they acted as slow trickle sources. And in general, we leaned towards abundance."
+  → Ví dụ hiếm: chính nhà thiết kế mô tả trực tiếp quyết định cân bằng source (trickle source,
+  cap theo ngày) trong game của họ — hợp cho .lens hoặc .exercise.
+
+### Mobile
+- Clash of Clans (Supercell, mobile strategy, 2012) — nguồn: Daniel Cook 2021, trong danh
+  sách ví dụ "competitive sink":
+  "Guild vs Guild competition in a game like Clash of Clans"
+  (nằm trong bullet-list "Examples of competitive sinks" cùng "Armies battling in an RTS
+  game.")
+  → Ví dụ mobile duy nhất trong nguồn Cook, xếp vào "competitive sink": tài nguyên (quân, thời
+  gian nâng cấp) bị "tiêu huỷ" qua thi đấu/thắng thua.
+- Clash of Clans — soft gate (build timer) — nguồn: Shokrizade 2013 (mục 5):
+  "A soft gate is one where the player can get past the gate, eventually. Clash of Clans uses
+  this type in making building times ever longer and allowing the user to spend to complete
+  them."
+- Puzzle & Dragons (mobile F2P) — nguồn: Shokrizade 2013 — ví dụ sink theo thời gian (stamina):
+  "What is particularly effective here is that the player has to go through several waves of
+  battles in a dungeon, with rewards given after each wave. The last wave is a "boss battle"
+  where the difficulty becomes massive and if the player is in the recommended dungeon for
+  them then they typically fail here. They are then told that all of the rewards from the
+  previous waves are going to be lost, in addition to the stamina used to enter the dungeon
+  (this can be 4 or more real hours of time worth of stamina)."
+- Candy Crush Saga (mobile) — nguồn: Shokrizade 2013 — ranh giới "skill game" và "money game":
+  "Another novel way to use a progress gate is to make it look transparent, but to use it as
+  the partition between the skill game and the money game."
+
+### PHÂN TÍCH MINH HOẠ (tự phân tích, không nguồn — phải gắn callout note/example khi viết bài)
+- Clash of Clans (mobile) — mở rộng phân tích cụ thể để bù cho việc nguồn Cook chỉ nhắc tên
+  game: Source = Gold Mine/Elixir Collector (thu thập thụ động), cướp tài nguyên khi tấn công,
+  rương/sự kiện hằng ngày. Sink = nâng cấp building (tốn tài nguyên + thời gian chờ), huấn
+  luyện quân, mua "speed-up" bằng Gem (hard currency) để rút ngắn thời gian chờ.
+- Genshin Impact (mobile/multi-platform, gacha) — Resin: source = hồi theo thời gian thực
+  (cap tối đa, giống "trickle source" Cook mô tả cho Cozy Grove); sink = đổi Resin lấy nguyên
+  liệu nâng cấp nhân vật, boss loot. Ví dụ "energy system" điển hình của mobile F2P — không có
+  trong nguồn đã verify.
+- WoW Brutosaur mount (giá ~5 triệu gold) — ví dụ sink tự nguyện gắn "status + tiện ích", giá
+  cao ngất để chỉ nhóm "endgame giàu" mua được. KHÔNG có tuyên bố chính thức từ Blizzard xác
+  nhận đây là gold sink có chủ đích — chỉ là suy luận từ thiết kế giá.
+- OSRS có vật phẩm nội thất tên literally là "Gold sink" (chơi chữ), tốn hàng trăm triệu gold —
+  ví dụ trực quan dễ giải thích cho người mới. Nguồn mô tả cơ chế này (OSRS Wiki) bị chặn truy
+  cập (mục 10), nên KHÔNG trích số liệu cụ thể, chỉ nêu như biết chung.
+- Repair cost trong nhiều ARPG/MMO (Diablo, WoW) = sink bắt buộc kiểu "repeatable" — mỗi lần
+  chết/dùng đồ hao mòn thì tốn tiền sửa, lặp lại đều đặn.
+- Chuyển đổi (converter) trong nhiều mobile game: đổi vé sự kiện lấy vật phẩm shop, hoặc đổi
+  tài nguyên dư (gỗ) lấy tài nguyên khan hiếm (đá quý) qua NPC/market — minh hoạ converter
+  sink nhưng không gắn ví dụ game cụ thể đã verify.
+- Diablo (PC/console, ARPG) — Cook chỉ nhắc tên trong ngữ cảnh "player promise"
+  ("Diablo promises power and mastery"), không phải ví dụ source/sink cụ thể. Nếu dùng Diablo
+  làm ví dụ source/sink (gold từ quái, sink ở NPC vendor/gambling), đó là phân tích minh hoạ
+  tự thêm.
+
+---
+
+## 8. Ghi chú: case Diablo III KHÔNG dùng trong bài
+
+User đã quyết BỎ toàn bộ case Diablo III (Auction House) khỏi bài Tầng 3 · 02. Lý do: case
+này lệch trọng tâm — mất giá trị loot (giá trị phần thưởng gameplay) KHÔNG phải cùng loại vấn
+đề với lạm phát tiền tệ (quá nhiều tiền lưu hành). Sau khi loại nguồn gamedeveloper.com/Vikrant
+Agarwal (mục 4, mục 10), case này chỉ còn đứng trên một nguồn duy nhất (Time.com) — không đủ
+mạnh để làm case chính.
+
+Case A vẫn được GIỮ LẠI trong file research này như tư liệu tham khảo (mục 4) — nếu session
+sau cần dùng lại, đọc kỹ cảnh báo về nguồn đã loại trước khi trích. KHÔNG tự ý đưa case này vào
+bài trừ khi user đổi ý.
+
+---
+
+## 9. Ghi chú nguồn cần thận trọng
+
+- Trang secure.runescape.com dùng encoding **windows-1252** (byte 0x92 = ’). Đọc bằng UTF-8 sẽ
+  ra mojibake và gây FALSE-NEGATIVE khi so khớp quote (dấu nháy cong không khớp) — khi verify
+  lại, phải đọc bằng latin1 rồi map cp1252, không đọc thẳng UTF-8.
+- Machinations article: byline thật là Joris Dormans, KHÔNG phải Ernest Adams (Adams chỉ là
+  chủ chuyên mục "The Designer's Notebook"); năm đăng đúng là 2012 (datePublished
+  2012-08-16), không phải 2011. Lưu ý: research/systems-design.txt (bài tang-3/01) hiện đang
+  cite nguồn này là "2011" — nằm ngoài phạm vi sửa của file này, main tự quyết có cập nhật
+  chéo hay không.
+- Link Simpson PDF mirror (mobiledevmemo.com): tải được bằng GET (PDF thật, 24 trang), nhưng
+  HEAD rơi vào redirect loop 302 vô hạn — nếu dùng tool chỉ gửi HEAD để kiểm tra link sống, sẽ
+  báo sai là link chết. User đã duyệt vẫn dùng, kèm ghi chú "bản mirror".
+- gamedeveloper.com/business/why-diablo-3-shut-down-the-auction-house — tưởng là bài báo toà
+  soạn nhưng thực chất là REPOST blog cá nhân (geeksmirage.com) của Vikrant Agarwal — xem mục
+  10, KHÔNG dùng.
+- "soft currency / hard currency" — không tìm được nguồn verify dùng đúng cặp thuật ngữ này;
+  Shokrizade dùng "premium currency". Nếu bài cần đúng cặp thuật ngữ, cần research thêm.
+- 4 nhãn "sink bắt buộc/tự nguyện/theo thời gian/chuyển đổi" — không có nguồn gốc dùng đúng
+  tên; đây là cách gọi phổ biến trong cộng đồng, ánh xạ tay sang khung Fixed/Repeatable/
+  Exponential/Competitive của Cook (mục 6) — tách bạch rõ trong bài.
+- Mức Grand Exchange tax cuối cùng là 1% (theo primagames.com, mmorpg.com) — CHƯA tự mở đọc
+  bài công bố chính thức của Jagex. KHÔNG trích như số đã verify.
+- EVE MER: số liệu ISK faucets/sinks chi tiết, biểu đồ money velocity, Consumer Price Index
+  nằm trong ảnh PNG hoặc bên thứ ba (Adam4EVE) chưa mở đọc — chỉ dùng số money supply tổng đã
+  trích ở mục 3.
+- WoW Brutosaur & OSRS "Gold sink" (vật phẩm nội thất) — không có tuyên bố chính thức xác nhận
+  mục đích thiết kế; chỉ là suy luận/quan sát, đánh dấu rõ là phân tích minh hoạ khi dùng.
+- TÁCH BẠCH theo quy trình dự án: mọi ví dụ có nguồn nằm ở mục 7 phần "PC/Console, Indie,
+  Mobile"; ví dụ không có nguồn nằm ở "PHÂN TÍCH MINH HOẠ" cuối mục 7 — khi viết bài phải bọc
+  trong callout note/example và ghi rõ.
+
+---
+
+## 10. KHÔNG DÙNG ĐƯỢC — đã thử, session sau khỏi làm lại
+
+- http://www.mine-control.com/zack/uoecon/uoecon.html — URL gốc (canonical) bài Simpson trên
+  trang cá nhân tác giả: HTTP 301 → theo redirect → 404. Dùng bản mirror mobiledevmemo.com
+  thay thế (mục 2.1; rủi ro HEAD redirect loop, xem mục 9).
+- en.wikipedia.org/wiki/Gold_sink — đã đọc, có định nghĩa "gold sink" và vài ví dụ (Ultima
+  Online, Kingdom of Loathing, RuneScape, Alter Aeon) nhưng KHÔNG có ví dụ mobile, không giải
+  thích nguồn gốc thuật ngữ. Quyết định KHÔNG dùng vì thừa/yếu hơn nguồn khác (Simpson,
+  Ludgate, Cook) — không phải lỗi kỹ thuật.
+- gamedesignskills.com, dev.to, machinations.io/articles, itembase.dev, 300mind.studio — chỉ
+  thấy qua snippet WebSearch, KHÔNG được mở đọc kỹ/fetch. Chưa đưa vào phần "đã verify". Có
+  thể đào tiếp ở session sau nếu cần thêm ví dụ mobile khác.
+- sourcegaming.info — HTTP 406, chặn curl. Không thử lại (đã biết trước từ research bài
+  tang-3/01).
+- Bài blog gốc Blizzard/Battle.net đóng Auction House Diablo III
+  (http://us.battle.net/d3/en/blog/10974978/) — redirect chain: 302 → 301 → 301 → cuối cùng
+  200 về https://diablo3.blizzard.com/en-us/ (trang chủ hiện tại, KHÔNG phải bài viết — nội
+  dung đã mất dù không phải lỗi 404).
+- **gamedeveloper.com/business/why-diablo-3-shut-down-the-auction-house** (tác giả Vikrant
+  Agarwal, đăng 19/09/2013) — HTTP 200 nhưng là REPOST BLOG CÁ NHÂN, đầu bài ghi "Originally
+  posted on my website: http://geeksmirage.com/...". Câu "It ultimately undermines Diablo's
+  core game play." mà research trước trích dẫn KHÔNG tồn tại trong trang (grep 0 hit). File
+  research thô B từng mô tả đây là "nguồn báo chí độc lập" — SAI, phải ghi rõ để session sau
+  không dùng lại. Xem case A (mục 4) và mục 8.
+- GameSpot — "Sink or Swim: Markets and Money in Online Games"
+  (gamespot.com/articles/sink-or-swim-markets-and-money-in-online-games/1100-6394608/) —
+  WebFetch 2 lần lỗi "Command failed with no output"; curl (User-Agent trình duyệt, timeout
+  15s) → exit code 7, Failed to connect (lỗi kết nối/chặn tầng network). Có quote hay của
+  Eyjólfur Guðmundsson xuất hiện trong search snippet nhưng CHƯA tự mở đọc được — KHÔNG đưa
+  vào bài.
+- FastCompany — "Meet The Alan Greenspan Of Virtual Currency In EVE Online"
+  (fastcompany.com/3024392/meet-the-alan-greenspan-of-virtual-currency-in-eve-online) — HTTP
+  403 (chặn truy cập tự động). Không dùng.
+- Nguồn gốc thuật ngữ "mudflation" (Usenet 1993, phổ biến qua EverQuest Ruins of Kunark) — chỉ
+  có trong wiki/fandom/urban dictionary, không đủ chuẩn học thuật để trích dẫn năm/tác giả cụ
+  thể. Nếu dùng từ này thì dùng như thuật ngữ chung của ngành, không gắn nguồn.
+- Số liệu ISK faucets/sinks theo tháng, Consumer Price Index, Adam4EVE sinks/faucets history —
+  nằm trong ảnh PNG trên trang EVE MER (không trích xuất được text) hoặc trên trang bên thứ ba
+  chưa mở đọc. KHÔNG đưa số cụ thể ngoài con số money supply đã trích ở mục 3.
+- Mức Grand Exchange tax cuối cùng là 1% (theo primagames.com, mmorpg.com) — CHƯA tự mở đọc
+  bài công bố chính thức của Jagex về mức 1% này. KHÔNG trích như số đã verify.
+- oldschool.runescape.wiki/w/Sink_(economy) — HTTP 403 (curl), WebFetch cũng trả 403 Forbidden
+  (Cloudflare chặn bot). Không verify được nội dung.
+- eveonline.com/news/view/monthly-economic-report-october-2025 — HTTP 200, truy cập được
+  nhưng số liệu (ISK sinks: Transaction Tax, Broker's Fee, Manufacturing, LP Store...) nằm
+  trong biểu đồ ảnh (PNG) và file dữ liệu tải về, KHÔNG có trong text HTML render được. Không
+  trích dẫn được số liệu cụ thể.
+- Jagex dev blog gốc về RuneScape gold sink cụ thể — không tìm ra URL bài blog gốc để fetch
+  (chỉ có bài báo thứ cấp primagames.com, nme.com tóm tắt lại). Chưa verify trực tiếp, KHÔNG
+  dùng.
+- Tuyên bố chính thức từ Blizzard xác nhận Brutosaur là "gold sink có chủ đích" — không tìm
+  thấy phát ngôn chính thức nào; chỉ có suy đoán từ cộng đồng/báo game. KHÔNG dùng làm trích
+  dẫn "theo nguồn".
+- "soft currency" vs "hard currency" — KHÔNG tìm được bài viết đã verify dùng đúng cặp thuật
+  ngữ này; nguồn Shokrizade dùng "premium currency" thay vì "hard currency". Cần thêm 1 vòng
+  research khác nếu bài bắt buộc dùng đúng cặp thuật ngữ.

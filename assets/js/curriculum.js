@@ -229,9 +229,9 @@ window.CURRICULUM = [
                     "Phát hiện economy bị lạm phát",
                     "Thiết kế sink hợp lý để giữ giá trị tài nguyên"
                 ],
-                minutes: 15,
+                minutes: 14,
                 level: "Trung bình",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-3/03-balance-spreadsheet",

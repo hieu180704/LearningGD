@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Economy: sources và sinks — Xưởng Game Design</title>
+<meta name="description" content="Trong Ultima Online, vàng chảy vào liên tục từ quái vật và hầm mỏ nhưng gần như không có gì làm nó biến mất — hậu quả là lạm phát. Học cách cân bằng source và sink để giữ một nền kinh tế game sống lâu dài.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-3/02-economy-sources-sinks" class="tier-3">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-3">Tầng 3 · Chuyên sâu</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 3 · Bài 02</p>
+            <h1>Economy: sources và sinks</h1>
+            <p class="dek">Mọi nền kinh tế game là một cái bồn: tài nguyên chảy vào từ vòi, và nên chảy ra bằng một ống thoát tương xứng — lệch một bên là lạm phát.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 14 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Trung bình</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="01-systems-design.html">Systems design</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Liệt kê source và sink trong một game cụ thể</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Phát hiện economy bị lạm phát</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Thiết kế sink hợp lý để giữ giá trị tài nguyên</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Bồn không đáy của Ultima Online</h2>
+        <p>Ultima Online ra mắt năm 1997, được xem là MMO quy mô lớn đầu tiên. Hàng nghìn người chơi cùng lúc giết quái, đào mỏ, nhặt vàng — mỗi hành động đó bơm thêm tài nguyên mới vào thế giới.</p>
+        <p>Vấn đề: gần như không có gì khiến vàng và vật phẩm biến mất. Server phình to, giá vật phẩm cứ leo thang, đồng vàng ngày càng mất giá.</p>
+        <p>Bạn đã học ở bài trước: một hệ thống kinh tế là dòng tài nguyên chảy qua source, pool, drain. Bài này soi kỹ hai đầu của dòng chảy đó — nơi tài nguyên sinh ra và nơi nó nên biến mất — vì cân bằng chúng là việc giữ cho một economy sống lâu.</p>
+
+        <h2 id="voi-va-ong-thoat">Vòi và ống thoát</h2>
+        <p>Dân economy design gọi cặp source-drain bạn đã biết bằng một tên khác: <span class="term" data-en="faucet">vòi</span> (faucet) và <span class="term" data-en="sink">ống thoát</span> (sink). Lance Stites, trích trong bài viết của Simon Ludgate, mô tả vòi: <em>"The faucet is the continued injection of 'currency', such as gold being acquired killing monsters or completing quests,"</em> (vòi là dòng bơm liên tục "tiền tệ" vào game, như vàng kiếm được từ giết quái hay hoàn thành nhiệm vụ.)</p>
+        <p>Sink là chiều ngược lại: nơi tài nguyên biến mất vĩnh viễn, không quay về pool của bất kỳ ai. Muốn economy sống lâu, hai đầu này phải cân nhau — không chỉ lo làm vòi hấp dẫn mà bỏ quên ống thoát.</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Vòi<small>Giết quái, đào mỏ, nhiệm vụ</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Bồn<small>Túi vàng của người chơi</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Ống thoát<small>Phí sửa đồ, thuế, vật phẩm tiêu hao</small></div>
+            </div>
+            <figcaption>Cùng ba mắt xích bạn đã gặp ở bài trước, nhìn qua ngôn ngữ economy design: vòi bơm vào, bồn giữ lại, ống thoát rút bớt ra.</figcaption>
+        </figure>
+
+        <h2 id="lam-phat-economy">Khi nào economy lạm phát</h2>
+        <p><span class="term" data-en="inflation">Lạm phát</span> xảy ra khi tài nguyên chảy vào nhiều hơn chảy ra, kéo dài đủ lâu để tích luỹ. Jagex, studio đứng sau RuneScape, diễn đạt gọn: <em>"If there is more gold coming into the game than there is leaving, then we experience inflation."</em> (nếu vàng chảy vào nhiều hơn chảy ra, ta có lạm phát.)</p>
+        <p>Ba dấu hiệu designer nên theo dõi: lượng tiền lưu hành tăng đều tháng qua tháng; giá vật phẩm leo thang dù gameplay không đổi; game vận hành lâu mà gần như không có sink nào xoá tài nguyên đi. EVE Online công bố báo cáo kinh tế hằng tháng và từng ghi nhận đúng dấu hiệu đầu: <em>"In August, we observed a significant upward trend in the money supply, reaching 2,190T ISK."</em> (tháng 8 ghi nhận xu hướng tăng rõ rệt của lượng tiền lưu hành, đạt 2.190 nghìn tỷ ISK.)</p>
+        <p>Theo dõi money supply theo thời gian là cách một economy designer phát hiện lạm phát trước khi người chơi phàn nàn về giá cả.</p>
+
+        <h2 id="bon-kieu-sink">Bốn kiểu sink</h2>
+        <p>Daniel Cook, trong bài viết "Value chains" trên Lostgarden, chia sink thành bốn kiểu theo cách chúng hút tài nguyên:</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Kiểu sink</th><th>Cách hoạt động + ví dụ</th></tr></thead>
+                <tbody>
+                    <tr><td>Fixed</td><td>Dùng một lần, không lặp lại — ví dụ mở khoá một nâng cấp cố định, hết là hết.</td></tr>
+                    <tr><td>Repeatable</td><td>Lặp lại nhiều lần, mỗi lần trừ một lượng cố định — ví dụ phí sửa đồ sau mỗi trận.</td></tr>
+                    <tr><td>Exponential</td><td>Muốn tăng thêm một bậc output, input phải tăng theo cấp số — luôn còn chỗ để hút thêm khi người chơi mạnh lên.</td></tr>
+                    <tr><td>Competitive</td><td>Người chơi thi nhau đổ tài nguyên vào, ai đổ nhiều nhất nhận giải lớn nhất — không có trần nên hút được rất nhiều.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Bốn kiểu này không loại trừ nhau. Một economy khoẻ thường phối hợp cả bốn, mỗi kiểu phục vụ một giai đoạn khác nhau trong hành trình của người chơi.</p>
+
+        <h2 id="vi-du-da-the-loai">Source và sink trong bốn thể loại</h2>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Game</th><th>Source → Sink</th></tr></thead>
+                <tbody>
+                    <tr><td>Ultima Online (PC, MMO)</td><td>Source: giết quái, đào mỏ. Sink gần như không có — đây chính là nguyên nhân lạm phát mở đầu bài.</td></tr>
+                    <tr><td>Monopoly (board game)</td><td>Source: đi qua ô Go nhận tiền — một source thụ động, không cần hành động gì thêm. Sink: tiền thuê trả cho đối thủ, thuế.</td></tr>
+                    <tr><td>Cozy Grove (indie)</td><td>Source: nhiệm vụ hằng ngày, thu hoạch tài nguyên trên đảo. Sink: chế tạo đồ trang trí, nâng cấp trại.</td></tr>
+                    <tr><td>Clash of Clans (mobile)</td><td>Source: gold mine, elixir collector tự sinh tài nguyên theo thời gian. Sink: nâng cấp công trình — một sink kiểu competitive khi so xếp hạng giữa các clan.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Phân tích minh hoạ</p>
+                <p>Chi tiết gold mine, elixir collector và gem speed-up trong Clash of Clans ở bảng trên là phân tích minh hoạ của bài học, không trích từ nguồn — nguồn gốc chỉ nêu tên game trong một bullet về sink kiểu competitive, không mô tả sâu cơ chế.</p>
+            </div>
+        </div>
+
+        <h2 id="lens">Soi economy của một game bất kỳ</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Đọc vòi và ống thoát của một game</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Tài nguyên này sinh ra từ đâu, với tốc độ nào?</li>
+                <li><span class="q-icon">?</span> Nó biến mất ở đâu, hay chỉ chuyển sang túi người chơi khác?</li>
+                <li><span class="q-icon">?</span> Nếu người chơi cày 100 giờ, thứ gì sẽ tràn ra?</li>
+                <li><span class="q-icon">?</span> Người chơi có được chọn tiêu tài nguyên vào đâu, hay bị ép vào một sink duy nhất?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Nhầm "chuyển tài nguyên" với sink thật</p>
+                <p>Bán đồ cho NPC trông như một sink — món đồ biến mất khỏi túi người chơi. Nhưng NPC in tiền ra trả cho họ, nên tổng tiền trong game tăng lên. Zachary Booth Simpson, phân tích economy của Ultima Online, gọi thẳng: <em>"This item drain is not a true sink of goods because it involves printing gold to pay for the goods."</em> (đây không phải sink thật vì nó in thêm vàng để trả cho món đồ.) Sink thật là tài nguyên bị huỷ ròng, không sinh thêm gì bù lại.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Sink thoả mãn quá nhanh</p>
+                <p>Nếu người chơi mua hết mọi thứ gắn với động lực của họ ngay lập tức, họ hết lý do quay lại vòng lặp tạo ra tài nguyên đó. Daniel Cook đặt câu hỏi cho trường hợp status: <em>"If you are motivated by status and you can instantly buy all the high status clothing, why bother continuing to exercise that value chain?"</em> (nếu bạn muốn địa vị mà mua ngay được hết đồ địa vị cao nhất, còn lý do gì để tiếp tục vòng lặp đó?)</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Sink thao túng thay vì tôn trọng lựa chọn</p>
+                <p>Một kiểu sink bị phê phán: dùng thời gian chờ ngày càng dài rồi bán cách rút ngắn — người chơi bị ép chứ không được chọn. Ramin Shokrizade gọi đây là soft gate: <em>"A soft gate is one where the player can get past the gate, eventually. Clash of Clans uses this type in making building times ever longer and allowing the user to spend to complete them."</em> (soft gate là cổng mà người chơi cuối cùng vẫn vượt qua được; Clash of Clans dùng kiểu này bằng cách kéo dài thời gian xây dựng rồi cho trả tiền để rút ngắn.)</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Soi economy của game bạn đang chơi</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">20 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Liệt kê source, sink, và dự đoán điểm nghẽn</h3>
+                <ol class="steps">
+                    <li><span>Chọn một game bạn đang chơi.</span></li>
+                    <li><span>Liệt kê 3 <strong>source</strong> và 3 <strong>sink</strong> của một loại tài nguyên chính trong game đó.</span></li>
+                    <li><span>Với mỗi sink, đánh dấu: đây là <strong>sink thật</strong> (tài nguyên bị huỷ ròng) hay chỉ là <strong>chuyển tài nguyên</strong> sang người khác hoặc hệ thống khác?</span></li>
+                    <li><span>Dự đoán: nếu chơi 100 giờ, thứ gì sẽ tràn ra vì thiếu sink?</span></li>
+                    <li><span>Đề xuất một sink mới thuộc kiểu <strong>Repeatable</strong> hoặc <strong>Competitive</strong> để giải quyết điểm tràn đó.</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nếu bí ở bước 3, tự hỏi: khi tài nguyên rời khỏi túi người chơi, nó có thật sự biến mất khỏi game, hay chỉ chạy sang túi của NPC/người chơi khác?</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Bán vật phẩm cho NPC khiến vật phẩm biến mất khỏi túi người chơi. Vì sao Zachary Booth Simpson nói đây không phải sink thật?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Vì NPC không thực sự tồn tại trong hệ thống kinh tế</button>
+                <button data-opt="b"><span class="badge">B</span> Vì NPC in thêm vàng ra trả, nên tổng tiền lưu hành trong game tăng lên</button>
+                <button data-opt="c"><span class="badge">C</span> Vì vật phẩm đó quay lại kho của một người chơi khác</button>
+            </div>
+            <div class="explain" hidden><p>Simpson chỉ ra: giao dịch đó đi kèm việc in thêm vàng để trả cho món đồ, nên tổng tiền trong game tăng lên. Sink thật phải huỷ tài nguyên ròng, không tạo thêm tài nguyên bù lại. Đáp án C mô tả một kiểu chuyển tài nguyên khác, không phải lý do Simpson đưa ra ở đây.</p></div>
+        </div>
+        <div class="quiz" data-answer="c">
+            <p class="q">Dấu hiệu nào KHÔNG nằm trong ba dấu hiệu lạm phát mà designer nên theo dõi ở bài này?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Lượng tiền lưu hành tăng đều tháng qua tháng</button>
+                <button data-opt="b"><span class="badge">B</span> Giá vật phẩm leo thang dù gameplay không đổi</button>
+                <button data-opt="c"><span class="badge">C</span> Người chơi mới liên tục tham gia server</button>
+            </div>
+            <div class="explain" hidden><p>Ba dấu hiệu được nêu là: money supply tăng đều, giá vật phẩm leo thang, và gần như không có sink nào xoá tài nguyên dù game vận hành lâu. Số lượng người chơi mới không nằm trong ba dấu hiệu này.</p></div>
+        </div>
+        <div class="quiz" data-answer="c">
+            <p class="q">Theo khung phân loại của Daniel Cook, kiểu sink nào luôn còn chỗ để hút thêm tài nguyên, vì input cần tăng theo cấp số để đổi lấy thêm một bậc output?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Fixed</button>
+                <button data-opt="b"><span class="badge">B</span> Repeatable</button>
+                <button data-opt="c"><span class="badge">C</span> Exponential</button>
+            </div>
+            <div class="explain" hidden><p>Exponential đúng vì mỗi bậc output tiếp theo đòi input tăng theo cấp số, nên không có trần. Fixed chỉ dùng một lần, Repeatable trừ một lượng cố định mỗi lần lặp lại — cả hai không tăng cấp số theo bậc.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Vì sao Ramin Shokrizade gọi việc kéo dài thời gian xây dựng trong Clash of Clans rồi bán cách rút ngắn là "soft gate" đáng phê phán?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Vì cổng đó không thể vượt qua nếu không trả tiền</button>
+                <button data-opt="b"><span class="badge">B</span> Vì người chơi cuối cùng vẫn vượt qua được, nhưng bị ép trả tiền thay vì có lựa chọn thật</button>
+                <button data-opt="c"><span class="badge">C</span> Vì đây là một sink kiểu Fixed chỉ dùng được một lần</button>
+            </div>
+            <div class="explain" hidden><p>Đáp án A sai vì Shokrizade nói rõ người chơi cuối cùng vẫn vượt qua được, chỉ là chậm hơn nếu không trả tiền — đó chính là điểm phân biệt soft gate với hard gate. Đáp án C không đúng — đây là ví dụ về sink thao túng, không phải phân loại Fixed.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Faucet &amp; Sink</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Tên gọi khác của source/drain trong economy design: faucet bơm tài nguyên vào liên tục, sink huỷ tài nguyên vĩnh viễn khỏi hệ thống (Lance Stites, dẫn trong Simon Ludgate).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Sink thật vs chuyển tài nguyên</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Sink thật huỷ tài nguyên ròng khỏi hệ thống. Bán đồ cho NPC không phải sink thật nếu NPC in thêm tiền trả lại — đó chỉ là chuyển tài nguyên (Zachary Booth Simpson).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Fixed / Repeatable / Exponential / Competitive</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">4 kiểu sink của Daniel Cook: Fixed dùng một lần, Repeatable lặp lại lượng cố định, Exponential đòi input tăng cấp số, Competitive không có trần vì người chơi thi nhau đổ vào.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Soft gate</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Cổng mà người chơi cuối cùng vẫn vượt qua được, nhưng bị kéo dài thời gian rồi mời trả tiền rút ngắn — ép chọn thay vì tôn trọng lựa chọn (Ramin Shokrizade).</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Economy là dòng chảy giữa vòi (source) và ống thoát (sink) — lạm phát xảy ra khi vào nhiều hơn ra kéo dài (Jagex).</li>
+                <li><span class="n">2</span> Sink thật huỷ tài nguyên ròng khỏi hệ thống; chuyển tài nguyên giữa người chơi và NPC không phải sink thật (Simpson). Bốn kiểu sink: Fixed, Repeatable, Exponential, Competitive (Daniel Cook).</li>
+                <li><span class="n">3</span> Sink tốt tôn trọng lựa chọn người chơi; soft gate ép trả tiền thay vì cho chọn là kiểu thiết kế bị phê phán (Shokrizade).</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://mobiledevmemo.com/wp-content/uploads/2021/09/The-In-game-Economics-of-Ultima-Online.pdf" target="_blank" rel="noopener">The In-game Economics of Ultima Online</a>
+                <span class="reading-meta">Zachary Booth Simpson · CGDC, 2000</span>
+                <p class="reading-why">Bản mirror (trang gốc đã chết) — nguồn phân tích lạm phát Ultima Online và khái niệm sink giả mở đầu bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/the-f-words-of-mmos-faucets" target="_blank" rel="noopener">The F-Words Of MMOs: Faucets</a>
+                <span class="reading-meta">Simon Ludgate · Game Developer, 2011</span>
+                <p class="reading-why">Nguồn định nghĩa faucet, trích lời Lance Stites dùng ở đầu bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/the-designer-s-notebook-machinations-a-new-way-to-design-game-mechanics" target="_blank" rel="noopener">The Designer's Notebook: Machinations, A New Way to Design Game Mechanics</a>
+                <span class="reading-meta">Joris Dormans · Game Developer, 2012</span>
+                <p class="reading-why">Đăng trong chuyên mục The Designer's Notebook của Ernest Adams — mở rộng khung Machinations bạn đã học ở bài trước.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://lostgarden.com/2021/12/12/value-chains/" target="_blank" rel="noopener">Value chains</a>
+                <span class="reading-meta">Daniel Cook · Lostgarden, 2021</span>
+                <p class="reading-why">Nguồn khung phân loại bốn kiểu sink: Fixed, Repeatable, Exponential, Competitive.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://secure.runescape.com/m=news/old-school-economy---future-plans?oldschool=1" target="_blank" rel="noopener">Old School Economy - Future Plans</a>
+                <span class="reading-meta">Jagex, 2021</span>
+                <p class="reading-why">Nguồn định nghĩa lạm phát dùng trong bài — góc nhìn từ một studio thật đang vận hành economy sống.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/business/the-top-f2p-monetization-tricks" target="_blank" rel="noopener">The Top F2P Monetization Tricks</a>
+                <span class="reading-meta">Ramin Shokrizade · Game Developer, 2013</span>
+                <p class="reading-why">Bài mang giọng phê phán, đọc để nhận diện kiểu thiết kế nên tránh như soft gate.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
