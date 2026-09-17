@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>F2P và LiveOps — Xưởng Game Design</title>
+<meta name="description" content="Vì sao 2% người chơi có thể tạo ra 75% doanh thu một game free-to-play, và làm sao lên kế hoạch một sự kiện LiveOps mà không biến game thành cỗ máy bóc lột.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-4/01-f2p-liveops" class="tier-4">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-4">Tầng 4 · Nâng cao</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 4 · Bài 01</p>
+            <h1>F2P và LiveOps</h1>
+            <p class="dek">Game miễn phí không kiếm tiền từ số đông — nó kiếm tiền từ một nhóm rất nhỏ, và sống sót bằng cách không bao giờ ngừng vận hành sau ngày ra mắt.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 16 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Nâng cao</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="../tang-3/02-economy-sources-sinks.html">Economy: sources và sinks</a> và <a href="../tang-3/03-balance-spreadsheet.html">Balance bằng spreadsheet</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Hiểu các mô hình doanh thu F2P phổ biến</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Lên kế hoạch một sự kiện LiveOps đơn giản</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Cân bằng giữa monetization và trải nghiệm chơi</li>
+                </ul>
+            </div>
+        </header>
+
+        <h2 id="mo-bai">Xây một toà nhà, đợi hay trả tiền</h2>
+        <p>Trong Clash of Clans, nâng cấp một toà nhà có thể mất vài giờ, có khi cả ngày. Bạn không bắt buộc phải trả tiền để xong việc — cứ đợi là toà nhà cũng lên cấp. Nhưng nếu muốn xong ngay, bạn trả tiền thật để mua vàng rút ngắn thời gian chờ.</p>
+        <p>Ramin Shokrizade gọi tên cơ chế này năm 2013: <em>"A soft gate is one where the player can get past the gate, eventually. Clash of Clans uses this type in making building times ever longer and allowing the user to spend to complete them."</em> (cổng mềm là loại cổng người chơi vẫn vượt qua được, chỉ là muộn hơn — Clash of Clans dùng kiểu này bằng cách kéo dài thời gian xây, và cho phép người chơi trả tiền để rút ngắn.)</p>
+        <p>Điểm mấu chốt: game không bán thêm sát thương hay thêm máu, nó bán <strong>thời gian</strong>. Đây chỉ là một trong nhiều cách một game F2P kiếm tiền. Bài này đi vào các mô hình doanh thu đó, và cách vận hành một game F2P sau ngày ra mắt.</p>
+
+        <h2 id="f2p-la-gi">F2P là gì, và ai thật sự trả tiền</h2>
+        <p>F2P (free-to-play) là game người chơi tải và chơi phần lớn nội dung mà không phải trả tiền trước — khác với premium, nơi bạn phải mua đứt game rồi mới được chơi. Doanh thu F2P đến từ giao dịch bên trong lúc chơi, không phải từ giá bán một lần.</p>
+        <p>Câu hỏi tự nhiên: nếu không ai bị bắt buộc trả tiền, ai là người trả? Emily Greer, đồng sáng lập Kongregate, công bố số liệu thật của chính nền tảng mình tại GDC 2015: chỉ <strong>2,1% tài khoản</strong> hoạt động từng mua thứ gì đó, nhưng nhóm nhỏ này tạo ra <strong>75% doanh thu</strong>. Nhóm chi từ 500 USD trở lên chỉ chiếm khoảng <strong>0,1% người chơi</strong>, nhưng đóng góp gần một nửa doanh thu còn lại.</p>
+        <p>Ngành hay gọi nhóm chi rất nhiều là <span class="term" data-en="whale">cá voi</span>, nhóm chi đều đặn mức vừa là <span class="term" data-en="dolphin">cá heo</span>, còn nhóm gần như không chi là <span class="term" data-en="minnow">cá con</span>. Đây là tiếng lóng phổ biến trong ngành — bài này không xác minh được nguồn gốc chính xác của những tên gọi đó, nên đừng coi mốc chi tiêu cụ thể của từng nhóm là con số chính thức.</p>
+        <p>Chính Greer cảnh báo về cách gọi "cá voi": <em>"to call them whales is to dehumanize them."</em> (gọi họ là cá voi là phi nhân hoá họ.) Bà lập luận nhóm chi tiêu lớn thường là người trưởng thành có thu nhập ổn định, chi tiêu có chủ đích như một sở thích — không nên mặc định coi họ là nạn nhân bị lợi dụng.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Theo nguồn vs. phân tích minh hoạ</p>
+                <p>Số liệu Kongregate/Swrve, các trích dẫn của Greer/Cox/Bycer/Shokrizade và khung 3 tiêu chí pay-to-win đều lấy thẳng từ nguồn đã dẫn. Khung 5 bước lên kế hoạch sự kiện ở phần dưới, và các câu hỏi ở phần Lens, là phân tích minh hoạ người viết bài tự ghép lại từ hai nguồn LiveOps — không phải trích nguyên văn từ một quy trình có sẵn.</p>
+            </div>
+        </div>
+
+        <h2 id="mo-hinh-doanh-thu">Sáu mô hình doanh thu phổ biến</h2>
+        <p>Cùng một mục tiêu — kiếm tiền từ người chơi không bị buộc phải trả — nhưng mỗi mô hình chọn một cơ chế khác nhau, kéo theo rủi ro thiết kế khác nhau.</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Mô hình</th><th>Cơ chế</th><th>Ví dụ thật</th><th>Rủi ro thiết kế</th></tr></thead>
+                <tbody>
+                    <tr><td>Cosmetic-only</td><td>Trả tiền cho vật phẩm không ảnh hưởng gameplay (skin, trang phục, emote)</td><td>Azur Lane — monetization tập trung vào skin đắt tiền (phân tích của Josh Bycer)</td><td>Trần doanh thu trên mỗi người chơi thấp hơn mô hình có gameplay power</td></tr>
+                    <tr><td>Battle pass</td><td>Trả phí cố định, tiến độ theo mùa, mở khoá dần qua các mốc, có bản miễn phí song song</td><td>Gốc từ Compendium của Dota 2 tại The International 2013</td><td>Tạo áp lực FOMO nếu người chơi không kịp hoàn thành trước khi mùa kết thúc</td></tr>
+                    <tr><td>Gacha / loot box</td><td>Trả tiền quay ngẫu nhiên vật phẩm hoặc nhân vật, tỉ lệ rơi không phải lúc nào cũng công bố</td><td>Genshin Impact — quay banner nhân vật giới hạn</td><td>Rủi ro pháp lý cao nhất trong các mô hình F2P; một số quốc gia coi là cờ bạc</td></tr>
+                    <tr><td>Energy / timer</td><td>Năng lượng hồi theo thời gian, hết thì đợi hoặc trả tiền hồi ngay — một dạng cổng mềm</td><td>Clash of Clans, Puzzle &amp; Dragons</td><td>Dễ biến thành sink cưỡng ép nếu năng lượng hồi quá chậm so với nhu cầu chơi</td></tr>
+                    <tr><td>Rewarded ads</td><td>Quảng cáo video mà người chơi chủ động chọn xem để đổi phần thưởng (thêm mạng, nhân đôi thưởng, hồi năng lượng)</td><td>Phổ biến ở phần lớn game F2P di động, không gắn với một tên game cụ thể</td><td>Phụ thuộc mạng quảng cáo bên thứ ba, doanh thu mỗi lượt thấp hơn giao dịch trực tiếp</td></tr>
+                    <tr><td>Subscription</td><td>Trả phí định kỳ để giữ quyền truy cập toàn bộ nội dung — ngược hẳn với F2P thuần</td><td>World of Warcraft (Blizzard, PC MMO)</td><td>Rào cản gia nhập cao hơn F2P với người chơi mới chưa biết có thích game hay không</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Trang chính thức Compendium 2013 của Dota 2 ghi rõ tỉ lệ ăn chia: <em>"For every purchase of an Interactive Compendium, 25% of the price will go directly into the prize pool."</em> (mỗi lượt mua Compendium, 25% giá bán vào thẳng prize pool.) Đây được xem là tiền thân của battle pass ngày nay: mua một lần, có các mốc tiến độ, gắn với một sự kiện giới hạn thời gian.</p>
+        <p>Rủi ro pháp lý của gacha/loot box là có thật. Bỉ (Gaming Commission) định nghĩa chính thức <em>"Loot boxes is the collective term for one or more game elements incorporated into a video game, in which the player acquires game items in a seemingly random manner, which may or may not involve a cost."</em> Trung Quốc đi xa hơn — theo quy định do Ministry of Culture công bố năm 2016, publisher game phải công khai tỉ lệ rơi của mọi vật phẩm ngẫu nhiên.</p>
+
+        <h2 id="liveops-la-gi">LiveOps là gì</h2>
+        <p>Ra mắt xong không phải hết việc. Crystin Cox định nghĩa năm 2020: <em>"LiveOps is a portmanteau of Live Operations... 'Operations' means to take care of something over time."</em> (LiveOps ghép từ Live + Operations — "vận hành" nghĩa là chăm sóc một thứ gì đó liên tục theo thời gian.)</p>
+        <p>James Gwertzman, CEO PlayFab, chia sự kiện LiveOps thành 5 nhóm mục đích: <strong>fun</strong> (thuần vui, không bán hàng), <strong>monetization</strong> (bán hàng), <strong>marketing</strong> (thu hút người chơi mới hoặc quay lại), <strong>content</strong> (mở khoá nội dung mới), và <strong>tactical</strong> (phản ứng nhanh với một vấn đề phát sinh).</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Lịch sự kiện<small>Chạy event theo lịch</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Đo metric<small>DAU, retention, ARPDAU</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Điều chỉnh<small>Sửa cơ chế/thưởng</small></div>
+            </div>
+            <div class="loop-return">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                <span>Quay lại đầu vòng — vòng lặp này không có điểm dừng (Cox, 2020)</span>
+            </div>
+            <figcaption>Vòng lặp LiveOps: mỗi sự kiện đều phải quay lại đo và sửa cho sự kiện kế tiếp.</figcaption>
+        </figure>
+
+        <h2 id="lap-ke-hoach">Lên kế hoạch một sự kiện LiveOps</h2>
+        <p>Ghép từ cách Cox đặt nhu cầu người chơi lên trước và cách Gwertzman phân loại event theo mục đích, có thể rút ra 5 bước thực dụng.</p>
+        <ol class="steps">
+            <li><span><strong>Mục tiêu</strong> — chọn đúng 1 trong 5 nhóm của Gwertzman trước khi nghĩ đến cơ chế: fun, monetization, marketing, content hay tactical.</span></li>
+            <li><span><strong>Metric</strong> — chọn 1-2 chỉ số khớp mục tiêu: DAU trong tuần sự kiện, D7 retention của nhóm tham gia, ARPDAU (doanh thu trung bình trên mỗi người chơi hoạt động trong ngày), hoặc conversion rate của gói ưu đãi giới hạn.</span></li>
+            <li><span><strong>Cơ chế</strong> — nhiệm vụ, thử thách hoặc giải đấu gắn với thời hạn rõ ràng, đặt nhu cầu người chơi lên trước thay vì chỉ nhét thêm nội dung.</span></li>
+            <li><span><strong>Thưởng</strong> — gắn với động lực người chơi thật sự muốn, không chỉ phá cân bằng lâu dài để tạo cảm giác "hời".</span></li>
+            <li><span><strong>Lịch</strong> — đặt vào event calendar tổng thể, tránh chồng lấn sự kiện khác, và đo lại sau khi kết thúc để quyết định lặp lại hay bỏ.</span></li>
+        </ol>
+        <p>Clash Royale minh hoạ rõ bước Thưởng và Lịch qua Pass Royale: mỗi mùa kéo dài theo tháng, có Free Pass và Diamond Pass chạy song song. Supercell mô tả: <em>"Diamond Pass offers premium rewards, including exclusive cosmetics like tower Skin and Emote."</em> (Diamond Pass tặng thưởng cao cấp, gồm skin tháp và emote độc quyền.) Free Pass vẫn có thưởng ở mọi mốc tiến độ, chỉ ít hơn bản trả phí — đúng tinh thần "ai cũng chơi được, ai trả tiền thì nhanh hơn hoặc đẹp hơn".</p>
+        <p>Ba chỉ số hay dùng ở bước Metric: <strong>ARPU</strong> (doanh thu trung bình trên MỌI người dùng, kể cả người không trả tiền), <strong>ARPPU</strong> (doanh thu trung bình chỉ trên người ĐÃ trả tiền), và ARPDAU. Nguồn phân biệt rõ hai chỉ số đầu và cuối: <em>"ARPU includes all users who have installed and used the app...while ARPDAU focuses on players who have actively engaged with your game every day."</em> Conversion rate là tỉ lệ người chơi chuyển từ không trả tiền sang có trả tiền ít nhất một lần — chỉ số then chốt để biết một sự kiện monetization có hiệu quả hay không.</p>
+
+        <h2 id="lens">Soi ranh giới công bằng của một game F2P</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Người chơi không trả tiền có còn thấy game công bằng không?</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Có lợi thế nào chỉ mua được bằng tiền, không có cách nào khác đạt được không?</li>
+                <li><span class="q-icon">?</span> Người không trả tiền có tiến bộ được ở tốc độ tương đương người trả tiền không?</li>
+                <li><span class="q-icon">?</span> Thiết kế có đang cố tạo áp lực để người chơi cảm thấy buộc phải chi tiêu không?</li>
+                <li><span class="q-icon">?</span> Nếu xoá hết microtransaction, game có còn đủ vui để chơi tiếp không?</li>
+            </ul>
+            <p class="lens-source">Josh Bycer (2021) đề xuất 3 tiêu chí đầu để nhận diện pay-to-win: <em>"Someone playing a free-to-play game should never feel like the game is being tilted or manipulated to make them spend."</em> Ông xếp Genshin Impact nghiêng về pay-to-win, Azur Lane gần cosmetic-only, còn For Honor là ví dụ progress-gate quá chậm.</p>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Thiết kế cái đau rồi bán thuốc giảm đau</p>
+                <p>Ramin Shokrizade gọi đây là coercive monetization: <em>"A coercive monetization model depends on the ability to 'trick' a person into making a purchase with incomplete information."</em> (mô hình kiếm tiền cưỡng ép dựa vào việc "lừa" người chơi mua hàng khi họ không có đủ thông tin.) Cố ý làm khó rồi bán lối thoát không phải thiết kế, đó là thao túng.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Lịch sự kiện chỉ toàn bán hàng</p>
+                <p>Gwertzman liệt kê 5 nhóm mục đích event, không phải chỉ một. Một calendar chỉ có event monetization, không xen event fun (không bán gì cả), sẽ khiến người chơi cảm thấy game chỉ đang cố móc túi liên tục.</p>
+            </div>
+        </div>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Đọc sai chỉ số</p>
+                <p>ARPDAU tăng sau một sự kiện trông như thành công, nhưng nếu D7 retention của đúng nhóm tham gia sự kiện đó lại rơi, sự kiện có thể đang moi tiền người chơi sắp rời game — không phải nuôi dưỡng người chơi ở lại lâu dài.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Thiết kế một sự kiện LiveOps 2 tuần</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">20 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Ghép đủ 5 bước cho một game bạn đang chơi</h3>
+                <ol class="steps">
+                    <li><span>Chọn một game F2P bạn đang chơi thật (mobile, PC hoặc console đều được).</span></li>
+                    <li><span>Chọn Mục tiêu: sự kiện 2 tuần này thuộc nhóm nào trong 5 nhóm của Gwertzman?</span></li>
+                    <li><span>Chọn Metric đo đúng mục tiêu đó (DAU, D7 retention, ARPDAU, hay conversion rate).</span></li>
+                    <li><span>Viết Cơ chế và Thưởng cụ thể — người chơi làm gì mỗi ngày, nhận gì ở mốc cuối.</span></li>
+                    <li><span>Đặt Lịch: ngày mở, ngày đóng, có chồng lấn sự kiện nào khác trong game đó không.</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nếu chọn mục tiêu monetization, hãy tự hỏi thêm câu ở phần Lens: người không trả tiền trong sự kiện này có còn thấy công bằng không? Nếu câu trả lời là không, thử đổi cơ chế thưởng sang hướng pay-for-convenience thay vì pay-to-win.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="a">
+            <p class="q">Theo số liệu Kongregate mà Emily Greer trình bày tại GDC 2015, điều gì đúng?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> 2,1% tài khoản có mua tạo ra 75% doanh thu</button>
+                <button data-opt="b"><span class="badge">B</span> 75% tài khoản có mua tạo ra 2,1% doanh thu</button>
+                <button data-opt="c"><span class="badge">C</span> Đa số người chơi đều chi tiêu ít nhất một lần</button>
+            </div>
+            <div class="explain" hidden><p>Đúng như Greer công bố: chỉ một nhóm rất nhỏ (2,1% tài khoản) tạo ra phần lớn doanh thu (75%). Đáp án B đảo ngược hai con số. Đáp án C sai hẳn bản chất F2P — số liệu của Greer cho thấy phần lớn người chơi KHÔNG chi tiêu.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Mô hình battle pass ngày nay, theo nguồn đã verify trong bài, bắt nguồn từ đâu?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Compendium của Dota 2 tại giải The International 2013, trích 25% giá bán vào prize pool</button>
+                <button data-opt="b"><span class="badge">B</span> Battle pass mùa 2 của Fortnite năm 2017</button>
+                <button data-opt="c"><span class="badge">C</span> Hệ thống thưởng theo mùa của Candy Crush Saga</button>
+            </div>
+            <div class="explain" hidden><p>Trang chính thức Dota 2 xác nhận cơ chế Compendium 2013 — mua một lần, mốc tiến độ, 25% giá vào prize pool. Đáp án B đúng là mốc phổ biến hoá tên gọi "battle pass" nhưng bài chỉ verify được nguồn gốc cơ chế qua Dota 2, không verify được ngày chính xác của Fortnite. Đáp án C không liên quan tới battle pass.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Theo định nghĩa của Crystin Cox (2020), LiveOps là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Một thuật ngữ marketing thuần tuý, không ảnh hưởng tới cách làm game</button>
+                <button data-opt="b"><span class="badge">B</span> Quá trình "chăm sóc" game liên tục theo thời gian sau khi ra mắt, không bao giờ thực sự xong</button>
+                <button data-opt="c"><span class="badge">C</span> Chỉ áp dụng cho game không có kết nối mạng</button>
+            </div>
+            <div class="explain" hidden><p>Cox định nghĩa "Operations" là chăm sóc một thứ gì đó liên tục theo thời gian, và nói thẳng "LiveOps games are never really done". Đáp án A hạ thấp LiveOps thành marketing thuần, sai với định nghĩa gốc. Đáp án C ngược hẳn: "Live" trong LiveOps chính là để chỉ game CÓ yếu tố kết nối.</p></div>
+        </div>
+        <div class="quiz" data-answer="c">
+            <p class="q">Theo 3 tiêu chí của Josh Bycer (2021), điều nào KHÔNG dùng để nhận diện pay-to-win?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Game có đang tạo áp lực khiến người chơi cảm thấy bị thao túng để chi tiêu không</button>
+                <button data-opt="b"><span class="badge">B</span> Có lợi thế nào chỉ mua được bằng tiền, không đạt được bằng cách khác không</button>
+                <button data-opt="c"><span class="badge">C</span> Game có đồ hoạ đẹp và được đầu tư marketing mạnh hay không</button>
+            </div>
+            <div class="explain" hidden><p>Đồ hoạ và marketing không nằm trong 3 tiêu chí của Bycer — ông tập trung vào áp lực chi tiêu, lợi thế độc quyền, và khả năng tiến độ không cần trả tiền. Đáp án A và B đều là tiêu chí thật của Bycer, nên không phải đáp án đúng cho câu hỏi "KHÔNG dùng".</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>F2P</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Free-to-play: người chơi truy cập phần lớn nội dung miễn phí, doanh thu đến từ giao dịch trong lúc chơi thay vì giá bán một lần.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>LiveOps</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vận hành game liên tục sau ra mắt — sửa, đo, thử nghiệm không ngừng. Crystin Cox (2020): "never really done".</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Battle pass</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Trả phí cố định, tiến độ theo mùa, mở khoá dần phần thưởng. Gốc từ Compendium của Dota 2, The International 2013 — 25% giá bán vào prize pool.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>ARPDAU</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Average Revenue Per Daily Active User — doanh thu trung bình trên mỗi người chơi HOẠT ĐỘNG trong ngày, khác ARPU (tính trên mọi người dùng).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Conversion rate</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Tỉ lệ người chơi chuyển từ không trả tiền sang có trả tiền ít nhất một lần — chỉ số then chốt để đánh giá một sự kiện monetization.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Pay-for-convenience</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Trả tiền chỉ để ĐẨY NHANH tốc độ đạt được thứ mà người chơi miễn phí cũng đạt được — khác pay-to-win (mua lợi thế không ai khác có).</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> F2P sống nhờ một nhóm rất nhỏ: 2,1% tài khoản Kongregate tạo ra 75% doanh thu (Emily Greer, 2015) — nhưng đừng chỉ thiết kế cho nhóm đó mà bỏ quên phần còn lại.</li>
+                <li><span class="n">2</span> LiveOps là vận hành liên tục, không bao giờ "xong" (Crystin Cox, 2020); mỗi sự kiện cần đủ 5 bước: mục tiêu, metric, cơ chế, thưởng, lịch.</li>
+                <li><span class="n">3</span> Ranh giới pay-to-win / pay-for-convenience / cosmetic (Josh Bycer, 2021) quyết định người không trả tiền có còn thấy game công bằng hay không.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-bai">Bài nói</span>
+                <a class="reading-title" href="https://www.slideshare.net/emily_greer/dont-call-them-whales-freetoplay-spenders-virtual-value-gdc-2015" target="_blank" rel="noopener">Don't Call Them Whales: Free-to-Play Spenders &amp; Virtual Value</a>
+                <span class="reading-meta">Emily Greer · GDC, 2015</span>
+                <p class="reading-why">Nguồn số liệu Kongregate/Swrve và lời cảnh báo về chữ "whale" dùng xuyên bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/understanding-liveops-doing-liveops" target="_blank" rel="noopener">Understanding LiveOps, Doing LiveOps</a>
+                <span class="reading-meta">Crystin Cox · Game Developer, 2020</span>
+                <p class="reading-why">Định nghĩa LiveOps và nguyên tắc "never really done" dùng trong bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/business/classifying-pay-to-win-design-in-today-s-market" target="_blank" rel="noopener">Classifying Pay to Win Design in Today's Market</a>
+                <span class="reading-meta">Josh Bycer · Game Developer, 2021</span>
+                <p class="reading-why">Khung 3 tiêu chí pay-to-win/pay-for-convenience/cosmetic dùng ở phần Lens.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/business/the-top-f2p-monetization-tricks" target="_blank" rel="noopener">The Top F2P Monetization Tricks</a>
+                <span class="reading-meta">Ramin Shokrizade · Game Developer, 2013</span>
+                <p class="reading-why">Nguồn cơ chế soft gate (Clash of Clans) và coercive monetization dùng trong bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamingcommission.be/en/faq/new-developments/what-are-loot-boxes" target="_blank" rel="noopener">What are loot boxes?</a>
+                <span class="reading-meta">Belgian Gaming Commission (FAQ chính thức)</span>
+                <p class="reading-why">Định nghĩa chính thức loot box và bối cảnh pháp lý — dùng khi cân nhắc mô hình gacha.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

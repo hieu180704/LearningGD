@@ -318,7 +318,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 16,
                 level: "Nâng cao",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-4/02-metrics-ab-test",
