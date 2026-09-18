@@ -178,9 +178,11 @@ Danh sách định hướng — mỗi trích dẫn cụ thể vẫn phải tự 
 - Subagent còn "làm mượt" cả lỗi trong nguồn: slide Worch/Smith ghi "wouldn't have work as well"
   (sai chính tả trong chính slide gốc) bị research chép thành "worked"; quote Kuelz bị ghép 2
   đoạn rời bằng `…` thành một câu liền. So byte 2 chiều (bài ↔ nguồn) mới bắt được.
-- `ol.steps li { display:flex }` (site.css) → mọi thẻ con thành flex item riêng, nên `<strong>`
-  inline giữa câu bị xé thành cột, vỡ dòng. Muốn bôi đậm trong `.steps` thì bọc cả nội dung
-  `<li>` trong một `<span>`. `check-site.js` không bắt được, chỉ lộ khi xem ảnh (vấp 2026-09-18).
+- **Mọi `li` là flex container** (`ol.steps li`, `.recap li` — site.css) biến mọi thẻ con thành
+  flex item riêng, nên `<strong>` inline giữa câu bị xé thành cột, vỡ dòng. Trong `.steps` thì
+  bọc cả nội dung `<li>` vào một `<span>`; trong `.recap` thì bỏ hẳn `<strong>` (các bài cũ
+  không bôi đậm trong recap). `check-site.js` không bắt được, chỉ lộ khi xem ảnh — vấp 2 lần
+  liên tiếp ở bài Tầng 3/07 và Tầng 4/03 (2026-09-18).
 - `ul` trần trong thân bài không có bullet (site.css:119 reset `list-style:none`) — dùng
   `table.compare` hoặc `ol.steps` thay vì `<ul>` khi cần liệt kê có cấu trúc.
 - Node đã có sẵn trên máy — dùng thẳng, không cần cài thêm.
