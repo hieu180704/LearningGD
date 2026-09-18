@@ -283,7 +283,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 14,
                 level: "Trung bình",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-3/07-narrative-design",

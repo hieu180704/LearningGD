@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX và onboarding — Xưởng Game Design</title>
+<meta name="description" content="Dẫn dắt người chơi mới hiểu game mà không cần đọc hướng dẫn dài: dạy qua hành động, rải dần cơ chế, và cách tự kiểm tra UX bằng heuristic.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-3/06-ux-onboarding" class="tier-3">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-3">Tầng 3 · Thiết kế chuyên sâu</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 3 · Bài 06</p>
+            <h1>UX và onboarding</h1>
+            <p class="dek">Người chơi mới không đọc hướng dẫn — họ bấm Skip. Bài này nói về cách dạy game qua chính hành động chơi, rải cơ chế đúng lúc cần, và tự soi luồng UX trước khi nó làm mất người chơi trong 10 phút đầu.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 14 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Trung bình</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="../tang-2/02-playtest.html">Playtest</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Thiết kế onboarding dạy qua hành động thay vì qua text</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Giảm ma sát trong luồng UX cốt lõi</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Đánh giá UX bằng vài heuristic cơ bản</li>
+                </ul>
+            </div>
+        </header>
+
+        <p>Bạn tải một game mobile mới. Màn hình đầu tiên: xin quyền thông báo. Rồi một đoạn phim ngắn giới thiệu thế giới. Rồi ba hộp thoại liên tiếp giải thích tiền tệ, năng lượng và hệ thống thẻ bài. Rồi một mũi tay chỉ vào nút "Chơi". Bạn đã bấm Skip từ hộp thoại thứ hai — và giờ vừa vào trận vừa tự hỏi mấy con số trên đầu màn hình nghĩa là gì.</p>
+        <p>Game đó không thiếu hướng dẫn. Nó thiếu thứ khác: một cách dạy khiến người chơi thật sự học được. Đó là công việc của <span class="term" data-en="onboarding" tabindex="0">onboarding</span> và <span class="term" data-en="user experience (UX)" tabindex="0">UX</span> — và nó bắt đầu từ trước khi người chơi chạm vào cơ chế đầu tiên.</p>
+
+        <h2 id="onboarding-la-gi">Onboarding không phải là tutorial</h2>
+        <p>Hai từ này hay bị dùng lẫn. Phân biệt cho gọn: <strong>tutorial</strong> là phần dạy một cơ chế cụ thể — màn tập bắn, hộp thoại "bấm X để nhảy". <strong>Onboarding</strong> rộng hơn: toàn bộ quãng đường từ lúc người chơi mở game lần đầu đến lúc họ tự tin chơi một mình. Màn hình chờ, việc tạo tài khoản, lần đầu nhìn thấy HUD, trận đầu tiên thắng được — tất cả đều nằm trong onboarding, dù không có dòng hướng dẫn nào.</p>
+        <p>Ngành mobile gọi khoảng này là <span class="term" data-en="first-time user experience" tabindex="0">FTUE</span> và đo nó rất thực dụng bằng <span class="term" data-en="day-1 retention" tabindex="0">D1 retention</span> — tỉ lệ người chơi quay lại sau đúng một ngày. Con số này là trần trên của mọi ngày sau: mất người chơi ở ngày đầu thì không có cách nào lấy lại ở ngày thứ bảy.</p>
+        <p>Vì vậy câu hỏi đúng của bài này không phải "tutorial nên dài bao nhiêu", mà: <em>người chơi mới cần hiểu gì, vào lúc nào, để họ còn muốn chơi tiếp?</em></p>
+
+        <h2 id="day-qua-hanh-dong">Dạy qua hành động, không qua chữ</h2>
+        <p>Celia Hodent — cựu Director of UX tại Epic Games, tác giả <em>The Gamer's Brain</em> — chỉ ra nghịch lý quen thuộc của ngành: <em>"Although learning-by-doing is recognized as being one of the most efficient ways of learning – especially when it comes to an interactive experience – tutorial texts are still frequently used to teach the main components of a game."</em> (dù học-bằng-làm được công nhận là một trong những cách học hiệu quả nhất, nhất là với trải nghiệm tương tác, tutorial dạng chữ vẫn được dùng thường xuyên để dạy các thành phần chính của game.)</p>
+        <p>Lý do nằm ở não người chơi, không ở ý chí của họ. Khi đang ở trạng thái học, trí nhớ làm việc chỉ xử lý được rất ít thông tin cùng lúc — theo Hodent, khoảng ba thứ. Đọc một đoạn chữ mô tả cơ chế mà không được thử ngay là <span class="term" data-en="shallow processing" tabindex="0">xử lý nông</span>: thông tin đi qua mắt nhưng không được ghi vào trí nhớ dài hạn. Làm thử một lần, trong đúng tình huống cần dùng, thì khác hẳn.</p>
+        <p>Cái bẫy phía người làm game có tên riêng: <span class="term" data-en="curse of knowledge" tabindex="0">lời nguyền của kiến thức</span>. Bạn biết hệ thống quá rõ nên có xu hướng giải thích cặn kẽ <em>cách làm</em> và <em>các thứ có trong game</em>, trong khi người chơi mới cần biết <em>tại sao</em> họ phải quan tâm. Hodent khuyên: nếu buộc phải dùng chữ, đừng giải thích quá ba điều, và ưu tiên nói "để làm gì" hơn "bấm thế nào".</p>
+
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Dạy đúng 1 thứ</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Bắt dùng ngay tại chỗ</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Bắt dùng lại, khó hơn</div>
+            </div>
+            <figcaption>Một vòng dạy gọn: giới thiệu một cơ chế, buộc dùng nó để đi tiếp, rồi yêu cầu dùng lại trong tình huống khó hơn để củng cố. Minh hoạ của bài học.</figcaption>
+        </figure>
+
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Tình huống</th><th>Dạy bằng chữ</th><th>Dạy bằng hành động</th></tr></thead>
+                <tbody>
+                    <tr><td>Người chơi tiếp nhận thế nào</td><td>Đọc (hoặc bấm qua) rồi tự hình dung</td><td>Làm thử ngay trong ngữ cảnh cần dùng</td></tr>
+                    <tr><td>Chi phí nhận thức</td><td>Phải nhớ trước, dùng sau</td><td>Nhớ và dùng xảy ra cùng lúc</td></tr>
+                    <tr><td>Khi người chơi quên</td><td>Không có gì nhắc lại</td><td>Tình huống tự bắt họ dùng lại</td></tr>
+                    <tr><td>Chi phí sản xuất</td><td>Rẻ, viết là xong</td><td>Đắt hơn: phải dựng màn/tình huống riêng</td></tr>
+                    <tr><td>Hợp với</td><td>Thông tin tra cứu, luật phụ hiếm dùng</td><td>Cơ chế cốt lõi người chơi dùng cả game</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Bảng này không nói chữ là xấu. Nó nói: chữ hợp với thứ người chơi sẽ tra lại khi cần, còn cơ chế cốt lõi thì phải dạy bằng tay.</p>
+
+        <h2 id="rai-dan">Rải dần thay vì dội hết</h2>
+        <p>Nguyên tắc thứ hai: đừng mở hết mọi thứ ngay phút đầu. Chỉ lộ ra thứ người chơi cần dùng, đúng lúc họ cần. Trong UX, kỹ thuật này gọi là <span class="term" data-en="progressive disclosure" tabindex="0">lộ dần</span>.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Không phải thuật ngữ gốc của ngành game</p>
+                <p>"Progressive disclosure" là khái niệm của UX/HCI nói chung, được Jakob Nielsen (Nielsen Norman Group) viết thành bài định nghĩa và phổ biến cho thiết kế giao diện từ năm 1995 — trước khi game mượn lại. Biết gốc gác giúp bạn tra cứu đúng chỗ: phần lớn tài liệu sâu về nó nằm ở ngành phần mềm, không phải tài liệu game.</p>
+            </div>
+        </div>
+        <p>Trong game, cách rải dần dễ thấy nhất là khoá bớt cơ chế và mở dần theo tiến trình. Khu mở đầu Great Plateau của <em>The Legend of Zelda: Breath of the Wild</em> làm đúng vậy: bốn đền thờ, mỗi đền dạy một khả năng lõi, và chỉ khi qua đủ bốn, người chơi mới được phát dù lượn để rời cao nguyên. Người chơi tự do đi lại trong khu đó, nhưng bộ công cụ thì được phát theo thứ tự.</p>
+        <p>Một dạng khác là để chính màn chơi dạy. <em>Portal</em> giới thiệu mỗi khái niệm mới trong một phòng thử riêng, đặt người chơi vào tình huống buộc phải tự hiểu portal làm được gì, không hộp thoại. Bạn không được "cho biết" luật — bạn suy ra luật rồi dùng nó để mở cửa.</p>
+
+        <h2 id="ma-sat">Ma sát: loại phải bỏ, loại cố ý giữ</h2>
+        <p><span class="term" data-en="friction" tabindex="0">Ma sát</span> là mọi thứ làm người chơi chậm lại, phân vân hoặc thao tác sai. Sai lầm phổ biến của người mới học UX là coi mọi ma sát đều xấu và cố xoá sạch — làm vậy sẽ xoá luôn phần thử thách, tức là xoá game.</p>
+        <p>Cách phân loại đơn giản: hỏi ma sát này có <strong>chủ đích thiết kế</strong> không. Bạn chết vì đọc sai đòn của boss: ma sát cố ý, chính là nội dung của game. Bạn chết vì không nhìn thấy đòn đó do hiệu ứng che mất: ma sát vô nghĩa, phải sửa. Bạn mất ba lần bấm để tìm nút đổi trang bị giữa trận: ma sát vô nghĩa. Bạn phải chọn bỏ một món đồ vì túi đầy: ma sát cố ý, nếu quản lý túi đồ là một phần thiết kế.</p>
+        <p>Nguyên tắc rút gọn: <strong>đừng áp heuristic usability lên toàn bộ game như một tấm vé thông hành</strong> — chỉ áp vào những chỗ mà sự bối rối, mệt mỏi hay thao tác lỗi không phục vụ mục đích thiết kế nào.</p>
+
+        <h2 id="vi-du">Bốn nền tảng, bốn kiểu onboard</h2>
+        <p><strong>Console — <em>Super Mario Bros.</em>, World 1-1 (1985).</strong> Màn dạy chơi kinh điển nhất lịch sử game không phải sản phẩm của một bản thiết kế thiên tài trên giấy. Takashi Tezuka, người đồng thiết kế cùng Miyamoto, kể trong phỏng vấn năm 2015: <em>"The basic stage known as 1-1 was actually something we came up with at the very end while balancing the overall difficulty."</em> (màn cơ bản 1-1 thực ra là thứ chúng tôi nghĩ ra sau cùng, khi đang cân bằng độ khó tổng thể.) Ông cũng nói thẳng rằng thiết kế của ông gần như không bao giờ đúng ngay lần đầu, nên ông phải ngồi xem người khác chơi rồi sửa đi sửa lại.</p>
+        <p><strong>PC — <em>Portal</em>.</strong> Dạy bằng bố trí không gian như đã nói ở trên. Điều đáng học hơn nằm ở quy trình: Kim Swift và Erik Wolpaw kể rằng ở dự án sinh viên trước đó, nhóm chỉ playtest vào tháng cuối và phát hiện ra hàng loạt vấn đề quá muộn để sửa — bài học khiến playtest sớm, liên tục trở thành phần lõi trong cách họ làm việc tại Valve.</p>
+        <p><strong>Indie — <em>Celeste</em>.</strong> Assist Mode nằm công khai trong menu, cho phép chỉnh tốc độ game, số lần dash, thậm chí bất tử. Game vẫn khuyến khích thử chế độ thường trước, nhưng không giấu lựa chọn đi. Đây là onboarding theo nghĩa rộng nhất: giữ người chơi ở lại bằng cách để họ tự chọn mức ma sát chịu được.</p>
+        <p><strong>Mobile — <em>Candy Crush Saga</em>, <em>Clash Royale</em>.</strong> Cả hai đều biến bài học đầu thành màn chơi thật chứ không phải phòng tập: người chơi chạm vào cơ chế cốt lõi trong vòng vài chục giây đầu, phần giải thích hệ thống phụ (nâng cấp thẻ, chỉnh deck) bị đẩy về sau. Nút bỏ qua hướng dẫn cũng to và rõ — không ép đọc.</p>
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Phần nào có nguồn, phần nào là phân tích</p>
+                <p>Câu của Tezuka và chuyện playtest của nhóm Portal lấy từ phỏng vấn và bài postmortem do chính người trong cuộc kể. Cấu trúc bốn đền thờ của Great Plateau, Assist Mode của <em>Celeste</em> và cách bố trí FTUE của hai game mobile là những thứ bạn tự kiểm chứng được bằng cách mở game ra chơi; phần giải thích "vì sao họ thiết kế như vậy" trong bài là phân tích minh hoạ, không phải phát ngôn của studio.</p>
+            </div>
+        </div>
+
+        <h2 id="lens">Soi luồng onboarding của một game</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Bảy câu hỏi UX cho 10 phút đầu</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Game có cho người chơi biết họ làm được gì, và chuyện gì xảy ra sau mỗi hành động?</li>
+                <li><span class="q-icon">?</span> Những tín hiệu đó có thật sự dễ thấy, hay bị hiệu ứng và HUD che mất?</li>
+                <li><span class="q-icon">?</span> Nhìn một vật thể/nút bấm, người chơi có đoán được nó dùng để làm gì không?</li>
+                <li><span class="q-icon">?</span> Cùng một ý nghĩa có được thể hiện nhất quán xuyên suốt game — và giống quy ước chung của thể loại?</li>
+                <li><span class="q-icon">?</span> Chỗ nào bắt người chơi nhớ hoặc thao tác nhiều hơn mức cần thiết, dù đó không phải phần thử thách?</li>
+                <li><span class="q-icon">?</span> Lỗi thao tác được ngăn từ đầu chưa, và nếu lỡ sai thì quay lại có dễ không?</li>
+                <li><span class="q-icon">?</span> Người chơi có tuỳ chỉnh được trải nghiệm (phím bấm, độ khó, phụ đề, tốc độ) theo nhu cầu của họ không?</li>
+            </ul>
+        </div>
+        <p>Bảy câu này là bản rút gọn của bảy trụ cột usability trong khung UX của Celia Hodent — chính bà ghi rõ đây là bản bà điều chỉnh lại từ mười heuristic kinh điển của Jakob Nielsen cho phù hợp ngôn ngữ của người làm game, không phải một hệ thống độc lập. Câu cuối cùng chạm vào accessibility, và đó không phải chuyện xa xỉ: <em>The Last of Us Part II</em> phát hành với hơn 60 tuỳ chọn accessibility cùng ba preset dựng sẵn cho thị giác, thính giác và vận động.</p>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">4 sai lầm phổ biến khi làm onboarding</p>
+                <p><strong>Dồn hết hướng dẫn vào đầu game</strong> — bắt người chơi nuốt mọi hệ thống trước khi được chạm vào game. Họ học chay, không có ngữ cảnh để áp dụng, nên quên gần hết ngay khi thật sự cần dùng.</p>
+                <p><strong>Dạy bằng tường chữ</strong> — hộp thoại dài thay cho việc để cơ chế tự nói. Người chơi bấm Skip theo phản xạ, và thông tin coi như chưa từng được truyền đi.</p>
+                <p><strong>Dạy xong không cho thực hành ngay</strong> — chỉ cho xem qua cutscene hoặc demo rồi chuyển cảnh. Kiến thức không được củng cố bằng hành động thì bay rất nhanh.</p>
+                <p><strong>Kiểm tra UX bằng chính người trong team</strong> — cả nhóm đã biết luật chơi từ đầu nên thấy cái gì cũng rõ ràng. Đây là lỗi đo lường, và nó khiến ba sai lầm phía trên không bao giờ bị phát hiện trước ngày phát hành.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Thực hành: săn điểm khựng</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">40 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Quan sát một người chơi thật trong 10 phút đầu</h3>
+                <ol class="steps">
+                    <li><span>Tìm một người chưa từng chơi game bạn sắp đưa, và không làm trong ngành game. Chọn một game mobile hoặc indie bất kỳ họ chưa chạm vào.</span></li>
+                    <li><span>Đưa máy và chỉ nói đúng một câu: "Cứ chơi tự nhiên." Sau đó áp dụng nguyên tắc playtest của Valve: <em>"Don’t give them hints"</em>, <em>"Don’t answer any questions"</em> — không gợi ý, không trả lời câu hỏi, không chỉ tay vào màn hình.</span></li>
+                    <li><span>Trong 10 phút, ghi lại timestamp mỗi khi thấy một trong bốn dấu hiệu: dừng tay quá 3 giây không rõ lý do; bấm thử nhiều lần vào cùng một chỗ; buột miệng hỏi hoặc than; bấm Skip một hướng dẫn mà không đọc.</span></li>
+                    <li><span>Hết giờ mới hỏi, đúng ba câu không dẫn dắt: đoạn nào thấy rối nhất, bây giờ bạn nghĩ mình cần làm gì tiếp, có nút nào bạn bấm mà không chắc nó làm gì.</span></li>
+                    <li><span>Tổng hợp: liệt kê tối thiểu 3 điểm khựng kèm timestamp, gán mỗi điểm vào một trong bốn sai lầm ở phần trên, và viết một câu đề xuất sửa cho từng điểm.</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Khó nhất là giữ im lặng — bạn sẽ rất muốn giúp khi thấy họ loay hoay. Đúng lúc đó mới là dữ liệu quý nhất, vì ngoài đời không ai ngồi cạnh người chơi để nhắc. Nếu muốn biết họ đang nghĩ gì, hãy nhờ họ nói to suy nghĩ ngay lúc chơi (think-aloud) và làm đúng lời khuyên của Nielsen: <em>"Shut up and let the users do the talking."</em></p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="c">
+            <p class="q">Theo lời Takashi Tezuka, World 1-1 của <em>Super Mario Bros.</em> ra đời như thế nào?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Được thiết kế đầu tiên, làm chuẩn cho mọi màn còn lại</button>
+                <button data-opt="b"><span class="badge">B</span> Được tạo tự động từ một công cụ sinh màn chơi rồi chỉnh tay</button>
+                <button data-opt="c"><span class="badge">C</span> Được nghĩ ra sau cùng, trong lúc cân bằng độ khó tổng thể</button>
+            </div>
+            <div class="explain" hidden><p>Tezuka nói nguyên văn: "The basic stage known as 1-1 was actually something we came up with at the very end while balancing the overall difficulty." Đáp án A là cách hiểu phổ biến nhưng ngược với lời người trong cuộc — màn dạy chơi kinh điển này được chốt sau cùng, sau nhiều vòng quan sát người chơi thật. Đáp án B không có nguồn nào nhắc tới.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Vì sao dạy bằng một đoạn chữ dài thường kém hiệu quả hơn cho người chơi thử ngay?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Vì người chơi hiện đại không biết đọc chữ dài</button>
+                <button data-opt="b"><span class="badge">B</span> Vì đọc mà không được thử là xử lý nông, thông tin không được ghi nhớ tốt</button>
+                <button data-opt="c"><span class="badge">C</span> Vì chữ trong game luôn dịch sai nghĩa gốc</button>
+            </div>
+            <div class="explain" hidden><p>Lý do là cơ chế nhận thức, không phải thái độ người chơi: trí nhớ làm việc chỉ xử lý được ít thông tin cùng lúc, và thông tin không gắn với hành động trong ngữ cảnh sẽ chỉ được xử lý nông. Đáp án A quy kết sai cho người chơi. Đáp án C là chuyện bản địa hoá, không liên quan.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Ma sát nào trong danh sách dưới đây nên được xem là ma sát cố ý, không cần xoá?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Người chơi phải bỏ bớt một món đồ vì túi đã đầy, trong game lấy quản lý tài nguyên làm trọng tâm</button>
+                <button data-opt="b"><span class="badge">B</span> Người chơi mất ba lần bấm để tìm nút đổi trang bị giữa trận</button>
+                <button data-opt="c"><span class="badge">C</span> Người chơi chết vì đòn đánh bị hiệu ứng hình ảnh che khuất</button>
+            </div>
+            <div class="explain" hidden><p>Ma sát cố ý là ma sát phục vụ một mục đích thiết kế — giới hạn túi đồ chính là nội dung của game quản lý tài nguyên. B và C đều là ma sát vô nghĩa: một cái làm chậm thao tác không vì lý do gì, một cái tước đi thông tin người chơi cần để phản ứng.</p></div>
+        </div>
+        <div class="quiz" data-answer="c">
+            <p class="q">Trong buổi playtest quan sát, khi người chơi quay sang hỏi "nút này để làm gì?", bạn nên làm gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Trả lời ngắn gọn rồi ghi chú lại, để buổi test tiếp tục trôi chảy</button>
+                <button data-opt="b"><span class="badge">B</span> Dừng buổi test và sửa ngay chỗ gây khó hiểu</button>
+                <button data-opt="c"><span class="badge">C</span> Không trả lời, ghi lại thời điểm và cách họ tự xoay xở</button>
+            </div>
+            <div class="explain" hidden><p>Nguyên tắc của Valve là giả lập người chơi đang ngồi ở phòng khách nhà họ: "Don’t give them hints", "Don’t answer any questions". Trả lời (A) sẽ xoá mất chính dữ liệu bạn cần — ngoài đời không có ai ngồi cạnh để giải thích. Dừng để sửa ngay (B) làm hỏng phần còn lại của buổi test và thường dựa trên một mẫu quan sát duy nhất.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Onboarding vs tutorial</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Tutorial là phần dạy một cơ chế cụ thể. Onboarding là toàn bộ quãng đường từ lúc mở game lần đầu đến khi người chơi tự tin chơi một mình — gồm cả UI đầu tiên, tạo tài khoản, trận thắng đầu tiên.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Learning by doing</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Dạy bằng cách cho người chơi làm thử ngay trong tình huống cần dùng. Hodent: học-bằng-làm được công nhận là một trong những cách học hiệu quả nhất, nhưng ngành vẫn thường xuyên dùng tutorial dạng chữ.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Progressive disclosure</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Chỉ lộ ra thứ người dùng cần, đúng lúc cần. Thuật ngữ gốc của UX/HCI (Jakob Nielsen, 1995), không phải của ngành game — game mượn lại thành việc mở khoá cơ chế dần theo tiến trình.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Curse of knowledge</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Lời nguyền của kiến thức: người làm game biết hệ thống quá rõ nên giải thích quá chi tiết "cách làm", bỏ quên "để làm gì" — và không còn thấy được chỗ nào khó hiểu với người mới.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Ma sát cố ý</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Ma sát phục vụ một mục đích thiết kế thì giữ (đọc đòn boss, quản lý túi đồ). Ma sát khiến người chơi bối rối, mệt hoặc thao tác sai mà không phục vụ gì thì bỏ.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>FTUE / D1 retention</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">FTUE là trải nghiệm lần đầu mở game. D1 retention là tỉ lệ quay lại sau đúng một ngày — trần trên của mọi ngày sau, nên mất người chơi ở ngày đầu là mất hẳn.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Dạy đúng lúc người chơi cần dùng, bằng chính hành động chơi — chữ chỉ hợp với thứ họ sẽ tra lại, không hợp với cơ chế cốt lõi.</li>
+                <li><span class="n">2</span> Ma sát không xấu; ma sát không phục vụ mục đích thiết kế nào mới xấu. Xoá sạch ma sát là xoá luôn game.</li>
+                <li><span class="n">3</span> Chỉ người chơi mới thật mới đo được onboarding. Ngồi im, không gợi ý, không trả lời — chỗ họ khựng lại chính là dữ liệu bạn cần.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://celiahodent.com/gamers-brain-ux-onboarding/" target="_blank" rel="noopener">The Gamer's Brain, Part 2: UX of Onboarding and Player Engagement</a>
+                <span class="reading-meta">Celia Hodent · bản viết lại từ talk GDC 2016</span>
+                <p class="reading-why">Nguồn gốc cho phần học-bằng-làm, giới hạn trí nhớ làm việc và "curse of knowledge" trong bài này.</p>
+            </li>
+            <li>
+                <span class="pill type-sach">Sách</span>
+                <a class="reading-title" href="https://celiahodent.com/the-gamers-brain/" target="_blank" rel="noopener">The Gamer's Brain: How Neuroscience and UX Can Impact Video Game Design</a>
+                <span class="reading-meta">Celia Hodent · CRC Press, 2017</span>
+                <p class="reading-why">Bản đầy đủ của khung UX game: bảy trụ cột usability và phần engage-ability.</p>
+            </li>
+            <li>
+                <span class="pill type-paper">Slide</span>
+                <a class="reading-title" href="https://cdn.akamai.steamstatic.com/apps/valve/2006/GDC2006_HL2DesignProcess.pdf" target="_blank" rel="noopener">Valve's Design Process for Creating Half-Life 2</a>
+                <span class="reading-meta">David Speyrer &amp; Brian Jacobson · GDC 2006</span>
+                <p class="reading-why">Slide gốc về cách chạy một buổi playtest: không gợi ý, không trả lời, dùng người ngoài team.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/" target="_blank" rel="noopener">Thinking Aloud: The #1 Usability Tool</a>
+                <span class="reading-meta">Jakob Nielsen · Nielsen Norman Group</span>
+                <p class="reading-why">Quy trình think-aloud gói gọn trong ba bước, dùng được ngay cho bài thực hành phía trên.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://gameaccessibilityguidelines.com/basic/" target="_blank" rel="noopener">Game Accessibility Guidelines — mức Basic</a>
+                <span class="reading-meta">Game Accessibility Guidelines</span>
+                <p class="reading-why">Danh sách ngắn những điều chỉnh dễ làm nhất: gán lại phím, cỡ chữ, phụ đề, không truyền thông tin chỉ bằng màu.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

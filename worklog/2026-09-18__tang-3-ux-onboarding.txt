@@ -1,0 +1,38 @@
+WORKLOG 2026-09-18 — Tầng 3 bài 06 UX và onboarding
+
+SUMMARY: Viết xong bài Tầng 3/06 UX và onboarding + research/ux-onboarding.txt.
+check-site.js 0 lỗi, thẻ HTML cân bằng (script riêng), 4/4 quote dùng trong bài đã tự curl
+nguồn gốc đối chiếu byte-for-byte (1 lỗi tự bắt & sửa: nháy thẳng -> nháy cong ở quote Valve),
+đã tự xem ảnh desktop + mobile × sáng + tối — layout PASS. CHƯA có người đọc thật duyệt
+nội dung sư phạm.
+
+ĐÃ LÀM
+1. Research 3 trục subagent Sonnet song song (onboarding / heuristic / ví dụ + sai lầm + đo),
+   1 subagent gộp -> research/ux-onboarding.txt (1078 dòng, 12 mục). Mục 10 "Bẫy khái niệm"
+   gom bẫy của cả 3 trục — đọc mục này trước nếu bài sau đụng lại UX/onboarding.
+2. Viết lessons/tang-3/06-ux-onboarding.html (đủ 12 phần, ~3.3k từ thân bài, ngang bài 04-05).
+   Quote dùng trong bài: Hodent (learning-by-doing), Tezuka (World 1-1 làm sau cùng),
+   Valve GDC 2006 (don't give them hints), Nielsen (shut up and let the users do the talking).
+3. Thêm 1 dòng cho bài mới vào tools/shoot.ps1 NGAY sau khi tạo file bài; bật curriculum.js
+   status -> "ready" SAU KHI file bài đã tồn tại.
+4. Loại khỏi bài 3 thứ không verify được: quote "We kept simulating what the player would do"
+   gán cho Miyamoto (2 agent độc lập cùng bác — nguồn Eurogamer gốc không có transcript),
+   thuật ngữ "kissing screen", năm của bộ heuristic GAP.
+
+ĐÃ VẤP TRONG SESSION NÀY
+- File research do subagent viết KHÔNG tin được ở mức KÝ TỰ: cả 3 file trục + file gộp đều có
+  0 ký tự nháy cong, và bước gộp còn đổi en dash "–" của quote Hodent thành "-". Nội dung chữ
+  đúng, dấu câu sai. => Quote nào thực sự đưa vào bài thì main phải tự curl lại nguồn gốc rồi
+  so byte, KHÔNG copy từ file research. (Đã tự bắt 1 lỗi trong chính bài mình viết:
+  "Don't give them hints" gõ nháy thẳng, slide Valve dùng U+2019.)
+- Kiểm quote bằng script so chuỗi với HTML thô đã decode entity (&#8211; -> –) là cách rẻ và
+  bắt được lỗi ngay; grep mắt thường không thấy khác biệt nháy thẳng/cong.
+
+CÒN LẠI
+- Tầng 3 còn bài 07 Narrative design, status "planned", CHƯA có research/narrative-design.txt.
+  Xong bài 07 là hết Tầng 3.
+- ĐỀ XUẤT CHỜ USER DUYỆT (chưa tự sửa, theo global rule 7): thêm 1 gạch đầu dòng vào CLAUDE.md
+  mục 8 ghi lại bẫy "file research do subagent viết mất nháy cong + en dash — phải curl lại
+  nguồn cho từng quote thực dùng".
+
+SHA: (commit ngay sau khi ghi worklog này)

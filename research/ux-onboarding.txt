@@ -1,0 +1,1078 @@
+RESEARCH - UX và Onboarding
+(Tầng 3 bài 06 · tổng hợp 3 file research trục 1/2/3 · đã fact-check)
+
+MỤC LỤC
+1. Phạm vi và cách dùng file này
+2. Khái niệm cốt lõi
+3. Các bộ heuristic
+4. Accessibility cơ bản (Game Accessibility Guidelines - mức Basic)
+5. Quote nguyên văn đã verify
+6. Ví dụ game theo nền tảng
+7. Sai lầm hay gặp khi làm onboarding/UX
+8. Phương pháp kiểm/đo UX
+9. Gợi ý bài tập thực hành (30-45 phút)
+10. Bẫy khái niệm - phải đọc trước khi viết bài
+11. Nguồn tham khảo đầy đủ
+12. Khoảng trống còn lại / [CHƯA VERIFY]
+
+---
+
+## 1. PHẠM VI VÀ CÁCH DÙNG FILE NÀY
+
+- File này gộp 3 file research thô cho bài Tầng 3 - bài 06 "UX và Onboarding": trục 1
+  (lý thuyết onboarding/dạy người chơi), trục 2 (heuristic/usability/accessibility), trục 3
+  (ví dụ thực tế theo nền tảng, sai lầm hay gặp, phương pháp đo UX, bài tập thực hành).
+- Trạng thái verify tổng quát: phần lớn quote đã verify bằng `curl` (+ `pdftotext` với PDF)
+  trực tiếp trên nguồn gốc, KHÔNG qua WebFetch tóm tắt (WebFetch từng đổi dấu câu ở research
+  bài khác - xem CLAUDE.md mục 8). Một số khái niệm/case chỉ có nguồn thứ cấp hoặc chưa verify
+  đầy đủ - đánh dấu `[THỨ CẤP]` / `[CHƯA VERIFY]` ngay tại chỗ dùng; toàn bộ khoảng trống còn
+  lại được liệt kê ở mục 12.
+- Cách dùng khi viết bài: đọc mục 2-4 để nắm khái niệm/heuristic có nguồn; lấy quote ở mục 5
+  (đã kèm người nói, nguồn + URL, cách verify); lấy ví dụ đa thể loại ở mục 6; đối chiếu sai
+  lầm/phương pháp đo ở mục 7-8; **đọc mục 10 (bẫy khái niệm) TRƯỚC khi viết** để tránh lặp lại
+  các lỗi trích dẫn/gán nhầm đã phát hiện; kiểm mục 12 nếu cần thêm 1 vòng research.
+
+## 2. KHÁI NIỆM CỐT LÕI
+
+### 2.1. Onboarding vs Tutorial
+
+"Tutorial" = màn/đoạn dạy cơ chế cụ thể (thường ở đầu game). "Onboarding" = phạm vi rộng hơn,
+gồm toàn bộ trải nghiệm từ lúc mở game đến lúc người chơi tự tin chơi một mình - gồm cả UI đầu
+tiên, tải game, tạo tài khoản, không chỉ phần dạy cơ chế. [Phân tích tổng hợp dựa trên cách
+dùng thuật ngữ nhất quán giữa các nguồn ở mục 11 (Hodent, các bài FTUE) - không phải trích
+nguyên văn 1 định nghĩa duy nhất, vì bản thân ngành cũng dùng hai từ này khá lẫn lộn - xem bẫy
+#12 ở mục 10.]
+
+### 2.2. "Học = vui" (Raph Koster, "A Theory of Fun for Game Design", 2004)
+
+Luận điểm trung tâm của Koster: fun (thấy vui) là cảm giác não bộ phát sinh khi đang *học*
+thành công một pattern mới; khi không còn gì để học, game trở nên nhàm. Hệ quả cho onboarding:
+một tutorial "vui" phải liên tục cho người chơi thứ gì đó mới để học - không phải giải trí
+bằng thẩm mỹ hay thưởng, mà bằng chính việc học. Quote nguyên văn ở mục 5.1.
+Nguồn: sách in, CHƯA đọc được bản đầy đủ trực tuyến - các quote lấy từ trang tổng hợp quote
+Goodreads (crowd-sourced nhưng khớp nhau giữa nhiều entry độc lập trên cùng domain, đã tự
+verify bằng curl). Đây KHÔNG phải bản scan gốc của NXB - ghi rõ để cân nhắc mức tin cậy khi
+dùng (coi là [gần verify], không phải "đã mở đọc bản gốc sách").
+
+### 2.3. Teach-by-doing / Learning-by-doing (Celia Hodent, "The Gamer's Brain", 2017 + GDC 2016
+"UX of Onboarding")
+
+- Định nghĩa UX theo Hodent: UX bắt nguồn từ cognitive science, Human Factors, và
+  Human-Computer Interaction (HCI) - quote nguyên văn mục 5.2.
+- Giới hạn trí nhớ làm việc (working memory): khi người chơi ở "learning mode", chỉ nên xử lý
+  tối đa khoảng 3 thông tin cùng lúc - lý do tutorial text dài, liệt kê nhiều thứ cùng lúc, hay
+  bị người chơi bỏ qua/quên.
+- "Learning by doing" được Hodent xem là hình thức dạy hiệu quả nhất, vì tutorial text đơn
+  thuần thiếu context và người chơi không thể thử ngay lúc đọc → xử lý nông (shallow
+  processing) → không được mã hoá tốt vào trí nhớ.
+- "Curse of knowledge": người thiết kế biết quá rõ hệ thống nên có xu hướng giải thích quá chi
+  tiết (cách làm - the how, vật thể trong game - the what) thay vì tập trung vào mục tiêu (lý
+  do - the why), khiến cognitive load của người chơi mới bị quá tải. → Hodent khuyến nghị: nếu
+  dùng tutorial text trên loading screen, đừng giải thích quá 3 điều, ưu tiên nói "why" hơn
+  "how"/"what".
+- Ví dụ thật Hodent kể (khi làm UX tại Epic Games/Fortnite giai đoạn Alpha - bản Save the
+  World, 2017): đội ngũ test thấy người chơi hỏi liên tục "sao không sửa được súng" → Fortnite
+  chủ đích thiết kế súng gãy ngay đầu game + text popup báo phải craft cái mới → nhưng survey
+  sau đó vẫn có người quên cách vào màn hình craft, vì thông tin bằng VO/text chỉ tạo "shallow
+  processing", còn hành động craft-thật ở màn tutorial được nhớ tốt hơn nhưng vẫn cần "recall
+  hint" nhắc lại sau đó - minh hoạ rằng ngay cả "learning by doing" cũng cần lặp lại/nhắc,
+  không chỉ làm 1 lần là đủ. [Nguồn gốc - lời trực tiếp Hodent qua bài chính chủ, xem mục 5.2]
+
+### 2.4. Progressive disclosure (drip-feed mechanics)
+
+Đây KHÔNG phải thuật ngữ gốc của ngành game - là thuật ngữ UX/HCI tổng quát. Jakob Nielsen
+(Nielsen Norman Group) viết bài định nghĩa & phổ biến khái niệm này cho thiết kế giao diện năm
+1995 (quote mục 5.5). Ý tưởng gốc về việc "chỉ lộ dần cho người dùng mới cách hệ thống hoạt
+động" từng được Kristina Hooper Woolsey (Apple Human Interface Group) nêu ra sớm hơn, năm 1985
+[CHƯA VERIFY nguồn gốc 1985 - chỉ thấy nhắc lại qua bài tổng hợp UXPin/Decision Lab, chưa mở
+được văn bản gốc 1985 của Woolsey]. → Game design mượn khái niệm này: chỉ mở khoá cơ chế/UI
+mới khi người chơi cần dùng đến (drip-feed), tránh dội hết luật chơi ngay đầu game. Xem bẫy
+#13 ở mục 10 (không phải thuật ngữ "gốc game").
+
+### 2.5. Skill atom / skill chain (Daniel Cook, "The Chemistry of Game Design", Lostgarden,
+19/7/2007 - đăng lại trên Gamasutra/Game Developer)
+
+"Skill atom" = đơn vị kỹ năng nhỏ nhất có thể tách biệt được trong một game (vd: "nhảy" là 1
+skill atom trong Mario). Các skill atom nối với nhau thành "skill chain": làm chủ atom này mở
+khoá/cho phép học atom tiếp theo (vd atom "nhảy" dẫn tới atom "nhảy qua hố", "nhảy lên bục",
+"nhảy đè quái"). Đây là cách tư duy hệ thống hoá cho việc thiết kế learning curve: vẽ được bản
+đồ atom nào cần dạy trước, atom nào phụ thuộc atom nào.
+Đã verify tồn tại thuật ngữ + tác giả qua curl; KHÔNG trích nguyên văn được câu định nghĩa
+chính xác của Cook (trang Lostgarden hiện tại lẫn phần bình luận rất dài che nội dung bài gốc
+trong bản HTML thô lấy được - nội dung trên là diễn giải/phân tích của người viết dựa trên các
+đoạn có verify được, không phải quote). Xem bẫy #14 ở mục 10 (không phải thuật ngữ của MDA).
+
+### 2.6. "Safe practice space"
+
+Ý tưởng: tutorial/level đầu nên là không gian mà người chơi có thể thử-sai với hậu quả thấp
+(không chết hẳn, không mất tiến trình) trước khi gặp thử thách thật có rủi ro. [CHƯA VERIFY
+thuật ngữ chính xác này gắn với tác giả cụ thể nào - không tìm thấy 1 nguồn duy nhất "đặt tên"
+khái niệm này; đây là mô tả phổ biến rải rác trong nhiều GDC talk về level design/tutorial
+(Miyamoto/Tezuka, Valve) chứ không có một định nghĩa hàn lâm duy nhất. Dùng trong bài như khái
+niệm mô tả, không đóng ngoặc kép/gán tên người phát minh.]
+
+### 2.7. FTUE (First-Time User Experience) + D1 retention (mobile F2P)
+
+- FTUE: toàn bộ trải nghiệm từ lần mở app/game đầu tiên đến khi người chơi "hiểu mình đang cầm
+  gì trong tay" - thuật ngữ mượn từ ngành phần mềm/product nói chung, được ngành mobile game
+  dùng phổ biến để chỉ pha onboarding + tutorial + first session.
+- D1 retention: tỉ lệ người chơi quay lại vào đúng 1 ngày sau lần chơi đầu. Về mặt toán học, D1
+  là **trần trên** cho mọi retention ngày sau: nếu 80% người chơi rời bỏ ngay ngày 1, D7 không
+  thể vượt quá 20%. Đây là lý do ngành mobile F2P đầu tư rất nặng vào FTUE - vì mọi
+  retention/monetization về sau đều bị giới hạn bởi con số D1.
+  [Nguồn: các bài blog ngành (Playio, Udonis - mục 11) - đây là kiến thức "ngành" phổ biến rộng
+  rãi, không phải academic paper có peer-review; ghi rõ để biết đây là industry best-practice.]
+- Chưa có case study mobile F2P cụ thể kèm số liệu D1 thật đã fact-check - xem mục 12.
+
+### 2.8. Affordance & Signifier (Don Norman)
+
+QUAN TRỌNG: Norman KHÔNG "sửa" khái niệm affordance thành signifier - ông giữ affordance,
+nhưng THÊM khái niệm signifier (bên cạnh affordance) để sửa cách mọi người dùng sai từ
+"affordance" sau khi ông giới thiệu nó năm 1988. Xem bẫy #6 ở mục 10.
+
+- **Affordance** (nguồn gốc thuật ngữ - Gibson, không phải Norman): "the actionable properties
+  between the world and an actor" - quote đầy đủ ở mục 5.6. Norman nhấn mạnh trong thiết kế
+  quan trọng là "perceived affordance" - khả năng người dùng CẢM NHẬN được rằng một hành động
+  là có thể, không phải affordance vật lý thuần tuý.
+- **Signifier** - tín hiệu cảm nhận được, báo cho người dùng biết HÀNH ĐỘNG nên diễn ra ở đâu
+  (khác affordance là hành động GÌ có thể xảy ra) - thuật ngữ Norman đưa ra công chúng trong
+  bài "Signifiers, not affordances" (Interactions, ACM, 2008). Quote đầy đủ ở mục 5.6.
+- Tóm tắt khái niệm cho bài (diễn giải, không phải quote): Affordance = khả năng hành động
+  khách quan mà một vật/hệ thống cho phép (vd: một cái nút bấm được "afford" là nhấn).
+  Signifier = tín hiệu cảm nhận được, cho người dùng BIẾT chỗ/cách thực hiện hành động đó (vd:
+  viền nổi quanh nút, đổi màu khi hover). Norman nhấn mạnh: trong thiết kế, thứ nhà thiết kế
+  thực sự tạo ra và kiểm soát là signifier, không phải affordance (affordance nhiều khi vốn đã
+  tồn tại tự nhiên).
+
+### 2.9. Friction cố ý vs friction xấu
+
+[Nguồn: bài IxDF "The Game UX Twist: Usability Principles for Games" - đã verify qua curl,
+đọc trực tiếp đoạn văn bàn về friction ngay sau bảng 7 pillar của Hodent - xem mục 3.4]
+
+Ý chính (quote đầy đủ mục 5.9): áp dụng các nguyên tắc usability CHỈ ở nơi friction là ngoài ý
+muốn (accidental) - nơi sự bối rối/mệt mỏi/lỗi không phục vụ mục đích thiết kế nào. Ví dụ minh
+hoạ trong nguồn: game souls-like - chết là friction CỐ Ý (trung tâm trải nghiệm, error
+prevention không áp dụng cho combat loop), nhưng menu lưu game/remap control confirm nhầm là
+friction XẤU (ngoài ý muốn, cần error prevention). "Mỗi game hứa hẹn với người chơi độ khó nằm
+ở đâu; việc của nhà thiết kế là giữ đúng lời hứa đó: bảo vệ friction cố ý và loại bỏ mọi thứ
+còn lại" (diễn giải từ quote gốc, xem mục 5.9).
+
+Diễn giải thêm (KHÔNG phải trích nguồn, chỉ tham khảo hướng phân tích - cần tự tìm ví dụ game
+cụ thể khi viết bài thật):
+- Friction xấu: menu rối, không rõ nút bấm nào, phải bấm nhiều lần mới thực hiện được thao tác
+  cơ bản.
+- Friction cố ý: cơ chế parry đòi hỏi timing chính xác (souls-like), giới hạn túi đồ buộc người
+  chơi ra quyết định (survival game), độ khó địa hình trong platformer.
+
+## 3. CÁC BỘ HEURISTIC
+
+### 3.1. Nielsen - 10 Usability Heuristics (1994)
+
+Nguồn chính: nngroup.com/articles/ten-usability-heuristics/ (đã curl HTML thô, verify heading
+verbatim từng heuristic). Tên 10 heuristic (verbatim, đúng thứ tự, đúng số thứ tự trên trang):
+
+1: Visibility of System Status
+2: Match Between the System and the Real World
+3: User Control and Freedom
+4: Consistency and Standards
+5: Error Prevention
+6: Recognition Rather than Recall
+7: Flexibility and Efficiency of Use
+8: Aesthetic and Minimalist Design
+9: Help Users Recognize, Diagnose, and Recover from Errors
+10: Help and Documentation
+
+Năm & nguồn gốc: trang gọi đây là "heuristics" vì chúng là "broad rules of thumb and not
+specific usability guidelines" (diễn giải từ nội dung trang, không phải trích 100% nguyên văn).
+Trích dẫn tham khảo gốc xuất hiện trên trang (đã verify qua curl): "...to derive a set of
+heuristics with maximum explanatory power, resulting in this revised set of heuristics [Nielsen
+1994b]." và "Nielsen, J. (1994a). Enhancing the explanatory power of usability heuristics. Proc.
+ACM CHI'94 Conf. (Boston, MA, April 24-28), 152-158." → heuristics được Nielsen công bố/hoàn
+thiện năm 1994, dựa trên factor analysis 249 usability problems [ĐÃ VERIFY qua đọc trực tiếp
+nội dung trang nngroup].
+Cách verify: `curl -s -A "Mozilla/5.0" https://www.nngroup.com/articles/ten-usability-heuristics/`
+rồi `grep -o '<h2 id="toc-[^"]*">[^<]*</h2>'` - lấy đúng 10 dòng heading, khớp 100%.
+
+### 3.2. Desurvire - HEP (2004) → PLAY (2009), và GAP
+
+Chuỗi lịch sử đã verify qua đọc trực tiếp full-text PDF (PLAY, tại ocw.metu.edu.tr).
+
+**a) HEP - "Heuristics to Evaluate Playability"** (LƯU Ý tên chính xác - xem bẫy #7 ở mục 10)
+Tác giả: Heather Desurvire, Martin Caplan, Jozsef A. Toth. Công bố: CHI 2004 (paper "Using
+Heuristics to Evaluate the Playability of Games"). [ĐÃ VERIFY tên tác giả + năm qua 2 nguồn
+độc lập: (1) trích trong bài PLAY 2009 chính nó - mục Introduction; (2) mục References của bài
+PLAY: "Desurvire, H., Caplan, M., Toth, J.: Using Heuristics to Evaluate the Playability of
+Games. (2004) In: ACM conference, CHI2004"]. HEP chia heuristic thành 4 nhóm lớn (verbatim):
+"The HEP Heuristics fell into four general areas: Game Play, Game Usability, Game Mechanics
+and Game Story."
+
+**b) PLAY - "Heuristics of Playability" / "Principles of Game Playability"**
+Tên bài đầy đủ (verbatim, trang bìa PDF): "Game Usability Heuristics (PLAY) For Evaluating and
+Designing Better Games: The Next Iteration". Tác giả: Heather Desurvire (Behavioristics,
+President; Professor USC Cinematic Arts) và Charlotte Wiberg (Assistant Professor Informatics,
+Umeå University, Thụy Điển). Công bố: HCI International 2009. [ĐÃ VERIFY - đọc trực tiếp PDF,
+có đủ tên tác giả, chức danh, affiliation, abstract]
+
+PLAY chia thành 3 category lớn, mỗi category có nhiều "Heuristic" con (verbatim từ "Table 1.
+Play Heuristics: Category, Heuristic and Explanation"):
+
+- Category 1: Game Play - Enduring Play; Challenge, Strategy and Pace; Consistency in Game
+  World; Goals; Variety of Players and Game Styles; Players Perception of Control
+- Category 2: Coolness/Entertainment/Humor/Emotional Immersion - Emotional Connection;
+  Coolness/Entertainment; Humor; Immersion
+- Category 3: Usability & Game Mechanics - Documentation/Tutorial; Status and Score; Game
+  Provides Feedback; Terminology; Burden On Player; Screen Layout; Navigation; Error
+  Prevention; Game Story Immersion
+
+Ví dụ heuristic con verbatim (nhóm III - "Error Prevention", gần với heuristic Nielsen #5):
+"H1. Player error is avoided. H2. Player interruption is supported, so that players can easily
+turn the game on and off and be able to save the games in different states. H3. Upon turning on
+the game, the player has enough information to begin play. H4. Players should be given context
+sensitive help while playing so that they are not stuck and need to rely on a manual for help."
+
+Phương pháp nghiên cứu PLAY: 54 gamers đánh giá game High/Low rank (theo điểm metacritic.com)
+trên 116 heuristic tiềm năng; 48/116 heuristic có khác biệt ý nghĩa thống kê giữa game điểm cao
+và điểm thấp.
+
+**c) GAP - "Game Approachability Principles"**
+Tác giả: Desurvire, H., Wiberg, C. [Từ WebSearch, dựa trên tiêu đề bài "User Experience Design
+for Inexperienced Gamers: GAP – Game Approachability Principles" - CHƯA tự mở đọc full-text
+bài GAP, chỉ thấy trong references của bài PLAY: "Upcoming research will focus on case studies,
+where PLAY for game usability and GAP [4], heuristics for game access..." và ref [4] trong bài
+PLAY là: "Desurvire, H., Wiberg, C.: Master of the Game: Assessing Approachability in Future
+Game Design. In: ACM CHI 2008 conference" - LƯU Ý: đây có thể là một bài khác/tiền thân của
+GAP, tên "Master of the Game" (CHI 2008), không trùng tên "GAP" trực tiếp - [CHƯA VERIFY] mối
+quan hệ chính xác giữa "Master of the Game" (2008) và "GAP" (có nguồn ghi năm 2015 cho GAP).
+KHÔNG đưa năm cụ thể cho GAP vào bài nếu chưa verify thêm - xem bẫy #10 ở mục 10.]
+GAP tập trung vào: làm game "approachable" hơn cho người chơi mới/casual - thân thiện, vui,
+immersive, dễ tiếp cận ngay từ đầu (tutorial/first-level).
+
+### 3.3. Pinelle, Wong, Stach - "Heuristic Evaluation for Games" (CHI 2008)
+
+[ĐÃ VERIFY - đọc trực tiếp full-text PDF, nguồn: irit.fr mirror của bài CHI 2008]
+
+Tên bài (verbatim): "Heuristic Evaluation for Games: Usability Principles for Video Game
+Design". Tác giả (verbatim, kèm affiliation): David Pinelle (University of Nevada, Las Vegas),
+Nelson Wong (University of Saskatchewan), Tadeusz Stach (Queen's University). Công bố: CHI 2008
+Proceedings, Game Zone track, Florence, Italy, April 5-10, 2008, trang 1453-1462.
+Phương pháp (verbatim rút gọn): phân tích review PC game từ một trang web game review phổ
+biến, "108 different games... 18 from each of 6 major game genres", rút ra "twelve common
+classes of usability problems", từ đó phát triển "ten usability heuristics".
+
+10 heuristic đầy đủ (VERBATIM, đã curl PDF → pdftotext trực tiếp, đúng thứ tự 1-10):
+
+1. Provide consistent responses to the user's actions.
+2. Allow users to customize video and audio settings, difficulty and game speed.
+3. Provide predictable and reasonable behavior for computer controlled units.
+4. Provide unobstructed views that are appropriate for the user's current actions.
+5. Allow users to skip non-playable and frequently repeated content.
+6. Provide intuitive and customizable input mappings.
+7. Provide controls that are easy to manage, and that have an appropriate level of sensitivity
+   and responsiveness.
+8. Provide users with information on game status.
+9. Provide instructions, training, and help.
+10. Provide visual representations that are easy to interpret and that minimize the need for
+    micromanagement.
+
+Ghi chú quan trọng cho bài: nhóm tác giả này CHỦ Ý loại trừ engagement/story/entertainment ra
+khỏi phạm vi (verbatim): "Game usability does not address issues of entertainment, engagement,
+and storyline..." - khác với HEP/PLAY (Desurvire) vốn gộp cả Game Play/Story vào heuristic. →
+điểm phân biệt hai trường phái, dùng được cho callout "note" trong bài (xem bẫy #11 ở mục 10).
+
+Bài cũng phê bình trực tiếp việc áp heuristic Nielsen (dành cho desktop app) vào game (verbatim
+- quote đầy đủ mục 5.7).
+
+### 3.4. Celia Hodent - UX framework (Usability + Engage-ability), 7 Usability Pillars
+
+[ĐÃ VERIFY qua curl trực tiếp bài viết của chính Celia Hodent trên celiahodent.com]
+Nguồn chính: "Understanding the Success of Fortnite: A UX & Psychology Perspective" -
+celiahodent.com/understanding-the-success-of-fortnite-ux/ (Hodent là cựu Director of UX tại
+Epic Games, tác giả sách "The Gamer's Brain").
+
+Quote mở (mục 5.8): Hodent dùng 2 pillar UX chính trong game - "usability" và "engage-ability".
+QUAN TRỌNG: Hodent nói RÕ RÀNG 7 pillar dưới đây là bà TỰ ĐIỀU CHỈNH (adapt) từ 10 heuristic của
+Nielsen, không phải một bộ độc lập không liên quan - quote đầy đủ mục 5.8. Tránh trình bày
+Hodent như phát minh độc lập tách rời Nielsen (xem bẫy #9 ở mục 10).
+
+7 Usability Pillars (tên chính xác, verbatim từ celiahodent.com):
+Signs and feedback - Clarity - Form follows function - Consistency - Minimum workload - Error
+prevention and recovery - Flexibility and accessibility
+
+Mô tả 1 dòng mỗi pillar (verbatim, từ bài "The Game UX Twist: Usability Principles for Games",
+IxDF - trích dẫn trực tiếp framework của Hodent) - quote đầy đủ mục 5.8.
+
+LƯU Ý tên gọi pillar thứ 7: đúng là "Flexibility and accessibility" (bài chính chủ Hodent và
+bài IxDF đều dùng tên này) - KHÔNG PHẢI chỉ "Flexibility" trơn như một số bản tóm tắt lưu hành
+(Medium, uxplanet) hay rút gọn. Xem bẫy #8 ở mục 10.
+
+Engage-ability (3 pillar, theo Hodent, cùng bài Fortnite): [ĐÃ VERIFY câu mở nhưng CHƯA verify
+đủ tên 3 pillar con - bài bị cắt ở đoạn "Unlike tools (suc..." khi curl]. Hodent liệt kê "three
+pillars I considered in order to improve the engage-ability of a game" nhưng chưa đọc hết danh
+sách 3 tên cụ thể. Xem mục 12.
+
+## 4. ACCESSIBILITY CƠ BẢN (GAME ACCESSIBILITY GUIDELINES - MỨC BASIC)
+
+[ĐÃ VERIFY qua curl trực tiếp trang Basic, gameaccessibilityguidelines.com/basic/]
+
+Mô tả mức Basic (verbatim - quote đầy đủ mục 5.10): các cân nhắc/quyết định thiết kế đơn giản,
+áp dụng cho hầu hết cơ chế game; không phải guideline nào cũng áp dụng cho mọi game, nhưng cái
+nào áp dụng được sẽ lợi cho số đông người chơi và dễ triển khai nếu nghĩ tới đủ sớm.
+
+4 vấn đề bị than phiền nhiều nhất (verbatim - quote đầy đủ mục 5.10): remapping, text size,
+colorblindness, và subtitle presentation.
+
+Danh sách guideline mức Basic liên quan trực tiếp đến UX/onboarding (verbatim, trang chia theo
+Motor/Cognitive/Vision/Hearing/Speech/General):
+
+Motor (Control / mobility):
+- "Allow controls to be remapped / reconfigured"
+- "Ensure controls are as simple as possible, or provide a simpler alternative"
+- "Include an option to adjust the sensitivity of controls"
+- "Ensure interactive elements / virtual controls are large and well spaced, particularly on
+  small or touch screens"
+- "Include an option to adjust the game speed"
+
+Cognitive (Thought / memory / processing information):
+- "Allow players to progress through text prompts at their own pace"
+- "Include interactive tutorials"
+- "Use simple clear language"
+- "Allow the game to be started without the need to navigate through multiple levels of menus"
+
+Vision:
+- "Provide high contrast between text/UI and background"
+- "Use an easily readable default font size"
+- "Ensure no essential information is conveyed by a fixed colour alone" (liên quan colourblind)
+
+Hearing:
+- "If any subtitles / captions are used, present them in a clear, easy to read way"
+- "Provide subtitles for all important speech"
+- "Provide separate volume controls or mutes for effects, speech and background / music"
+
+General:
+- "Ensure that all settings are saved/remembered"
+- "Offer a wide choice of difficulty levels"
+
+Cấu trúc 3 mức của toàn bộ hệ thống (verbatim từ mô tả chung trang chủ, qua WebSearch - CHƯA
+tự curl trang chủ, chỉ curl trang /basic/): Basic → Intermediate → Advanced, xếp theo độ khó
+triển khai / mức độ ảnh hưởng người chơi. Xem ví dụ game áp dụng thật (The Last of Us Part II)
+ở mục 6, nhóm "Accessibility".
+
+## 5. QUOTE NGUYÊN VĂN ĐÃ VERIFY
+
+### 5.1. Raph Koster, "A Theory of Fun for Game Design" (2004)
+
+[Q1] "That's what games are, in the end. Teachers. Fun is just another word for learning."
+Nguồn: https://www.goodreads.com/quotes/990231-that-s-what-games-are-in-the-end-teachers-fun-is
+Cách verify: `curl -A "Mozilla/5.0" <url>` → grep title/meta tag, khớp nguyên văn.
+
+[Q2] "The definition of a good game is therefore "one that teaches everything it has to offer
+before the player stops playing." That's what games are, in the end. Teachers. Fun is just
+another word for learning."
+Nguồn: https://www.goodreads.com/work/quotes/19639-a-theory-of-fun-for-game-design
+Cách verify: `curl -A "Mozilla/5.0" <url>` → grep trực tiếp trên HTML thô, thấy đúng đoạn (đã
+decode &ldquo;/&rdquo; thành ngoặc kép cong trong trang gốc).
+
+[Q3] "Boredom is the opposite of learning." (bản dài hơn "Boredom is the opposite of learning.
+When a game stops teaching us, we feel bored." xuất hiện ở trang quote riêng:
+https://www.goodreads.com/quotes/9498316-boredom-is-the-opposite-of-learning-when-a-game-stops
+- đã curl cả hai, hai bản khớp nhau ở phần chung.)
+Nguồn: https://www.goodreads.com/work/quotes/19639-a-theory-of-fun-for-game-design
+
+[Q4] "Fun is about learning in a context where there is no pressure from consequence, and that
+is why games matter."
+Nguồn: https://www.goodreads.com/work/quotes/19639-a-theory-of-fun-for-game-design
+Cách verify: curl HTML thô trang work-quotes, grep thấy nguyên văn.
+LƯU Ý CHUNG cho Q1-Q4: nguồn verify là trang tổng hợp quote (Goodreads), không phải bản scan
+trực tiếp của sách - xem caveat ở mục 2.2.
+
+### 5.2. Celia Hodent, "The Gamer's Brain, Part 2: UX of Onboarding and Player Engagement"
+(bản viết lại từ talk GDC 2016, blog cá nhân celiahodent.com)
+
+[Q5] "The user experience entails how a person perceives and interacts with a product and the
+satisfaction and emotions elicited via this interaction. It takes its roots in cognitive
+science, Human Factors, and Human-Computer Interaction (HCI)."
+Nguồn: https://celiahodent.com/gamers-brain-ux-onboarding/
+Cách verify: `curl -A "Mozilla/5.0" <url>` → lấy HTML thô, xác định đúng thẻ `<article
+id="post-610" class="post-610 ... category-blog tag-gdc tag-neuroscience tag-ux">`, strip tag,
+đọc nguyên đoạn - đây là bài chính chủ tác giả tự đăng lại nội dung slide/talk của mình.
+
+[Q6] "Discovering and mastering a video game is a learning experience for the user. It
+requires mental efforts. This is why it's important to understand how the brain learns to
+craft a compelling onboarding experience – one worth putting effort into, one that will matter
+to your audience."
+Nguồn: https://celiahodent.com/gamers-brain-ux-onboarding/ - verify như Q5.
+
+[Q7] "Although learning-by-doing is recognized as being one of the most efficient ways of
+learning - especially when it comes to an interactive experience - tutorial texts are still
+frequently used to teach the main components of a game."
+Nguồn: https://celiahodent.com/gamers-brain-ux-onboarding/ - verify như Q5.
+
+[Q8] "When you teach the player something when they can actually do it, it gives context
+(learning by doing). But if on top of it you add meaning by giving a clear purpose for
+practicing that new skill, then players will retain even more."
+Nguồn: https://celiahodent.com/gamers-brain-ux-onboarding/ - verify như Q5.
+
+[Q9] "Because of the "curse of knowledge" we have a tendency to explain things we know well by
+getting too much into details, explaining more about how to do all the things, instead of
+minding the cognitive load of the player and the purpose of tutorial."
+Nguồn: https://celiahodent.com/gamers-brain-ux-onboarding/ - verify như Q5.
+
+### 5.3. Takashi Tezuka (đồng thiết kế Super Mario Bros. cùng Miyamoto)
+
+[Q10] Phỏng vấn đăng trên báo Sankei Shinbun ngày 30/11/2015 nhân kỷ niệm 30 năm Mario, bản
+dịch tiếng Anh trên shmuplations.com:
+"They almost never clicked on the first try. I'd build it with a specific flow in mind, like
+"an enemy appears here and Mario moves like this." But people rarely play the way you expect,
+so I'd watch them and make adjustments. Also, when you build it yourself, you inevitably make
+it too hard. The basic stage known as 1-1 was actually something we came up with at the very
+end while balancing the overall difficulty."
+Nguồn: https://shmuplations.com/supermariobros/
+Cách verify: `curl -A "Mozilla/5.0" <url>` → tìm đúng `<div class="entry-content">`, strip tag,
+đọc nguyên đoạn. Trang ghi rõ: "This Super Mario Bros interview with Takashi Tezuka originally
+appeared in the 11/30/2015 edition of Sankei Shinbun."
+Ý nghĩa cho bài: bằng chứng trực tiếp, có nguồn, rằng ngay cả level dạy-chơi kinh điển nhất
+lịch sử game (World 1-1) cũng được hoàn thiện bằng playtest lặp lại, không phải thiết kế đúng
+ngay từ đầu trên giấy - và 1-1 là màn được chốt SAU CÙNG để cân bằng độ khó, không phải màn đầu
+tiên được làm. LƯU Ý: đây là lời TEZUKA, không phải Miyamoto - xem bẫy #1 ở mục 10.
+
+### 5.4. Kim Swift & Erik Wolpaw (thiết kế Narbacular Drop tại DigiPen, sau được Valve tuyển
+để làm Portal)
+
+[Q11] Bài postmortem "Thinking with Portals: Creating Valve's New IP" (gốc Gamasutra, đăng lại
+trên Game Developer):
+"We were introduced very quickly to the cornerstones of Valve's development process:
+Playtesting and application of playtest observations to game design."
+Đoạn liền trước (cùng bài, cùng verify): "...we didn't playtest the game until the last month
+of its development [ám chỉ Narbacular Drop bản DigiPen]. Our playtests revealed several
+problems and bugs, but it was far too late to actually fix most of them."
+Nguồn: https://www.gamedeveloper.com/design/thinking-with-portals-creating-valve-s-new-ip
+Cách verify: `curl -A "Mozilla/5.0" <url>` → trang là ứng dụng React/Next.js render phía client
+nên HTML thô chủ yếu chứa JSON nội bộ; đã grep trực tiếp trên chuỗi JSON thô (không qua trình
+duyệt) và thấy đúng câu này xuất hiện y nguyên trong dữ liệu trang.
+Ý nghĩa: bài học khiến Valve (sau khi tuyển nhóm) đưa playtest sớm & liên tục thành quy trình
+lõi khi làm Portal.
+
+### 5.5. Jakob Nielsen (Nielsen Norman Group)
+
+[Q12] Bài "Progressive Disclosure":
+"Progressive disclosure is one of the best ways to satisfy both of these conflicting
+requirements. It's a simple, yet powerful idea:"
+Nguồn: https://www.nngroup.com/articles/progressive-disclosure/
+Cách verify: `curl -A "Mozilla/5.0" <url>` → grep trực tiếp trên HTML thô, khớp nguyên văn.
+Ghi chú: nguồn UX/HCI tổng quát (không phải riêng game) - dùng để làm rõ gốc gác thuật ngữ.
+
+### 5.6. Don Norman - Affordance & Signifier
+
+[Q13] Bài "Affordances and Design" (jnd.org):
+"The word "affordance" was originally invented by the perceptual psychologist J. J. Gibson
+(1977, 1979) to refer to the actionable properties between the world and an actor (a person or
+animal). To Gibson, affordances are a relationship. They are a part of nature: they do not
+have to be visible, known, or desirable. Some affordances are yet to be discovered. Some are
+dangerous. I suspect that none of us know all the affordances of even everyday objects."
+Nguồn: https://jnd.org/affordances-and-design/
+Cách verify: `curl -A "Mozilla/5.0" <url>` → grep theo "affordances are a relationship" - khớp
+nguyên văn.
+
+[Q14] Bài "Signifiers, not affordances" (Interactions magazine, ACM, 2008, đăng lại trên
+jnd.org - đây LÀ bài gốc nơi Norman đưa thuật ngữ "signifier" ra công chúng):
+"[A signifier is] some sort of indicator, some signal in the physical or social world that can
+be interpreted meaningfully. Signifiers signify critical information, even if the signifier
+itself is an accidental byproduct of the world."
+"I call any physically perceivable cue a signifier, whether it is incidental or deliberate."
+"Social signifiers replace affordances, for they are broader and richer, allowing for
+accidental signifiers as well as deliberate ones, and even for items that signify by their
+absence... The perceivable part of an affordance is a signifier, and if deliberately placed by
+a designer, it is a social signifier."
+Nguồn: https://jnd.org/signifiers-not-affordances/
+Cách verify: `curl -A "Mozilla/5.0" <url>` → grep theo "[Ss]ignifier" - đã đọc thấy đủ 3 câu
+trên nguyên văn trong HTML thô.
+
+[Q15] "The Design of Everyday Things" (Revised and Expanded Edition, 2013):
+"Affordances define what actions are possible. Signifiers specify how people discover those
+possibilities: signifiers are signs, perceptible signals of what can be done. Signifiers are
+of far more importance to designers than are affordances."
+Nguồn (verify mức trung gian, qua Goodreads):
+https://www.goodreads.com/quotes/7611905-affordances-define-what-actions-are-possible-signifiers-specify-how-people
+Cách verify: `curl` + grep trên HTML thô, khớp nguyên văn trong `<meta name="description">` và
+trong nút share Twitter của trang - nhưng đây là trích dẫn thứ cấp (Goodreads tổng hợp), KHÔNG
+phải đọc trực tiếp file sách gốc. Nếu cần chốt tuyệt đối, nên tìm bản PDF/scan sách đối chiếu
+trang cụ thể trước khi dùng dưới dạng ngoặc kép.
+[CHƯA VERIFY - không dùng]: câu lưu truyền rộng rãi "Affordances determine what actions are
+possible. Signifiers communicate where the action should take place. We need both." - chưa tự
+mở được bản gốc có câu này nguyên văn qua curl. Nếu dùng, ưu tiên Q15 (goodreads, đã verify)
+hoặc Q14 (jnd.org, verify trực tiếp 100%).
+
+### 5.7. Pinelle, Wong, Stach - "Heuristic Evaluation for Games" (CHI 2008)
+
+[Q16] "Game usability does not address issues of entertainment, engagement, and storyline..."
+[Q17] "Nielsen developed his heuristics primarily for desktop applications. They refer to
+common user-interface concepts, such as dialogs, undo and redo, and error prevention. However,
+many of these ideas have limited meaning in the game context... they do not address several
+important usability issues, such as using proper camera angles when displaying the game world
+or providing intuitive control mappings."
+Nguồn: https://www.irit.fr/recherches/ICS/projects/twintide/upload/447.pdf
+Cách verify: đọc trực tiếp full-text PDF, `pdftotext`.
+
+### 5.8. Celia Hodent - "Understanding the Success of Fortnite: A UX & Psychology Perspective"
+
+[Q18] "...we use two main UX pillars in games: "usability", and what I call "engage-ability".
+Game UX = Usability + Engage-ability"
+
+[Q19] "Usability is about the ability of the game to be used, which entails taking into
+account human limitations in terms of perception, attention, and memory. Usability is a
+well-known UX pillar and very precise guidelines have been established throughout the years in
+industrial design and digital product design. The most renowned list of usability heuristics
+(i.e. rules of thumb) was put together by Jakob Nielsen. In my game UX framework, I've adapted
+these heuristics to be more relevant and, well, usable to game developers who use their own
+vernacular. These game usability heuristics are as follows:
+Signs and feedback
+Clarity
+Form follows function
+Consistency
+Minimum workload
+Error prevention and recovery
+Flexibility and accessibility"
+Nguồn: https://celiahodent.com/understanding-the-success-of-fortnite-ux/
+Cách verify: `curl` trực tiếp HTML thô, extract text sạch.
+
+[Q20] Mô tả 1 dòng mỗi pillar (bài "The Game UX Twist: Usability Principles for Games", IxDF -
+trích dẫn trực tiếp framework của Hodent, dẫn nguồn sách "The Gamer's Brain" và khóa học của
+chính Hodent trên IxDF):
+"Signs and feedback: does the game communicate what players can do and what happens when they
+interact with the system?
+Clarity: are signs and feedback clearly perceived?
+Form follows function: can players grasp the functionality of a system just by observing it?
+Consistency: are signs and feedback consistent across the game and the genre?
+Minimum workload: does the system minimize cognitive, memory, and physical load where
+challenge isn't intended?
+Error prevention and recovery: are errors prevented, or can players recover from them easily?
+Flexibility and accessibility: can players tailor the experience, and is the game accessible
+to players with disabilities?"
+Nguồn: https://ixdf.org/literature/article/the-game-ux-twist-usability-principles-for-games
+Cách verify: `curl` trực tiếp, đọc đoạn văn. LƯU Ý: đây là bài IxDF (bên thứ ba) diễn giải lại
+framework của Hodent, không phải lời Hodent trực tiếp - khác với Q18/Q19.
+
+### 5.9. Friction cố ý vs friction xấu (IxDF, "The Game UX Twist: Usability Principles for
+Games")
+
+[Q21] "These principles aren't a universal pass over your entire game. Apply them only where
+friction is accidental, and where confusion, fatigue, or error serve no design purpose."
+
+[Q22] "Take a souls-like game as an example. Death is frequent, deliberate, and central to the
+experience. Error prevention doesn't apply to the combat loop; getting hit, getting killed, and
+losing progress is the game. But error prevention absolutely applies to your save system, your
+menu navigation, and your control remapping screen. Players should never lose a character
+build because they accidentally confirmed the wrong prompt."
+
+[Q23] "Every game makes a promise to players about where the difficulty lives. Your job is to
+honor that promise: protect intentional friction and eliminate everything else."
+Nguồn: https://ixdf.org/literature/article/the-game-ux-twist-usability-principles-for-games
+Cách verify: `curl` trực tiếp, đọc đoạn văn ngay sau bảng 7 pillar.
+
+### 5.10. Game Accessibility Guidelines - mức Basic
+
+[Q24] "Simple considerations or design decisions that apply to most game mechanics. Not every
+guideline will apply to your game, but those that do will benefit large numbers of gamers, and
+are easy to implement if thought about early enough."
+
+[Q25] "...the four most commonly complained about accessibility issues (source) are remapping,
+text size, colorblindness, and subtitle presentation. If you can address those, you'll make a
+significant difference to a large number of players."
+Nguồn: https://gameaccessibilityguidelines.com/basic/
+Cách verify: `curl` trực tiếp trang /basic/.
+
+### 5.11. Valve - "Valve's Design Process for Creating Half-Life 2" (GDC 2006, David Speyrer &
+Brian Jacobson)
+
+[Q26] Slide "Running a Good Playtest":
+"Make sure the people responsible for the design and execution are there
+ - Simplifies evaluation
+ - Prioritizes
+ - Motivates
+Simulate the player 'in their living room'
+ - Don't give them hints
+ - Don't answer any questions
+ - Don't provide extrinsic rewards
+Use external playtesters"
+
+[Q27] Slide "Questioning Playtesters":
+"Don't rely too much on questions
+ Often you learn more from what playtesters don't experience
+ Ask non-leading questions"
+
+[Q28] Slide "Playtesting as Production":
+"We felt done as soon as playtesting was no longer painful to watch"
+Nguồn: https://cdn.akamai.steamstatic.com/apps/valve/2006/GDC2006_HL2DesignProcess.pdf
+Cách verify: tải PDF chính thức bằng curl, trích xuất bằng `pdftotext` - đọc trực tiếp từ PDF,
+không qua tóm tắt AI.
+LƯU Ý: đây là mô tả quy trình playtest CHUNG của Valve cho cả quá trình làm game, không phải
+quy trình riêng cho phần tutorial/mở đầu - xem bẫy #4 ở mục 10.
+
+### 5.12. Jakob Nielsen - "Thinking Aloud: The #1 Usability Tool"
+
+[Q29] "Thinking aloud may be the single most valuable usability engineering method." (Nielsen
+trích lại từ chính sách sách 1993 của ông, "Usability Engineering"; NN/G ghi chú thêm: "and I
+stand by this assessment today.")
+
+[Q30] "To run a basic thinking aloud usability study, you need to do only 3 things:
+ - Recruit representative users.
+ - Give them representative tasks to perform.
+ - Shut up and let the users do the talking."
+Nguồn: https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/
+Cách verify: `curl` trực tiếp và grep trên HTML thô.
+
+### 5.13. Naughty Dog - PlayStation Blog, "The Last of Us Part II: Accessibility Features
+Detailed"
+
+[Q31] "The Last of Us Part II features more than 60 accessibility settings, with expanded
+options focused on fine-motor and hearing, as well as completely new features that benefit
+low-vision and blind players."
+
+[Q32] "we created three accessibility presets that configure all the recommended settings for
+vision, hearing, and motor accessibility."
+
+[Q33] "Navigation Assistance can be used to guide you along the golden path of story
+progression or you can use Enhanced Listen Mode to go off and find enemies or pickups
+instead."
+
+[Q34] "For the first time in a Naughty Dog game, we are offering full control customization."
+Nguồn: https://blog.playstation.com/2020/06/09/the-last-of-us-part-ii-accessibility-features-detailed/
+Cách verify: `curl` trực tiếp, đọc nguyên văn các đoạn `<p>`. Đây là tự bạch của studio (giọng
+"chúng tôi"), không phải đánh giá của báo chí.
+
+## 6. VÍ DỤ GAME THEO NỀN TẢNG
+
+Ghi chú đọc bảng: `[NGUỒN GỐC ĐÃ ĐỌC]` = đã tự đọc/curl trực tiếp tài liệu gốc; `[NGUỒN TỒN TẠI,
+CHƯA VERIFY CHI TIẾT]` = talk/interview có thật nhưng là VIDEO nên không lấy được transcript
+qua curl - chỉ dùng ở mức sự kiện/luận điểm chung, KHÔNG trích quote; `[PHÂN TÍCH TỰ SUY]` = tự
+suy luận/diễn giải, không có nguồn cụ thể xác nhận chi tiết đó; `[THỨ CẤP]` = bài phân tích của
+bên thứ ba, không phải phát ngôn chính thức của studio.
+
+### PC / Console
+
+1. **Half-Life 2** (Valve, PC/console) - playtest nội bộ định kỳ 1-2 tuần/lần trong suốt
+   production; người quan sát ngồi im, không gợi ý, không trả lời câu hỏi, không thưởng ngoài
+   luồng - "giả lập người chơi đang ở phòng khách nhà họ". [NGUỒN GỐC ĐÃ ĐỌC - slide GDC 2006
+   chính thức của Valve, quote Q26-Q28]. LƯU Ý: mô tả quy trình playtest CHUNG cho cả game,
+   không phải quy trình riêng cho tutorial/mở đầu - xem bẫy #4 ở mục 10.
+
+2. **Portal** (Valve, PC/console) - mỗi test chamber chỉ giới thiệu đúng 1 khái niệm cơ chế
+   mới, đặt người chơi vào tình huống buộc phải tự khám phá công dụng của portal, không có hộp
+   thoại giải thích. [NGUỒN TỒN TẠI, CHƯA VERIFY CHI TIẾT - talk "A Portal Post-Mortem:
+   Integrating Writing and Design" trên GDC Vault, không truy cập được nội dung]. Phần "mỗi
+   chamber = 1 bài học ẩn" là quan sát phổ biến trong giới phân tích game [THỨ CẤP - video
+   essay "The Invisible Tutorial Hidden In Every Portal Chamber"]. Bổ sung: giai thoại GLaDOS
+   được thêm sau khi playtester phản hồi "that was a great tutorial, I can't wait to play the
+   actual game" dù đó đã là toàn bộ game - cho thấy onboarding cơ chế thành công nhưng
+   onboarding cảm xúc/motivation thì chưa [THỨ CẤP nặng - xem bẫy #3 ở mục 10, KHÔNG trích
+   trong ngoặc kép như lời trực tiếp Valve]. Quá trình phát triển: Kim Swift/Erik Wolpaw kể lại
+   playtest muộn ở Narbacular Drop khiến Valve (sau khi tuyển nhóm) đưa playtest sớm & liên tục
+   làm quy trình lõi cho Portal [NGUỒN GỐC ĐÃ ĐỌC, quote Q11].
+
+3. **Super Mario Bros. - World 1-1** (Nintendo, 1985, Famicom/NES) - theo lời Tezuka (Q10):
+   1-1 được hoàn thiện SAU CÙNG trong quá trình phát triển, bằng cách quan sát người chơi thật
+   rồi chỉnh sửa lặp lại - không phải thiết kế đúng ngay từ đầu. Ví dụ tốt cho "playtest-driven
+   onboarding". [NGUỒN GỐC ĐÃ ĐỌC]. Phân tích minh hoạ thêm (tự quan sát, kiểm chứng được bằng
+   cách tự chơi lại, KHÔNG phải trích nguồn): khoảng trống an toàn ngay đầu màn trước khi gặp
+   Goomba đầu tiên cho cơ hội bấm thử nút nhảy không rủi ro; block "?" đầu tiên nằm ngay tầm
+   với để test việc đập từ dưới lên. [PHÂN TÍCH TỰ SUY]. LƯU Ý: quote "We kept simulating what
+   the player would do" hay bị gán cho Miyamoto nhưng KHÔNG verify được - xem bẫy #1 ở mục 10.
+
+4. **The Legend of Zelda: Breath of the Wild - Great Plateau** (Nintendo, console) - khu vực mở
+   đầu phi tuyến tính, người chơi tự do khám phá; 4 shrine mỗi cái dạy 1 khả năng lõi (bom từ
+   tính/hoá học, đóng băng nước, điều khiển thời gian, nam châm), sau khi qua đủ 4 shrine mới
+   được phát dù lượn (paraglider) để rời cao nguyên. [NGUỒN TỒN TẠI, CHƯA VERIFY CHI TIẾT - GDC
+   2017 talk "Change and Constant: Breaking Conventions with The Legend of Zelda: Breath of the
+   Wild"]. Cấu trúc "4 shrine → paraglider" kiểm chứng được trực tiếp trong game; phần "vì sao
+   thiết kế như vậy" lấy từ báo chí tường thuật GDC talk, chưa verify nguyên văn.
+
+5. **Celeste** (Maddy Makes Games/Matt Thorson, indie - PC/console) - Assist Mode công khai
+   trong menu, cho phép chỉnh tốc độ/số lần dash/bất tử..., nhưng game khuyến khích thử chế độ
+   thường trước để có trải nghiệm "đúng ý đồ". [THỨ CẤP, có phát ngôn nhà thiết kế qua báo] -
+   Matt Thorson nói Assist Mode "phá vỡ" cân bằng khó ông đã tinh chỉnh nhưng ưu tiên "trao
+   quyền cho người chơi" (nguồn Vice.com, mục 11), chưa curl verify nguyên văn câu này.
+
+6. **Hades** (Supergiant Games, indie - PC/console) - chết không phải "mất hết" mà là cơ chế
+   tường thuật: mỗi lần quay về House of Hades (hub) có thoại mới, quan hệ nhân vật tiến triển,
+   giảm cảm giác trừng phạt của thất bại trong roguelike. [NGUỒN TỒN TẠI, CHƯA VERIFY CHI TIẾT -
+   Greg Kasavin nói trên GDC Podcast và phỏng vấn Rock Paper Shotgun, không truy cập được
+   transcript].
+
+7. **Into the Breach** (Subset Games, indie - PC) - hiển thị TRƯỚC đòn tấn công tiếp theo của
+   mọi kẻ địch (full information), buộc người chơi học tư duy "chấp nhận mất 1 mech để cứu toàn
+   cục". [NGUỒN TỒN TẠI, CHƯA VERIFY CHI TIẾT - GDC 2019 "Into the Breach Design Postmortem",
+   chi tiết qua tường thuật báo chí Shacknews].
+
+8. **Dead Cells** (Motion Twin, indie - PC/console) - chết = tiến trình (roguelite, giữ lại một
+   phần nâng cấp vĩnh viễn); platforming "dễ tha thứ" (coyote time, input buffering) để người
+   chơi luôn biết rõ vì sao mình chết, tập trung thử thách vào combat/quyết định. [NGUỒN TỒN
+   TẠI, CHƯA VERIFY CHI TIẾT - GDC 2019 "'Dead Cells': What the F*n!?", tường thuật qua Game
+   Developer/PocketGamer].
+
+### Mobile / F2P
+
+9. **Fortnite (bản Alpha - Save the World, 2017)** - vũ khí gãy ngay đầu game buộc người chơi
+   học "craft" ngay từ đầu, nhưng vẫn cần "recall hint" ở màn sau vì thông tin dạng text/VO bị
+   quên. [NGUỒN GỐC ĐÃ ĐỌC - lời trực tiếp Hodent, xem mục 2.3, quote Q6-Q9 context]. Đây tuy
+   là PC ban đầu, được nhắc ở đây vì ví dụ D1/FTUE hữu ích, đa nền tảng về sau.
+
+10. **Clash Royale** (Supercell, mobile) - 2 "coaching moment" chính trong FTUE: (1) dạy đặt
+    quân bài lên bản đồ gần như ngay lập tức, (2) sau đó mới dạy nâng cấp thẻ/chỉnh deck; xen
+    kẽ giữa ép dạy và để tự khám phá. [THỨ CẤP - bài phân tích PocketGamer.biz và các bài
+    Medium/LinkedIn phân tích lại, không phải phát ngôn chính thức Supercell; trang gốc bị
+    Cloudflare chặn khi curl].
+
+11. **Candy Crush Saga** (King, mobile) - level 1 thực chất là bãi tập nguỵ trang thành màn
+    chơi thật; mascot chỉ tay + khung hoạt ảnh nhỏ minh hoạ thao tác vuốt kẹo; nút "Skip"
+    tutorial to, rõ, không ép đọc hết. [THỨ CẤP, PHÂN TÍCH CỘNG ĐỒNG - UserOnboarding.Academy và
+    các bài phân tích gamification, không phải phát ngôn chính thức King].
+
+12. **Monument Valley** (ustwo games, mobile/indie) - không có tutorial dạng chữ; người chơi
+    học qua chạm/kéo trực tiếp lên kiến trúc, độ khó tăng dần theo từng màn nhỏ; đội ngũ gốc UX
+    studio nên user-test mọi thay đổi ở mọi level trước khi phát hành. [NGUỒN TỒN TẠI - GDC talk
+    "Designing Monument Valley: Less Game, More Experience" + bài blog chính thức ustwo, chi
+    tiết "user test mọi thay đổi mọi level" lấy từ tường thuật báo chí, chưa verify nguyên văn
+    slide]. Ken Wong (artist & designer) qua phỏng vấn formfiftyfive (NGUỒN GỐC ĐÃ ĐỌC) chỉ mô
+    tả chung chung mỗi màn là "unique, handcrafted combination of puzzle, graphic design and
+    architecture" - KHÔNG nói cụ thể kỹ thuật dẫn hướng bằng màu/ánh sáng; claim "dẫn mắt người
+    chơi qua kiến trúc kiểu Escher không cần text" là [THỨ CẤP - WebSearch tổng hợp từ Game
+    Developer/Creative Bloq], không phải lời trực tiếp Ken Wong - phải phân biệt 2 claim khi
+    dùng.
+
+13. **Among Us** (InnerSloth, mobile/PC) - onboarding trong game rất mỏng: chỉ có nút tĩnh "How
+    to Play" ở màn hình chờ, không có tutorial tương tác thật sự. [PHÂN TÍCH TỰ SUY, có dữ kiện
+    nền hỗ trợ]. Among Us bùng nổ năm 2020 chủ yếu nhờ streamer/YouTuber giải thích luật thay
+    game, trong bối cảnh COVID-19 (sự kiện có ghi nhận rộng rãi) - onboarding NGOÀI game (xã
+    hội) bù đắp onboarding TRONG game yếu. KHÔNG nên trình bày Among Us như ví dụ "onboarding
+    tốt tự thân" - xem bẫy #5 ở mục 10.
+
+### Accessibility
+
+14. **The Last of Us Part II** (Naughty Dog, console) - hơn 60 tuỳ chọn accessibility, chia 3
+    preset (thị giác/thính giác/vận động); "Navigation Assistance" dẫn theo "đường vàng" cốt
+    truyện cho người khiếm thị; "Enhanced Listen Mode"; audio cue ánh xạ hành động thường gặp
+    (nhặt đồ, nhảy qua khe, né đòn cận chiến); Text-to-Speech tự động bật theo cấu hình hệ máy;
+    tuỳ biến toàn bộ phím bấm - lần đầu tiên ở game Naughty Dog. [NGUỒN GỐC ĐÃ ĐỌC - bài blog
+    chính thức PlayStation Blog (Naughty Dog tự viết, giọng "chúng tôi"), quote Q31-Q34].
+
+## 7. SAI LẦM HAY GẶP KHI LÀM ONBOARDING/UX
+
+(Mô tả tổng hợp kiến thức ngành phổ biến - không gán cho 1 game cụ thể trừ khi có nguồn; ví dụ
+minh hoạ dùng game ở mục 6 để đối chiếu.)
+
+1. **Tutorial dồn hết ở đầu (info dump)** - bắt người chơi đọc/xem hết mọi cơ chế trước khi
+   được chạm vào game. Ví dụ minh hoạ: nhiều JRPG cũ ép ngồi qua 20-30 phút giải thích hệ thống
+   trước khi có quyền điều khiển tự do. Đối lập: Zelda BotW Great Plateau rải kỹ năng qua 4
+   shrine, mỗi lần 1 khả năng, có ngữ cảnh dùng ngay. Hệ quả: người chơi quên gần hết vì học
+   "chay", không có ngữ cảnh áp dụng ngay lúc học.
+2. **Dạy bằng tường chữ (wall of text)** - hộp thoại/pop-up dài dòng thay vì để cơ chế "tự
+   nói". Hệ quả: người chơi bấm "OK/Skip" theo phản xạ mà không đọc - thông tin coi như chưa
+   từng được truyền tải; khi cần dùng lại thì không nhớ. Đối lập: Portal/Super Mario Bros dạy
+   hoàn toàn qua bố trí không gian, không chữ.
+3. **Dạy thứ người chơi chưa cần** - giải thích cơ chế phụ/hiếm dùng trước khi người chơi gặp
+   tình huống cần nó. Hệ quả: quá tải nhận thức (cognitive overload) - phải nhớ nhiều thứ cùng
+   lúc mà chưa thực hành cái nào, dễ quên hết.
+4. **Không cho thực hành ngay sau khi dạy** - chỉ "cho xem" (demo/cutscene) mà không để người
+   chơi tự bấm thử ngay lập tức. Đối lập: mỗi chamber của Portal vừa giới thiệu cơ chế vừa bắt
+   buộc dùng ngay để qua màn. Hệ quả: kiến thức không được củng cố bằng hành động → quên nhanh
+   (giống học lý thuyết lái xe mà không được cầm vô lăng).
+5. **Tắt tương tác - "cutscene hoá" hướng dẫn / QTE ép buộc** - biến đoạn dạy chơi thành cảnh
+   phim không tương tác, hoặc quick-time-event ép đúng 1 nút bấm. Hệ quả: người chơi mất cảm
+   giác chủ động, nếu bấm sai QTE phải xem lại cả đoạn cutscene → khó chịu gấp đôi.
+6. **UI thừa thông tin (information overload)** - màn hình lúc onboard hiển thị mọi
+   HUD/currency/notification cùng lúc dù người chơi chưa cần dùng đến phần lớn. Hệ quả: không
+   biết nhìn vào đâu là quan trọng; vi phạm heuristic Nielsen #8 (Aesthetic and Minimalist
+   Design).
+7. **Thiếu feedback khi hành động thất bại** - người chơi chết/thua nhưng không rõ NGUYÊN NHÂN
+   cụ thể (bị đánh bởi cái gì, từ hướng nào). Đối lập: Dead Cells được thiết kế để người chơi
+   luôn biết rõ vì sao mình chết (theo tường thuật GDC 2019 postmortem Sébastien Bénard - [NGUỒN
+   TỒN TẠI, CHƯA VERIFY CHI TIẾT]). Hệ quả: lặp lại đúng sai lầm cũ vì không học được gì từ thất
+   bại - vi phạm heuristic "visibility of system status" và "help users recognize/diagnose/
+   recover from errors" (Nielsen).
+8. **Test UX với chính team làm game ("curse of knowledge")** - để lập trình viên/designer tự
+   chơi thử và kết luận "dễ hiểu mà". Đối lập trực tiếp: nguyên tắc Valve (Q26) - "Use external
+   playtesters", "Don't give them hints". Hệ quả: team đã biết hết luật chơi từ đầu nên không
+   thể phát hiện điểm khựng thật của người chơi mới - lỗi ĐO LƯỜNG, không phải lỗi thiết kế,
+   nhưng khiến mọi lỗi thiết kế phía trên không bao giờ được phát hiện trước khi ra mắt.
+
+## 8. PHƯƠNG PHÁP KIỂM/ĐO UX
+
+1. **Playtest quan sát thầm lặng (silent observation playtest)** - người quan sát ngồi cạnh,
+   ghi chép, KHÔNG gợi ý/trả lời/thưởng (Q26). Mục tiêu: xem hành vi thật, không phải hành vi
+   "được mớm". Nguồn: Valve GDC 2006 slide (đã verify).
+2. **Think-aloud protocol (nói to suy nghĩ)** - 3 bước theo Nielsen: chọn người dùng đại diện,
+   giao nhiệm vụ đại diện, để họ vừa chơi vừa nói to suy nghĩ, người quan sát im lặng ghi chép
+   (Q30). Ưu điểm (theo NN/G): rẻ, dùng được ở mọi giai đoạn phát triển (kể cả bản giấy/
+   prototype sớm), 5 người dùng đã lộ ra phần lớn vấn đề usability. Nhược điểm (theo NN/G):
+   tình huống không tự nhiên (ít ai vừa làm vừa tự nói to), có nguy cơ người quan sát vô tình
+   mớm câu trả lời nếu hỏi dẫn dắt. Nguồn: NN/G "Thinking Aloud: The #1 Usability Tool".
+3. **Funnel FTUE (phân tích phễu first-time-user-experience)** - gắn analytics đo % người chơi
+   hoàn thành từng bước nhỏ trong onboarding (VD: "mở app → qua màn 1 → đặt quân bài đầu tiên →
+   thắng trận đầu"), tìm bước có tỉ lệ rơi (drop-off) cao bất thường để ưu tiên sửa. Công cụ
+   thực tế: GameAnalytics, Amplitude (ví dụ công cụ ngành, không khẳng định game cụ thể nào
+   dùng). Nguồn: GameAnalytics docs, Amplitude guide (thứ cấp, tài liệu sản phẩm, không phải
+   academic paper).
+4. **Heuristic walkthrough** - kết hợp heuristic evaluation (dò lỗi theo danh sách nguyên tắc
+   Nielsen) với cognitive walkthrough (đi qua từng task như người mới, tự hỏi "người chơi có
+   biết phải làm gì tiếp không?"); vài người đánh giá độc lập rồi gộp kết quả, ưu tiên theo mức
+   độ nghiêm trọng. Nguồn: Usability Body of Knowledge, "Heuristic Walkthrough" (phương pháp do
+   Andrew Sears đề xuất, kết hợp heuristic evaluation + walkthrough usability inspection).
+5. **Test "10 phút đầu" với người ngoài team (cold-open test)** - dựng bản chơi được placeholder
+   art cho 10 phút đầu, cho 5 người CHƯA từng thấy game chơi thử, ghi lại 3 điểm khựng lớn
+   nhất, sửa, test lại - lặp lại theo chu kỳ. Nguồn: tổng hợp thực hành phổ biến trong ngành
+   mobile game (bài blog chuyên đề FTUE), [THỨ CẤP - không phải 1 nguồn học thuật duy nhất].
+   LƯU Ý: đề bài gốc từng nhắc thuật ngữ "kissing screen" cho phương pháp này - đã tìm kỹ và
+   KHÔNG xác nhận được đây là thuật ngữ thật trong ngành. KHÔNG dùng tên gọi này trong bài, chỉ
+   mô tả phương pháp bằng ngôn ngữ thường - xem bẫy #15 ở mục 10.
+
+## 9. GỢI Ý BÀI TẬP THỰC HÀNH (30-45 PHÚT)
+
+Tên gợi ý: "Săn điểm khựng - quan sát 1 người chơi thật"
+
+**Chuẩn bị (5 phút):**
+- Tìm 1 người sẵn sàng chơi thử (bạn bè/người nhà), điều kiện bắt buộc: người này CHƯA từng
+  chơi game mobile free-to-play mà bạn sắp đưa cho họ, và KHÔNG phải người học/làm game (tránh
+  "curse of knowledge" ở cả hai phía).
+- Chọn 1 game mobile F2P bất kỳ họ chưa chơi (Candy Crush, Clash Royale, hoặc game tương tự
+  đang hot).
+- Chuẩn bị giấy/note app để ghi timestamp.
+
+**Bước 1 - Quan sát thầm lặng (10 phút, áp dụng nguyên tắc Valve, Q26):**
+- Đưa máy, chỉ nói: "Cứ chơi tự nhiên, mở app lên chơi như bình thường."
+- TUYỆT ĐỐI không gợi ý, không trả lời câu hỏi của họ trong lúc chơi, không chỉ vào màn hình.
+- Ghi lại timestamp mỗi lần xảy ra 1 trong 4 dấu hiệu: (a) dừng thao tác > 3 giây không rõ lý
+  do (không phải đang đọc); (b) bấm thử/bấm nhầm nhiều lần vào cùng 1 chỗ; (c) buột miệng hỏi
+  hoặc than phiền ("cái này để làm gì vậy", "sao vậy ta"); (d) bấm Skip/tắt ngang 1 tutorial
+  hoặc popup mà không đọc.
+
+**Bước 2 - Phỏng vấn ngắn theo kiểu think-aloud hồi tưởng (5 phút):**
+Hỏi đúng 3 câu, không dẫn dắt, không gợi ý đáp án: (1) "Đoạn nào nãy giờ bạn thấy rối nhất?";
+(2) "Ngay lúc này bạn nghĩ mục tiêu tiếp theo mình cần làm là gì?"; (3) "Có nút/biểu tượng nào
+bạn đã bấm mà không chắc nó làm gì không?"
+
+**Bước 3 - Tổng hợp (15-20 phút):**
+- Liệt kê lại toàn bộ điểm khựng đã ghi theo timestamp.
+- Với mỗi điểm khựng, gán vào 1 trong 8 sai lầm ở mục 7 (nếu khớp), hoặc ghi "khác" nếu không
+  khớp cái nào.
+- Viết 1 câu đề xuất sửa cho mỗi điểm khựng (không cần code, chỉ cần ý tưởng).
+
+**Tiêu chí hoàn thành bài tập:**
+- Có tối thiểu 3 điểm khựng cụ thể, mỗi điểm có timestamp + mô tả hành vi quan sát được (không
+  phải suy đoán mơ hồ).
+- Mỗi điểm khựng được map vào ít nhất 1 sai lầm ở mục 7 kèm lý do ngắn.
+- Không được tự chơi thay hoặc chơi mẫu trước khi cho người kia chơi (sẽ làm hỏng tính "người
+  mới thật sự" của bài tập).
+
+## 10. BẪY KHÁI NIỆM - PHẢI ĐỌC TRƯỚC KHI VIẾT BÀI
+
+1. **Gán nhầm quote cho Miyamoto (đã đối chiếu từ cả 2 file nguồn, gộp thành 1 mục).** Nhiều
+   bài (Game Developer/Chris Kerr, Adafruit, MCV/Develop, Fast Company, HotHardware, CBR, No
+   Context Culture...) trích Shigeru Miyamoto nói "We kept simulating what the player would do"
+   và "even within that one section, the player would understand the general concept of what
+   Mario is supposed to be and what the game is about", dẫn nguồn video phỏng vấn Eurogamer
+   7/9/2015 "Video: Miyamoto on how Nintendo made Mario's most iconic level". Đã tự curl 2 lần
+   độc lập bản lưu Wayback Machine của chính trang Eurogamer đó và đọc toàn bộ phần text - bài
+   viết CHỈ có đoạn giới thiệu ngắn dẫn vào 1 video nhúng ("presented under the pretence of
+   being a classroom"), KHÔNG có transcript nào chứa các câu trích trên trong phần HTML. Tức là
+   các câu trích này (nếu đúng) đến từ lời thoại TRONG VIDEO, không thể verify bằng curl text.
+   → Đánh dấu [CHƯA VERIFY] toàn bộ, KHÔNG đưa vào bài dưới dạng trích dẫn trong ngoặc kép gán
+   cho Miyamoto. Interview TEXT có nguồn rõ ràng nhất về việc "chốt 1-1 sau cùng qua playtest"
+   là lời của TEZUKA (Sankei Shinbun 2015, qua shmuplations - Q10), không phải Miyamoto - nhiều
+   bài blog gộp chung hai người thành "Miyamoto nói" khi thực ra là phỏng vấn song song hoặc
+   chỉ một người trả lời.
+2. **Cẩn thận khi so sánh Mario 1-1 (1985) với A/B testing hiện đại.** Nhiều bài blog hiện đại
+   viết như thể Nintendo "playtest quy mô lớn, đo lường" World 1-1 giống ngành mobile game ngày
+   nay. Theo phỏng vấn 2015 (dù chưa verify nguyên văn), nhóm mô tả việc "mô phỏng người chơi
+   trong đầu nhà thiết kế" (suy luận qua kinh nghiệm thiết kế), không phải quy trình playtest có
+   đo lường số liệu như Valve mô tả cho Half-Life 2 (Q26-Q28). Hai việc này khác bản chất -
+   tránh gộp chung khi viết bài.
+3. **Giai thoại GLaDOS/Portal hay được kể như "quote trực tiếp của Valve"** nhưng nguồn phổ
+   biến nhất hiện nay (Mark Brown/GMTK, newsletter 24/5/2023) là bài viết lại/diễn giải, không
+   phải trích dẫn có ghi rõ ai trong Valve nói câu đó, lúc nào, ở đâu (không có link tới GDC
+   talk hay tài liệu gốc kèm theo). Nên coi là giai thoại được lưu truyền rộng rãi trong ngành
+   (có khả năng đúng) hơn là quote đã kiểm chứng tận gốc.
+4. **Không nên viết như thể "Valve thiết kế playtest thầm lặng RIÊNG cho phần tutorial/mở đầu
+   game".** Nguồn gốc (slide GDC 2006) mô tả đây là triết lý playtest ÁP DỤNG CHO TOÀN BỘ QUÁ
+   TRÌNH LÀM Half-Life 2 (từng đoạn gameplay mỗi tuần), không phải kỹ thuật thiết kế riêng cho
+   đoạn onboarding. Vẫn dùng được làm ví dụ cho "phương pháp playtest quan sát" ở mục 8, nhưng
+   đừng gán nhầm là "quy trình làm tutorial của Half-Life 2".
+5. **Among Us KHÔNG nên trình bày như 1 case "onboarding tốt".** Game này nổi tiếng năm 2020
+   phần lớn nhờ bối cảnh xã hội (COVID-19, streamer) chứ không phải vì tutorial trong game xuất
+   sắc; UI của nó vẫn mang hạn chế từ gốc mobile 2018. Ví dụ tốt cho ý "onboarding ngoài game
+   (xã hội) có thể bù đắp onboarding trong game yếu", KHÔNG phải ví dụ về thiết kế FTUE mẫu
+   mực.
+6. **"Norman đổi affordance thành signifier" là cách nói SAI.** Norman KHÔNG thay thế/xoá khái
+   niệm affordance; ông giữ nguyên affordance (theo nghĩa Gibson: quan hệ khách quan giữa vật
+   và tác nhân) và THÊM signifier để chỉ phần "tín hiệu cảm nhận được" - vì thấy giới thiết kế
+   dùng sai từ "affordance" để chỉ luôn cả phần tín hiệu này. Cách nói đúng: "Norman giới thiệu
+   thêm khái niệm signifier (2008 essay, đưa vào bản 2013 của DOET) để tách bạch với
+   affordance", không phải "sửa lại/thay thế affordance".
+7. **HEP dễ nhầm chữ viết tắt.** Tên chính xác là "Heuristics to Evaluate Playability"
+   (Desurvire, Caplan, Toth, CHI 2004) - không phải "Heuristic Evaluation for Playability" như
+   cách viết phổ biến. Thứ tự từ khác nhau, dễ gõ sai khi trích. PLAY và HEP là 2 bộ heuristic
+   KHÁC NHAU của CÙNG tác giả chính (Desurvire), ra đời cách nhau 5 năm (2004 → 2009), PLAY là
+   bản mở rộng/tổng quát hoá của HEP - không phải cùng một bộ đổi tên. Tránh viết "Desurvire
+   phát triển PLAY năm 2004" (sai năm) hoặc gộp chung 2 bộ thành một danh sách.
+8. **Tên đầy đủ pillar thứ 7 của Hodent là "Flexibility AND ACCESSIBILITY"**, không phải chỉ
+   "Flexibility" trơn. Nhiều bài tóm tắt thứ cấp (Medium, một số blog UX) rút gọn sai thành
+   "Flexibility".
+9. **7 pillar của Hodent KHÔNG PHẢI một hệ thống độc lập tách rời Nielsen** - chính Hodent viết
+   rõ đây là heuristic của Nielsen được bà "adapt" lại cho ngôn ngữ của game developer. Nếu
+   trình bày Hodent như một nguồn heuristic hoàn toàn mới/riêng biệt (song song, không liên
+   quan Nielsen) là SAI so với chính lời tác giả.
+10. **GAP (Game Approachability Principles) - CHƯA verify được năm công bố chính xác** và mối
+    quan hệ rõ ràng với bài "Master of the Game" (CHI 2008, cùng 2 tác giả Desurvire & Wiberg).
+    Một số nguồn thứ cấp ghi GAP là 2015, nhưng chưa tự mở đọc bài GAP gốc để xác nhận. Nếu đưa
+    GAP vào bài học, chỉ nên nói chung chung về mục đích, đánh dấu năm là [CHƯA VERIFY] hoặc bỏ
+    hẳn chi tiết năm.
+11. **Pinelle/Wong/Stach (CHI 2008) CỐ Ý loại trừ engagement/story/fun** ra khỏi phạm vi
+    "usability" của họ - khác hẳn triết lý Desurvire (PLAY/HEP gộp cả Game Play, Story,
+    Coolness vào heuristic). Nếu bài học nói "heuristic game" chung chung mà không phân biệt 2
+    trường phái này, dễ gây hiểu lầm rằng tất cả heuristic game đều coi engagement là một phần
+    của "usability". Cũng cần phân biệt bài này với 1 bài KHÁC gần giống của cùng nhóm tác giả:
+    "Using genres to customize usability evaluations of video games" (Future Play 2008).
+12. **Nhầm "tutorial" và "onboarding" là đồng nghĩa tuyệt đối** - trong nhiều tài liệu ngành
+    (kể cả Hodent), "onboarding" bao trùm cả trải nghiệm UI/UX trước khi vào gameplay (màn hình
+    tải, tạo tài khoản, UI đầu tiên) - không chỉ phần "dạy cơ chế". Bài học nên tách rõ 2 khái
+    niệm thay vì dùng lẫn.
+13. **"Progressive disclosure" tưởng là thuật ngữ riêng của game design** - đây vốn là thuật
+    ngữ UX/HCI tổng quát, phổ biến hoá bởi Jakob Nielsen (1995) cho phần mềm/giao diện nói
+    chung, không phải do một nhà thiết kế game nào đặt ra. Game design chỉ mượn lại khái niệm
+    này để mô tả "drip-feed mechanics". Nếu bài viết implies đây là khái niệm "gốc game", cần
+    sửa lại cách diễn đạt.
+14. **"Skill atom" đôi khi bị nhầm là thuật ngữ học thuật lâu đời hoặc của MDA framework**
+    (Hunicke/LeBlanc/Zubek). Thực ra đây là thuật ngữ riêng của Daniel Cook, đưa ra trong 1 bài
+    blog cá nhân (Lostgarden, 2007), không nằm trong bài báo MDA gốc (2004) và không phải thuật
+    ngữ academic có peer-review.
+15. **Thuật ngữ "kissing the screen" (từng xuất hiện trong đề bài gốc như 1 tên phương pháp
+    test UX).** Đã tìm kỹ (nhiều lượt search với các biến thể "kiss of death", "kissable" trong
+    ngành game/UX) và KHÔNG tìm được bất kỳ nguồn nào dùng đây là thuật ngữ thật trong ngành
+    game UX/onboarding. Có thể là nhầm lẫn thuật ngữ, thuật ngữ nội bộ 1 studio không được
+    document công khai, hoặc bị bịa. ĐỀ XUẤT: không đưa thuật ngữ này vào bài học; nếu có nguồn
+    riêng xác nhận được thì mới dùng, còn không thì chỉ mô tả khái niệm "test 10 phút đầu" bằng
+    ngôn ngữ thường (mục 8, mục 9).
+
+## 11. NGUỒN THAM KHẢO ĐẦY ĐỦ
+
+**Đã tự curl/đọc trực tiếp (nguồn gốc, độ tin cậy cao nhất):**
+- Raph Koster, "A Theory of Fun for Game Design" (2004) - quote tổng hợp qua Goodreads:
+  https://www.goodreads.com/quotes/990231-that-s-what-games-are-in-the-end-teachers-fun-is
+  https://www.goodreads.com/work/quotes/19639-a-theory-of-fun-for-game-design
+  https://www.goodreads.com/quotes/9498316-boredom-is-the-opposite-of-learning-when-a-game-stops
+- Celia Hodent, "The Gamer's Brain, Part 2: UX of Onboarding and Player Engagement":
+  https://celiahodent.com/gamers-brain-ux-onboarding/
+- Celia Hodent, "Understanding the Success of Fortnite: A UX & Psychology Perspective":
+  https://celiahodent.com/understanding-the-success-of-fortnite-ux/
+- Takashi Tezuka, phỏng vấn Sankei Shinbun 30/11/2015 (bản dịch tiếng Anh):
+  https://shmuplations.com/supermariobros/
+- Kim Swift & Erik Wolpaw, "Thinking with Portals: Creating Valve's New IP":
+  https://www.gamedeveloper.com/design/thinking-with-portals-creating-valve-s-new-ip
+- Jakob Nielsen, "Progressive Disclosure": https://www.nngroup.com/articles/progressive-disclosure/
+- Jakob Nielsen, "10 Usability Heuristics for User Interface Design":
+  https://www.nngroup.com/articles/ten-usability-heuristics/
+- Jakob Nielsen, "Thinking Aloud: The #1 Usability Tool":
+  https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/
+- Don Norman, "Affordances and Design": https://jnd.org/affordances-and-design/
+- Don Norman, "Signifiers, not affordances" (Interactions, ACM, 2008): https://jnd.org/signifiers-not-affordances/
+- Quote DOET 2013 (qua Goodreads, verify thứ cấp):
+  https://www.goodreads.com/quotes/7611905-affordances-define-what-actions-are-possible-signifiers-specify-how-people
+- Desurvire & Wiberg, PLAY 2009 full PDF:
+  https://ocw.metu.edu.tr/pluginfile.php/4129/mod_resource/content/0/ceit706_2/10/game_usability-_heuristics.pdf
+- Pinelle, Wong, Stach - CHI 2008 full PDF: https://www.irit.fr/recherches/ICS/projects/twintide/upload/447.pdf
+- IxDF, "The Game UX Twist: Usability Principles for Games":
+  https://ixdf.org/literature/article/the-game-ux-twist-usability-principles-for-games
+- Game Accessibility Guidelines, Basic: https://gameaccessibilityguidelines.com/basic/
+- Valve, "Valve's Design Process for Creating Half-Life 2" (GDC 2006, PDF gốc):
+  https://cdn.akamai.steamstatic.com/apps/valve/2006/GDC2006_HL2DesignProcess.pdf
+- PlayStation Blog (Naughty Dog), "The Last of Us Part II: Accessibility Features Detailed":
+  https://blog.playstation.com/2020/06/09/the-last-of-us-part-ii-accessibility-features-detailed/
+- Eurogamer (Martin Robinson), "Video: Miyamoto on how Nintendo made Mario's most iconic level"
+  (07/09/2015) - bản lưu trữ (đã curl 2 lần độc lập, không có transcript):
+  https://web.archive.org/web/20160321111454/http://www.eurogamer.net/articles/2015-09-07-video-miyamoto-on-how-nintendo-made-marios-most-iconic-level
+
+**Nguồn tồn tại, xác nhận qua tiêu đề/link nhưng CHƯA verify được nội dung chi tiết/nguyên văn
+(video/transcript không truy cập được qua curl):**
+- Celia Hodent, video GDC 2016 gốc: https://www.youtube.com/watch?v=Paf6B1jleCo
+  https://archive.org/details/GDC2016Hodent
+- Valve, GDC 2006 talk "Valve's Design Process for Creating Half-Life 2" (bản GDC Vault):
+  https://www.gdcvault.com/play/1013237/Valve-s-Design-Process-for
+- GDC Vault, "A PORTAL Post-Mortem: Integrating Writing and Design":
+  https://gdcvault.com/play/197/A-PORTAL-Post-Mortem-Integrating
+- GDC Vault, "Change and Constant: Breaking Conventions with The Legend of Zelda: Breath of the
+  Wild" (GDC 2017): https://www.gdcvault.com/play/1024562/Change-and-Constant-Breaking-Conventions
+- GDC Vault, "'Into the Breach' Design Postmortem" (GDC 2019):
+  https://www.gdcvault.com/play/1025772/-Into-the-Breach-Design
+- GDC Vault, "'Dead Cells': What the F*n!?" (GDC 2019):
+  https://www.gdcvault.com/play/1025788/-Dead-Cells-What-the
+- GDC Vault, "Designing Monument Valley: Less Game, More Experience":
+  https://gdcvault.com/play/1020878/Designing-Monument-Valley-Less-Game
+- GDC Podcast, "Roguelikes and narrative design with Hades creative director Greg Kasavin" (ep. 16):
+  https://gdconf.com/article/roguelikes-and-narrative-design-with-hades-creative-director-greg-kasavin-gdc-podcast-ep-16/
+- Game Developer, "How Supergiant weaves narrative rewards into Hades' cycle of perpetual death"
+  (không render qua curl): https://www.gamedeveloper.com/design/how-supergiant-weaves-narrative-rewards-into-i-hades-i-cycle-of-perpetual-death
+- Mark Brown (Game Maker's Toolkit), "Valve's 'Secret Weapon'" (newsletter, 24/5/2023 - nguồn
+  THỨ CẤP về giai thoại GLaDOS/playtest Portal): https://gmtk.substack.com/p/valves-secret-weapon
+- Ken Wong, phỏng vấn formfiftyfive về Monument Valley:
+  https://www.formfiftyfive.com/features/interview-with-ken-wong-artist-designer-of-monument-valley/
+
+**Nguồn thứ cấp (phân tích/blog, không phải phát ngôn chính thức studio - dùng để mô tả hiện
+tượng chung, không trích quote):**
+- Raph Koster, "Theory of Fun: 10 Years Later" (slide/PDF, chưa đọc kỹ):
+  https://www.raphkoster.com/gaming/gdco12/Koster_Raph_Theory_Fun_10.pdf
+- Daniel Cook, "The Chemistry of Game Design", Lostgarden, 19/7/2007:
+  https://lostgarden.com/2007/07/19/the-chemistry-of-game-design/
+  https://www.gamedeveloper.com/design/the-chemistry-of-game-design
+- Wikipedia, "Progressive disclosure" (chỉ định vị lịch sử thuật ngữ, không trích dẫn trực
+  tiếp - Wikipedia không đạt chuẩn nguồn gốc theo quy tắc dự án):
+  https://en.wikipedia.org/wiki/Progressive_disclosure
+- FTUE/D1 retention (industry blog, không academic):
+  https://blog.playio.co/mobile-game-onboarding-retention
+  https://www.blog.udonis.co/mobile-marketing/mobile-games/first-time-user-experience
+  https://recognizingpatterns.substack.com/p/first-time-user-experience-your-player
+- NN/G, "10 Usability Heuristics Applied to Video Games":
+  https://www.nngroup.com/articles/usability-heuristics-applied-video-games/
+- Usability Body of Knowledge, "Heuristic Walkthrough": https://www.usabilitybok.org/heuristic-walkthrough/
+- GameAnalytics, "A Deep Dive into Funnel Reporting for Games":
+  https://www.gameanalytics.com/blog/exploring-gaming-funnels
+- Amplitude, "Discover Funnel Analysis": https://amplitude.com/guides/funnel-analysis
+- PocketGamer.biz, "FTUE: Clash Royale" (bị Cloudflare chặn khi curl):
+  https://www.pocketgamer.biz/news/62827/ftue-clash-royale/
+- UserOnboarding.Academy, "Candy Crush's onboarding is a total eye-candy":
+  https://useronboarding.academy/user-onboarding-inspirations/candy-crush
+- Vice.com, "Why The Very Hard 'Celeste' is Perfectly Fine With You Breaking Its Rules":
+  https://www.vice.com/en_us/article/d3w887/celeste-difficulty-assist-mode
+- Game Developer, "Common Pitfalls in Game Tutorials" (không render qua curl):
+  https://www.gamedeveloper.com/design/common-pitfalls-in-game-tutorials
+- Game Developer, "The Designer's Notebook: Eight Ways To Make a Bad Tutorial" (Ian Schreiber,
+  không render qua curl): https://www.gamedeveloper.com/design/the-designer-s-notebook-eight-ways-to-make-a-bad-tutorial
+- TVTropes, "Forced Tutorial": https://tvtropes.org/pmwiki/pmwiki.php/Main/ForcedTutorial
+
+## 12. KHOẢNG TRỐNG CÒN LẠI / [CHƯA VERIFY]
+
+- Case study mobile F2P cụ thể có số liệu D1 retention thật - hiện chỉ có định nghĩa ngành
+  chung chung ở mục 2.7.
+- Nội dung GDC 2006 "Valve's Design Process for Creating Half-Life 2" trên GDC Vault - chỉ mới
+  xác nhận sự tồn tại của talk, chưa xem/đọc transcript đầy đủ (bản PDF gốc đã đọc được, xem
+  mục 5.11).
+- Định nghĩa nguyên văn "skill atom" của Daniel Cook - mới verify tác giả/nguồn tồn tại, chưa
+  trích được câu định nghĩa chính xác (trang Lostgarden hiện tại bị lẫn rất nhiều bình luận dài
+  trong bản HTML thô lấy qua curl).
+- Nguồn gốc 1985 của Kristina Hooper Woolsey cho ý tưởng "progressive disclosure" - chỉ thấy
+  nhắc lại qua bài tổng hợp UXPin/Decision Lab, chưa mở được văn bản gốc.
+- "Safe practice space" - chưa tìm được 1 nguồn duy nhất "đặt tên" khái niệm này gắn với tác giả
+  cụ thể.
+- GAP (Game Approachability Principles) - chưa verify năm công bố chính xác và quan hệ với bài
+  "Master of the Game" (CHI 2008) - xem bẫy #10 ở mục 10.
+- Engage-ability (3 pillar của Hodent) - đã verify câu mở nhưng chưa verify đủ tên 3 pillar con
+  (bài bị cắt khi curl ở đoạn "Unlike tools (suc...").
+- Quote "Affordances determine what actions are possible. Signifiers communicate where the
+  action should take place. We need both." - lưu truyền rộng rãi nhưng chưa tự mở được bản gốc
+  chứa câu này nguyên văn.
+- Nhiều talk GDC Vault (Portal post-mortem, Zelda BotW GDC 2017, Into the Breach postmortem,
+  Dead Cells postmortem, Monument Valley GDC talk) chỉ xác nhận được sự tồn tại qua trang mô
+  tả/link, KHÔNG truy cập được transcript/video đầy đủ (yêu cầu đăng nhập/mua Subscription hoặc
+  chỉ có ở dạng video) - nếu bài cần trích quote trực tiếp từ các talk này, cần 1 vòng research
+  riêng có xem video/đọc bản trả phí.
+- Case study cụ thể (game + số liệu) minh hoạ trực tiếp cho "Aesthetic and Minimalist Design"
+  (Nielsen #8) trong ví dụ UI thừa thông tin (mục 7, sai lầm #6) - hiện chỉ có mô tả tổng quát,
+  chưa gắn tên game cụ thể đã fact-check.
