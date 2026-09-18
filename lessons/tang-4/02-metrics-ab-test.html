@@ -112,25 +112,39 @@
                 <p>Bài của Gurinder Singh (2014) từng gọi D1 = 40%, D7 = 20%, D30 = 10% là mức "ổn". Số này đã hơn một thập kỷ tuổi — đừng dùng làm chuẩn hiện nay, chỉ dùng để hình dung cách công thức hoạt động.</p>
             </div>
         </div>
+        <figure class="diagram wide">
+            <svg class="chart-cost-curve" viewBox="0 0 300 300" role="img" aria-label="Biểu đồ retention giảm dần theo D1, D7, D30: 40%, 20%, 10% người chơi còn hoạt động">
+                <line class="axis-line" x1="56" y1="264" x2="284" y2="264"></line>
+                <line class="axis-line" x1="56" y1="264" x2="56" y2="40"></line>
+                <text class="svg-sub" x="170" y="292" text-anchor="middle">Ngày sau khi cài</text>
+                <text class="svg-sub" x="24" y="152" text-anchor="middle" transform="rotate(-90 24 152)">% còn hoạt động</text>
+                <text class="svg-sub" x="48" y="276" text-anchor="end">0</text>
+                <text class="svg-sub" x="44" y="80" text-anchor="end">40</text>
+                <circle class="pt pt-ok" cx="102" cy="76" r="7"></circle>
+                <text class="svg-label" x="102" y="58" text-anchor="middle">D1 · 40%</text>
+                <circle class="pt pt-ok" cx="181" cy="170" r="7"></circle>
+                <text class="svg-label" x="181" y="152" text-anchor="middle">D7 · 20%</text>
+                <circle class="pt pt-ok" cx="261" cy="217" r="7"></circle>
+                <text class="svg-label" x="261" y="199" text-anchor="middle">D30 · 10%</text>
+            </svg>
+            <figcaption>Biểu đồ minh hoạ của bài học: retention giảm dần theo thời gian, dùng đúng ba con số D1 = 40%, D7 = 20%, D30 = 10% trong ví dụ của Gurinder Singh đã dẫn ở trên — số đã hơn một thập kỷ tuổi, chỉ để hình dung cách đọc, không phải chuẩn hiện nay.</figcaption>
+        </figure>
 
         <h2 id="funnel">Funnel: nhìn thấy đúng chỗ rơi rụng</h2>
         <p>Funnel là cách phân tích chuỗi hành động dẫn tới một điểm chuyển đổi (<span class="term" data-en="conversion">conversion</span>) — mỗi bước đo được bao nhiêu người đi tiếp, bao nhiêu người rơi rụng. Conversion rate của một bước = số người hoàn thành bước đó ÷ số người bắt đầu bước đó × 100.</p>
         <figure class="diagram wide">
-            <div class="mda-diagram">
-                <div class="mda-block loop">Cài đặt<small>100%</small></div>
-                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
-                <div class="mda-block loop">Chơi xong tutorial<small>rơi rụng?</small></div>
-                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
-                <div class="mda-block loop">Quay lại D1<small>rơi rụng?</small></div>
-                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
-                <div class="mda-block loop">Trả tiền lần đầu<small>rơi rụng?</small></div>
-            </div>
+            <ol class="steps">
+                <li><span>Cài đặt <small>· 100%</small></span></li>
+                <li><span>Chơi xong tutorial <small>· rơi rụng?</small></span></li>
+                <li><span>Quay lại D1 <small>· rơi rụng?</small></span></li>
+                <li><span>Trả tiền lần đầu <small>· rơi rụng?</small></span></li>
+            </ol>
             <figcaption>Funnel đơn giản hoá cho một mobile game — bốn bước minh hoạ của người viết, không phải số liệu từ một nguồn cụ thể. Bước nào có tỉ lệ rơi rụng cao nhất là nơi cần soi kỹ, giống cách King soi ra level 65.</figcaption>
         </figure>
 
         <h2 id="vanity-vs-actionable">Vanity metric vs actionable metric</h2>
         <p>Eric Ries đặt tên cho hai loại metric trong một bài viết trên blog của Tim Ferriss (19/05/2009, trước khi in lại thành chương sách <em>The Lean Startup</em> năm 2011). Vanity metric là những con số chỉ tăng theo thời gian và khiến người xem thấy vui, nhưng không dẫn tới hành động nào:</p>
-        <p><em>"They might make you feel good, but they don’t offer clear guidance for what to do."</em> (chúng có thể khiến bạn thấy vui, nhưng không đưa ra hướng dẫn rõ ràng để làm gì tiếp theo — Eric Ries, tim.blog, 2009.)</p>
+        <p><em>"They might make you feel good, but they don’t offer clear guidance for what to do."</em> (chúng có thể khiến bạn thấy vui, nhưng không đưa ra hướng dẫn rõ ràng để làm gì tiếp theo)</p>
         <div class="callout" data-kind="insight">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
             <div class="callout-body">
@@ -138,17 +152,47 @@
                 <p>Trước khi báo cáo một con số, tự hỏi: "nếu con số này đảo ngược, tôi sẽ làm gì khác đi?" Nếu câu trả lời là "không gì cả" — đó là vanity metric. Tổng lượt tải, tổng người đăng ký thường rơi vào nhóm này vì chỉ tăng, không phản ánh việc người chơi có còn ở lại hay không.</p>
             </div>
         </div>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Vanity metric<small>chỉ tăng theo thời gian, không dẫn tới hành động nào</small></div>
+                <div class="mda-block loop">Actionable metric<small>đảo ngược thì bạn biết phải làm gì khác đi</small></div>
+            </div>
+            <figcaption>Sơ đồ minh hoạ của bài học: phân biệt vanity metric và actionable metric theo định nghĩa của Eric Ries đã dẫn ở trên.</figcaption>
+        </figure>
         <p>Ries còn cảnh báo một lỗi phổ biến hơn: ra mắt tính năng mới, vài ngày sau doanh thu tăng, cả đội mừng và gán công cho tính năng đó — trong khi biến động có thể chỉ do ngẫu nhiên hoặc một yếu tố bên ngoài không liên quan (mùa vụ, sự kiện khác). Đây là lý do A/B test — có nhóm đối chứng chạy song song — đáng tin hơn nhìn "trước/sau" đơn thuần như case level 65 ở trên.</p>
 
         <h2 id="ab-test">A/B test: chia đôi, không đoán</h2>
         <p>Ries minh hoạ actionable metric bằng chính một A/B test: chia ngẫu nhiên khách hàng làm hai, một nửa thấy tính năng mới, nửa còn lại không đổi gì (<span class="term" data-en="control group">control</span>); vài ngày sau, nhóm thấy tính năng mới (<span class="term" data-en="variant/treatment group">variant</span>) có doanh thu bình quân đầu người cao hơn 20%. Từ đó có thể quyết ngay: tung tính năng cho toàn bộ người chơi.</p>
+        <figure class="diagram wide">
+            <table class="compare spreadsheet">
+                <thead>
+                    <tr><th class="cell-corner" scope="col"></th><th class="col-letter" scope="col">A</th><th class="col-letter" scope="col">B</th><th class="col-letter" scope="col">C</th></tr>
+                </thead>
+                <tbody>
+                    <tr><th class="row-num" scope="row">1</th><th scope="col">Nhóm</th><th scope="col">Thay đổi</th><th scope="col">Doanh thu bình quân đầu người</th></tr>
+                    <tr><th class="row-num" scope="row">2</th><td>Control</td><td>Không đổi gì</td><td class="cell-dev" data-state="zero">Mức nền</td></tr>
+                    <tr><th class="row-num" scope="row">3</th><td>Variant</td><td>Thấy tính năng mới</td><td class="cell-dev" data-state="over">Cao hơn 20%</td></tr>
+                </tbody>
+            </table>
+            <figcaption>Bảng tính minh hoạ của bài học: kết quả A/B test trong ví dụ của Eric Ries đã dẫn ở trên — nhóm Variant có doanh thu bình quân đầu người cao hơn 20% so với nhóm Control, đúng con số duy nhất bài đã nêu.</figcaption>
+        </figure>
         <p>Nguyên lý chung: chia ngẫu nhiên (random assignment) thành control và variant, đo cùng một metric ở cả hai nhóm trong cùng khung thời gian, rồi so sánh bằng kiểm định thống kê để biết khác biệt là do thay đổi hay do ngẫu nhiên. Ba cái bẫy hay gặp khi làm sai bước này:</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Chia ngẫu nhiên<small>Control / Variant</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Đo cùng metric<small>cùng khung thời gian</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">So sánh bằng kiểm định thống kê<small>thay đổi hay ngẫu nhiên?</small></div>
+            </div>
+            <figcaption>Sơ đồ minh hoạ của bài học: ba bước nguyên lý của một A/B test, theo đúng nguyên tắc đã nêu ở trên.</figcaption>
+        </figure>
         <div class="callout" data-kind="mistake">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Peeking — dừng test sớm khi thấy đẹp</p>
                 <p>Evan Miller (evanmiller.org) tính: giả sử tỉ lệ chuyển đổi thật là 50% và một thay đổi (đổi logo) thật ra không có tác dụng gì, nhưng bạn liên tục nhìn kết quả và dừng ngay khi đạt 5% significance hoặc sau 150 lượt quan sát. Tỉ lệ thí nghiệm SAI báo "có ý nghĩa thống kê" không phải 5%, mà là:</p>
-                <p><em>"Try 26.1% – more than five times what you probably thought the significance level was."</em> (thử con số 26,1% xem — nhiều hơn gấp năm lần mức ý nghĩa thống kê mà có lẽ bạn tưởng — Evan Miller, evanmiller.org, 2013.)</p>
+                <p><em>"Try 26.1% – more than five times what you probably thought the significance level was."</em> (thử con số 26,1% xem — nhiều hơn gấp năm lần mức ý nghĩa thống kê mà có lẽ bạn tưởng)</p>
                 <p>Peek càng nhiều lần, ngưỡng "reported" cần đạt để giữ đúng 5% ý nghĩa thật càng phải chặt hơn: peek 1 lần cần 2,9%; 2 lần cần 2,2%; 3 lần cần 1,8%; 5 lần cần 1,4%; 10 lần chỉ còn 1,0%. Giải pháp: chốt sample size trước khi chạy, đợi đủ số đó rồi mới đọc kết quả — không dừng giữa chừng vì thấy số đẹp.</p>
             </div>
         </div>

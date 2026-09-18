@@ -208,6 +208,68 @@
 &lt;/figure&gt;</code></pre>
         </div>
 
+        <p>Khi cần một scatter chart (vd cost curve: trục X/Y là số liệu, một đường chéo lý tưởng, các điểm lệch trên/dưới), dùng inline SVG với 2 class có sẵn <code>svg-label</code>/<code>svg-sub</code> cho chữ, và bộ class <code>axis-line</code>/<code>ideal-line</code>/<code>pt</code> (+ <code>pt-ok</code>/<code>pt-over</code>/<code>pt-under</code>) cho trục/đường/điểm — tất cả đều lấy màu qua token, không hex rời rạc.</p>
+        <figure class="diagram wide">
+            <svg class="chart-cost-curve" viewBox="0 0 300 300" role="img" aria-label="Vi du chart-cost-curve: 1 diem dung gia, 1 diem tren duong, 1 diem duoi duong">
+                <line class="axis-line" x1="56" y1="264" x2="284" y2="264"></line>
+                <line class="axis-line" x1="56" y1="264" x2="56" y2="40"></line>
+                <line class="ideal-line" x1="56" y1="264" x2="272" y2="48"></line>
+                <text class="svg-sub" x="170" y="292" text-anchor="middle">Cost</text>
+                <text class="svg-sub" x="24" y="152" text-anchor="middle" transform="rotate(-90 24 152)">Benefit</text>
+                <circle class="pt pt-ok" cx="200" cy="140" r="7"></circle>
+                <text class="svg-label" x="214" y="144" text-anchor="start">1</text>
+                <circle class="pt pt-over" cx="150" cy="110" r="7"></circle>
+                <text class="svg-label" x="136" y="114" text-anchor="end">2</text>
+                <circle class="pt pt-under" cx="230" cy="200" r="7"></circle>
+                <text class="svg-label" x="244" y="204" text-anchor="start">3</text>
+            </svg>
+            <ol class="chart-legend">
+                <li><span class="cell-dev" data-state="zero">1</span> Đúng giá — nằm ngay trên đường chéo</li>
+                <li><span class="cell-dev" data-state="over">2</span> Trên đường cong — quá mạnh</li>
+                <li><span class="cell-dev" data-state="under">3</span> Dưới đường cong — quá yếu</li>
+            </ol>
+            <figcaption>Chú thích nói rõ đây là minh hoạ hay số liệu thật.</figcaption>
+        </figure>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;figure class="diagram wide"&gt;
+  &lt;svg class="chart-cost-curve" viewBox="0 0 300 300" role="img" aria-label="..."&gt;
+    &lt;line class="axis-line" x1="56" y1="264" x2="284" y2="264"&gt;&lt;/line&gt;
+    &lt;line class="ideal-line" x1="56" y1="264" x2="272" y2="48"&gt;&lt;/line&gt;
+    &lt;text class="svg-sub" x="170" y="292" text-anchor="middle"&gt;Cost&lt;/text&gt;
+    &lt;circle class="pt pt-ok" cx="200" cy="140" r="7"&gt;&lt;/circle&gt;
+    &lt;text class="svg-label" x="214" y="144"&gt;1&lt;/text&gt;
+  &lt;/svg&gt;
+  &lt;ol class="chart-legend"&gt;
+    &lt;li&gt;&lt;span class="cell-dev" data-state="zero"&gt;1&lt;/span&gt; Đúng giá&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;figcaption&gt;Chú thích.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+        </div>
+
+        <p>Khi bài cần minh hoạ bố cục một màn chơi nhìn từ trên xuống (vd hub-and-spoke), dùng <code>.level-map</code> + <code>.level-map-room[data-area]</code>: lưới 3×3, khu trung tâm ở giữa, tối đa 4 nhánh <code>n</code>/<code>s</code>/<code>e</code>/<code>w</code>. Khu trung tâm lấy màu tầng qua token <code>--tier</code>.</p>
+        <figure class="diagram wide">
+            <div class="level-map">
+                <div class="level-map-room" data-area="n">Nhánh A</div>
+                <div class="level-map-room" data-area="w">Nhánh B</div>
+                <div class="level-map-room" data-area="center">Khu trung tâm</div>
+                <div class="level-map-room" data-area="e">Nhánh C</div>
+                <div class="level-map-room" data-area="s">Nhánh D</div>
+            </div>
+            <figcaption>Chú thích nói rõ đây là minh hoạ hay bố cục thật của một game.</figcaption>
+        </figure>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;figure class="diagram wide"&gt;
+  &lt;div class="level-map"&gt;
+    &lt;div class="level-map-room" data-area="n"&gt;Nhánh A&lt;/div&gt;
+    &lt;div class="level-map-room" data-area="center"&gt;Khu trung tâm&lt;/div&gt;
+    &lt;div class="level-map-room" data-area="s"&gt;Nhánh D&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;figcaption&gt;Chú thích.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+        </div>
+
         <h2 id="bang">Bảng so sánh</h2>
         <p>Bọc table trong <code>.table-wrap</code> để cuộn ngang riêng, không đẩy tràn trang.</p>
         <div class="table-wrap">
@@ -227,6 +289,33 @@
     &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;...&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
   &lt;/table&gt;
 &lt;/div&gt;</code></pre>
+        </div>
+
+        <p>Khi bài cần minh hoạ đúng "một bảng tính trông như thế nào" (vd bảng cân bằng), thêm class <code>spreadsheet</code> vào <code>table.compare</code>: hàng chữ cái cột (A, B, C...), cột số hàng, lưới đủ 2 chiều. Ô lệch dùng class <code>cell-dev</code> + <code>data-state="zero|over|under"</code> để tô màu qua token (giống <code>callout[data-kind]</code>).</p>
+        <div class="table-wrap">
+            <table class="compare spreadsheet">
+                <thead>
+                    <tr><th class="cell-corner" scope="col"></th><th class="col-letter" scope="col">A</th><th class="col-letter" scope="col">B</th></tr>
+                </thead>
+                <tbody>
+                    <tr><th class="row-num" scope="row">1</th><th scope="col">Lựa chọn</th><th scope="col">Lệch</th></tr>
+                    <tr><th class="row-num" scope="row">2</th><td>Vũ khí A</td><td class="cell-dev" data-state="zero">0 · đúng giá</td></tr>
+                    <tr><th class="row-num" scope="row">3</th><td>Vũ khí B</td><td class="cell-dev" data-state="over">+2 · trên đường</td></tr>
+                    <tr><th class="row-num" scope="row">4</th><td>Vũ khí C</td><td class="cell-dev" data-state="under">-1 · dưới đường</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;table class="compare spreadsheet"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th class="cell-corner" scope="col"&gt;&lt;/th&gt;&lt;th class="col-letter" scope="col"&gt;A&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th class="row-num" scope="row"&gt;1&lt;/th&gt;&lt;th scope="col"&gt;Lựa chọn&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th class="row-num" scope="row"&gt;2&lt;/th&gt;&lt;td class="cell-dev" data-state="zero"&gt;0&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
         </div>
 
         <h2 id="exercise">Exercise (thực hành)</h2>

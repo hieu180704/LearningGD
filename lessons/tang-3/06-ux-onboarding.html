@@ -79,6 +79,18 @@
         <p>Bạn tải một game mobile mới. Màn hình đầu tiên: xin quyền thông báo. Rồi một đoạn phim ngắn giới thiệu thế giới. Rồi ba hộp thoại liên tiếp giải thích tiền tệ, năng lượng và hệ thống thẻ bài. Rồi một mũi tay chỉ vào nút "Chơi". Bạn đã bấm Skip từ hộp thoại thứ hai — và giờ vừa vào trận vừa tự hỏi mấy con số trên đầu màn hình nghĩa là gì.</p>
         <p>Game đó không thiếu hướng dẫn. Nó thiếu thứ khác: một cách dạy khiến người chơi thật sự học được. Đó là công việc của <span class="term" data-en="onboarding" tabindex="0">onboarding</span> và <span class="term" data-en="user experience (UX)" tabindex="0">UX</span> — và nó bắt đầu từ trước khi người chơi chạm vào cơ chế đầu tiên.</p>
 
+        <figure class="diagram wide">
+            <ol class="steps">
+                <li><span><strong>Xin quyền thông báo.</strong> Màn hình đầu tiên người chơi thấy, trước khi biết game là gì.</span></li>
+                <li><span><strong>Đoạn phim giới thiệu thế giới.</strong> Vẫn chưa cho chạm vào gì.</span></li>
+                <li><span><strong>Hộp thoại 1: tiền tệ.</strong> Giải thích bằng chữ, chưa có ngữ cảnh để dùng ngay.</span></li>
+                <li><span><strong>Hộp thoại 2: năng lượng.</strong> Người chơi bấm Skip tại đây — điểm rơi rụng.</span></li>
+                <li><span><strong>Hộp thoại 3: hệ thống thẻ bài.</strong> Không còn ai đọc nữa.</span></li>
+                <li><span><strong>Mũi tên chỉ vào nút "Chơi".</strong> Người chơi vào trận mà không hiểu các con số trên màn hình.</span></li>
+            </ol>
+            <figcaption>Sơ đồ minh hoạ của bài học, dựng lại đúng luồng onboarding mở đầu bài: mỗi bước dội thêm một lớp thông tin, người chơi rời bỏ ngay khi việc học vượt quá sức chịu.</figcaption>
+        </figure>
+
         <h2 id="onboarding-la-gi">Onboarding không phải là tutorial</h2>
         <p>Hai từ này hay bị dùng lẫn. Phân biệt cho gọn: <strong>tutorial</strong> là phần dạy một cơ chế cụ thể — màn tập bắn, hộp thoại "bấm X để nhảy". <strong>Onboarding</strong> rộng hơn: toàn bộ quãng đường từ lúc người chơi mở game lần đầu đến lúc họ tự tin chơi một mình. Màn hình chờ, việc tạo tài khoản, lần đầu nhìn thấy HUD, trận đầu tiên thắng được — tất cả đều nằm trong onboarding, dù không có dòng hướng dẫn nào.</p>
         <p>Ngành mobile gọi khoảng này là <span class="term" data-en="first-time user experience" tabindex="0">FTUE</span> và đo nó rất thực dụng bằng <span class="term" data-en="day-1 retention" tabindex="0">D1 retention</span> — tỉ lệ người chơi quay lại sau đúng một ngày. Con số này là trần trên của mọi ngày sau: mất người chơi ở ngày đầu thì không có cách nào lấy lại ở ngày thứ bảy.</p>
@@ -124,6 +136,18 @@
             </div>
         </div>
         <p>Trong game, cách rải dần dễ thấy nhất là khoá bớt cơ chế và mở dần theo tiến trình. Khu mở đầu Great Plateau của <em>The Legend of Zelda: Breath of the Wild</em> làm đúng vậy: bốn đền thờ, mỗi đền dạy một khả năng lõi, và chỉ khi qua đủ bốn, người chơi mới được phát dù lượn để rời cao nguyên. Người chơi tự do đi lại trong khu đó, nhưng bộ công cụ thì được phát theo thứ tự.</p>
+
+        <figure class="diagram wide">
+            <ol class="steps">
+                <li><span><strong>Đền thờ 1.</strong> Dạy một khả năng lõi, dùng ngay trong đền để giải đố.</span></li>
+                <li><span><strong>Đền thờ 2.</strong> Dạy một khả năng lõi khác.</span></li>
+                <li><span><strong>Đền thờ 3.</strong> Dạy một khả năng lõi khác.</span></li>
+                <li><span><strong>Đền thờ 4.</strong> Dạy khả năng lõi cuối cùng.</span></li>
+                <li><span><strong>Đủ bốn đền.</strong> Mở khoá dù lượn — người chơi được rời Great Plateau.</span></li>
+            </ol>
+            <figcaption>Sơ đồ minh hoạ của bài học, dựa trên Great Plateau của <em>The Legend of Zelda: Breath of the Wild</em>: người chơi tự do đi lại trong khu vực, nhưng bộ công cụ được mở theo đúng thứ tự.</figcaption>
+        </figure>
+
         <p>Một dạng khác là để chính màn chơi dạy. <em>Portal</em> giới thiệu mỗi khái niệm mới trong một phòng thử riêng, đặt người chơi vào tình huống buộc phải tự hiểu portal làm được gì, không hộp thoại. Bạn không được "cho biết" luật — bạn suy ra luật rồi dùng nó để mở cửa.</p>
 
         <h2 id="ma-sat">Ma sát: loại phải bỏ, loại cố ý giữ</h2>
@@ -185,14 +209,14 @@
                 <h3>Quan sát một người chơi thật trong 10 phút đầu</h3>
                 <ol class="steps">
                     <li><span>Tìm một người chưa từng chơi game bạn sắp đưa, và không làm trong ngành game. Chọn một game mobile hoặc indie bất kỳ họ chưa chạm vào.</span></li>
-                    <li><span>Đưa máy và chỉ nói đúng một câu: "Cứ chơi tự nhiên." Sau đó áp dụng nguyên tắc playtest của Valve: <em>"Don’t give them hints"</em>, <em>"Don’t answer any questions"</em> — không gợi ý, không trả lời câu hỏi, không chỉ tay vào màn hình.</span></li>
+                    <li><span>Đưa máy và chỉ nói đúng một câu: "Cứ chơi tự nhiên." Sau đó áp dụng nguyên tắc playtest của Valve: <em>"Don’t give them hints"</em> (đừng gợi ý), <em>"Don’t answer any questions"</em> (đừng trả lời bất kỳ câu hỏi nào) — và không chỉ tay vào màn hình.</span></li>
                     <li><span>Trong 10 phút, ghi lại timestamp mỗi khi thấy một trong bốn dấu hiệu: dừng tay quá 3 giây không rõ lý do; bấm thử nhiều lần vào cùng một chỗ; buột miệng hỏi hoặc than; bấm Skip một hướng dẫn mà không đọc.</span></li>
                     <li><span>Hết giờ mới hỏi, đúng ba câu không dẫn dắt: đoạn nào thấy rối nhất, bây giờ bạn nghĩ mình cần làm gì tiếp, có nút nào bạn bấm mà không chắc nó làm gì.</span></li>
                     <li><span>Tổng hợp: liệt kê tối thiểu 3 điểm khựng kèm timestamp, gán mỗi điểm vào một trong bốn sai lầm ở phần trên, và viết một câu đề xuất sửa cho từng điểm.</span></li>
                 </ol>
                 <details class="hint">
                     <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
-                    <p>Khó nhất là giữ im lặng — bạn sẽ rất muốn giúp khi thấy họ loay hoay. Đúng lúc đó mới là dữ liệu quý nhất, vì ngoài đời không ai ngồi cạnh người chơi để nhắc. Nếu muốn biết họ đang nghĩ gì, hãy nhờ họ nói to suy nghĩ ngay lúc chơi (think-aloud) và làm đúng lời khuyên của Nielsen: <em>"Shut up and let the users do the talking."</em></p>
+                    <p>Khó nhất là giữ im lặng — bạn sẽ rất muốn giúp khi thấy họ loay hoay. Đúng lúc đó mới là dữ liệu quý nhất, vì ngoài đời không ai ngồi cạnh người chơi để nhắc. Nếu muốn biết họ đang nghĩ gì, hãy nhờ họ nói to suy nghĩ ngay lúc chơi (think-aloud) và làm đúng lời khuyên của Nielsen: <em>"Shut up and let the users do the talking."</em> (im lặng, để người dùng là người nói.)</p>
                 </details>
             </div>
         </div>

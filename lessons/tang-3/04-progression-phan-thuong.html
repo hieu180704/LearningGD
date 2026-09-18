@@ -116,15 +116,80 @@
         <p>Cách phổ biến nhất để làm progression phân nhánh là <span class="term" data-en="skill tree">cây kỹ năng</span>. Blizzard giải thích lý do chọn hình cây cho talent của World of Warcraft: trực quan hoá các nhánh lựa chọn khi xây nhân vật, truyền đạt quan hệ phụ thuộc lẫn độ mạnh yếu mà không cần thêm luật. Mỗi talent có <span class="term" data-en="prerequisite">điều kiện tiên quyết</span> vẽ bằng mũi tên — phải mua xong ít nhất một talent phía trước mới mở khoá được cái tiếp theo.</p>
         <p>Đối lập là bậc thang thẳng: Baldur's Gate: Dark Alliance (PS2) quy XP thành cấp theo mẫu tam giác — Level 2 cần 1000 XP, Level 3 cần thêm 2000, Level 4 thêm 3000 (Ian Schreiber). Không nhánh nào để chọn, ai cũng đi đúng một đường, chỉ khác tốc độ.</p>
 
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Cấu trúc</th><th>Đặc điểm</th></tr></thead>
+                <tbody>
+                    <tr><td>Cây kỹ năng (WoW talent)</td><td>Có nhánh để chọn; mỗi talent có điều kiện tiên quyết vẽ bằng mũi tên, phải mua xong nhánh trước mới mở khoá nhánh sau</td></tr>
+                    <tr><td>Bậc thang thẳng (Baldur's Gate: Dark Alliance)</td><td>Không nhánh nào để chọn; XP tăng theo mẫu tam giác, ai cũng đi đúng một đường, chỉ khác tốc độ lên cấp</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <figure class="diagram wide">
+            <svg class="chart-cost-curve" viewBox="0 0 320 200" role="img" aria-label="Biểu đồ đường cong kinh nghiệm của Baldur's Gate: Dark Alliance: trục ngang Level, trục dọc XP cần đạt, đường nối 4 điểm cho thấy khoảng cách giữa các cấp ngày càng xa">
+                <line class="axis-line" x1="40" y1="170" x2="300" y2="170"></line>
+                <line class="axis-line" x1="40" y1="170" x2="40" y2="20"></line>
+                <polyline class="ideal-line" fill="none" points="70,170 140,147 210,100 280,30"></polyline>
+                <text class="svg-sub" x="170" y="192" text-anchor="middle">Level</text>
+                <text class="svg-sub" x="16" y="95" text-anchor="middle" transform="rotate(-90 16 95)">XP cần đạt</text>
+                <circle class="pt pt-ok" cx="70" cy="170" r="6"></circle>
+                <text class="svg-label" x="70" y="156" text-anchor="middle">1</text>
+                <circle class="pt pt-ok" cx="140" cy="147" r="6"></circle>
+                <text class="svg-label" x="140" y="133" text-anchor="middle">2</text>
+                <circle class="pt pt-ok" cx="210" cy="100" r="6"></circle>
+                <text class="svg-label" x="210" y="86" text-anchor="middle">3</text>
+                <circle class="pt pt-ok" cx="280" cy="30" r="6"></circle>
+                <text class="svg-label" x="280" y="16" text-anchor="middle">4</text>
+            </svg>
+            <ol class="chart-legend">
+                <li><span class="cell-dev" data-state="zero">1</span> Level 1 — điểm bắt đầu, 0 XP</li>
+                <li><span class="cell-dev" data-state="zero">2</span> Level 2 — cần 1000 XP</li>
+                <li><span class="cell-dev" data-state="zero">3</span> Level 3 — cần thêm 2000 XP (tổng 3000)</li>
+                <li><span class="cell-dev" data-state="zero">4</span> Level 4 — cần thêm 3000 XP (tổng 6000)</li>
+            </ol>
+            <figcaption>Đường cong kinh nghiệm tam giác của Baldur's Gate: Dark Alliance (Ian Schreiber): mỗi cấp đòi thêm nhiều XP hơn cấp trước, nên đường nối các điểm dốc dần lên chứ không phải một đường thẳng đều.</figcaption>
+        </figure>
+
         <h2 id="gate">Gate: chặn để mở</h2>
         <p>Tiến trình luôn cần chỗ chặn tạm thời — <span class="term" data-en="gate">cửa chặn</span>. Adams &amp; Dormans mô tả bằng ngôn ngữ economy: một ability đặc biệt, như double-jump, là nguồn sản xuất ra resource trừu tượng gọi là <span class="term" data-en="access">access</span> — quyền đi tới khu vực trước đó chưa tới được. Cách khác không cần vật phẩm: Schreiber gọi là <span class="term" data-en="skill gating">chặn theo độ khó</span> — thả chuỗi thử thách tăng dần, kéo dài thời lượng chơi bằng cách kiểm soát tốc độ học thay vì khoá vật phẩm.</p>
         <p>Gate bằng vật phẩm có rủi ro riêng, theo Adams &amp; Dormans: Zelda hay dùng vật phẩm tiêu hao — mũi tên, bom — làm chìa khoá; hết giữa chừng là <span class="term" data-en="deadlock">kẹt cứng</span>. Zelda tránh việc này bằng nguồn tái sinh, ví dụ nồi đất tự hồi vật phẩm khi người chơi rời phòng rồi quay lại.</p>
+
+        <figure class="diagram wide">
+            <p><strong>Gate bằng ability — access là một resource</strong></p>
+            <div class="mda-diagram">
+                <div class="mda-block loop">Ability đặc biệt (vd: double-jump)</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Access — quyền vào khu vực mới</div>
+            </div>
+            <p><strong>Gate bằng vật phẩm tiêu hao — rủi ro deadlock</strong></p>
+            <ol class="steps">
+                <li><span>Vật phẩm tiêu hao (mũi tên, bom) dùng làm chìa khoá cửa chặn.</span></li>
+                <li><span>Người chơi dùng hết giữa chừng, không còn gì để mở cửa chặn tiếp theo.</span></li>
+                <li><span>Deadlock — kẹt cứng, không thể tiến tiếp.</span></li>
+                <li><span>Zelda tránh bằng nguồn tái sinh: nồi đất tự hồi vật phẩm khi người chơi rời phòng rồi quay lại.</span></li>
+            </ol>
+            <figcaption>Hai cách gate theo Adams &amp; Dormans: ability đặc biệt sinh ra access (trên); vật phẩm tiêu hao thì có nguy cơ deadlock nếu không có nguồn tái sinh (dưới). Minh hoạ của bài học.</figcaption>
+        </figure>
 
         <h2 id="lich-trinh-thuong">Lịch trình phần thưởng</h2>
         <p>Ian Schreiber gọi nhịp thưởng trong game là <span class="term" data-en="reward schedule">lịch trình phần thưởng</span> — không chỉ muốn người chơi tiến bộ, mà muốn họ cảm thấy đang được thưởng vì chơi giỏi. Có hai cực cần tránh. Thưởng quá thưa: <em>"Giving too few rewards, or spacing them out for too long so that the player goes for long stretches without feeling any sense of progression, is usually a bad thing. The player is demoralized and may start to feel like if they aren’t making progress, they’re playing the game wrong (even if they’re really doing fine)."</em> (thưởng quá thưa khiến người chơi nản, tưởng mình đang chơi sai dù thực ra vẫn ổn.) Thưởng quá dày cũng hại không kém — nhiều phần thưởng lớn dồn dập trong thời gian ngắn làm giảm giá trị cảm nhận của từng phần thưởng, dù cộng dồn lại vẫn ra đúng số đó.</p>
         <p>Ngẫu nhiên hay cố định cũng tạo cảm giác khác nhau: <em>"Another thing we know from psychology is that a random reward schedule is more powerful than a fixed schedule."</em> (lịch trình thưởng ngẫu nhiên có sức tác động mạnh hơn cố định — Schreiber không dẫn nguồn tâm lý học cụ thể, chỉ nói chung "từ psychology".)</p>
 
-        <p>Celia Hodent chia lịch trình phần thưởng thành bốn kiểu, theo hai trục thời gian/hành động và cố định/biến thiên: fixed interval là mốc thời gian biết trước (Fortnite thưởng mỗi ngày đăng nhập, Clash of Clans thưởng khi công trình xây xong đúng giờ); variable interval biết thưởng sẽ tới nhưng không biết lúc nào (cherry bonus trong Pacman); fixed ratio cần đủ một số hành động cố định (nhiệm vụ, mở khoá skill tree); variable ratio thì số hành động đó ngẫu nhiên mỗi lần (slot machine, loot crate). Thưởng theo hành động (ratio) tạo tần suất cao hơn thưởng theo thời gian, và variable ratio ổn định nhất trong cả bốn, theo Hodent — một nghiên cứu trên 210 người chơi thật xác nhận điều này: <em>"On average, the variable-ratio schedule was better in the outcome measures than the fixed-ratio schedule."</em> (lịch trình biến thiên cho kết quả tốt hơn lịch trình cố định — Nagle, Wolf, Riener, Novak, 2014.)</p>
+        <p>Celia Hodent chia lịch trình phần thưởng thành bốn kiểu, theo hai trục thời gian/hành động và cố định/biến thiên — bảng dưới liệt kê cả bốn kèm ví dụ. Thưởng theo hành động (ratio) tạo tần suất cao hơn thưởng theo thời gian, và variable ratio ổn định nhất trong cả bốn, theo Hodent — một nghiên cứu trên 210 người chơi thật xác nhận điều này: <em>"On average, the variable-ratio schedule was better in the outcome measures than the fixed-ratio schedule."</em> (lịch trình biến thiên cho kết quả tốt hơn lịch trình cố định — Nagle, Wolf, Riener, Novak, 2014.)</p>
+
+        <figure class="diagram wide">
+            <table class="compare">
+                <thead>
+                    <tr><th scope="col"></th><th scope="col">Fixed<br><small>cố định</small></th><th scope="col">Variable<br><small>biến thiên</small></th></tr>
+                </thead>
+                <tbody>
+                    <tr><th scope="row">Interval<br><small>theo thời gian</small></th><td><strong>Fixed interval</strong><br><small>Mốc thời gian biết trước — Fortnite thưởng mỗi ngày đăng nhập, Clash of Clans thưởng khi công trình xây xong đúng giờ</small></td><td><strong>Variable interval</strong><br><small>Biết thưởng sẽ tới nhưng không biết lúc nào — cherry bonus trong Pacman</small></td></tr>
+                    <tr><th scope="row">Ratio<br><small>theo hành động</small></th><td><strong>Fixed ratio</strong><br><small>Cần đủ một số hành động cố định — nhiệm vụ, mở khoá skill tree</small></td><td><strong>Variable ratio</strong><br><small>Số hành động cần thiết ngẫu nhiên mỗi lần — slot machine, loot crate. Ổn định nhất trong bốn kiểu (Hodent)</small></td></tr>
+                </tbody>
+            </table>
+            <figcaption>Khung bốn ô của Celia Hodent: hai trục thời gian/hành động và cố định/biến thiên. Ví dụ trong từng ô lấy đúng từ đoạn văn trên.</figcaption>
+        </figure>
         <p>Chuyển màn hoặc khu vực mới cũng là một dạng thưởng — Schreiber khuyên giãn theo đường cong tăng dần, màn sau dài hơn màn trước một chút; và thưởng cho hành động chủ động có sức nặng hơn thưởng cho thứ người chơi không biết mình đang làm.</p>
 
         <h2 id="vo-nghia">Khi phần thưởng trở nên vô nghĩa</h2>

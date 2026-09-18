@@ -80,6 +80,18 @@
 
         <p>Khoảng cách giữa hai điều đó — ý tưởng đồ sộ và lát chơi được sau hai tuần — chính là nội dung của toàn bộ các bài trước: MDA, core loop, prototype giấy, playtest, iteration, hệ thống, kinh tế, level design, UX, tự sự, số liệu, đạo đức, mổ xẻ game. Bài này không dạy khái niệm mới. Nó ráp những mảnh đó lại thành một quy trình bạn tự chạy được, từ ý tưởng đến một prototype thật sự chơi được.</p>
 
+        <figure class="diagram wide">
+            <ol class="steps">
+                <li><span><strong>Chọn ý tưởng khả thi.</strong> Ý tưởng nằm ở giao ba loại của Derek Yu, và đủ thời gian, nguồn lực để thực sự làm ra nó.</span></li>
+                <li><span><strong>Vòng lặp Fullerton — xương sống.</strong> Đặt mục tiêu, dựng, test, đánh giá, sửa — lặp lại suốt dự án, không chạy một lần rồi dừng.</span></li>
+                <li><span><strong>Prototype đầu tiên.</strong> Giấy hay dựng thẳng trên máy — mô hình thô, chưa thắng thua, chơi được sớm nhất có thể.</span></li>
+                <li><span><strong>Cắt phạm vi.</strong> Lùi xuống, xuống nữa, đến khi thấy khả thi trong một đến hai tuần.</span></li>
+                <li><span><strong>Bắt đầu thật sự.</strong> Có thứ chơi được — viết ý tưởng hay design doc chưa tính là đã bắt đầu.</span></li>
+                <li><span><strong>90% cuối và chuyện về đích.</strong> Hoàn thiện chi tiết là một kỹ năng cần rèn, không phải bước cuối để đó lo sau.</span></li>
+            </ol>
+            <figcaption>Sơ đồ minh hoạ của bài học — sáu phần của bài, theo đúng thứ tự trình bày ở dưới, dùng làm bản đồ khi đọc hết bài.</figcaption>
+        </figure>
+
         <h2 id="chon-y-tuong">Chọn ý tưởng khả thi, không phải ý tưởng hay nhất</h2>
 
         <p>Bước đầu tiên không phải nghĩ ra ý tưởng hay nhất, mà chọn ý tưởng có khả năng hoàn thành cao nhất. Đây là hai tiêu chí khác nhau — nhầm giữa chúng là lý do phổ biến khiến một dự án nhỏ không bao giờ đi hết chặng đường.</p>
@@ -159,11 +171,17 @@
 
         <p>Ba ví dụ sau là phân tích của bài, dựng theo đúng logic "lùi xuống, xuống nữa" đó — không trích từ nguồn nào.</p>
 
-        <p><strong>Game nhập vai thế giới mở → một căn phòng, một cơ chế hội thoại.</strong> Bỏ hẳn bản đồ thế giới, hệ phe phái, hệ chế tạo. Giữ lại đúng một cuộc hội thoại rẽ nhánh trong một căn phòng, nơi người chơi thấy rõ lựa chọn của mình dẫn tới hậu quả khác nhau.</p>
-
-        <p><strong>Game sinh tồn nhiều người chơi → một vòng năm phút chơi đơn.</strong> Bỏ máy chủ, bỏ tương tác giữa nhiều người, bỏ hệ thống xây dựng lâu dài. Giữ lại một vòng thu thập — chế tạo — đối mặt nguy hiểm gói gọn trong năm phút, chơi một mình.</p>
-
-        <p><strong>Game xây dựng thành phố → quản lý đúng một tài nguyên.</strong> Bỏ hết các loại tài nguyên, công trình, dân số chạy song song. Giữ lại một tài nguyên duy nhất — ví dụ nước hoặc điện — và những đánh đổi xoay quanh riêng nó.</p>
+        <figure class="diagram wide">
+            <table class="compare">
+                <thead><tr><th>Ý tưởng ban đầu (quá tay cho hai tuần)</th><th>Sau khi cắt (vừa sức cho hai tuần)</th></tr></thead>
+                <tbody>
+                    <tr><td>Game nhập vai thế giới mở — bản đồ thế giới, hệ phe phái, hệ chế tạo</td><td>Một căn phòng, một cơ chế hội thoại — đúng một cuộc hội thoại rẽ nhánh, nơi người chơi thấy rõ lựa chọn của mình dẫn tới hậu quả khác nhau</td></tr>
+                    <tr><td>Game sinh tồn nhiều người chơi — máy chủ, tương tác giữa nhiều người, hệ thống xây dựng lâu dài</td><td>Một vòng năm phút chơi đơn — thu thập, chế tạo, đối mặt nguy hiểm gói gọn trong năm phút, chơi một mình</td></tr>
+                    <tr><td>Game xây dựng thành phố — nhiều loại tài nguyên, công trình, dân số chạy song song</td><td>Quản lý đúng một tài nguyên — ví dụ nước hoặc điện — và những đánh đổi xoay quanh riêng nó</td></tr>
+                </tbody>
+            </table>
+            <figcaption>Sơ đồ minh hoạ của bài học — ba ví dụ cắt phạm vi theo logic "lùi xuống, xuống nữa" của Derek Yu, không trích nguyên văn từ nguồn nào.</figcaption>
+        </figure>
 
         <h2 id="bat-dau-that">Bắt đầu thật sự nghĩa là gì</h2>
 
@@ -182,6 +200,20 @@
         <p>Vì chặng cuối luôn dài hơn tưởng tượng, Yu đề xuất coi nó khác đi: <em>If you treat finishing like a skill, rather than simply a step in the process, you can acknowledge not only that it’s something you can get better at, but also what habits and thought processes get in your way.</em> (dịch ý: nếu bạn coi việc hoàn thành là một kỹ năng, thay vì chỉ là một bước trong quy trình, bạn sẽ thừa nhận được rằng đó là thứ có thể luyện giỏi lên — và nhận ra những thói quen, cách nghĩ nào đang cản trở chính mình).</p>
 
         <p>Với một dự án hai tuần, "hoàn thành" không có nghĩa là đầy đủ tính năng. Nó có nghĩa là lát chơi được đó không còn lỗi chặn đường, có điểm bắt đầu và kết thúc rõ ràng, và người lạ cầm lên chơi được mà không cần bạn ngồi giải thích.</p>
+
+        <figure class="diagram wide">
+            <table class="compare">
+                <thead><tr><th>Mốc</th><th>Xong khi nào thì coi là đạt</th></tr></thead>
+                <tbody>
+                    <tr><td>Chọn ý tưởng</td><td>Ý tưởng nằm ở giao ba loại (muốn làm / muốn đã làm xong / giỏi làm), và bạn có đủ thời gian, nguồn lực thật để làm ra nó</td></tr>
+                    <tr><td>Cắt phạm vi</td><td>Đã lùi xuống, xuống nữa, đến khi thấy phạm vi khả thi trong một đến hai tuần</td></tr>
+                    <tr><td>Prototype đầu tiên</td><td>Có thứ chơi được — không phải chỉ ý tưởng viết ra hay một design doc</td></tr>
+                    <tr><td>Playtest</td><td>Có người khác — không phải bạn — đã chạm vào prototype, và bạn ghi lại phản hồi của họ</td></tr>
+                    <tr><td>Hoàn thành</td><td>Không còn lỗi chặn đường, có điểm bắt đầu và kết thúc rõ ràng, người lạ chơi được mà không cần bạn ngồi giải thích</td></tr>
+                </tbody>
+            </table>
+            <figcaption>Sơ đồ minh hoạ của bài học — checklist tổng hợp lại tiêu chí "xong" đã nêu ở từng phần trên, dùng để tự chấm tiến độ dự án của bạn.</figcaption>
+        </figure>
 
         <h2 id="lens">Lens</h2>
 

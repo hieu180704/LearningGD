@@ -1107,6 +1107,61 @@ figure.diagram figcaption { font-size: 14px; color: var(--ink-2); margin-top: va
 }
 .loop-return svg { flex-shrink: 0; color: var(--accent); }
 
+/* So do bo cuc man choi nhin tu tren xuong (vd hub-and-spoke trong bai level-design):
+   luoi 3x3, khu trung tam o giua, toi da 4 nhanh N/S/E/W. Mau qua token --tier cua tang. */
+.level-map {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+        ".    n    ."
+        "w    c    e"
+        ".    s    .";
+    gap: var(--sp-2);
+    max-width: 320px;
+    margin: 0 auto;
+}
+.level-map-room {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: var(--font-display);
+    line-height: 1.2;
+    border-radius: var(--r-md);
+    background: var(--surface-2);
+    color: var(--ink);
+    padding: var(--sp-2);
+}
+.level-map-room[data-area="center"] { grid-area: c; background: color-mix(in srgb, var(--tier) 16%, var(--surface)); color: var(--tier); }
+.level-map-room[data-area="n"] { grid-area: n; }
+.level-map-room[data-area="s"] { grid-area: s; }
+.level-map-room[data-area="e"] { grid-area: e; }
+.level-map-room[data-area="w"] { grid-area: w; }
+
+/* Bien the SVG cho scatter chart (vd cost curve trong bai balance-spreadsheet) — dung chung 2 class
+   svg-label/svg-sub o tren de nhan/truc doc mau dung theme. */
+.diagram svg.chart-cost-curve { display: block; margin: 0 auto; max-width: 320px; width: 100%; height: auto; }
+.diagram svg .axis-line { stroke: var(--rule); stroke-width: 2; }
+.diagram svg .ideal-line { stroke: var(--ink-2); stroke-width: 2; stroke-dasharray: 5 5; }
+.diagram svg .pt { stroke: var(--surface); stroke-width: 2; }
+.diagram svg .pt-ok { fill: var(--ok); }
+.diagram svg .pt-over { fill: var(--warn); }
+.diagram svg .pt-under { fill: var(--info); }
+
+/* Nhan trang thai dung chung cho o bang tinh (table.compare.spreadsheet) va legend cua chart-cost-curve:
+   zero = dung gia, over = tren duong cong (qua manh), under = duoi duong cong (qua yeu). */
+.cell-dev { font-weight: 700; }
+.cell-dev[data-state="zero"] { color: var(--ok); }
+.cell-dev[data-state="over"] { color: var(--warn); }
+.cell-dev[data-state="under"] { color: var(--info); }
+
+.chart-legend { display: flex; flex-direction: column; gap: 6px; margin-top: var(--sp-3); font-size: 14px; color: var(--ink-2); }
+.chart-legend li { display: flex; align-items: center; gap: 8px; }
+.chart-legend .cell-dev { font-family: var(--font-mono); }
+
 /* ===== 17. TABLE ===== */
 .table-wrap {
     overflow-x: auto;
@@ -1135,6 +1190,26 @@ table.compare tr:last-child td { border-bottom: none; }
 table.compare th.mda-m { color: var(--mech); }
 table.compare th.mda-d { color: var(--dyn); }
 table.compare th.mda-a { color: var(--aes); }
+
+/* Bien the "spreadsheet" cua table.compare: luoi day du 2 chieu + hang chu cai (A-E) + cot so hang,
+   mo phong giao dien mot bang tinh that (dung khi bai can minh hoa "bang balance trong nhu the nao"). */
+table.compare.spreadsheet { min-width: 620px; }
+table.compare.spreadsheet th, table.compare.spreadsheet td { border-right: 1px solid var(--rule); }
+table.compare.spreadsheet tr:last-child td, table.compare.spreadsheet tr:last-child th { border-bottom: 1px solid var(--rule); }
+table.compare.spreadsheet th.cell-corner, table.compare.spreadsheet th.col-letter, table.compare.spreadsheet th.row-num {
+    text-align: center;
+    font-family: var(--font-mono);
+}
+
+/* Mobile: spreadsheet la SO DO, khong phai bang tra — cot "Lech" mang toan bo y nghia nen khong duoc
+   day ra ngoai man hinh. Bo min-width va thu nho padding de du 6 cot lot trong 400px. */
+@media (max-width: 599px) {
+    table.compare.spreadsheet { min-width: 0; }
+    table.compare.spreadsheet th, table.compare.spreadsheet td {
+        padding: var(--sp-2) var(--sp-2);
+        font-size: 13px;
+    }
+}
 
 /* ===== 18. EXERCISE ===== */
 .exercise {

@@ -81,15 +81,36 @@
         <p>Vấn đề không nằm ở việc boss "khó" hay "dễ". Câu hỏi đúng phải là: độ khó này so với kỹ năng của <strong>ai</strong>? Đó chính là thứ mô hình flow cố gắng trả lời.</p>
 
         <h2 id="flow-la-gi">Flow là gì</h2>
-        <p>Mihaly Csikszentmihalyi, nhà tâm lý học nghiên cứu trải nghiệm này từ thập niên 1970, mô tả trong sách <em>Flow: The Psychology of Optimal Experience</em> (1990), nguyên văn:</p>
+        <p>Mihaly Csikszentmihalyi, nhà tâm lý học nghiên cứu trải nghiệm này từ thập niên 1970, viết trong <em>Flow: The Psychology of Optimal Experience</em> (1990), nguyên văn:</p>
         <div class="callout" data-kind="note">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Mihaly Csikszentmihalyi — Flow: The Psychology of Optimal Experience, 1990</p>
-                <p><em>"Enjoyment appears at the boundary between boredom and anxiety, when the challenges are just balanced with the person's capacity to act."</em></p>
+                <p><em>"Enjoyment appears at the boundary between boredom and anxiety, when the challenges are just balanced with the person's capacity to act."</em> (niềm vui xuất hiện ở ranh giới giữa <span class="term" data-en="boredom">nhàm chán</span> và <span class="term" data-en="anxiety">lo âu</span>, khi thử thách vừa cân bằng với năng lực hành động của người đó)</p>
             </div>
         </div>
         <p>Nói cách khác: niềm vui không nằm ở "dễ" hay "khó" tuyệt đối, mà nằm ở đúng ranh giới giữa hai thái cực <span class="term" data-en="boredom">nhàm chán</span> và <span class="term" data-en="anxiety">lo âu</span>.</p>
+        <figure class="diagram wide">
+            <svg class="chart-cost-curve" viewBox="0 0 300 300" role="img" aria-label="Bieu do truc ky nang va thu thach: duong cheo la flow channel, ba diem minh hoa vung lo au, vung flow, vung nham chan">
+                <line class="axis-line" x1="56" y1="264" x2="284" y2="264"></line>
+                <line class="axis-line" x1="56" y1="264" x2="56" y2="40"></line>
+                <line class="ideal-line" x1="56" y1="264" x2="272" y2="48"></line>
+                <text class="svg-sub" x="170" y="292" text-anchor="middle">Kỹ năng</text>
+                <text class="svg-sub" x="24" y="152" text-anchor="middle" transform="rotate(-90 24 152)">Thử thách</text>
+                <circle class="pt pt-over" cx="110" cy="110" r="7"></circle>
+                <text class="svg-label" x="124" y="114" text-anchor="start">1</text>
+                <circle class="pt pt-ok" cx="170" cy="150" r="7"></circle>
+                <text class="svg-label" x="184" y="154" text-anchor="start">2</text>
+                <circle class="pt pt-under" cx="230" cy="200" r="7"></circle>
+                <text class="svg-label" x="244" y="204" text-anchor="start">3</text>
+            </svg>
+            <ol class="chart-legend">
+                <li><span class="cell-dev" data-state="over">1</span> Anxiety — thử thách vượt xa kỹ năng</li>
+                <li><span class="cell-dev" data-state="zero">2</span> Flow channel — thử thách và kỹ năng cân bằng, cùng tăng dần</li>
+                <li><span class="cell-dev" data-state="under">3</span> Boredom — kỹ năng vượt xa thử thách</li>
+            </ol>
+            <figcaption>Flow channel — mô hình challenge × skill của Csikszentmihalyi (<em>Flow</em>, 1990). Sơ đồ minh hoạ của bài học.</figcaption>
+        </figure>
         <figure class="diagram wide">
             <div class="mda-diagram">
                 <div class="mda-block loop">Anxiety
@@ -105,7 +126,7 @@
                     <small>Ví dụ: quái quá yếu, lặp lại thao tác cũ không còn gì để học.</small>
                 </div>
             </div>
-            <figcaption>Flow channel — mô hình challenge × skill (Csikszentmihalyi, <em>Flow</em>, 1990).</figcaption>
+            <figcaption>Ba vùng của flow channel với ví dụ cụ thể trong game — minh hoạ của bài học, dựng lại từ mô hình ở sơ đồ trên.</figcaption>
         </figure>
         <div class="callout" data-kind="insight">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
@@ -116,7 +137,7 @@
         </div>
 
         <h2 id="tam-thanh-to">Tám thành tố của trải nghiệm flow</h2>
-        <p>Trong cùng chương sách trên, Csikszentmihalyi viết, nguyên văn: <em>"the phenomenology of enjoyment has eight major components."</em> Dịch lại, tám thành tố đó là:</p>
+        <p>Trong cùng chương sách trên, Csikszentmihalyi viết, nguyên văn: <em>"the phenomenology of enjoyment has eight major components."</em> (hiện tượng học của niềm vui có tám thành tố chính). Tám thành tố đó là:</p>
         <ol>
             <li>Đối mặt nhiệm vụ có cơ hội hoàn thành được (a task we have a chance of completing)</li>
             <li>Có khả năng tập trung vào việc đang làm (able to concentrate)</li>
@@ -128,12 +149,17 @@
             <li>Cảm nhận về thời gian bị biến đổi (transformation of the sense of time)</li>
         </ol>
         <p>Bốn thành tố dễ áp dụng nhất khi thiết kế game:</p>
-        <ul>
-            <li><strong>Mục tiêu rõ ràng</strong> — người chơi luôn biết chính xác việc cần làm tiếp theo, ví dụ một chỉ dấu quest đơn giản trên màn hình.</li>
-            <li><strong>Phản hồi tức thì</strong> — mỗi hành động có phản hồi ngay, ví dụ số sát thương hiện lên đúng lúc vũ khí trúng đòn.</li>
-            <li><strong>Cảm giác kiểm soát</strong> — input phản hồi mượt, không độ trễ, người chơi thấy mình thật sự làm chủ nhân vật.</li>
-            <li><strong>Méo cảm nhận thời gian</strong> — ngồi vào "chơi tạm 10 phút" rồi ngẩng lên đã hai tiếng, dấu hiệu quen thuộc của một phiên chơi trong flow.</li>
-        </ul>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Thành tố</th><th>Ứng dụng trong thiết kế</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Mục tiêu rõ ràng</strong></td><td>người chơi luôn biết chính xác việc cần làm tiếp theo, ví dụ một chỉ dấu quest đơn giản trên màn hình.</td></tr>
+                    <tr><td><strong>Phản hồi tức thì</strong></td><td>mỗi hành động có phản hồi ngay, ví dụ số sát thương hiện lên đúng lúc vũ khí trúng đòn.</td></tr>
+                    <tr><td><strong>Cảm giác kiểm soát</strong></td><td>input phản hồi mượt, không độ trễ, người chơi thấy mình thật sự làm chủ nhân vật.</td></tr>
+                    <tr><td><strong>Méo cảm nhận thời gian</strong></td><td>ngồi vào "chơi tạm 10 phút" rồi ngẩng lên đã hai tiếng, dấu hiệu quen thuộc của một phiên chơi trong flow.</td></tr>
+                </tbody>
+            </table>
+        </div>
         <div class="callout" data-kind="note">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
             <div class="callout-body">
@@ -148,15 +174,41 @@
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Jesse Schell — The Art of Game Design</p>
-                <p><em>"This cycle of 'tense and release, tense and release' comes up again and again in design."</em></p>
+                <p><em>"This cycle of 'tense and release, tense and release' comes up again and again in design."</em> (vòng lặp "căng rồi thả, căng rồi thả" này lặp đi lặp lại trong thiết kế)</p>
             </div>
         </div>
         <p>Lý do không nên tăng độ khó tuyến tính: căng thẳng liên tục làm người chơi kiệt sức, còn thoải mái liên tục làm họ chán. Ba kỹ thuật cân bằng dùng được ngay cho người mới thiết kế, giữ nguyên tên gốc của Schell:</p>
-        <ul>
-            <li><em>"Increase difficulty with each success."</em> — mỗi lần người chơi vượt qua một thử thách, thử thách kế tiếp khó hơn một chút, luôn kết hợp với nhịp lên-xuống chứ không tăng liên tục.</li>
-            <li><em>"Let players get through easy parts fast."</em> — để người chơi đã giỏi lướt nhanh qua đoạn dễ, không bắt họ lê chân qua thứ họ đã thành thạo.</li>
-            <li><em>"Playtest with a variety of players."</em> — test với cả người mới lẫn người có kinh nghiệm, vì "vừa sức" của người này có thể là "quá dễ" hoặc "quá khó" của người khác.</li>
-        </ul>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Kỹ thuật (Schell)</th><th>Ứng dụng</th></tr></thead>
+                <tbody>
+                    <tr><td><em>"Increase difficulty with each success."</em> (tăng độ khó sau mỗi lần thành công)</td><td>mỗi lần người chơi vượt qua một thử thách, thử thách kế tiếp khó hơn một chút, luôn kết hợp với nhịp lên-xuống chứ không tăng liên tục.</td></tr>
+                    <tr><td><em>"Let players get through easy parts fast."</em> (để người chơi vượt nhanh qua đoạn dễ)</td><td>để người chơi đã giỏi lướt nhanh qua đoạn dễ, không bắt họ lê chân qua thứ họ đã thành thạo.</td></tr>
+                    <tr><td><em>"Playtest with a variety of players."</em> (playtest với nhiều kiểu người chơi khác nhau)</td><td>test với cả người mới lẫn người có kinh nghiệm, vì "vừa sức" của người này có thể là "quá dễ" hoặc "quá khó" của người khác.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <figure class="diagram wide">
+            <svg class="chart-cost-curve" viewBox="0 0 320 180" role="img" aria-label="Bieu do duong cong do kho theo thoi gian: dinh la luc cang, day la luc tha long, day sau cao hon day truoc">
+                <line class="axis-line" x1="40" y1="150" x2="290" y2="150"></line>
+                <line class="axis-line" x1="40" y1="150" x2="40" y2="20"></line>
+                <polyline class="ideal-line" fill="none" points="40,130 90,70 140,110 190,50 240,90 290,30"></polyline>
+                <text class="svg-sub" x="165" y="172" text-anchor="middle">Thời gian</text>
+                <text class="svg-sub" x="16" y="85" text-anchor="middle" transform="rotate(-90 16 85)">Độ khó</text>
+                <circle class="pt pt-over" cx="90" cy="70" r="6"></circle>
+                <text class="svg-label" x="90" y="58" text-anchor="middle">1</text>
+                <circle class="pt pt-under" cx="140" cy="110" r="6"></circle>
+                <text class="svg-label" x="140" y="126" text-anchor="middle">2</text>
+                <circle class="pt pt-over" cx="190" cy="50" r="6"></circle>
+                <circle class="pt pt-under" cx="240" cy="90" r="6"></circle>
+                <circle class="pt pt-over" cx="290" cy="30" r="6"></circle>
+            </svg>
+            <ol class="chart-legend">
+                <li><span class="cell-dev" data-state="over">1</span> Đỉnh căng (tense) — mỗi đỉnh sau cao hơn đỉnh trước</li>
+                <li><span class="cell-dev" data-state="under">2</span> Đáy thả lỏng (release) — vẫn cao hơn đáy trước, không tụt về mức ban đầu</li>
+            </ol>
+            <figcaption>Sơ đồ minh hoạ của bài học cho kỹ thuật "tense and release" của Jesse Schell: độ khó lên xuống theo nhịp thay vì tăng thẳng một mạch.</figcaption>
+        </figure>
 
         <h2 id="vi-du">Ba cách xử lý độ khó, ba thể loại khác nhau</h2>
         <div class="table-wrap">
@@ -169,12 +221,26 @@
                 </tbody>
             </table>
         </div>
-        <p>Trong flOw, Jenova Chen thiết kế để người chơi tự quyết định mức thử thách bằng chính lựa chọn ăn gì trong game, không phải một hệ thống ẩn theo dõi số liệu. Ở Resident Evil 2 Remake, producer Yoshiaki Hirabayashi xác nhận, nguyên văn: <em>"In terms of the standard difficulty, it does adjust based on player performance."</em></p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Đo hiệu suất người chơi</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Điều chỉnh nhịp/độ khó</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Người chơi phản ứng</div>
+            </div>
+            <div class="loop-return">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                <span>Quay lại đo hiệu suất — vòng lặp chạy liên tục suốt ván chơi</span>
+            </div>
+            <figcaption>Vòng lặp DDA chung cho cả ba game trong bảng trên — mỗi game chỉnh một phần khác nhau của vòng lặp này. Sơ đồ minh hoạ của bài học.</figcaption>
+        </figure>
+        <p>Trong flOw, Jenova Chen thiết kế để người chơi tự quyết định mức thử thách bằng chính lựa chọn ăn gì trong game, không phải một hệ thống ẩn theo dõi số liệu. Ở Resident Evil 2 Remake, producer Yoshiaki Hirabayashi xác nhận, nguyên văn: <em>"In terms of the standard difficulty, it does adjust based on player performance."</em> (ở mức độ khó chuẩn, nó có điều chỉnh theo hiệu suất người chơi)</p>
         <div class="callout" data-kind="note">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
             <div class="callout-body">
-                <p class="callout-title">Về bảng trên</p>
-                <p>Chỉ câu trong ngoặc kép là nguyên văn. Mô tả cách mỗi game xử lý độ khó trong bảng là phân tích minh hoạ của bài. Riêng câu của Hirabayashi lấy từ một bài báo thuật lại phỏng vấn gốc, không phải văn bản chính thức của Capcom.</p>
+                <p class="callout-title">Về bảng và sơ đồ trên</p>
+                <p>Chỉ câu trong ngoặc kép là nguyên văn, còn mô tả cách xử lý độ khó trong bảng và vòng lặp DDA là phân tích minh hoạ của bài. Câu của Hirabayashi lấy từ một bài báo thuật lại phỏng vấn gốc, không phải văn bản chính thức của Capcom.</p>
             </div>
         </div>
 
@@ -196,7 +262,7 @@
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Nhầm lẫn phổ biến: DDA = làm game dễ hơn</p>
-                <p>Michael Booth (Valve), người viết AI Director của Left 4 Dead, tự phân biệt rõ trong slide GDC 2009, nguyên văn là hai dòng liền nhau: <em>"Algorithm adjusts pacing, not difficulty"</em> và <em>"Amplitude (difficulty) is not changed, frequency (pacing) is"</em>.</p>
+                <p>Michael Booth (Valve), người viết AI Director của Left 4 Dead, tự phân biệt rõ trong slide GDC 2009, nguyên văn là hai dòng liền nhau: <em>"Algorithm adjusts pacing, not difficulty"</em> (thuật toán chỉnh nhịp độ, không chỉnh độ khó) và <em>"Amplitude (difficulty) is not changed, frequency (pacing) is"</em> (biên độ — tức độ khó — không đổi, tần suất — tức nhịp độ — mới đổi).</p>
                 <p>Nghĩa là hệ thống chỉnh <strong>nhịp</strong> — khi nào dồn dập, khi nào cho người chơi thở — chứ không hạ sát thương hay số lượng kẻ địch. Ngược lại, có studio chọn không cho chỉnh độ khó chút nào: FromSoftware giữ Sekiro/Dark Souls một mức thử thách như nhau cho mọi người, vì tin cảm giác thành tựu chỉ trọn vẹn khi thử thách là công bằng với tất cả (đã nhắc ở bài Fun và động lực người chơi).</p>
             </div>
         </div>

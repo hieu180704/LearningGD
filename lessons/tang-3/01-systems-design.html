@@ -84,7 +84,7 @@
         <h2 id="co-che-va-he-thong">Từ cơ chế đơn lẻ tới hệ thống</h2>
         <p>Ở Tầng 1 bạn đã học MDA: Mechanics là luật, Dynamics là hành vi phát sinh khi luật đó chạy thật. Systems design đào sâu vào chỗ nối hai tầng ấy — nơi nhiều mechanic rời rạc gộp thành một <span class="term" data-en="system">hệ thống</span>.</p>
         <p>Hunicke, LeBlanc và Zubek định nghĩa mechanic ở mức cụ thể: <em>"Mechanics describes the particular components of the game, at the level of data representation and algorithms."</em> (các thành phần cụ thể của game, ở cấp dữ liệu và thuật toán.) Một mechanic đơn lẻ — "mỗi lượt tung xúc xắc" — chỉ là một mảnh rời.</p>
-        <p>Hệ thống xuất hiện khi các mảnh rời đó tương tác qua thời gian: <em>"Dynamics describes the run-time behavior of the mechanics acting on player inputs and each other's outputs over time."</em> (hành vi lúc chạy thật, khi các mechanic tác động lên input người chơi và lên nhau, theo thời gian.) Nói ngắn gọn: <em>"the mechanics give rise to dynamic system behavior, which in turn leads to particular aesthetic experiences."</em> (mechanic sinh ra hành vi hệ thống, hành vi đó dẫn tới trải nghiệm cảm xúc cụ thể.)</p>
+        <p>Hệ thống xuất hiện khi các mảnh rời đó tương tác qua thời gian: <em>"Dynamics describes the run-time behavior of the mechanics acting on player inputs and each other's outputs over time."</em> (hành vi lúc chạy thật, khi các mechanic tác động lên input người chơi và lên nhau, theo thời gian.) Nói ngắn gọn: theo Hunicke, LeBlanc và Zubek, mechanic sinh ra hành vi hệ thống, và hành vi hệ thống đó dẫn tới trải nghiệm cảm xúc cụ thể cho người chơi.</p>
         <figure class="diagram wide">
             <div class="mda-diagram">
                 <div class="mda-block loop">Cơ chế rời<small>Luật, dữ liệu, thuật toán</small></div>
@@ -97,7 +97,7 @@
         </figure>
 
         <h2 id="doc-so-do-he-thong">Đọc một sơ đồ hệ thống</h2>
-        <p>Joris Dormans giới thiệu khung Machinations để vẽ đúng phần khó thấy nhất của một hệ thống: dòng tài nguyên chảy qua các mắt xích. Ông viết: <em>"The Machinations framework is designed to model activity, interaction, and communication between the parts of a game's internal economy."</em> (mô tả hoạt động, tương tác và trao đổi giữa các phần trong nền kinh tế nội bộ của game.) Lý do cần một ngôn ngữ hình riêng: <em>"A game's economic system is dominated by the flow of resources."</em> (hệ thống kinh tế của game bị chi phối bởi <span class="term" data-en="resource flow">dòng chảy tài nguyên</span>.)</p>
+        <p>Joris Dormans giới thiệu khung Machinations để vẽ đúng phần khó thấy nhất của một hệ thống: dòng tài nguyên chảy qua các mắt xích. Ông mô tả khung này dùng để thể hiện hoạt động, tương tác và trao đổi giữa các phần trong nền kinh tế nội bộ của game — vì theo ông, hệ thống kinh tế của một game luôn bị chi phối bởi <span class="term" data-en="resource flow">dòng chảy tài nguyên</span>.</p>
         <p>Bạn chưa cần tính số liệu (bài sau mới tới) — chỉ cần đọc 4 ký hiệu cốt lõi, và hiểu mũi tên là một dòng tài nguyên đang chảy.</p>
         <div class="table-wrap">
             <table class="compare">
@@ -123,9 +123,9 @@
 
         <h2 id="vong-phan-hoi">Vòng phản hồi: dương và âm</h2>
         <p>Xoáy càng ngày càng giàu trong Monopoly có tên gọi: một <span class="term" data-en="positive feedback loop">vòng phản hồi dương</span>. Ian Schreiber định nghĩa rạch ròi cả hai chiều: <em>"positive feedback loop" means that receiving a power reward makes it more likely that you'll receive more, in other words it rewards you for doing well and punishes you for doing poorly; "negative feedback loop" is the opposite, where receiving a power reward makes it less likely you'll receive more, so it punishes you for doing well and rewards you for doing poorly.</em> (vòng dương: thưởng càng nhiều càng dễ nhận thêm — ưu ái người đang tốt. <span class="term" data-en="negative feedback loop">Vòng phản hồi âm</span> thì ngược lại: cản người đang tốt, ưu ái người đang kém.)</p>
-        <p>David Sirlin đặt tên dễ nhớ hơn. Vòng dương ông gọi là "dốc trơn": <em>"If a game has slippery slope, it means that falling behind causes you to fall even further behind."</em> (tụt lại sẽ khiến bạn tụt càng xa hơn) — <em>"a loop that amplifies itself as in a nuclear reaction"</em> (tự khuếch đại như phản ứng hạt nhân). Vòng âm, ông gọi "lội ngược liên tục", ví như nhiệt kế điều nhiệt: <em>"A thermostat uses negative feedback to keep the temperature of a room from spiraling out of control."</em> (giữ nhiệt độ phòng không vọt mất kiểm soát.)</p>
-        <p>Vài ví dụ: vỏ rùa xanh Mario Kart — <em>"The further behind you are, the more powerful the items you get"</em> (càng sau càng nhận vật phẩm mạnh) — là vòng âm. Mutator Fatboy trong Unreal Tournament (giết địch thì to hơn, dễ trúng đạn hơn) là vòng âm "mềm". Ngược lại, Sirlin xác nhận <em>"StarCraft and Chess both have slippery slope"</em> (đều có dốc trơn) — sai lầm nhỏ đầu ván có thể quyết định cả trận, rất lâu trước nước chiếu bí.</p>
-        <p>Game đua xe gọi chung hiệu ứng vòng âm này là rubber-banding. Dave Mark: <em>"If you are doing well, the competition starts doing well. If you are sucking badly, so do they."</em> (bạn chơi tốt thì đối thủ tốt lên, bạn tệ thì họ cũng tệ theo.)</p>
+        <p>David Sirlin đặt tên dễ nhớ hơn. Vòng dương ông gọi là "dốc trơn": <em>"If a game has slippery slope, it means that falling behind causes you to fall even further behind."</em> (tụt lại sẽ khiến bạn tụt càng xa hơn) — một vòng tự khuếch đại, theo ông chẳng khác gì phản ứng hạt nhân. Vòng âm, ông gọi "lội ngược liên tục", ví như nhiệt kế điều nhiệt: <em>"A thermostat uses negative feedback to keep the temperature of a room from spiraling out of control."</em> (giữ nhiệt độ phòng không vọt mất kiểm soát.)</p>
+        <p>Vài ví dụ: vỏ rùa xanh Mario Kart — <em>"The further behind you are, the more powerful the items you get"</em> (càng sau càng nhận vật phẩm mạnh) — là vòng âm. Mutator Fatboy trong Unreal Tournament (giết địch thì to hơn, dễ trúng đạn hơn) là vòng âm "mềm". Ngược lại, Sirlin xác nhận StarCraft và cờ vua đều có dốc trơn — sai lầm nhỏ đầu ván có thể quyết định cả trận, rất lâu trước nước chiếu bí.</p>
+        <p>Game đua xe gọi chung hiệu ứng vòng âm này là rubber-banding — theo Dave Mark, khi bạn chơi tốt thì đối thủ tự động tốt lên theo, còn khi bạn chơi tệ thì đối thủ cũng tệ theo.</p>
         <figure class="diagram wide">
             <div class="mda-diagram">
                 <div class="mda-block loop">Thắng thêm</div>
@@ -140,11 +140,25 @@
             </div>
             <figcaption>Vòng phản hồi dương: mỗi lượt qua vòng, khoảng cách với người phía sau càng rộng thêm.</figcaption>
         </figure>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Tụt lại</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Vật phẩm mạnh hơn</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Rút ngắn khoảng cách</div>
+            </div>
+            <div class="loop-return">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                <span>Quay lại "Tụt lại" — nhưng khoảng cách đã hẹp hơn, vòng tự làm yếu chính nó (vỏ rùa xanh Mario Kart)</span>
+            </div>
+            <figcaption>Vòng phản hồi âm: mỗi lượt qua vòng, khoảng cách với người dẫn đầu càng thu hẹp lại.</figcaption>
+        </figure>
 
         <h2 id="chon-vong-nao">Khi nào dùng vòng nào</h2>
         <p>Vòng dương không mặc định xấu, vòng âm không mặc định tốt — cả hai là công cụ, dùng đúng lúc mới có giá trị.</p>
         <p>Cờ vua gần như toàn vòng dương, trừ một ngoại lệ có chủ đích: phong hậu. Schreiber: <em>"Chess does have one positive-sum element, pawn promotion, but that generally happens rarely and only in the end game, and serves the important purpose of adding a positive feedback loop to bring the game to a close."</em> (phong hậu hiếm khi xảy ra, chỉ ở cuối ván, thêm một vòng dương để kết thúc ván đấu — không có nó, ván ngang sức có thể kéo dài vô ích.)</p>
-        <p>Ngược lại, vòng âm giữ trận sát nút tới cuối. Sirlin: <em>"it makes games closer, and small early mistakes are not crippling"</em> (ván đấu sít sao hơn, sai lầm nhỏ đầu trận không định đoạt cả trận). Riot Games, nhà phát triển League of Legends, mô tả việc cân hai lực này trong một game PvP thật: <em>"Comeback mechanics allow losing teams an achievable but difficult path back into the game. When tuned correctly, they help to balance snowballing, but it's a very fine line."</em> (cơ chế comeback cho đội thua một đường trở lại khó nhưng khả thi — chỉnh đúng thì cân được snowball, nhưng là ranh giới rất mong manh.)</p>
+        <p>Ngược lại, vòng âm giữ trận sát nút tới cuối — theo Sirlin, nó khiến ván đấu sít sao hơn, sai lầm nhỏ đầu trận không định đoạt cả trận. Riot Games, nhà phát triển League of Legends, mô tả việc cân hai lực này trong một game PvP thật: <em>"Comeback mechanics allow losing teams an achievable but difficult path back into the game. When tuned correctly, they help to balance snowballing, but it's a very fine line."</em> (cơ chế comeback cho đội thua một đường trở lại khó nhưng khả thi — chỉnh đúng thì cân được snowball, nhưng là ranh giới rất mong manh.)</p>
         <div class="table-wrap">
             <table class="compare">
                 <thead><tr><th>Vòng dương</th><th>Vòng âm</th></tr></thead>
@@ -164,11 +178,11 @@
         </div>
 
         <h2 id="he-qua-ngoai-du-tinh">Khi hệ thống vượt khỏi tay bạn</h2>
-        <p>Đôi khi hệ thống tạo ra hành vi mà chính người thiết kế cũng không lường trước. Jesper Juul gọi đây là <span class="term" data-en="emergent behavior">hành vi nổi lên</span>: <em>"Emergence games often surprise players and even the designers of the game."</em> (làm bất ngờ cả người chơi lẫn chính người thiết kế.) Lý do nằm ở bản chất luật chơi: <em>"a game is specified as a small number of rules that combine and yield large numbers of game variations, which the players then design strategies for dealing with."</em> (một số ít luật cộng dồn sinh ra vô số biến thể — người chơi tự nghĩ chiến thuật đối phó.)</p>
+        <p>Đôi khi hệ thống tạo ra hành vi mà chính người thiết kế cũng không lường trước. Jesper Juul gọi đây là <span class="term" data-en="emergent behavior">hành vi nổi lên</span>: <em>"Emergence games often surprise players and even the designers of the game."</em> (làm bất ngờ cả người chơi lẫn chính người thiết kế.) Lý do nằm ở bản chất luật chơi: theo Juul, chỉ cần một số ít luật cộng dồn lại là đã có thể sinh ra vô số biến thể, và người chơi sẽ tự nghĩ ra chiến thuật để đối phó với từng biến thể đó.</p>
         <p>Không phải hành vi nổi lên nào cũng đáng giữ. Sirlin gọi trường hợp xấu là <span class="term" data-en="degenerate strategy">chiến thuật thoái hoá</span>: <em>"When a game doesn't hold up to expert play, it's degenerate in some way. There's only one good move or one good character, or one good strategy, or something like that."</em> (game không trụ được trước lối chơi trình độ cao — chỉ còn đúng một nước đi, một nhân vật, hay một chiến thuật tốt.)</p>
-        <p>Có loại hành vi nổi lên không nằm trong luật nào cả — nó sinh từ chính người chơi. Schreiber: <em>"everyone by default will gang up on the leader"</em> (mặc định xúm lại đánh hội đồng người dẫn đầu). Đây là một vòng âm tự phát, nhưng dễ quá đà: <em>"players tend to overshoot"</em> (ra tay quá tay), khiến chơi tốt lại giống như bị trừng phạt.</p>
+        <p>Có loại hành vi nổi lên không nằm trong luật nào cả — nó sinh từ chính người chơi. Schreiber: <em>"everyone by default will gang up on the leader"</em> (mặc định xúm lại đánh hội đồng người dẫn đầu). Đây là một vòng âm tự phát, nhưng dễ quá đà — theo Schreiber, người chơi thường ra tay quá tay, khiến chơi tốt lại giống như bị trừng phạt.</p>
         <p>Ranh giới giữa "hành vi thú vị" và lỗ hổng cần vá gọi là exploit: <em>"the use of a feature that gives a substantial unfair advantage to players using it."</em> (dùng một tính năng để có lợi thế không công bằng đáng kể.) Nó có thể là một mechanic có chủ đích bị lạm dụng, hoặc là tác dụng phụ ngoài ý muốn của một bug hay glitch.</p>
-        <p>Ví dụ rõ nhất cho một hành vi nhận hai quyết định khác nhau là wavedashing trong Super Smash Bros. Melee. Sakurai xác nhận đội biết từ lúc dev: <em>"Of course, we noticed that you could do that during the development period."</em> (biết ngay từ khi phát triển.) Nhưng tới Brawl, ông bỏ nó — không vì coi là bug, mà vì <em>"there was a growing gap between beginners and advanced players, and taking that out helps to level the playing field"</em> (khoảng cách người mới và người giỏi ngày càng rộng, bỏ nó để san bằng sân chơi). Cùng một hành vi, hai mục tiêu thiết kế khác nhau.</p>
+        <p>Ví dụ rõ nhất cho một hành vi nhận hai quyết định khác nhau là wavedashing trong Super Smash Bros. Melee. Sakurai xác nhận đội đã biết ngay từ lúc phát triển game. Nhưng tới Brawl, ông bỏ nó — không vì coi là bug, mà vì <em>"there was a growing gap between beginners and advanced players, and taking that out helps to level the playing field"</em> (khoảng cách người mới và người giỏi ngày càng rộng, bỏ nó để san bằng sân chơi). Cùng một hành vi, hai mục tiêu thiết kế khác nhau.</p>
         <div class="table-wrap">
             <table class="compare">
                 <thead><tr><th>Ví dụ</th><th>Designer đã làm gì</th></tr></thead>

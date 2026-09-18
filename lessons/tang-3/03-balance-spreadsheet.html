@@ -102,6 +102,55 @@
         </div>
         <p>Định giá lá mới: một creature 4/3 màu Blue có benefit = 1 (Blue) + 4 (Power) + 3 (Toughness) = 8, nên giá kỳ vọng của nó là U4.</p>
         <p>Soát lá đã có: một creature 1/4 giá W3 có cost = 1 (baseline) + 2 (mana W có màu) + 3 (mana không màu) = 6, nhưng benefit chỉ = 1 (power) + 4 (toughness) = 5 — lá này nằm <strong>1 điểm dưới đường cong</strong> (below the curve), tức hơi yếu so với giá phải trả.</p>
+
+        <figure class="diagram wide">
+            <table class="compare spreadsheet">
+                <thead>
+                    <tr><th class="cell-corner" scope="col"></th><th class="col-letter" scope="col">A</th><th class="col-letter" scope="col">B</th><th class="col-letter" scope="col">C</th><th class="col-letter" scope="col">D</th><th class="col-letter" scope="col">E</th></tr>
+                </thead>
+                <tbody>
+                    <tr><th class="row-num" scope="row">1</th><th scope="col">Lá bài</th><th scope="col">Giá in trên lá</th><th scope="col">Cost (tính)</th><th scope="col">Benefit (tính)</th><th scope="col">Lệch</th></tr>
+                    <tr><th class="row-num" scope="row">2</th><td>4/3 Blue</td><td>U4</td><td>8</td><td>8</td><td class="cell-dev" data-state="zero">0</td></tr>
+                    <tr><th class="row-num" scope="row">3</th><td>1/4 White</td><td>W3</td><td>6</td><td>5</td><td class="cell-dev" data-state="under">−1</td></tr>
+                    <tr><th class="row-num" scope="row">4</th><td>3/3 Green</td><td>4</td><td>5</td><td>6</td><td class="cell-dev" data-state="over">+1</td></tr>
+                    <tr><th class="row-num" scope="row">5</th><td>2/2 Red</td><td>R2</td><td>5</td><td>5</td><td class="cell-dev" data-state="zero">0</td></tr>
+                    <tr><th class="row-num" scope="row">6</th><td>1/1 Green</td><td>3</td><td>4</td><td>2</td><td class="cell-dev" data-state="under">−2</td></tr>
+                </tbody>
+            </table>
+            <figcaption>Bảng tính suy ngược công thức định giá — cách một bảng cân bằng thật trông như thế nào. Dòng 2 và 3 lấy đúng số trong ví dụ Magic: The Gathering 2011 của Ian Schreiber đã dẫn ở trên; ba dòng còn lại tự tính theo đúng công thức đó để minh hoạ đủ ba trạng thái lệch. Cột E: <strong>0</strong> là đúng giá, số <strong>dương</strong> là trên đường cong (quá mạnh), số <strong>âm</strong> là dưới đường cong (quá yếu).</figcaption>
+        </figure>
+
+        <figure class="diagram wide">
+            <svg class="chart-cost-curve" viewBox="0 0 300 300" role="img" aria-label="Biểu đồ cost curve: trục ngang Cost, trục dọc Benefit, đường chéo là đường cong lý tưởng, 5 điểm dữ liệu ứng với 5 lá bài trong bảng trên">
+                <line class="axis-line" x1="56" y1="264" x2="284" y2="264"></line>
+                <line class="axis-line" x1="56" y1="264" x2="56" y2="40"></line>
+                <line class="ideal-line" x1="56" y1="264" x2="272" y2="48"></line>
+                <text class="svg-sub" x="170" y="292" text-anchor="middle">Cost</text>
+                <text class="svg-sub" x="24" y="152" text-anchor="middle" transform="rotate(-90 24 152)">Benefit</text>
+                <text class="svg-sub" x="48" y="276" text-anchor="end">0</text>
+                <text class="svg-sub" x="248" y="280" text-anchor="middle">8</text>
+                <text class="svg-sub" x="44" y="76" text-anchor="end">8</text>
+                <circle class="pt pt-ok" cx="248" cy="72" r="7"></circle>
+                <text class="svg-label" x="262" y="76" text-anchor="start">1</text>
+                <circle class="pt pt-under" cx="200" cy="144" r="7"></circle>
+                <text class="svg-label" x="214" y="148" text-anchor="start">2</text>
+                <circle class="pt pt-over" cx="176" cy="120" r="7"></circle>
+                <text class="svg-label" x="162" y="124" text-anchor="end">3</text>
+                <circle class="pt pt-ok" cx="176" cy="144" r="7"></circle>
+                <text class="svg-label" x="162" y="152" text-anchor="end">4</text>
+                <circle class="pt pt-under" cx="152" cy="216" r="7"></circle>
+                <text class="svg-label" x="166" y="220" text-anchor="start">5</text>
+            </svg>
+            <ol class="chart-legend">
+                <li><span class="cell-dev" data-state="zero">1</span> 4/3 Blue (U4) — đúng giá</li>
+                <li><span class="cell-dev" data-state="under">2</span> 1/4 White (W3) — dưới đường</li>
+                <li><span class="cell-dev" data-state="over">3</span> 3/3 Green (4) — trên đường</li>
+                <li><span class="cell-dev" data-state="zero">4</span> 2/2 Red (R2) — đúng giá</li>
+                <li><span class="cell-dev" data-state="under">5</span> 1/1 Green (3) — dưới đường</li>
+            </ol>
+            <figcaption>Sơ đồ minh hoạ của bài học: điểm nằm trên đường chéo lý tưởng (cost = benefit) là quá mạnh, dưới đường là quá yếu. Toạ độ lấy từ 5 lá trong bảng tính ở trên.</figcaption>
+        </figure>
+
         <p>Bảng tính không cho bạn câu trả lời cuối cùng — nó chỉ cho bạn thấy chỗ lệch để đi kiểm tra tiếp.</p>
         <div class="callout" data-kind="note">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
@@ -147,6 +196,20 @@
         <h2 id="playtest">Bảng số không thay được playtest</h2>
         <p>Cost curve chỉ áp dụng cho phần transitive — các lựa chọn so sánh được, cộng dồn được. Với quan hệ khắc chế vòng tròn kiểu oẳn tù tì, không có đường cong nào cả: <em>"It can’t be a cost curve, because each choice wins sometimes and loses sometimes."</em> (không thể có cost curve, vì mỗi lựa chọn lúc thắng lúc thua.)</p>
         <p>Bảng tính cho giả thuyết, người chơi mới cho kết luận: <em>"Playtest the game with friends and challenge them to “break” the game by finding exploits and optimal strategies."</em> (chơi thử game cùng bạn bè và thách họ "phá" game bằng cách tìm lỗ hổng và chiến thuật tối ưu.) Vòng lặp thật: dựng bảng → playtest → sửa lại đường cong → lặp lại.</p>
+
+        <figure class="diagram wide">
+            <ol class="steps">
+                <li><span><strong>Dựng bảng.</strong> Tính cost/benefit từng lựa chọn theo công thức, tìm lá lệch khỏi đường cong.</span></li>
+                <li><span><strong>Playtest.</strong> Người chơi thật thử game, tìm cách "phá" bằng exploit hoặc chiến thuật tối ưu.</span></li>
+                <li><span><strong>Sửa lại đường cong.</strong> Chỉnh công thức hoặc số liệu theo đúng điều người chơi vừa cho thấy.</span></li>
+                <li><span><strong>Lặp lại.</strong> Dựng bảng mới với số đã sửa, rồi playtest tiếp.</span></li>
+            </ol>
+            <div class="loop-return">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                <span>Quay lại "Dựng bảng" — vòng lặp không có điểm dừng cố định</span>
+            </div>
+            <figcaption>Vòng lặp cân bằng bốn bước: bảng tính cho giả thuyết, playtest cho kết luận, rồi quay lại sửa số. Minh hoạ của bài học.</figcaption>
+        </figure>
 
         <h2 id="lens">Soi bảng số của một game bất kỳ</h2>
         <div class="lens">

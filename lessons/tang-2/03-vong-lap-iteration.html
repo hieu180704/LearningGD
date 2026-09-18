@@ -78,11 +78,11 @@
 
         <h2 id="mo-bai">Thử thách cơ bản đã đủ hấp dẫn</h2>
         <p>Asher Vollmer và Greg Wohlwend dành hơn sáu tháng thử nghiệm thiết kế cho Threes — trò chơi giải đố trượt ô số. Theo tường thuật của Game Developer, trong quãng thời gian đó cả hai thử thêm chướng ngại vật, quái vật, những ký hiệu hào nhoáng, với hy vọng giữ chân người chơi lâu hơn.</p>
-        <p>Rồi họ nhận ra thử thách cơ bản — trượt các ô số trong một không gian hẹp để đạt điểm cao nhất — đã đủ hấp dẫn. Câu trích nổi bật trong bài viết: <em>"If the game isn't compelling enough to hold someone's attention, then the game needs to be better."</em></p>
+        <p>Rồi họ nhận ra thử thách cơ bản — trượt các ô số trong một không gian hẹp để đạt điểm cao nhất — đã đủ hấp dẫn. Câu trích nổi bật trong bài viết: <em>"If the game isn't compelling enough to hold someone's attention, then the game needs to be better."</em> (nếu game không đủ hấp dẫn để giữ được sự chú ý của ai đó, thì game cần phải hay hơn.)</p>
         <p>Cách người viết bài đọc câu chuyện này: thiết kế cuối cùng không nằm sẵn trong đầu từ đầu, mà lộ ra qua việc làm, chơi, thấy chưa ổn, sửa, rồi thử lại. Vòng lặp đó có tên gọi riêng: <span class="term" data-en="iterative design">thiết kế lặp</span>.</p>
 
         <h2 id="khai-niem">Vòng lặp: làm, thử, phân tích, sửa</h2>
-        <p>Eric Zimmerman mô tả quy trình này gọn trong ba bước lặp lại: <em>"Test; analyze; refine. And repeat."</em> Nói đầy đủ hơn, iterative design là một phương pháp thiết kế dựa trên vòng lặp liên tục: dựng một bản thử, kiểm thử nó, phân tích kết quả thu được, rồi tinh chỉnh lại bản đang làm — theo cách Zimmerman định nghĩa.</p>
+        <p>Eric Zimmerman mô tả quy trình này gọn trong ba bước lặp lại: <em>"Test; analyze; refine. And repeat."</em> (kiểm thử; phân tích; tinh chỉnh. Rồi lặp lại.) Nói đầy đủ hơn, iterative design là một phương pháp thiết kế dựa trên vòng lặp liên tục: dựng một bản thử, kiểm thử nó, phân tích kết quả thu được, rồi tinh chỉnh lại bản đang làm — theo cách Zimmerman định nghĩa.</p>
         <p>Bước "kiểm thử" trong vòng lặp này chính là buổi playtest đã nói ở bài trước — xem lại <a href="02-playtest.html">bài Playtest</a> nếu cần ôn lại cách chuẩn bị và quan sát một buổi test.</p>
         <figure class="diagram wide">
             <div class="mda-diagram">
@@ -98,17 +98,31 @@
                     <small>Đọc kết quả, tinh chỉnh lại bản thử.</small>
                 </div>
             </div>
-            <figcaption>Sơ đồ do người viết bài tổng hợp theo định nghĩa của Zimmerman; mũi tên cuối quay lại bước đầu.</figcaption>
+            <div class="loop-return">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                <span>Quay lại Prototype — vòng lặp không dừng lại chỉ sau một lần sửa</span>
+            </div>
+            <figcaption>Sơ đồ do người viết bài tổng hợp theo định nghĩa của Zimmerman: dựng, thử, phân tích rồi sửa — mũi tên cuối quay lại bước đầu, vì "And repeat" là một phần của định nghĩa.</figcaption>
         </figure>
-        <p>Vì sao phải lặp thay vì cố làm đúng ngay từ lần đầu? Ian Schreiber trả lời ngắn gọn: <em>"The purpose of iteration is to lower design risk."</em> Càng lặp nhiều, bạn càng chắc luật chơi của mình thật sự hoạt động — trước khi đổ quá nhiều công sức vào một hướng có thể sai.</p>
+        <p>Vì sao phải lặp thay vì cố làm đúng ngay từ lần đầu? Ian Schreiber trả lời ngắn gọn: <em>"The purpose of iteration is to lower design risk."</em> (mục đích của iteration là hạ thấp rủi ro thiết kế.) Càng lặp nhiều, bạn càng chắc luật chơi của mình thật sự hoạt động — trước khi đổ quá nhiều công sức vào một hướng có thể sai.</p>
 
         <h2 id="vong-lap-ngan">Vòng lặp càng ngắn, sai lầm càng rẻ</h2>
         <p>Daniel Cook, viết về quy trình phát triển sản phẩm nói chung chứ không riêng game, so sánh hai cách làm: một bên mất 12 đến 18 tháng để hoàn thiện một ý tưởng trước khi đưa cho người dùng thấy; bên kia dựng bản mới và đưa ra trước người dùng mỗi 2 đến 4 tuần.</p>
-        <p>Cook giải thích vì sao cách thứ hai an toàn hơn: <em>"The short feedback cycles ensures the big mistakes happen far less often."</em> Nếu một đội đi lệch hướng một chút, họ nhanh chóng nhận ra đó là ý tưởng tồi và sửa lại hướng đi — thay vì phát hiện sai lầm sau khi đã đổ cả năm trời công sức vào đó.</p>
+        <p>Cook giải thích vì sao cách thứ hai an toàn hơn: <em>"The short feedback cycles ensures the big mistakes happen far less often."</em> (chu kỳ phản hồi ngắn giúp những sai lầm lớn xảy ra ít hơn nhiều.) Nếu một đội đi lệch hướng một chút, họ nhanh chóng nhận ra đó là ý tưởng tồi và sửa lại hướng đi — thay vì phát hiện sai lầm sau khi đã đổ cả năm trời công sức vào đó.</p>
+        <figure class="diagram wide">
+            <table class="compare">
+                <thead><tr><th>Vòng dài</th><th>Vòng ngắn (Cook đề xuất)</th></tr></thead>
+                <tbody>
+                    <tr><td>12–18 tháng mới hoàn thiện một ý tưởng, rồi mới đưa cho người dùng thấy</td><td>Dựng bản mới và đưa ra trước người dùng mỗi 2–4 tuần</td></tr>
+                    <tr><td>Nếu đi sai hướng, chỉ phát hiện ra sau khi đã đổ cả năm trời công sức</td><td>Đi lệch hướng một chút là nhanh chóng nhận ra và sửa lại</td></tr>
+                </tbody>
+            </table>
+            <figcaption>Sơ đồ minh hoạ của bài học, theo so sánh của Daniel Cook: vòng lặp càng ngắn, sai lầm lớn càng được phát hiện sớm và rẻ hơn để sửa.</figcaption>
+        </figure>
 
         <h2 id="khi-nao-dung">Khi nào dừng lặp, khi nào bỏ hẳn</h2>
-        <p>Vòng lặp không lặp mãi mãi. Schreiber gói gọn tiêu chí dừng trong một câu: <em>"If you decide the game is good enough, then that is that."</em> Fullerton diễn đạt gần tương tự: quá trình thiết kế – test – đánh giá được lặp lại nhiều lần, cho tới khi thiết kế được xem là đã đáp ứng mục tiêu đề ra.</p>
-        <p>Nhưng đôi khi câu trả lời không phải "dừng vì đã đủ tốt", mà là "dừng vì ý tưởng này không đáng làm tiếp". Cook gọi những điểm dừng đó là kill gate: <em>"gates every few iterations that kill poorly performing projects"</em> — những chốt chặn sau mỗi vài vòng lặp, nơi các dự án hoạt động kém bị dừng hẳn thay vì tiếp tục đổ thêm công sức.</p>
+        <p>Vòng lặp không lặp mãi mãi. Schreiber gói gọn tiêu chí dừng trong một câu: <em>"If you decide the game is good enough, then that is that."</em> (nếu bạn quyết định game đã đủ tốt, vậy là xong.) Fullerton diễn đạt gần tương tự: quá trình thiết kế – test – đánh giá được lặp lại nhiều lần, cho tới khi thiết kế được xem là đã đáp ứng mục tiêu đề ra.</p>
+        <p>Nhưng đôi khi câu trả lời không phải "dừng vì đã đủ tốt", mà là "dừng vì ý tưởng này không đáng làm tiếp". Cook gọi những điểm dừng đó là kill gate: <em>"gates every few iterations that kill poorly performing projects"</em> (những chốt chặn sau mỗi vài vòng lặp, nơi các dự án hoạt động kém bị dừng hẳn thay vì tiếp tục đổ thêm công sức.)</p>
 
         <h2 id="vi-du">Ba đội, ba cách lặp</h2>
         <div class="callout" data-kind="note">
@@ -150,7 +164,7 @@
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Viết bản thiết kế đầy đủ rồi mới đem đi test</p>
-                <p>Zimmerman kể lối làm game bán lẻ thường gặp: nghĩ ra một concept hoàn chỉnh, viết tài liệu thiết kế chi tiết mọi khía cạnh, rồi mới làm. Ông so sánh: <em>"A more iterative design process, on the other hand, will not only streamline development resources, but will also result in a more robust and successful final product."</em> Càng chờ lâu mới đưa bản thử ra test, càng phát hiện vấn đề muộn.</p>
+                <p>Zimmerman kể lối làm game bán lẻ thường gặp: nghĩ ra một concept hoàn chỉnh, viết tài liệu thiết kế chi tiết mọi khía cạnh, rồi mới làm. Ông so sánh: <em>"A more iterative design process, on the other hand, will not only streamline development resources, but will also result in a more robust and successful final product."</em> (ngược lại, một quy trình thiết kế lặp nhiều hơn không chỉ giúp tinh gọn nguồn lực phát triển, mà còn cho ra sản phẩm cuối cùng chắc chắn và thành công hơn.) Càng chờ lâu mới đưa bản thử ra test, càng phát hiện vấn đề muộn.</p>
             </div>
         </div>
         <div class="callout" data-kind="mistake">
@@ -164,9 +178,20 @@
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
             <div class="callout-body">
                 <p class="callout-title">Không dám bỏ ý tưởng dù đã thấy dấu hiệu xấu</p>
-                <p>Jonathan Dower (Supercell), khi được hỏi lúc nào nên bỏ một game đang làm: <em>"once you get that feeling about the 'other game,' or about the game you 'should' be making, in your mind, you've probably already killed your game."</em> Nguồn nhấn mạnh đây là cách làm của riêng Supercell, không áp dụng cho mọi studio — nhiều studio không đủ tài chính để bỏ hẳn một game như vậy.</p>
+                <p>Jonathan Dower (Supercell), khi được hỏi lúc nào nên bỏ một game đang làm: <em>"once you get that feeling about the 'other game,' or about the game you 'should' be making, in your mind, you've probably already killed your game."</em> (một khi bạn có cảm giác về "game khác" đó, hay về game mà bạn "nên" làm, trong đầu mình, thì nhiều khả năng bạn đã giết chết game của mình rồi.) Nguồn nhấn mạnh đây là cách làm của riêng Supercell, không áp dụng cho mọi studio — nhiều studio không đủ tài chính để bỏ hẳn một game như vậy.</p>
             </div>
         </div>
+        <figure class="diagram wide">
+            <table class="compare">
+                <thead><tr><th>Vòng lặp đang ổn</th><th>Vòng lặp đang hỏng</th></tr></thead>
+                <tbody>
+                    <tr><td>Đưa bản thử ra test sớm, dù còn thô</td><td>Viết tài liệu thiết kế đầy đủ mọi khía cạnh trước, chờ rất lâu mới đem đi test</td></tr>
+                    <tr><td>Mỗi vòng chỉ đổi đúng một thứ</td><td>Đổi nhiều thứ cùng lúc, không biết thay đổi nào tạo ra khác biệt</td></tr>
+                    <tr><td>Dám bỏ hẳn ý tưởng khi đã thấy dấu hiệu xấu</td><td>Không dám bỏ dù đã thấy dấu hiệu xấu, cứ cố lặp tiếp</td></tr>
+                </tbody>
+            </table>
+            <figcaption>Sơ đồ minh hoạ của bài học: tổng hợp lại 3 sai lầm hay gặp ở trên, đối chiếu cách làm nên tránh và cách làm nên theo.</figcaption>
+        </figure>
 
         <h2 id="thuc-hanh">3 vòng lặp cho prototype giấy</h2>
         <div class="exercise">

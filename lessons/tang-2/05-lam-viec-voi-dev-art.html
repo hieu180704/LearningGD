@@ -111,8 +111,20 @@
 
         <h2 id="noi-muc-tieu">Nói mục tiêu, đừng nói cách code</h2>
         <p>Một lập trình viên gameplay viết trên blog hỏi-đáp Ask a Game Dev: <em>"Most of the time the design goal isn't a specific and exact implementation of something, it's an attempt to craft an experience for the player."</em> (Phần lớn mục tiêu thiết kế không phải một cách hiện thực cụ thể và chính xác, mà là một nỗ lực tạo ra trải nghiệm cho người chơi.)</p>
-        <p>Hệ quả: <em>"When the end goal is as nebulous as an engaging experience, most of the time there are multiple alternative ways to reach the same goal."</em> (Khi đích đến mơ hồ như "một trải nghiệm hấp dẫn", thường có nhiều con đường khác nhau để tới cùng một đích.) Vì vậy <em>"a savvy designer will usually work with the engineer to find a '90% solution'"</em> — designer khôn ngoan sẽ làm việc cùng kỹ sư để tìm ra một <span class="term" data-en="90% solution">giải pháp 90%</span>: không đúng 100% hình dung ban đầu, nhưng giữ được cảm giác cốt lõi với chi phí kỹ thuật hợp lý.</p>
-        <p>Không phải pushback nào từ dev cũng nên bỏ qua, nhưng cũng không phải cái nào cũng nên nhượng bộ. Lý do đáng nghe: <em>"technical constraints or the task requiring too much engineering time"</em> (ràng buộc kỹ thuật thật, hoặc việc đòi hỏi quá nhiều thời gian kỹ thuật). Lý do không đáng nghe: <em>"the engineer just doesn't want to do it"</em> (lập trình viên đơn giản là không muốn làm). Khi nghe pushback, hỏi thẳng: ràng buộc cụ thể là gì?</p>
+        <p>Hệ quả: <em>"When the end goal is as nebulous as an engaging experience, most of the time there are multiple alternative ways to reach the same goal."</em> (Khi đích đến mơ hồ như "một trải nghiệm hấp dẫn", thường có nhiều con đường khác nhau để tới cùng một đích.) Vì vậy <em>"a savvy designer will usually work with the engineer to find a '90% solution'"</em> (designer khôn ngoan sẽ làm việc cùng kỹ sư để tìm ra một <span class="term" data-en="90% solution">giải pháp 90%</span>) — không đúng 100% hình dung ban đầu, nhưng giữ được cảm giác cốt lõi với chi phí kỹ thuật hợp lý.</p>
+        <p>Không phải pushback nào từ dev cũng nên bỏ qua, nhưng cũng không phải cái nào cũng nên nhượng bộ ngay. Khi nghe pushback, hỏi thẳng: ràng buộc cụ thể là gì? Bảng dưới đây phân biệt hai loại lý do thường gặp.</p>
+        <figure class="diagram wide">
+            <div class="table-wrap">
+                <table class="compare">
+                    <thead><tr><th>Loại lý do</th><th>Ví dụ nguyên văn</th><th>Nên làm gì</th></tr></thead>
+                    <tbody>
+                        <tr><td>Đáng nghe</td><td><em>"technical constraints or the task requiring too much engineering time"</em> (ràng buộc kỹ thuật thật, hoặc việc đòi hỏi quá nhiều thời gian kỹ thuật)</td><td>Cùng dev tìm giải pháp 90%</td></tr>
+                        <tr><td>Không đáng nghe</td><td><em>"the engineer just doesn't want to do it"</em> (lập trình viên đơn giản là không muốn làm)</td><td>Hỏi lại ràng buộc cụ thể, đừng nhượng bộ ngay</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <figcaption>Sơ đồ minh hoạ của bài học, dựng từ hai loại lý do pushback theo Ask a Game Dev.</figcaption>
+        </figure>
 
         <h2 id="noi-cam-giac">Nói cảm giác, đừng vẽ hộ artist</h2>
         <p>Designer không phải hoạ sĩ. Việc của designer là mô tả cảm giác thị giác muốn có, không phải tự vẽ hộ. Neil Blevins phân biệt ba công cụ theo giai đoạn:</p>
@@ -126,12 +138,28 @@
                 </tbody>
             </table>
         </div>
-        <p>Nguyên văn Blevins về callout sheet: <em>A callout sheet is very similar to a packet, except the reference tends to be on the same page as the design, and there are arrows, for you to "call out" all the little details.</em> Câu hỏi mà artist cần được trả lời trước, theo Blevins: <em>"Should I notice the size of the vehicle? The weathering on the vehicle? the way the paint on the vehicle looks?"</em> (Tôi có cần chú ý tới kích cỡ chiếc xe? Vết phong hoá trên xe? Cách sơn trông như thế nào?)</p>
+        <p>Theo Blevins, callout sheet giống design packet, chỉ khác ở chỗ reference nằm ngay trên cùng trang với concept, kèm mũi tên để "gọi tên" từng chi tiết nhỏ — như bảng trên đã tóm tắt. Câu hỏi mà artist cần được trả lời trước, theo Blevins: <em>"Should I notice the size of the vehicle? The weathering on the vehicle? the way the paint on the vehicle looks?"</em> (Tôi có cần chú ý tới kích cỡ chiếc xe? Vết phong hoá trên xe? Cách sơn trông như thế nào?)</p>
         <p>Hannah George bổ sung phía feedback: hãy <em>"clearly communicate your likes and dislikes regarding visual styles"</em> (nói rõ bạn thích và không thích gì về phong cách hình ảnh) và <em>"Use annotations or callouts..."</em> (dùng <span class="term" data-en="annotation">chú thích ngay trên ảnh</span> hoặc callout) thay vì chỉ nói chung chung. Adrian Gimate-Welsh nói rõ tác dụng: <em>"When the art team has clear and concrete references to draw from, much time in corrections is saved."</em> (Khi đội hoạ sĩ có reference rõ ràng và cụ thể để dựa vào, rất nhiều thời gian sửa lỗi được tiết kiệm.)</p>
 
         <h2 id="readability">Readability — chỗ design gặp art</h2>
         <p>Alex Kubodera: <em>"Readability can be broken down into telegraphing (what happens before) and expectations (what happens after)"</em> (khả năng đọc hiểu chia làm hai phần: <span class="term" data-en="telegraphing">báo trước</span> — điều xảy ra trước, và <span class="term" data-en="expectations">kỳ vọng</span> — điều xảy ra sau).</p>
         <p>Đây là chỗ design và art gặp nhau: designer quyết định logic — khi nào phải cảnh báo, khi nào phải phản hồi — nhưng chính artist là người vẽ ra tín hiệu đó bằng màu sắc, hình dạng, animation. Adam Henry: <em>"Color cues are truly the best way to spark intuition in our players"</em> (tín hiệu màu sắc thực sự là cách tốt nhất để khơi gợi trực giác của người chơi). Nếu hai bên không thống nhất trước một bảng màu ý nghĩa, tín hiệu sẽ lẫn lộn: <em>"If cues aren't placed to reflect our design, it can cause confusion within the playground."</em> (Nếu tín hiệu không được đặt để phản ánh đúng thiết kế, nó có thể gây nhầm lẫn trong sân chơi.)</p>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Designer
+                    <small>Quyết khi nào cần báo trước, khi nào cần phản hồi.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Artist
+                    <small>Vẽ tín hiệu bằng màu sắc, hình dạng, animation.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Người chơi
+                    <small>Đọc tín hiệu, hình thành kỳ vọng.</small>
+                </div>
+            </div>
+            <figcaption>Sơ đồ minh hoạ của bài học: readability là chỗ logic thiết kế của designer gặp tín hiệu thị giác do artist vẽ ra.</figcaption>
+        </figure>
 
         <h2 id="vi-du">Ba game, một case indie</h2>
         <div class="table-wrap">
@@ -163,6 +191,22 @@
         </div>
 
         <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Gửi yêu cầu
+                    <small>Rủi ro: biến mất, không ghé hỏi tiến độ.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Nhận bản nháp đầu
+                    <small>Rủi ro: feedback mơ hồ, không có annotation cụ thể.</small>
+                </div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Ráp vào game
+                    <small>Rủi ro: asset đẹp riêng lẻ nhưng lệch khi đặt chung.</small>
+                </div>
+            </div>
+            <figcaption>Sơ đồ minh hoạ của bài học: ba điểm dễ vỡ trong phối hợp, ứng với ba sai lầm bên dưới.</figcaption>
+        </figure>
         <div class="callout" data-kind="mistake">
             <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
             <div class="callout-body">
@@ -216,7 +260,7 @@
                 <button data-opt="b"><span class="badge">B</span> Project manager / producer</button>
                 <button data-opt="c"><span class="badge">C</span> Lập trình viên trưởng</button>
             </div>
-            <div class="explain" hidden><p>Nguyên văn Mullich: "It is the project manager's responsibility to provide the team with direction and support, balancing the scope of the game design against the project's time and budget constraints." Designer định nghĩa "làm gì", nhưng không phải người cân scope.</p></div>
+            <div class="explain" hidden><p>Nguyên văn Mullich: <em>"It is the project manager's responsibility to provide the team with direction and support, balancing the scope of the game design against the project's time and budget constraints."</em> (Producer/project manager chịu trách nhiệm cân bằng phạm vi thiết kế với ràng buộc thời gian và ngân sách của dự án.) Designer định nghĩa "làm gì", nhưng không phải người cân scope.</p></div>
         </div>
         <div class="quiz" data-answer="b">
             <p class="q">Theo Ask a Game Dev, phần lớn design goal là gì?</p>
@@ -225,7 +269,7 @@
                 <button data-opt="b"><span class="badge">B</span> Một nỗ lực tạo ra trải nghiệm cho người chơi</button>
                 <button data-opt="c"><span class="badge">C</span> Yêu cầu kỹ thuật phải tuân theo tuyệt đối</button>
             </div>
-            <div class="explain" hidden><p>Nguyên văn: "Most of the time the design goal isn't a specific and exact implementation of something, it's an attempt to craft an experience for the player." Vì vậy thường có nhiều cách khác nhau để đạt cùng một trải nghiệm.</p></div>
+            <div class="explain" hidden><p>Nguyên văn: <em>"Most of the time the design goal isn't a specific and exact implementation of something, it's an attempt to craft an experience for the player."</em> (Phần lớn mục tiêu thiết kế không phải một cách hiện thực cụ thể và chính xác, mà là một nỗ lực tạo ra trải nghiệm cho người chơi.) Vì vậy thường có nhiều cách khác nhau để đạt cùng một trải nghiệm.</p></div>
         </div>
         <div class="quiz" data-answer="b">
             <p class="q">Callout sheet khác mood board ở điểm nào, theo Neil Blevins?</p>
@@ -234,7 +278,7 @@
                 <button data-opt="b"><span class="badge">B</span> Reference nằm cùng trang với concept, có mũi tên gọi tên từng chi tiết</button>
                 <button data-opt="c"><span class="badge">C</span> Không cần reference, chỉ cần mô tả bằng lời</button>
             </div>
-            <div class="explain" hidden><p>Blevins mô tả callout sheet: reference nằm cùng trang với design, kèm mũi tên để "call out" từng chi tiết nhỏ. Mood board (đáp án A) là công cụ ở giai đoạn sớm hơn, thuần ảnh, chưa gắn concept.</p></div>
+            <div class="explain" hidden><p>Blevins mô tả callout sheet: reference nằm cùng trang với design, kèm mũi tên để <em>"call out"</em> (gọi tên) từng chi tiết nhỏ. Mood board (đáp án A) là công cụ ở giai đoạn sớm hơn, thuần ảnh, chưa gắn concept.</p></div>
         </div>
         <div class="quiz" data-answer="a">
             <p class="q">Theo Rahul Sehgal, vì sao nên review art thường xuyên, thậm chí mỗi ngày?</p>
@@ -243,7 +287,7 @@
                 <button data-opt="b"><span class="badge">B</span> Vì hợp đồng của artist yêu cầu báo cáo hàng ngày</button>
                 <button data-opt="c"><span class="badge">C</span> Vì artist làm việc chậm nên cần giám sát sát sao</button>
             </div>
-            <div class="explain" hidden><p>Sehgal: "Art assets... may look good when seen in isolation, but that doesn't mean that they will look as good once you put them into the game." Review sớm và thường xuyên để bắt lệch pha này trước khi quá muộn.</p></div>
+            <div class="explain" hidden><p>Sehgal: <em>"Art assets... may look good when seen in isolation, but that doesn't mean that they will look as good once you put them into the game."</em> (Asset có thể đẹp khi xem riêng lẻ, nhưng không có nghĩa nó sẽ đẹp như vậy khi đặt vào game.) Review sớm và thường xuyên để bắt lệch pha này trước khi quá muộn.</p></div>
         </div>
 
         <h2 id="flashcard">Ôn nhanh</h2>
