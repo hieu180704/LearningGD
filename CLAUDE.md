@@ -52,6 +52,12 @@ Gốc `D:\Project\GD`:
 - `assets/js/site.js` — hành vi JS (theme, tiến độ, TOC, quiz, flashcard, v.v.).
 - `tools/check-site.js` — script Node kiểm tra lỗi liên kết/token/markup, không dependency.
 - `tools/shoot.ps1` — chụp ảnh headless Chrome để tự kiểm tra layout.
+- `tools/tagcheck.js` — kiểm cân bằng thẻ HTML; bù lỗ hổng `check-site.js` không bắt thẻ
+  thiếu đóng. Dùng: `node tools/tagcheck.js <file.html> [...]`.
+- `tools/subst.js` — thay placeholder `{{TOKEN}}` trong bài bằng trích dẫn nguyên byte; từ
+  chối ghi nếu token thiếu/lặp/lạ. Để subagent không phải gõ lại chữ tiếng Anh.
+- `tools/check2way.js` — so byte hai chiều trích dẫn trong bài ↔ nguồn gốc đã tải; tách
+  riêng "lệch ký tự" với "lệch nội dung".
 - `research/<chủ-đề>.txt` — research đã fact-check cho từng bài (link nguồn, [CHƯA VERIFY]).
 - `worklog/<ngày>__<slug>.txt` — ghi chú bàn giao mỗi session (SUMMARY ghi rõ trạng thái verify).
 
@@ -185,6 +191,10 @@ Danh sách định hướng — mỗi trích dẫn cụ thể vẫn phải tự 
   liên tiếp ở bài Tầng 3/07 và Tầng 4/03 (2026-09-18).
 - `ul` trần trong thân bài không có bullet (site.css:119 reset `list-style:none`) — dùng
   `table.compare` hoặc `ol.steps` thay vì `<ul>` khi cần liệt kê có cấu trúc.
+- Trích dẫn: KHÔNG để subagent gõ lại chữ tiếng Anh. Main cắt quote từ nguồn đã curl ra
+  fixture JSON, subagent chỉ đặt `{{TOKEN}}`, main thay bằng `tools/subst.js` rồi verify bằng
+  `tools/check2way.js`. Bài Tầng 4/05 sạch 14/14 ngay lần đầu, không phải sửa vòng nào — trong
+  khi 3 session trước, lần nào subagent tự gõ quote cũng làm phẳng nháy cong hoặc đổi `…`.
 - Node đã có sẵn trên máy — dùng thẳng, không cần cài thêm.
 - Grid track phải dùng `minmax(0,1fr)`, không dùng `1fr` trần — tránh tràn ngang mobile
   do min-content bị bảng/diagram kéo giãn.
