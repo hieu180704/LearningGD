@@ -1,0 +1,52 @@
+WORKLOG 2026-09-18 — Tầng 4 bài 05 Portfolio và con đường sự nghiệp
+
+SUMMARY: Viết xong Tầng 4/05 "Portfolio và con đường sự nghiệp" + research/portfolio-con-duong.txt
+(commit 16fb4ee). check-site.js 0 lỗi, thẻ HTML cân bằng (script riêng), 14/14 quote so byte HAI
+CHIỀU bài <-> nguồn gốc PASS, main tự đọc hết văn xuôi (bắt được 1 lỗi gán nhầm nguồn), đã tự xem
+ảnh mobile sáng/tối + desktop tối — layout PASS. Thân bài 2.410 chữ (khoảng thật của các bài đã
+duyệt là 1.843-2.822). CHƯA có người đọc thật duyệt nội dung sư phạm.
+
+ĐÃ LÀM
+1. research/portfolio-con-duong.txt — 2 subagent Sonnet chạy song song theo 2 trục (A: portfolio +
+   tuyển dụng; B: quỹ đạo nghề). 7 nguồn gốc tự curl: Ethan Levy (Game Developer 2013, phần 2 + 5),
+   Tom Sloper (gamedesignworkshop.com), Tracy Fullerton (trích đoạn Game Design Workshop b.5),
+   Mark Baldwin (2006), Damion Schubert (zenofdesign.com 2011), Valve Handbook (2012 PDF).
+   File research có NHÚNG SẴN fixture quote ở cuối — để session sau không mất theo scratchpad.
+2. lessons/tang-4/05-portfolio-con-duong.html — trục bài: portfolio designer không có chuẩn hình
+   thức nên phải chứng minh bằng BẰNG CHỨNG NĂNG LỰC, kể quyết định theo khung 4 bước. 14 trích dẫn.
+3. Thêm dòng $pages trong tools/shoot.ps1 NGAY sau khi tạo file bài, rồi mới bật status "ready".
+4. curriculum.js: minutes 12 -> 14, status planned -> ready. Còn đúng 1 entry planned (capstone).
+5. Loại khỏi bài theo quyết định có chủ đích: phân biệt chức danh creative director / game director /
+   lead designer (chỉ tìm được blog SEO ẩn danh); số liệu lương (không verify ổn định, chóng lỗi thời);
+   con số "3-5 case study" mà main từng tự áp — KHÔNG nguồn nào chống lưng, đã bỏ hẳn.
+
+ĐÃ VẤP TRONG SESSION NÀY
+- Trục B: 9/17 quote bị làm phẳng nháy cong NGAY TRONG FILE RESEARCH, dù prompt đã cấm rõ. Trục A
+  thì 12/12 sạch — cùng một loại prompt, kết quả khác nhau => không đoán trước được, phải kiểm 100%.
+- Subagent LẠI làm mượt lỗi trong nguồn: nguồn Schubert viết dính chữ "hisorganization", subagent
+  sửa thành "his organization" rồi tự khai quote đó ĐỘ TIN CAO. Đã loại quote đó khỏi bài.
+- Script so byte tự báo FAIL 2 chỗ nhưng cả 2 là FALSE-NEGATIVE của chính stripper: (a) ranh giới
+  thẻ </a> chèn space trước dấu chấm; (b) pdftotext chèn caption "Fig. 4-2" vào giữa câu. Phải
+  tách riêng "lệch ký tự" với "lệch nội dung chữ" (normalize nháy rồi so lại) mới thấy đâu là lỗi thật.
+- Main đưa cho subagent con số độ dài "2050-2150 chữ" lấy từ handoff mà KHÔNG chốt cách đếm.
+  Subagent tuân đúng con số, và tự báo rằng bài 04 chỉ đạt 1.851 theo cùng phương pháp. Đo lại 8 bài
+  mới thấy bài 04 là bài NGẮN NHẤT loạt => con số trong handoff vô nghĩa nếu không kèm cách đếm.
+- Lỗi mà KHÔNG script nào bắt được, chỉ lộ khi main tự đọc prose: mục Đọc thêm gán ba tiêu chí của
+  Levy cho Part 5, trong khi chúng nằm ở Part 2. (Lần trước là bịa cơ chế game — lần này là gán
+  nhầm nguồn. Cùng một bài học: phải tự đọc.)
+
+CÁCH LÀM ĐÃ DÙNG LẠI ĐƯỢC — TỐT HƠN HẲN LẦN TRƯỚC
+- KHÔNG cho subagent gõ chữ tiếng Anh nữa. Main cắt sẵn quote thành token, subagent chỉ đặt
+  {{TEN_TOKEN}} vào bài, main thay bằng byte nguồn bằng script. Script từ chối ghi nếu thiếu/lặp/
+  lạ token. Cách này XOÁ HẲN lớp lỗi ký tự — 14/14 sạch ngay lần đầu, không phải sửa vòng nào.
+- 3 script đã dùng (đang nằm ở scratchpad, SẼ MẤT): subst.js (thay token), tagcheck.js (cân bằng
+  thẻ, đã tự test không false-positive trên 2 bài đã duyệt), check2way.js (so byte bài <-> nguồn).
+  User CHƯA quyết có đưa vào tools/ hay không — hỏi lại đầu session sau.
+
+CÒN LẠI
+- Capstone 01 "Thiết kế một game nhỏ trọn vòng" — entry planned DUY NHẤT còn lại (curriculum.js:385).
+  Xong bài này là hết dự án (26/26).
+- tools/shoot.ps1 dòng 10 trỏ "design-spec-v2.txt muc 8" — file KHÔNG tồn tại. Pointer chết có sẵn
+  từ trước, vẫn chưa xử. Chờ user quyết xoá dòng đó hay bổ sung file.
+- Repo vẫn chưa có repo-params.json cho skill session-close (chạy bằng param suy ra:
+  worklogDir=worklog/, không có handoffsDir).
