@@ -69,7 +69,9 @@ $rootUrl = ($root -replace '\\', '/')
 $pages = @(
     @{ name = "index"; file = "index.html" },
     @{ name = "lo-trinh"; file = "lo-trinh.html" },
-    @{ name = "components"; file = "components.html" },
+    # components.html dai hon 2600px rat nhieu -> khong co heightOverride thi moi component tu Diagram
+    # tro xuong KHONG BAO GIO duoc chup, script van in "OK" (vap 2026-09-18).
+    @{ name = "components"; file = "components.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
     # Bai hoc that: cao hon nhieu (nhieu section dai) nen can height rieng, xem heightOverride ben duoi.
     @{ name = "lesson-tang-1-01-mda"; file = "lessons/tang-1/01-mda.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
     @{ name = "lesson-tang-0-01-game-la-gi"; file = "lessons/tang-0/01-game-la-gi.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },

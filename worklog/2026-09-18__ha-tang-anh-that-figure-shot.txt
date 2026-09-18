@@ -1,0 +1,49 @@
+SUMMARY: Dựng hạ tầng ảnh chụp game thật (figure.shot + check-site [g]/[h] + fix shoot.ps1
+heightOverride) — đã verify: check-site 0 lỗi, 3 test tiêu cực đều bắt đúng lỗi, tagcheck cân
+bằng, tự xem ảnh desktop-dark + mobile-light của components.html. CHƯA có ảnh thật nào trong bài.
+
+Bối cảnh
+- Khoá học 26 bài, ~92 figure.diagram, trước session này repo có ĐÚNG 0 file ảnh và 0 thẻ <img>.
+- Chốt với user: chỉ dùng screenshot game thật, lưu local trong repo, khoá học phi thương mại
+  hoàn toàn → dùng theo diện minh hoạ giáo dục + credit bắt buộc hiển thị trong bài.
+
+Đã làm
+1. assets/img/.gitkeep + assets/img/CREDITS.txt (UTF-8 no-BOM) — sổ xuất xứ 8 trường:
+   FILE / GAME / STUDIO / NAM / NGUON_URL / NGAY_TAI / TINH_TRANG_LICENSE / DUNG_O_BAI.
+2. site.css +26 dòng: figure.shot, .wide, .shot-note, .shot-credit. Toàn bộ màu qua token sẵn có
+   (--surface, --surface-2, --rule, --ink-2, --r-lg, --r-md, --sp-*); sắc độ credit dùng
+   color-mix() trên token, pattern đã có sẵn 30 chỗ trong file — không có hex rời.
+3. components.html +20 dòng: mục trình diễn #shot, ảnh placeholder bằng data: URI SVG nên không
+   đẻ link chết cho check-site rule [b].
+4. tools/check-site.js +66 dòng: rule [g] <img> phải có alt không rỗng + width + height;
+   rule [h] figure.shot phải chứa .shot-credit không rỗng. Có parseTagAttrs() tokenize attribute
+   theo ranh giới quote — cần thiết vì regex quét mù khớp nhầm width='1920' NẰM TRONG data: URI
+   của src, gây false-negative.
+5. tools/shoot.ps1 +2 dòng: khai heightOverride cho components.html.
+
+Lỗi có sẵn phát hiện trên đường đi (không do diff này gây ra)
+- components.html không khai heightOverride nên ảnh QC bị cắt ở 2600px desktop / 3000px mobile.
+  Hệ quả: mọi component từ Diagram trở xuống (Diagram, Shot, Bảng, Exercise, Quiz, Flashcards,
+  Recap, Reading, Pager) CHƯA TỪNG được chụp lần nào, script vẫn in đủ 4 dòng "OK". Đã sửa.
+  → Các component cũ giờ mới lần đầu có ảnh; NÊN soi lại chúng trong một session riêng.
+
+Đo được về nguồn ảnh (đã ghi vào CLAUDE.md mục 8)
+- 6/6 game khảo sát (Celeste, Hades, Hollow Knight, Into the Breach, Baba Is You, Slay the Spire)
+  đều IM LẶNG về quyền dùng ảnh — không cho phép rõ ràng, cũng không cấm. Giả định ban đầu
+  "nhiều indie có dòng license đọc được" là SAI.
+- Tải thử 3 ảnh, tự mở xem: Celeste 1920x1080 PNG dùng được ngay; Slay the Spire 1920x1080 nhưng
+  là build tiền phát hành có watermark + dấu ngày 09-28-2017 (UI khác bản phát hành);
+  Hollow Knight chỉ 598x336 và là WebP đội lốt .jpg do CDN Squarespace resize.
+- Kết luận: tự đi kiếm nguồn làm được, nhưng phải mở từng ảnh ra soi, không có đường tắt.
+
+CLAUDE.md đã cập nhật
+- Mục 3: thêm assets/img/<slug>/ và CREDITS.txt vào danh sách folder hợp lệ.
+- Mục 4: thêm dòng figure.shot; sửa dòng figure.diagram cho hết mâu thuẫn với việc dùng ảnh raster.
+- Mục 8: thêm 5 gạch đầu dòng (bẫy heightOverride, press kit im lặng, CDN resize ngầm, ảnh tiền
+  phát hành, subagent không được tự chọn/tải ảnh).
+
+Còn lại (session sau)
+- Chưa chèn ảnh thật vào bài nào. Bài ưu tiên: tang-3/05 level-design, tang-4/04 mo-xe-game.
+- tang-1/05 game-feel press kit phục vụ kém (game feel là chuyển động, ảnh tĩnh marketing không
+  tả được). tang-4/03 dao-duc-dark-patterns gần như không có đường ra bằng ảnh press kit —
+  không studio nào bỏ màn bán IAP vào press kit của mình; giữ nguyên diagram.

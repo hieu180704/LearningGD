@@ -48,6 +48,8 @@ Gốc `D:\Project\GD`:
 - `lessons/_lesson-starter.html` — khung trống để copy khi viết bài mới: đã có đủ
   head/topbar/nav/toc/footer, phần `<article>` chỉ có comment hướng dẫn.
 - `assets/css/site.css` — toàn bộ style, token.
+- `assets/img/<slug>/` — ảnh chụp màn hình game thật dùng trong bài (`figure.shot`).
+  `assets/img/CREDITS.txt` ghi xuất xứ từng ảnh; ảnh không có bản ghi thì không được dùng.
 - `assets/js/curriculum.js` — `window.CURRICULUM`, dữ liệu 6 tầng × 26 bài.
 - `assets/js/site.js` — hành vi JS (theme, tiến độ, TOC, quiz, flashcard, v.v.).
 - `tools/check-site.js` — script Node kiểm tra lỗi liên kết/token/markup, không dependency.
@@ -91,7 +93,8 @@ Không tạo file/folder ngoài danh sách trên trừ khi có yêu cầu rõ r�
 | `.term[data-en]` | Thuật ngữ tiếng Việt, hover/focus hiện tên tiếng Anh gốc |
 | `.mda-m` / `.mda-d` / `.mda-a`, `.chip.mda-*` | Đánh dấu nội dung thuộc Mechanics/Dynamics/Aesthetics |
 | `.chip` | Pill nhỏ dùng chung (không thuộc MDA) |
-| `figure.diagram` (`.wide`) | Sơ đồ minh hoạ — ưu tiên dựng bằng HTML/CSS, chỉ dùng SVG khi thật cần. Một chuỗi `.mda-diagram` tối đa **3 khối** `.mda-block`: 4 khối vượt bề rộng cột nên wrap xuống dòng, để lại mũi tên chỉ vào khoảng trống |
+| `figure.diagram` (`.wide`) | Sơ đồ minh hoạ quan hệ/luồng — dựng bằng HTML/CSS, chỉ dùng SVG khi thật cần. Ảnh chụp game thật thì dùng `figure.shot`, không nhét vào đây. Một chuỗi `.mda-diagram` tối đa **3 khối** `.mda-block`: 4 khối vượt bề rộng cột nên wrap xuống dòng, để lại mũi tên chỉ vào khoảng trống |
+| `figure.shot` (`.wide`) | Ảnh chụp màn hình game thật. Bắt buộc có `alt`, `width`, `height`, `.shot-note` (ảnh này dạy gì) và `.shot-credit` (Game — Studio, Năm + nguồn). Không có credit = không được dùng. Ảnh nằm trong `assets/img/<slug>/`, xuất xứ ghi ở `assets/img/CREDITS.txt` |
 | `.table-wrap > table.compare` | Bảng so sánh, cuộn ngang trong container riêng |
 | `.exercise` | Bài thực hành: các bước + `details.hint` gợi ý |
 | `.quiz[data-answer]` | Câu hỏi trắc nghiệm tự chấm, có giải thích |
@@ -172,6 +175,20 @@ Danh sách định hướng — mỗi trích dẫn cụ thể vẫn phải tự 
 - `shoot.ps1` có danh sách `$pages` **hardcode**: tạo bài mới xong phải tự thêm 1 dòng cho
   bài đó, nếu không script vẫn chạy êm, in "OK" cho toàn bộ bài cũ và **bỏ qua bài mới**
   trong im lặng. `check-site.js` không bắt được thiếu sót này (vấp 2026-09-18).
+- `shoot.ps1` còn một trục im lặng thứ hai: trang không khai `heightOverride` bị cắt ở chiều
+  cao viewport mặc định (desktop 2600 / mobile 3000). `components.html` thiếu dòng này nên mọi
+  component từ Diagram trở xuống **chưa từng được chụp lần nào**, script vẫn in đủ 4 dòng "OK"
+  (vấp 2026-09-18). Thêm trang dài vào `$pages` thì phải khai `heightOverride` cùng lúc.
+- Press kit game gần như luôn **im lặng** về bản quyền, không phải "cho phép rõ ràng" (đo 6
+  game: Celeste, Hades, Hollow Knight, Into the Breach, Baba Is You, Slay the Spire → 0/6 có
+  dòng license). Site dùng ảnh theo diện minh hoạ giáo dục, phi thương mại, credit đầy đủ.
+- Ảnh trên trang chủ game thường bị CDN resize nhỏ và đổi định dạng ngầm (hollowknight.com trả
+  WebP 598×336 dưới đuôi `.jpg`). Phải `file` kiểm định dạng + kích thước thật, đừng tin đuôi.
+- Ảnh press kit có thể là build **tiền phát hành** nhiều năm trước, UI khác bản phát hành (ảnh
+  Slay the Spire trên megacrit.com có watermark và dấu ngày 09-28-2017). Dạy bằng ảnh đó là dạy
+  sai giao diện hiện tại — phải tự mở ảnh xem, không script nào bắt được.
+- Subagent **không** được tự chọn/tải ảnh: chỉ thu URL + chữ license. Main tự tải, tự mở ảnh
+  xem, tự xác nhận đúng game đúng cảnh rồi mới đưa vào bài.
 - `check-site.js` không bắt thẻ HTML thiếu đóng — báo "0 lỗi" vẫn có thể vỡ layout. Tự kiểm
   cân bằng thẻ bằng script riêng trước khi chốt bài.
 - Verify quote tiếng Anh phải dùng `curl` + grep trên HTML thô, **không dùng WebFetch**:

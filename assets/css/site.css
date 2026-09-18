@@ -1162,6 +1162,32 @@ figure.diagram figcaption { font-size: 14px; color: var(--ink-2); margin-top: va
 .chart-legend li { display: flex; align-items: center; gap: 8px; }
 .chart-legend .cell-dev { font-family: var(--font-mono); }
 
+/* ===== SHOT (ảnh chụp màn hình game thật, kèm credit — xem assets/img/CREDITS.txt) =====
+   Căn lề/spacing giống figure.diagram ở trên để nhất quán. */
+figure.shot {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-lg);
+    padding: var(--sp-5);
+    margin: var(--sp-5) 0;
+    overflow-x: auto;
+    min-width: 0;
+}
+figure.shot.wide { max-width: 880px; }
+figure.shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--r-md);
+    border: 1px solid var(--rule);
+    background: var(--surface-2);
+}
+figure.shot figcaption { margin-top: var(--sp-3); }
+/* Câu giải thích ảnh dạy điều gì — cỡ/màu giống figure.diagram figcaption */
+.shot-note { display: block; font-size: 14px; color: var(--ink-2); }
+/* Dòng credit game/studio/năm — nhỏ hơn 1 bậc, mờ hơn .shot-note, tách dòng bằng gap nhỏ */
+.shot-credit { display: block; font-size: 13px; color: color-mix(in srgb, var(--ink-2) 70%, var(--surface)); margin-top: var(--sp-1); }
+
 /* ===== 17. TABLE ===== */
 .table-wrap {
     overflow-x: auto;

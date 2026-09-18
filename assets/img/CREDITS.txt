@@ -1,0 +1,36 @@
+CREDITS.txt — xuất xứ ảnh chụp màn hình game dùng trong Xưởng Game Design
+
+QUY ƯỚC
+--------
+Mọi ảnh trong assets/img/ dùng theo diện MINH HOẠ GIÁO DỤC, PHI THƯƠNG MẠI —
+trích dẫn press kit / trang chính thức của studio hoặc nền tảng phát hành để
+minh hoạ khái niệm thiết kế, không dùng cho mục đích thương mại, không host lại
+với ý định thay thế bản gốc. Mọi ảnh khi đưa vào một bài học BẮT BUỘC phải hiển
+thị credit ngay trong bài (dùng component figure.shot > .shot-credit — xem
+components.html), không chỉ ghi ở file này.
+
+Mỗi ảnh có đúng MỘT bản ghi bên dưới, đủ 8 trường theo thứ tự cố định. Bản ghi
+mới thêm vào cuối file, không xoá bản ghi cũ kể cả khi ảnh đã gỡ khỏi bài.
+
+CÁC TRƯỜNG
+----------
+FILE:                đường dẫn tương đối trong assets/img/, vd: tang-2/hades-hub.png
+GAME:                tên game
+STUDIO:              studio/nhà phát triển
+NAM:                 năm phát hành (hoặc năm ảnh được chụp/công bố nếu khác)
+NGUON_URL:            URL gốc đã tải ảnh về (press kit, trang chính thức, Steam, v.v.)
+NGAY_TAI:             ngày tải ảnh về, định dạng YYYY-MM-DD
+TINH_TRANG_LICENSE:   ghi rõ đây là press kit chính thức / fair use minh hoạ giáo dục /
+                      hay diện khác — càng cụ thể càng tốt, không để trống
+DUNG_O_BAI:           slug bài học đang dùng ảnh này, vd: tang-2/03-level-design
+
+MẪU BẢN GHI TRỐNG (copy khối này cho mỗi ảnh mới)
+--------------------------------------------------
+FILE:
+GAME:
+STUDIO:
+NAM:
+NGUON_URL:
+NGAY_TAI:
+TINH_TRANG_LICENSE:
+DUNG_O_BAI:

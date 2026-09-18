@@ -270,6 +270,26 @@
 &lt;/figure&gt;</code></pre>
         </div>
 
+        <h2 id="shot">Ảnh chụp màn hình game (shot)</h2>
+        <p>Dùng khi bài cần minh hoạ bằng ảnh thật từ một game cụ thể. Mọi ảnh phải có <code>alt</code>, <code>width</code>/<code>height</code> đúng kích thước gốc (chống layout shift), và bắt buộc có <code>.shot-credit</code> ghi rõ game/studio/năm/nguồn — xem quy ước đầy đủ ở <code>assets/img/CREDITS.txt</code>. Ảnh dưới đây là placeholder demo layout, ảnh thật sẽ nằm trong <code>assets/img/&lt;slug&gt;/</code>.</p>
+        <figure class="shot wide">
+            <img src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Crect width='1920' height='1080' fill='%239AA5B8'/%3E%3Ctext x='960' y='540' font-family='sans-serif' font-size='72' fill='%23FFFFFF' text-anchor='middle' dominant-baseline='middle'%3Eplaceholder%3C/text%3E%3C/svg%3E" alt="Ảnh minh hoạ placeholder, chưa phải ảnh game thật" width="1920" height="1080" loading="lazy">
+            <figcaption>
+                <span class="shot-note">Câu giải thích ảnh này dạy điều gì cho người đọc.</span>
+                <span class="shot-credit">Tên Game — Studio, Năm. Ảnh: press kit chính thức. Dùng theo diện minh hoạ giáo dục.</span>
+            </figcaption>
+        </figure>
+        <div class="demo-block">
+            <p class="demo-block-label">Snippet</p>
+            <pre><code>&lt;figure class="shot wide"&gt;
+  &lt;img src=&quot;../../assets/img/&lt;slug&gt;/&lt;file&gt;.png&quot; alt="&lt;mô tả&gt;" width="1920" height="1080" loading="lazy"&gt;
+  &lt;figcaption&gt;
+    &lt;span class="shot-note"&gt;Câu giải thích ảnh này dạy điều gì.&lt;/span&gt;
+    &lt;span class="shot-credit"&gt;Tên Game — Studio, Năm. Ảnh: press kit chính thức.&lt;/span&gt;
+  &lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+        </div>
+
         <h2 id="bang">Bảng so sánh</h2>
         <p>Bọc table trong <code>.table-wrap</code> để cuộn ngang riêng, không đẩy tràn trang.</p>
         <div class="table-wrap">

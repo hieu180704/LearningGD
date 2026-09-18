@@ -159,6 +159,72 @@ htmlFiles.forEach(function (file) {
     }
 });
 
+// Tách attr=value của một thẻ HTML theo đúng ranh giới quote (name="..."/name='...'), duyệt tuần tự
+// bằng regex global nên nội dung nằm TRONG một attr value (vd width='1920' bên trong data: URI của src)
+// không bị hiểu nhầm thành attribute riêng — bug đã vấp khi test bằng placeholder data: SVG.
+function parseTagAttrs(tag) {
+    var attrs = {};
+    var attrRe = /([a-zA-Z_:][\w:.-]*)\s*=\s*("([^"]*)"|'([^']*)')/g;
+    var am;
+    while ((am = attrRe.exec(tag))) {
+        attrs[am[1].toLowerCase()] = am[3] !== undefined ? am[3] : am[4];
+    }
+    return attrs;
+}
+
+// ===== (g) <img>: bắt buộc có alt không rỗng và cả width+height (chống layout shift) =====
+htmlFiles.forEach(function (file) {
+    var html = fs.readFileSync(file, "utf8");
+    function lineOf(index) {
+        return html.slice(0, index).split("\n").length;
+    }
+    var imgRe = /<img\b[^>]*>/g;
+    var im;
+    while ((im = imgRe.exec(html))) {
+        var tag = im[0];
+        var line = lineOf(im.index);
+        var attrs = parseTagAttrs(tag);
+        if (!attrs.alt || !attrs.alt.trim()) {
+            errors.push("[g] " + rel(file) + ": dòng " + line + ": <img> thiếu alt hoặc alt rỗng");
+        }
+        if (!attrs.width || !attrs.height) {
+            errors.push("[g] " + rel(file) + ": dòng " + line + ": <img> thiếu width và/hoặc height (chống layout shift)");
+        }
+    }
+});
+
+// ===== (h) figure.shot: bắt buộc chứa .shot-credit không rỗng =====
+htmlFiles.forEach(function (file) {
+    var html = fs.readFileSync(file, "utf8");
+    function lineOf(index) {
+        return html.slice(0, index).split("\n").length;
+    }
+    var figRe = /<figure\b[^>]*class=["']([^"']*)["'][^>]*>/g;
+    var fm;
+    while ((fm = figRe.exec(html))) {
+        var classes = fm[1].split(/\s+/);
+        if (classes.indexOf("shot") === -1) continue;
+        var openEnd = figRe.lastIndex;
+        var depth = 1;
+        var tagRe = /<figure\b|<\/figure>/g;
+        tagRe.lastIndex = openEnd;
+        var tm;
+        var end = html.length;
+        while ((tm = tagRe.exec(html))) {
+            if (tm[0].charAt(1) === "/") depth--; else depth++;
+            if (depth === 0) { end = tagRe.lastIndex; break; }
+        }
+        var content = html.slice(openEnd, end);
+        var creditRe = /class=["'][^"']*\bshot-credit\b[^"']*["'][^>]*>([\s\S]*?)<\/[a-zA-Z0-9]+>/;
+        var cm = creditRe.exec(content);
+        var creditText = cm ? cm[1].replace(/<[^>]+>/g, "").trim() : "";
+        if (!creditText) {
+            errors.push("[h] " + rel(file) + ": dòng " + lineOf(fm.index) + ': <figure class="shot"> thiếu .shot-credit hoặc nội dung rỗng');
+        }
+        figRe.lastIndex = end;
+    }
+});
+
 // ===== (d) site.css: không hex color ngoài khối :root và html[data-theme="dark"] =====
 var cssPath = path.join(ROOT, "assets", "css", "site.css");
 if (!fs.existsSync(cssPath)) {
