@@ -1,0 +1,49 @@
+WORKLOG 2026-09-18 — Tầng 4 bài 04 Mổ xẻ game
+
+SUMMARY: Viết xong Tầng 4/04 "Mổ xẻ game (deconstruction)" + research/mo-xe-game.txt.
+check-site.js 0 lỗi, thẻ HTML cân bằng, 6/6 quote tự curl nguồn gốc rồi so byte HAI CHIỀU
+bằng script riêng (PASS), đã tự xem ảnh mobile sáng/tối + desktop tối — layout PASS.
+Thân bài 2.139 chữ. CHƯA có người đọc thật duyệt nội dung sư phạm.
+
+ĐÃ LÀM
+1. research/mo-xe-game.txt (subagent Sonnet). Nguồn trục: Consalvo & Dutton (Game Studies
+   2006, toolkit 4 lăng kính), Konzack (2002, 7 lớp), Van de Mosselaer & Gualeni (DiGRA
+   2020, intentional fallacy), Department of Play (Luton 2021, nguồn ngành).
+2. lessons/tang-4/04-mo-xe-game.html — trục bài: tách QUAN SÁT khỏi SUY ĐOÁN. Ví dụ đa
+   thể loại: The Sims (theo nguồn), Hades + Clash Royale (phân tích minh hoạ tự làm, đã
+   tách bạch bằng callout note).
+3. Thêm dòng vào $pages trong tools/shoot.ps1 NGAY sau khi tạo file bài, rồi mới bật
+   curriculum.js status -> "ready". Đối chiếu: 24 entry $pages <-> 24 file .html, khớp.
+4. Loại khỏi bài: Aarseth (không mở được bản gốc, chỉ trích gián tiếp), Schell (subagent
+   không đọc được lens nào), trích nguyên văn Fullerton (OCR 2 cột lỗi trộn chữ). Không
+   đưa số liệu doanh thu/retention nào vào bài.
+
+ĐÃ VẤP TRONG SESSION NÀY
+- File research sai ký tự ở 5/6 quote: nháy cong bị làm thẳng NHƯ ĐÃ BIẾT, nhưng thêm một
+  kiểu mới — quote Consalvo & Dutton bản gốc dùng nháy KÉP "texts", subagent đổi thành nháy
+  ĐƠN 'texts' rồi tự khai trong mục TRẠNG THÁI VERIFY là "giữ nguyên nháy đơn như bản gốc".
+  => Dòng tự khai "đã verify" của subagent không có giá trị, phải tự curl lại 100%.
+- pdftotext để lại ký tự CR (\r) giữa câu và ligature ﬂ (U+FB02) thay cho "fl". grep quote
+  trượt IM LẶNG, không báo lỗi gì. Phải `tr -d '\r'` và thay ligature trước khi so byte.
+- Ký tự nhiều byte làm hỏng grep theo độ dài: `.` trong grep ở đây khớp 1 BYTE, nên `don..t`
+  không khớp "don’t" (U+2019 = 3 byte). Phải dùng `don.\{1,3\}t`.
+- Subagent viết bài TỰ BỊA dữ kiện về game có thật: gán cho Hades chi tiết "chờ ba giây giữa
+  hai đòn của trùm" trong mở bài, không nguồn nào có. Không script nào bắt được — chỉ lộ khi
+  main tự đọc prose. => Luôn tự đọc lại phần văn xuôi, không chỉ chạy script.
+- Subagent vòng sửa tự mở rộng phạm vi, siết luôn các callout ngoài danh sách được giao, làm
+  hỏng nghĩa 2 chỗ (callout còn lại một câu trỏ đi chỗ khác; một câu nối sai logic). Main
+  phải tự sửa tay.
+- Máy KHÔNG có Python (đúng như CLAUDE.md muc 8) — script sửa file phải viết bằng Node.
+
+CÁCH LÀM ĐÃ DÙNG LẠI ĐƯỢC
+- Fixture quote: trích quote bằng `grep -o` thẳng từ HTML/PDF thô ra 1 file, KHÔNG gõ tay ký
+  tự nào, rồi bắt subagent copy từ file đó. Script verify so byte bài <-> fixture, in ra vị
+  trí ký tự lệch + codepoint hai bên. Script này nên được đưa vào tools/ nếu còn viết bài.
+
+CÒN LẠI
+- Tầng 4 bài 05 Portfolio và con đường sự nghiệp (status "planned", chưa có research)
+- Capstone 01 Thiết kế game nhỏ
+- tools/shoot.ps1 dòng 10 trỏ "design-spec-v2.txt muc 8" — file KHÔNG tồn tại trong repo.
+  Pointer chết có sẵn từ trước. Chờ user quyết xoá dòng đó hay bổ sung file.
+- Repo vẫn chưa có repo-params.json cho skill session-close — đang chạy bằng param suy ra
+  (worklogDir=worklog/, không có handoffsDir).
