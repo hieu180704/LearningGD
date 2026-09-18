@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thiết kế một game nhỏ trọn vòng — Xưởng Game Design</title>
+<meta name="description" content="Bài capstone: ráp core loop, prototype, playtest và iteration đã học thành một quy trình bạn tự chạy được, từ ý tưởng đến một lát chơi được trong hai tuần.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="capstone/01-thiet-ke-game-nho" class="tier-C">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#capstone">Capstone</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Capstone · Bài 01</p>
+            <h1>Thiết kế một game nhỏ trọn vòng</h1>
+            <p class="dek">Một ý tưởng thế giới mở đồ sộ và một lát chơi được sau hai tuần là hai thứ rất khác nhau. Bài này ráp lại mọi kỹ năng đã học thành quy trình đưa bạn từ cái này sang cái kia.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 20 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Nâng cao</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: đã học hết Tầng 0-4</span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Xác định core loop và MDA cho ý tưởng của bạn</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Prototype, playtest và lặp ít nhất một vòng</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Tổng hợp thành một tài liệu thiết kế ngắn gọn</li>
+                </ul>
+            </div>
+        </header>
+
+        <p>Một người mới bắt đầu có trong đầu một ý tưởng đồ sộ: một game nhập vai thế giới mở, nhiều phe phái, hệ thống chế tạo, hàng chục giờ nội dung. Ý tưởng đó không sai — chỉ là không thể bắt đầu từ đó. Hai tuần sau, thứ người này thực sự dựng xong là một cảnh nhỏ: một nhân vật, một cuộc hội thoại rẽ nhánh, và một lựa chọn có hậu quả. Không bản đồ thế giới, không hệ phe phái, không chế tạo. Chỉ một lát cắt đủ nhỏ để chơi thử được trong một buổi.</p>
+
+        <p>Khoảng cách giữa hai điều đó — ý tưởng đồ sộ và lát chơi được sau hai tuần — chính là nội dung của toàn bộ các bài trước: MDA, core loop, prototype giấy, playtest, iteration, hệ thống, kinh tế, level design, UX, tự sự, số liệu, đạo đức, mổ xẻ game. Bài này không dạy khái niệm mới. Nó ráp những mảnh đó lại thành một quy trình bạn tự chạy được, từ ý tưởng đến một prototype thật sự chơi được.</p>
+
+        <h2 id="chon-y-tuong">Chọn ý tưởng khả thi, không phải ý tưởng hay nhất</h2>
+
+        <p>Bước đầu tiên không phải nghĩ ra ý tưởng hay nhất, mà chọn ý tưởng có khả năng hoàn thành cao nhất. Đây là hai tiêu chí khác nhau — nhầm giữa chúng là lý do phổ biến khiến một dự án nhỏ không bao giờ đi hết chặng đường.</p>
+
+        <p>Derek Yu — tác giả game <em>Spelunky</em>, trong bài viết <em>Finishing a Game</em> (2010) — chia những game khiến mình hứng thú thành ba loại: <em>I’ve found that there are three types of games that pique my interest: games I want to make, games I want to have made, and games I’m good at making.</em> (dịch ý: có ba loại game khiến tôi thấy hứng thú — game tôi muốn làm, game tôi muốn đã làm xong, và game tôi giỏi làm).</p>
+
+        <p>Ba loại nghe giống nhau nhưng động lực đứng sau khác hẳn. "Muốn làm" là hứng thú với chính quá trình làm. "Muốn đã làm xong" là hứng thú với cảm giác hoàn thành, không hẳn với quá trình. "Giỏi làm" là tự tin vì có sẵn kỹ năng phù hợp. Một ý tưởng chỉ thuộc đúng một loại vẫn có thể làm được, nhưng mang rủi ro riêng — bảng dưới đây liệt kê rõ.</p>
+
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Loại ý tưởng</th><th>Dấu hiệu nhận biết</th><th>Rủi ro nếu chỉ có mỗi loại đó</th></tr></thead>
+                <tbody>
+                    <tr><td>Game muốn làm</td><td>Hào hứng ngay khi nghĩ tới, muốn tự tay chạm vào nó</td><td>Hào hứng ban đầu nhưng thiếu kỹ năng phù hợp, dễ bỏ dở khi gặp khó</td></tr>
+                    <tr><td>Game muốn đã làm xong</td><td>Thích cảm giác "đã hoàn thành X" hơn là thích quá trình làm ra X</td><td>Làm vì hư danh, dễ chán khi công việc thực tế không như tưởng tượng</td></tr>
+                    <tr><td>Game giỏi làm</td><td>Có sẵn kỹ năng, kinh nghiệm, hoặc công cụ phù hợp</td><td>An toàn nhưng thiếu động lực để đi hết chặng đường nếu không thấy hứng thú</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>Derek Yu cho rằng ý tưởng đáng bắt đầu nhất không nằm gọn trong một loại, mà ở chỗ giao nhau của cả ba: <em>In my opinion, the ideas with the most potential (to be finished, at least) fall into all three categories and also satisfy the requirement “I have the time and resources to actually make this”.</em> (dịch ý: theo tôi, những ý tưởng có tiềm năng hoàn thành cao nhất — ít nhất là hoàn thành — rơi vào cả ba loại, và còn phải thoả thêm một điều kiện: tôi có đủ thời gian và nguồn lực để thực sự làm ra nó).</p>
+
+        <p>Điều kiện cuối cùng đó dễ bị bỏ qua nhất. Một ý tưởng vừa hào hứng, vừa đúng sở trường, vừa hứa hẹn cảm giác thành tựu — nhưng nếu vượt quá thời gian và nguồn lực đang có, nó vẫn là ý tưởng sai để bắt đầu ngay lúc này.</p>
+
+        <h2 id="vong-lap">Vòng lặp: xương sống của cả dự án</h2>
+
+        <p>Chọn được ý tưởng đúng chỉ là điểm khởi đầu. Từ đó, mọi thứ vận hành qua một cơ chế lặp đi lặp lại tiếng Anh gọi là <span class="term" data-en="Iteration" tabindex="0">iteration</span> — khái niệm đã gặp ở bài Playtest và Iteration, nay trở thành xương sống của toàn bộ dự án.</p>
+
+        <p>Tracy Fullerton — giáo sư thiết kế game tại USC, tác giả sách <em>Game Design Workshop</em> — định nghĩa: <em>By “iteration” I simply mean that you design, test, and evaluate the results over and over again throughout the development of your game, each time improving upon the gameplay or features, until the player experience meets your criteria.</em> (dịch ý: bằng "iteration", tôi chỉ đơn giản muốn nói rằng bạn thiết kế, kiểm thử và đánh giá kết quả lặp đi lặp lại trong suốt quá trình phát triển, mỗi lần cải thiện gameplay hoặc tính năng, cho tới khi trải nghiệm người chơi đạt tiêu chí bạn đặt ra).</p>
+
+        <p>Fullerton cụ thể hoá định nghĩa đó thành một vòng lặp tám bước, gọi là quy trình <span class="term" data-en="Playcentric Design" tabindex="0">lấy người chơi làm trung tâm</span>. Theo Fullerton, tám bước đó là:</p>
+
+        <ol class="steps">
+            <li><span>Đặt mục tiêu trải nghiệm người chơi — hình dung cụ thể cảm giác bạn muốn người chơi có được, trước khi nghĩ đến cơ chế.</span></li>
+            <li><span>Nảy ra một ý tưởng hoặc hệ thống cụ thể để tạo ra cảm giác đó.</span></li>
+            <li><span>Dựng prototype cho ý tưởng hoặc hệ thống đó — có thể là bản dựng vật lý, bản dựng số, hoặc thậm chí storyboard hay animatic cho một ý tưởng cần trình bày cho người chơi xem.</span></li>
+            <li><span>Cho người chơi tiềm năng thử hoặc xem prototype đó, để lấy phản ứng và phản hồi.</span></li>
+            <li><span>Đánh giá kết quả so với mục tiêu trải nghiệm đã đặt ra ở bước một.</span></li>
+            <li><span>Sắp xếp thứ tự ưu tiên các vấn đề phát hiện được, và sửa chúng bằng cách thay đổi prototype.</span></li>
+            <li><span>Cho playtest lại prototype đã sửa, rồi đánh giá lại kết quả so với mục tiêu trải nghiệm.</span></li>
+            <li><span>Lặp lại toàn bộ quá trình này cho đến khi tìm ra giải pháp và thiết kế được coi là đạt mục tiêu.</span></li>
+        </ol>
+
+        <p>Tám bước trên không chạy một lần rồi dừng. Bước cuối đưa quy trình quay lại vòng sửa và test cho đến khi thiết kế đạt mục tiêu đặt ra ở bước một — đó là lý do gọi nó là vòng lặp, không phải một quy trình chạy thẳng một chiều.</p>
+
+        <figure class="diagram wide">
+            <ol class="steps">
+                <li><span><strong>Đặt mục tiêu &amp; nảy ý tưởng.</strong> Hình dung cảm giác muốn tạo ra, rồi nghĩ ra cách cụ thể để tạo ra nó (bước 1-2).</span></li>
+                <li><span><strong>Dựng prototype.</strong> Vật lý, số, hay storyboard — miễn trình bày được cho người chơi xem (bước 3).</span></li>
+                <li><span><strong>Playtest &amp; đánh giá.</strong> Cho người chơi thử, rồi so kết quả với mục tiêu ban đầu (bước 4-5).</span></li>
+                <li><span><strong>Ưu tiên, sửa, lặp.</strong> Sửa vấn đề quan trọng nhất, test lại, lặp đến khi đạt mục tiêu (bước 6-8).</span></li>
+            </ol>
+            <figcaption>Tám bước gốc của Fullerton gom thành bốn chặng để dễ nhìn — thứ tự và nội dung từng bước giữ nguyên như bản gốc.</figcaption>
+        </figure>
+
+        <h2 id="prototype-dau-tien">Prototype đầu tiên: giấy hay dựng thẳng trên máy</h2>
+
+        <p>Bước ba trong vòng lặp — dựng prototype — là nơi hai nguồn tham khảo của bài này đưa ra hai gợi ý nghe có vẻ khác nhau về phương tiện. Cả hai đều đáng làm theo, chỉ khác chỗ bắt đầu.</p>
+
+        <p>Fullerton nhấn mạnh việc hoàn thiện một mô hình thô trước khi động đến công cụ số: <em>The goal is to play and perfect this simplistic model before a single line of code or art asset is ever made.</em> (dịch ý: mục tiêu là chơi và hoàn thiện mô hình đơn giản đó trước khi bất kỳ dòng code hay asset đồ hoạ nào được làm ra).</p>
+
+        <p>Nhóm Experimental Gameplay Project tại Carnegie Mellon, trong bài <em>How to Prototype a Game in Under 7 Days</em> (2005), lại nói về việc dựng thẳng một <span class="term" data-en="Toy" tabindex="0">toy</span> — một cơ chế lõi chưa có mục tiêu, chưa có thắng thua: <em>This “toy” should be the core mechanic of the game minus any goals or decisions. There is no win or lose state, just a fun thing to play with.</em> (dịch ý: "toy" này nên là cơ chế lõi của game, trừ đi mọi mục tiêu hay quyết định — không có trạng thái thắng hay thua, chỉ là một thứ chơi cho vui).</p>
+
+        <p>Nhóm này cũng đưa ra một mốc thời gian cụ thể: <em>We found that generally any gameplay idea can be prototyped effectively in less than one week. Extra slop time tends to yield diminishing returns.</em> (dịch ý: chúng tôi nhận thấy hầu hết mọi ý tưởng gameplay đều có thể được prototype hiệu quả trong chưa đầy một tuần — thời gian kéo dài thêm chỉ mang lại lợi ích giảm dần).</p>
+
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Hai phương tiện, không phải hai quy tắc mâu thuẫn</p><p>Fullerton nghiêng về mô hình vật lý — giấy, thẻ bài, cờ — trước khi động tới code. Experimental Gameplay Project dựng thẳng trên máy trong vài giờ. Cả hai cùng nhắm một mục tiêu: một mô hình thô, chưa thắng thua, chơi được sớm nhất có thể. Chọn bên nào tuỳ loại cơ chế đang thử — cơ chế xoay quanh luật và lượt chơi hợp với giấy; cơ chế cần cảm giác điều khiển theo thời gian thực hợp với dựng thẳng trên máy.</p></div>
+        </div>
+
+        <h2 id="cat-pham-vi">Cắt phạm vi: ba ví dụ</h2>
+
+        <p>Có ý tưởng đúng và biết cách prototype vẫn chưa đủ nếu phạm vi ý tưởng đó quá lớn so với hai tuần đang có. Bước cắt phạm vi là nơi hầu hết ý tưởng lớn bị bỏ dở nếu không được làm nghiêm túc.</p>
+
+        <p>Derek Yu cho rằng chính sự thiếu thốn đó lại có lợi: <em>It’s our limited resources and time that forces us to make tight games that feel like they have a purpose.</em> (dịch ý: chính nguồn lực và thời gian giới hạn buộc chúng ta phải làm những game chặt chẽ, có cảm giác mang mục đích rõ ràng).</p>
+
+        <p>Ông đề xuất cách cắt cụ thể: <em>So go back down, down, down, down to a point where you may even find it somewhat beneath you. For example, instead of jumping from your 4x space sim to your 4x space sim IN 3D, try making a great game that focuses on one small element of space sims. And if you can’t finish that, try something more like Asteroids.</em> (dịch ý: hãy lùi xuống, xuống nữa, xuống đến mức bạn thấy nó hơi dưới tầm mình. Ví dụ, thay vì nhảy từ game mô phỏng không gian 4x của bạn sang bản 4x không gian đó nhưng làm 3D, hãy thử làm một game thật tốt chỉ tập trung vào một yếu tố nhỏ của thể loại mô phỏng không gian. Và nếu vẫn không xong được cái đó, hãy thử thứ gì gần giống Asteroids hơn).</p>
+
+        <p>Ba ví dụ sau là phân tích của bài, dựng theo đúng logic "lùi xuống, xuống nữa" đó — không trích từ nguồn nào.</p>
+
+        <p><strong>Game nhập vai thế giới mở → một căn phòng, một cơ chế hội thoại.</strong> Bỏ hẳn bản đồ thế giới, hệ phe phái, hệ chế tạo. Giữ lại đúng một cuộc hội thoại rẽ nhánh trong một căn phòng, nơi người chơi thấy rõ lựa chọn của mình dẫn tới hậu quả khác nhau.</p>
+
+        <p><strong>Game sinh tồn nhiều người chơi → một vòng năm phút chơi đơn.</strong> Bỏ máy chủ, bỏ tương tác giữa nhiều người, bỏ hệ thống xây dựng lâu dài. Giữ lại một vòng thu thập — chế tạo — đối mặt nguy hiểm gói gọn trong năm phút, chơi một mình.</p>
+
+        <p><strong>Game xây dựng thành phố → quản lý đúng một tài nguyên.</strong> Bỏ hết các loại tài nguyên, công trình, dân số chạy song song. Giữ lại một tài nguyên duy nhất — ví dụ nước hoặc điện — và những đánh đổi xoay quanh riêng nó.</p>
+
+        <h2 id="bat-dau-that">Bắt đầu thật sự nghĩa là gì</h2>
+
+        <p>Ba ví dụ trên đều mới dừng ở việc cắt phạm vi trên giấy. Cắt xong không có nghĩa là đã bắt đầu — đây là chỗ nhiều người nhầm lẫn.</p>
+
+        <p>Derek Yu nói thẳng về điều này: <em>Writing your idea down is not starting the damn game. Writing a design document is not starting the damn game.</em> (dịch ý: viết ý tưởng ra không phải là bắt đầu cái game chết tiệt đó. Viết design doc cũng không phải là bắt đầu cái game chết tiệt đó).</p>
+
+        <p>Ông đưa tiêu chí để biết khi nào thực sự đã bắt đầu: <em>Just remember: a damn game can be played, and if you have not created something that can be played, it’s not a damn game!</em> (dịch ý: nhớ rằng một cái game chết tiệt phải chơi được — nếu bạn chưa tạo ra thứ gì chơi được, thì đó chưa phải là một cái game).</p>
+
+        <p>Đây chính là lý do bài Prototype giấy ở Tầng 2 xuất hiện sớm trong lộ trình: thứ chơi được đầu tiên không cần là code, có thể chỉ là giấy và bút, miễn người khác cầm lên là chơi được ngay.</p>
+
+        <h2 id="ve-dich">90% cuối và chuyện về đích</h2>
+
+        <p>Có một prototype chơi được rồi vẫn còn một chặng dễ bị đánh giá thấp: đưa nó từ "chơi được" sang "hoàn thành". Derek Yu mô tả chặng này bằng một nghịch lý quen thuộc: <em>They say the last 10 percent is really 90 percent, and there is truth to this. It’s the details that end up taking a long time.</em> (dịch ý: người ta hay nói 10% cuối thực ra là 90% — và điều đó đúng một phần. Chính các chi tiết mới là thứ ngốn nhiều thời gian nhất).</p>
+
+        <p>Vì chặng cuối luôn dài hơn tưởng tượng, Yu đề xuất coi nó khác đi: <em>If you treat finishing like a skill, rather than simply a step in the process, you can acknowledge not only that it’s something you can get better at, but also what habits and thought processes get in your way.</em> (dịch ý: nếu bạn coi việc hoàn thành là một kỹ năng, thay vì chỉ là một bước trong quy trình, bạn sẽ thừa nhận được rằng đó là thứ có thể luyện giỏi lên — và nhận ra những thói quen, cách nghĩ nào đang cản trở chính mình).</p>
+
+        <p>Với một dự án hai tuần, "hoàn thành" không có nghĩa là đầy đủ tính năng. Nó có nghĩa là lát chơi được đó không còn lỗi chặn đường, có điểm bắt đầu và kết thúc rõ ràng, và người lạ cầm lên chơi được mà không cần bạn ngồi giải thích.</p>
+
+        <h2 id="lens">Lens</h2>
+
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Lăng kính Dự án của chính bạn</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Thứ tôi vừa làm tuần này có chơi được không, hay mới chỉ là chuẩn bị?</li>
+                <li><span class="q-icon">?</span> Ý tưởng tôi đang làm nằm ở giao của ba loại Derek Yu nói, hay chỉ thuộc đúng một loại?</li>
+                <li><span class="q-icon">?</span> Tôi đã cắt phạm vi đủ sâu chưa, hay vẫn đang giữ lại vì tiếc công?</li>
+                <li><span class="q-icon">?</span> Vòng playtest gần nhất có làm tôi thay đổi gì thật, hay tôi chỉ nghe rồi bỏ qua?</li>
+                <li><span class="q-icon">?</span> Tôi có đang né phần chi tiết cuối cùng vì nó không hào hứng bằng phần đầu?</li>
+            </ul>
+            <p class="lens-source">Dựng từ toàn bộ quy trình sáu phần ở trên — không trích nguyên văn.</p>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Đánh bóng một cơ chế chưa từng được kiểm chứng</p><p>Daniel Cook — Lostgarden — cảnh báo: <em>Even for the most experienced designer, 50% to 80% of your ‘educated’ selections are going to be complete dogs. Every unproven mechanic you polish ends up being a massive drain on your budget and your reputation as a designer.</em> (dịch ý: ngay cả với designer giàu kinh nghiệm nhất, 50 đến 80% những lựa chọn "có cơ sở" của bạn vẫn sẽ là thất bại hoàn toàn; mỗi cơ chế chưa được kiểm chứng mà bạn đem đi đánh bóng đều là một khoản ngân sách và uy tín bị rút cạn). Bỏ công đánh bóng đồ hoạ, âm thanh cho một cơ chế chưa ai chơi thử là đặt cược vào thứ nhiều khả năng vẫn hỏng.</p></div>
+        </div>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Cố cứu một ý tưởng đã chết vì tiếc công</p><p>Nhóm Experimental Gameplay Project cảnh báo: <em>It's important to quickly recognize dead-end game ideas, cut your losses and move on.</em> (dịch ý: điều quan trọng là nhận ra sớm những ý tưởng game đi vào ngõ cụt, cắt lỗ và đi tiếp). Sửa đi sửa lại một ý tưởng đã rõ là không vui, thay vì thử ý tưởng khác, chỉ tốn thêm thời gian của hai tuần vốn đã ít.</p></div>
+        </div>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Mở rộng phạm vi giữa chừng</p><p>Sau khi đã cắt phạm vi và bắt đầu prototype, việc lại thêm tính năng "vì nó dễ" hoặc "vì tiện tay" kéo dự án quay về đúng quy mô đã cắt bỏ ở bước trước — công cắt phạm vi coi như mất trắng.</p></div>
+        </div>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Chuẩn bị mãi không bắt đầu</p><p>Đọc thêm tài liệu, tinh chỉnh design doc, hay dựng thêm sơ đồ trước khi có bất kỳ thứ gì chơi được — theo tiêu chí ở phần "Bắt đầu thật sự nghĩa là gì", đó vẫn chưa phải bắt đầu, dù cảm giác như đang làm việc.</p></div>
+        </div>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Để phần hoàn thiện đến cuối mới lo</p><p>Dồn hết chi tiết — sửa lỗi vặt, cân chỉnh cảm giác điều khiển, làm rõ hướng dẫn — vào những ngày cuối cùng, đúng lúc thời gian còn lại ít nhất để xử lý phần vốn ngốn nhiều thời gian nhất.</p></div>
+        </div>
+
+        <h2 id="thuc-hanh">Thực hành</h2>
+
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">1-2 tuần</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Lập kế hoạch cho dự án nhỏ của chính bạn</h3>
+                <ol class="steps">
+                    <li><span>Chọn ý tưởng theo ba loại của Derek Yu — ghi ra ý tưởng của bạn thuộc loại nào (muốn làm / muốn đã làm xong / giỏi làm), và kiểm tra bạn có đủ thời gian, nguồn lực thật để làm nó không. (10 phút)</span></li>
+                    <li><span>Viết đúng một câu mục tiêu trải nghiệm người chơi — mô tả cảm giác bạn muốn người chơi có, không mô tả cơ chế. (10 phút)</span></li>
+                    <li><span>Cắt phạm vi xuống một lát chơi được trong 1-2 tuần — áp dụng kiểu "lùi xuống, xuống nữa" cho đến khi thấy khả thi. (20 phút)</span></li>
+                    <li><span>Dựng prototype thô cho lát chơi đó — giấy hoặc dựng thẳng trên máy, miễn chơi được trong vài giờ đến một ngày. (nhiều buổi)</span></li>
+                    <li><span>Cho đúng một người chơi thử prototype đó và quan sát, không giải thích trước. (15-30 phút)</span></li>
+                    <li><span>Ghi lại đúng một thay đổi cụ thể bạn sẽ làm ở vòng lặp kế tiếp, dựa trên điều vừa quan sát được. (10 phút)</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nếu người chơi thử là bạn bè đã biết ý tưởng, hỏi thêm một người hoàn toàn không biết gì về nó — phản hồi của người lạ thường lộ ra chỗ mà bạn bè đã "hiểu ngầm" giúp bạn.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+
+        <div class="quiz" data-answer="c">
+            <p class="q">Theo Derek Yu, một ý tưởng có tiềm năng hoàn thành cao nhất cần thoả điều kiện nào, ngoài việc nằm ở giao của ba loại game hấp dẫn?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Phải là ý tưởng chưa ai từng làm</button>
+                <button data-opt="b"><span class="badge">B</span> Phải thuộc thể loại đang thịnh hành</button>
+                <button data-opt="c"><span class="badge">C</span> Phải có đủ thời gian và nguồn lực để thực sự làm ra nó</button>
+                <button data-opt="d"><span class="badge">D</span> Phải được nhiều người khác góp ý trước khi bắt đầu</button>
+            </div>
+            <div class="explain" hidden><p>C đúng — đây chính là điều kiện Yu thêm vào ngoài phần giao ba loại. A, B, D không phải tiêu chí ông đưa ra và không liên quan đến khả năng hoàn thành.</p></div>
+        </div>
+
+        <div class="quiz" data-answer="b">
+            <p class="q">Một ý tưởng game xây dựng thành phố với hàng chục loại tài nguyên đang không thể xong trong hai tuần. Theo cách "lùi xuống, xuống nữa" của Derek Yu, bước cắt phạm vi hợp lý tiếp theo là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Giữ nguyên số tài nguyên nhưng giảm chất lượng đồ hoạ</button>
+                <button data-opt="b"><span class="badge">B</span> Bỏ bớt xuống một tài nguyên duy nhất, thử lại; nếu vẫn không xong, lùi tiếp</button>
+                <button data-opt="c"><span class="badge">C</span> Chuyển sang làm bản 3D để tăng giá trị sản phẩm</button>
+                <button data-opt="d"><span class="badge">D</span> Thêm người vào nhóm để làm kịp mọi tài nguyên</button>
+            </div>
+            <div class="explain" hidden><p>B đúng — đúng tinh thần "lùi xuống, xuống nữa" và ví dụ Asteroids: cắt tiếp nếu vẫn chưa xong, không phải giữ nguyên phạm vi hay mở rộng nhóm.</p></div>
+        </div>
+
+        <div class="quiz" data-answer="c">
+            <p class="q">Một người đã viết xong bản mô tả ý tưởng dài hai trang và một design doc chi tiết, nhưng chưa dựng gì. Theo tiêu chí của Derek Yu, người này đã "bắt đầu" dự án chưa?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Rồi, vì design doc là bước bắt buộc đầu tiên</button>
+                <button data-opt="b"><span class="badge">B</span> Rồi, vì ý tưởng đã đủ rõ ràng để triển khai</button>
+                <button data-opt="c"><span class="badge">C</span> Chưa, vì chưa tạo ra thứ gì chơi được</button>
+                <button data-opt="d"><span class="badge">D</span> Chưa, vì design doc cần có sơ đồ minh hoạ mới tính là hoàn chỉnh</button>
+            </div>
+            <div class="explain" hidden><p>C đúng — Yu nói thẳng viết ý tưởng và viết design doc đều không phải là bắt đầu; một game phải chơi được mới tính. D sai vì lý do đưa ra (thiếu sơ đồ) không phải tiêu chí thật.</p></div>
+        </div>
+
+        <div class="quiz" data-answer="b">
+            <p class="q">Nghịch lý "10% cuối thực ra là 90%" theo Derek Yu nên được hiểu thế nào khi lập kế hoạch cho dự án nhỏ?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Bỏ qua phần chi tiết cuối vì nó không quan trọng bằng cơ chế lõi</button>
+                <button data-opt="b"><span class="badge">B</span> Dành thời gian tương ứng cho phần hoàn thiện, vì chi tiết là thứ ngốn thời gian nhất</button>
+                <button data-opt="c"><span class="badge">C</span> Làm chi tiết trước, cơ chế lõi để sau cùng</button>
+                <button data-opt="d"><span class="badge">D</span> Thuê thêm người chỉ để làm mỗi phần chi tiết</button>
+            </div>
+            <div class="explain" hidden><p>B đúng — nghịch lý này cảnh báo đừng đánh giá thấp thời gian cần cho phần hoàn thiện. A đi ngược hoàn toàn ý gốc, C đảo ngược thứ tự vòng lặp, D không phải điều nguồn nói tới.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Ý tưởng nằm ở giao ba loại</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Kiểm bằng bảng ba loại (muốn làm / muốn đã làm xong / giỏi làm), cộng điều kiện đủ thời gian và nguồn lực thật để làm nó.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Prototype đầu tiên dưới một tuần</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Kiểm bằng đồng hồ — nếu vượt mốc, cắt bớt phạm vi thay vì kéo dài thời gian dựng.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Đã có một vòng playtest thật</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Kiểm bằng việc có người khác — không phải bạn — đã chạm vào prototype, và bạn có ghi lại phản hồi của họ.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Một thay đổi rõ cho vòng sau</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Kiểm bằng cách viết nó thành đúng một câu cụ thể — không mơ hồ kiểu "sẽ cải thiện thêm".</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Coi hoàn thành là một kỹ năng</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Kiểm bằng câu hỏi: mình có đang dừng lại ở 90% xong chỉ vì phần chi tiết còn lại không hào hứng bằng phần đầu?</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại</h2>
+
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Chọn ý tưởng nằm ở giao của ba loại theo Derek Yu, và chỉ bắt đầu khi thật sự đủ thời gian, nguồn lực để làm nó.</li>
+                <li><span class="n">2</span> Vòng lặp tám bước của Fullerton là xương sống của cả dự án: đặt mục tiêu, dựng prototype, playtest, đánh giá, sửa, lặp lại đến khi đạt.</li>
+                <li><span class="n">3</span> Một game chỉ tính là đã bắt đầu khi có thứ chơi được, và hoàn thành là một kỹ năng cần rèn, không phải một bước cuối trong quy trình.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+
+        <ul class="reading">
+            <li><span class="pill type-bai">Bài viết</span> <span class="reading-title">Finishing a Game</span> <span class="reading-meta">Derek Yu · makegames.tumblr.com, 2010</span> <p class="reading-why">Nguồn của toàn bộ phần chọn ý tưởng, cắt phạm vi, tiêu chí "bắt đầu thật sự", và nghịch lý 10% cuối.</p></li>
+            <li><span class="pill type-sach">Sách</span> <span class="reading-title">Game Design Workshop</span> <span class="reading-meta">Tracy Fullerton · trích đoạn bản in 5 trên Game Developer, 2024</span> <p class="reading-why">Định nghĩa iteration và vòng lặp tám bước playcentric làm xương sống cho toàn bộ bài.</p></li>
+            <li><span class="pill type-bai">Bài viết</span> <span class="reading-title">How to Prototype a Game in Under 7 Days</span> <span class="reading-meta">Experimental Gameplay Project · Game Developer, 2005</span> <p class="reading-why">Khái niệm "toy", mốc thời gian dưới một tuần, và lời khuyên cắt lỗ với ý tưởng ngõ cụt.</p></li>
+            <li><span class="pill type-bai">Bài viết</span> <span class="reading-title">Post-it note design docs</span> <span class="reading-meta">Daniel Cook · Lostgarden, 2008</span> <p class="reading-why">Cảnh báo về tỷ lệ thất bại cao ngay cả với lựa chọn có cơ sở, dùng cho sai lầm "đánh bóng cơ chế chưa kiểm chứng".</p></li>
+            <li><span class="pill type-bai">Bài viết</span> <span class="reading-title">Richard Lemarchand: Playtesting and A Playful Production Process</span> <span class="reading-meta">Steve Bromley phỏng vấn · gamesuserresearch.com, 2021</span> <p class="reading-why">Góc nhìn phỏng vấn về playtest và quy trình sản xuất lấy vui chơi làm trung tâm, bổ sung cho vòng lặp của Fullerton.</p></li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

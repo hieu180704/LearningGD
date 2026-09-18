@@ -392,7 +392,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 20,
                 level: "Nâng cao",
-                status: "planned"
+                status: "ready"
             }
         ]
     }

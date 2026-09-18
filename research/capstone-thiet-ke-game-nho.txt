@@ -1,0 +1,755 @@
+RESEARCH — THIẾT KẾ MỘT GAME NHỎ TRỌN VÒNG (capstone, bài 01)
+Ngày: 2026-09-18
+
+CẢNH BÁO ĐỌC TRƯỚC KHI DÙNG FILE NÀY
+- Phần thân (TRỤC A, TRỤC B) do subagent viết. Nội dung CHỮ đã được main so byte với nguồn gốc,
+  nhưng KÝ TỰ trong phần thân KHÔNG đáng tin: 10/11 quote trục B và 6/15 quote trục A bị lệch ký
+  tự ngay trong file gốc của subagent (nháy cong bị làm phẳng, dấu … bị đổi thành ...).
+- MUỐN TRÍCH DẪN VÀO BÀI: chỉ copy từ mục "FIXTURE QUOTE" ở CUỐI FILE. Fixture lấy byte trực
+  tiếp từ nguồn (curl HTML thô / pdftotext), không ai gõ tay ký tự nào.
+
+KẾT QUẢ SO BYTE (main tự chạy, 2026-09-18)
+- Tổng 33 quote dựng được từ nguồn, 33/33 khớp nguyên văn. 0 quote bị loại.
+- Trục A: 2 chỗ ban đầu báo "lệch nội dung" đều là artifact, không phải bịa:
+  (a) khối 8 gạch đầu dòng quy trình playcentric bị subagent ghép thành MỘT câu liền — fixture
+      tách lại thành 8 mục riêng (QA_LOOP1..8);
+  (b) bản trích sách ngắt dòng giữa chữ "pro-duction" — fixture nối lại, có ghi chú.
+- Trục B: 10/11 quote lệch ký tự dù subagent tự khai "đã verify, không bị làm phẳng".
+- CẢNH BÁO NGUỒN: URL mà subagent khai cho bài Derek Yu (tumblr.com/makegames/1136623767/...)
+  KHÔNG trả về thân bài khi curl — trang render phía client, chỉ có meta description bị cắt.
+  Phải lấy qua web.archive.org mới có nguyên văn. Nếu tin dòng tự khai thì đã trích dẫn từ một
+  trang chưa từng đọc được.
+
+NGUỒN GỐC ĐÃ CURL (6)
+  derekyu    https://web.archive.org/web/2019id_/http://makegames.tumblr.com/post/1136623767/finishing-a-game
+             (bài gốc: Derek Yu, "Finishing a Game", makegames.tumblr.com, 2010)
+  fullerton  https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+  proto7     https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+  cook       https://lostgarden.com/2008/12/06/post-it-note-design-docs/
+  lemarchand https://gamesuserresearch.com/richard-lemarchand-playtesting-and-a-playful-production-process/
+             (PHỎNG VẤN do Steve Bromley thực hiện — KHÔNG phải trích từ sách của Lemarchand)
+  wehle      https://media.gdcvault.com/gdc2019/presentations/Wehle_David_NoTimeNo.pdf
+             (ĐÃ CỐ Ý KHÔNG DÙNG: số liệu chi phí/giờ công/doanh thu là số tự khai của một cá
+             nhân, không phải thống kê ngành — dễ bị người mới đọc thành chuẩn để so)
+
+KHÔNG VERIFY ĐƯỢC, ĐÃ LOẠI KHỎI BÀI
+- Richard Lemarchand, A Playful Production Process: không có bản nguyên văn hợp pháp nào mở đọc
+  được. Mọi ý của ông trong bài chỉ đến từ bài phỏng vấn nêu trên, và phải ghi đúng là phỏng vấn.
+- Tracy Fullerton ngoài phần trích đoạn công khai: không dùng.
+- Jesse Schell "Rule of the Loop": chỉ có tóm tắt bên thứ ba, không trích.
+- Anna Anthropy, Rise of the Videogame Zinesters: bản scan là dạng mượn có kiểm soát, không
+  đối chiếu được với sách gốc.
+- Mọi số liệu dạng "X% game indie không hoàn thành": không truy được nguồn gốc, bỏ hẳn.
+
+================================================================================
+TRỤC A — QUY TRÌNH LÀM MỘT GAME NHỎ TRỌN VÒNG
+
+MỤC LỤC
+1. Nguồn đã mở đọc thật
+2. A1 — Các giai đoạn: ideation → prototype → playtest → iterate
+3. A2 — Prototype vật lý / prototype thô
+4. A3 — Vòng lặp thiết kế lặp (iterative design loop) cho dự án cá nhân nhỏ
+5. Mảng không tìm được nguồn tin cậy
+
+======================================================================
+1. NGUỒN ĐÃ MỞ ĐỌC THẬT
+======================================================================
+
+[F] Tracy Fullerton, "Book Excerpt: Game Design Workshop" (trích từ Game Design
+    Workshop, 5th edition), Game Developer (gamedeveloper.com), tác giả: Tracy
+    Fullerton, đăng 2024-04-18.
+    URL: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+    Đã mở bằng curl, đọc HTML thô (không qua WebFetch), grep xác nhận từng câu.
+
+[L] Steve Bromley (phỏng vấn Richard Lemarchand), "Richard Lemarchand –
+    Playtesting and a Playful Production Process", Games User Research
+    (gamesuserresearch.com), đăng 2021-12-08.
+    URL: https://gamesuserresearch.com/richard-lemarchand-playtesting-and-a-playful-production-process/
+    Đã mở bằng curl, đọc HTML thô, grep xác nhận từng câu. Các quote gán cho
+    Lemarchand là lời ông nói trực tiếp trong phỏng vấn (không phải trích sách).
+
+[LP] Trang chính thức của sách Lemarchand, "About", playfulproductionprocess.com
+    (trang giới thiệu sách — văn phong giống blurb nhà xuất bản, không chắc là
+    nguyên văn lời Lemarchand).
+    URL: https://www.playfulproductionprocess.com/about/
+    Đã mở bằng curl, đọc HTML thô.
+
+[K] Matt Kucic (cùng Kyle Gabler, Kyle Gray, Shalin Shodhan — nhóm Experimental
+    Gameplay Project, Carnegie Mellon Entertainment Technology Center),
+    "How to Prototype a Game in Under 7 Days", Game Developer / gốc Gamasutra,
+    đăng 2005-10-26 (bản đăng lại trên lostgarden.com của Daniel Cook ngày
+    2005-10-28, không mở bản lostgarden — dùng bản gốc gamedeveloper.com).
+    URL: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+    Đã mở bằng curl, đọc HTML thô, grep xác nhận từng câu và từng người nói
+    (bài ở dạng phỏng vấn nhiều người: Mr. Gray / Mr. Gabler / Mr. Kucic /
+    Mr. Shodhan, đã tách đúng ai nói câu nào bằng vị trí trong HTML).
+
+KHÔNG mở được / không dùng:
+- Jesse Schell, The Art of Game Design — "Rule of the Loop": không tìm được
+  bản trích đoạn công khai nào của chính Schell hoặc nhà xuất bản để tự mở đọc
+  (chỉ có các trang tổng hợp/note của bên thứ ba như notesbylex.com — đây là
+  nguồn thứ cấp, không phải nguyên văn sách). KHÔNG dùng ngoặc kép cho phần
+  này — xem mục 5.
+- Daniel Cook / lostgarden.com: đã mở 2 bài ("Play With Your Peas: A game
+  prototyping challenge" và "The Chemistry of Game Design") nhưng cả hai
+  không có nội dung bàn trực tiếp về giai đoạn dự án hay vòng lặp lặp cho một
+  game nhỏ — không dùng.
+
+======================================================================
+2. A1 — CÁC GIAI ĐOẠN: IDEATION → PROTOTYPE → PLAYTEST → ITERATE
+======================================================================
+
+- Fullerton mở đầu phần quy trình bằng cách gọi thẳng đây là một chuỗi có thứ
+  tự: từ ý tưởng ban đầu đến một trải nghiệm chơi được và thỏa mãn.
+
+    QUOTE:
+    Having a good solid process for developing an idea from the initial ideation process into a playable and satisfying game experience is another key to thinking like a game designer.
+    NGUỒN: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+    NEO: Design Process</h2> (đầu mục "A Playcentric Design Process")
+    ĐỘ TIN: CAO
+
+- Fullerton liệt kê tường minh trình tự các bước của "quy trình lặp"
+  (iterative process) — đây chính là ranh giới giữa các giai đoạn ideation /
+  prototype / playtest / đánh giá, trình bày dưới dạng danh sách gạch đầu
+  dòng trong bài gốc:
+
+    QUOTE:
+    Player experience goals are set.
+    An idea or system is conceived.
+    An idea or system is prototyped. (This may mean a physical or digital prototype, or even storyboards or an animatic for an idea that can be presented to players.)
+    The idea or system is playtested or shown to potential players for response and feedback.
+    Results are evaluated against player experience goals.
+    Issues are prioritized and addressed by making changes to the prototype.
+    The prototype is retested and the results are evaluated against experience goals again.
+    This process is repeated until solutions are found and the design is deemed to meet the goals.
+    NGUỒN: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+    NEO: Here is a detailed flow of the iterative process that you should go through when designing a game:
+    ĐỘ TIN: CAO
+
+  (Ghi chú: đây là danh sách bullet trong bài gốc, mỗi dòng một ý — đã chép
+  đúng thứ tự xuất hiện, không tự sắp xếp lại. Dấu "•" đầu mỗi dòng trong HTML
+  gốc đã bỏ để tránh lẫn với gạch đầu dòng của file này, phần chữ giữ nguyên.)
+
+- Dấu hiệu "được phép sang giai đoạn sau" theo Fullerton nằm ngay trong câu
+  cuối ở trên: chỉ dừng vòng lặp (tức chỉ được xem là xong một giai đoạn) khi
+  "solutions are found and the design is deemed to meet the goals" — nghĩa là
+  tiêu chí chuyển giai đoạn không phải thời gian đã bỏ ra, mà là kết quả
+  playtest khớp với player experience goals đã đặt ra từ đầu.
+
+- Richard Lemarchand (phỏng vấn) xác nhận trực tiếp cấu trúc bốn giai đoạn của
+  chính cuốn sách của ông — lưu ý: đây là các giai đoạn quản lý dự án cấp cao
+  hơn (ideation, preproduction, full production, post-production), rộng hơn
+  phạm vi 4 bước ideation→prototype→playtest→iterate của bài học, nhưng cùng
+  logic "milestone đánh dấu ranh giới":
+
+    QUOTE:
+    Game development is going to remain tremendously challenging and that's part of what I love about it, and what intrigues me. All I wanted to do with this book was gather up all these best practices that I've been exposed to, that I'd learned from other people, from my colleagues, my mentors, from talks at GDC and elsewhere, and put them in a row just to guide people through making a game. The book guides people through four phases that guide them, steadily but surely, towards a finished game.
+    NGUỒN: https://gamesuserresearch.com/richard-lemarchand-playtesting-and-a-playful-production-process/
+    NEO: (câu trả lời trong đoạn phỏng vấn, ngay trước câu bắt đầu bằng "Game development is going to remain")
+    ĐỘ TIN: CAO
+
+  [CHƯA VERIFY — dùng diễn giải, không quote]: Trang giới thiệu sách
+  (playfulproductionprocess.com/about) mô tả bốn giai đoạn cụ thể là
+  "ideation, preproduction, full production, and post-production", mỗi giai
+  đoạn có "milestones that mark the beginning and end of each phase" — tức
+  ranh giới chuyển giai đoạn được đánh dấu bằng milestone/deliverable cụ thể,
+  không phải cảm tính. Văn phong trang này giống blurb nhà xuất bản hơn là lời
+  trực tiếp của Lemarchand nên không đưa vào ngoặc kép, chỉ dùng làm ý bổ
+  trợ.
+
+======================================================================
+3. A2 — PROTOTYPE VẬT LÝ / PROTOTYPE THÔ
+======================================================================
+
+- Đoạn giải thích rõ nhất của Fullerton về physical prototype: làm ngay sau
+  brainstorm, làm bằng gì, ai chơi, và mục tiêu là gì:
+
+    QUOTE:
+    Another key component to playcentric design is that ideas should be prototyped and playtested early. I encourage designers to construct a playable version of their idea immediately after brainstorming ideas. By this I mean a physical prototype of the core game mechanics. A physical prototype can use paper and pen or index cards or even be acted out. It is meant to be played by the designer and her friends. The goal is to play and perfect this simplistic model before a single line of code or art asset is ever made.
+    NGUỒN: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+    NEO: Another key component to playcentric design is that ideas should be prototyped and playtested early. (câu trước là hết một đoạn khác — đây gần như là câu mở đoạn, NEO lấy chính câu đầu của đoạn)
+    ĐỘ TIN: CAO
+
+- Vì sao phải làm trước khi viết code (hậu quả nếu không làm): Fullerton nói
+  rõ hệ quả của việc bỏ qua bước test cơ chế lõi sớm — lỗi thiết kế bị phát
+  hiện quá trễ trong quá trình sản xuất:
+
+    QUOTE:
+    This way, the game designer receives instant feedback on what players think of the game and can see immediately if they are on track to achieve their player experience goals. This might sound like common sense, but in the industry today, much of the testing of the core game mechanics comes later in the production cycle, which can lead to disappointing results. Because many games are not thoroughly prototyped or tested early on, flaws in the design aren't identified until late in the process—in some cases, too late to fix.
+    NGUỒN: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+    NEO: The goal is to play and perfect this simplistic model before a single line of code or art asset is ever made.
+    ĐỘ TIN: CAO
+    (Ghi chú: bản HTML gốc có một chỗ ngắt dòng lạ "pro-duction" — đã sửa lại
+    thành "production" liền vì đây rõ ràng là lỗi tách âm tiết do dàn trang
+    web, không phải lỗi chính tả cố ý trong nguồn; không phải trường hợp "lỗi
+    có sẵn cần giữ nguyên".)
+
+- Richard Lemarchand (phỏng vấn), về việc prototype thô/vụng vẫn có giá trị
+  ngay cả khi chưa ra hình hài game:
+
+    QUOTE:
+    I think that no matter how small and clunky, and maybe un-gamelike a prototype that you make is, there's incredible value in putting it in front of somebody else, and just seeing how they react, seeing how they approach it, seeing if they can work out the controls that you haven't properly explained, seeing what they can get just through play.
+    NGUỒN: https://gamesuserresearch.com/richard-lemarchand-playtesting-and-a-playful-production-process/
+    NEO: (đoạn mở đầu mục "Playtesting early in development" trong bài phỏng vấn)
+    ĐỘ TIN: CAO
+
+- Lemarchand — lời khuyên nổi bật (được chính trang trích làm pull-quote):
+  lúc prototype nên nhắm tới "món đồ chơi" (toy) chứ chưa phải "game":
+
+    QUOTE:
+    I tell my students that when they're prototyping, looking for interesting game verbs that might lead them to a more fully developed game design, it's usually much better to make a toy than it is a game.
+    NGUỒN: https://gamesuserresearch.com/richard-lemarchand-playtesting-and-a-playful-production-process/
+    NEO: (câu ngay sau đoạn nói về giá trị của việc cho người khác chơi prototype vụng)
+    ĐỘ TIN: CAO
+
+- Đồng quan điểm "toy trước, game sau" từ nhóm Experimental Gameplay Project
+  (Kyle Gabler, trả lời phỏng vấn về cách họ làm 50 game trong 1 học kỳ, mỗi
+  game ≤ 7 ngày, 1 người/game):
+
+    QUOTE:
+    Start with the core mechanic. Whether spring systems, swarm behavior, gravity, etc, it never took more than a few hours to get the basic theme up and running. This "toy" should be the core mechanic of the game minus any goals or decisions. There is no win or lose state, just a fun thing to play with.
+    NGUỒN: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+    NEO: Mr. Gabler: (đây là câu trả lời của ông cho câu hỏi về quy trình làm prototype)
+    ĐỘ TIN: CAO
+
+  (Ghi chú xung đột nhẹ với Fullerton: nhóm này làm prototype trên máy/code
+  ngay từ đầu (digital toy, vài giờ dựng xong), không phải prototype giấy như
+  Fullerton nhấn mạnh. Hai nguồn không mâu thuẫn về MỤC TIÊU — "toy" đơn giản,
+  chưa có thắng/thua — mà khác nhau ở PHƯƠNG TIỆN, tuỳ loại cơ chế. Nên trình
+  bày trong bài là hai lựa chọn, không phải một quy tắc cứng.)
+
+======================================================================
+4. A3 — VÒNG LẶP THIẾT KẾ LẶP CHO DỰ ÁN CÁ NHÂN NHỎ
+======================================================================
+
+- Định nghĩa "iteration" của Fullerton, và tiêu chí dừng một vòng
+  (đã trích một phần ở mục A1, nhắc lại phần định nghĩa riêng):
+
+    QUOTE:
+    By "iteration" I simply mean that you design, test, and evaluate the results over and over again throughout the development of your game, each time improving upon the gameplay or features, until the player experience meets your criteria.
+    NGUỒN: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+    NEO: (câu mở đầu mục "Iteration", ngay sau heading cùng tên)
+    ĐỘ TIN: CAO
+
+  → Tiêu chí "thành công" của một vòng = kết quả playtest khớp
+  player experience goals đã đặt trước (không phải "cảm thấy ổn" của người
+  làm). Tiêu chí "dừng hẳn" cả chuỗi vòng lặp = danh sách 8 bước ở mục A1,
+  dừng ở bước cuối "This process is repeated until solutions are found and
+  the design is deemed to meet the goals."
+
+- Về việc iteration áp dụng xuyên suốt, không chỉ ở đầu dự án:
+
+    QUOTE:
+    is applicable during every aspect of game design, from initial conception through final quality assurance testing.
+    NGUỒN: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+    NEO: This process is repeated until solutions are found and the design is deemed to meet the goals. Iteration
+    ĐỘ TIN: CAO
+    (Ghi chú: câu này trong nguồn nối tiếp trực tiếp câu "Iteration is deeply
+    important to the playcentric process" — chủ ngữ "Iteration" bị tách ra ở
+    một câu trước đó trong đoạn văn gốc; NEO lấy đúng cụm liền trước theo thứ
+    tự xuất hiện trong HTML.)
+
+- Nhóm Experimental Gameplay Project — dữ liệu thực nghiệm về "một vòng nên
+  dài bao lâu" khi làm một mình: họ tự đặt luật "≤ 7 ngày, 1 người/game" cho
+  50 lượt thử trong một học kỳ:
+
+    QUOTE:
+    1. Each game must be made in less than seven days,
+    2. Each game must be made by exactly one person,
+    3. Each game must be based around a common theme i.e. "gravity", "vegetation", "swarms", etc.
+    NGUỒN: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+    NEO: (đây là khối trích dẫn 3 luật chơi của dự án Experimental Gameplay Project, trình bày trong bài dưới dạng blockquote đánh số)
+    ĐỘ TIN: CAO
+
+- Kết luận thực nghiệm quan trọng nhất của họ về việc "một vòng nên dừng khi
+  nào" — thời gian đổ thêm vào một prototype không tỉ lệ thuận với chất lượng:
+
+    QUOTE:
+    We found that generally any gameplay idea can be prototyped effectively in less than one week. Extra slop time tends to yield diminishing returns. Some prototypes, for instance, took just a single evening to throw together, while others got an extra week or two of love. Surprisingly, we found that there was no correlation between time spent in development and how successful the game ultimately turned out.
+    NGUỒN: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+    NEO: TWO weeks, it will be TWICE as good!" Of course this isn't the case.
+    ĐỘ TIN: CAO
+
+- Matt Kucic — tiêu chí cụ thể để BIẾT khi nào một vòng thất bại và phải dừng
+  (rất sát với A3 "khi nào dừng một vòng"):
+
+    QUOTE:
+    My "Potato" ended up being a perfectly simulated soft body system built in Flash. The only problem was that it was in no way fun. It caused more headaches than death metal, wasted a week, and it didn't even really move. You've got to know when to hold 'em and know when to fold 'em.
+    NGUỒN: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+    NEO: Mr. Kucic: (đây là câu trả lời của ông, đứng ngay sau nhãn tên người nói)
+    ĐỘ TIN: CAO
+
+    QUOTE:
+    It's important to quickly recognize dead-end game ideas, cut your losses and move on. As we found, spontaneity is more valuable than time spent trying to salvage existing code. You can always come back if lighting strikes at a later time.
+    NGUỒN: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+    NEO: Mr. Kucic: (câu trả lời tiếp theo, cùng người nói, ngay sau quote "Potato" ở trên)
+    ĐỘ TIN: CAO
+
+- Kyle Gray — vì sao không thể "gian lận" một vòng lặp bằng art/nhạc khi cơ
+  chế chưa ổn (liên quan tới việc XÁC NHẬN một vòng có thật sự thành công hay
+  chỉ nguỵ trang):
+
+    QUOTE:
+    We found that game players are smarter than you think, and they can tell when you're pulling a fast one on them. If the gameplay is horrible, there is no recovery - all the art, music, and product tie-ins in the world won't make it a great game
+    NGUỒN: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+    NEO: Mr. Gray: (câu trả lời của ông, đứng ngay sau nhãn tên người nói)
+    ĐỘ TIN: CAO
+    (Ghi chú: câu trích trong HTML nguồn bị cắt cụt — không có dấu chấm kết
+    câu ở cuối đoạn trích. Đã chép đúng y nguyên, không tự thêm dấu chấm.)
+
+- [CHƯA VERIFY — không quote]: Jesse Schell gọi nguyên lý này là "Rule of the
+  Loop" trong The Art of Game Design (2008), đại ý: chất lượng game tỉ lệ với
+  số lần được test và cải thiện. Không tìm được bản gốc công khai để tự mở
+  đọc và so nguyên văn — chỉ có các trang tổng hợp bên thứ ba nhắc lại, không
+  đủ tin cậy để trích dẫn trực tiếp. Nên đưa khái niệm này vào bài (nếu dùng)
+  dưới dạng diễn giải có ghi rõ "theo Schell, được gọi là 'Rule of the Loop'"
+  mà không đặt trong ngoặc kép, và không bịa số trang.
+
+======================================================================
+5. MẢNG KHÔNG TÌM ĐƯỢC NGUỒN TIN CẬY
+======================================================================
+
+- Nguyên văn chính xác của "Rule of the Loop" trong The Art of Game Design
+  (Jesse Schell) — không có bản trích công khai của tác giả/nhà xuất bản để
+  tự mở đọc; chỉ có tóm tắt/paraphrase của bên thứ ba (notesbylex.com,
+  game-studies fandom wiki). KHÔNG dùng làm quote.
+- Daniel Cook (lostgarden.com) nói trực tiếp về vòng lặp thiết kế cho MỘT dự
+  án cá nhân nhỏ: đã mở 2 bài có vẻ liên quan nhất theo tên
+  ("Play With Your Peas: A game prototyping challenge",
+  "The Chemistry of Game Design") nhưng nội dung thực tế không bàn về giai
+  đoạn dự án hay tiêu chí dừng vòng lặp — không có gì để trích. Có thể còn
+  bài khác trên lostgarden.com đúng chủ đề hơn nhưng chưa tìm ra trong phạm
+  vi thời gian research này; không đưa Daniel Cook vào bài nếu không tìm
+  thêm được nguồn cụ thể.
+- Không xác nhận được tên đầy đủ 4 tác giả của "How to Prototype a Game in
+  Under 7 Days" ngay trên trang gamedeveloper.com (chỉ thấy tên xưng hô
+  "Mr. Gray / Mr. Gabler / Mr. Kucic / Mr. Shodhan" trong nội dung phỏng vấn,
+  và dòng byline "by Matt Kucic" ở cuối bài) — nếu bài học cần nêu đủ tên và
+  vai trò của cả 4 người, cần tìm thêm nguồn xác nhận (vd. trang GDC Vault
+  của talk cùng tên) trước khi viết vào bài.
+
+
+================================================================================
+
+TRỤC B — PHẠM VI VÀ HOÀN THÀNH DỰ ÁN ĐẦU TAY
+
+NGUỒN ĐÃ MỞ ĐỌC THẬT
+- Derek Yu (tác giả Spelunky, Aquaria). "Finishing a Game". makegames.tumblr.com,
+  post ngày không ghi rõ trên trang (bài kinh điển, được trích dẫn rộng rãi từ khoảng 2012).
+  URL: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  Truy cập: 2026-09-18. Đã tải HTML thô (curl, không qua WebFetch/model tóm tắt) và trích
+  nguyên văn trực tiếp từ JSON nội bộ trang (trường "text") — không qua bước diễn giải nào.
+- Daniel Cook (Lostgarden, Chief Creative Officer Spry Fox). "Post-it note design docs".
+  URL: https://lostgarden.com/2008/12/06/post-it-note-design-docs/
+  Truy cập: 2026-09-18. Đã tải HTML thô bằng curl, grep trực tiếp trên mã nguồn.
+- David Wehle (tác giả The First Tree). "No Time, No Budget, No Problem: Finishing The
+  First Tree" — slide chính thức từ GDC Vault (GDC 2019, Independent Games Summit).
+  URL: https://media.gdcvault.com/gdc2019/presentations/Wehle_David_NoTimeNo.pdf
+  Truy cập: 2026-09-18. Đã tải PDF và đọc trực tiếp toàn bộ 43 slide (nguồn gốc, tác giả
+  công bố chính chủ). Lưu ý: nội dung chính của talk này là MARKETING game đã hoàn thành,
+  chỉ một phần nhỏ chạm B2 (kỷ luật để về đích) — dùng dè dặt, không lạm dụng.
+
+Đã tra cứu nhưng KHÔNG lấy được nguyên văn xác thực (xem mục cuối): Richard Lemarchand —
+A Playful Production Process; Tracy Fullerton — Game Design Workshop; Anna Anthropy — Rise
+of the Videogame Zinesters.
+
+===========================================================
+B1. KIỂM SOÁT PHẠM VI (SCOPE) CHO DỰ ÁN ĐẦU TAY
+===========================================================
+
+- Derek Yu chỉ ra người mới hay nhầm ba loại ý tưởng: game muốn LÀM (quá trình làm đã vui),
+  game muốn CÓ (chỉ thích kết quả, không thích tự thực hiện), và game mình GIỎI làm (hợp
+  tính cách, có kinh nghiệm sẵn). Ý tưởng nào rơi vào cả ba, và thêm điều kiện "có đủ thời
+  gian + nguồn lực để thực sự làm", mới là ý tưởng đáng chọn cho một dự án — không phải ý
+  tưởng "hay nhất" trên giấy.
+
+  QUOTE:
+  I've found that there are three types of games that pique my interest: games I want to
+  make, games I want to have made, and games I'm good at making.
+  NGUỒN: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  NEO: 1. CHOOSE AN IDEA WITH POTENTIAL
+  ĐỘ TIN: CAO
+
+  QUOTE:
+  In my opinion, the ideas with the most potential (to be finished, at least) fall into
+  all three categories and also satisfy the requirement "I have the time and resources to
+  actually make this".
+  NGUỒN: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  NEO: which you understand the rhythm and flow of very well.
+  ĐỘ TIN: CAO
+
+- Dấu hiệu dự án đang phình, theo Derek Yu: khi bị chậm tiến độ ("way behind schedule") và
+  nhận ra danh sách ý tưởng còn lại là bất khả thi trong thời gian còn lại — đây chính là
+  lúc BẮT BUỘC phải quyết định cái gì thực sự quan trọng và cái gì phải cắt. Ông lập luận
+  rằng chính giới hạn nguồn lực/thời gian mới tạo ra một game "chặt", có mục đích rõ — nếu
+  có nguồn lực vô hạn, ai cũng sẽ làm ra một game lan man giống nhau.
+
+  QUOTE:
+  Well, that's great, actually! Because now you're forced to decide what is really
+  important to your game, and what you could cut. The fact is, if we all had unlimited
+  resources and unlimited time, we'd all make the same crappy, meandering everything game
+  and there'd be no reason to play at all. It's our limited resources and time that forces
+  us to make tight games that feel like they have a purpose.
+  NGUỒN: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  NEO: Oh woe is you... BUT WAIT!
+  ĐỘ TIN: CAO
+
+- Nếu buộc phải bỏ dự án giữa chừng, lời khuyên của Derek Yu là "scale down, not up" cho
+  dự án tiếp theo — tức đi ngược lại bản năng ngày càng đặt mục tiêu to hơn dù các dự án
+  trước càng lúc càng dở dang. Ông cho ví dụ cụ thể: thay vì nhảy từ game 4X-space-sim sang
+  bản 3D của chính nó, hãy làm một game tập trung vào MỘT yếu tố nhỏ của thể loại đó; nếu
+  vẫn không xong, hạ tiếp xuống mức như Asteroids.
+
+  QUOTE:
+  So go back down, down, down, down to a point where you may even find it somewhat beneath
+  you. For example, instead of jumping from your 4x space sim to your 4x space sim IN 3D,
+  try making a great game that focuses on one small element of space sims. And if you
+  can't finish that, try something more like Asteroids.
+  NGUỒN: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  NEO: important to treat finishing as a skill, too.
+  ĐỘ TIN: CAO
+
+- Daniel Cook (Lostgarden) đưa góc nhìn bổ sung: cách chống lại việc chọn sai/quá tay ngay
+  từ đầu không phải là viết design doc thật chi tiết rồi cam kết theo nó, mà là chấp nhận
+  phần lớn lựa chọn ban đầu — kể cả của người có kinh nghiệm — sẽ sai, và né rủi ro đó bằng
+  cách không đổ công sức "đánh bóng" một cơ chế chưa được kiểm chứng là vui.
+  Lưu ý tách bạch: câu này nằm trong một bài đối chiếu "design doc" và "post-it note /
+  paper prototyping" nói chung — không phải bài viết riêng về scope dự án đầu tay, nhưng
+  áp dụng trực tiếp được vào lý do tại sao ý tưởng ban đầu (thường quá to) cần bị nghi ngờ.
+
+  QUOTE:
+  Even for the most experienced designer, 50% to 80% of your ‘educated’ selections are
+  going to be complete dogs. Every unproven mechanic you polish ends up being a massive
+  drain on your budget and your reputation as a designer.
+  NGUỒN: https://lostgarden.com/2008/12/06/post-it-note-design-docs/
+  NEO: forced to pick, without much evidence, a main mechanics for production.
+  ĐỘ TIN: CAO
+
+===========================================================
+B2. HOÀN THÀNH MỘT GAME
+===========================================================
+
+- Derek Yu coi "finishing" (khả năng hoàn thành) là một KỸ NĂNG riêng, luyện được, chứ
+  không phải một bước tất yếu trong quy trình — đây là luận điểm mở đầu và xuyên suốt toàn
+  bài, lý giải vì sao ông liệt kê ra 15 "bẫy tâm lý" khiến người làm game giỏi vẫn không
+  xong việc.
+
+  QUOTE:
+  If you treat finishing like a skill, rather than simply a step in the process, you can
+  acknowledge not only that it's something you can get better at, but also what habits and
+  thought processes get in your way.
+  NGUỒN: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  NEO: it's probably why they have the recognition I don't!
+  ĐỘ TIN: CAO
+
+- Về phần cuối dự án ("90% cuối" tốn công): Derek Yu mô tả đây là giai đoạn chi tiết hoá —
+  thứ khiến một hệ thống "chạy được" (competent) biến thành một hệ thống "tốt và không lỗi",
+  và việc này có thể tốn nhiều tháng dù phần khung chỉ mất một tuần.
+
+  QUOTE:
+  They say the last 10 percent is really 90 percent, and there is truth to this. It's the
+  details that end up taking a long time. Sure, maybe you coded a competent combat system
+  in a week... but making it great and making it complex (and bug-free)... these things
+  can take months.
+  NGUỒN: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  NEO: 15. THE LAST 10 PERCENT
+  ĐỘ TIN: CAO
+  Lưu ý: cụm "the last 10 percent is really 90 percent" là câu nói dân gian trong ngành mà
+  Derek Yu dẫn lại ("They say..."), không phải do ông tự đặt ra — không gán câu này là phát
+  minh của riêng ông khi đưa vào bài học.
+
+- Kỷ luật cắt tính năng để về đích — Derek Yu gọi thẳng là "CUT. IT. OUT.": một khi đã có
+  lõi cơ chế được kiểm chứng là vui (core mechanic đã prototype), mọi thứ khác nên bị coi là
+  "phần thêm" có thể cắt, thậm chí đang che khuất phần hay nhất của game.
+
+  QUOTE:
+  If you've been building upon some core concepts that are provably fun, just keep cutting
+  until you get to the very edge of that core. Everything else is probably just fluff you
+  could do without. Or worse, it's fluff that's preventing people from seeing the best
+  parts of your game.
+  NGUỒN: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  NEO: forces us to make tight games that feel like they have a purpose.
+  ĐỘ TIN: CAO
+
+- Một bẫy tâm lý khác khiến dự án chết giữa chừng: viện cớ "code đang rối, làm lại từ đầu
+  sẽ nhanh và tốt hơn". Derek Yu bác bỏ thẳng — cho rằng đây là vòng lặp vô tận, không phải
+  giải pháp.
+
+  QUOTE:
+  STOP. NO. This is true at some point during every game's development. Your code will
+  always be a mess. You will have learned a lot. It will never be perfect. And if you
+  start all over, you'll find yourself in the exact same situation when you get to this
+  point again. It's a terrible trap to think like this.
+  NGUỒN: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  NEO: could do it a lot better and faster, and then the rest of the game will go a lot faster, too!
+  ĐỘ TIN: CAO
+
+- Bổ sung từ David Wehle (The First Tree, GDC 2019): ví dụ thực tế về việc cắt hạng mục để
+  ra mắt đúng hẹn — anh tự liệt "những gì đã làm sai" khi launch, trong đó có việc launch
+  mà THIẾU hẳn một số hạng mục (trading card, phụ đề, đa ngôn ngữ...) — tức chấp nhận một
+  bản phát hành không đầy đủ để game thực sự ra mắt, thay vì trì hoãn để hoàn thiện thêm.
+  Slide cũng ghi nguyên tắc làm việc của anh là "Never have a 0% day" (không để một ngày nào
+  trôi qua mà không động vào dự án, dù chỉ ít phút) như một kỷ luật để duy trì đà hoàn thành
+  trong suốt 18 tháng làm ngoài giờ (~900 giờ, chi phí 10.250 USD, ra mắt trên Steam
+  14/9/2017). Đây là dữ liệu từ slide chính chủ của tác giả, không phải số liệu thống kê
+  ngành — chỉ áp dụng cho đúng 1 dự án của đúng 1 người.
+
+  Ý slide (không phải câu văn xuôi nên không đặt ngoặc kép "quote nguyên văn", chỉ trích
+  nguyên chữ trên slide):
+  "I launched without trading cards, subtitles, other languages, etc."
+  "Never have a 0% day"
+  NGUỒN: https://media.gdcvault.com/gdc2019/presentations/Wehle_David_NoTimeNo.pdf (slide 9, 17)
+  ĐỘ TIN: CAO (đọc trực tiếp từ PDF gốc do tác giả công bố qua GDC Vault)
+
+===========================================================
+B3. CHỌN Ý TƯỞNG CHO DỰ ÁN NHỎ — KHẢ THI, KHÔNG PHẢI HAY NHẤT
+===========================================================
+
+- Tiêu chí chọn ý tưởng của Derek Yu (nhắc lại có chủ đích từ B1 vì đây là luận điểm gốc
+  cho cả việc CHỌN và việc GIỮ ĐƯỢC phạm vi nhỏ): ý tưởng tốt cho một dự án là ý tưởng vừa
+  muốn làm, vừa hợp khả năng, vừa "có đủ thời gian và nguồn lực để thực sự làm" — ba điều
+  kiện phải cùng đúng, không phải chỉ cần "ý tưởng hay".
+  (Xem quote đầy đủ ở mục B1.)
+
+- Về việc "actually start" thay vì chuẩn bị mãi: Derek Yu phân biệt rạch ròi giữa CHUẨN BỊ
+  để bắt đầu (viết ý tưởng, viết design doc, gom team, làm engine riêng) và THỰC SỰ bắt đầu
+  — tiêu chí ông đưa ra là: một "game thật" phải chơi được (playable), nếu chưa có gì chơi
+  được thì chưa phải là đã bắt đầu làm game.
+
+  QUOTE:
+  Writing your idea down is not starting the damn game. Writing a design document is not
+  starting the damn game. Assembling a team is not starting the damn game. Even doing
+  graphics or music is not starting the damn game. It's easy to confuse "preparing to
+  start the damn game" with "starting the damn game". Just remember: a damn game can be
+  played, and if you have not created something that can be played, it's not a damn game!
+  NGUỒN: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  NEO: 2. ACTUALLY START THE DAMN GAME
+  ĐỘ TIN: CAO
+
+- Muốn biến ý tưởng lớn thành một lát cắt chơi được: Derek Yu khuyên tìm ra "core mechanic"
+  — cơ chế lõi phải tự nó VUI khi thực hiện, vì đó là hành động người chơi lặp lại nhiều
+  nhất — và dùng chính cái lõi vui đó làm điểm neo để quyết định cắt gì (xem quote "CUT IT
+  OUT" ở B2). Nói cách khác: lát cắt nhỏ đáng làm là lát cắt chứa được cơ chế lõi đã được
+  kiểm chứng vui, không phải lát cắt chứa nhiều nội dung nhất.
+
+  QUOTE:
+  Find core mechanics that are just fun to play around with. It should be fun to execute
+  the most basic interactions, because that's what players will be doing the most when
+  they play your game. Ultimately, you want this core to drive your development. This will
+  make it a lot easier for you later on when you have to cut out parts of the game (#13) -
+  you'll always have this core to fall back to.
+  NGUỒN: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+  NEO: 5. MAKE SURE THE CORE MECHANICS ARE FUN
+  ĐỘ TIN: CAO
+
+- Daniel Cook bổ sung góc nhìn ngược: đừng chọn ý tưởng qua suy luận trên giấy (design doc)
+  rồi cam kết ngay, vì phần lớn lựa chọn "có vẻ hợp lý" hoá ra không vui khi làm thật — nên
+  cách khả thi hơn là thử nhiều hướng nhỏ, rẻ trước khi chọn hướng để đầu tư công sức lớn.
+  (Xem quote đầy đủ ở B1 — cùng một câu, áp dụng được cho cả B1 và B3 vì đây là lý do gốc
+  của việc "chọn ý tưởng khả thi" thay vì "ý tưởng hay nhất trên giấy".)
+
+===========================================================
+MẢNG KHÔNG TÌM ĐƯỢC NGUỒN TIN CẬY
+===========================================================
+
+- Richard Lemarchand — A Playful Production Process: không tìm được bản full-text hợp
+  pháp/miễn phí nào (sách MIT Press 2021, không có trên archive.org dạng đọc được, Google
+  Books chỉ cho xem trang bìa/mục lục). Không trích dẫn được nguyên văn về scope từ sách
+  này — CHƯA VERIFY, không đưa ý cụ thể nào gán cho Lemarchand vào bài.
+- Tracy Fullerton — Game Design Workshop: tương tự, không tìm được đoạn nguyên văn cụ thể
+  về scope cho người mới; các bài viết thứ cấp (NYU Game Center, Gamedeveloper.com) chỉ
+  diễn giải chung chung, không trích nguyên văn có thể verify — không dùng.
+- Anna Anthropy — Rise of the Videogame Zinesters: bản scan trên archive.org
+  (riseofvideogamez0000anth) thuộc diện mượn có kiểm soát (controlled digital lending),
+  không search-inside được mà không mượn sách — không lấy được nguyên văn xác thực. Các
+  "quote" xuất hiện trên Goodreads/trang thứ cấp KHÔNG được dùng vì không tự mở được trang
+  sách gốc để đối chiếu.
+- Không tìm thấy transcript công khai, có thể trích nguyên văn, của một GDC talk nào tập
+  trung đúng chủ đề "scope cho dự án đầu tay" (talk của David Wehle tìm được thì trọng tâm
+  là marketing, chỉ chạm B2 ở mức phụ).
+- Không đưa bất kỳ con số thống kê dạng "X% dự án indie/game jam không hoàn thành" — tìm
+  kiếm không ra nguồn gốc đáng tin cậy cho loại số liệu này, đúng như cảnh báo trong yêu
+  cầu — cố tình bỏ qua.
+
+
+================================================================================
+
+### QA1  [fullerton]
+Having a good solid process for developing an idea from the initial ideation process into a playable and satisfying game experience is another key to thinking like a game designer.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA2  [lemarchand]
+Game development is going to remain tremendously challenging and that’s part of what I love about it, and what intrigues me. All I wanted to do with this book was gather up all these best practices that I’ve been exposed to, that I’d learned from other people, from my colleagues, my mentors, from talks at GDC and elsewhere, and put them in a row just to guide people through making a game. The book guides people through four phases that guide them, steadily but surely, towards a finished game.
+SRC: https://gamesuserresearch.com/richard-lemarchand-playtesting-and-a-playful-production-process/
+
+### QA3  [fullerton]
+Another key component to playcentric design is that ideas should be prototyped and playtested early. I encourage designers to construct a playable version of their idea immediately after brainstorming ideas. By this I mean a physical prototype of the core game mechanics. A physical prototype can use paper and pen or index cards or even be acted out. It is meant to be played by the designer and her friends. The goal is to play and perfect this simplistic model before a single line of code or art asset is ever made.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA4  [fullerton]  [de-artifact: ngat dong giua "pro-duction"]
+This way, the game designer receives instant feedback on what players think of the game and can see immediately if they are on track to achieve their player experience goals. This might sound like common sense, but in the industry today, much of the testing of the core game mechanics comes later in the production cycle, which can lead to disappointing results. Because many games are not thoroughly prototyped or tested early on, flaws in the design aren’t identified until late in the process—in some cases, too late to fix.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA5  [lemarchand]
+I think that no matter how small and clunky, and maybe un-gamelike a prototype that you make is, there’s incredible value in putting it in front of somebody else, and just seeing how they react, seeing how they approach it, seeing if they can work out the controls that you haven’t properly explained, seeing what they can get just through play.
+SRC: https://gamesuserresearch.com/richard-lemarchand-playtesting-and-a-playful-production-process/
+
+### QA6  [lemarchand]
+I tell my students that when they’re prototyping, looking for interesting game verbs that might lead them to a more fully developed game design, it’s usually much better to make a toy than it is a game.
+SRC: https://gamesuserresearch.com/richard-lemarchand-playtesting-and-a-playful-production-process/
+
+### QA7  [proto7]
+Start with the core mechanic. Whether spring systems, swarm behavior, gravity, etc, it never took more than a few hours to get the basic theme up and running. This “toy” should be the core mechanic of the game minus any goals or decisions. There is no win or lose state, just a fun thing to play with.
+SRC: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+
+### QA8  [fullerton]
+By “iteration” I simply mean that you design, test, and evaluate the results over and over again throughout the development of your game, each time improving upon the gameplay or features, until the player experience meets your criteria.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA9  [fullerton]
+is applicable during every aspect of game design, from initial conception through final quality assurance testing.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA10  [proto7]
+1. Each game must be made in less than seven days, 2. Each game must be made by exactly one person, 3. Each game must be based around a common theme i.e. "gravity", "vegetation", "swarms", etc.
+SRC: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+
+### QA11  [proto7]
+We found that generally any gameplay idea can be prototyped effectively in less than one week. Extra slop time tends to yield diminishing returns. Some prototypes, for instance, took just a single evening to throw together, while others got an extra week or two of love. Surprisingly, we found that there was no correlation between time spent in development and how successful the game ultimately turned out.
+SRC: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+
+### QA12  [proto7]
+My “Potato” ended up being a perfectly simulated soft body system built in Flash. The only problem was that it was in no way fun. It caused more headaches than death metal, wasted a week, and it didn't even really move. You've got to know when to hold ‘em and know when to fold ‘em.
+SRC: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+
+### QA13  [proto7]
+It's important to quickly recognize dead-end game ideas, cut your losses and move on. As we found, spontaneity is more valuable than time spent trying to salvage existing code. You can always come back if lighting strikes at a later time.
+SRC: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+
+### QA14  [proto7]
+We found that game players are smarter than you think, and they can tell when you're pulling a fast one on them. If the gameplay is horrible, there is no recovery - all the art, music, and product tie-ins in the world won't make it a great game
+SRC: https://www.gamedeveloper.com/game-platforms/how-to-prototype-a-game-in-under-7-days
+
+### QA_LOOP1  [fullerton]
+Player experience goals are set.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA_LOOP2  [fullerton]
+An idea or system is conceived.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA_LOOP3  [fullerton]
+An idea or system is prototyped. (This may mean a physical or digital prototype, or even storyboards or an animatic for an idea that can be presented to players.)
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA_LOOP4  [fullerton]
+The idea or system is playtested or shown to potential players for response and feedback.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA_LOOP5  [fullerton]
+Results are evaluated against player experience goals.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA_LOOP6  [fullerton]
+Issues are prioritized and addressed by making changes to the prototype.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA_LOOP7  [fullerton]
+The prototype is retested and the results are evaluated against experience goals again.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QA_LOOP8  [fullerton]
+This process is repeated until solutions are found and the design is deemed to meet the goals.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### QB1  [derekyu]
+I’ve found that there are three types of games that pique my interest: games I want to make, games I want to have made, and games I’m good at making.
+SRC: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+
+### QB2  [derekyu]
+In my opinion, the ideas with the most potential (to be finished, at least) fall into all three categories and also satisfy the requirement “I have the time and resources to actually make this”.
+SRC: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+
+### QB3  [derekyu]
+Well, that’s great, actually! Because now you’re forced to decide what is really important to your game, and what you could cut. The fact is, if we all had unlimited resources and unlimited time, we’d all make the same crappy, meandering everything game and there’d be no reason to play at all. It’s our limited resources and time that forces us to make tight games that feel like they have a purpose.
+SRC: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+
+### QB4  [derekyu]
+So go back down, down, down, down to a point where you may even find it somewhat beneath you. For example, instead of jumping from your 4x space sim to your 4x space sim IN 3D, try making a great game that focuses on one small element of space sims. And if you can’t finish that, try something more like Asteroids.
+SRC: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+
+### QB5  [cook]
+Even for the most experienced designer, 50% to 80% of your ‘educated’ selections are going to be complete dogs. Every unproven mechanic you polish ends up being a massive drain on your budget and your reputation as a designer.
+SRC: https://lostgarden.com/2008/12/06/post-it-note-design-docs/
+
+### QB6  [derekyu]
+If you treat finishing like a skill, rather than simply a step in the process, you can acknowledge not only that it’s something you can get better at, but also what habits and thought processes get in your way.
+SRC: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+
+### QB7  [derekyu]
+They say the last 10 percent is really 90 percent, and there is truth to this. It’s the details that end up taking a long time. Sure, maybe you coded a competent combat system in a week… but making it great and making it complex (and bug-free)… these things can take months.
+SRC: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+
+### QB8  [derekyu]
+If you’ve been building upon some core concepts that are provably fun, just keep cutting until you get to the very edge of that core. Everything else is probably just fluff you could do without. Or worse, it’s fluff that’s preventing people from seeing the best parts of your game.
+SRC: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+
+### QB9  [derekyu]
+STOP. NO. This is true at some point during every game’s development. Your code will always be a mess. You will have learned a lot. It will never be perfect. And if you start all over, you’ll find yourself in the exact same situation when you get to this point again. It’s a terrible trap to think like this.
+SRC: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+
+### QB10  [derekyu]
+Writing your idea down is not starting the damn game. Writing a design document is not starting the damn game. Assembling a team is not starting the damn game. Even doing graphics or music is not starting the damn game. It’s easy to confuse “preparing to start the damn game” with “starting the damn game”. Just remember: a damn game can be played, and if you have not created something that can be played, it’s not a damn game!
+SRC: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+
+### QB11  [derekyu]
+Find core mechanics that are just fun to play around with. It should be fun to execute the most basic interactions, because that’s what players will be doing the most when they play your game. Ultimately, you want this core to drive your development. This will make it a lot easier for you later on when you have to cut out parts of the game (#13) - you’ll always have this core to fall back to.
+SRC: https://www.tumblr.com/makegames/1136623767/finishing-a-game
+
+
+=== FIXTURE DA PHAN BO CHO BAI (token dung trong file bai) ===
+
+FIXTURE DA PHAN BO — dat token {{TEN}} trong bai, KHONG go lai chu nao
+
+{{Q_3TYPES}}  [derekyu]
+I’ve found that there are three types of games that pique my interest: games I want to make, games I want to have made, and games I’m good at making.
+
+{{Q_POTENTIAL}}  [derekyu]
+In my opinion, the ideas with the most potential (to be finished, at least) fall into all three categories and also satisfy the requirement “I have the time and resources to actually make this”.
+
+{{Q_ITER}}  [fullerton]
+By “iteration” I simply mean that you design, test, and evaluate the results over and over again throughout the development of your game, each time improving upon the gameplay or features, until the player experience meets your criteria.
+
+{{Q_PHYSICAL}}  [fullerton]
+The goal is to play and perfect this simplistic model before a single line of code or art asset is ever made.
+
+{{Q_TOY}}  [proto7]
+This “toy” should be the core mechanic of the game minus any goals or decisions. There is no win or lose state, just a fun thing to play with.
+
+{{Q_WEEK}}  [proto7]
+We found that generally any gameplay idea can be prototyped effectively in less than one week. Extra slop time tends to yield diminishing returns.
+
+{{Q_LIMITS}}  [derekyu]
+It’s our limited resources and time that forces us to make tight games that feel like they have a purpose.
+
+{{Q_SCALEDOWN}}  [derekyu]
+So go back down, down, down, down to a point where you may even find it somewhat beneath you. For example, instead of jumping from your 4x space sim to your 4x space sim IN 3D, try making a great game that focuses on one small element of space sims. And if you can’t finish that, try something more like Asteroids.
+
+{{Q_NOTSTART1}}  [derekyu]
+Writing your idea down is not starting the damn game. Writing a design document is not starting the damn game.
+
+{{Q_NOTSTART2}}  [derekyu]
+Just remember: a damn game can be played, and if you have not created something that can be played, it’s not a damn game!
+
+{{Q_LAST10}}  [derekyu]
+They say the last 10 percent is really 90 percent, and there is truth to this. It’s the details that end up taking a long time.
+
+{{Q_SKILL}}  [derekyu]
+If you treat finishing like a skill, rather than simply a step in the process, you can acknowledge not only that it’s something you can get better at, but also what habits and thought processes get in your way.
+
+{{Q_DOGS}}  [cook]
+Even for the most experienced designer, 50% to 80% of your ‘educated’ selections are going to be complete dogs. Every unproven mechanic you polish ends up being a massive drain on your budget and your reputation as a designer.
+
+{{Q_DEADEND}}  [proto7]
+It's important to quickly recognize dead-end game ideas, cut your losses and move on.
+
