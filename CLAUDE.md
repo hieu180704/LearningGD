@@ -85,7 +85,7 @@ Không tạo file/folder ngoài danh sách trên trừ khi có yêu cầu rõ r�
 | `.term[data-en]` | Thuật ngữ tiếng Việt, hover/focus hiện tên tiếng Anh gốc |
 | `.mda-m` / `.mda-d` / `.mda-a`, `.chip.mda-*` | Đánh dấu nội dung thuộc Mechanics/Dynamics/Aesthetics |
 | `.chip` | Pill nhỏ dùng chung (không thuộc MDA) |
-| `figure.diagram` (`.wide`) | Sơ đồ minh hoạ — ưu tiên dựng bằng HTML/CSS, chỉ dùng SVG khi thật cần |
+| `figure.diagram` (`.wide`) | Sơ đồ minh hoạ — ưu tiên dựng bằng HTML/CSS, chỉ dùng SVG khi thật cần. Một chuỗi `.mda-diagram` tối đa **3 khối** `.mda-block`: 4 khối vượt bề rộng cột nên wrap xuống dòng, để lại mũi tên chỉ vào khoảng trống |
 | `.table-wrap > table.compare` | Bảng so sánh, cuộn ngang trong container riêng |
 | `.exercise` | Bài thực hành: các bước + `details.hint` gợi ý |
 | `.quiz[data-answer]` | Câu hỏi trắc nghiệm tự chấm, có giải thích |
@@ -163,6 +163,14 @@ Danh sách định hướng — mỗi trích dẫn cụ thể vẫn phải tự 
 - Chrome headless `--window-size` có min width ~484px → ảnh mobile 400px bị sai. `shoot.ps1`
   dùng DevTools Protocol (Emulation.setDeviceMetricsOverride); đừng quay lại `--window-size`.
 - Subagent tự báo "ảnh ổn" từng sai (gutter mobile) → main phải tự xem ít nhất ảnh mobile.
+- `shoot.ps1` có danh sách `$pages` **hardcode**: tạo bài mới xong phải tự thêm 1 dòng cho
+  bài đó, nếu không script vẫn chạy êm, in "OK" cho toàn bộ bài cũ và **bỏ qua bài mới**
+  trong im lặng. `check-site.js` không bắt được thiếu sót này (vấp 2026-09-18).
+- `check-site.js` không bắt thẻ HTML thiếu đóng — báo "0 lỗi" vẫn có thể vỡ layout. Tự kiểm
+  cân bằng thẻ bằng script riêng trước khi chốt bài.
+- Verify quote tiếng Anh phải dùng `curl` + grep trên HTML thô, **không dùng WebFetch**:
+  WebFetch trả bản tóm tắt qua một model nhỏ nên dấu câu/chữ bị đổi âm thầm. Vấp 2026-09-18:
+  4/11 quote sai (1 lệch dấu câu, 3 bị ghép/cắt câu) dù vòng research trước báo "đã verify".
 - Node đã có sẵn trên máy — dùng thẳng, không cần cài thêm.
 - Grid track phải dùng `minmax(0,1fr)`, không dùng `1fr` trần — tránh tràn ngang mobile
   do min-content bị bảng/diagram kéo giãn.
