@@ -171,6 +171,18 @@ Danh sách định hướng — mỗi trích dẫn cụ thể vẫn phải tự 
 - Verify quote tiếng Anh phải dùng `curl` + grep trên HTML thô, **không dùng WebFetch**:
   WebFetch trả bản tóm tắt qua một model nhỏ nên dấu câu/chữ bị đổi âm thầm. Vấp 2026-09-18:
   4/11 quote sai (1 lệch dấu câu, 3 bị ghép/cắt câu) dù vòng research trước báo "đã verify".
+- File research do subagent viết **không tin được ở mức ký tự**: đo thật ở 2 session liên tiếp,
+  cả 3 file trục lẫn file gộp đều có **0 ký tự nháy cong** (`’ “ ”`), và bước gộp từng đổi en
+  dash `–` của quote thành `-`. Nội dung chữ đúng, dấu câu sai. Quote thực sự đưa vào bài phải
+  tự `curl` lại nguồn gốc rồi so byte — không copy ký tự từ file research (vấp 2026-09-18).
+- Subagent còn "làm mượt" cả lỗi trong nguồn: slide Worch/Smith ghi "wouldn't have work as well"
+  (sai chính tả trong chính slide gốc) bị research chép thành "worked"; quote Kuelz bị ghép 2
+  đoạn rời bằng `…` thành một câu liền. So byte 2 chiều (bài ↔ nguồn) mới bắt được.
+- `ol.steps li { display:flex }` (site.css) → mọi thẻ con thành flex item riêng, nên `<strong>`
+  inline giữa câu bị xé thành cột, vỡ dòng. Muốn bôi đậm trong `.steps` thì bọc cả nội dung
+  `<li>` trong một `<span>`. `check-site.js` không bắt được, chỉ lộ khi xem ảnh (vấp 2026-09-18).
+- `ul` trần trong thân bài không có bullet (site.css:119 reset `list-style:none`) — dùng
+  `table.compare` hoặc `ol.steps` thay vì `<ul>` khi cần liệt kê có cấu trúc.
 - Node đã có sẵn trên máy — dùng thẳng, không cần cài thêm.
 - Grid track phải dùng `minmax(0,1fr)`, không dùng `1fr` trần — tránh tràn ngang mobile
   do min-content bị bảng/diagram kéo giãn.
