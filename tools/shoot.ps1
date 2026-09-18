@@ -93,7 +93,8 @@ $pages = @(
     @{ name = "lesson-tang-3-07-narrative-design"; file = "lessons/tang-3/07-narrative-design.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
     @{ name = "lesson-tang-4-01-f2p-liveops"; file = "lessons/tang-4/01-f2p-liveops.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
     @{ name = "lesson-tang-4-02-metrics-ab-test"; file = "lessons/tang-4/02-metrics-ab-test.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
-    @{ name = "lesson-tang-4-03-dao-duc-dark-patterns"; file = "lessons/tang-4/03-dao-duc-dark-patterns.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } }
+    @{ name = "lesson-tang-4-03-dao-duc-dark-patterns"; file = "lessons/tang-4/03-dao-duc-dark-patterns.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } },
+    @{ name = "lesson-tang-4-04-mo-xe-game"; file = "lessons/tang-4/04-mo-xe-game.html"; heightOverride = @{ desktop = 20000; mobile = 32000 } }
 )
 $viewports = @(
     @{ name = "desktop"; width = 1440; height = 2600 },

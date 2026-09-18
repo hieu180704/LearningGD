@@ -1,0 +1,463 @@
+RESEARCH — Tầng 4 bài 04: "Mổ xẻ game (deconstruction)"
+Ngày research: 2026-09-18
+
+MỤC LỤC
+1. Deconstruction/game analysis là gì — khác review, khác playtest
+2. Khung/quy trình mổ xẻ có nguồn
+3. Quan sát vs suy đoán/diễn giải
+4. Sai lầm hay gặp khi mổ xẻ game
+5. Cấu trúc một bài phân tích game ngắn + tiêu chí bài tốt
+6. Ví dụ game đa thể loại (phân tích minh hoạ)
+7. ĐỌC THÊM
+8. TRẠNG THÁI VERIFY
+
+================================================================
+1. DECONSTRUCTION/GAME ANALYSIS LÀ GÌ — KHÁC REVIEW, KHÁC PLAYTEST
+================================================================
+
+- Consalvo & Dutton mở đầu bài báo bằng việc chỉ ra: dù việc nghiên cứu game đang tăng,
+  gần như chưa có nỗ lực xây một PHƯƠNG PHÁP cho phân tích định tính/phê bình game như
+  "văn bản" (text). Nguyên văn (đã verify, xem mục 8):
+  "Although the study of digital games is steadily increasing, there has been little or
+  no effort to develop a method for the qualitative, critical analysis of games as
+  'texts' (broadly defined)." — Consalvo, M. & Dutton, N. (2006). Game Studies, vol 6
+  issue 1. URL: https://gamestudies.org/0601/articles/consalvo_dutton (trang gốc
+  không mở trực tiếp được lúc research — 403/timeout — đã đọc qua bản lưu Wayback Machine
+  ngày 2020-11-12: https://web.archive.org/web/20201112012658/http://www.gamestudies.org/0601/articles/consalvo_dutton
+  — nội dung Wayback là bản snapshot nguyên trạng trang gốc, coi là đã mở đọc thật).
+
+- Bài báo phân biệt rõ 2 hướng nghiên cứu game trước đó: (a) nghiên cứu NGƯỜI CHƠI
+  (khảo sát, phỏng vấn, thực nghiệm — tức các phương pháp giống playtest/UX research,
+  hỏi người chơi cảm thấy gì) và (b) nghiên cứu "TEXT" của game (phân tích nội dung,
+  ý thức hệ). Deconstruction/game analysis theo Consalvo & Dutton thuộc nhóm (b): tự
+  nhà nghiên cứu chơi + phân tích có hệ thống các thành phần của game, KHÔNG dựa vào
+  hỏi người khác chơi cảm thấy gì (đó là playtest/audience research, một việc khác).
+  → Điểm khác biệt cốt lõi: playtest hỏi NGƯỜI CHƠI phản ứng thế nào; deconstruction
+  là nhà phân tích tự bóc tách CHÍNH GAME (cấu trúc, luật, tương tác) để hiểu vì sao nó
+  vận hành như vậy.
+
+- Khác REVIEW: review (báo chí game) thường đưa ra đánh giá hay/dở, khuyến nghị mua hay
+  không, và theo Consalvo & Dutton, các phân tích định tính trước đó (vd Kennedy 2002 về
+  Lara Croft, Krzywinska 2003 về Buffy) "đã không giải thích rõ cách phân tích được tiến
+  hành" — tức thiếu tính hệ thống, có thể lặp lại. Deconstruction đòi hỏi một QUY TRÌNH
+  công khai, có thể người khác làm theo và kiểm tra lại — đây là điểm khác biệt với
+  review ấn tượng chủ quan.
+
+- Góc thực dụng (ngành, không phải academic): Department of Play (Will Luton) định nghĩa
+  deconstruction là việc "áp dụng một phân tích chặt chẽ, có phê phán vào một sản phẩm
+  media/art, thường bằng cách tách nó ra các phần cấu thành để hiểu rõ hơn sự tương tác
+  giữa chúng" — và phân biệt rõ mục đích: dùng để RÚT RA BÀI HỌC THIẾT KẾ cho dự án tiếp
+  theo, không phải để đánh giá hay/dở game đó.
+  URL: https://departmentofplay.net/guide-how-to-deconstruct/ (đã curl HTML thô, đọc
+  trực tiếp — bài đăng 2021-06-03, tác giả Will Luton, Founder Department of Play).
+  [LƯU Ý: đây là nguồn ngành/blog thực dụng, KHÔNG phải academic — Bogost's "Unit
+  Operations" được nhắc trong bài như nguồn học thuật gốc của khái niệm deconstruction,
+  nhưng bài viết KHÔNG trích trực tiếp Bogost, chỉ nhắc tên sách.]
+
+- Vì sao designer cần nó (tổng hợp từ 2 nguồn trên): (1) hiểu một game đã thành công/thất
+  bại vận hành ra sao ở mức hệ thống — thứ mà chơi thuần tuý hoặc đọc review không cho
+  thấy; (2) xây "mental model" có thể tái sử dụng khi thiết kế game khác cùng thể loại;
+  (3) tách bạch được "cái gì hoạt động" (how) khỏi "vì sao nó hoạt động" (why) — điều
+  review không làm.
+
+================================================================
+2. KHUNG/QUY TRÌNH MỔ XẺ CÓ NGUỒN
+================================================================
+
+--- 2.1. Toolkit 4 phần của Consalvo & Dutton (2006) ---
+Nguồn: https://gamestudies.org/0601/articles/consalvo_dutton (đọc qua Wayback snapshot
+2020-11-12, xem mục 1). Đã đọc toàn văn phần thân bài liên quan 4 công cụ.
+
+Bốn công cụ/lăng kính, dùng kết hợp (không bắt buộc theo thứ tự cố định):
+
+1) OBJECT INVENTORY (kiểm kê vật phẩm) — Lập danh sách/bảng tính mọi vật phẩm có thể
+   tìm được/mua/trộm/tạo ra trong game, ghi các thuộc tính: dùng 1 lần hay nhiều lần,
+   các lựa chọn tương tác với vật phẩm, chi phí, mô tả. Câu hỏi gợi mở: vật phẩm có vai
+   trò/tầm quan trọng gì trong game? Người chơi được khuyến khích sưu tầm vì bản thân
+   việc sưu tầm hay vì tính hữu dụng? Có thể suy ra gì về cấu trúc kinh tế của game từ
+   giá cả, độ khan hiếm?
+   Ví dụ minh hoạ trong bài gốc: The Sims — hơn 400 vật phẩm nội thất, 21% đa dụng, 46
+   vật phẩm (11%) cho phép tương tác lãng mạn không phân biệt giới tính.
+
+2) INTERFACE STUDY (nghiên cứu giao diện) — Định nghĩa interface là mọi thông tin trên
+   màn hình cho người chơi biết về mạng sống/sức khoẻ/vị trí/trạng thái nhân vật, cộng
+   với menu chiến đấu/hành động, menu lồng nhau. Điều quan trọng với nhà phân tích là
+   THÔNG TIN VÀ LỰA CHỌN được cung cấp cho người chơi, VÀ những thông tin/lựa chọn bị
+   GIỮ LẠI (không cho thấy). Xem xét interface (vượt ra ngoài chuyện đẹp/dễ dùng) giúp
+   xác định người chơi được tự do thử nghiệm đến đâu, thông tin nào được "ưu tiên" hiển
+   thị (điểm số luôn hiện = được coi trọng?), thông tin nào vắng mặt/khó tìm.
+   Ví dụ: Anno 1503 — giao diện lộ ra các giả định ý thức hệ về "tiến bộ" qua thứ tự nhu
+   cầu công dân đòi hỏi (thực phẩm/quần áo → thuốc lá/gia vị → quán rượu/nhà thờ/lụa).
+
+3) INTERACTION MAP (bản đồ tương tác) — Phương pháp "vi mô" hơn, xem xét các lựa chọn
+   người chơi được đưa ra khi tương tác — không phải với vật phẩm, mà với nhân vật
+   khác/NPC. Ghi lại (bằng công cụ ghi hình hoặc ghi tay) đoạn hội thoại/lựa chọn đáng
+   chú ý. Câu hỏi gợi mở: tương tác có bị giới hạn không (chỉ 1-2 phản hồi)? Tương tác
+   có thay đổi theo thời gian? NPC có được tương tác không, đến mức nào? Việc này giúp
+   xác định game có mở cho người chơi định hình hướng đi hay không (nếu mọi lựa chọn
+   dẫn đến cùng 1 kết quả → ít tự do hơn).
+
+4) GAMEPLAY LOG (nhật ký chơi) — Mảng "mơ hồ nhất": thế giới tổng thể của game và hành
+   vi phát sinh (emergent gameplay). Nhà nghiên cứu quan sát các hành vi/tình huống bất
+   ngờ, hệ thống thế giới lớn hơn (cơ chế lưu game, cách trình bày avatar, "cảm giác"
+   tổng thể), và tính liên văn bản (intertextuality). Phần thú vị nhất là khám phá cái
+   xảy ra khi người chơi làm điều nhà làm game không định — không nhất thiết là "bug",
+   mà là "tai nạn thú vị" khiến game khác với xem phim/chơi board game.
+   Ví dụ kinh điển được trích: "hooker cheat" trong Grand Theft Auto 3 (Rockstar Games,
+   2001) — hành vi phát sinh từ việc ghép 2 cơ chế riêng biệt (hồi máu qua tương tác với
+   gái mại dâm; đánh NPC để lấy lại tiền), không phải code cheat có sẵn.
+
+Kết luận của bài báo (nguyên văn, đã verify):
+"But for now this methodological toolkit-interaction mapping, object inventory,
+interface study and logging gameplay-is offered as a starting point for researchers
+interested in studying digital games..."
+
+--- 2.2. Bảy lớp (layers) của Konzack (2002) ---
+Nguồn: Konzack, L. (2002). "Computer Game Criticism: A Method for Computer Game
+Analysis." Proceedings of Computer Games and Digital Cultures Conference, Tampere:
+Tampere University Press. URL đã curl PDF thật và pdftotext:
+https://mith.umd.edu/wp-content/uploads/2014/02/Konzack_GameCriticism_2002.pdf (HTTP 200,
+8 trang, đọc toàn văn).
+
+7 lớp phân tích (mô tả để làm theo được), minh hoạ trong bài gốc bằng game Soul Calibur
+(Namco, 1999):
+1) HARDWARE — phần cứng chạy game (console/PC, input device...).
+2) PROGRAM CODE — mã nguồn (thường không tiếp cận trực tiếp được, phải suy luận gián
+   tiếp qua functionality).
+3) FUNCTIONALITY — chức năng kỹ thuật: game làm được gì, các hệ thống vận hành ra sao.
+4) GAME PLAY — trải nghiệm chơi: vị trí, tài nguyên, không gian, thời gian, mục tiêu,
+   trở ngại, kiến thức, phần thưởng/hình phạt.
+5) MEANING (ý nghĩa) — nghĩa ngữ nghĩa (semantic) của game, nghiên cứu qua ký hiệu học
+   (semiotics): các dấu hiệu/biểu tượng trong game tạo nghĩa gì cho người chơi.
+6) REFERENTIALITY (tính liên chiếu) — so sánh game với game/media khác: các dấu hiệu,
+   mô-típ, cấu trúc game vay mượn từ đâu và mang nghĩa gì khi được chuyển vào game này
+   (ví dụ Konzack đưa ra: Donkey Kong "referentiality" tới phim King Kong). Bài cũng
+   dùng phân loại 4 thể loại game của Roger Caillois: agôn (thi đấu kỹ năng), alea (may
+   rủi), ilinx (chóng mặt/cảm giác mạnh), mimicry (nhập vai/giả lập).
+7) SOCIO-CULTURE — bối cảnh văn hoá-xã hội quanh việc chơi game.
+
+Tác giả CẢNH BÁO về phương pháp bottom-up của chính mình (nguyên văn, đã verify):
+"The method of analysis is a bottom-up approach and like any method it has its flaws.
+As the main flaw one can see the losing of perspective by focusing only on fragments of
+the computer game. Thus, in order to minimise this flaw we should make a general
+description of the computer game in question before analysis."
+→ Đây là gợi ý quy trình cụ thể: LUÔN mô tả tổng quan game TRƯỚC khi đi vào phân tích
+từng lớp, để không mất góc nhìn toàn cảnh.
+
+--- 2.3. Formal Elements của Fullerton (Game Design Workshop, chương "Working with
+Formal Elements") ---
+Nguồn: bản scan/OCR chương này dùng trong khoá học, URL:
+https://markfloryan.github.io/gamedesign/readings/fullerton-2008-formal-elements.pdf
+(đã curl PDF thật, HTTP 200, pdftotext). [CHƯA VERIFY ở mức trích nguyên văn: bản OCR
+2 cột bị lỗi trộn chữ nặng ở nhiều đoạn (vd cột "Objectives" bị xáo chữ hoàn toàn) — vì
+vậy KHÔNG dùng trích dẫn nguyên văn từ file này, chỉ dùng để XÁC NHẬN CẤU TRÚC/danh sách
+đề mục, vốn đọc được rõ ràng ở các tiêu đề section.]
+
+Xác nhận được (từ tiêu đề các mục con đọc rõ trong file, không phải đoạn văn xuôi):
+Chương 3 "Working with Formal Elements" của Fullerton liệt kê các formal element gồm
+Players, Objectives, Procedures, Rules, Resources, Conflict, Boundaries, Outcome — có
+các mục con "Defining Rules", "System Procedures", "Exercise 3.10: Conflict", "Exercise
+3.11: Boundaries", "Exercise 3.12: Outcome" xuất hiện rõ trong text. Đây là khung mô tả
+CẤU TRÚC LUẬT của một game (khác Consalvo & Dutton — khung của Fullerton thiên về mô tả
+hệ thống luật/mục tiêu, không phải quan sát trải nghiệm chơi thực tế).
+→ Dùng khung này khi mổ xẻ tập trung vào LUẬT/HỆ THỐNG game (thiết kế) hơn là khi mổ xẻ
+tập trung vào TRẢI NGHIỆM/văn hoá (dùng Consalvo & Dutton hoặc Konzack layer 4-7 tốt
+hơn).
+[Ghi chú thêm: Sách còn có khung "Dramatic Elements" (chương 4: Challenge/flow, Play,
+Types of Players, Premise, Character, Story, World building, Dramatic arc) — KHÔNG mở
+được bản đầy đủ chương này trong lần research này, chỉ thấy tên chương qua kết quả tìm
+kiếm (Taylor & Francis). Đánh dấu [CHƯA VERIFY nội dung chi tiết chương Dramatic
+Elements].]
+
+================================================================
+3. QUAN SÁT VS SUY ĐOÁN/DIỄN GIẢI (trục quan trọng nhất của bài)
+================================================================
+
+--- 3.1. Cảnh báo học thuật: "intentional fallacy" ---
+Nguồn: Van de Mosselaer, N. & Gualeni, S. (2020). "The Implied Designer and the
+Experience of Gameworlds." Proceedings of DiGRA 2020. URL:
+https://dl.digra.org/index.php/dl/article/download/1219/1219/1216 (đã curl PDF thật,
+16 trang, HTTP 200, pdftotext).
+
+Nguyên văn (đã verify, xem mục 8):
+"Lastly, stating that the intentions of the actual author are crucial when interpreting
+the meaning of a work would be an instance of the 'intentional fallacy' (Wimsatt and
+Beardsley 1946), as it ignores the ways in which readers independently 'make meaning'
+during their reading, and how free they are in the interpretation of the work."
+
+Khái niệm "intentional fallacy" gốc từ Wimsatt, W.K. & Beardsley, M. (1946) — bài báo
+này KHÔNG tự mở đọc trực tiếp (chỉ biết qua trích dẫn trong Van de Mosselaer & Gualeni
+2020), nên [CHƯA VERIFY nguồn gốc 1946] — chỉ dùng như trích dẫn gián tiếp, ghi rõ nguồn
+trung gian.
+
+Ứng dụng vào game (paraphrase từ bài, không trích nguyên văn phần này — bài dùng thuật
+ngữ "implied designer", phỏng theo "implied author" của Wayne C. Booth): người chơi
+không tiếp cận trực tiếp được ý định thật của nhà thiết kế; thứ họ suy luận ra khi chơi
+là một "implied designer" — hình dung chủ quan về ý định, dựng lên từ chính trải nghiệm
+chơi, nền tảng văn hoá-xã hội và gu cá nhân của người chơi. Nói cách khác: "designer làm
+vậy để..." luôn là một DIỄN GIẢI của người phân tích, không phải sự thật khách quan có
+thể quan sát trực tiếp — trừ khi có phát biểu công khai của chính nhà thiết kế (interview,
+GDC talk, postmortem) làm bằng chứng.
+
+--- 3.2. Cảnh báo thực dụng: Department of Play ---
+Nguồn: https://departmentofplay.net/guide-how-to-deconstruct/ (đã curl HTML thô, đọc
+trực tiếp, xem mục 1).
+
+Nguyên văn (đã verify, xem mục 8), mục "Know Your Assumptions":
+"Deconstruction is ultimately a process of interpretation and is often highly
+subjective. That does not undermine the process, but being aware of your assumptions as
+you apply the deconstructive lens can be highly advantageous."
+
+Và: "In most cases you will have to base your deconstruction on imperfect data, so you
+will inevitably have to make assumptions. Most of those assumptions will likely be
+around causality, but be aware that as you build your mental model of the game you may
+be wrong in some areas. Be willing to revisit and reassess your assumptions."
+
+→ Đây là nguồn NGÀNH (không phải academic) xác nhận cùng một điểm với nguồn academic ở
+3.1 từ góc nhìn khác: deconstruction luôn lẫn suy đoán (interpretation), không thể tránh
+— nhưng phải Ý THỨC được đâu là suy đoán, đâu là dữ kiện quan sát được.
+
+--- 3.3. Cách tách bạch thực hành (tổng hợp, không trích nguồn cụ thể — đây là phần
+PHÂN TÍCH/đề xuất thực dụng để đưa vào bài, cần ghi rõ trong bài là "gợi ý thực hành",
+không gán cho một nguồn cụ thể) ---
+- QUAN SÁT = mô tả được bằng dữ kiện kiểm chứng lại được: "nút X xuất hiện ở góc trên
+  bên trái", "người chơi phải đợi 3 giây trước khi tấn công tiếp", "vật phẩm A không thể
+  mua lại sau khi dùng". Người khác chơi lại game có thể xác nhận đúng/sai.
+- SUY ĐOÁN/DIỄN GIẢI = giải thích VÌ SAO: "nhà thiết kế đặt nút X ở đó để tối ưu thao
+  tác ngón cái", "thời gian chờ 3 giây nhằm tạo nhịp căng thẳng". Không thể xác nhận chỉ
+  bằng cách chơi lại — cần bằng chứng khác (interview, GDC talk, patch note, dữ liệu A/B
+  test) hoặc phải NÊU RÕ đây là suy đoán của người viết.
+- Cách viết an toàn: câu quan sát dùng động từ trung tính ("hiển thị", "yêu cầu", "giới
+  hạn"); câu suy đoán gắn rõ chủ ngữ diễn giải ("có thể vì...", "nhiều khả năng nhằm...",
+  "cách đọc của tôi là...") — không viết suy đoán như thể là sự thật khách quan.
+
+================================================================
+4. SAI LẦM HAY GẶP KHI MỔ XẺ GAME
+================================================================
+
+Theo nguồn (Department of Play, "8 Tips" — đã đọc toàn văn, xem mục 1 và 3.2):
+
+1) [Theo nguồn] Không xác định trước MỤC ĐÍCH mổ xẻ ("Start With Why?") — game có hàng
+   triệu quyết định thiết kế, mổ xẻ toàn bộ là bất khả thi; không biết trước muốn lấy gì
+   sẽ lạc trong chi tiết.
+2) [Theo nguồn] Không ý thức được các GIẢ ĐỊNH mình đang đặt ra khi diễn giải dữ liệu
+   không hoàn chỉnh (xem mục 3.2) — đặc biệt giả định về quan hệ nhân-quả.
+3) [Theo nguồn] Chỉ mô tả "HOW" (cơ chế vận hành thế nào) mà không hỏi "WHY" (vì sao nó
+   hiệu quả) — nguyên văn: "Without due care a deconstruction can become a rather
+   mechanical process of breaking down a games' systems and function. That can be useful
+   in some cases, but it is often more helpful to explore not just how a game works on a
+   functional level, but also why it works."
+4) [Theo nguồn] Giả định "game đang thành công = mọi phần trong nó đều hoàn hảo" — thành
+   công và HIỂU vì sao thành công là hai việc khác nhau; nguyên văn: "succeeding and
+   understanding the success don't always go together."
+5) [Theo nguồn] Chỉ mổ xẻ game thành công, bỏ qua game thất bại — game thất bại dạy được
+   nhiều về "false positive thinking" (ví dụ: tin rằng battle pass luôn kiếm tiền tốt, bị
+   phản chứng bởi một game có battle pass nhưng ARPDAU thấp).
+
+Bổ sung [PHÂN TÍCH THỰC DỤNG — không gán nguồn cụ thể, là tổng hợp/suy luận cho phù hợp
+bài học người mới]:
+6) Nhầm QUAN SÁT với SUY ĐOÁN (đã nói kỹ ở mục 3) — sai lầm phổ biến nhất với người mới
+   viết bài phân tích, thường viết "designer làm X để Y" như một sự thật hiển nhiên.
+7) Chỉ chơi 1 lần, không chơi đủ để thấy hết nhánh/rẽ nhánh quan trọng — Consalvo &
+   Dutton lưu ý riêng với Interaction Map rằng "game có thể cần được chơi nhiều hơn một
+   lần" để người phân tích xác định được liệu các đoạn hội thoại/lựa chọn ban đầu tưởng
+   không đáng chú ý có thực ra quan trọng không, và để khám phá các nhánh thay thế.
+
+================================================================
+5. CẤU TRÚC MỘT BÀI PHÂN TÍCH GAME NGẮN + TIÊU CHÍ BÀI TỐT
+================================================================
+
+[PHÂN TÍCH/TỔNG HỢP THỰC DỤNG — outline này do người viết đề xuất, tổng hợp từ khung
+Consalvo & Dutton (mục 2.1) + tips Department of Play (mục 4), KHÔNG phải outline có sẵn
+trong một nguồn duy nhất — cần ghi rõ trong bài học đây là gợi ý thực hành, không trích
+nguyên văn từ đâu]
+
+Outline thực dụng cho một bài phân tích ngắn (phù hợp bài tập cuối bài học):
+
+1. Xác định MỤC ĐÍCH mổ xẻ: chọn 1 câu hỏi cụ thể muốn trả lời (không mổ xẻ toàn bộ
+   game) — vd "vì sao vòng lặp core loop của game X giữ chân người chơi", không phải
+   "phân tích game X nói chung".
+2. Giới thiệu ngắn: tên game, thể loại, năm ra mắt, nền tảng, 1-2 câu mô tả tổng quan
+   (áp dụng gợi ý của Konzack: mô tả tổng quan trước khi vào chi tiết, để không mất góc
+   nhìn toàn cảnh).
+3. Quan sát có hệ thống theo 1-2 lăng kính phù hợp câu hỏi đã chọn ở bước 1 (chọn từ
+   object inventory / interface study / interaction map / gameplay log của Consalvo &
+   Dutton, hoặc 1-2 "layer" của Konzack) — ghi lại DỮ KIỆN quan sát được, tách riêng
+   khỏi diễn giải.
+4. Diễn giải: đưa ra 1-2 cách đọc (why) cho các quan sát ở bước 3, đánh dấu rõ đây là
+   suy đoán của người viết, không phải sự thật xác nhận được — trừ khi có trích dẫn
+   phỏng vấn/GDC talk/patch note làm bằng chứng.
+5. Bài học thiết kế rút ra: nếu là designer, học được gì có thể áp dụng cho dự án khác —
+   đây là phần khác biệt giữa "mổ xẻ cho designer" và "phê bình học thuật".
+6. (Tuỳ chọn) Giới hạn của bài phân tích: nêu rõ mình chưa/ không thể kiểm tra được gì
+   (vd không có dữ liệu doanh thu, chỉ chơi bản demo, không phỏng vấn được nhà làm game).
+
+Tiêu chí một bài phân tích tốt [tổng hợp]:
+- Có câu hỏi/phạm vi rõ ràng ngay từ đầu (không lan man).
+- Tách bạch được quan sát và diễn giải bằng ngôn ngữ (xem mục 3.3) — người đọc phân biệt
+  được đâu là "chắc chắn thấy", đâu là "tôi nghĩ".
+- Có ví dụ/dữ kiện cụ thể (số liệu, tên màn chơi, tên cơ chế) — không chỉ nhận định
+  chung chung kiểu review ("gameplay rất cuốn hút").
+- Rút ra được bài học có thể áp dụng, không chỉ mô tả lại game.
+
+================================================================
+6. VÍ DỤ GAME ĐA THỂ LOẠI (minh hoạ)
+================================================================
+
+[PHÂN TÍCH MINH HOẠ TỰ LÀM — các dữ kiện nền (tên hãng, năm phát hành, nền tảng) là dữ
+kiện công khai phổ biến, không cần trích nguồn học thuật; PHẦN NHẬN ĐỊNH sau mỗi game là
+gợi ý góc mổ xẻ, KHÔNG phải trích dẫn từ nguồn nào — người viết bài học cần tự kiểm tra
+lại năm phát hành/hãng phát triển trước khi đưa vào bài chính thức nếu cần độ chính xác
+tuyệt đối, vì các con số này lấy từ trí nhớ mô hình, không phải curl xác nhận trong lần
+research này]:
+
+1. The Sims (PC, Maxis/Electronic Arts, 2000) — đã dùng làm ví dụ mẫu bởi chính Consalvo
+   & Dutton (2006, xem mục 2.1) cho cả 4 lăng kính. Góc mổ xẻ gợi ý: object inventory
+   (kinh tế vật phẩm) + interface study (Character Creation Screen).
+2. Grand Theft Auto 3 (console/PC, Rockstar Games, 2001) — case "hooker cheat" được
+   Consalvo & Dutton trích làm ví dụ kinh điển về gameplay log/emergent behaviour (xem
+   mục 2.1, mục 4).
+3. Soul Calibur (arcade/console, Namco, 1999) — game mẫu xuyên suốt bài Konzack (2002,
+   xem mục 2.2), minh hoạ cả 7 lớp phân tích.
+4. Một game mobile free-to-play (đề xuất: Apex Legends Mobile hoặc tương tự — Department
+   of Play có nhắc case Apex Legends và Clash Quest trong bài "8 Tips", xem mục 1/4) —
+   góc mổ xẻ gợi ý: kinh tế 2 loại tiền tệ, retention qua patch note. [CHƯA VERIFY chi
+   tiết case cụ thể — Department of Play chỉ nhắc tên game kèm ảnh minh hoạ, không có
+   đoạn phân tích chi tiết trong bài đã đọc].
+5. Một game indie đơn giản, dễ chơi lại nhiều lần trong thời gian ngắn để thực hành
+   interaction map (vd game có nhánh hội thoại ngắn) — gợi ý để người học chọn 1 game
+   họ đã chơi, không cố định — phù hợp bài tập .exercise của bài học.
+
+================================================================
+7. ĐỌC THÊM
+================================================================
+
+- [Paper] Consalvo, M. & Dutton, N. (2006). "Game Analysis: Developing a methodological
+  toolkit for the qualitative study of games." Game Studies, 6(1).
+  https://gamestudies.org/0601/articles/consalvo_dutton (bản lưu:
+  https://web.archive.org/web/20201112012658/http://www.gamestudies.org/0601/articles/consalvo_dutton)
+- [Paper] Konzack, L. (2002). "Computer Game Criticism: A Method for Computer Game
+  Analysis." Proceedings CGDC 2002.
+  https://mith.umd.edu/wp-content/uploads/2014/02/Konzack_GameCriticism_2002.pdf
+- [Paper] Aarseth, E. (2003). "Playing Research: Methodological approaches to game
+  analysis." DAC Conference, Melbourne. Không mở được bản gốc trực tiếp trong lần
+  research này (403/429 ở mọi mirror thử) — biết nội dung qua trích dẫn trong Consalvo &
+  Dutton 2006 (xem mục 2.1/mục 8). Link tham khảo (chưa tự mở):
+  https://www.researchgate.net/publication/228739348_Playing_Research_Methodological_approaches_to_game_analysis
+- [Paper] Van de Mosselaer, N. & Gualeni, S. (2020). "The Implied Designer and the
+  Experience of Gameworlds." Proceedings of DiGRA 2020.
+  https://dl.digra.org/index.php/dl/article/download/1219/1219/1216
+- [Sách] Fullerton, T. Game Design Workshop, chương "Working with Formal Elements" (bản
+  đọc dùng trong khoá học, chỉ xác nhận được cấu trúc, không trích nguyên văn — xem mục
+  2.3): https://markfloryan.github.io/gamedesign/readings/fullerton-2008-formal-elements.pdf
+- [Bài viết ngành] Luton, W. (2021). "Guide: How To Deconstruct Games Better."
+  Department of Play. https://departmentofplay.net/guide-how-to-deconstruct/
+- [Sách — chưa mở lần này] Schell, J. The Art of Game Design: A Book of Lenses — có các
+  lens liên quan phân tích/đánh giá game (vd Lens of the Toy, Lens of Flow). [CHƯA VERIFY
+  nội dung cụ thể — chỉ xác nhận qua mô tả sách trên trang bán/giới thiệu, không tự đọc
+  nguyên văn lens nào trong lần research này].
+
+================================================================
+8. TRẠNG THÁI VERIFY
+================================================================
+
+Danh sách toàn bộ quote nguyên văn tiếng Anh đã dùng trong file này, kèm tình trạng:
+
+1. "Although the study of digital games is steadily increasing, there has been little or
+   no effort to develop a method for the qualitative, critical analysis of games as
+   'texts' (broadly defined)."
+   — Nguồn: Consalvo & Dutton 2006, đọc qua Wayback snapshot 2020-11-12.
+   — ĐÃ VERIFY: chép trực tiếp từ text đã strip-HTML của trang lưu, đối chiếu lại bằng
+   mắt với đoạn gốc trong file /tmp tại thời điểm research. Giữ nguyên nháy đơn 'texts'
+   như bản gốc dùng (trang dùng nháy đơn cho từ này).
+
+2. "But for now this methodological toolkit-interaction mapping, object inventory,
+   interface study and logging gameplay-is offered as a starting point for researchers
+   interested in studying digital games, as a way to make the research thorough, without
+   losing those aspects of games-play and emergence-that make them the dynamic artefacts
+   of culture that they are."
+   — Nguồn: Consalvo & Dutton 2006, đoạn "Summary: Building a methodological toolkit for
+   games". ĐÃ VERIFY (chép trực tiếp từ text đã strip-HTML).
+   — Ghi chú: dấu gạch nối "-" giữa các cụm (vd "toolkit-interaction") xuất hiện trong
+   bản HTML đã strip — CÓ THỂ là en-dash "–" bị hiển thị sai thành hyphen thường khi qua
+   sed strip-tag/terminal encoding, KHÔNG chắc 100% đây là hyphen thật trong bản gốc.
+   [CHƯA VERIFY tuyệt đối ký tự gạch nối — nếu cần trích dẫn chính xác từng ký tự, phải
+   tự mở lại URL Wayback và xem trực tiếp trên trình duyệt, không dựa vào bản curl+sed
+   trong file research này].
+
+3. "The method of analysis is a bottom-up approach and like any method it has its flaws.
+   As the main flaw one can see the losing of perspective by focusing only on fragments
+   of the computer game. Thus, in order to minimise this flaw we should make a general
+   description of the computer game in question before analysis."
+   — Nguồn: Konzack 2002, trang 89 (đầu bài, phần INTRODUCTION), pdftotext từ PDF gốc
+   MITH. ĐÃ VERIFY (đọc trực tiếp từ pdftotext -layout, không qua tóm tắt AI).
+
+4. "Deconstruction is ultimately a process of interpretation and is often highly
+   subjective. That does not undermine the process, but being aware of your assumptions
+   as you apply the deconstructive lens can be highly advantageous."
+   — Nguồn: Department of Play, "Guide: How To Deconstruct Games Better", mục "Know Your
+   Assumptions". ĐÃ VERIFY (curl HTML thô, strip tag bằng sed, đọc trực tiếp).
+
+5. "In most cases you will have to base your deconstruction on imperfect data, so you
+   will inevitably have to make assumptions. Most of those assumptions will likely be
+   around causality, but be aware that as you build your mental model of the game you
+   may be wrong in some areas. Be willing to revisit and reassess your assumptions."
+   — Nguồn: Department of Play, cùng bài, cùng mục. ĐÃ VERIFY (cùng cách trên).
+
+6. "Without due care a deconstruction can become a rather mechanical process of breaking
+   down a games' systems and function. That can be useful in some cases, but it is often
+   more helpful to explore not just how a game works on a functional level, but also why
+   it works."
+   — Nguồn: Department of Play, mục "Get to Why It Works, Not Just How". ĐÃ VERIFY.
+
+7. "succeeding and understanding the success don't always go together."
+   — Nguồn: Department of Play, mục "Know Your Assumptions". ĐÃ VERIFY.
+
+8. "Lastly, stating that the intentions of the actual author are crucial when
+   interpreting the meaning of a work would be an instance of the 'intentional fallacy'
+   (Wimsatt and Beardsley 1946), as it ignores the ways in which readers independently
+   'make meaning' during their reading, and how free they are in the interpretation of
+   the work."
+   — Nguồn: Van de Mosselaer & Gualeni, Proceedings of DiGRA 2020, trang 2 (theo số
+   trang PDF). ĐÃ VERIFY (curl PDF gốc DiGRA, pdftotext -layout, đọc trực tiếp).
+
+9. Trích dẫn GIÁN TIẾP (quote-trong-quote) từ Aarseth 2003, lấy qua Consalvo & Dutton
+   2006 — KHÔNG tự mở được bản gốc Aarseth (xem mục 7):
+   "we can study the design, rules and mechanics of the game ... we can observe others
+   play, or read their reports and reviews ... we can play the game ourselves" (p.3)
+   và: "in gathering information about the game, we should use as many sources as
+   possible. Playing is essential, but should be combined with other sources if at all
+   possible ... The analysis should also contain reflection on the sources used; where
+   they come from, what could have been included, why did we select the ones we did,
+   etc" (p.7).
+   — TRẠNG THÁI: [CHƯA VERIFY ở nguồn gốc] — đây là quote Consalvo & Dutton trích từ
+   Aarseth, bản thân đoạn trích trong Consalvo & Dutton ĐÃ được đọc thật (verify #1/#2
+   ở trên cùng file), nhưng dấu "..." trong quote là do CHÍNH Consalvo & Dutton dùng để
+   nối các đoạn rời của Aarseth — không tự curl được bản gốc Aarseth 2003 để đối chiếu
+   xem "..." đó có bỏ mất chữ quan trọng gì không (mọi URL Aarseth thử đều 403 hoặc
+   429). KHÔNG dùng 2 quote lồng này trong bài học trừ khi verify lại được bản gốc
+   Aarseth, hoặc trích rõ ràng là "theo Consalvo & Dutton dẫn lại từ Aarseth 2003".
+
+NGUỒN THỬ NHƯNG KHÔNG MỞ ĐƯỢC (403/429/timeout):
+- gamestudies.org (kết nối trực tiếp qua curl và qua WebFetch đều timeout/ECONNREFUSED
+  — có thể domain chặn kết nối từ môi trường sandbox; đã dùng Wayback Machine snapshot
+  làm giải pháp thay thế, snapshot lấy nguyên trạng HTML nên coi là đã "mở đọc thật").
+- academia.edu (bản Aarseth PDF) — HTTP 403 qua WebFetch.
+- semanticscholar.org (trang paper Aarseth) — HTTP 202 rồi treo; API semanticscholar.org
+  trả 429 Too Many Requests.
+- hypertext.rmit.edu.au/dac/papers/Aarseth.pdf — không kết nối được (curl trả HTML lỗi
+  thay vì PDF thật); bản lưu Wayback của URL này trả 404.
+- oreilly.com (Table of Lenses, sách Schell) — HTTP 403 (paywall).
+- press.etc.cmu.edu (PDF trực tiếp "Game Research Methods" Lankoski & Björk) — URL cũ đã
+  chết, redirect về trang tìm kiếm sách CMU Press chung, KHÔNG lấy được PDF/chương nào
+  trong lần research này. [Nguồn Lankoski & Björk trong đề bài — KHÔNG dùng được, không
+  đưa nội dung nào từ sách này vào file research].
+
+TÓM TẮT SỐ LIỆU:
+- 9 quote nguyên văn tiếng Anh được liệt kê ở trên.
+- 7/9 quote ĐÃ VERIFY (đọc trực tiếp từ HTML/PDF gốc bằng curl/pdftotext, không qua tóm
+  tắt AI).
+- 1 quote (#2) có nghi vấn nhỏ về ký tự gạch nối (hyphen vs en-dash) — ghi rõ trong mục
+  verify của chính nó.
+- 1 cặp quote (#9, quote-trong-quote từ Aarseth) chưa verify được nguồn gốc — nguồn
+  Aarseth 2003 không mở được ở bất kỳ mirror nào đã thử.

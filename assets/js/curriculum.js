@@ -357,7 +357,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 14,
                 level: "Nâng cao",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-4/05-portfolio-con-duong",
