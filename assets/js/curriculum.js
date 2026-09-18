@@ -344,7 +344,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 13,
                 level: "Nâng cao",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-4/04-mo-xe-game",

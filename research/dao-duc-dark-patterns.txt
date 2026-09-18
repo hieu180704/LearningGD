@@ -1,0 +1,1567 @@
+RESEARCH — ĐẠO ĐỨC THIẾT KẾ VÀ DARK PATTERNS (Tầng 4, bài 03)
+Ngày gộp: 2026-09-18
+File này gộp cơ học 3 file research: dp-truc1-nguongoc.txt (nguồn gốc và phân loại
+thuật ngữ), dp-truc2-game-tamly.txt (dark pattern đặc thù game và cơ chế tâm lý),
+dp-truc3-vidu-phaply.txt (ví dụ thật, quy định, khung ra quyết định). Không research
+thêm, không sửa câu chữ quote so với 3 file gốc.
+
+Ghi chú đọc: các chỉ dẫn dạng "xem mục N" hoặc "SN" nằm BÊN TRONG các đoạn trích dưới
+đây là đánh số NỘI BỘ của từng file trục gốc (trước khi gộp) hoặc số mục/section của
+chính bài báo học thuật được trích (ví dụ "mục 4.1.1" là §4.1.1 trong bài Zagal et al.
+2013) — không phải số mục của file gộp này. Dùng MỤC LỤC dưới đây để tra đúng vị trí
+trong file này.
+
+MỤC LỤC
+1. Nguồn gốc thuật ngữ "dark pattern" (Brignull) và việc đổi tên deceptive design
+2. Zagal, Björk & Lewis (FDG 2013): định nghĩa và taxonomy 3 nhóm
+3. Taxonomy khác: Brignull gốc/hiện tại, Mathur et al. 2019, Gray et al. 2018
+4. Dark pattern về tiền trong game F2P
+5. Dark pattern về thời gian và xã hội
+6. Cơ chế tâm lý bị khai thác
+7. Ranh giới thuyết phục / thao túng / cưỡng ép
+8. Góc phản biện, lập luận bảo vệ F2P
+9. Ví dụ thật và hệ quả pháp lý
+10. Quy định và chính sách nền tảng (Apple, Google, ESRB)
+11. Khung ra quyết định cho designer
+12. Sai lầm hay gặp
+13. Đọc thêm
+14. BẪY KHÁI NIỆM
+15. TRẠNG THÁI VERIFY
+
+====================================================================
+1. NGUỒN GỐC THUẬT NGỮ "DARK PATTERN" (BRIGNULL) VÀ VIỆC ĐỔI TÊN DECEPTIVE DESIGN
+====================================================================
+(Từ trục 1 — dp-truc1-nguongoc.txt, mục 1)
+
+
+- Người đặt ra: Harry Brignull (UX researcher người Anh). Website gốc: darkpatterns.org,
+  lập ra năm 2010 (theo chính trang "About us" hiện tại của deceptive.design — xem quote
+  bên dưới, mục Origin). Bản snapshot Wayback Machine (wiki.darkpatterns.org, chụp
+  22/12/2010) cũng xác nhận: "This site was set up by Harry Brignull who also runs a blog
+  at 90percentofeverything.com."
+  → Năm 2010 được xác nhận bởi 2 nguồn độc lập (trang About hiện tại + snapshot 2010 của
+  chính site). VERIFIED.
+
+- Định nghĩa NGUYÊN VĂN đầu tiên (từ bản wiki.darkpatterns.org, snapshot 22/12/2010 —
+  đây là bản archive cũ nhất truy cập được, không chắc là câu chữ nguyên thuỷ 100% từ lúc
+  site mới mở vì MediaWiki cho phép sửa, nhưng là bản sớm nhất có thể verify được):
+
+  "Dark Patterns are different – they are not mistakes, they are carefully crafted with
+  a solid understanding of human psychology, and they do not have the user's interests
+  in mind."
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI — chú ý: dấu gạch ngang là en dash "–", nháy đơn trong
+  "user's" là nháy cong ’]
+  URL: https://web.archive.org/web/20110615000000/http://darkpatterns.org/
+  (trang gốc: wiki.darkpatterns.org/Home, đã đóng băng qua Wayback Machine)
+  Trạng thái: VERIFIED — đã curl + grep byte-level trên HTML thô, xác nhận đúng ký tự
+  (en dash –, nháy cong ’).
+
+- Định nghĩa NGUYÊN VĂN hiện tại (deceptive.design, 2026, chính là site kế thừa
+  darkpatterns.org — do Brignull đứng đầu):
+
+  "Deceptive patterns trick people into doing things they didn't mean to. Also known as
+  "dark patterns," they're features of apps, websites and AI systems that stop you doing
+  what you want, or steer you into harmful decisions you would not have made
+  deliberately."
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+  URL: https://www.deceptive.design/
+  Trạng thái: VERIFIED — curl trực tiếp trang chủ, strip tag bằng script, không qua
+  WebFetch.
+
+- ĐỔI TÊN sang "deceptive patterns" / deceptive.design:
+
+  "This website was previously called darkpatterns.org and the category of manipulative,
+  coercive or deceptive design practice was referred to as "dark patterns". Under advice
+  from the Tech Policy Design Lab of the World Wide Web Foundation, the domain name was
+  changed to deceptive.design and the term was changed to "manipulative, deceptive and
+  coercive patterns" — or, in abbreviated form, "deceptive patterns". The change reflects
+  a commitment to avoiding language that might inadvertently carry negative associations
+  or reinforce harmful stereotypes."
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI — đã grep byte-level, em dash "—" giữ nguyên]
+  URL: https://www.deceptive.design/about (mục "History")
+  Trạng thái: VERIFIED — curl + grep trực tiếp trên HTML thô.
+
+  Ghi chú: trang About không nêu NĂM đổi tên cụ thể, chỉ nói "Under advice from the Tech
+  Policy Design Lab". Năm đổi tên chính xác: [CHƯA VERIFY] — không tìm thấy trên trang
+  About; cần tra thêm (có thể khoảng 2023 dựa theo thời điểm Tech Policy Design Lab của
+  World Wide Web Foundation hoạt động, nhưng đây là suy đoán, KHÔNG đưa vào bài nếu
+  không verify được).
+
+- Đội ngũ hiện tại: Harry Brignull (Founder) + Dr. Mark Leiser (luật) là "Core team";
+  domain hiện dùng cho site: deceptive.design (Testimonium Ltd, Anh).
+  URL: https://www.deceptive.design/about — VERIFIED.
+====================================================================
+2. ZAGAL, BJÖRK & LEWIS (FDG 2013): ĐỊNH NGHĨA VÀ TAXONOMY 3 NHÓM
+====================================================================
+(Từ trục 1 — dp-truc1-nguongoc.txt, mục 2. Nội dung dưới đây là định nghĩa "dark game
+design pattern" phát triển qua 4 bước, taxonomy 3 nhóm/7 pattern con, và cách phân
+biệt dark pattern với thiết kế khó/thử thách bình thường.)
+
+Nguồn PDF gốc đã mở đọc thật (pdftotext -enc UTF-8 -layout):
+URL: http://www.fdg2013.org/program/papers/paper06_zagal_etal.pdf
+(Proceedings chính thức của Foundations of Digital Games 2013)
+Trạng thái: VERIFIED — đọc toàn bộ 547 dòng text sau khi pdftotext.
+
+2.1. Định nghĩa "dark game design pattern" theo chính bài này
+
+Bài không đưa ra định nghĩa cố định ngay từ đầu mà PHÁT TRIỂN DẦN qua 4 bước
+(proto-definition 1 → 2 → 3 → Final Definition). Đây là điểm quan trọng để dạy đúng tinh
+thần bài báo — không nên chỉ trích 1 câu cuối mà bỏ qua quá trình lập luận.
+
+- Proto-definition 1:
+  "A dark game design pattern is a pattern used intentionally by a game creator to cause
+  negative experiences for players."
+
+- Proto-definition 2 (thêm điều kiện "không có sự đồng thuận của player"):
+  "A dark game design pattern is a pattern used intentionally by a game creator to cause
+  negative experiences for players without those players' consent."
+
+- Proto-definition 3 (thêm điều kiện "đi ngược lợi ích tốt nhất của player"):
+  "A dark game design pattern is a pattern used intentionally by a game creator to cause
+  negative experiences for players that are against their best interests and happen
+  without their consent."
+
+- FINAL DEFINITION (định nghĩa chốt của bài, phần CONCLUSIONS):
+  "A dark game design pattern is a pattern used intentionally by a game creator to cause
+  negative experiences for players which are against their best interests and likely to
+  happen without their consent."
+
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI — cả 4 câu trên, copy nguyên từ file text đã pdftotext,
+  giữ nguyên toàn bộ chính tả/định dạng gốc]
+
+  Ghi chú quan trọng: chính bài báo cũng định nghĩa rõ chữ "dark" mang 2 nghĩa
+  (trích nguyên văn, đoạn ngay sau Proto-definition 3):
+  "We note that the denotation dark here carries two meanings. It refers to the fact that
+  designers are willingly doing something unethical and that the players are likely to be
+  unaware that they are being manipulated against their best interests."
+
+2.2. Hệ thống phân loại (taxonomy) họ đề xuất
+
+Ba nhóm lớn, dựa trên thứ mà player bị "deceived into spending or using"
+(nguyên văn: "divided into three categories loosely based on what the player is being
+deceived into spending or using... These categories are time, money, and social
+capital."):
+
+  A) Temporal Dark Patterns (§4.1) — liên quan THỜI GIAN
+     - Grinding (§4.1.1): ép player làm việc lặp đi lặp lại vô nghĩa để kéo dài thời
+       lượng chơi.
+     - Playing by Appointment (§4.1.2): ép player chơi vào thời điểm cụ thể do game quy
+       định (ví dụ cây trồng "withering" nếu không thu hoạch đúng giờ trong FarmVille).
+
+  B) Monetary Dark Patterns (§4.2) — liên quan TIỀN
+     - Pay to Skip (§4.2.1): cho phép trả tiền để bỏ qua thử thách/grind (ví dụ Angry
+       Birds "Mighty Eagle").
+     - Pre-Delivered Content (§4.2.2): nội dung đã có sẵn trên đĩa/file cài đặt nhưng
+       khoá lại, bắt trả thêm tiền để mở khoá.
+     - Monetized Rivalries (§4.2.3): khai thác tính cạnh tranh để ép chi tiền (dân gian
+       gọi "Pay to Win"/"Pay to Cheat").
+
+  C) Social Capital-Based Dark Patterns (§4.3) — liên quan VỐN XÃ HỘI
+     - Social Pyramid Schemes (§4.3.1): ép player lôi kéo bạn bè tham gia để tiến bộ
+       trong game (ví dụ FarmVille cần "neighbors").
+     - Impersonation (§4.3.2): game giả danh hành động của bạn bè player (ví dụ thông
+       báo giả "Betty sent you a gift") để đánh lừa.
+
+  Mỗi nhóm lớn đều có kèm bộ "guiding questions" (câu hỏi hướng dẫn) để xác định có phải
+  dark pattern không — bài không đưa ra "bright-line test" (ranh giới rạch ròi), tự thừa
+  nhận: "Since there are no bright-line tests or binary rules, we have offered examples
+  and guiding questions..."
+
+2.3. Cách phân biệt dark pattern với thiết kế khó/thử thách bình thường
+
+  - Anti-pattern (§2) ≠ dark pattern: anti-pattern là "bad design" do THIẾU KIẾN THỨC /
+    đánh đổi tồi / thiếu thời gian-nguồn lực — KHÔNG cố ý. Trích nguyên văn:
+    "Our argument is that Dark Patterns do not happen by mistake; they must be
+    purposefully utilized to evoke the given behavior." Và phân biệt rõ "Bad Design" vs
+    "Designing for Bad".
+
+  - Hai điều kiện bắt buộc để là "unethical game design pattern" (nêu ở §1.2):
+    (1) A negative experience for the player
+    (2) The intention, on the part of the creators of the game, to cause that negative
+        experience.
+    → Thiếu 1 trong 2 (không cố ý HOẶC không gây trải nghiệm tiêu cực thật) thì KHÔNG
+    phải dark pattern.
+
+  - Trò chơi khó/khắc nghiệt nhưng KHÔNG phải dark pattern nếu player "willful and
+    informed participation" — ví dụ Painstation (đấm điện player), Dark Room Sex Game,
+    role-play cực đoan: player biết trước và tự nguyện tham gia trải nghiệm tiêu cực đó.
+    Trích nguyên văn: "there is or should be a willful and informed participation from
+    the part of the player in the experience. How can it be a dark pattern if the player
+    understands and accepts the negative experience?"
+
+  - Gambling/cá cược KHÔNG được bài này coi là dark pattern (dù tỉ lệ thắng bất lợi cho
+    player), vì player "complicit" — tự nguyện tham gia có hiểu biết. Trích nguyên văn:
+    "we do not consider gambling (or betting) as a dark pattern, because players are
+    complicit in the interaction. Even in cases where the odds are distinctly against
+    the player, the player has presumably made an informed decision to participate."
+
+  - Khái niệm "transparency"/"manipulation literacy" (§5, gần cuối bài): một pattern
+    thao túng nhưng nếu player đã "literate" (hiểu rõ cơ chế, có thể cho consent một
+    cách có ý thức) thì pattern đó "is no longer dark" đối với player đó. Tức là ranh
+    giới dark/không-dark còn phụ thuộc NGƯỜI CHƠI cụ thể, không tuyệt đối.
+
+  - AI đối thủ "cheat" để tạo thử thách công bằng hơn (ví dụ rubber-band AI trong game
+    đua xe) KHÔNG bị coi là dark pattern vì mục đích là tạo trải nghiệm tốt hơn cho
+    player, không phải lợi dụng player — dù bản chất cũng là "lừa" player theo nghĩa nào
+    đó. Đây là ví dụ về ranh giới mờ (§5, "Shades of Grey").
+
+  Trạng thái tất cả trích dẫn mục 2: VERIFIED (đọc trực tiếp PDF gốc FDG2013 qua
+  pdftotext).
+
+  [Bổ sung từ trục 2 — dp-truc2-game-tamly.txt, mục 2: trục 2 xác nhận lại đúng các
+  pattern con này là thuật ngữ CHÍNH THỨC của Zagal/Björk/Lewis (viết hoa nhỏ trong
+  bài gốc: GRINDING, PLAYING BY APPOINTMENT, PAY TO SKIP, PRE-DELIVERED CONTENT,
+  MONETIZED RIVALRIES, SOCIAL PYRAMID SCHEMES, FRIEND SPAM/IMPERSONATION — trục 2 dùng
+  đủ cả 2 tên "Friend Spam / Impersonation" cho pattern cuối), đồng thời có định nghĩa
+  chi tiết hơn + ví dụ đa game (World of Warcraft, Call of Duty 4, FarmVille, Pokémon,
+  Animal Crossing) cho từng pattern thuộc nhóm thời gian và xã hội — xem đầy đủ ở
+  mục 5 của file này.]
+
+====================================================================
+3. CÁC TAXONOMY KHÁC: BRIGNULL GỐC/HIỆN TẠI, MATHUR ET AL. 2019, GRAY ET AL. 2018
+====================================================================
+(Từ trục 1 — dp-truc1-nguongoc.txt, mục 3)
+
+3.1. Taxonomy gốc của Brignull (darkpatterns.org, snapshot 2010)
+
+Danh sách pattern gốc (từ menu điều hướng wiki.darkpatterns.org, snapshot 22/12/2010):
+Roach Motel, Privacy Zuckering, Bait and Switch, Sneak into Basket, Forced Continuity,
+Trick questions, Hidden costs, Price Comparison Prevention, Disguised Ads, Friend Spam,
+Forced Disclosure, Misdirection, Faraway bill.
+URL: https://web.archive.org/web/20110615000000/http://darkpatterns.org/
+Trạng thái: VERIFIED (đọc trực tiếp trang đã archive).
+
+Taxonomy HIỆN TẠI của deceptive.design (2026, đã đổi tên/gộp một số loại), 19 loại:
+Addictive Design, Comparison prevention, Confirmshaming, Currency Confusion, Disguised
+ads, Fake scarcity, Fake social proof, Fake urgency, Forced action, Hard to cancel,
+Hidden costs, Hidden subscription, Nagging, Obstruction, Preselection, Sneaking, Trick
+wording, Visual interference (+ 1 mục cắt do giới hạn trang chủ, danh sách đầy đủ nằm ở
+trang /types).
+URL: https://www.deceptive.design/ (trang chủ, mục "Types of deceptive pattern")
+Trạng thái: VERIFIED (curl trực tiếp).
+
+Ghi chú: so 2 danh sách thấy rõ SỰ TIẾN HOÁ — ví dụ "Roach Motel" cũ → nay gộp vào
+"Hard to cancel"; "Trick questions" → "Trick wording"; "Misdirection" cũ (2010) không còn
+là tên riêng ở trang chủ hiện tại (có thể đã gộp vào "Visual interference" — nhưng đây là
+SUY LUẬN của agent, KHÔNG có nguồn xác nhận trực tiếp việc gộp, main cần tự kiểm nếu dùng
+claim này).
+
+3.2. Mathur et al., "Dark Patterns at Scale: Findings from a Crawl of 11K Shopping
+     Websites" (Proc. ACM Hum.-Comput. Interact., Vol. 3, CSCW, Article 81, 2019)
+
+URL PDF gốc: https://arxiv.org/pdf/1907.07032 (bản arXiv, khớp bản CSCW 2019 — có ghi
+"81" ở đầu trang, đúng số article của CSCW)
+Tác giả: Arunesh Mathur, Gunes Acar, Michael J. Friedman, Elena Lucherini, Jonathan
+Mayer, Marshini Chetty, Arvind Narayanan (Princeton + U Chicago).
+Trạng thái: VERIFIED — pdftotext trực tiếp.
+
+7 CATEGORY lớn họ tìm thấy (crawl ~53K trang sản phẩm / ~11K website mua sắm, 1,818
+instance, 15 type con):
+  1. Sneaking (họ ghi rõ: "Coined by Gray et al. in their taxonomy" — tức khái niệm vay
+     mượn từ Gray et al. 2018, không phải Mathur tự đặt)
+  2. Urgency
+  3. Misdirection (dựa trên Misdirection gốc của Brignull, nhưng Mathur mở rộng thêm
+     phần "language and emotional manipulation" — trích nguyên văn: "while Brignull
+     considered Misdirection... also including Misdirection caused by language and
+     emotional manipulation")
+  4. Social Proof
+  5. Scarcity
+  6. Obstruction (cũng "coined by Gray et al.")
+  7. Forced Action (họ ghi "originally proposed by" — nguồn gốc từ Gray et al.)
+
+  → Điểm quan trọng: taxonomy Mathur KHÔNG độc lập hoàn toàn — nó lai giữa taxonomy của
+  Brignull (Misdirection) và Gray et al. (Sneaking, Obstruction, Forced Action), cộng
+  thêm 2 nhóm mới tự đề xuất (Urgency, Social Proof, Scarcity — dựa trên lý thuyết thuyết
+  phục/social proof/scarcity bias kinh điển).
+
+  Trạng thái: VERIFIED (đọc trực tiếp Table 1 + phần 5.1.x của PDF).
+
+3.3. Gray, Kou, Battles, Hoggatt & Toombs, "The Dark (Patterns) Side of UX Design"
+     (CHI 2018)
+
+URL PDF gốc đã đọc thật: https://web.archive.org/web/2018/http://colingray.me/wp-content/uploads/2018_Grayetal_CHI_DarkPatternsUXDesign.pdf
+(bản gốc trên colingray.me hiện trả 404 — link cũ được tìm qua thảo luận Hacker News năm
+2018 (news.ycombinator.com/item?id=17962469), sau đó lấy qua Wayback Machine; nội dung
+PDF xác nhận đúng là bài CHI 2018, tác giả Colin M. Gray, Yubo Kou, Bryan Battles, Joseph
+Hoggatt, Austin L. Toombs, Purdue University — khớp DOI 10.1145/3173574.3174108 tra qua
+Semantic Scholar API)
+Trạng thái: VERIFIED — pdftotext trực tiếp trên bản PDF lấy qua Wayback Machine.
+
+5 NHÓM CHIẾN LƯỢC (strategies) họ đề xuất — ĐÚNG TÊN, trích nguyên văn:
+"we identified five primary dark patterns that appeared to serve as strategic motivators
+for designers: nagging, obstruction, sneaking, interface interference, and forced
+action."
+
+  1. Nagging — gián đoạn lặp lại, chuyển hướng nhỏ khỏi tác vụ chính người dùng đang làm.
+  2. Obstruction — cản trở luồng thao tác, cố ý làm khó hơn mức cần thiết để ngăn hành
+     động (ví dụ Brignull's "Roach Motel", "Price Comparison Prevention" được xếp vào
+     nhóm này).
+  3. Sneaking — giấu/trì hoãn thông tin liên quan để người dùng làm điều họ sẽ phản đối
+     nếu biết (Brignull's "Forced Continuity", "Hidden Costs", "Sneak into Basket",
+     "Bait and Switch" được xếp vào nhóm này).
+  4. Interface Interference — thao túng giao diện, có 3 nhóm con: Hidden Information,
+     Preselection, Aesthetic Manipulation (bao gồm cả Brignull's "Misdirection",
+     "Disguised Ad", "Trick Questions").
+  5. Forced Action — bắt buộc thực hiện hành động cụ thể mới được tiếp tục dùng chức
+     năng (bao gồm Social Pyramid — mở rộng từ Brignull's "Friend Spam", và
+     "Gamification"/grinding, Brignull's "Privacy Zuckering").
+
+  Ghi chú quan trọng: chính bài nói rõ "This categorization builds upon Brignull's
+  taxonomy" — tức 5 nhóm này KHÔNG thay thế mà TÁI TỔ CHỨC các pattern cụ thể của
+  Brignull thành nhóm chiến lược cấp cao hơn.
+
+  Định nghĩa dark pattern theo Gray et al. (nguyên văn, phần Abstract/Intro):
+  "We use the term dark patterns to define instances where designers use their
+  knowledge of human behavior (e.g., psychology) and the desires of end users to
+  implement deceptive functionality that is not in the user's best interest."
+
+  Trạng thái: VERIFIED (đọc trực tiếp PDF, §RESULTS).
+====================================================================
+4. DARK PATTERN VỀ TIỀN TRONG GAME F2P
+====================================================================
+(Từ trục 2 — dp-truc2-game-tamly.txt, mục 1)
+
+Nguồn chính dùng cho mục này: Petrovskaya, E. & Zendle, D. (2021). "Predatory
+Monetisation? A Categorisation of Unfair, Misleading and Aggressive Monetisation
+Techniques in Digital Games from the Player Perspective." Journal of Business
+Ethics, 181, 1065–1081. Open access (CC BY 4.0).
+URL ĐÃ MỞ ĐỌC THẬT (curl, HTML đầy đủ, đã strip tag đọc toàn văn):
+https://link.springer.com/article/10.1007/s10551-021-04970-6
+Phương pháp: khảo sát 1104 người chơi, hỏi họ mô tả giao dịch trong game mà họ thấy
+"misleading / unfair / aggressive" — 3 từ này lấy thẳng từ luật Anh "Consumer
+Protection from Unfair Trading Regulations 2008". Kết quả: 35 kỹ thuật, gộp thành
+8 nhóm (domain). Bài báo trích nguyên văn lời người chơi (mã hoá P + số).
+
+1.1. Premium currency / tiền ảo trung gian (che giấu giá thật)
+- Cơ chế theo Petrovskaya & Zendle 2021 (nhóm "In-Game Currency"):
+  + "In-Game Currency Disguises Actual Price": quy đổi tiền thật sang tiền ảo
+    khiến giá trị thật bị che, khó ra quyết định.
+    Quote người chơi (nguyên văn, ≤2 câu, từ bài báo — [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+    để đối chiếu dấu câu chính xác 100%, vì bản curl của tôi qua HTML strip tag có
+    thể lệch khoảng trắng):
+    "False currencies in-game obfuscate the cost of purchases, making it difficult
+    to make a reasonable decision as to something's value." (P778)
+  + "Multiple Currency Types Cause Confusion": nhiều loại tiền ảo cùng lúc (vd.
+    tiền chơi + tiền mua bằng tiền thật) làm người chơi khó tính được mình đang
+    tiêu bao nhiêu tiền thật.
+    Quote: "Multiple premium currencies. These (such as in Heroes of the Storms
+    currency for playing, currency for real money) make it very difficult to
+    gauge what is required to obtain said items without knowing how much you are
+    spending/how much the item costs." (P404) [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+  + "Fixed Purchase Rates are Unfair" — ĐÂY LÀ NGUỒN CHO "số dư lẻ cố ý": game
+    giới hạn các mốc quy đổi tiền thật → tiền ảo sao cho gần như không bao giờ
+    mua vừa khít, luôn dư một khoản nhỏ vô dụng, đẩy người chơi nạp thêm.
+    Quote: "I think League of Legends again, in how they price their in game
+    currency. It is intentional so that when you spend £10 worth it ends up
+    only allowing you to buy 1.75 items. It feels incredibly blatant that being
+    left with nearly enough for another purchase should encourage more
+    spending." (P591) [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+- Vì sao có hại: người chơi mất khả năng so sánh giá thật giữa các vật phẩm/gói
+  nạp (mất "price salience"), và cơ chế "dư lẻ" là chủ đích thiết kế để tạo thêm
+  một lần nạp — đúng định nghĩa "aggressive practice" trong luật Anh (xem mục 4).
+
+1.2. Loot box và xác suất không công bố
+- Cơ chế tâm lý: Larche, C.J., Chini, K., Lee, C., Dixon, M.J., Fernandes, M.
+  (2021). "Rare Loot Box Rewards Trigger Larger Arousal and Reward Responses,
+  and Greater Urge to Open More Loot Boxes." Journal of Gambling Studies.
+  URL ĐÃ MỞ ĐỌC THẬT: https://pmc.ncbi.nlm.nih.gov/articles/PMC7882574/
+  Tóm tắt verify được (đọc abstract + phần dẫn nhập trực tiếp trên trang):
+  "loot boxes containing rarer items are more valuable, arousing, rewarding and
+  urge-inducing to players, similar to the way slots gamblers treat rare large
+  wins in slots play" — đo bằng skin conductance response (phản ứng da, chỉ báo
+  hưng phấn sinh lý) và lực bấm; vật phẩm càng hiếm thì phản ứng hưng phấn càng
+  lớn, y hệt cơ chế máy đánh bạc (slot machine).
+  Bài báo dẫn: loot box và slot machine "both operate on a variable-ratio
+  reinforcement schedule" (xem mục 3.1 Skinner).
+- Định nghĩa "predatory monetization" (King & Delfabbro 2018) — trích dẫn lại
+  NGUYÊN VĂN trong bài Petrovskaya & Zendle 2021 (tôi đọc trực tiếp đoạn này
+  trong bản HTML đã mở, không tự bịa):
+  "schemes which involve in-game purchase systems that disguise or withhold the
+  true long-term cost of the activity until players are psychologically or
+  financially committed... using elements of intrusive solicitations, limited
+  disclosure, and manipulation of reward outcomes."
+  (Nguồn gốc: King, D.L. & Delfabbro, P.H. (2018), Addiction, 113(11), 1967–1969
+  — tôi CHƯA mở trực tiếp bài gốc Addiction, chỉ đọc qua trích dẫn đã verify
+  trong Petrovskaya & Zendle. [CHƯA VERIFY bản gốc, nhưng câu quote lấy từ nguồn
+  đã mở đọc thật]).
+- Vì sao có hại: xác suất trúng vật phẩm hiếm thường không công bố hoặc công bố
+  mập mờ; cơ chế thưởng biến thiên (variable ratio) tạo hưng phấn sinh lý đo
+  được y hệt gambling, nhắm cả vào người chưa đủ tuổi/không nhận diện được rủi ro
+  tài chính.
+
+1.3. FOMO timer, ưu đãi đếm ngược, daily login streak
+- Từ Petrovskaya & Zendle 2021, nhóm liên quan: "Limited Time Offers" — "instances
+  where players believe that some products are promoted as only being available
+  for a set amount of time to artificially create a sense of fear of missing out
+  and anxiety in players, and push them to engage with the transaction."
+  Quote người chơi: "They're time gated so you can only buy one weekly, giving
+  the impression that they're a good deal to buy, but generally aren't worth
+  their contents." (P252) [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+- Daily login streak: KHÔNG tìm được nguồn học thuật đặt tên riêng cho cơ chế
+  này trong 2 bài báo đã verify ở trên. [CHƯA VERIFY nguồn học thuật riêng cho
+  "daily login streak"] — về mặt cơ chế tâm lý, nó dùng chung nguyên lý với mục
+  3.3 "endowed progress effect" (Nunes & Drèze 2006): chuỗi ngày đã điểm danh là
+  một dạng "tiến độ giả" khiến người chơi không muốn làm gián đoạn để "mất" thành
+  quả đã có — liên hệ trực tiếp tới loss aversion (mục 3.2).
+
+1.4. Pay-to-skip / energy system (bán thời gian chờ do chính game tạo ra)
+- Đây chính là pattern "PAY TO SKIP" gốc từ Zagal, Björk & Lewis 2013 (xem đầy đủ
+  ở mục 2 vì đây là nguồn thuật ngữ chuẩn). Petrovskaya & Zendle 2021 xác nhận lại
+  hiện tượng này dưới tên "Pay or Wait":
+  "this refers to a situation in which players are given the choice of waiting
+  some time before being able to progress in the game, or paying some money to
+  skip this wait."
+  Quote: "Everything you did had obsorbetently [sic] long wait times with the
+  option to speed them up by spending premium currency." (P927)
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI — giữ cả lỗi chính tả "obsorbetently" của người
+  chơi, đánh dấu [sic] trong bài gốc]
+- Ví dụ kinh điển từ Zagal et al. 2013 (đã đọc toàn văn PDF, xem mục 2.4): SimCity
+  Social — năng lượng tối đa tăng chậm hơn tốc độ người chơi lớn lên trong game,
+  nên càng chơi lâu, năng lượng còn lại cho hành động có ý nghĩa càng giảm, buộc
+  phải trả tiền để duy trì trải nghiệm ban đầu.
+
+1.5. Anchoring trong bảng giá gói nạp, gói "giá trị nhất"
+- Nguyên lý tâm lý gốc (đã verify): Tversky, A. & Kahneman, D. (1974). "Judgment
+  under Uncertainty: Heuristics and Biases." Science, 185(4157), 1124-1131.
+  URL ĐÃ MỞ ĐỌC THẬT (bản scan JSTOR, pdftotext đọc được toàn văn 8 trang):
+  https://www.cs.tufts.edu/comp/150AIH/pdf/TverskyKa74.pdf
+  Bài báo mô tả "adjustment from an anchor" là một trong ba heuristic phán đoán
+  dưới bất định: người ta ước lượng bằng cách bắt đầu từ một giá trị mỏ neo rồi
+  điều chỉnh, và điều chỉnh thường không đủ ("insufficient adjustment").
+- Ứng dụng cụ thể vào UI bảng giá game (đặt gói lớn cạnh gói nhỏ, gắn nhãn "giá
+  trị nhất"/"best value" để neo nhận thức giá trị): [CHƯA VERIFY — không tìm
+  được bài academic nào áp thẳng thuật ngữ "anchoring" vào UI bảng giá game F2P
+  trong phạm vi search đã làm; đây là suy luận ứng dụng nguyên lý gốc, không
+  phải claim đã có nguồn game-specific]. Cần main tự cân nhắc có đưa vào bài với
+  cảnh báo "suy luận ứng dụng" hay bỏ.
+
+1.6. Bundle ép mua (không mua lẻ được), số dư lẻ cố ý
+- Số dư lẻ cố ý: đã có nguồn vững ở mục 1.1 ("Fixed Purchase Rates are Unfair",
+  Petrovskaya & Zendle 2021, quote P591 về League of Legends 1.75 item).
+- Bundle ép mua không mua lẻ được: Zagal et al. 2013 có pattern liên quan gần
+  nhất là "PRE-DELIVERED CONTENT" (nội dung đã có sẵn trên đĩa/file cài đặt
+  nhưng khoá lại, chỉ mở khi trả thêm tiền) — xem mục 2.5. Petrovskaya & Zendle
+  2021 cũng có mã liên quan "Separate Re-Release of Product as Free, Cheaper,
+  or Easier to Get" (sản phẩm ban đầu khoá trong bundle/subscription, sau đó
+  tách bán lẻ rẻ hơn hoặc miễn phí) — quote: "In general: buying the DLC and
+  then developers giving it away... Why buy games the year they come out, if
+  they'll be fixed and in-full 12 months down the line, for cheaper?" (P43)
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+  Đây không hoàn toàn trùng khớp "bundle ép mua không tách lẻ được" như user hỏi
+  — [CHƯA VERIFY] một nguồn academic đặt tên riêng chính xác cho hiện tượng
+  "bundle-only, no à-la-carte option". Gần nhất về mặt khái niệm là 2 pattern
+  trên; nên main cân nhắc diễn giải lại cho khớp nếu dùng.
+====================================================================
+5. DARK PATTERN VỀ THỜI GIAN VÀ XÃ HỘI
+====================================================================
+(Từ trục 2 — dp-truc2-game-tamly.txt, mục 2 — chi tiết đầy đủ + ví dụ đa game cho các
+pattern đã nêu tên ở mục 2 của file này, nguồn gốc Zagal, Björk & Lewis 2013)
+
+NGUỒN DUY NHẤT, ĐÃ MỞ ĐỌC TOÀN VĂN (pdftotext, 547 dòng đọc hết):
+Zagal, J.P., Björk, S., Lewis, C. (2013). "Dark Patterns in the Design of
+Games." Proceedings of FDG 2013 (Foundations of Digital Games), pp. 39-46.
+URL: http://www.fdg2013.org/program/papers/paper06_zagal_etal.pdf
+
+Đây là bài báo GỐC đặt ra thuật ngữ "Dark Game Design Pattern" cho ngành game
+(lấy cảm hứng từ darkpatterns.org của Harry Brignull, áp dụng cụ thể vào gameplay).
+Định nghĩa cuối cùng của bài báo (nguyên văn, verify từ PDF):
+"A dark game design pattern is a pattern used intentionally by a game creator to
+cause negative experiences for players which are against their best interests
+and likely to happen without their consent."
+
+Bài chia dark pattern thành 3 nhóm theo thứ đang bị "đánh cắp": thời gian, tiền
+bạc, vốn xã hội (social capital). TẤT CẢ tên pattern dưới đây là thuật ngữ CHÍNH
+THỨC của Zagal/Björk/Lewis (2013), viết hoa nhỏ trong bài gốc — main dùng đúng
+tên này khi trích, đừng tự đặt tên khác.
+
+2.1. GRINDING (mục 4.1.1 trong bài gốc)
+- Định nghĩa: "performing repetitive and tedious tasks" để lên cấp — dark pattern
+  vì "a way of coercing the player into needlessly spending time in a game for
+  the sole purpose of extending the game's duration."
+  Nguyên văn: "repeatedly kill the same enemies over and over by utilizing the
+  same strategy just to gain an experience level and access to new capabilities."
+- Ví dụ đa game: World of Warcraft (PvP, nhân vật cấp 85 áp đảo cấp 15, buộc
+  người chơi cấp thấp phải grind), Call of Duty 4: Modern Warfare (mở khoá vũ
+  khí qua level up, làm lệch cán cân từ kỹ năng sang thời gian chơi).
+
+2.2. PLAYING BY APPOINTMENT (mục 4.1.2)
+- Định nghĩa: game buộc người chơi phải chơi vào thời điểm cụ thể (do game định,
+  không phải người chơi chọn). Ví dụ: FarmVille — cây trồng có cơ chế "withering"
+  (héo, mất giá trị) nếu không thu hoạch trong khung giờ nhất định (đa số dưới
+  24 giờ), buộc người chơi phải sắp xếp đời sống thực theo lịch của game.
+- Bài gốc LƯU Ý: pattern này KHÔNG tối (not dark) nếu việc hoàn thành đúng hẹn
+  không bắt buộc để tiến bộ — ví dụ Pokémon (bắt Pokémon ban đêm là tuỳ chọn,
+  không cản việc hoàn thành game) hay Animal Crossing (nhân vật đặc biệt xuất
+  hiện theo ngày chỉ mang tính thưởng thêm). => độ "tối" phụ thuộc NGỮ CẢNH, không
+  phải bản thân cơ chế.
+
+2.3. SOCIAL PYRAMID SCHEMES (mục 4.3.1) — thuật ngữ chính thức của Zagal et al.
+- Định nghĩa: game khuyến khích người chơi lôi kéo bạn bè tham gia để tiến bộ,
+  tạo ra "entrapment" — người chơi cảm thấy nghĩa vụ xã hội phải chơi (vì bạn bè
+  rủ) và phải tiếp tục lôi kéo thêm người khác, giống mô hình kim tự tháp (dẫn
+  Jarvis 2000 về pyramid scheme, và multilevel marketing — Muncy 2004).
+- Ví dụ FarmVille — trích nguyên văn lời một người chơi (Liszkiewicz 2010,
+  "Cultivated Play: Farmville", dẫn lại trong bài Zagal et al. 2013, tôi đọc
+  trực tiếp trong PDF đã mở):
+  "My mother began playing Farmville last fall, because her friend asked her to
+  join and become her in-game neighbor... Without at least eight in-game
+  neighbors, in fact, it is almost impossible to advance in Farmville without
+  spending real money. This frustrating reality led my mother—who was now
+  obligated to play because of her friend—to convince my father, two of her
+  sisters, my fiancée and (much to my dismay) myself to join Farmville."
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI để đối chiếu 100% dấu câu — tôi đọc qua
+  pdftotext, có rủi ro lệch khoảng trắng/gạch nối dòng]
+
+2.4. FRIEND SPAM / IMPERSONATION (mục 4.3.2) — thuật ngữ chính thức
+- Định nghĩa: game giả danh bạn bè người chơi để gửi thông báo hành động họ
+  không thực sự làm (vd. "Betty sent you a gift" dù Betty không gửi), hoặc dùng
+  chính tài khoản người chơi để gửi tin nhắn/đăng bài mà họ không chủ ý — dẫn lại
+  định nghĩa của Brignull (2011) về "Friend Spam": game "asks for your twitter or
+  email credentials [...] for an allegedly benign purpose [...] but then goes on
+  [to] publish content or send out bulk messages using your account."
+- Tác hại: tổn thất vốn xã hội thật ngoài đời (bạn bè không quan tâm đến game
+  vẫn bị làm phiền/bị đại diện sai).
+
+2.5. Các pattern liên quan tới TIỀN trong cùng bài (map sang mục 1 ở trên):
+  PAY TO SKIP (4.2.1), PRE-DELIVERED CONTENT (4.2.2), MONETIZED RIVALRIES (4.2.3
+  — "Pay to Win", dẫn Järvinen 2012: "design for pay to win, but balance for
+  grind to compete").
+
+2.6. Ranh giới nội bộ bài báo — 2 "proto-definition" trước khi tới định nghĩa
+cuối, RẤT ĐÁNG ĐƯA VÀO BÀI vì nó chính là logic suy luận academict:
+  Proto-definition 1: pattern dùng CÓ CHỦ ĐÍCH để gây trải nghiệm tiêu cực.
+  Proto-definition 2: + KHÔNG CÓ sự đồng thuận (consent) của người chơi.
+  Proto-definition 3 (gần cuối): + đi ngược lợi ích tốt nhất của người chơi.
+  Final: + "likely to happen without their consent" (nới lỏng "without" thành
+  "likely... without" — thừa nhận yếu tố xác suất/mức độ).
+Bài cũng dẫn "Disclosure Principle" của Berdichevsky & Neuenschwander (1999,
+Communications of the ACM 42(5), 51-58) — trích nguyên văn từ PDF đã mở:
+"The creators of a persuasive technology should disclose their motivations,
+methods, and intended outcomes, except when such disclosure would significantly
+undermine an otherwise ethical goal." — đây là cầu nối trực tiếp sang mục 4.
+====================================================================
+6. CƠ CHẾ TÂM LÝ BỊ KHAI THÁC
+====================================================================
+(Từ trục 2 — dp-truc2-game-tamly.txt, mục 3)
+
+3.1. Variable ratio reinforcement schedule (Skinner) — vì sao gây nghiện
+- Nguồn gốc: B.F. Skinner, nghiên cứu operant conditioning (điều kiện hoá thao
+  tác), khái niệm "schedules of reinforcement" — trong đó variable-ratio là lịch
+  củng cố mà phần thưởng đến sau một SỐ LẦN PHẢN ỨNG không cố định, không đoán
+  trước được.
+  [CHƯA VERIFY trực tiếp văn bản gốc Skinner — không mở được sách/paper gốc
+  (Skinner 1953 "Science and Human Behavior" hoặc các báo cáo thí nghiệm gốc)
+  trong phạm vi thời gian research này. Thông tin trên tổng hợp từ nhiều nguồn
+  giáo trình tâm lý học đồng thuận qua WebSearch, KHÔNG phải blog SEO đơn lẻ,
+  nhưng tôi chưa tự mở đọc bản gốc bằng curl/pdftotext].
+- Vì sao áp dụng được vào game: ĐÃ VERIFY qua Larche et al. 2021 (mục 1.2) — bài
+  báo nói thẳng loot box và slot machine "both operate on a variable-ratio
+  reinforcement schedule, which is known to elicit a pattern of
+  reinforced/repeated behaviours (Haw 2008)." Đây là nguồn học thuật thật, đã
+  mở đọc, xác nhận việc áp dụng variable ratio vào game (cụ thể là loot box).
+  URL: https://pmc.ncbi.nlm.nih.gov/articles/PMC7882574/
+- Cơ chế: vì không đoán trước được lần nào có thưởng, hành vi (mở loot box,
+  đánh quái) trở nên RẤT KHÓ DẬP TẮT (resistant to extinction) — người chơi tiếp
+  tục dù phần lớn các lần không có thưởng, giống hành vi đánh bạc.
+
+3.2. Sunk cost fallacy, loss aversion (Kahneman & Tversky)
+- Loss aversion — ĐÃ VERIFY TOÀN VĂN: Kahneman, D. & Tversky, A. (1979).
+  "Prospect Theory: An Analysis of Decision under Risk." Econometrica, 47(2),
+  263-291.
+  URL ĐÃ MỞ ĐỌC THẬT (pdftotext toàn văn 11 trang):
+  https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Behavioral_Decision_Theory/Kahneman_Tversky_1979_Prospect_theory.pdf
+  Quote nguyên văn (đã đối chiếu trực tiếp trong file text đã pdftotext, không
+  qua tóm tắt): "we expect outcomes to be coded as gains or losses relative to a
+  neutral reference point, and losses to loom larger than gains."
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI để double-check ký tự chính xác, dù tôi đã đọc
+  trực tiếp bằng pdftotext không qua model tóm tắt]
+  => Đây chính là nguồn gốc cụm "losses loom larger than gains" hay bị trích dẫn
+  sai chỗ trên mạng — bản gốc 1979 đúng là có câu này.
+- Áp dụng vào game: mất streak điểm danh, mất tiến độ mùa giải (season pass),
+  mất vật phẩm giới hạn thời gian — kích hoạt loss aversion mạnh hơn nhiều so
+  với việc chưa từng có được thứ đó. [CHƯA VERIFY nguồn game-specific áp dụng
+  trực tiếp "loss aversion" — đây là suy luận ứng dụng nguyên lý gốc đã verify,
+  main cần gắn nhãn "phân tích minh hoạ" theo mục 6.3 CLAUDE.md nếu dùng].
+- Sunk cost fallacy: nguồn kinh điển Arkes, H.R. & Blumer, C. (1985). "The
+  Psychology of Sunk Cost." Organizational Behavior and Human Decision
+  Processes, 35(1), 124-140.
+  [CHƯA VERIFY toàn văn — ScienceDirect chặn truy cập (trang tải về nhưng nội
+  dung không chứa văn bản đọc được qua curl, có thể do paywall/JS render).
+  Metadata (tên tác giả, tạp chí, năm, số trang) được xác nhận TRÙNG KHỚP qua
+  nhiều nguồn độc lập trong WebSearch (SSRN, ResearchGate, ideas.repec.org,
+  ScienceDirect chính chủ), nên khả năng đúng cao, nhưng tôi CHƯA tự đọc được
+  câu quote nguyên văn]. Định nghĩa hiệu ứng theo mô tả tổng hợp (không phải
+  quote nguyên văn, diễn giải lại): xu hướng tiếp tục đầu tư (tiền/effort/thời
+  gian) vào một việc chỉ vì đã đầu tư trước đó, dù về lý tính nên dừng.
+  Áp dụng vào game: người chơi đã nạp/farm rất nhiều vào một tài khoản/server
+  thường khó bỏ game dù không còn vui — [CHƯA VERIFY nguồn game-specific].
+
+3.3. Endowed progress effect
+- Nunes, J.C. & Drèze, X. (2006). "The Endowed Progress Effect: How Artificial
+  Advancement Increases Effort." Journal of Consumer Research, 32(4), 504-512.
+  [CHƯA VERIFY toàn văn — không mở được bản PDF/SSRN gốc trong phạm vi research
+  này (SSRN timeout, JCR paywall). Số liệu dưới đây tổng hợp qua WebSearch từ
+  nhiều nguồn (bao gồm cả trang tư vấn CX không đáng tin — renascence.io — nên
+  KHÔNG dùng nguồn đó, chỉ ghi lại con số vì nó lặp lại khớp nhau ở nhiều nguồn
+  độc lập, nhưng vẫn đánh dấu chưa tự verify bằng mắt]:
+  Thí nghiệm thẻ tích tem rửa xe: nhóm A nhận thẻ 8 ô trống hoàn toàn (cần 8 lần
+  mua để đủ thưởng); nhóm B nhận thẻ 10 ô nhưng đã có sẵn 2 ô được đóng dấu
+  trước (cũng cần thêm 8 lần mua để đủ thưởng — số lần cần mua giống hệt nhóm
+  A). Kết quả báo cáo: nhóm B hoàn thành thẻ nhanh hơn và tỷ lệ hoàn thành cao
+  hơn nhóm A dù khối lượng công việc thực tế bằng nhau.
+  [CHƯA VERIFY con số phần trăm chính xác (34% vs 19%, mốc 9 tháng) — các số
+  này lặp lại giống nhau ở nhiều nguồn thứ cấp nhưng tôi chưa tự đọc bảng số
+  liệu gốc trong paper].
+- Áp dụng vào game: thanh kinh nghiệm/quest bar khởi đầu đã có sẵn % hoàn thành
+  (vd. "battle pass đã hoàn thành 10%" ngay khi mua), hoặc daily streak hiển thị
+  vài ô đã tick sẵn — tạo cảm giác "đang dang dở" thay vì "chưa bắt đầu", thúc
+  đẩy hoàn thành. [CHƯA VERIFY nguồn game-specific — suy luận ứng dụng].
+
+3.4. Social proof / reciprocity (Cialdini)
+- Cialdini, R.B. & Goldstein, N.J. (2004). "Social Influence: Compliance and
+  Conformity." Annual Review of Psychology, 55, 591-621.
+  [CHƯA VERIFY toàn văn — cả PubMed (chặn bằng cookie-challenge) lẫn
+  Annual Reviews (trang trả về rỗng/chặn) tôi đều không mở đọc được nội dung
+  thật trong phạm vi research này. Metadata (tác giả, tạp chí, năm, số trang,
+  DOI 10.1146/annurev.psych.55.090902.142015) được nhiều nguồn độc lập xác nhận
+  khớp nhau (PubMed listing, ResearchGate, Annual Reviews chính chủ), nên đây
+  là bài có thật, nhưng tôi CHƯA tự đọc nội dung].
+  Diễn giải tổng hợp (không phải quote nguyên văn): social proof — người ta có
+  xu hướng làm theo hành vi/quyết định của người khác, đặc biệt khi không chắc
+  chắn; reciprocity — con người có xu hướng đáp lễ khi nhận được thứ gì đó, tạo
+  cảm giác "nợ" cần trả.
+  Nguồn gốc sách phổ biến hơn (không phải paper học thuật, mang tính tham khảo):
+  Cialdini, R.B. (1984). "Influence: The Psychology of Persuasion." [CHƯA
+  VERIFY — không mở đọc trong phạm vi research này, chỉ ghi nhận tên sách qua
+  nhiều nguồn].
+- Áp dụng vào game: leaderboard bạn bè (social proof — "bạn của bạn đã đạt X"),
+  gửi quà miễn phí trong game để tạo nghĩa vụ đáp lễ (reciprocity) — liên hệ
+  trực tiếp với SOCIAL PYRAMID SCHEMES / FRIEND SPAM đã verify ở mục 2.3-2.4
+  (Zagal et al. 2013), là bằng chứng game-specific chắc chắn hơn nhiều so với
+  suy luận trừu tượng.
+====================================================================
+7. RANH GIỚI THUYẾT PHỤC / THAO TÚNG / CƯỠNG ÉP
+====================================================================
+(Gộp trục 1 — dp-truc1-nguongoc.txt, mục 4 — và trục 2 — dp-truc2-game-tamly.txt,
+mục 4. Phần đầu dưới đây là phần trục 1: ranh giới mờ theo Gray et al. 2018 và Zagal
+et al. 2013.)
+
+
+KHÔNG tìm được nguồn học thuật nào đưa ra một "bright-line" (ranh giới rạch ròi, kiểm
+chứng được) giữa 3 khái niệm này. Ngược lại, các nguồn đã đọc đều NÓI THẲNG là ranh giới
+mờ/chồng lấn:
+
+- Gray et al. 2018 (CHI), phần DISCUSSION, trích nguyên văn:
+  "It is interesting to note that many of the strategies we identified in our corpus
+  bear striking resemblance to the persuasive strategies proposed by Fogg [26].
+  Persuasive strategies such as tunneling or reduction have strong similiarity to the
+  forced action and obstruction dark patterns strategies. Similarly, tailoring and
+  suggestion may result in strategies like interface interference. Finally, conditioning
+  could include strategies such as sneaking or nagging. What this indicates is that many
+  persuasive strategies are already being used for nefarious purposes..."
+
+  → Tức: chính các kỹ thuật persuasive design kinh điển của B.J. Fogg (2003, "Persuasive
+  Technology") có thể BIẾN THÀNH dark pattern tuỳ mục đích sử dụng — ranh giới nằm ở Ý
+  ĐỊNH và LỢI ÍCH AI ĐƯỢC PHỤC VỤ, không nằm ở bản thân kỹ thuật.
+
+  Gray et al. cũng nói thẳng việc thiếu vocab để phân định:
+  "All of these concerns foreground ethical dilemmas that are difficult to reconcile or
+  describe given the existing academically-focused vocabulary of persuasive design or
+  the method-focused language of value-sensitive design."
+
+  Và về việc vẽ ranh giới cứng: "While traditional, static notions of ethical codes
+  would seek to draw specific boundaries, the number of variables in play makes this
+  approach untenable." (asnwer: họ đề xuất quay về "designer's character"/trách nhiệm
+  đạo đức của người thiết kế thay vì một ranh giới kỹ thuật cố định).
+
+  URL: bản PDF CHI 2018 nêu ở mục 3.3. Trạng thái: VERIFIED.
+
+- Zagal et al. 2013 cũng gặp đúng vấn đề này khi bàn "Psychological Tricks" (§5.2), trích
+  nguyên văn câu hỏi họ tự đặt ra (không trả lời dứt khoát):
+  "How do we draw the line between using this knowledge to provide more interesting,
+  engaging, and satisfying gameplay experiences (good) and exploiting player's cognitive
+  biases and predictably irrational behavior to make more money?"
+  → Họ THỪA NHẬN không có câu trả lời rạch ròi, chỉ đưa ra câu hỏi hướng dẫn.
+  Trạng thái: VERIFIED (đã đọc PDF gốc, mục 2.3 ở trên).
+
+- Về "monetization hợp lệ" cụ thể: KHÔNG tìm được nguồn học thuật nào định nghĩa rạch
+  ròi ranh giới monetization hợp lệ vs dark pattern trong game (ví dụ: mua skin thẩm mỹ
+  thuần tuý vs "pay to skip"). Zagal et al. có đề cập gần nhất qua khái niệm "support"
+  (Juul) — một pattern trở thành "dark" khi nó không "support" (hỗ trợ) phong cách chơi
+  mà đa số player chọn, và trở nên bắt buộc với họ — nhưng đây vẫn là NGUYÊN TẮC ĐỊNH
+  TÍNH, không phải ranh giới đo lường được.
+  [CHƯA VERIFY được nguồn nào định nghĩa ranh giới định lượng/rạch ròi — nếu bài cần nói
+  về điều này, PHẢI ghi rõ là "không có ranh giới chuẩn được giới học thuật đồng thuận",
+  không được bịa ra một ranh giới nghe hợp lý.]
+
+  [Tiếp theo, từ trục 2 — dp-truc2-game-tamly.txt, mục 4: khung phân biệt thuyết phục/
+  thao túng/cưỡng ép của Susser, Roessler & Nissenbaum (2019), và bộ tiêu chí PHÁP LÝ
+  cụ thể hơn theo luật Anh (Consumer Protection from Unfair Trading Regulations 2008)
+  — luật này cũng được trích dẫn qua Petrovskaya & Zendle 2021, xem mục 4 của file này
+  để đối chiếu ứng dụng cụ thể vào tiền tệ trong game.]
+
+Nguồn chính, ĐÃ VERIFY TOÀN VĂN qua pdftotext (đọc trực tiếp file PDF 10 trang,
+không qua WebFetch/tóm tắt model nhỏ):
+Susser, D., Roessler, B., Nissenbaum, H. (2019). "Online Manipulation: Hidden
+Influences in a Digital World." Georgetown Law Technology Review, 4(1), 1-45.
+(Bản PDF cùng nội dung cũng đăng ở Internet Policy Review 8(2), 2019.)
+URL: https://pure.uva.nl/ws/files/45242068/Susser_Roessler_Nissenbaum_Online_Manipulation_.pdf
+
+4.1. Định nghĩa cốt lõi (nguyên văn, đọc trực tiếp từ PDF):
+"manipulation is hidden influence—the covert subversion of another person's
+decision-making power. In contrast with persuasion, which is the forthright
+appeal to another person's decision-making power, or coercion, which is the
+restriction of acceptable options from which another person might choose,
+manipulation functions by exploiting the manipulee's cognitive (or affective)
+weaknesses"
+[NGUYÊN VĂN CẦN MAIN CURL LẠI để double-check]
+
+4.2. Ba tiêu chí phân biệt rút ra được từ bài (tôi tổng hợp lại từ nhiều đoạn
+đã đọc trực tiếp, không phải quote nguyên văn 1 câu duy nhất):
+  a) CÔNG KHAI hay CHE GIẤU (covert vs forthright/transparent): thuyết phục là
+     "the attempted influence is forthright and transparent" — người bị ảnh
+     hưởng biết mình đang bị thuyết phục và bằng cách nào. Thao túng che giấu
+     hoặc bản thân chiêu thức, hoặc ý đồ/vai trò của người tác động.
+  b) NHẮM VÀO LÝ TRÍ hay NHẮM VÀO ĐIỂM YẾU: thuyết phục (nghĩa hẹp, "rational
+     persuasion") là "changing someone's mind by giving reasons he or she can
+     reflect on and evaluate." Thao túng "exploit[s] the manipulee's cognitive
+     (or affective) weaknesses" — nhắm vào lỗ hổng nhận thức/cảm xúc, không
+     phải khả năng suy luận.
+  c) CÒN LỰA CHỌN THẬT SỰ hay KHÔNG (resistible vs irresistible): phân biệt với
+     CƯỠNG ÉP (coercion) — cưỡng ép dùng "irresistible incentives" (dẫn Rudinow
+     1978: "one which could only be avoided through heroism, madness, or
+     something similarly extraordinary") hoặc loại bỏ hết lựa chọn chấp nhận
+     được (Wood: "acceptable alternatives"). Thao túng khác cưỡng ép ở chỗ nó
+     "leaves their capacity for conscious decision-making intact" — người bị
+     thao túng VẪN có lựa chọn, nhưng lựa chọn đó bị bóp méo mà họ không biết.
+  => Tổng hợp: bài báo trả lời đúng câu hỏi user đặt ra (lợi ích thuộc về ai,
+     thông tin minh bạch không, có rút lui được không) nhưng KHÔNG đưa ra dưới
+     dạng "bộ tiêu chí liệt kê sẵn" — đây là tôi tự rút ra 3 trục (a/b/c) từ
+     lập luận của bài. Main nên trình bày rõ đây là "diễn giải lại", không phải
+     nguyên văn 1 bộ tiêu chí có sẵn trong bài.
+
+4.3. Bộ tiêu chí PHÁP LÝ cụ thể hơn — luật Anh, ĐÃ VERIFY qua Petrovskaya &
+Zendle 2021 (trích dẫn nguyên văn luật trong bài đã đọc, mục 1 ở trên):
+"Consumer Protection from Unfair Trading Regulations 2008" định nghĩa 3 loại
+hành vi thương mại bị cấm — đây là bộ tiêu chí PHÁP LÝ CÓ THẬT, không phải suy
+luận, có thể dùng làm khung phân tích cụ thể cho bài:
+  - UNFAIR: "contravenes the requirements of professional diligence" và
+    "materially distorts or is likely to materially distort the economic
+    behaviour of the average consumer".
+  - MISLEADING: dùng thông tin không đúng sự thật khi trình bày sản phẩm, ảnh
+    hưởng nhận thức người mua — bao gồm cả "misleading omissions" (che giấu
+    thông tin, không cần nói dối trực tiếp).
+  - AGGRESSIVE: "significantly impairs or is likely significantly to impair the
+    average consumer's freedom of choice or conduct... through the use of
+    harassment, coercion or undue influence."
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI để double-check]
+
+4.4. Ngành công nghiệp game hay dùng tiêu chí gì (không có chuẩn thống nhất)?
+- Zagal et al. 2013 (đã verify, mục 2) dùng "Disclosure Principle" của
+  Berdichevsky & Neuenschwander (1999) làm thước đo thực dụng: nếu nhà thiết kế
+  SẴN SÀNG công khai mục đích/cơ chế thuyết phục mà không làm hỏng mục tiêu đạo
+  đức của nó, thì đó là chấp nhận được; nếu công khai sẽ phá vỡ hiệu quả (tức
+  cơ chế CHỈ hoạt động khi người chơi không biết), đó là dấu hiệu thao túng.
+  Bài cũng đề xuất khái niệm "manipulation literacy" (giống procedural literacy)
+  — quan điểm rằng ranh giới dịch chuyển khi người chơi ĐƯỢC GIÁO DỤC để nhận ra
+  pattern; pattern chỉ còn "tối" (dark) khi người chơi CHƯA đủ hiểu biết để nhận
+  diện và ưng thuận có ý thức.
+- KẾT LUẬN CHO MỤC NÀY: không có MỘT bộ tiêu chí chuẩn hoá được ngành đồng thuận
+  100%; nhưng có 2 nguồn cụ thể, đã verify, có thể dùng làm khung: (1) luật tiêu
+  dùng Anh 2008 (unfair/misleading/aggressive — mục 4.3), và (2) Disclosure
+  Principle của Berdichevsky & Neuenschwander qua Zagal et al. 2013 (mục 4.4).
+====================================================================
+8. GÓC PHẢN BIỆN, LẬP LUẬN BẢO VỆ F2P
+====================================================================
+(Từ trục 2 — dp-truc2-game-tamly.txt, mục 5)
+
+Nguồn, ĐÃ VERIFY TOÀN VĂN qua pdftotext (14 trang, đọc trực tiếp):
+Alha, K., Koskinen, E., Paavilainen, J., Hamari, J., Kinnunen, J. (2014).
+"Free-to-Play Games: Professionals' Perspectives." Proceedings of DiGRA Nordic
+2014.
+URL: https://dl.digra.org/index.php/dl/article/download/702/702
+Phương pháp: phỏng vấn định tính 14 chuyên gia làm việc trong ngành game F2P.
+LƯU Ý QUAN TRỌNG cho mục 6.3 CLAUDE.md (tách "theo nguồn" và "phân tích"):
+đây là NGUỒN THỨ CẤP ghi lại Ý KIẾN của người trong ngành — không phải bằng
+chứng khoa học rằng các lập luận đó ĐÚNG, chỉ là bằng chứng rằng NGƯỜI TRONG
+NGÀNH THỰC SỰ NGHĨ VẬY. Main cần ghi rõ trong bài đây là "lập luận của người
+trong ngành", không trình bày như sự thật đã được chứng minh.
+
+5.1. Lập luận "để người chơi tự chọn có trả tiền hay không, còn hơn bán game dở
+với giá cố định":
+Quote nguyên văn (đọc trực tiếp từ PDF, dòng 308-311 file text):
+"Some game professionals saw F2P games as ethical as games with a more
+traditional model. In some cases it was considered to be more unethical to make
+a bad game, advertise it well and sell it with 60 euros than to ask money within
+a game when you do not even have to pay if you decide not to."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+
+5.2. So sánh với chi phí giải trí khác:
+"Some professionals compared F2P games to other hobbies. Paying for playing
+might be cheaper than a night at a bar with friends."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+
+5.3. "Whales" (người chi rất nhiều tiền) không hẳn chi tiêu bốc đồng — dẫn một
+nghiên cứu khác trong bài (tôi đọc qua trích dẫn trong bài Alha et al., CHƯA tự
+mở nghiên cứu gốc của Ducheneaut & Yee):
+"Recently Nicolas Ducheneaut and Nick Yee introduced the results of their
+study, where they found that whales did not usually make impulse purchases,
+but rather made rational, long-term decisions with their investments (Sinclair
+2014)."
+[CHƯA VERIFY nghiên cứu gốc Ducheneaut & Yee — chỉ đọc qua trích dẫn lại trong
+bài Alha et al. 2014, chưa tự mở nguồn Sinclair 2014 hay bài gốc của
+Ducheneaut/Yee]
+
+5.4. Giải pháp "thiết kế F2P có trách nhiệm" mà chính người trong ngành đề xuất
+— liên hệ trực tiếp tới mục 4 (Disclosure Principle):
+"One way is to make it more evident and visible that even though the game is
+free, it includes voluntary in-app purchases. The game should also state
+clearly what the player is paying for and what he/she is getting in return. The
+decision to pay or refuse to pay is then player's to make."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+
+5.5. Giới hạn của lập luận tự nguyện — chính bài Alha et al. cũng ghi nhận
+NGOẠI LỆ được người trong ngành thừa nhận: "it was noted that the combination of
+children and F2P is ethically problematic. The concepts of money might not yet
+be clear to children." => ngay cả phía bảo vệ ngành cũng không cho rằng "tự
+nguyện" áp dụng được cho MỌI đối tượng người chơi (trẻ em là ngoại lệ thừa
+nhận).
+
+5.6. Giải thích khả dĩ cho việc vì sao người trong ngành ít thấy vấn đề đạo đức
+hơn công chúng — bài dẫn "cognitive dissonance" (Festinger 1956, qua diễn giải
+của tác giả Alha et al., KHÔNG phải trích nguyên văn Festinger):
+"This psychological distress can be relieved by changing your negative attitude
+into positive. This could also in part explain the defensive stances the
+professionals took against critique."
+[CHƯA VERIFY nguồn gốc Festinger 1956 trực tiếp — chỉ đọc qua diễn giải của tác
+giả bài Alha et al. 2014, không tự mở lý thuyết cognitive dissonance gốc].
+=> Đây là một điểm THÚ VỊ cho bài: chính nghiên cứu ủng hộ góc nhìn ngành cũng
+tự đưa ra một cách giải thích khiến lập luận bảo vệ bớt tin cậy hơn (có thể là
+lý-tính-hoá sau sự thật, không phải lý-luận-trước). Main có thể dùng để cân
+bằng 2 chiều trong 1 đoạn.
+====================================================================
+9. VÍ DỤ THẬT VÀ HỆ QUẢ PHÁP LÝ
+====================================================================
+(Từ trục 3 — dp-truc3-vidu-phaply.txt, mục 1)
+
+### 1.1 Star Wars Battlefront II (2017, console/PC — EA/DICE)
+
+Chuyện gì xảy ra: Battlefront II ra mắt với hệ thống loot box (Crystals mua
+bằng tiền thật → mở loot box → nhận ngẫu nhiên thẻ nâng cấp nhân vật/vũ khí,
+ảnh hưởng trực tiếp tới sức mạnh trong gameplay — "pay to win"). Cộng đồng
+phản ứng dữ dội; một bình luận giải thích của EA trên Reddit ("giúp người
+chơi cảm thấy tự hào và thành tựu khi mở khoá...") trở thành bình luận bị
+downvote nhiều nhất lịch sử Reddit tại thời điểm đó.
+
+Dark pattern: loot box trả phí tác động trực tiếp tới cán cân sức mạnh
+(pay-to-win), gắn với hệ thống progression bị nén chặt để đẩy người chơi
+mua Crystals.
+
+Kết cục: EA tắt toàn bộ tính năng mua trong game (in-game purchases) chỉ
+vài giờ trước giờ mở bán toàn cầu. Tuyên bố chính thức của EA (đăng trên
+Twitter/EA Star Wars, được báo chí trích dẫn rộng rãi): "We hear you loud
+and clear, so we're turning off all in-game purchases." — [NGUYÊN VĂN CẦN
+MAIN CURL LẠI, dò trên trang gốc EA/Star Wars nếu cần trích chính xác].
+Microtransactions sau đó được đưa trở lại (tháng 3/2018) dưới dạng chỉ mua
+được vật phẩm cosmetic, không còn ảnh hưởng gameplay.
+Nguồn: https://www.windowscentral.com/it-looks-ea-has-removed-all-microtransactions-star-wars-battlefront-ii ;
+https://www.forbes.com/sites/insertcoin/2017/11/16/ea-has-removed-star-wars-battlefront-2s-microstransactions-hours-before-launch/
+Vụ việc này cũng là chất xúc tác trực tiếp khiến Bỉ và Hà Lan mở điều tra
+pháp lý về loot box (xem mục 1.2, 1.3) — được chính báo cáo của Gaming
+Commission Bỉ 2018 nêu tên Battlefront II là 1 trong các game bị xem xét.
+
+### 1.2 Bỉ — Gaming Commission (Kansspelcommissie) tuyên loot box trả phí là
+cờ bạc (2018, PC/console — nhiều game)
+
+Chuyện gì xảy ra: Năm 2018, Gaming Commission (cơ quan quản lý cờ bạc của
+Bỉ) công bố một báo cáo nghiên cứu loot box, xem xét cụ thể Star Wars:
+Battlefront II, FIFA 18 và Counter-Strike: Global Offensive, để trả lời
+câu hỏi loot box có phải "games of chance" (trò chơi may rủi) hay không.
+
+Xác nhận từ chính trang official của Gaming Commission (gamingcommission.be,
+đã curl trực tiếp ngày research):
+"In 2018, the Gaming Commission (GC) published a report (...) on loot
+boxes, which examined whether they should be regarded as games of chance."
+URL: https://www.gamingcommission.be/en/faq/new-developments/what-are-loot-boxes
+Báo cáo gốc (PDF, tiếng Anh): https://www.gamingcommission.be/sites/default/files/2021-08/onderzoeksrapport-loot-boxen-Engels-publicatie.pdf
+
+Kết luận (theo các nguồn luật thứ cấp uy tín — CMS Law, Taylor Wessing —
+đối chiếu với trang chính thức ở trên): loot box trả phí, có yếu tố ngẫu
+nhiên và có giá trị trao đổi/tài sản, bị xem là "games of chance" và thuộc
+phạm vi điều chỉnh của Luật Cờ bạc Bỉ (Belgian Gambling Act 7/5/1999), vốn
+cấm vận hành trò chơi may rủi khi không có giấy phép. Vi phạm có thể bị xử
+phạt hình sự.
+Nguồn thứ cấp (đối chiếu, không phải nguồn gốc pháp lý):
+https://cms.law/en/aut/publication/loot-boxes-a-treasure-trove-of-gambling-regulatory-issues
+https://www.taylorwessing.com/en/insights-and-events/insights/2025/03/an-iphone-a-gambling-problem-and-the-loot-box-debate
+
+Kết cục thực tế (quan trọng để dạy đúng — đừng nói "Bỉ cấm loot box" đơn
+giản): việc thực thi rất không đồng đều. Một số công ty (EA — Bỉ) đã gỡ
+loot box trả phí khỏi FIFA tại Bỉ; Nintendo đã đóng cửa Animal Crossing:
+Pocket Camp một phần vì lo ngại quy định loot box của Bỉ (nguồn:
+https://www.techradar.com/news/nintendo-is-shutting-down-animal-crossing-pocket-camp-in-belgium-due-to-loot-box-regulation-concerns
+— đây là báo chí, nên gắn [BÁO CHÍ, CHƯA ĐỐI CHIẾU THÔNG CÁO NINTENDO]).
+Nhưng nghiên cứu học thuật (Collabra: Psychology, UC Press, đăng title
+"Breaking Ban: Belgium's Ineffective Gambling Law Regulation of Video Game
+Loot Boxes") và một bài peer-review khác ghi nhận loot box vẫn tồn tại phổ
+biến ở Bỉ nhiều năm sau "lệnh cấm" vì thiếu cơ chế thực thi xuyên biên giới
+với các nhà phát hành ở nước ngoài.
+Nguồn: https://online.ucpress.edu/collabra/article/9/1/57641/195100/Breaking-Ban-Belgium-s-Ineffective-Gambling-Law
+=> Bài học cho designer: "quy định nói X" khác với "thực thi có hiệu lực
+X" — không nên dạy loot box là "đã bị cấm hẳn ở Bỉ" mà nên dạy "Bỉ đã
+tuyên bố coi loot box trả phí là cờ bạc, thực thi không triệt để".
+
+### 1.3 Hà Lan — vụ kiện EA/FIFA loot box, rồi bị TOÀ CẤP CAO LẬT LẠI
+(2018–2022, PC/console)
+
+Chuyện gì xảy ra (trình tự, đã đối chiếu nhiều nguồn luật thứ cấp khớp
+nhau — Lexology, AKD, VGC):
+- 2018: Kansspelautoriteit (Ksa — cơ quan quản lý cờ bạc Hà Lan) nghiên
+  cứu 10 game có loot box, kết luận 4 game vi phạm luật cờ bạc Hà Lan.
+- Ksa xử phạt EA vì hệ thống "Packs" (loot box) trong FIFA Ultimate Team.
+- EA khởi kiện; Tòa án quận The Hague (District Court of The Hague) tuyên
+  EA vi phạm Đạo luật Cờ bạc Hà Lan, cho phép mức phạt lên tới khoảng
+  5 triệu euro, kèm phạt định kỳ 500.000 euro/tuần nếu EA không sửa.
+- EA kháng cáo lên tòa hành chính cấp cao nhất.
+- 9/3 (năm — [CHƯA VERIFY CHÍNH XÁC NĂM, các nguồn thứ cấp không thống
+  nhất rõ ràng năm ra phán quyết phúc thẩm cuối, cần đối chiếu trực tiếp
+  raadvanstate.nl]): Afdeling bestuursrechtspraak van de Raad van State
+  (Administrative Jurisdiction Division của Council of State — tòa hành
+  chính tối cao Hà Lan) LẬT LẠI phán quyết cấp dưới, kết luận loot box
+  trong FIFA KHÔNG phải "game of chance" theo luật Hà Lan, hủy khoản phạt.
+
+Kết cục: loot box trong FIFA được tuyên là HỢP PHÁP ở Hà Lan (trái ngược
+hoàn toàn với kết luận ban đầu của Ksa). Đây là ví dụ tốt để dạy: hai quốc
+gia châu Âu láng giềng (Bỉ, Hà Lan) ra hai kết luận pháp lý gần như đối
+lập về cùng một cơ chế loot box — pháp luật về loot box KHÔNG thống nhất
+toàn cầu, không có "chuẩn quốc tế" rõ ràng.
+Nguồn (thứ cấp, luật sư/hãng luật — chưa mở được văn bản toà gốc bằng
+tiếng Hà Lan):
+https://www.lexology.com/library/detail.aspx?g=b7336333-71ac-47d4-b33d-77f5bf54ebfe
+https://www.akd.eu/insights/loot-boxes-are-legal-in-the-netherlands
+https://www.videogameschronicle.com/news/dutch-judge-rules-that-ea-should-be-fined-e250k-every-week-until-it-removes-fifa-loot-boxes/
+[CHƯA VERIFY từ văn bản gốc raadvanstate.nl — chỉ verify qua nguồn luật
+thứ cấp tiếng Anh, các nguồn này khớp nhau về nội dung nên độ tin cậy khá
+cao, nhưng KHÔNG phải nguồn gốc chính thức]
+
+### 1.4 Epic Games / Fortnite và FTC (Mỹ, 2022–2024, PC/console/mobile)
+— ĐÃ VERIFY TRỰC TIẾP TỪ FTC.GOV (curl nguyên văn press release)
+
+Đây là vụ việc verify chắc nhất trong bộ ví dụ — đọc thẳng từ ftc.gov.
+
+Số tiền và cấu trúc (2 khoản riêng biệt, hay bị nhầm lẫn thành 1):
+- $245.000.000 — khoản BỒI HOÀN (refund) cho người tiêu dùng, vì "dark
+  patterns" (thiết kế nút bấm gây nhầm lẫn dẫn tới charge ngoài ý muốn) +
+  để trẻ em mua hàng không cần phụ huynh xác nhận + khóa tài khoản của
+  người tranh chấp khoản phí trái phép.
+- $275.000.000 — khoản PHẠT (penalty) riêng, vì vi phạm COPPA (Children's
+  Online Privacy Protection Act — thu thập dữ liệu trẻ em trái phép).
+- Tổng cộng: hơn 520 triệu USD (chính FTC gọi đây là mức kỷ lục khi công
+  bố tháng 12/2022).
+
+Nguyên văn từ FTC (curl trực tiếp ftc.gov ngày 2026-09-18, không qua
+WebFetch tóm tắt):
+"The Federal Trade Commission has finalized an order requiring Epic
+Games, the maker of the Fortnite video game, to pay $245 million to
+consumers to settle charges that the company used dark patterns to trick
+players into making unwanted purchases and let children rack up
+unauthorized charges without any parental involvement."
+— https://www.ftc.gov/news-events/news/press-releases/2023/03/ftc-finalizes-order-requiring-fortnite-maker-epic-games-pay-245-million-tricking-users-making
+(Press release ngày 14/3/2023)
+
+"Fortnite's counterintuitive, inconsistent, and confusing button
+configuration led players of all ages to incur unwanted charges based on
+the press of a single button. For example, players could be charged
+while attempting to wake the game from sleep mode, while the game was in
+a loading screen, or by pressing an adjacent button while attempting
+simply to preview an item."
+— https://www.ftc.gov/news-events/news/press-releases/2024/12/ftc-sends-refund-payments-consumers-impacted-epic-games-unlawful-billing-practices
+(Press release ngày 9/12/2024)
+=> Đây là ví dụ dark pattern CỤ THỂ NHẤT, dễ hiểu nhất cho người mới: bấm
+nhầm nút cạnh nhau, hoặc bấm để "xem trước" vật phẩm cũng bị tính tiền.
+
+Tình trạng hoàn tiền (verify từ press release 9/12/2024): FTC gửi đợt hoàn
+tiền đầu tiên — 629.344 khoản thanh toán, trung bình khoảng 114 USD/người,
+một nửa qua PayPal một nửa bằng séc — và tuyên bố sẽ còn đợt tiếp theo.
+Lệnh của FTC cũng cấm Epic dùng dark pattern để tính phí, buộc phải xin
+"affirmative consent" (đồng ý rõ ràng) trước khi tính phí, và cấm khóa
+tài khoản của người tranh chấp phí.
+
+### 1.5 Nhật Bản — "Kompu gacha" bị cấm (2012, mobile — GREE, DeNA/Mobage)
+
+Chuyện gì xảy ra: "Kompu gacha" (complete gacha) là cơ chế: người chơi phải
+sưu tập đủ MỘT BỘ vật phẩm hiếm (mỗi vật phẩm tự nó đã có xác suất thấp)
+để đổi lấy một phần thưởng hiếm hơn nữa — nhân đôi tầng ngẫu nhiên, tạo áp
+lực chi tiêu rất mạnh trong game xã hội trên di động.
+
+Dark pattern: xác suất kép (random-trong-random) làm người chơi đánh giá
+sai kỳ vọng chi phí thực tế để "hoàn thành bộ sưu tập".
+
+Cơ quan / thời điểm: Cơ quan Người tiêu dùng Nhật Bản (Consumer Affairs
+Agency — CAA) ra thông báo ngày 18/5/2012 rằng kompu gacha vi phạm "Act
+against Unjustifiable Premiums and Misleading Representations" (Đạo luật
+chống quà tặng khuyến mãi bất hợp lý và biểu thị gây hiểu lầm).
+[CHƯA VERIFY TỪ TRANG GỐC CAA (caa.go.jp) — chỉ verify qua nhiều nguồn báo
+chí chuyên ngành game tiếng Anh khớp nhau (Japan Times, GameDeveloper,
+serkantoto.com — tác giả người viết chuyên theo dõi ngành game Nhật, đăng
+đúng thời điểm 5/2012), KHÔNG mở được văn bản CAA gốc tiếng Nhật trong
+phiên nghiên cứu này.]
+Nguồn: https://www.japantimes.co.jp/life/2012/05/16/digital/japans-social-gaming-industry-hindered-by-governments-anti-gambling-move/
+https://www.gamedeveloper.com/business/why-quot-kompu-gacha-quot-was-banned
+https://www.serkantoto.com/2012/05/18/gacha-regulation-official/
+
+Kết cục: GREE và DeNA (nền tảng Mobage) cùng phần lớn nhà cung cấp game xã
+hội tuyên bố loại bỏ kompu gacha trước cuối tháng 5/2012. Tác động thị
+trường: các công ty game xã hội Nhật mất tổng cộng khoảng 3,8 tỷ USD vốn
+hóa thị trường trong một phiên giao dịch khi tin quy định lan ra — con số
+này lấy từ tổng hợp báo chí, [CHƯA VERIFY con số 3,8 tỷ USD từ nguồn tài
+chính gốc, chỉ có trong bài tổng hợp WebSearch, KHÔNG đưa số này vào bài
+học nếu không tự curl lại xác nhận được].
+====================================================================
+10. QUY ĐỊNH VÀ CHÍNH SÁCH NỀN TẢNG (APPLE, GOOGLE, ESRB)
+====================================================================
+(Từ trục 3 — dp-truc3-vidu-phaply.txt, mục 2)
+
+### 2.1 Apple App Store Review Guidelines — mục 3.1.1
+
+Từ tháng 12/2017, Apple bổ sung yêu cầu: app có "loot boxes" hoặc cơ chế
+tương tự (mua để nhận vật phẩm ảo NGẪU NHIÊN) phải công bố xác suất nhận
+từng loại vật phẩm cho người dùng TRƯỚC KHI mua.
+Nguồn (thứ cấp, hãng luật, trích khá sát guideline gốc):
+https://www.fenwick.com/insights/publications/apple-now-requires-disclosure-of-loot-box-odds
+Trang guideline hiện hành: https://developer.apple.com/app-store/review/guidelines/
+[Chưa curl trực tiếp guideline gốc để lấy đúng số điều khoản + nguyên văn
+hiện tại — guideline của Apple cập nhật liên tục, đánh dấu để verify lại
+số mục "3.1.1" khi viết bài chính thức, vì Apple có thể đã dời/đổi số mục
+theo thời gian.]
+
+### 2.2 Google Play — Developer Program Policies
+
+Google Play cũng yêu cầu app có loot box "clearly disclose the odds of
+receiving those items in advance of purchase" (công bố rõ xác suất trước
+khi mua) — chính sách bổ sung sau Apple, mang tinh thần tương tự.
+Nguồn: https://www.fenwick.com/insights/publications/google-play-now-requires-disclosure-of-loot-box-odds
+https://www.gamedeveloper.com/business/games-on-the-google-play-store-now-required-to-disclose-loot-box-odds
+[Chưa curl trang chính sách gốc Google Play Console Help để lấy nguyên
+văn điều khoản hiện hành — cần làm khi viết bài chính thức vì đây là "yêu
+cầu nền tảng", designer thực tế cần link tới đúng trang policy hiện tại.]
+
+Điểm quan trọng cho designer: đây là YÊU CẦU CỦA NỀN TẢNG (hợp đồng phân
+phối app/game), KHÔNG PHẢI luật của chính phủ — khác về bản chất với mục
+1.2/1.3 (luật cờ bạc quốc gia). Không tuân thủ → bị gỡ khỏi store, không
+phải bị truy tố hình sự.
+
+### 2.3 ESRB — nhãn "In-Game Purchases (Includes Random Items)"
+
+Đã verify trực tiếp từ blog chính thức ESRB (curl esrb.org, tác giả ghi
+tên rõ ràng: Patricia E. Vance, Chủ tịch ESRB, đăng 13/4/2020):
+Bài viết công bố interactive element mới, gắn cho MỌI game có mua trong
+game với yếu tố ngẫu nhiên (loot box, gacha, gói thẻ bài, vòng quay may
+mắn, rương kho báu...), định nghĩa: gắn nhãn khi "the player does not know
+the specific digital goods the player will receive prior to purchase"
+(người chơi không biết chính xác vật phẩm sẽ nhận được trước khi mua).
+Nguồn: https://www.esrb.org/blog/in-game-purchases-includes-random-items/
+Yêu cầu hiển thị: trên bao bì vật lý, mọi nơi tải được game/app, trong
+quảng cáo, mạng xã hội, và trên các trang review game.
+Ghi chú quan trọng: ESRB CỐ Ý không dùng từ "loot box" trong tên nhãn vì
+khảo sát cho thấy phần lớn phụ huynh không quen thuật ngữ này, và ESRB
+muốn nhãn bao quát rộng hơn khái niệm loot box thuần túy.
+
+### 2.4 GDPR / UK Age Appropriate Design Code
+
+[CHƯA RESEARCH SÂU — nằm trong phạm vi yêu cầu "nếu liên quan" nhưng thời
+gian research trục này ưu tiên loot box/dark pattern trước. Ghi chú để
+agent khác hoặc main tự bổ sung nếu bài cần: UK Age Appropriate Design
+Code (ICO) có điều khoản liên quan tới "nudge techniques" nhắm vào trẻ em
+— cần verify riêng từ ico.org.uk trước khi đưa vào bài, KHÔNG đưa vào bài
+học dựa trên trí nhớ.]
+====================================================================
+11. KHUNG RA QUYẾT ĐỊNH CHO DESIGNER
+====================================================================
+(Từ trục 3 — dp-truc3-vidu-phaply.txt, mục 3)
+
+
+### 3.1 Định nghĩa "dark pattern" — nguồn gốc thuật ngữ
+
+Harry Brignull (chuyên gia UX, tiến sĩ khoa học nhận thức) là người đặt ra
+thuật ngữ "dark pattern" năm 2010, định nghĩa: "a user interface that has
+been carefully crafted to trick users into doing things" (giao diện được
+thiết kế có chủ đích để đánh lừa người dùng làm những việc họ không định
+làm).
+Nguồn (bài chính Brignull tự viết, thuật lại bài nói chuyện):
+https://harrybr.medium.com/bringing-dark-patterns-to-light-d86f24224ebf
+=> Điểm mấu chốt để dạy người mới: dark pattern định nghĩa dựa trên Ý ĐỊNH
+THIẾT KẾ ("carefully crafted"/"an understanding of human psychology to
+trick"), không dựa trên việc tính năng đó có kiếm được tiền hay không.
+Một tính năng monetize mạnh nhưng KHÔNG lừa người chơi (người chơi hiểu rõ
+họ đang mua gì, xác suất gì, và tự nguyện) không tự động là dark pattern.
+
+### 3.2 Sáng kiến "Code of Ethics for the Game Industry" (Celia Hodent,
+GDC 2025) — Ý KIẾN CỦA NGƯỜI TRONG NGÀNH, KHÔNG PHẢI CHUẨN NGÀNH BẮT BUỘC
+
+Celia Hodent — cựu Giám đốc UX tại Epic Games (Fortnite), tiến sĩ tâm lý
+học — dẫn dắt nhóm "Ethical Games", công bố đề xuất code of ethics cho
+ngành game tại GDC 2025, với sự tham gia góp ý của học giả, nhà phát
+triển, nhà giáo dục, nhà quản lý và người chơi.
+Nguồn (slide GDC Vault, chính chủ):
+https://media.gdcvault.com/gdc2025/Slides/Hodent_Celia_CodeOfEthics.pdf
+https://gamesbeat.com/group-launches-proposed-code-of-ethics-for-the-game-industry/
+QUAN TRỌNG: đây là ĐỀ XUẤT (proposed), KHÔNG PHẢI chuẩn bắt buộc đã được
+toàn ngành công nhận/áp dụng — cần ghi rõ trong bài là "một nhóm trong
+ngành đang vận động", không phải "ngành game có luật đạo đức chính thức".
+
+### 3.3 IGDA Code of Ethics — LƯU Ý: KHÔNG PHỦ HỢP CHO CHỦ ĐỀ MONETIZATION
+
+Đã kiểm tra: IGDA (International Game Developers Association) có "Code of
+Ethics" chính thức (https://members.igda.org/page/codeofethics,
+https://igda.org/about-us/core-values-and-code-of-ethics/), nhưng nội
+dung chủ yếu xoay quanh MÔI TRƯỜNG LÀM VIỆC — chống phân biệt đối xử, quấy
+rối, tiêu chuẩn nghề nghiệp, lãnh đạo — CHỨ KHÔNG tập trung vào đạo đức
+thiết kế monetization/dark pattern. Nếu trích IGDA trong bài, phải trích
+đúng phạm vi (đạo đức nghề nghiệp/workplace), KHÔNG gán ghép IGDA như
+"chuẩn ngành về monetization đạo đức" — sẽ là claim sai.
+
+### 3.4 Một khung câu hỏi thực dụng để designer tự hỏi khi gặp yêu cầu
+tính năng đáng ngờ (TỔNG HỢP của agent research từ các nguồn trên + logic
+suy ra từ định nghĩa Brignull — GHI RÕ ĐÂY LÀ TỔNG HỢP, KHÔNG PHẢI TRÍCH
+NGUYÊN VĂN 1 NGUỒN DUY NHẤT):
+
+1. Người chơi có HIỂU đúng họ đang làm gì và trả bao nhiêu không, TRƯỚC
+   khi họ hành động? (đối chiếu tinh thần yêu cầu công bố xác suất của
+   Apple/Google/ESRB ở mục 2)
+2. Nếu người chơi biết rõ toàn bộ sự thật, họ có còn muốn làm việc đó
+   không? (test kinh điển cho "informed consent" — nếu câu trả lời là
+   "không, vì thế mình phải giấu bớt" → đó là dấu hiệu dark pattern)
+3. Tính năng này có nhắm khai thác vào nhóm dễ tổn thương (trẻ em, người
+   có xu hướng gambling) mà không có rào chắn (ví dụ: không xác nhận phụ
+   huynh — xem lại lỗi cụ thể của Epic ở mục 1.4)?
+4. Nếu tính năng này lên báo/bị điều tra, câu trả lời "chúng tôi làm vậy
+   vì..." có đứng vững trước công chúng không? (test "front page")
+=> Đây là khung suy luận GIÁO KHOA do agent tổng hợp để dạy tư duy, không
+phải trích dẫn một nguồn đơn lẻ nào — main cần tự quyết định có dùng
+nguyên văn khung này hay không, và ghi rõ trong bài đây là "khung gợi ý"
+chứ không viện dẫn nó như một chuẩn có tên tuổi chính thức.
+====================================================================
+12. SAI LẦM HAY GẶP
+====================================================================
+(Từ trục 3 — dp-truc3-vidu-phaply.txt, mục 4)
+
+(Mục này là TỔNG HỢP của agent dựa trên các case study ở mục 1 + định
+nghĩa dark pattern ở mục 3.1 — không phải trích dẫn nguyên văn 1 nguồn học
+thuật cụ thể nào, cần main tự đánh giá mức độ dùng trong bài.)
+
+- "Mọi hình thức monetization đều xấu": SAI theo chính định nghĩa của
+  Brignull (mục 3.1) — dark pattern được định nghĩa qua YẾU TỐ LỪA DỐI/
+  THAO TÚNG, không qua việc "có bán hàng hay không". Ví dụ Battlefront II
+  sau khi sửa (mục 1.1): EA vẫn bán cosmetic loot box, vẫn kiếm tiền,
+  nhưng không còn ảnh hưởng gameplay và (theo yêu cầu ESRB/Apple/Google ở
+  mục 2) phải công bố xác suất — đó là monetization được xem là chấp nhận
+  được hơn, không phải "hết monetization".
+- "Sếp bảo làm thì hết trách nhiệm": vụ Epic (mục 1.4) cho thấy trách
+  nhiệm pháp lý đổ lên CÔNG TY (Epic Games), không phải cá nhân designer/
+  engineer nào bấm nút cụ thể — nhưng điều đó không đồng nghĩa cá nhân
+  không có trách nhiệm đạo đức nghề nghiệp; đây là 2 khái niệm khác nhau
+  (trách nhiệm pháp lý công ty vs trách nhiệm đạo đức cá nhân) mà người
+  mới hay gộp làm một.
+- "Hợp pháp = đạo đức": vụ Hà Lan (mục 1.3) là ví dụ rõ nhất — tòa hành
+  chính tối cao Hà Lan tuyên loot box FIFA HỢP PHÁP, nhưng điều đó không
+  tự động trả lời câu hỏi "loot box đó có lừa/thao túng người chơi hay
+  không" (câu hỏi đạo đức theo định nghĩa Brignull vẫn tách biệt với câu
+  hỏi pháp lý). Ngược lại, Bỉ tuyên bất hợp pháp (mục 1.2) — cùng 1 cơ chế
+  game, 2 quốc gia, 2 kết luận pháp lý trái ngược → "hợp pháp ở đâu đó"
+  không phải một tiêu chuẩn đạo đức ổn định để designer dựa vào.
+- "Chỉ cần không phải loot box (không random) thì an toàn về đạo đức":
+  dark pattern trong vụ Epic (mục 1.4) hoàn toàn KHÔNG liên quan tới loot
+  box/random — chỉ là bố trí nút bấm gây nhầm lẫn. Người mới hay thu hẹp
+  "đạo đức thiết kế" về mỗi chủ đề gacha/loot box, bỏ qua các dark pattern
+  khác (nagging, sneaking, forced action — theo phân loại 5 nhóm dark
+  pattern nêu ở kết quả tìm kiếm mục 3, cần verify lại nguồn phân loại này
+  nếu đưa vào bài chính thức).
+====================================================================
+13. ĐỌC THÊM
+====================================================================
+(Từ trục 3 — dp-truc3-vidu-phaply.txt, mục 5 — danh sách gốc bên dưới, kèm bổ sung các
+nguồn học thuật chính đã dùng ở trục 1 và trục 2, không trùng URL với danh sách trục 3)
+
+1. FTC — trang tổng hợp vụ Epic Games/Fortnite (ftc.gov/Fortnite và các
+   press release liên quan): https://www.ftc.gov/news-events/news/press-releases/2023/03/ftc-finalizes-order-requiring-fortnite-maker-epic-games-pay-245-million-tricking-users-making
+   Lý do đọc: nguồn GỐC, chính xác nhất về số tiền/lý do/cơ chế dark
+   pattern cụ thể — nên là nguồn trích dẫn chính khi viết ví dụ Epic.
+
+2. Gaming Commission Bỉ — báo cáo loot box 2018 (PDF gốc, tiếng Anh):
+   https://www.gamingcommission.be/sites/default/files/2021-08/onderzoeksrapport-loot-boxen-Engels-publicatie.pdf
+   Lý do đọc: văn bản pháp lý gốc, phân tích kỹ thuật vì sao loot box coi
+   là "game of chance" — cần cho phần giải thích lập luận pháp lý, không
+   chỉ kết luận.
+
+3. Harry Brignull — "Bringing Dark Patterns to Light" (bài viết gốc của
+   người đặt ra thuật ngữ): https://harrybr.medium.com/bringing-dark-patterns-to-light-d86f24224ebf
+   Lý do đọc: định nghĩa gốc, tránh dùng định nghĩa dark pattern bị pha
+   loãng qua nhiều lớp diễn giải lại.
+
+4. ESRB — blog công bố nhãn "In-Game Purchases (Includes Random Items)":
+   https://www.esrb.org/blog/in-game-purchases-includes-random-items/
+   Lý do đọc: nguồn chính thức, có lý do ESRB chọn cách gọi tên khác "loot
+   box" — bài học hay về truyền thông chính sách tới phụ huynh.
+
+5. Celia Hodent — trang cá nhân/chủ đề ethics (tuyển tập bài viết, talk,
+   slide GDC): https://celiahodent.com/tag/ethics/
+   Lý do đọc: góc nhìn người từng làm UX Director tại studio lớn (Epic),
+   cân bằng giữa dữ liệu khoa học hành vi và thực tế phát triển game —
+   nhưng LUÔN ghi là ý kiến cá nhân/đề xuất của một nhóm, không phải luật.
+
+7. Zagal, J.P., Björk, S., Lewis, C. (2013). "Dark Patterns in the Design of Games."
+   Proceedings of FDG 2013: http://www.fdg2013.org/program/papers/paper06_zagal_etal.pdf
+   Lý do đọc: bài học thuật GỐC đặt thuật ngữ "dark game design pattern" cho ngành
+   game, nguồn của toàn bộ mục 2 và mục 5 trong file này. (trục 1, trục 2)
+
+8. Mathur, A. et al. (2019). "Dark Patterns at Scale: Findings from a Crawl of 11K
+   Shopping Websites." Proc. ACM Hum.-Comput. Interact., Vol. 3, CSCW, Article 81:
+   https://arxiv.org/pdf/1907.07032
+   Lý do đọc: taxonomy 7 category dựa trên khảo sát quy mô lớn, cho thấy các taxonomy
+   dark pattern vay mượn/tái tổ chức lẫn nhau ra sao. (trục 1)
+
+9. Gray, C.M., Kou, Y., Battles, B., Hoggatt, J., Toombs, A.L. (2018). "The Dark
+   (Patterns) Side of UX Design." CHI 2018:
+   https://web.archive.org/web/2018/http://colingray.me/wp-content/uploads/2018_Grayetal_CHI_DarkPatternsUXDesign.pdf
+   Lý do đọc: nguồn 5 nhóm chiến lược (nagging, obstruction, sneaking, interface
+   interference, forced action) và lập luận về ranh giới mờ với persuasive design của
+   Fogg. (trục 1)
+
+10. deceptive.design (trang kế thừa darkpatterns.org, do Harry Brignull đứng đầu):
+    https://www.deceptive.design/
+    Lý do đọc: định nghĩa và taxonomy hiện hành (2026), đối chiếu với bản gốc 2010 qua
+    Wayback Machine: https://web.archive.org/web/20110615000000/http://darkpatterns.org/
+    (trục 1)
+
+11. Petrovskaya, E. & Zendle, D. (2021). "Predatory Monetisation? A Categorisation of
+    Unfair, Misleading and Aggressive Monetisation Techniques in Digital Games from the
+    Player Perspective." Journal of Business Ethics, 181, 1065-1081:
+    https://link.springer.com/article/10.1007/s10551-021-04970-6
+    Lý do đọc: nguồn chính cho toàn bộ mục 4 (tiền F2P), 35 kỹ thuật monetization gộp
+    thành 8 nhóm, dựa trên khảo sát 1104 người chơi và luật tiêu dùng Anh. (trục 2)
+
+12. Larche, C.J. et al. (2021). "Rare Loot Box Rewards Trigger Larger Arousal and
+    Reward Responses, and Greater Urge to Open More Loot Boxes." Journal of Gambling
+    Studies: https://pmc.ncbi.nlm.nih.gov/articles/PMC7882574/
+    Lý do đọc: bằng chứng thực nghiệm (đo phản ứng sinh lý) nối loot box với cơ chế
+    variable-ratio reinforcement của slot machine. (trục 2)
+
+13. Susser, D., Roessler, B., Nissenbaum, H. (2019). "Online Manipulation: Hidden
+    Influences in a Digital World." Georgetown Law Technology Review, 4(1), 1-45:
+    https://pure.uva.nl/ws/files/45242068/Susser_Roessler_Nissenbaum_Online_Manipulation_.pdf
+    Lý do đọc: khung phân biệt thuyết phục/thao túng/cưỡng ép dùng ở mục 7. (trục 2)
+
+14. Alha, K., Koskinen, E., Paavilainen, J., Hamari, J., Kinnunen, J. (2014).
+    "Free-to-Play Games: Professionals' Perspectives." DiGRA Nordic 2014:
+    https://dl.digra.org/index.php/dl/article/download/702/702
+    Lý do đọc: nguồn duy nhất cho mục 8 (góc phản biện), phỏng vấn định tính 14 chuyên
+    gia F2P. (trục 2)
+
+====================================================================
+14. BẪY KHÁI NIỆM
+====================================================================
+Gộp mục BẪY của cả 3 file trục. Không có bẫy nào trùng lặp thật sự giữa 3 trục (mỗi
+trục đánh vào một khía cạnh khác nhau) nên giữ nguyên đủ 7 + 7 + 7 = 21 mục, chia theo
+trục gốc.
+
+14.1. Từ trục 1 (dp-truc1-nguongoc.txt)
+
+1. "Dark pattern = chỉ có trong UI/UX web/app" — SAI theo tài liệu phổ biến. Brignull đặt
+   thuật ngữ cho web/app trước (2010), nhưng khái niệm áp dụng được vào GAME DESIGN cần
+   một bài học thuật RIÊNG (Zagal, Björk & Lewis 2013) vì game có đặc thù khác: player
+   thường CHỦ ĐỘNG chấp nhận thử thách/khó khăn (xem mục 2.3) — bê nguyên định nghĩa web
+   sang game dễ nhầm "khó" với "dark".
+
+2. "Cứ khó/gây khó chịu là dark pattern" — SAI. Zagal et al. nhấn mạnh 2 điều kiện bắt
+   buộc: CỐ Ý (intentional) + ĐI NGƯỢC LỢI ÍCH VÀ THIẾU ĐỒNG THUẬN của player. Game khó
+   nhưng player tự nguyện & hiểu rõ (Painstation, Dark Souls-kiểu-khó, gambling có hiểu
+   biết) KHÔNG phải dark pattern theo định nghĩa này.
+
+3. "Anti-pattern và dark pattern là một" — SAI. Zagal et al. phân biệt rõ: anti-pattern
+   là lỗi thiết kế do THIẾU KINH NGHIỆM/kiến thức (không cố ý), dark pattern là CỐ Ý.
+   Tài liệu phổ thông hay lẫn lộn 2 khái niệm này.
+
+4. "Taxonomy 'chuẩn' duy nhất của dark pattern" — KHÔNG TỒN TẠI. Có ít nhất 4 taxonomy
+   khác nhau đã verify (Brignull gốc 2010, Brignull hiện tại 2026, Gray et al. 2018 5
+   nhóm chiến lược, Mathur et al. 2019 7 category) và chúng KHÔNG trùng khớp — thậm chí
+   Mathur còn vay mượn tên gọi trực tiếp từ Gray et al. Dạy bài này cần nói rõ đây là
+   lĩnh vực đang tiến hoá, không có 1 bảng phân loại "chính thức" cuối cùng.
+
+5. "Dark pattern = thuật ngữ hàn lâm do nhà nghiên cứu đặt ra" — SAI. Cả Brignull (UX
+   practitioner, không phải academic) lẫn thuật ngữ ban đầu đều xuất phát từ GIỚI THỰC
+   HÀNH (practitioner), academia (Zagal et al., Gray et al., Mathur et al.) đi sau để
+   hệ thống hoá/nghiên cứu lại. Gray et al. 2018 gọi thẳng đây là "practitioner-created
+   construct".
+
+6. "'Dark' trong dark pattern chỉ có nghĩa 'xấu/ác ý'" — KHÔNG ĐẦY ĐỦ. Zagal et al. chỉ
+   rõ chữ "dark" mang 2 NGHĨA SONG SONG: (a) designer cố ý làm điều phi đạo đức, VÀ (b)
+   player không nhận biết được mình đang bị thao túng ngược lợi ích — thiếu 1 trong 2 vế
+   thì định nghĩa của họ không tính là dark pattern.
+
+7. "Persuasive design và dark pattern là 2 phạm trù tách biệt rõ ràng" — SAI theo Gray et
+   al. 2018: họ chỉ ra các kỹ thuật persuasive design cổ điển của Fogg (tunneling,
+   reduction, tailoring, suggestion, conditioning) tương ứng gần như 1-1 với các nhóm
+   dark pattern họ đề xuất — khác biệt nằm ở Ý ĐỊNH & LỢI ÍCH phục vụ, không phải ở kỹ
+   thuật.
+
+14.2. Từ trục 2 (dp-truc2-game-tamly.txt)
+
+1. "Dark pattern" trong game KHÔNG đồng nghĩa "mọi cơ chế monetization gây khó
+   chịu". Zagal et al. 2013 đòi hỏi 2 điều kiện: (a) CHỦ ĐÍCH của nhà thiết kế,
+   (b) ĐI NGƯỢC lợi ích người chơi VÀ khả năng thiếu sự đồng thuận. Một cơ chế
+   gây khó chịu nhưng minh bạch, người chơi hiểu rõ và chấp nhận (vd. gacha có
+   công bố tỷ lệ rõ ràng, người chơi tự nguyện) — theo logic bài gốc, KHÔNG còn
+   là "dark" nữa (dù vẫn có thể gây hại về mặt khác). Đừng gộp chung "mechanic
+   gây tốn tiền" với "dark pattern" một cách tự động.
+
+2. Zagal et al. 2013 MINH THỊ nói KHÔNG coi gambling/betting tự thân là dark
+   pattern: "we do not consider gambling (or betting) as a dark pattern, because
+   players are complicit in the interaction... the player has presumably made an
+   informed decision to participate." Đây là điểm dễ hiểu lầm — bài không lên án
+   gambling nói chung, mà lên án việc GIẤU bản chất gambling hoặc giấu chi phí.
+   Loot box gây tranh cãi chính vì nó mang đặc điểm gambling nhưng KHÔNG được
+   công bố/điều tiết như gambling (xem mục 1.2, 4.3).
+
+3. "Variable ratio reinforcement" (Skinner) là khái niệm về LỊCH CỦNG CỐ hành
+   vi nói chung (áp dụng cả cho việc học tập tích cực, không riêng gì
+   gambling/loot box) — bản thân cơ chế KHÔNG xấu, nó là nguyên lý học tập cơ
+   bản. Điều biến nó thành công cụ gây hại là NGỮ CẢNH áp dụng (tiền thật, trẻ
+   vị thành niên, không công bố xác suất) chứ không phải bản thân lịch củng cố.
+   Đừng viết như thể "variable ratio = xấu" một cách tuyệt đối.
+
+4. Loss aversion (Kahneman & Tversky 1979) và endowed progress effect (Nunes &
+   Drèze 2006) là 2 khái niệm KHÁC NHAU dù có liên hệ: loss aversion là về cảm
+   nhận BẤT ĐỐI XỨNG giữa mất và được (mất đau hơn được vui, ở CÙNG một khối
+   lượng); endowed progress effect là về việc TIẾN ĐỘ GIẢ (được ban tặng sẵn một
+   phần) làm tăng nỗ lực hoàn thành — cơ chế tâm lý khác nhau (một về framing
+   mất/được, một về động lực hoàn tất mục tiêu/goal gradient). Đừng gộp làm một.
+
+5. "Manipulation literacy" (Zagal et al. 2013) ngụ ý một điều gây tranh cãi:
+   MỘT KHI người chơi đủ hiểu biết để nhận diện và tự nguyện chấp nhận một dark
+   pattern, bài báo coi nó KHÔNG CÒN LÀ dark pattern nữa ("once players are
+   literate enough to understand the effects of a pattern so that they can give
+   consent... the pattern is no longer dark"). Đây là một lập luận có thể bị
+   dùng để BIỆN MINH cho việc không cần sửa thiết kế (chỉ cần "giáo dục người
+   chơi" là đủ) — main nên cẩn thận khi trình bày, tránh để người đọc hiểu nhầm
+   thành "cứ dark pattern thoải mái, tại người chơi ngu thôi".
+
+6. RẤT NHIỀU claim trong file này (đánh dấu [CHƯA VERIFY]) chỉ được xác nhận qua
+   metadata trùng khớp ở nhiều nguồn WebSearch, KHÔNG phải tôi tự đọc nguyên văn
+   bằng curl/pdftotext. Cụ thể các nguồn CHƯA verify toàn văn: Skinner (gốc),
+   Arkes & Blumer 1985 (ScienceDirect chặn), Nunes & Drèze 2006 (SSRN/JCR chặn,
+   số liệu %/tháng CHƯA tự đọc), Cialdini & Goldstein 2004 (PubMed + Annual
+   Reviews đều chặn), Ducheneaut & Yee (whale study, chỉ đọc qua trích dẫn lại
+   trong Alha et al.), King & Delfabbro 2018 bản gốc Addiction (chỉ đọc qua
+   trích dẫn lại trong Petrovskaya & Zendle 2021), Festinger 1956 (chỉ đọc qua
+   diễn giải của Alha et al.). Main PHẢI tự mở lại các nguồn này nếu định trích
+   dẫn trực tiếp/nguyên văn vào bài học, theo đúng quy tắc mục 6.2 CLAUDE.md.
+
+7. Mọi đoạn đánh dấu "[NGUYÊN VĂN CẦN MAIN CURL LẠI]" là quote tôi đọc được từ
+   PDF/HTML đã mở thật (không qua WebFetch), nhưng vì đi qua pdftotext hoặc sed
+   strip-tag nên CÓ RỦI RO lệch khoảng trắng, gạch nối xuống dòng, hoặc ký tự
+   đặc biệt (nháy cong, en-dash). Trước khi đưa vào bài học chính thức, main cần
+   tự curl lại URL tương ứng và đối chiếu ký tự-theo-ký tự, đúng quy tắc đã vấp
+   ngày 2026-09-18 (4/11 quote sai vì công cụ trung gian đổi dấu câu).
+
+14.3. Từ trục 3 (dp-truc3-vidu-phaply.txt) — nguyên văn là "BẪY KHÁI NIỆM / CLAIM
+KHÔNG VERIFY ĐƯỢC", thiên về cảnh báo số liệu/quote chưa verify hơn là bẫy khái niệm
+thuần tuý, giữ nguyên như file gốc:
+
+- SỐ TIỀN FTC/Epic: $245 triệu (dark patterns, refund) và $275 triệu
+  (COPPA, penalty) là 2 khoản RIÊNG — hay bị gộp nhầm thành "$520 triệu vì
+  loot box/dark pattern". Đã verify trực tiếp từ ftc.gov: $520 triệu là
+  TỔNG của 2 vụ dàn xếp khác nhau (dark patterns + vi phạm quyền riêng tư
+  trẻ em COPPA), không phải một khoản phạt duy nhất vì dark pattern.
+
+- Năm ra phán quyết phúc thẩm cuối cùng của Hà Lan (Raad van State lật lại
+  phán quyết cấp dưới): các nguồn thứ cấp tiếng Anh đối chiếu ra ngày
+  "9 tháng 3" nhưng KHÔNG thống nhất rõ năm trong các trích dẫn agent tìm
+  được trong phiên này — PHẢI verify lại năm chính xác từ raadvanstate.nl
+  hoặc uitspraken.rechtspraak.nl trước khi đưa số liệu này vào bài chính
+  thức.
+
+- Con số "3,8 tỷ USD vốn hóa thị trường mất trong 1 phiên" (vụ kompu
+  gacha Nhật 2012): chỉ xuất hiện trong bản tóm tắt WebSearch tổng hợp,
+  KHÔNG tự curl xác nhận được từ nguồn tài chính gốc trong phiên nghiên
+  cứu này — KHÔNG đưa số này vào bài nếu không verify thêm.
+
+- Thông báo CAA Nhật Bản (kompu gacha, 18/5/2012): verify qua nhiều báo
+  chuyên ngành tiếng Anh khớp nhau nhưng CHƯA mở được văn bản gốc tiếng
+  Nhật của Consumer Affairs Agency (caa.go.jp) — độ tin cậy khá cao nhờ
+  đối chiếu chéo nhiều nguồn độc lập, nhưng về mặt kỹ thuật đây vẫn là
+  [CHƯA VERIFY TỪ NGUỒN GỐC CHÍNH PHỦ].
+
+- Tuyên bố "We hear you loud and clear, so we're turning off all in-game
+  purchases" (EA, Battlefront II 2017): trích qua nhiều bài báo khớp
+  nhau nhưng agent CHƯA tự curl lại đúng post gốc (Twitter/EA) để đối
+  chiếu dấu câu/nguyên văn 100% — gắn nhãn [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+  nếu dùng làm trích dẫn trong ngoặc kép trong bài chính thức.
+
+- Quy định GDPR / UK Age Appropriate Design Code: KHÔNG được research
+  trong phiên này (ngoài phạm vi ưu tiên thời gian) — nếu bài cần, phải
+  research + verify riêng, không dùng trí nhớ để viết.
+
+- Số điều khoản chính xác hiện hành "3.1.1" của Apple App Store Guidelines
+  và trang chính sách Google Play Console hiện tại: chưa curl trực tiếp
+  văn bản guideline gốc trong phiên này (chỉ qua bài phân tích luật của
+  Fenwick) — Apple/Google cập nhật guideline thường xuyên, PHẢI curl lại
+  ngay trước khi trích số điều khoản trong bài chính thức.
+====================================================================
+15. TRẠNG THÁI VERIFY
+====================================================================
+Bảng tổng hợp trạng thái verify của các claim/nguồn chính trong file này. Chi tiết đầy
+đủ (kèm quote nguyên văn, số trang, ghi chú phương pháp) nằm trong các mục 1-14 ở trên;
+bảng dưới đây chỉ tóm tắt trạng thái ở cấp NGUỒN, không liệt lại từng quote lẻ. Rất
+nhiều đoạn quote trong các mục 1-14 còn mang nhãn "[NGUYÊN VĂN CẦN MAIN CURL LẠI]" —
+nhãn này ĐÃ được giữ nguyên tại chỗ trong thân bài (không gỡ bỏ), main phải tự curl lại
+URL tương ứng và đối chiếu ký tự trước khi trích nguyên văn vào bài học chính thức.
+
+CLAIM / NGUỒN | TRẠNG THÁI | GHI CHÚ (URL nếu ĐÃ VERIFY, lý do nếu CHƯA VERIFY)
+
+1. Brignull đặt tên "dark pattern" năm 2010, định nghĩa đầu tiên | ĐÃ VERIFY |
+   https://web.archive.org/web/20110615000000/http://darkpatterns.org/
+
+2. Định nghĩa hiện tại + lý do đổi tên "deceptive patterns" | ĐÃ VERIFY |
+   https://www.deceptive.design/ và https://www.deceptive.design/about
+
+3. Năm chính xác đổi tên darkpatterns.org sang deceptive.design | [CHƯA VERIFY] |
+   trang About không nêu năm cụ thể, chỉ nói "Under advice from the Tech Policy Design
+   Lab" — không suy đoán năm nếu chưa tìm được nguồn nêu rõ
+
+4. Zagal, Björk & Lewis 2013 toàn văn (định nghĩa, taxonomy, anti-pattern, willful
+   participation, gambling, manipulation literacy, Grinding, Playing by Appointment,
+   Social Pyramid Schemes, Friend Spam/Impersonation, Disclosure Principle) | ĐÃ VERIFY |
+   http://www.fdg2013.org/program/papers/paper06_zagal_etal.pdf (pdftotext toàn văn)
+
+5. Taxonomy gốc Brignull 2010 (13 pattern) và taxonomy hiện tại deceptive.design
+   (19 loại) | ĐÃ VERIFY | như mục 1-2 ở trên
+
+6. Mathur et al. 2019 toàn văn (7 category, vay mượn từ Gray et al.) | ĐÃ VERIFY |
+   https://arxiv.org/pdf/1907.07032
+
+7. Gray et al. 2018 toàn văn (5 nhóm chiến lược, định nghĩa, so sánh với Fogg) |
+   ĐÃ VERIFY | https://web.archive.org/web/2018/http://colingray.me/wp-content/uploads/2018_Grayetal_CHI_DarkPatternsUXDesign.pdf
+
+8. Petrovskaya & Zendle 2021 toàn văn (8 nhóm, 35 kỹ thuật, luật Anh 2008) |
+   ĐÃ VERIFY | https://link.springer.com/article/10.1007/s10551-021-04970-6
+
+9. King & Delfabbro 2018 (Addiction) — định nghĩa "predatory monetization" |
+   [CHƯA VERIFY] | chỉ đọc qua trích dẫn lại trong Petrovskaya & Zendle 2021, chưa tự
+   mở bản gốc Addiction 113(11)
+
+10. Larche et al. 2021 toàn văn (loot box, variable-ratio, arousal) | ĐÃ VERIFY |
+    https://pmc.ncbi.nlm.nih.gov/articles/PMC7882574/
+
+11. Anchoring áp dụng vào UI bảng giá gói nạp game F2P | [CHƯA VERIFY] | nguyên lý gốc
+    Tversky & Kahneman 1974 đã verify toàn văn, nhưng không tìm được nguồn academic áp
+    thẳng "anchoring" vào UI bảng giá game — đây là suy luận ứng dụng, không phải claim
+    đã có nguồn game-specific
+
+12. Tversky & Kahneman 1974 toàn văn (anchoring, adjustment) | ĐÃ VERIFY |
+    https://www.cs.tufts.edu/comp/150AIH/pdf/TverskyKa74.pdf
+
+13. Bundle ép mua không mua lẻ được (tên gọi academic riêng) | [CHƯA VERIFY] | không
+    tìm được nguồn đặt tên riêng khớp chính xác hiện tượng này
+
+14. Kahneman & Tversky 1979 Prospect Theory toàn văn (loss aversion, "losses loom
+    larger than gains") | ĐÃ VERIFY | https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Behavioral_Decision_Theory/Kahneman_Tversky_1979_Prospect_theory.pdf
+
+15. Loss aversion áp dụng cụ thể vào game (streak, season pass, vật phẩm giới hạn) |
+    [CHƯA VERIFY] | nguyên lý gốc đã verify, nhưng đây là suy luận ứng dụng game-specific
+
+16. Arkes & Blumer 1985 toàn văn (sunk cost fallacy) | [CHƯA VERIFY] | ScienceDirect
+    chặn truy cập nội dung; metadata (tác giả/tạp chí/năm/trang) khớp nhiều nguồn độc
+    lập nhưng chưa tự đọc quote nguyên văn
+
+17. Nunes & Drèze 2006 toàn văn + số liệu % (endowed progress effect) | [CHƯA VERIFY] |
+    SSRN timeout, JCR paywall; số liệu 34%/19%/9 tháng lặp lại ở nhiều nguồn thứ cấp
+    nhưng chưa tự đọc bảng số liệu gốc
+
+18. Cialdini & Goldstein 2004 toàn văn (social proof, reciprocity) | [CHƯA VERIFY] |
+    PubMed cookie-challenge, Annual Reviews chặn; metadata khớp nhiều nguồn độc lập
+    (DOI 10.1146/annurev.psych.55.090902.142015) nhưng chưa tự đọc nội dung
+
+19. Cialdini 1984 "Influence: The Psychology of Persuasion" (sách) | [CHƯA VERIFY] |
+    chỉ ghi nhận tên sách qua nhiều nguồn, chưa mở đọc
+
+20. Susser, Roessler & Nissenbaum 2019 toàn văn (định nghĩa manipulation, 3 tiêu chí
+    covert/nhắm điểm yếu/resistible) | ĐÃ VERIFY | https://pure.uva.nl/ws/files/45242068/Susser_Roessler_Nissenbaum_Online_Manipulation_.pdf
+
+21. Alha et al. 2014 toàn văn (F2P professionals' perspectives, 14 phỏng vấn) |
+    ĐÃ VERIFY | https://dl.digra.org/index.php/dl/article/download/702/702
+
+22. Ducheneaut & Yee whale study (whales không chi tiêu bốc đồng) | [CHƯA VERIFY] |
+    chỉ đọc qua trích dẫn lại (Sinclair 2014) trong Alha et al. 2014, chưa tự mở nguồn
+    gốc
+
+23. Festinger 1956 cognitive dissonance gốc | [CHƯA VERIFY] | chỉ đọc qua diễn giải
+    của tác giả Alha et al. 2014, chưa tự mở lý thuyết gốc
+
+24. Juul "support" — ranh giới monetization hợp lệ vs dark pattern | [CHƯA VERIFY] |
+    không có nguồn định nghĩa ranh giới định lượng/rạch ròi được giới học thuật đồng
+    thuận; đây là nguyên tắc định tính duy nhất tìm được, không phải chuẩn đo lường được
+
+25. Star Wars Battlefront II 2017 (loot box pay-to-win, EA tắt in-game purchases) |
+    ĐÃ VERIFY (qua báo chí thứ cấp) | https://www.windowscentral.com/it-looks-ea-has-removed-all-microtransactions-star-wars-battlefront-ii ;
+    https://www.forbes.com/sites/insertcoin/2017/11/16/ea-has-removed-star-wars-battlefront-2s-microstransactions-hours-before-launch/
+
+26. Quote EA "We hear you loud and clear, so we're turning off all in-game purchases"
+    | [CHƯA VERIFY nguyên văn 100%] | trích qua nhiều báo khớp nhau, chưa tự curl lại
+    post gốc Twitter/EA để đối chiếu dấu câu
+
+27. Gaming Commission Bỉ 2018 (loot box = games of chance, Luật Cờ bạc Bỉ 1999) |
+    ĐÃ VERIFY | https://www.gamingcommission.be/en/faq/new-developments/what-are-loot-boxes ;
+    báo cáo PDF gốc: https://www.gamingcommission.be/sites/default/files/2021-08/onderzoeksrapport-loot-boxen-Engels-publicatie.pdf
+
+28. Thực thi loot box ở Bỉ không triệt để (Nintendo đóng Animal Crossing: Pocket Camp,
+    nghiên cứu "Breaking Ban") | ĐÃ VERIFY một phần | "Breaking Ban" (Collabra:
+    Psychology) đã verify: https://online.ucpress.edu/collabra/article/9/1/57641/195100/Breaking-Ban-Belgium-s-Ineffective-Gambling-Law ;
+    riêng claim Nintendo là [BÁO CHÍ, CHƯA ĐỐI CHIẾU THÔNG CÁO NINTENDO CHÍNH THỨC]:
+    https://www.techradar.com/news/nintendo-is-shutting-down-animal-crossing-pocket-camp-in-belgium-due-to-loot-box-regulation-concerns
+
+29. Hà Lan: Ksa xử phạt EA, tòa The Hague tuyên vi phạm, Raad van State lật lại (loot
+    box FIFA hợp pháp) | ĐÃ VERIFY qua nguồn luật thứ cấp | https://www.lexology.com/library/detail.aspx?g=b7336333-71ac-47d4-b33d-77f5bf54ebfe ;
+    https://www.akd.eu/insights/loot-boxes-are-legal-in-the-netherlands ; CHƯA mở được
+    văn bản tòa gốc tiếng Hà Lan
+
+30. Năm chính xác phán quyết phúc thẩm cuối của Hà Lan (Raad van State) | [CHƯA VERIFY] |
+    các nguồn thứ cấp tiếng Anh không thống nhất rõ năm, cần đối chiếu raadvanstate.nl
+    hoặc uitspraken.rechtspraak.nl
+
+31. Epic Games/Fortnite và FTC: $245 triệu refund (dark patterns) + $275 triệu phạt
+    (COPPA), chi tiết cơ chế nút bấm gây nhầm lẫn | ĐÃ VERIFY TRỰC TIẾP TỪ FTC.GOV |
+    https://www.ftc.gov/news-events/news/press-releases/2023/03/ftc-finalizes-order-requiring-fortnite-maker-epic-games-pay-245-million-tricking-users-making ;
+    https://www.ftc.gov/news-events/news/press-releases/2024/12/ftc-sends-refund-payments-consumers-impacted-epic-games-unlawful-billing-practices
+
+32. Kompu gacha Nhật Bản bị CAA cấm 2012 | ĐÃ VERIFY qua báo chí chuyên ngành (chưa mở
+    văn bản CAA gốc tiếng Nhật) | https://www.japantimes.co.jp/life/2012/05/16/digital/japans-social-gaming-industry-hindered-by-governments-anti-gambling-move/ ;
+    https://www.gamedeveloper.com/business/why-quot-kompu-gacha-quot-was-banned ;
+    https://www.serkantoto.com/2012/05/18/gacha-regulation-official/
+
+33. Con số "3,8 tỷ USD vốn hóa mất trong 1 phiên" (kompu gacha) | [CHƯA VERIFY] | chỉ
+    xuất hiện trong tổng hợp WebSearch, không tự curl xác nhận được từ nguồn tài chính
+    gốc — KHÔNG đưa vào bài nếu không verify thêm
+
+34. Apple App Store Guidelines mục 3.1.1 (công bố xác suất loot box từ 12/2017) |
+    ĐÃ VERIFY qua nguồn luật thứ cấp, [CHƯA VERIFY số điều khoản hiện hành] | https://www.fenwick.com/insights/publications/apple-now-requires-disclosure-of-loot-box-odds ;
+    trang gốc (cần curl lại số mục hiện hành): https://developer.apple.com/app-store/review/guidelines/
+
+35. Google Play Developer Program Policies (công bố xác suất loot box) | ĐÃ VERIFY qua
+    nguồn luật thứ cấp, [CHƯA VERIFY trang chính sách gốc hiện hành] | https://www.fenwick.com/insights/publications/google-play-now-requires-disclosure-of-loot-box-odds
+
+36. ESRB nhãn "In-Game Purchases (Includes Random Items)" (4/2020, Patricia E. Vance)
+    | ĐÃ VERIFY TRỰC TIẾP | https://www.esrb.org/blog/in-game-purchases-includes-random-items/
+
+37. GDPR / UK Age Appropriate Design Code (nudge techniques nhắm trẻ em) |
+    [CHƯA RESEARCH] | ngoài phạm vi ưu tiên thời gian của trục 3, cần research + verify
+    riêng từ ico.org.uk trước khi đưa vào bài
+
+38. Harry Brignull "Bringing Dark Patterns to Light" (định nghĩa dark pattern, ý định
+    thiết kế) | ĐÃ VERIFY | https://harrybr.medium.com/bringing-dark-patterns-to-light-d86f24224ebf
+
+39. Celia Hodent, "Code of Ethics for the Game Industry" (GDC 2025, đề xuất, không
+    phải chuẩn ngành) | ĐÃ VERIFY (slide GDC Vault chính chủ) | https://media.gdcvault.com/gdc2025/Slides/Hodent_Celia_CodeOfEthics.pdf
+
+40. IGDA Code of Ethics chỉ về môi trường làm việc, không về monetization | ĐÃ VERIFY |
+    https://members.igda.org/page/codeofethics ; https://igda.org/about-us/core-values-and-code-of-ethics/

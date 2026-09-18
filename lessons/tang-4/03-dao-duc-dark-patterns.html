@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đạo đức thiết kế và dark patterns — Xưởng Game Design</title>
+<meta name="description" content="Nhận diện dark pattern trong game, phân biệt thuyết phục với thao túng, và tự kiểm một tính năng trước khi nó lên bản build.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-4/03-dao-duc-dark-patterns" class="tier-4">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-4">Tầng 4 · Nâng cao</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 4 · Bài 03</p>
+            <h1>Đạo đức thiết kế và dark patterns</h1>
+            <p class="dek">Câu hỏi không phải "game này có kiếm được tiền không", mà "người chơi có biết mình đang trả gì không". Bài này cho bạn bộ tiêu chí để tự kiểm một tính năng trước khi nó lên bản build.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 13 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Nâng cao</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="01-f2p-liveops.html">F2P và LiveOps</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Nhận diện các dark pattern phổ biến</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Phân tích ranh giới giữa thuyết phục và thao túng</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Đề xuất thiết kế đạo đức hơn cho một tính năng</li>
+                </ul>
+            </div>
+        </header>
+
+        <p>Trong <em>Fortnite</em>, nút xác nhận mua nằm ngay cạnh nút chỉ để xem trước món đồ. Bấm lệch một nhịp là mất tiền thật. Đây không phải suy đoán của người viết: Ủy ban Thương mại Liên bang Mỹ (FTC) đã đưa nó vào lệnh xử lý chính thức, mô tả <em>"Fortnite’s counterintuitive, inconsistent, and confusing button configuration led players to incur unwanted charges based on the press of a single button."</em> Epic Games phải trả 245 triệu đô la cho người tiêu dùng.</p>
+
+        <p>Điều đáng học ở đây không phải con số. Là chuyện <strong>không ai trong studio đó cần phải là người xấu</strong> thì kết cục này mới xảy ra. Một nút đặt gần hơn một chút để "giảm ma sát", một chỉ số chuyển đổi tăng lên, một lần A/B test cho kết quả tốt — ghép lại thành thứ mà cơ quan quản lý gọi là dark pattern.</p>
+
+        <h2 id="dark-pattern-la-gi">Dark pattern là gì</h2>
+
+        <p>Thuật ngữ <span class="term" data-en="Dark Pattern" tabindex="0">mẫu thiết kế tối</span> do Harry Brignull đặt ra năm 2010 cho giao diện web nói chung: những mẫu giao diện được thiết kế để lừa người dùng làm điều họ không định làm. Về sau chính Brignull chuyển sang dùng từ <span class="term" data-en="Deceptive Design" tabindex="0">thiết kế đánh lừa</span>, và trang của ông nay mang tên đó.</p>
+
+        <p>Với game, bài tham chiếu là Zagal, Björk &amp; Lewis, <em>Dark Patterns in the Design of Games</em> (Foundations of Digital Games 2013). Điều quan trọng: các tác giả không đưa ra định nghĩa ngay, mà dựng dần qua ba bản nháp rồi mới chốt — vì mỗi bản nháp đều thiếu một điều kiện. Bản cuối:</p>
+
+        <div class="callout" data-kind="insight">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
+            <div class="callout-body"><p class="callout-title">Định nghĩa gốc</p><p><em>"A dark game design pattern is a pattern used intentionally by a game creator to cause negative experiences for players which are against their best interests and likely to happen without their consent."</em></p></div>
+        </div>
+
+        <p>Ba điều kiện nằm trong câu đó, và cả ba phải cùng có mặt: <strong>cố ý</strong>, <strong>ngược lợi ích của người chơi</strong>, và <strong>không có sự đồng thuận của họ</strong>. Đây chính là chỗ tách dark pattern khỏi một game khó. Dark Souls gây trải nghiệm tiêu cực, cố ý, nhưng người chơi biết trước và chọn nó — điều kiện thứ hai và thứ ba không thỏa.</p>
+
+        <p>Bài báo xếp dark pattern trong game thành ba nhóm theo thứ bị lấy đi:</p>
+
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Temporal<small>Lấy thời gian: cày ải, điểm danh đúng giờ</small></div>
+                <div class="mda-block loop">Monetary<small>Lấy tiền: che giá thật, trả để bỏ qua</small></div>
+                <div class="mda-block loop">Social Capital<small>Lấy quan hệ: mời bạn bè, ép theo nhóm</small></div>
+            </div>
+            <figcaption>Ba nhóm dark pattern theo Zagal, Björk &amp; Lewis (FDG 2013). Một tính năng có thể thuộc nhiều nhóm cùng lúc — sự kiện giới hạn thời gian vừa lấy thời gian vừa lấy tiền.</figcaption>
+        </figure>
+
+        <h2 id="thuyet-phuc-hay-thao-tung">Thuyết phục hay thao túng</h2>
+
+        <p>Đây là câu hỏi khó nhất của bài, và cũng là chỗ dễ trả lời ẩu nhất. Mọi thiết kế đều tác động lên hành vi người chơi — đó là định nghĩa của thiết kế. Vậy đâu là chỗ nó thành thao túng?</p>
+
+        <p>Khung rõ ràng nhất đến từ Susser, Roessler &amp; Nissenbaum, <em>Online Manipulation: Hidden Influences in a Digital World</em> (2019). Họ định nghĩa: <em>"manipulation is hidden influence—the covert subversion of another person’s decision-making power."</em> Thuyết phục thì ngược lại — công khai nhắm vào khả năng suy xét của người ta; còn cưỡng ép là bóp hẹp lựa chọn cho tới khi không còn gì để chọn.</p>
+
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Tiêu chí</th><th>Thuyết phục</th><th>Thao túng</th><th>Cưỡng ép</th></tr></thead>
+                <tbody>
+                    <tr><td>Người chơi có thấy nó đang diễn ra không</td><td>Có, công khai</td><td>Không, ngấm ngầm</td><td>Có, nhưng vô ích</td></tr>
+                    <tr><td>Nhắm vào đâu</td><td>Lý trí, khả năng cân nhắc</td><td>Điểm yếu nhận thức và cảm xúc</td><td>Bộ lựa chọn còn lại</td></tr>
+                    <tr><td>Ví dụ trong game</td><td>Bảng giá ghi rõ tiền thật, nói rõ nhận được gì</td><td>Đổi tiền thật qua hai lớp tiền ảo để giá thật mờ đi</td><td>Chặn tiến trình cho tới khi trả tiền</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Đừng chờ một lằn ranh sạch sẽ</p><p>Gray và cộng sự (CHI 2018) nói thẳng rằng không có ranh giới rạch ròi giữa dark pattern và <span class="term" data-en="Persuasive Design" tabindex="0">thiết kế thuyết phục</span>: các kỹ thuật thuyết phục kinh điển ánh xạ gần như một đối một sang các nhóm dark pattern mà họ liệt kê. Nghĩa là bạn sẽ không bao giờ có một cái công tắc để đo. Bạn chỉ có tiêu chí và trách nhiệm tự phán đoán.</p></div>
+        </div>
+
+        <h3>Điểm yếu nào đang bị khai thác</h3>
+
+        <p>Biết cơ chế tâm lý đứng sau giúp bạn nhận ra tính năng của mình đang dựa vào cái gì để sống:</p>
+
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Cơ chế</th><th>Nội dung</th><th>Hình thù trong game</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="term" data-en="Variable Ratio Reinforcement" tabindex="0">thưởng theo tỉ lệ biến thiên</span></td><td>Phần thưởng đến không đều đặn giữ hành vi lặp lại bền hơn phần thưởng đều đặn</td><td>Hộp vật phẩm ngẫu nhiên, quay gacha</td></tr>
+                    <tr><td><span class="term" data-en="Loss Aversion" tabindex="0">ác cảm mất mát</span></td><td>Kahneman &amp; Tversky (1979): <em>"losses loom larger than gains"</em> — mất một khoản đau hơn được đúng khoản đó</td><td>Chuỗi điểm danh sắp đứt, vật phẩm sắp hết hạn</td></tr>
+                    <tr><td><span class="term" data-en="Sunk Cost" tabindex="0">chi phí đã bỏ ra</span></td><td>Đã đầu tư nhiều thì khó bỏ, kể cả khi bỏ mới là hợp lý</td><td>Tài khoản nhiều năm, bộ sưu tập dở dang</td></tr>
+                    <tr><td><span class="term" data-en="Anchoring" tabindex="0">mỏ neo</span></td><td>Con số nhìn thấy đầu tiên định khung cho mọi con số sau</td><td>Gói nạp đắt nhất đặt trên cùng để gói giữa trông rẻ</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>Chú ý: bản thân các cơ chế này <strong>không xấu</strong>. Ác cảm mất mát cũng là thứ khiến người chơi tiếc khi bỏ dở một ván cờ hay. Vấn đề nằm ở chỗ bạn dùng nó để làm gì — cho trải nghiệm của họ, hay cho hóa đơn của họ.</p>
+
+        <h2 id="vi-du">Chuyện đã xảy ra ngoài đời</h2>
+
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Ghi chú</p><p>Các con số, năm và kết luận dưới đây lấy từ văn bản của chính cơ quan ban hành. Phần bình luận "bài học rút ra" là <strong>phân tích của bài học</strong>, không phải phát biểu của cơ quan đó.</p></div>
+        </div>
+
+        <p><strong>FTC và Epic Games.</strong> Ngoài khoản 245 triệu đô la vì dark pattern nói ở đầu bài, Epic còn chịu một khoản 275 triệu khác. Hai khoản này hay bị cộng lại thành "phạt 520 triệu vì dark pattern" — sai. FTC ghi rõ khoản thứ hai thuộc <em>một dàn xếp riêng</em>, về luật bảo vệ quyền riêng tư trẻ em. Trích số liệu pháp lý mà gộp nhầm như vậy là mất uy tín cả lập luận.</p>
+
+        <p><strong>Bỉ và loot box.</strong> Năm 2018, Ủy ban Trò chơi Bỉ công bố một báo cáo phân tích loot box dưới ánh sáng luật cờ bạc nước này. Lập luận cốt lõi: khi người chơi bỏ tiền thật mua một hộp có nội dung ngẫu nhiên, đó là đặt cược theo nghĩa của luật — và phần thắng không nhất thiết phải quy ra tiền mới tính.</p>
+
+        <p><strong>Quy định nền tảng.</strong> Apple và Google đều yêu cầu công bố xác suất với vật phẩm ngẫu nhiên. ESRB thì thêm nhãn riêng <em>In-Game Purchases (Includes Random Items)</em> để người mua biết trước. Hướng chung của ngành là <strong>bắt buộc minh bạch</strong>, không phải cấm cơ chế.</p>
+
+        <h2 id="phan-bien">Nghe phía bên kia</h2>
+
+        <p>Một bài về đạo đức mà chỉ có một phía thì không dạy được ai. Trong nghiên cứu phỏng vấn người làm F2P của Alha và cộng sự (DiGRA Nordic 2014), những người trong nghề đưa ra các lập luận đáng cân nhắc: mô hình này cho phép <strong>rất nhiều người chơi miễn phí</strong> nhờ một nhóm nhỏ trả tiền; người trả tiền là người trưởng thành tự quyết chi tiêu của mình; và bán vật phẩm trang trí cho người muốn mua thì khác hẳn bán lợi thế chiến đấu.</p>
+
+        <p>Những lập luận này không sai. Nhưng chính nghiên cứu đó cũng ghi nhận hai chỗ hở mà người trong ngành tự thừa nhận: trẻ em là ngoại lệ không tự bảo vệ được, và người làm nghề rất dễ tự hợp lý hóa việc mình làm. Giữ được cả hai vế này trong đầu cùng lúc mới là tư duy của người làm nghề — không phải chọn một phía rồi hô khẩu hiệu.</p>
+
+        <h2 id="lens">Lens</h2>
+
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Năm câu hỏi trước khi đẩy tính năng lên build</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Tính năng này phục vụ lợi ích của ai — người chơi, hay chỉ bảng chỉ số?</li>
+                <li><span class="q-icon">?</span> Người chơi có biết mình đang trả bao nhiêu tiền thật không, ngay tại thời điểm bấm?</li>
+                <li><span class="q-icon">?</span> Nó hoạt động công khai hay dựa vào việc người chơi không nhận ra?</li>
+                <li><span class="q-icon">?</span> Người chơi muốn dừng hoặc rút lui thì có làm được dễ dàng không?</li>
+                <li><span class="q-icon">?</span> Nếu phải giải thích đầy đủ cơ chế này cho chính người chơi nghe, bạn có thấy ngượng không?</li>
+            </ul>
+            <p class="lens-source">Câu 1–4 dựng theo tiêu chí trong Susser, Roessler &amp; Nissenbaum (2019) và Zagal, Björk &amp; Lewis (2013); câu 5 là phép thử thực dụng của bài học, không phải chuẩn ngành.</p>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Coi mọi hình thức kiếm tiền là xấu</p><p>Bán vật phẩm trang trí với giá ghi rõ, không ngẫu nhiên, không hạn giờ giả — không có điều kiện nào trong định nghĩa dark pattern được thỏa. Gộp tất cả vào một rọ khiến bạn mất khả năng phân biệt đúng lúc cần phân biệt nhất.</p></div>
+        </div>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Nghĩ hợp pháp là đủ</p><p>Cùng một cơ chế loot box, cơ quan quản lý ở các nước khác nhau kết luận khác nhau, và kết luận đó còn thay đổi theo thời gian. Nếu chuẩn đạo đức của bạn là "chưa bị cấm ở thị trường này" thì nó sẽ đổi mỗi lần bạn phát hành ở nước mới.</p></div>
+        </div>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">"Sếp bảo làm" là hết trách nhiệm</p><p>Bạn là người duy nhất trong phòng hiểu cơ chế này sẽ tác động thế nào lên người chơi. Không nói ra tức là thông tin đó biến mất khỏi bàn ra quyết định. Nói ra mà vẫn bị phủ quyết là chuyện khác — nhưng ít nhất quyết định đó đã được đưa ra với đủ dữ kiện.</p></div>
+        </div>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Thu hẹp đạo đức thiết kế về mỗi chuyện loot box</p><p>Nhóm Temporal và Social Capital không dính tới tiền nhưng vẫn lấy đi thứ có thật: buộc người chơi lên game đúng khung giờ, hay biến bạn bè thành kênh quảng cáo. Một game không bán gì cả vẫn có thể đầy dark pattern.</p></div>
+        </div>
+
+        <h2 id="thuc-hanh">Thực hành</h2>
+
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">25 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Mổ một màn hình bán hàng</h3>
+                <ol class="steps">
+                    <li><span>Mở một game F2P bạn đang chơi, chụp lại màn hình cửa hàng hoặc gói nạp.</span></li>
+                    <li><span>Liệt kê mọi thứ đang tác động lên quyết định: đồng hồ đếm ngược, nhãn "giá trị nhất", tiền ảo, số dư lẻ, thứ tự các gói.</span></li>
+                    <li><span>Cho từng thứ đi qua <strong>5 câu hỏi Lens</strong> ở trên. Đánh dấu cái nào trượt, và trượt ở câu nào.</span></li>
+                    <li><span>Xếp mỗi thứ vào một trong ba nhóm: Temporal, Monetary, hay Social Capital.</span></li>
+                    <li><span>Thiết kế lại màn hình đó sao cho <strong>vẫn bán được hàng</strong> nhưng qua được cả 5 câu hỏi. Ghi lại thứ bạn phải đánh đổi.</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Bước 5 mới là bước thật. Rất dễ viết ra một màn hình "đạo đức" bằng cách bỏ hết mọi thứ — nhưng như vậy là né bài tập, vì studio nào cũng cần doanh thu. Thử đổi chứ đừng xóa: ghi giá tiền thật ngay cạnh giá tiền ảo, cho số dư luôn chia hết để không còn kẹt lại vài đồng lẻ, đổi "còn 2 giờ" giả thành lịch xoay vòng công khai để người chơi biết món đồ sẽ quay lại. Chỗ bạn thấy khó đánh đổi nhất chính là chỗ tính năng gốc đang sống nhờ vào điểm yếu của người chơi.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+
+        <div class="quiz" data-answer="c">
+            <p class="q">Theo định nghĩa của Zagal, Björk &amp; Lewis, điều nào KHÔNG phải điều kiện để một mẫu thiết kế bị coi là dark pattern?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Được dùng một cách cố ý</button>
+                <button data-opt="b"><span class="badge">B</span> Đi ngược lợi ích của người chơi</button>
+                <button data-opt="c"><span class="badge">C</span> Làm người chơi mất tiền</button>
+                <button data-opt="d"><span class="badge">D</span> Xảy ra mà không có sự đồng thuận của người chơi</button>
+            </div>
+            <div class="explain" hidden><p>C đúng là đáp án cần chọn: mất tiền không nằm trong định nghĩa. Nhóm Temporal và Social Capital lấy đi thời gian và quan hệ chứ không lấy tiền, vẫn là dark pattern. Ba điều kiện thật là A, B và D — và phải có đủ cả ba.</p></div>
+        </div>
+
+        <div class="quiz" data-answer="b">
+            <p class="q">Một game hiện bảng giá bằng tiền thật, ghi rõ nhận được đúng vật phẩm nào, không hạn giờ. Theo khung thuyết phục / thao túng / cưỡng ép, đây là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Thao túng, vì vẫn đang tác động lên quyết định mua</button>
+                <button data-opt="b"><span class="badge">B</span> Thuyết phục, vì công khai và nhắm vào khả năng cân nhắc</button>
+                <button data-opt="c"><span class="badge">C</span> Cưỡng ép, vì người chơi muốn món đồ thì phải trả tiền</button>
+                <button data-opt="d"><span class="badge">D</span> Dark pattern, vì mọi hoạt động bán hàng đều là dark pattern</button>
+            </div>
+            <div class="explain" hidden><p>B đúng. A nhầm ở chỗ coi mọi tác động là thao túng — thao túng cần yếu tố <em>ngấm ngầm</em>. C nhầm: cưỡng ép là bóp hẹp lựa chọn tới mức không còn gì để chọn, còn ở đây người chơi hoàn toàn có thể không mua.</p></div>
+        </div>
+
+        <div class="quiz" data-answer="d">
+            <p class="q">Game của bạn có chuỗi điểm danh 30 ngày, đứt một ngày là mất sạch phần thưởng tích lũy. Cơ chế tâm lý nào đang bị dựa vào nhiều nhất?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Mỏ neo</button>
+                <button data-opt="b"><span class="badge">B</span> Thưởng theo tỉ lệ biến thiên</button>
+                <button data-opt="c"><span class="badge">C</span> Bằng chứng xã hội</button>
+                <button data-opt="d"><span class="badge">D</span> Ác cảm mất mát cộng với chi phí đã bỏ ra</button>
+            </div>
+            <div class="explain" hidden><p>D đúng: 29 ngày đã tích là chi phí đã bỏ ra, còn việc mất sạch khi lỡ một ngày đánh thẳng vào ác cảm mất mát. Đây cũng là dark pattern nhóm Temporal — nó quyết định hộ người chơi phải mở game vào lúc nào trong ngày.</p></div>
+        </div>
+
+        <div class="quiz" data-answer="a">
+            <p class="q">Luật sư của công ty xác nhận tính năng nạp tiền mới hoàn toàn hợp pháp ở mọi thị trường đang phát hành. Kết luận đúng là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Hợp pháp là điều kiện cần, chưa phải điều kiện đủ — vẫn phải tự kiểm bằng tiêu chí thiết kế</button>
+                <button data-opt="b"><span class="badge">B</span> Đã hợp pháp thì không cần bàn thêm về đạo đức</button>
+                <button data-opt="c"><span class="badge">C</span> Cứ làm, có vấn đề thì trách nhiệm thuộc về bộ phận pháp lý</button>
+                <button data-opt="d"><span class="badge">D</span> Phải bỏ tính năng, vì mọi cơ chế nạp tiền đều đáng ngờ</button>
+            </div>
+            <div class="explain" hidden><p>A đúng. Cùng một cơ chế được kết luận khác nhau ở các nước khác nhau và đổi theo thời gian, nên "chưa bị cấm" là một cái mốc di động chứ không phải một chuẩn. D thì rơi vào sai lầm ngược lại — coi mọi hình thức kiếm tiền là xấu.</p></div>
+        </div>
+
+        <h2 id="flashcard">Thẻ ôn nhanh</h2>
+
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Dark pattern trong game</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Mẫu thiết kế cố ý gây trải nghiệm tiêu cực, ngược lợi ích người chơi, và không có sự đồng thuận của họ. Thiếu một điều kiện là không tính.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Ba nhóm của Zagal</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Temporal (thời gian), Monetary (tiền), Social Capital (quan hệ xã hội).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Thao túng</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Tác động ngấm ngầm, khai thác điểm yếu nhận thức. Khác thuyết phục ở chỗ bị che giấu, khác cưỡng ép ở chỗ nạn nhân vẫn tưởng mình đang tự chọn.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Ác cảm mất mát</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Mất một khoản đau hơn được đúng khoản đó. Là nền của chuỗi điểm danh và đồng hồ đếm ngược.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Tiền ảo trung gian</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Quy đổi tiền thật qua một hoặc nhiều lớp tiền trong game khiến giá thật mờ đi và số dư luôn kẹt lại vài đồng lẻ.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Phép thử cuối</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Nếu phải giải thích đầy đủ cơ chế này cho chính người chơi nghe mà thấy ngượng, thì đó là câu trả lời.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại</h2>
+
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Dark pattern cần đủ ba điều kiện: cố ý, ngược lợi ích người chơi, không có sự đồng thuận. Game khó không phải dark pattern.</li>
+                <li><span class="n">2</span> Ranh giới thuyết phục và thao túng nằm ở chỗ ngấm ngầm hay công khai — không có công thức đo, chỉ có tiêu chí để tự phán đoán.</li>
+                <li><span class="n">3</span> Hợp pháp là điều kiện cần, không phải điều kiện đủ. Bạn là người duy nhất trong phòng hiểu cơ chế mình vừa dựng.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+
+        <ul class="reading">
+            <li><span class="pill type-paper">Paper</span> <span class="reading-title">Dark Patterns in the Design of Games</span> <span class="reading-meta">Zagal, Björk &amp; Lewis · FDG 2013</span> <p class="reading-why">Đọc để lấy định nghĩa gốc và ba nhóm phân loại — bài ngắn, và cách các tác giả sửa định nghĩa ba lần đáng học hơn cả kết luận.</p></li>
+            <li><span class="pill type-paper">Paper</span> <span class="reading-title">Online Manipulation: Hidden Influences in a Digital World</span> <span class="reading-meta">Susser, Roessler &amp; Nissenbaum · 2019</span> <p class="reading-why">Đọc để có bộ tiêu chí phân biệt thuyết phục, thao túng và cưỡng ép — dùng được ngoài phạm vi game.</p></li>
+            <li><span class="pill type-paper">Paper</span> <span class="reading-title">Predatory Monetisation? A Categorisation of Unfair, Misleading and Aggressive Monetisation Techniques in Digital Games from the Player Perspective</span> <span class="reading-meta">Petrovskaya &amp; Zendle · 2021</span> <p class="reading-why">Đọc để thấy danh sách kỹ thuật cụ thể do chính người chơi mô tả, kèm lời họ nói — truy cập mở.</p></li>
+            <li><span class="pill type-bai">Bài viết</span> <span class="reading-title">deceptive.design</span> <span class="reading-meta">Harry Brignull</span> <p class="reading-why">Đọc để có danh mục dark pattern ngoài game và ví dụ thật — nơi thuật ngữ này ra đời năm 2010.</p></li>
+            <li><span class="pill type-bai">Bài viết</span> <span class="reading-title">Hồ sơ vụ FTC và Epic Games</span> <span class="reading-meta">Federal Trade Commission · 2023</span> <p class="reading-why">Đọc thẳng thông cáo gốc để thấy cơ quan quản lý mô tả một dark pattern bằng ngôn ngữ nào — hữu ích khi bạn cần thuyết phục người trong studio.</p></li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
