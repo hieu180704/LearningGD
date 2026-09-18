@@ -35,4 +35,4 @@ CÒN LẠI
   mục 8 ghi lại bẫy "file research do subagent viết mất nháy cong + en dash — phải curl lại
   nguồn cho từng quote thực dùng".
 
-SHA: (commit ngay sau khi ghi worklog này)
+SHA: 7304061
