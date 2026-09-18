@@ -1,0 +1,691 @@
+RESEARCH - Level design
+(Tầng 3 bài 05 · tổng hợp 5 file research · đã fact-check)
+
+MỤC LỤC
+0. Trạng thái verify
+1. Nguồn đã verify
+2. Dẫn hướng người chơi trong không gian
+3. Nhịp độ và đường cong cường độ
+4. Cấu trúc không gian: typology và combat zone
+5. Dạy người chơi qua không gian
+6. Quy trình: từ giấy tới blockout
+7. Metrics và số liệu
+8. Công cụ
+9. Ví dụ game theo nền tảng
+10. Sai lầm hay gặp
+11. Bẫy khái niệm - phải đọc trước khi viết bài
+12. Nhận định không có nguồn (phân tích minh hoạ)
+13. Không dùng được (đã thử - session sau khỏi thử lại)
+
+---
+
+## 0. TRẠNG THÁI VERIFY
+
+- Tổng nguồn đã mở đọc thật (đã bỏ trùng): 40 nguồn. Trong đó The Level Design Book
+  (book.leveldesignbook.com) chiếm 14 TRANG CON khác nhau, mỗi trang tính là 1 nguồn riêng
+  vì nội dung/URL khác nhau: Prospect-refuge, Composition, Critical path, Pacing, Typology,
+  Cover, Recommended talks, Blockout, Metrics, Overview, Playtesting, Layout, Quake metrics,
+  Massing. 26 nguồn còn lại gồm: 1 sách (Totten, đọc toàn văn PDF), 10 nguồn thuộc nhóm "lời
+  trực tiếp nhà thiết kế" (Norman, Robert Yang, Griesemer, Hayashida, Benson Russell, Silli,
+  Steve Lee/Zi Peters, Nesbitt, Delahay, Ken Wong), 12 bài báo/tài liệu cộng đồng còn lại
+  (Wikipedia, MousePlanet, các bài Game Developer khác, World of Level Design x2, Gorman Dev,
+  8bitplay), 3 docs công cụ chính thức (Unity ProBuilder, Unreal Modeling Mode, Tiled).
+- Tổng quote đã verify nguyên văn bằng curl+grep (theo ld-D): 11 quote. Kết quả: 7 khớp
+  hoàn toàn (Q1, Q2, Q3, Q5, Q7, Q10, Q11); 3 khớp nhưng có lưu ý quan trọng về cách trích
+  (Q4, Q6, Q8 - ghép đoạn không liền mạch / diễn giải quá tay / dấu câu bị đổi); 1 quote LỆCH
+  vì dấu câu bị đổi khiến câu bị cắt cụt gây hiểu lầm là hết câu (Q9 - Steve Lee, xem mục 11).
+  Không có quote nào "không tìm thấy".
+- Nguồn chặn bot / cần nhớ khi research thêm: developer.valvesoftware.com (Hammer wiki và
+  trang Category:Official_Source_2_Tools) trả HTTP 403 cả hai lần thử; polycount.com và
+  gamedesignskills.com cũng trả 403; academia.edu và dokumen.pub (bản PDF/scan sách Totten)
+  trả 403 - phải dùng bản PDF thay thế trên archive.org mới đọc được toàn văn; medium.com
+  fetch thất bại không rõ lý do (nghi ngờ chặn bot) ở cả 2 bài thử (skaviplay, Austin Endres);
+  GDC Vault (gdcvault.com) yêu cầu đăng nhập/mua Subscription cho hầu hết talk liên quan -
+  không mở được nội dung đầy đủ, chỉ có trang mô tả.
+
+## 1. NGUỒN ĐÃ VERIFY
+
+### (a) Sách
+
+1. Christopher Totten - "An Architectural Approach to Level Design" (1st edition, CRC Press)
+   - NGUỒN GỐC - đọc TOÀN VĂN chương 3 "Basic Gamespaces" (trang 136-142) qua bản PDF
+   full-text trên archive.org: https://ia801505.us.archive.org/16/items/random-papers2/An%20Architectural%20Approach%20to%20Level%20Design.pdf
+   [tải PDF bằng curl, chuyển text bằng pdftotext -layout, đọc trực tiếp - không phải snippet
+   gián tiếp]. Nội dung dùng được: định nghĩa "architectural weenie" (Totten trích lại từ
+   Jesse Schell, gốc xa hơn là "weenie" của Walt Disney); khung 5 yếu tố Kevin Lynch
+   (Landmarks, Paths, Nodes, Edges, Districts) áp cho sandbox gamespace; ví dụ Half-Life 2:
+   Episode 2 (radio building), Grand Theft Auto IV (Statue of Happiness, Rotterdam Tower),
+   Disneyland/Magic Kingdom, Bully (Bullworth Academy).
+
+### (b) Lời trực tiếp của nhà thiết kế
+
+1. Don Norman - "Affordances and Design" - jnd.org (trang cá nhân của chính tác giả) - NGUỒN
+   GỐC - https://jnd.org/affordances-and-design/ [HTTP 200]. Nội dung dùng được: định nghĩa
+   affordance theo Gibson, phân biệt affordance thực tế vs affordance được cảm nhận
+   ("perceived affordance").
+2. Robert Yang - "GDC 2018: How To Light A Level, slides and transcript" - Radiator Blog
+   (blog cá nhân của chính diễn giả) - NGUỒN GỐC - https://www.blog.radiator.debacle.us/2018/03/gdc-2018-how-to-light-level-slides-and.html
+   [HTTP 200]. Nội dung dùng được: quy trình 6 bước chiếu sáng 1 level; quote đã verify (Q2)
+   về ánh sáng dẫn hướng progression/exit và về việc không được để ánh sáng đến phút cuối.
+3. Jaime Griesemer (Bungie) - phỏng vấn "Half-Minute Halo" - Engadget, 2011 - nguồn thứ cấp
+   nhưng trích lời trực tiếp - https://www.engadget.com/2011-07-14-half-minute-halo-an-interview-with-jaime-griesemer.html
+   [HTTP 200]. Nội dung dùng được: nguồn gốc câu "30 seconds of fun" và quote đầy đủ về nested
+   loop 3 giây/30 giây/3 phút (đã verify Q5).
+4. Koichi Hayashida (đạo diễn Super Mario 3D Land/3D World) - phỏng vấn "The Secret to Mario
+   Level Design" - Gamedeveloper.com (bài gốc Gamasutra, 2012) - nguồn thứ cấp, trích lời
+   trực tiếp - https://www.gamedeveloper.com/design/the-secret-to-i-mario-i-level-design
+   [HTTP 200]. Nội dung dùng được: 4 bước gameplay dạy cơ chế trong 1 màn, liên hệ với
+   kishoutenketsu (đã verify Q6, có lưu ý quan trọng - xem mục 11).
+5. Benson Russell (Combat Designer, Naughty Dog) - "Designing Combat Encounters in
+   Uncharted 2" - Gamedeveloper.com, 03/08/2010 - bài viết chuyên môn trực tiếp từ nhà thiết
+   kế (nguồn sơ cấp) - https://www.gamedeveloper.com/design/designing-combat-encounters-in-i-uncharted-2-i-
+   [HTTP 200]. Nội dung dùng được: mở rộng combat space theo chiều dọc, khái niệm "Traversal
+   Gunplay".
+6. Elisabetta Silli (level designer Mirror's Edge) - phát biểu tại panel GDC "The Tao of
+   Level Design", trích qua Engadget "Overheard@GDC: Seeing red in Mirror's Edge" (17/8/2010)
+   - nguồn thứ cấp báo chí, trích lời trực tiếp - https://www.engadget.com/2010-08-17-overheard-gdc-mirrors-edges-odd-go-here-color.html
+   [HTTP 200]. Nội dung dùng được: lý do chọn màu ĐỎ cho "Runner Vision" (đã verify Q11).
+7. Steve Lee (level designer Dishonored 2/Bioshock Infinite, Arkane), Zi Peters (Sumo
+   Digital), Vincent Barrieres (Ubisoft Montpellier) - phỏng vấn "From pen-and-paper to
+   blockouts: How level designers craft iconic stealthy encounters" - Gamedeveloper.com -
+   nguồn thứ cấp (bài phỏng vấn), trích lời trực tiếp - https://www.gamedeveloper.com/design/from-pen-and-paper-to-blockouts-how-level-designers-craft-iconic-stealthy-encounters
+   [HTTP 200]. Nội dung dùng được: giá trị của bước giấy trước blockout thật; định nghĩa
+   blockout của Steve Lee (đã verify Q9, LỆCH dấu câu - xem mục 11).
+8. Harry Nesbitt (Lead Artist & Programmer, Team Alto/Snowman) - "Road to the IGF: Team
+   Alto's Alto's Odyssey" - Gamedeveloper.com - NGUỒN GỐC (self-report của dev) -
+   https://www.gamedeveloper.com/business/road-to-the-igf-team-alto-s-i-alto-s-odyssey-i-
+   [HTTP 200]. Nội dung dùng được: kỹ thuật trộn nội dung procedural với đoạn "hand-crafted"
+   để tạo pacing trên mobile.
+9. Matti Delahay (Craft Lead - Level Design, Rovio) - "The Craft Behind The Levels" -
+   rovio.com/articles - NGUỒN GỐC (bài đăng chính thức của Rovio) -
+   https://www.rovio.com/articles/the-craft-behind-the-levels-a-look-into-level-design-in-rovio-games/
+   [HTTP 200]. Nội dung dùng được: vai trò level designer trong game puzzle mobile, điều phối
+   "cadence của độ khó và nhịp độ".
+10. Ken Wong (artist & designer, ustwo games) - phỏng vấn formfiftyfive về Monument Valley -
+    NGUỒN GỐC nhưng quote khá chung chung - https://www.formfiftyfive.com/features/interview-with-ken-wong-artist-designer-of-monument-valley/
+    [HTTP 200]. Nội dung dùng được: mô tả mỗi màn là "handcrafted combination of puzzle,
+    graphic design and architecture" - KHÔNG nói cụ thể về kỹ thuật dẫn hướng bằng màu/ánh
+    sáng (xem lưu ý ở mục 9).
+
+### (c) Tài liệu cộng đồng / báo chí
+
+1. Wikipedia - "Weenie (design)" - nguồn thứ cấp (tổng hợp) -
+   https://en.wikipedia.org/wiki/Weenie_(design) [HTTP 200]. Định nghĩa weenie, quote Walt
+   Disney và John Hench (đã verify Q1).
+2. Jim Korkis - "The Origin of the Disneyland Wienie" - MousePlanet - nguồn thứ cấp (nhà sử
+   Disney) - https://mouseplanet.com/the-origin-of-the-disneyland-wienie/5245/ [HTTP 200].
+   Câu chuyện gốc từ xúc xích điều khiển chó của Walt Disney.
+3. The Level Design Book - "Prospect-refuge" - nguồn thứ cấp, tài liệu cộng đồng (Creative
+   Commons) - https://book.leveldesignbook.com/process/blockout/massing/prospect-refuge
+   [HTTP 200]. Phản biện lý thuyết prospect-refuge của Jay Appleton khi áp vào game.
+4. The Level Design Book - "Composition" - https://book.leveldesignbook.com/process/blockout/massing/composition
+   [HTTP 200]. Định nghĩa composition, sightline (đã verify Q3), phản biện leading lines
+   ("brain poison", đã verify Q3).
+5. The Level Design Book - "Critical path" - https://book.leveldesignbook.com/process/layout/criticalpath
+   [HTTP 200]. Định nghĩa critical path/golden path.
+6. The Level Design Book - "Pacing" - https://book.leveldesignbook.com/process/preproduction/pacing
+   [HTTP 200]. Định nghĩa "beat" (đã verify Q4), nguyên tắc "alternate highs and lows"
+   (đã verify Q4, có lưu ý ghép đoạn).
+7. The Level Design Book - "Typology" - https://book.leveldesignbook.com/process/layout/typology
+   [HTTP 200]. Room typology và level typology, kèm ví dụ game.
+8. The Level Design Book - "Cover" - https://book.leveldesignbook.com/process/combat/cover
+   [HTTP 200]. Định nghĩa cover, 3 kiểu di chuyển quanh cover, flanking, verticality.
+9. The Level Design Book - "Recommended talks" - https://book.leveldesignbook.com/appendix/resources/talks
+   [HTTP 200]. Danh mục talk tham khảo thêm (CHƯA tự mở/xem các talk này).
+10. The Level Design Book - "Blockout" - https://book.leveldesignbook.com/process/blockout
+    [HTTP 200]. Định nghĩa blockout là bản nháp thô bằng khối 3D đơn giản.
+11. The Level Design Book - "Metrics" - https://book.leveldesignbook.com/process/blockout/metrics
+    [HTTP 200]. Định nghĩa metrics, player metrics/building metrics, quote đã verify Q7.
+12. The Level Design Book - "Overview" - https://book.leveldesignbook.com/process/overview
+    [HTTP 200]. Quy trình tổng thể pre-production → environment art.
+13. The Level Design Book - "Playtesting" - https://book.leveldesignbook.com/process/blockout/playtesting
+    [HTTP 200]. Nguyên tắc quan sát playtest, không ngắt lời, khái niệm heatmap.
+14. The Level Design Book - "Layout" - https://book.leveldesignbook.com/process/layout
+    [HTTP 200]. Bubble diagram, 2D layout, quote đã verify Q8 (có lưu ý cắt câu).
+15. The Level Design Book - "Quake metrics" - https://book.leveldesignbook.com/process/blockout/metrics/quake
+    [HTTP 200]. Bộ số liệu metrics cụ thể của Quake (đơn vị Quake units).
+16. The Level Design Book - "Massing" - https://book.leveldesignbook.com/process/blockout/massing
+    [HTTP 200]. Khái niệm massing/articulation trong blockout.
+17. Game Developer (Gamasutra cũ) - "Learn level design tricks from an Arkane designer at
+    GDC 2017" - nguồn thứ cấp (báo đưa tin) - https://www.gamedeveloper.com/design/learn-level-design-tricks-from-an-arkane-designer-at-gdc-2017-
+    [HTTP 200]. Steve Lee trình bày "An Approach to Holistic Level Design" tại GDC 2017.
+18. Game Developer - "Guiding the Player - Leading Lines in The Vanishing of Ethan Carter"
+    (Sven-David Giesselmann) - nguồn thứ cấp (blogger/nhà phân tích độc lập) -
+    https://www.gamedeveloper.com/design/guiding-the-player-leading-lines-in-quot-the-vanishing-of-ethan-carter-quot-
+    [HTTP 200]. Quote về leading lines như công cụ dẫn hướng quan trọng.
+19. Game Developer - "Composition in Level Design" (Mateusz Piaskiewicz) - nguồn thứ cấp -
+    https://www.gamedeveloper.com/design/composition-in-level-design [HTTP 200]. Định nghĩa
+    composition, sightline theo góc máy, leading lines, "observation spot"/"funnel".
+20. Game Developer - "Anatomy of a Combat Zone" (Josh Bridge, 2009) - nguồn thứ cấp (bài
+    chuyên môn) - https://www.gamedeveloper.com/design/anatomy-of-a-combat-zone [HTTP 200].
+    Định nghĩa Combat Zone, Kill Zone (đã verify Q10), Defensive Cover, Flanking, Verticality,
+    Layering.
+21. Game Developer - "Charting Through Pacing of Uncharted 2, Part 1" (Stanislav Costiuc) -
+    bản chuyển thể từ series video, nguồn thứ cấp/phân tích minh hoạ, KHÔNG phải phát biểu
+    chính thức của Naughty Dog - https://www.gamedeveloper.com/design/charting-through-pacing-of-uncharted-2-part-1---pacing-principles
+    [HTTP 200]. Mô hình "heartbeat", phân tích đường cong cường độ Uncharted 2.
+22. Game Developer - "Beat-chart - game designer's best friend" (Nick Filatov) - nguồn thứ
+    cấp - https://www.gamedeveloper.com/design/beat-chart-game-designer-s-best-friend
+    [HTTP 200].
+23. World of Level Design - "Blocktober: Your Quick Start Guide to Blockouts" - nguồn thứ
+    cấp (hướng dẫn cộng đồng) - https://www.worldofleveldesign.com/categories/level_design_tutorials/guide-to-blocktober.php
+    [HTTP 200].
+24. World of Level Design - "Art of Blocking In Your Map" - nguồn thứ cấp -
+    https://www.worldofleveldesign.com/categories/level_design_tutorials/art_of_blocking_in_your_map.php
+    [HTTP 200]. Quote về blocking-in, khuyên nhờ level designer khác test trước khi đi vào chi
+    tiết.
+25. Gorman Dev - "The Role of an Environment Artist & Level Designer" - nguồn thứ cấp -
+    https://www.gormandev.com/post/the-role-of-an-environment-artist-a-level-designer
+    [HTTP 200].
+26. 8bitplay - "What the heck is level design and what level designer does" - nguồn thứ cấp
+    - https://8bitplay.com/blog/what-the-heck-is-level-design-and-what-level-designer-does/
+    [HTTP 200].
+
+### (d) Docs chính thức của công cụ
+
+1. Unity chính thức - ProBuilder Package Manager docs (package 6.0.9) -
+   https://docs.unity3d.com/Packages/com.unity.probuilder@6.0/manual/installing.html
+   [HTTP 200]. Cài qua Package Manager, yêu cầu Unity 2019.4 trở lên.
+2. Epic Games chính thức - "Modeling Mode in Unreal Engine" (UE 5.8 docs) -
+   https://dev.epicgames.com/documentation/unreal-engine/modeling-mode-in-unreal-engine?lang=en-US
+   [HTTP 200]. Công cụ tạo/sculpt/edit hình học 3D trực tiếp trong UE. Docs KHÔNG dùng từ
+   "blockout"/"greybox" trực tiếp.
+3. Tiled chính thức - "Introduction" (bản stable) -
+   https://doc.mapeditor.org/en/stable/manual/introduction/ [HTTP 200]. Trình biên tập
+   tilemap 2D, hỗ trợ orthogonal/isometric/hexagonal.
+
+## 2. DẪN HƯỚNG NGƯỜI CHƠI TRONG KHÔNG GIAN
+
+- **Weenie / landmark** (thuật ngữ Disney Imagineering): công trình/vật thể nổi bật đặt ở vị
+  trí chiến lược để "vẫy gọi" người xem đi về hướng đó mà không cần biển báo. Quote nguyên văn
+  Walt Disney (đã verify Q1): "to people 'come this way.' People won't go down a long
+  corridor unless there's something promising at the end. You have to have something that
+  beckons to them." John Hench mô tả là "a beckoning finger". Gốc từ xúc xích
+  (wienerwurst) Walt dùng để điều khiển chó của mình đi theo hướng ông muốn. [Nguồn 1c, 2c]
+- **Architectural weenie** áp vào level design - thuật ngữ do JESSE SCHELL (tác giả The Art
+  of Game Design: A Book of Lenses) đặt ra để mô tả landmark hút người chơi tới điểm mục
+  tiêu; Christopher Totten TRÍCH LẠI thuật ngữ này trong sách "An Architectural Approach to
+  Level Design" (chương 3 "Basic Gamespaces", đã đọc toàn văn - xem mục 1a). Gốc xa hơn nữa
+  là "weenie" của Walt Disney. Quote nguyên văn: "Architectural weenies are an integral part
+  of sandbox spaces. They allow these worlds to retain their openness but still direct
+  players to places that designers want them to go." Ví dụ trong sách: Half-Life 2: Episode 2
+  (radio building tô màu đỏ/vàng nổi bật giữa cảnh quan xanh/nâu, có sơ đồ Figure 3.38), Grand
+  Theft Auto IV (Statue of Happiness, Rotterdam Tower), Disneyland/Magic Kingdom (Sleeping
+  Beauty Castle). LƯU Ý bẫy attribution - xem mục 11.
+- **Khung 5 yếu tố hình ảnh đô thị** (Kevin Lynch, "The Image of the City", 1960): Paths,
+  Edges, Districts, Nodes, Landmarks. Totten dành cả mục "Organizing the Sandbox: Kevin
+  Lynch's Image of the City" (trang 137-142) để áp khung này vào sandbox gamespace, khẳng
+  định thẳng: "Landmarks are recognizable elements that can be guideposts to people in an
+  urban space. This definition should sound very similar to the concept of architectural
+  weenies, as they are the same thing." Ví dụ minh hoạ trong sách: Bully (khuôn viên
+  Bullworth Academy cho Landmarks/Nodes), Half-Life 2 (Landmarks). LƯU Ý bẫy "boundaries" vs
+  "Edges" - xem mục 11.
+- **Sightline** (đường tầm nhìn) - "a trajectory of empty open space that offers a possible
+  view of another space" (đã verify Q3, khớp 100%, xuất hiện 2 lần trên trang Composition).
+  Đây là CÔNG CỤ người chơi có thể dùng khi cần, không đảm bảo hành vi.
+- **Leading lines** (đường dẫn hướng bằng bố cục) - "Setting elements of the composition to
+  draw lines in certain directions we're able to guide the player's eye" (Piaskiewicz, mục
+  1c-19). Level Design Book PHẢN BIỆN mạnh, gọi hiện tượng này là "brain poison" và phân biệt
+  rõ với sightline - hai nguồn KHÔNG đồng thuận về mức độ hiệu quả, xem chi tiết đầy đủ ở
+  mục 11 (bẫy #4).
+- **Affordance** - "the actionable properties between the world and an actor" (Gibson, dẫn
+  lại bởi Don Norman). Norman nhấn mạnh trong thiết kế quan trọng là "perceived affordance" -
+  "what the user perceives that some action is possible", không phải affordance vật lý thuần
+  tuý. [Nguồn 1b-1]
+- **Signifier** - tín hiệu báo cho người dùng biết HÀNH ĐỘNG nên diễn ra ở đâu (khác affordance
+  là hành động GÌ có thể xảy ra). [CHƯA VERIFY đầy đủ - nguồn tổng hợp WebSearch từ UX Planet
+  và Wikipedia "Affordance", diễn giải gián tiếp sách Design of Everyday Things bản 2013,
+  chưa mở trực tiếp trang gốc]. Ví dụ diễn giải: tấm phẳng trên cửa = đẩy, tay cầm dài/tròn =
+  kéo.
+- **Critical path / golden path** - "tuyến đường lý tưởng của trải nghiệm người chơi, bao gồm
+  nội dung bắt buộc và bỏ qua khu vực tuỳ chọn" (Level Design Book, mục 1c-5). Phân biệt với
+  optional path (không nằm trên đường bắt buộc, có thể bị cắt khi giảm scope).
+- **Prospect-refuge** (kiến trúc "trông ra - ẩn vào") - lý thuyết của nhà địa lý Jay Appleton
+  trong "The Experience of Landscape" (1975) [CHƯA VERIFY - chỉ tổng hợp WebSearch, chưa mở
+  đọc chính sách 1975]: con người thích không gian vừa cho phép QUAN SÁT (prospect) vừa được
+  AN TOÀN, không bị nhìn thấy (refuge). Level Design Book PHẢN BIỆN việc bê nguyên lý thuyết
+  này vào game, đề xuất dùng sightline/vista thay prospect và enclosure thay refuge, vì an
+  toàn trong game là "trạng thái game" (game state) chứ không phải thuộc tính kiến trúc cố
+  định. Ví dụ: "debate parlor" trong Elden Ring. Chi tiết bẫy - xem mục 11 (bẫy #5).
+- **Breadcrumbing** - đặt liên tiếp các tín hiệu môi trường (vật phẩm, ánh sáng, âm thanh) để
+  nhẹ nhàng kéo người chơi theo một hướng, lấy cảm hứng từ Hansel and Gretel. [CHƯA VERIFY -
+  nguồn tổng hợp WebSearch, chưa mở đọc trực tiếp bài gốc để lấy quote nguyên văn].
+- **Guiding qua ánh sáng (lighting hierarchy)** - dùng độ tương phản ánh sáng để tạo thứ bậc:
+  key light mạnh hơn cho critical path, ánh sáng yếu hơn cho lối phụ. Quote đã verify Q2:
+  "Light for player progression, and highlight exits / critical path... you want to create
+  contrast with these key lights, and suggest where the player can go." [Nguồn 1b-2]
+- **Gated guidance vs implicit guidance** - hai kiểu dẫn hướng đối lập (rào chắn vật lý bắt
+  buộc rẽ hướng vs tín hiệu tinh tế không bắt buộc) - xem mục 12, đây là phân tích không có
+  nguồn học thuật cụ thể đặt tên đúng cặp thuật ngữ này.
+
+## 3. NHỊP ĐỘ VÀ ĐƯỜNG CONG CƯỜNG ĐỘ
+
+- **"30 seconds of fun"** (Jaime Griesemer, Bungie, GDC 2002, talk "The Illusion of
+  Intelligence: The Integration of AI and Level Design in Halo", đồng trình bày với Chris
+  Butcher). Nguyên văn câu gốc (đã verify Q5): "In Halo 1, there was maybe 30 seconds of fun
+  that happened over and over and over and over again. And so, if you can get 30 seconds of
+  fun, you can pretty much stretch that out to be an entire game." Griesemer về sau (phỏng
+  vấn Engadget 2011) làm rõ: đây là 1 loop lồng trong 3 tầng thời gian, nguyên văn đầy đủ đã
+  verify: "you have a 3-second loop inside of a 30-second loop inside of a 3-minute loop that
+  is always different, so you get a unique experience every time." Câu ngắn bị trích lan
+  truyền tách khỏi ngữ cảnh nested loop - xem bẫy #3 ở mục 11.
+- **Beat** - đơn vị nhỏ nhất của pacing, quote đã verify Q4: "A beat is a small self-contained
+  chunk of a level. A single area, event, activity, or element." Nhiều beat ghép thành
+  "melody và rhythm" của cả màn.
+- **Nguyên tắc xen kẽ cường độ (alternating highs/lows)** - quote đã verify Q4 (lưu ý: 2 cụm
+  ghép từ 2 vị trí không liền mạch trên cùng trang - 1 heading "Alternate highs and lows." +
+  1 câu trong đoạn khác): "Players adjust to prolonged periods of high intensity. Any intense
+  boss fight will feel like a slog after 10+ minutes. To keep it fresh, use occasional
+  downtime as a contrast and palette cleanser, otherwise the player will simply go numb." Đây
+  là cơ sở có nguồn cho khái niệm "nhịp thở"/breather, dù bản thân từ "breather" không xuất
+  hiện nguyên văn trong nguồn - là cách diễn giải hợp lý từ nguyên tắc trên.
+- **Đường cong cường độ áp dụng thực tế (Uncharted 2)** - mở đầu mạnh, 3 đỉnh cao trong toàn
+  game, chỉ 1 đoạn ở đáy (thường ngay sau đỉnh cao nhất để tạo tương phản), kết thúc KHÔNG ở
+  cường độ tối đa (tránh cảm giác trống rỗng sau khi kết thúc). Mô hình được gọi ẩn dụ là
+  "heartbeat". Chương 6 xen kẽ combat/platforming, tránh puzzle vì puzzle làm giảm cường độ.
+  [Nguồn 1c-21 - LƯU Ý: đây là phân tích thứ cấp của 1 người phân tích/YouTuber, KHÔNG phải
+  phát biểu chính thức từ Naughty Dog].
+- Khác biệt pacing theo cấu trúc game: single-player (critical path rõ), multiplayer (pacing
+  emerge từ layout), open world (pacing theo "zone" lỏng hơn). Có nhắc (không đào sâu) tới
+  Hero's Journey, Three-Act Structure, Freytag's Five-Act Structure, Aristotle's Poetics như
+  gốc lý thuyết kịch của đường cong cường độ. [Nguồn 1c-6]
+
+## 4. CẤU TRÚC KHÔNG GIAN: TYPOLOGY VÀ COMBAT ZONE
+
+- **Typology bố cục màn chơi** - "common layout patterns and functions... shared design
+  vocabulary helps you study other levels and communicate." Room typology: Corridor (tuyến
+  tính chặt - ví dụ P.T.), Switchback/Hairpin (dead-end có lối ra nhìn thấy khi quay lại - ví
+  dụ Dear Esther), Ring Around the Rosie/Combat Bowl (không gian nhỏ có cover giữa), Arena/POI
+  (nhiều lane lưu thông + cover - ví dụ DOOM II "Dead Simple"). Level typology: Hub-and-spoke
+  (khu trung tâm + nhánh toả ra - ví dụ BioShock Medical Pavilion, Zelda: Ocarina of Time),
+  Loopback (tuyến tính vòng lại - ví dụ dungeon Skyrim), Branching chokepoints/String of
+  pearls, Pass-through, Time cave (chỉ liệt kê tên, không có định nghĩa chi tiết trong nguồn
+  đã đọc). [Nguồn 1c-7]
+- **Cover** - "Any object or structure that blocks a sightline or shields someone from
+  attack." 3 kiểu tương tác: around cover (game arcade), with cover (game tactical), through
+  cover (cover shooter). [Nguồn 1c-8]
+- **Combat Zone / Kill Zone / Defensive Cover** - Combat Zone: khu vực gameplay trong 1 level
+  được chỉ định cho chiến đấu, không nhất thiết có ranh giới vật lý. Kill Zone, quote đã
+  verify Q10: "the area in which the player and/or AI is without cover and can be fired
+  directly upon, and potentially killed." Defensive Cover: khu vực được bảo vệ khỏi hoả lực
+  trực tiếp, đối trọng bắt buộc với Kill Zone. [Nguồn 1c-20]
+- **Flanking** - cover có hướng (directional cover) để lại điểm mù cho phép vòng qua tấn công
+  hoặc đồng đội yểm trợ; theo Josh Bridge, flanking giúp người chơi cảm thấy "outsmart the
+  stupid game". [Nguồn 1c-8, 1c-20]
+- **Verticality** - combat zone dựng theo chiều dọc thay vì chỉ chiều ngang, tăng độ khó và
+  lựa chọn chiến thuật; đối lập "Trench" (bị dồn xuống thấp) và "Elevation" (chiếm cao điểm).
+  [Nguồn 1c-8, 1c-20]
+- **Layering** - nhiều tầng bề mặt chơi xếp chồng, cần thiết để hỗ trợ nhiều phong cách chơi
+  khác nhau trong cùng 1 combat zone. [Nguồn 1c-20]
+- **Traversal Gunplay** (Benson Russell, Naughty Dog) - thiết kế cho phép người chơi dùng kỹ
+  năng leo trèo/di chuyển để giành lợi thế trong combat, thay vì chỉ dựa cover tĩnh; mở rộng
+  combat space theo cả chiều ngang lẫn dọc, quy trình lặp "bắt đầu đơn giản rồi xây dựng
+  thêm" khi thiết kế encounter. [Nguồn 1b-5]
+
+## 5. DẠY NGƯỜI CHƠI QUA KHÔNG GIAN
+
+- **Cấu trúc 4 bước dạy cơ chế trong 1 màn Mario** (Koichi Hayashida, xác nhận nguồn gốc từ
+  Miyamoto). Nguyên văn 4 bước đã verify (Q6, liên tục nhau): "First, you have to learn how
+  to use that gameplay mechanic, and then the stage will offer you a slightly more
+  complicated scenario in which you have to use it. And then the next step is something
+  crazy happens that makes you think about it in a way you weren't expecting. And then you
+  get to demonstrate, finally, what sort of mastery you've gained over it." Hayashida so sánh
+  cấu trúc này với truyện tranh 4 khung và cấu trúc kishoutenketsu trong manga.
+  QUAN TRỌNG - xem bẫy #2 ở mục 11 về cách gọi tên từng bước.
+- Diễn giải hiện đại hoá 4 bước trên thành "safe introduction → variation → combination →
+  twist" là cách gọi TỰ PHÂN TÍCH của người viết, KHÔNG xuất hiện nguyên văn trong nguồn - xem
+  mục 12.
+
+## 6. QUY TRÌNH: TỪ GIẤY TỚI BLOCKOUT
+
+Ghi chú phương pháp: nhiều đoạn trong mục này được WebFetch tóm tắt (paraphrase) thay vì trả
+nguyên văn HTML; câu nào có ngoặc kép tiếng Anh là quote đã đối chiếu sát nguyên văn, phần
+không có ngoặc kép là tóm tắt, không dùng như trích dẫn khi viết bài.
+
+Các nguồn không dùng chung một tên gọi "N bước" thống nhất, nhưng ghép lại khớp với trình tự
+sau. Riêng bước "reference & mood board" như một bước riêng có tên gọi thì KHÔNG có nguồn nào
+xác nhận - xem mục 12.
+
+1. **Pre-production / xác định ý tưởng lớn** - "plan out the big ideas and overall experience
+   design" (tóm tắt). [Nguồn 1c-12]
+2. **Bubble diagram** - mở rộng từ "parti" thành các "bubble" (mỗi bubble = 1 không gian),
+   dùng mũi tên thể hiện kết nối/hướng di chuyển, thiết lập tỷ lệ và quan hệ giữa các khu vực.
+   Quote đã verify (Q8, có lưu ý cắt câu - xem mục 11): "A bad bubble diagram is good. That
+   means you found the design problem early, and you can draw another one to try another
+   arrangement." [Nguồn 1c-14]
+3. **2D layout (bản vẽ mặt bằng trên giấy)** - bản vẽ top-down, dùng nhiều độ dày đường nét
+   để phân biệt loại tường. Quote nguyên văn: "START BIG. Use the entire page. Start with big
+   main shapes and gradually work down to smaller features like doors and windows. Don't draw
+   at 100% detail." [Nguồn 1c-14]
+4. **Blockout 3D** - "a rough draft of the level built with simple 3D shapes" (tóm tắt, chưa
+   đối chiếu từng chữ). World of Level Design định nghĩa blocking-in bằng quote nguyên văn:
+   "Blocking in is where you open up the editor and start roughing in the dimensions of the
+   map." Nguyên tắc: "Work the whole map; do not focus on any one part." [Nguồn 1c-10, 1c-24]
+5. **Playtest** - nguyên tắc quan sát: ghi chép hành vi người chơi, KHÔNG ngắt lời trừ khi
+   người chơi bị kẹt thật hoặc level lỗi rõ ràng. Có nhắc heatmap: "Heatmaps, top-down
+   visualizations of where players frequently move, earn points, score kills, or die."
+   World of Level Design khuyên tự đi bộ trong engine để playtest, và ghi nhận (tóm tắt) rằng
+   phần lớn thời gian blockout không sống sót được qua playtest. [Nguồn 1c-13, 1c-23]
+6. **Iteration** - phát hiện vấn đề từ giai đoạn giấy rẻ hơn nhiều so với đã xây blockout
+   thật. Quote nguyên văn (Zi Peters): "it is cheaper to hit those possibilities and rectify
+   them there for building out the environment itself." Steve Lee định nghĩa blockout (đã
+   verify Q9, LỆCH dấu câu - xem mục 11): nguyên văn đầy đủ "The blockout stage is about
+   figuring out what your level is supposed to be by making a rough but representative
+   version of it quickly, testing it, and then iterating on it as much as you can." [Nguồn
+   1b-7]
+7. **Art pass** - "Environment Art" là giai đoạn sau blockout + scripting + lighting. Gorman
+   Dev xác nhận vai trò environment artist: "An Environment Artist in AAA typically manages
+   and handles most of the visual elements seen inside of a level" - họ nhận blockout từ
+   designer rồi "set dress" giữ nguyên ý đồ thiết kế. [Nguồn 1c-12, 1c-25]
+
+## 7. METRICS VÀ SỐ LIỆU
+
+Định nghĩa chung (tóm tắt qua tool): metrics là cảm giác về tỷ lệ, khoảng cách và các phép đo
+trên toàn bộ level/game, gồm 2 loại: player metrics (kích thước nhân vật, tốc độ di chuyển, độ
+cao nhảy tối đa - số đo thực tế trong engine) và building metrics (kích thước sàn/tường do nhà
+thiết kế quyết định dựa trên mục tiêu trải nghiệm). Quote nguyên văn đã verify (Q7): "Metrics
+are useful, but metrics are not magic." [Nguồn 1c-11]
+
+Ví dụ Unity (tóm tắt qua tool - CHƯA đối chiếu kỹ với bản gốc, coi là tham khảo, không phải số
+tuyệt đối): bounding box nhân vật 1.0 x 1.8m; chiều cao mắt 1.5-1.7m; chiều rộng hành lang tối
+thiểu 2.0m; cửa ra vào 1.25 x 2.5m; bậc cầu thang 0.1 x 0.15m.
+
+Ví dụ Quake (các con số trích nguyên văn có ngoặc kép theo tool báo cáo, đơn vị Quake units):
+collision hull nhân vật "32 x 32 x 56"; chiều rộng hành lang tối thiểu tuyệt đối "33" units;
+chiều cao trần tối thiểu để đi qua "57" units; vị trí camera "46" units từ sàn; tốc độ chạy tối
+đa "320 units/second"; khoảng nhảy xa tối đa (có đà) "244" units; độ cao nhảy đứng tại chỗ tối
+đa "43" units; chiều rộng hành lang tiêu chuẩn (khuyến nghị) "128u+ wide"; chiều cao trần tiêu
+chuẩn "128u high"; phòng nhỏ tiêu chuẩn "256u wide"; đường ống thông gió (không nút cúi) "64u
+wide, 64u tall"; độ dốc ramp tiêu chuẩn "1:2 slope gradient (26.57 độ)"; cầu thang "16 rise :
+32 run (1:2 slope)"; không gian tối thiểu quanh quái vật "at least 16 units above ground / 16
+units away from walls", phòng cho quái vật nói chung cần rộng/cao gấp đôi kích thước quái vật.
+Đây là số liệu THAM KHẢO từ game cụ thể Quake, minh hoạ khái niệm "đo theo khả năng nhân vật" -
+KHÔNG phải chuẩn chung cho mọi game, phải nói rõ trong bài học. [Nguồn 1c-15]
+
+Nguyên tắc khác (tóm tắt qua tool, chưa có quote nguyên văn xác nhận): không nên theo tỷ lệ
+thế giới thật vì level "to" trong game thực tế nhỏ hơn nhiều đời thực; nên cân nhắc metrics
+ngay từ blockout vì khó test trên bản vẽ giấy, nhưng để quá muộn (sau art pass) thì sửa rất
+tốn thời gian. [Nguồn 1c-24]
+
+## 8. CÔNG CỤ
+
+1. **Unity ProBuilder** - đã verify qua docs chính thức. Package version 6.0.9, cài qua
+   Package Manager. Quote nguyên văn: "From version 3.0 and onwards, ProBuilder is only
+   available from the Package Manager." Yêu cầu Unity 2019.4 trở lên; dùng URP/HDRP cần import
+   thêm Shaders từ Samples. [Nguồn 1d-1]
+2. **Unreal Engine Modeling Mode** - đã verify qua docs chính thức Epic Games (UE 5.8). Quote
+   nguyên văn: "The Modeling editor mode provides a toolset for creating, sculpting, and
+   editing 3D geometry directly in Unreal Engine (UE)." Trang docs KHÔNG dùng từ
+   "blockout"/"greybox" trực tiếp - việc Modeling Mode dùng để blockout là thông tin từ nguồn
+   thứ cấp (cộng đồng), CHƯA VERIFY bằng chính văn bản Epic. Geometry Brush (BSP) - công cụ
+   blockout đời cũ - vẫn còn trong docs UE, nhưng cộng đồng cho là đã bị Modeling Mode thay
+   thế là cách blockout chính trong UE5 [CHƯA VERIFY bằng tuyên bố chính thức "thay thế" -
+   xem mục 12]. [Nguồn 1d-2]
+3. **Tiled (tilemap 2D)** - đã verify qua docs chính thức. Quote nguyên văn: "Tiled is a 2D
+   level editor that helps you develop the content of your game. Its primary feature is to
+   edit tile maps of various forms." Hỗ trợ orthogonal, isometric, hexagonal. [Nguồn 1d-3]
+4. **Valve Hammer Editor** (Source 2, cho CS2/Dota2) - [CHƯA VERIFY ĐẦY ĐỦ]. Trang wiki chính
+   thức Valve Developer Community trả HTTP 403 Forbidden khi fetch trực tiếp (2 lần thử). Chỉ
+   có thông tin qua kết quả tìm kiếm (không phải mở trang thật): Hammer bản mới đi kèm
+   Half-Life: Alyx (2020), dùng cho CS2/Dota2/Deadlock. KHÔNG thể trích dẫn nguyên văn vì
+   không mở được trang.
+5. **Giấy + bút** - không cần "verify còn tồn tại", nhưng được nhiều nguồn xác nhận là bước
+   đầu tiên phổ biến trước khi vào 3D.
+
+## 9. VÍ DỤ GAME THEO NỀN TẢNG
+
+### PC
+- **Half-Life 2** (Valve, 2004, FPS) - toà tháp Citadel đóng vai trò landmark/weenie xuyên
+  suốt City 17, nhìn thấy từ xa, kết hợp âm thanh (giọng Breen vang khắp nơi). [CÓ NGUỒN
+  nhưng YẾU - kết quả WebSearch tổng hợp từ Game Developer/Medium, CHƯA mở đọc bài gốc để
+  lấy quote nguyên văn]
+- **Half-Life 2: Episode 2** (Valve) - radio building tô màu đỏ/vàng nổi bật giữa cảnh quan
+  xanh/nâu, ví dụ "architectural weenie" trong sách Totten, có sơ đồ Figure 3.38. [CÓ NGUỒN -
+  đã đọc toàn văn sách, xem mục 1a và mục 2]
+- **Counter-Strike: Global Offensive**, bản đồ de_cache (Valve) - ví dụ sightline trong thiết
+  kế multiplayer cạnh tranh. [CÓ NGUỒN - Level Design Book, đã mở đọc]
+- **DOOM II** (id Software) - màn "Dead Simple", ví dụ typology "Arena/POI". [CÓ NGUỒN - Level
+  Design Book, đã mở đọc]
+
+### Console
+- **Uncharted 3** (Naughty Dog, PS3) - đoạn rooftop chase đầu game dùng "guiding lines" và
+  "shapes in the middle of the path" dẫn mắt người chơi không cần compass/HUD. [CÓ NGUỒN
+  nhưng YẾU - WebSearch tổng hợp mô tả video Game Maker's Toolkit, CHƯA tự mở/xem video để
+  lấy quote nguyên văn]
+- **Uncharted 2: Among Thieves** (Naughty Dog, PS3) - đường cong cường độ toàn game (3 đỉnh,
+  mở mạnh, không kết ở đỉnh - phân tích thứ cấp, mục 3) và combat encounter dùng traversal
+  gunplay (phát biểu trực tiếp Benson Russell, mục 4). [CÓ NGUỒN - hỗn hợp: pacing là phân
+  tích thứ cấp, combat design là nguồn sơ cấp]
+- **Mirror's Edge** (DICE, 2008, PS3/Xbox 360/PC) - hệ thống "Runner Vision" dùng màu ĐỎ báo
+  hiệu đường đi. [CÓ NGUỒN - GDC talk Elisabetta Silli, đã verify Q11. LƯU Ý màu - xem mục 11
+  bẫy #6]
+- **Super Mario 3D World / 3D Land** (Nintendo, Wii U/3DS) - ví dụ 4 bước dạy cơ chế do
+  Hayashida mô tả. [CÓ NGUỒN - phỏng vấn trực tiếp, đã verify Q6]
+- **Dishonored 2** (Arkane, PC/console) - Steve Lee trình bày "holistic level design" kết hợp
+  affordance + intentionality + world building cho immersive sim. [CÓ NGUỒN - đã mở đọc mô tả
+  talk, CHƯA đọc transcript/slide đầy đủ]
+- **BioShock** (2K/Irrational) - khu Medical Pavilion, ví dụ typology "Hub-and-spoke". [CÓ
+  NGUỒN - Level Design Book]
+- **The Elder Scrolls V: Skyrim** (Bethesda) - dungeon dùng typology "Loopback". [CÓ NGUỒN -
+  Level Design Book]
+- **The Legend of Zelda: Ocarina of Time** (Nintendo, N64) - "hub and spoke system where all
+  the key rooms fork off from one central plaza" theo Mark Brown (Game Maker's Toolkit),
+  trích qua bài phỏng vấn trên Zelda Dungeon. [CÓ NGUỒN nhưng nguồn thứ cấp về lời phát biểu,
+  KHÔNG phải transcript gốc video Boss Keys]
+- **Grand Theft Auto V** (Rockstar North) - ví dụ composition/sightline trong open world,
+  tham chiếu nhà thiết kế Miriam Bellard. [CÓ NGUỒN - Level Design Book]
+- **Grand Theft Auto IV** (Rockstar North) - Statue of Happiness, Rotterdam Tower, ví dụ
+  architectural weenie trong sách Totten. [CÓ NGUỒN - đã đọc toàn văn sách]
+- **P.T.** (Kojima Productions) - ví dụ typology "Corridor" (đi lặp lại cùng 1 hành lang). [CÓ
+  NGUỒN - Level Design Book]
+
+### Indie
+- **Hollow Knight** (Team Cherry, PC/console/Switch) - tín hiệu âm thanh (tiếng ngân nga NPC
+  "cartographer" vang dần khi lại gần) kết hợp tín hiệu thị giác (motif kiến trúc vùng). [CÓ
+  NGUỒN nhưng YẾU - WebSearch tổng hợp từ bài phân tích SUPERJUMP, CHƯA mở đọc bài gốc]
+- **Dear Esther** (thechineseroom, PC) - ví dụ typology "Switchback/Hairpin". [CÓ NGUỒN -
+  Level Design Book]
+
+### Mobile
+- **Alto's Odyssey** (Snowman, 2018, iOS/Android/PC) - trộn nội dung procedural với đoạn
+  "hand-crafted" để tạo pacing, tránh đơn điệu lẫn lặp lại nhàm chán. [CÓ NGUỒN GỐC - lời trực
+  tiếp Harry Nesbitt, đã đọc nội dung thật]
+- **Angry Birds Dream Blast / Angry Birds Journey** (Rovio) - level designer điều phối
+  "cadence của độ khó và nhịp độ" khi giới thiệu cơ chế mới, mỗi màn được test/chỉnh tay. [CÓ
+  NGUỒN GỐC - bài chính thức Rovio, lời Matti Delahay]
+- **Monument Valley** (ustwo, 2014, iOS/Android) - CẦN PHÂN BIỆT 2 CLAIM KHÁC NHAU về cùng 1
+  game: (1) "mỗi màn hình là 1 tác phẩm đồ hoạ trọn vẹn, dẫn mắt người chơi qua kiến trúc kiểu
+  Escher không cần text" - đây là claim [CÓ NGUỒN nhưng YẾU, WebSearch tổng hợp từ Game
+  Developer/Creative Bloq, CHƯA mở đọc bài gốc]; (2) lời Ken Wong qua phỏng vấn formfiftyfive
+  (đã mở đọc thật, NGUỒN GỐC) chỉ nói chung chung mỗi màn là "unique, handcrafted combination
+  of puzzle, graphic design and architecture" - KHÔNG nói cụ thể về kỹ thuật dẫn hướng bằng
+  màu sắc/ánh sáng. Nếu dùng Monument Valley làm ví dụ "implicit visual guidance", phải ghi rõ
+  đó là claim (1) - nguồn yếu, không phải lời trực tiếp Ken Wong.
+
+## 10. SAI LẦM HAY GẶP
+
+1. Lạm dụng leading lines mà không kiểm chứng hiệu quả thực tế - Level Design Book cảnh báo
+   đây có thể là "brain poison": tin rằng đường hội tụ sẽ dẫn mắt người chơi nhưng hiệu ứng
+   thực tế yếu hơn tưởng tượng, cần playtest thay vì mặc định tin lý thuyết bố cục.
+2. Áp dụng máy móc lý thuyết kiến trúc thực (prospect-refuge) vào game mà không điều chỉnh -
+   an toàn trong game là "trạng thái game" (ví dụ sau khi hạ gục quái trong 1 phòng, phòng đó
+   thành "safe house"), khác kiến trúc thực nơi an toàn là thuộc tính cố định của không gian.
+3. Lighting bị để ở cuối cùng như bước "trang trí" - Robert Yang cảnh báo: "Don't leave it
+   until the last minute, don't treat it as an afterthought" - ánh sáng phải tính từ bước
+   blockout/graybox vì ảnh hưởng trực tiếp tới dẫn hướng qua progression và exit.
+4. Quá nhiều cover dày đặc trong 1 combat zone khiến không gian thành mê cung, người chơi mất
+   khả năng theo dõi tình huống - hệ quả từ nguyên tắc "cover blocks sightlines" bị lạm dụng.
+5. Kết thúc màn/game ở đúng cường độ cao nhất - theo phân tích Uncharted 2, gây cảm giác trống
+   rỗng (không kết ở cường độ tối đa là có chủ đích).
+6. Làm art trước khi blockout xong - rẻ để xoá/xây lại hình học blockout thô, nhưng vứt bỏ
+   công việc đã hoàn thiện (art) là đắt và lãng phí; phát hiện vấn đề từ giai đoạn giấy rẻ hơn
+   nhiều so với phát hiện lúc đã xây môi trường thật.
+7. Không playtest / bỏ qua bước kiểm tra - nên nhờ level designer khác test trước khi đi vào
+   chi tiết hoá.
+8. Không gian/hành lang làm quá to, mất tỷ lệ với nhân vật - đối chiếu với số liệu Quake đã
+   verify: hành lang tiêu chuẩn Quake là "128u+ wide" - nguyên tắc "dựng theo tỷ lệ nhân vật,
+   không theo cảm tính" nhất quán giữa nhiều nguồn, dù con số tuyệt đối khác nhau tuỳ game.
+
+## 11. BẪY KHÁI NIỆM - PHẢI ĐỌC TRƯỚC KHI VIẾT BÀI
+
+1. **Quote Steve Lee về blockout bị LỆCH dấu câu (Q9).** Bản trích lan truyền viết "...by
+   making a rough but representative version of it quickly." (dùng dấu chấm, coi như hết
+   câu). NGUYÊN VĂN ĐÚNG ĐẦY ĐỦ là: "The blockout stage is about figuring out what your level
+   is supposed to be by making a rough but representative version of it quickly, testing it,
+   and then iterating on it as much as you can." - bản gốc dùng dấu phẩy sau "quickly," rồi
+   câu còn tiếp tục "testing it, and then iterating on it as much as you can." Từ ngữ đúng
+   nhưng dấu chấm cắt giữa câu gây hiểu lầm là hết ý. PHẢI trích đủ cả câu khi dùng trong bài.
+2. **Hayashida KHÔNG tự gắn nhãn ki/sho/ten/ketsu cho từng bước.** Trong đoạn phỏng vấn mô tả
+   4 bước (đã verify Q6), ông KHÔNG nói "bước 1 là ki, bước 2 là sho..." theo kiểu gán nhãn
+   1-1. Ông mô tả 4 bước bằng lời thường, RỒI SAU ĐÓ mới liên hệ: "It's very similar to a
+   narrative structure that you find in four-panel comics... is a phrase, kishoutenketsu,
+   where you introduce a concept, and then in the next panel you develop the idea a little
+   bit more; in the third panel there's something of a change-up, and then in the fourth
+   panel you have your conclusion." Đây là liên hệ/so sánh với khái niệm kishoutenketsu nói
+   chung, KHÔNG phải bảng gán nhãn rõ ràng cho từng bước cụ thể của màn Mario. Viết bài PHẢI
+   diễn đạt là "cấu trúc tương tự kishoutenketsu", KHÔNG được viết "Hayashida gọi 4 bước là
+   ki, sho, ten, ketsu" - đó là suy diễn quá nguyên văn.
+3. **"30 seconds of fun" bị trích cụt.** Câu ngắn "In Halo 1, there was maybe 30 seconds of
+   fun that happened over and over and over and over again..." khi đứng một mình dễ bị hiểu
+   sai thành "chỉ cần 30 giây gameplay hay là đủ". Griesemer về sau nhấn mạnh ý đầy đủ là 1
+   NESTED LOOP 3 tầng thời gian: "you have a 3-second loop inside of a 30-second loop inside
+   of a 3-minute loop that is always different, so you get a unique experience every time."
+   PHẢI trích kèm cả nested loop 3 giây/30 giây/3 phút, không chỉ câu cụt "30 seconds of fun".
+4. **Leading lines: hai phe không đồng thuận, phải trình bày cả hai chiều.** Level Design Book
+   gọi leading lines là "99% brain poison" và phân biệt rõ với sightline (khái niệm họ cho là
+   dùng được thật). Nguyên văn: "Our stance against leading lines / shot composition in level
+   design is currently not the norm in the game industry. While we think it's 99% brain
+   poison, other credible designers disagree." Chính họ THỪA NHẬN các nhà thiết kế uy tín khác
+   không đồng ý với quan điểm này (ví dụ Piaskiewicz và Giesselmann đều dùng leading lines như
+   công cụ chính thống trong bài viết của họ). Bài học PHẢI trình bày cả hai chiều, không chỉ
+   chọn 1 phe.
+5. **Prospect-refuge: Level Design Book phản biện việc bê nguyên lý thuyết kiến trúc vào
+   game.** Họ cho rằng lý thuyết Appleton "có ứng dụng hạn chế trong thiết kế cấp độ" vì rủi
+   ro/an toàn/thông tin trong game khác kiến trúc thực (an toàn trong game là "trạng thái
+   game", không phải thuộc tính cố định của không gian), đề xuất dùng sightline/vista thay
+   prospect và enclosure thay refuge.
+6. **Mirror's Edge dùng màu ĐỎ, không phải màu vàng.** Hệ thống "Runner Vision" của Mirror's
+   Edge dùng màu ĐỎ (đã verify Q11: "Red is an odd choice because it means danger or stop." -
+   Elisabetta Silli, level designer Mirror's Edge, tại GDC "The Tao of Level Design"). Màu
+   VÀNG là đặc trưng của Uncharted (yellow paint/caution tape), KHÔNG phải Mirror's Edge -
+   đừng nhầm lẫn hai game khi viết ví dụ.
+7. **"Architectural weenie" là thuật ngữ của JESSE SCHELL, không phải Totten đặt ra.** Totten
+   TRÍCH LẠI thuật ngữ này từ Jesse Schell (The Art of Game Design: A Book of Lenses, cũng là
+   một trong các designer của Pirates of the Caribbean: Battle for Buccaneer Gold); gốc xa hơn
+   nữa là "weenie" của Walt Disney. Nguyên văn sách Totten: "Jesse Schell, author of The Art
+   of Game Design: A Book of Lenses and one of the designers on Pirates of the Caribbean:
+   Battle for Buccaneer Gold, used the term architectural weenie to describe landmarks used
+   to attract players to goal points in their game." KHÔNG được viết thành "Totten đặt ra
+   thuật ngữ này" hay "Totten sáng tạo khái niệm architectural weenie".
+8. **Totten liệt kê nhầm yếu tố thứ 5 của Lynch là "boundaries" ở câu tóm tắt.** Câu giới
+   thiệu mở đầu trong sách viết: "...organizing cities with these elements: landmarks, paths,
+   nodes, districts, and boundaries." Nhưng TÊN MỤC CON thật sự trong sách (và nội dung triển
+   khai chi tiết) lại dùng đúng từ "Edges" - khớp với thuật ngữ gốc của Lynch (Paths, Edges,
+   Districts, Nodes, Landmarks). Đoạn định nghĩa Edges nguyên văn: "Edges, according to Lynch,
+   are boundaries not formed by paths. They are linear elements that mark a transition from
+   one continuous area or condition to the next." Khi viết bài, dùng đúng "Edges" như 5 yếu tố
+   gốc của Lynch, không dùng "boundaries" (chỉ là cách gọi lỏng ở câu tóm tắt của Totten).
+9. **Quote Q4 và Q8 bị ghép/cắt câu, phải ghi nguyên văn đầy đủ.**
+   - Q4 (Level Design Book, trang Pacing): "Alternate highs and lows." là MỘT HEADING riêng,
+     KHÔNG có phần tiếp ngay sau trong cùng câu. Câu "...use occasional downtime as a contrast
+     and palette cleanser" nằm ở MỘT ĐOẠN KHÁC, nguyên văn đầy đủ: "Players adjust to
+     prolonged periods of high intensity. Any intense boss fight will feel like a slog after
+     10+ minutes. To keep it fresh, use occasional downtime as a contrast and palette
+     cleanser, otherwise the player will simply go numb." Nếu trích 2 cụm này nối bằng dấu
+     "...", phải hiểu đó là 1 heading + 1 câu ở đoạn khác, không phải 1 câu liền mạch.
+   - Q8 (Level Design Book, trang Layout): bản trích lan truyền dùng dấu chấm sau "early."
+     nhưng NGUYÊN VĂN ĐẦY ĐỦ dùng dấu phẩy và câu còn tiếp tục: "A bad bubble diagram is good.
+     That means you found the design problem early, and you can draw another one to try
+     another arrangement." Từ ngữ khớp nhưng dấu câu bị đổi, cắt cụt câu sớm.
+
+## 12. NHẬN ĐỊNH KHÔNG CÓ NGUỒN (PHÂN TÍCH MINH HOẠ)
+
+- **Gated guidance vs implicit guidance** là hai đầu của MỘT phổ liên tục, không phải hai
+  phạm trù tách biệt - hầu hết game kết hợp cả hai ở các điểm khác nhau trong level (ví dụ:
+  cửa khoá ép đi theo một hướng rồi thả implicit cue trong không gian mở hơn). Đây là phân
+  tích/khái quát hoá của người viết, chưa tìm được nguồn học thuật/GDC talk nào định nghĩa
+  chính xác cặp thuật ngữ này theo đúng cách diễn đạt trên.
+- **Negative space** (không gian âm - vùng KHÔNG được chiếu sáng/KHÔNG có chi tiết) có thể
+  dùng ngược để dẫn hướng: làm mọi thứ quanh 1 lối đi trở nên "kém hấp dẫn" để người chơi tự
+  nhiên bị đẩy về phía lối đi được đầu tư chi tiết hơn. Đây là suy diễn từ nguyên lý tương
+  phản (contrast) đã thấy ở Robert Yang và ở khái niệm composition/sightline, CHƯA tìm được
+  nguồn riêng nói thẳng về "negative space" như thuật ngữ kỹ thuật trong level design (khác
+  negative space trong thiết kế đồ hoạ/logo).
+- Ghép "combat → khám phá → puzzle → cutscene" thành 1 chu kỳ nhịp thở chuẩn cho bài học là
+  suy diễn hợp lý từ nguyên tắc "alternate highs and lows" + ví dụ Uncharted 2 xen combat/
+  platforming, nhưng KHÔNG có nguồn nào phát biểu chính xác 4 bước này như công thức chính
+  thức - cần ghi rõ là "mô hình minh hoạ".
+- Gọi tên "safe introduction → variation → combination → twist" song song với Ki/Sho/Ten/Ketsu
+  là cách diễn giải lại bằng thuật ngữ thiết kế hiện đại - KHÔNG xuất hiện nguyên văn trong
+  nguồn Hayashida, là tự phân tích, cần ghi chú rõ trong bài.
+- Không tìm được nguồn nào dùng đúng cụm "reference & mood board" như MỘT BƯỚC RIÊNG có tên
+  gọi riêng, đặt trước bubble diagram trong quy trình level design. Nguồn đã mở (Level Design
+  Book - Overview) chỉ nói chung chung về "pre-production: plan out the big ideas and overall
+  experience design" - reference/mood board có thể là 1 phần của bước này nhưng không có
+  nguồn xác nhận đó là bước tách biệt có tên chính thức (khác quy trình concept art, nơi mood
+  board là thuật ngữ phổ biến hơn).
+- "Làm hành lang xám vô hồn" như một loại sai lầm được đặt tên riêng - không có nguồn trực
+  tiếp, chỉ là suy luận từ khái niệm massing/articulation (World of Level Design nhắc tới
+  massing/articulation như cách tránh cảm giác đều đều, nhưng không có câu quote riêng nói
+  thẳng vấn đề này).
+- Nhận định "UE5 giới thiệu Modeling Mode để THAY THẾ BSP Brushes" - thông tin tổng hợp qua
+  tìm kiếm từ nhiều bài cộng đồng, KHÔNG phải câu tuyên bố chính thức từ trang docs Epic (trang
+  Modeling Mode chính thức không nói câu này).
+- Không tìm được ví dụ mobile game nào có nguồn đã mở đọc thật liên quan trực tiếp tới cấu
+  trúc typology/combat zone (trục B) trong phạm vi thời gian research - không ép thêm ví dụ
+  mobile vào phần này nếu chưa research riêng (ví dụ mobile về pacing đã có ở mục 3 và mục 9,
+  nhưng riêng typology/combat zone thì chưa).
+
+## 13. KHÔNG DÙNG ĐƯỢC (ĐÃ THỬ - SESSION SAU KHỎI THỬ LẠI)
+
+1. **GDC Vault** (nhiều URL, ví dụ gdcvault.com/play/1025179 "Invisible Intuition" - David
+   Shaver; gdcvault.com/play/1022117 "Wayfinding & Storytelling Techniques"; gdcvault.com/play/1023553...)
+   - chỉ hiện trang mô tả/preview, nội dung đầy đủ (transcript/video) yêu cầu đăng nhập/mua
+   GDC Vault Subscription - không thể WebFetch để lấy nội dung đầy đủ. Chỉ có tóm tắt qua báo
+   chí thứ cấp (Game Developer).
+2. **developer.valvesoftware.com/wiki/Hammer** và **.../wiki/Category:Official_Source_2_Tools**
+   - HTTP 403 Forbidden cả 2 lần thử - trang chặn bot/user-agent của tool fetch.
+3. **academia.edu** (PDF "An Architectural Approach to Level Design", Totten) - HTTP 403
+   Forbidden. Đã KHẮC PHỤC bằng cách tải bản PDF thay thế trên archive.org và đọc bằng
+   pdftotext - xem mục 1a. Không cần thử lại academia.edu.
+4. **dokumen.pub** (bản edition 2 sách Totten, full text) - HTTP 403 Forbidden.
+5. **taylorfrancis.com** (trang mono sách Totten) - mở được nhưng chỉ có tiêu đề, không có
+   nội dung/mục lục thật (trang cần JS/paywall).
+6. **Google Books search snippet** cho "architectural weenie" Totten - không trả về đoạn
+   trích thật, chỉ là trang kết quả tìm kiếm rỗng nội dung.
+7. **openlibrary.org/search/inside** cho "architectural weenie" - trả về kết quả từ SÁCH KHÁC
+   (Ludoliteracy của José Zagal, không phải sách Totten) - không dùng được để verify trực tiếp.
+8. **polycount.com/discussion/52412/level-designer-vs-enviro-artist** - HTTP 403 Forbidden -
+   diễn đàn chặn bot fetch.
+9. **gamedesignskills.com/game-development/level-designer-vs-level-environment-artist/** -
+   HTTP 403 Forbidden.
+10. **medium.com/@skaviplay/learning-to-see-8f90aaf079c8** - fetch thất bại ("Command failed
+    with no output"), thử 1 lần - không lấy được nội dung, chỉ còn snippet tìm kiếm (KHÔNG
+    dùng để trích dẫn số liệu "10-15 giây đi bộ" hay "300-400 units" nếu chưa mở lại xác
+    nhận).
+11. **medium.com** bài "The Level Design in Uncharted 4" (Austin Endres) - WebFetch thất bại
+    ("Command failed with no output"), không rõ nguyên nhân (có thể rate-limit hoặc Medium
+    chặn bot). Chưa thử lại.
+12. **https://cdn.cloudflare.steamstatic.com/apps/valve/2006/GDC2006_HL2DesignProcess.pdf**
+    (Valve GDC 2006 "Design Process for Creating Half-Life 2") - tải được file PDF nhị phân
+    nhưng WebFetch KHÔNG trích xuất được text từ PDF linearized này - cần công cụ đọc PDF
+    khác nếu muốn dùng nguồn này (đã thành công với cách này cho sách Totten qua archive.org,
+    có thể thử pdftotext trực tiếp cho file này ở session sau).
+13. **rewardingplay.com** (blog cá nhân Jaime Griesemer) - mở được (HTTP 200) nhưng không có
+    bài viết nào về arena/sandbox/kill zone design trong Halo; các bài hiện có là về thiết kế
+    kẻ địch, balancing, cooldown - không khớp phạm vi trục B.
+14. Sách **"A Playful Production Process"** (Richard Lemarchand, MIT Press, 2021) - không có
+    bản đọc miễn phí online, chỉ thấy trang giới thiệu của NXB và Google Books preview không
+    đầy đủ - không thể mở đọc và trích dẫn nội dung bên trong.
+15. **GDC Vault Half-Life 2 developer commentary** giả định ban đầu gắn với Kim Swift - SAI:
+    Kim Swift thực tế làm Portal, không phải Half-Life 2. Không tìm được đoạn commentary nào
+    của Kim Swift hay ai khác nói trực tiếp về "dùng ánh sáng để dẫn hướng người chơi" trong
+    Half-Life 2. Nếu cần nguồn Half-Life 2 lighting/guidance, phải tìm riêng Valve Developer
+    Wiki hoặc GDC talk khác (chưa thử trong các phiên đã qua).
+16. **Monument Valley** - không tìm được bài nào ustwo/Ken Wong nói cụ thể về "cách dẫn hướng
+    bằng màu sắc/ánh sáng" hay "nhịp độ độ khó giữa các màn" dù đã thử 2 query search + 1
+    WebFetch vào formfiftyfive; các claim kiểu "visual cues guide players" chỉ thấy trong bài
+    phân tích thứ cấp (cleverwasteoftime.com, krasamo.com), không phải lời trực tiếp dev.
+17. **GDC Vault "Designing Monument Valley: Less Game, More Experience"** và **"The Art of
+    Monument Valley 2"** - chỉ có trang mô tả + video, không có transcript mở đọc được miễn
+    phí.

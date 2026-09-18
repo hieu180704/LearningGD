@@ -270,7 +270,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 16,
                 level: "Trung bình",
-                status: "planned"
+                status: "ready"
             },
             {
                 slug: "tang-3/06-ux-onboarding",

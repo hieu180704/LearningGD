@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level design — Xưởng Game Design</title>
+<meta name="description" content="Không biển chỉ đường, không mũi tên HUD — vì sao người chơi vẫn luôn đi đúng hướng? Học cách dùng landmark, ánh sáng và nhịp độ căng-nghỉ để dẫn hướng, và quy trình từ bubble diagram tới blockout, theo Walt Disney, Jesse Schell, Christopher Totten, Jaime Griesemer, Koichi Hayashida.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-3/05-level-design" class="tier-3">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-3">Tầng 3 · Chuyên sâu</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 3 · Bài 05</p>
+            <h1>Level design</h1>
+            <p class="dek">Không biển chỉ đường, không mũi tên HUD — vậy điều gì khiến người chơi luôn đi đúng hướng? Bài này giải mã landmark, ánh sáng, nhịp độ căng-nghỉ, và quy trình dựng một level từ tờ giấy đầu tiên tới bản blockout.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 16 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Trung bình</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="01-systems-design.html">Systems design</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Dùng landmark và ánh sáng để dẫn hướng người chơi</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Thiết kế nhịp độ căng - nghỉ trong một màn chơi</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Blockout một khu vực nhỏ</li>
+                </ul>
+            </div>
+        </header>
+
+        <p>Bạn bước vào một căn phòng lạ trong game. Không mũi tên chỉ đường, không minimap, không biển hiệu nào ghi "lối ra". Vậy mà bạn vẫn tự nhiên đi đúng hướng — mắt bị hút về phía một cánh cửa sáng đèn cuối hành lang, hoặc một toà tháp cao vượt lên khỏi mái nhà xung quanh.</p>
+        <p>Đó không phải may mắn, mà là kết quả của việc ai đó đã dàn dựng không gian bạn đang đứng: chỗ đặt ánh sáng, chỗ đặt vật thể nổi bật, chỗ nào nên căng và chỗ nào nên cho bạn thở. Công việc đó gọi là level design — từ landmark ngoài chân trời tới bản vẽ blockout đầu tiên.</p>
+
+        <h2 id="level-design-la-gi">Level design là gì</h2>
+        <p>Level design là công việc dàn dựng không gian và nhịp độ để tạo ra một trải nghiệm cụ thể — không chỉ là vẽ cho không gian đó đẹp. Một hành lang có thể trông rất đẹp nhưng vẫn là level tệ, nếu người chơi lạc đường liên tục hoặc chán vì không có gì thay đổi nhịp độ.</p>
+        <p>Ranh giới với environment artist khá rõ trong quy trình thực tế: designer dựng blockout — khối hình học thô xác định không gian và luồng di chuyển — rồi environment artist mới tiếp nhận để phủ chi tiết thẩm mỹ lên trên, giữ nguyên ý đồ thiết kế ban đầu. Theo Gorman Dev, environment artist trong một studio AAA <em>"typically manages and handles most of the visual elements seen inside of a level"</em> (quản lý phần lớn yếu tố hình ảnh trong một level) — việc của họ là hình ảnh, không phải luồng chơi.</p>
+
+        <h2 id="dan-huong">Dẫn hướng mà không cần biển chỉ đường</h2>
+        <p>Walt Disney có một mẹo cũ khi quay phim: buộc một khúc xúc xích trước ống kính để con chó của mình luôn chạy đúng hướng. Ông mang mẹo đó sang thiết kế công viên, gọi những công trình cao nổi bật là "weenie" — thứ khiến khách tự muốn đi về phía nó. Disney giải thích: <em>"People won't go down a long corridor unless there's something promising at the end."</em> (người ta sẽ không đi hết một hành lang dài trừ khi có thứ gì hứa hẹn ở cuối đường.)</p>
+        <p>Jesse Schell (tác giả <em>The Art of Game Design</em>) mang khái niệm này vào game, đặt tên "architectural weenie" cho <span class="term" data-en="landmark" tabindex="0">landmark</span> — vật thể hút mắt người chơi về phía mục tiêu. Christopher Totten, trong sách <em>An Architectural Approach to Level Design</em>, trích lại thuật ngữ của Schell rồi nối nó vào khung 5 yếu tố hình ảnh đô thị của Kevin Lynch: Paths, Nodes, Districts, Landmarks và Edges (ranh giới không do đường đi tạo thành). Totten khẳng định: landmark trong khung Lynch và "architectural weenie" là một khái niệm.</p>
+        <p>Ánh sáng cũng dẫn hướng. Robert Yang (GDC 2018) tóm gọn: <em>"Light for player progression, and highlight exits / critical path."</em> (dùng ánh sáng đánh dấu đường tiến trình, làm nổi bật lối ra và <span class="term" data-en="critical path" tabindex="0">critical path</span>.) Ông cảnh báo thêm: đừng để việc chiếu sáng đến phút cuối, coi nó như một bước trang trí — ánh sáng phải tính từ giai đoạn blockout, vì ảnh hưởng trực tiếp tới việc người chơi có đi đúng hướng hay không.</p>
+        <p>Một công cụ khác là <span class="term" data-en="sightline" tabindex="0">sightline</span> — "a trajectory of empty open space that offers a possible view of another space" (khoảng không gian mở cho phép nhìn thấy một không gian khác). Sightline chỉ là công cụ người chơi CÓ THỂ dùng, không đảm bảo họ sẽ nhìn đúng chỗ bạn muốn.</p>
+
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Đứng ở lối vào</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Thấy landmark từ xa</div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Tự đi về phía landmark</div>
+            </div>
+            <figcaption>Landmark không ép người chơi đi đâu — nó chỉ nổi bật hơn phần còn lại, người chơi tự chọn đi về phía nó. Minh hoạ của bài học.</figcaption>
+        </figure>
+
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">Leading lines: hai phe chưa đồng thuận</p>
+                <p>The Level Design Book xếp "leading lines" — dùng bố cục dẫn mắt người chơi theo một hướng — vào diện đáng ngờ: <em>"Our stance against leading lines / shot composition in level design is currently not the norm in the game industry. While we think it's 99% brain poison, other credible designers disagree."</em> Chính họ thừa nhận nhiều nhà thiết kế uy tín khác vẫn dùng nó như công cụ chính thống — chỗ này phải playtest thật, đừng tin chắc lý thuyết bố cục.</p>
+            </div>
+        </div>
+
+        <p>Ví dụ màu sắc: Mirror's Edge dùng hệ thống "Runner Vision" tô màu ĐỎ các bề mặt cần tương tác. Nghe ngược đời — level designer Elisabetta Silli thừa nhận tại GDC: <em>"Red is an odd choice because it means danger or stop."</em> (đỏ là lựa chọn kỳ lạ vì nó thường có nghĩa nguy hiểm hoặc dừng lại.) Đây là màu đỏ của Mirror's Edge — màu vàng là đặc trưng của hệ thống tương tự trong Uncharted, đừng nhầm hai game.</p>
+
+        <h2 id="nhip-do">Nhịp độ: căng và nghỉ</h2>
+        <p>Đơn vị nhỏ nhất của nhịp độ gọi là <span class="term" data-en="beat" tabindex="0">beat</span>: <em>"A beat is a small self-contained chunk of a level. A single area, event, activity, or element."</em> (một beat là một mẩu nhỏ, tự khép kín trong level — một khu vực, sự kiện, hoạt động, hoặc yếu tố.) Nhiều beat nối lại thành nhịp điệu của cả màn.</p>
+        <p>Nguyên tắc cơ bản: xen kẽ cao và thấp. The Level Design Book đặt hẳn một tiêu đề riêng — "Alternate highs and lows." — rồi giải thích ở đoạn khác cùng trang: <em>"Players adjust to prolonged periods of high intensity. Any intense boss fight will feel like a slog after 10+ minutes. To keep it fresh, use occasional downtime as a contrast and palette cleanser, otherwise the player will simply go numb."</em> (người chơi thích nghi với cường độ cao kéo dài — trận boss nào cũng thành nhàm sau hơn 10 phút; thỉnh thoảng cho một quãng nghỉ để làm mới cảm giác, nếu không người chơi sẽ trơ lì.)</p>
+        <p>Câu nói nổi tiếng nhất về nhịp độ có lẽ là "30 seconds of fun" của Jaime Griesemer (Bungie), tại GDC 2002 khi trình bày về Halo: <em>"In Halo 1, there was maybe 30 seconds of fun that happened over and over and over and over again. And so, if you can get 30 seconds of fun, you can pretty much stretch that out to be an entire game."</em> Câu này hay bị trích cụt như thể chỉ cần 30 giây gameplay hay là đủ. Năm 2011, chính Griesemer làm rõ lại: đó là một vòng lặp lồng ba tầng thời gian: <em>"you have a 3-second loop inside of a 30-second loop inside of a 3-minute loop that is always different, so you get a unique experience every time."</em></p>
+        <p>Áp dụng cụ thể: một phân tích Uncharted 2 — không phải phát biểu chính thức của Naughty Dog, mà là phân tích thứ cấp gọi mô hình này là "heartbeat" — chỉ ra toàn game có ba đỉnh cường độ, chỉ một đoạn trũng thấp (thường ngay sau đỉnh cao nhất để tạo tương phản), và cố tình không kết ở đúng lúc cường độ cao nhất để tránh cảm giác trống rỗng.</p>
+        <p>Trên mobile, nhịp độ khó giữ hơn vì mỗi màn rất ngắn. Harry Nesbitt (Lead Artist &amp; Programmer, đội Alto's Odyssey ở Snowman) mô tả kỹ thuật trộn nội dung sinh ngẫu nhiên với những đoạn ông gọi là "hand-crafted" — dàn dựng thủ công — để giữ nhịp độ khỏi đơn điệu hay lặp nhàm chán.</p>
+
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Căng<small>combat</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Nghỉ<small>khám phá</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Căng hơn<small>mini-boss, rồi nghỉ</small></div>
+            </div>
+            <figcaption>Nhịp độ xen kẽ cao-thấp liên tục; đỉnh cao nhất thường không nằm ở cảnh cuối. Minh hoạ của bài học, dựa trên "alternate highs and lows" và phân tích Uncharted 2.</figcaption>
+        </figure>
+
+        <h2 id="hinh-dang">Hình dạng của màn chơi</h2>
+        <p>Level design có một bộ "hình dạng" lặp lại qua nhiều game, gọi là typology — biết tên các dạng này giúp designer trao đổi ý tưởng nhanh, không cần vẽ lại từ đầu mỗi lần.</p>
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Dạng</th><th>Hình dung</th><th>Ví dụ</th><th>Dùng khi nào</th></tr></thead>
+                <tbody>
+                    <tr><td>Corridor</td><td>Hành lang gần như thẳng, ít rẽ nhánh</td><td>P.T.</td><td>Kiểm soát chặt nhịp độ, không để lạc</td></tr>
+                    <tr><td>Hub-and-spoke</td><td>Khu trung tâm, nhiều nhánh toả ra rồi quay lại</td><td>BioShock (Medical Pavilion)</td><td>Người chơi tự chọn thứ tự khám phá, vẫn có một mốc chung</td></tr>
+                    <tr><td>Loopback</td><td>Tuyến tính nhưng vòng lại gần điểm xuất phát</td><td>Dungeon trong Skyrim</td><td>Tạo cảm giác đi trọn một vòng, không quay lại đường cũ</td></tr>
+                    <tr><td>Arena / Combat Bowl</td><td>Không gian mở, nhiều lane và cover ở giữa</td><td>DOOM II, màn "Dead Simple"</td><td>Trọng tâm màn là chiến đấu nhiều kẻ địch cùng lúc</td></tr>
+                    <tr><td>Switchback</td><td>Hành lang cụt, chỉ thấy lối ra khi quay đầu</td><td>Dear Esther</td><td>Tạo bất ngờ nhẹ hoặc kiểm soát góc nhìn lúc quay lại</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Trong màn combat, ba khái niệm hay đi cùng nhau. Cover, định nghĩa: <em>"Any object or structure that blocks a sightline or shields someone from attack."</em> (vật thể chặn sightline hoặc che chắn khỏi hoả lực.) Cover tạo ra <span class="term" data-en="kill zone" tabindex="0">kill zone</span>, theo Josh Bridge: <em>"the area in which the player and/or AI is without cover and can be fired directly upon, and potentially killed."</em> (khu vực không có cover, có thể bị bắn trúng và chết.) Và verticality — dựng combat zone theo chiều dọc — mở thêm lựa chọn chiến thuật giữa bị dồn xuống thấp và chiếm cao điểm.</p>
+
+        <h2 id="day-nguoi-choi">Dạy người chơi qua không gian</h2>
+        <p>Koichi Hayashida, đạo diễn Super Mario 3D Land/3D World, mô tả khuôn 4 bước ông dùng để dạy một cơ chế mới trong một màn Mario: <em>"First, you have to learn how to use that gameplay mechanic, and then the stage will offer you a slightly more complicated scenario in which you have to use it. And then the next step is something crazy happens that makes you think about it in a way you weren't expecting. And then you get to demonstrate, finally, what sort of mastery you've gained over it."</em> (học dùng cơ chế → gặp tình huống phức tạp hơn → có chuyện bất ngờ buộc bạn nghĩ khác đi → cuối cùng được thể hiện mức thành thạo đã đạt.)</p>
+        <p>Hayashida sau đó tự so sánh cấu trúc này với truyện tranh 4 khung Nhật, gọi là kishoutenketsu. Cần nói rõ: ông chỉ nói 4 bước "rất giống" kishoutenketsu, không hề gán nhãn từng bước là ki, sho, ten, ketsu — đây là phép so sánh do chính ông đưa ra để dễ hình dung, không phải một lý thuyết level design có sẵn.</p>
+
+        <h2 id="tu-giay-toi-blockout">Từ giấy tới blockout</h2>
+        <p>Quy trình phổ biến đi qua nhiều lớp nháp rẻ trước khi tốn công dựng hình học 3D: ý tưởng lớn → bubble diagram → bản vẽ mặt bằng 2D trên giấy → <span class="term" data-en="blockout" tabindex="0">blockout</span> 3D → playtest → lặp lại → art pass.</p>
+        <p>Bubble diagram phác nhanh từng khu vực thành một "bong bóng", nối bằng mũi tên thể hiện hướng di chuyển. The Level Design Book khuyến khích vẽ nhiều bản: <em>"A bad bubble diagram is good. That means you found the design problem early, and you can draw another one to try another arrangement."</em> (một bubble diagram tệ lại là điều tốt — nghĩa là bạn phát hiện vấn đề sớm, và có thể vẽ bản khác để thử cách sắp xếp khác.)</p>
+        <p>Steve Lee (level designer Dishonored 2, Arkane) định nghĩa blockout: <em>"The blockout stage is about figuring out what your level is supposed to be by making a rough but representative version of it quickly, testing it, and then iterating on it as much as you can."</em> (tìm ra level của bạn thực chất nên là gì, bằng một bản dựng nhanh, thô nhưng đại diện được, đem test, rồi lặp lại nhiều nhất có thể.)</p>
+        <p>Khi dựng blockout, phải đo không gian theo khả năng thật của nhân vật — gọi là <span class="term" data-en="metrics" tabindex="0">metrics</span>: chiều cao nhảy, tốc độ chạy, chiều rộng hành lang. The Level Design Book nhắc thẳng: <em>"Metrics are useful, but metrics are not magic."</em> (metrics hữu ích, nhưng không phải phép màu.) Quake có bộ số liệu riêng — hành lang tiêu chuẩn "128u+", trần cao "128u" — nhưng đó là con số của MỘT game cụ thể, không phải chuẩn chung.</p>
+        <p>Công cụ cho người mới: giấy và bút vẫn rẻ nhất để thử bố cục trước khi mở phần mềm; Unity ProBuilder dựng khối 3D trực tiếp trong Unity qua Package Manager; Unreal Modeling Mode làm việc tương tự trong Unreal Engine; Tiled dùng cho level 2D dạng tilemap.</p>
+
+        <h2 id="lens">Soi một màn chơi bất kỳ</h2>
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Đọc cách một level dẫn hướng</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Người chơi biết phải đi đâu nhờ cái gì — landmark, ánh sáng, hay sightline?</li>
+                <li><span class="q-icon">?</span> Chỗ nào trong màn là nhịp nghỉ, ngay sau đoạn căng thẳng nhất?</li>
+                <li><span class="q-icon">?</span> Nếu tắt hết HUD và minimap, màn này còn dẫn hướng được không?</li>
+            </ul>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body">
+                <p class="callout-title">5 sai lầm hay gặp trong level design</p>
+                <p><strong>Làm art trước khi blockout xong</strong> — xoá một khối hình học thô rất rẻ, vứt bỏ art đã hoàn chỉnh thì đắt và lãng phí.</p>
+                <p><strong>Không playtest</strong> — phần lớn thời gian dựng blockout không sống sót qua buổi playtest đầu tiên.</p>
+                <p><strong>Không gian quá to so với nhân vật</strong> — dựng theo cảm tính thay vì đối chiếu tốc độ và tầm nhảy thật.</p>
+                <p><strong>Nhồi quá nhiều cover thành mê cung</strong> — cover đặt quá dày khiến người chơi mất khả năng theo dõi toàn cảnh trận đấu.</p>
+                <p><strong>Kết màn đúng lúc cường độ cao nhất</strong> — dễ gây cảm giác trống rỗng ngay sau khi màn hoặc game hạ màn.</p>
+            </div>
+        </div>
+
+        <h2 id="thuc-hanh">Thực hành: blockout một khu vực nhỏ</h2>
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">30 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Người chơi phải tìm chìa khoá mở cửa thoát</h3>
+                <ol class="steps">
+                    <li><span>Vẽ bubble diagram: 3-5 bong bóng (lối vào, khu tìm chìa khoá, cửa thoát...), nối bằng mũi tên thể hiện hướng di chuyển.</span></li>
+                    <li><span>Chuyển bubble diagram thành bản vẽ mặt bằng 2D trên giấy: vẽ tường, cửa, vị trí đặt chìa khoá.</span></li>
+                    <li><span>Blockout khu vực đó bằng khối hình đơn giản — trên giấy, Unity ProBuilder, Unreal Modeling Mode, hoặc Tiled nếu làm 2D. Chỉ cần khối thô, chưa cần chi tiết.</span></li>
+                    <li><span>Đặt một landmark hoặc nguồn sáng để người chơi tự tìm ra hướng tới khu vực chứa chìa khoá — không dùng text hay HUD chỉ dẫn.</span></li>
+                    <li><span>Nhờ một người khác thử đi từ lối vào tới khi lấy được chìa khoá và mở cửa thoát. Ghi lại chỗ nào khiến họ lạc đường.</span></li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Nếu người thử đứng yên nhìn quanh không biết đi đâu: thêm một landmark nhìn thấy được ngay từ điểm bắt đầu, hoặc tăng tương phản ánh sáng giữa lối đúng và lối sai.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+        <div class="quiz" data-answer="b">
+            <p class="q">Câu "30 seconds of fun" của Jaime Griesemer, khi chính ông làm rõ lại vào năm 2011, thực chất mô tả điều gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Một game chỉ cần thiết kế đúng 30 giây nội dung rồi lặp lại y hệt suốt game</button>
+                <button data-opt="b"><span class="badge">B</span> Một vòng lặp lồng ba tầng thời gian — 3 giây trong 30 giây trong 3 phút — luôn khác nhau mỗi lần</button>
+                <button data-opt="c"><span class="badge">C</span> Thời lượng tối thiểu bắt buộc của một cutscene giới thiệu cơ chế mới</button>
+            </div>
+            <div class="explain" hidden><p>Griesemer nói rõ trong phỏng vấn Engadget 2011: nested loop 3 giây/30 giây/3 phút "luôn khác nhau, nên bạn có trải nghiệm độc nhất mỗi lần" — khác hẳn cách hiểu phổ biến (và sai) là "chỉ cần 30 giây gameplay hay là đủ, lặp lại y hệt". Đáp án A là chính hiểu lầm mà câu nói ngắn hay gây ra. Đáp án C không liên quan tới nội dung Griesemer đề cập.</p></div>
+        </div>
+        <div class="quiz" data-answer="c">
+            <p class="q">The Level Design Book gọi leading lines (dùng bố cục dẫn mắt người chơi) là "99% brain poison". Kết luận thực dụng nào đúng với tinh thần tranh luận này?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Không bao giờ được dùng bố cục để dẫn mắt người chơi, vì đã có bằng chứng khoa học phản bác hoàn toàn</button>
+                <button data-opt="b"><span class="badge">B</span> Leading lines là chân lý cần áp dụng ở mọi combat zone</button>
+                <button data-opt="c"><span class="badge">C</span> Đây là vấn đề ngành chưa đồng thuận — phải playtest thay vì tin chắc vào lý thuyết bố cục</button>
+            </div>
+            <div class="explain" hidden><p>Chính The Level Design Book thừa nhận "other credible designers disagree" — tức nhiều nhà thiết kế uy tín khác vẫn coi leading lines là công cụ chính thống. Không có bằng chứng khoa học "phản bác hoàn toàn" nào được đưa ra, nên đáp án A quá tuyệt đối. Đáp án B cũng sai vì bài học nhấn mạnh đây là điểm gây tranh cãi, không phải chân lý.</p></div>
+        </div>
+        <div class="quiz" data-answer="a">
+            <p class="q">Theo định nghĩa đầy đủ của Steve Lee, giai đoạn blockout dùng để làm gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Tìm ra level của bạn thực chất nên là gì, bằng một bản dựng thô nhưng đại diện được, đem test rồi lặp lại</button>
+                <button data-opt="b"><span class="badge">B</span> Hoàn thiện chi tiết ánh sáng và vật liệu trước khi đưa vào bản chính thức</button>
+                <button data-opt="c"><span class="badge">C</span> Thay thế hoàn toàn bước playtest vì blockout đã đủ chính xác</button>
+            </div>
+            <div class="explain" hidden><p>Steve Lee định nghĩa blockout là bước "figuring out what your level is supposed to be" bằng bản dựng thô, rồi test và lặp lại — đúng đáp án A. Đáp án B là công việc của art pass, diễn ra sau blockout. Đáp án C sai vì blockout chính là thứ CẦN được playtest, không thay thế nó.</p></div>
+        </div>
+        <div class="quiz" data-answer="b">
+            <p class="q">Hệ thống "Runner Vision" trong Mirror's Edge dùng màu gì để báo hiệu đường đi, và vì sao Elisabetta Silli gọi đó là lựa chọn "kỳ lạ"?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Màu vàng, vì vàng thường dùng cho cảnh báo công trường</button>
+                <button data-opt="b"><span class="badge">B</span> Màu đỏ, vì đỏ thường có nghĩa nguy hiểm hoặc dừng lại</button>
+                <button data-opt="c"><span class="badge">C</span> Màu xanh lá, vì xanh lá thường có nghĩa an toàn nên gây hiểu lầm ngược</button>
+            </div>
+            <div class="explain" hidden><p>Silli nói thẳng: "Red is an odd choice because it means danger or stop" — Mirror's Edge dùng màu đỏ. Đáp án A nhầm với Uncharted, nơi dùng màu vàng (yellow paint) cho các bề mặt leo trèo. Đáp án C không khớp với bất kỳ nguồn nào về Mirror's Edge.</p></div>
+        </div>
+
+        <h2 id="flashcard">Ôn nhanh</h2>
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Weenie / landmark</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Vật thể nổi bật đặt ở vị trí chiến lược để "vẫy gọi" người chơi đi về hướng đó mà không cần biển báo. Gốc từ mẹo xúc xích điều khiển chó của Walt Disney; Jesse Schell gọi phiên bản trong game là "architectural weenie".</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Sightline</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Một khoảng không gian mở cho phép nhìn thấy một không gian khác — công cụ người chơi CÓ THỂ dùng để định hướng, không đảm bảo họ sẽ nhìn đúng chỗ (The Level Design Book).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Beat</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Đơn vị nhỏ nhất của nhịp độ trong một level — một khu vực, sự kiện, hoạt động hoặc yếu tố tự khép kín. Nhiều beat nối lại thành nhịp điệu của cả màn (The Level Design Book).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Blockout</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Bản dựng thô bằng khối hình học đơn giản để tìm ra level thực chất nên là gì, đem test rồi lặp lại — trước khi tốn công làm art (Steve Lee, Arkane).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Metrics</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Số đo không gian dựa theo khả năng thật của nhân vật — chiều cao nhảy, tốc độ chạy, chiều rộng hành lang. "Hữu ích nhưng không phải phép màu" (The Level Design Book).</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Critical path</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Tuyến đường lý tưởng gồm nội dung bắt buộc của trải nghiệm người chơi, bỏ qua các khu vực tuỳ chọn — còn gọi là "golden path" (The Level Design Book).</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại bài</h2>
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Landmark và ánh sáng dẫn hướng không cần HUD (Walt Disney; Jesse Schell qua Totten; Robert Yang) — nhưng leading lines vẫn là vùng tranh cãi giữa các nhà thiết kế, phải playtest thay vì tin chắc lý thuyết bố cục.</li>
+                <li><span class="n">2</span> Nhịp độ cần xen kẽ cao - thấp theo từng beat; "30 seconds of fun" của Griesemer thực chất là một vòng lặp lồng ba tầng thời gian, không phải "30 giây là đủ".</li>
+                <li><span class="n">3</span> Càng phát hiện vấn đề sớm càng rẻ — bubble diagram tệ là dấu hiệu tốt, blockout dùng để tìm ra level nên là gì trước khi làm art, và metrics phải đo theo khả năng nhân vật, không theo cảm tính.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+        <ul class="reading">
+            <li>
+                <span class="pill type-sach">Sách</span>
+                <a class="reading-title" href="https://ia801505.us.archive.org/16/items/random-papers2/An%20Architectural%20Approach%20to%20Level%20Design.pdf" target="_blank" rel="noopener">An Architectural Approach to Level Design — chương 3, Basic Gamespaces</a>
+                <span class="reading-meta">Christopher Totten · CRC Press, 1st edition</span>
+                <p class="reading-why">Nguồn gốc "architectural weenie" (trích lại từ Jesse Schell) và khung 5 yếu tố Kevin Lynch áp vào sandbox gamespace.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://en.wikipedia.org/wiki/Weenie_(design)" target="_blank" rel="noopener">Weenie (design)</a>
+                <span class="reading-meta">Wikipedia</span>
+                <p class="reading-why">Câu chuyện gốc và quote của Walt Disney, John Hench về weenie.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.blog.radiator.debacle.us/2018/03/gdc-2018-how-to-light-level-slides-and.html" target="_blank" rel="noopener">GDC 2018: How To Light A Level, slides and transcript</a>
+                <span class="reading-meta">Robert Yang · Radiator Blog, 2018</span>
+                <p class="reading-why">Quy trình chiếu sáng dẫn hướng người chơi, cảnh báo không để ánh sáng đến phút cuối.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.engadget.com/2011-07-14-half-minute-halo-an-interview-with-jaime-griesemer.html" target="_blank" rel="noopener">Half-Minute Halo: An Interview With Jaime Griesemer</a>
+                <span class="reading-meta">Engadget, 2011</span>
+                <p class="reading-why">Nguồn đầy đủ của "30 seconds of fun" và nested loop 3 giây/30 giây/3 phút.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://book.leveldesignbook.com/process/blockout/massing/composition" target="_blank" rel="noopener">Composition</a>
+                <span class="reading-meta">The Level Design Book</span>
+                <p class="reading-why">Định nghĩa sightline và tranh luận về leading lines dùng xuyên bài.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://book.leveldesignbook.com/process/preproduction/pacing" target="_blank" rel="noopener">Pacing</a>
+                <span class="reading-meta">The Level Design Book</span>
+                <p class="reading-why">Định nghĩa beat và nguyên tắc xen kẽ cường độ cao thấp.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://book.leveldesignbook.com/process/layout/typology" target="_blank" rel="noopener">Typology</a>
+                <span class="reading-meta">The Level Design Book</span>
+                <p class="reading-why">Các dạng bố cục màn chơi và ví dụ game dùng trong bảng so sánh.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/the-secret-to-i-mario-i-level-design" target="_blank" rel="noopener">The Secret to Mario Level Design</a>
+                <span class="reading-meta">Koichi Hayashida · Gamedeveloper.com, 2012</span>
+                <p class="reading-why">Nguồn 4 bước dạy cơ chế trong một màn Mario và liên hệ kishoutenketsu.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/from-pen-and-paper-to-blockouts-how-level-designers-craft-iconic-stealthy-encounters" target="_blank" rel="noopener">From pen-and-paper to blockouts: How level designers craft iconic stealthy encounters</a>
+                <span class="reading-meta">Steve Lee, Zi Peters · Gamedeveloper.com</span>
+                <p class="reading-why">Định nghĩa blockout và giá trị của bước giấy trước khi dựng hình học thật.</p>
+            </li>
+            <li>
+                <span class="pill type-bai">Bài viết</span>
+                <a class="reading-title" href="https://www.gamedeveloper.com/design/anatomy-of-a-combat-zone" target="_blank" rel="noopener">Anatomy of a Combat Zone</a>
+                <span class="reading-meta">Josh Bridge · Gamedeveloper.com, 2009</span>
+                <p class="reading-why">Định nghĩa combat zone, kill zone, verticality dùng trong phần hình dạng màn chơi.</p>
+            </li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>
