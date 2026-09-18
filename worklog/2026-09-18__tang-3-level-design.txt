@@ -1,0 +1,35 @@
+WORKLOG 2026-09-18 — Tầng 3 bài 05 Level design
+
+SUMMARY: Viết xong bài Tầng 3/05 Level design + research/level-design.txt (commit c8ea485).
+check-site.js 0 lỗi, thẻ HTML cân bằng (script riêng), 29/29 quote tiếng Anh khớp nguyên văn
+research (đối chiếu bằng script), đã tự xem ảnh desktop + mobile × sáng + tối — layout PASS
+sau khi sửa 1 lỗi wrap sơ đồ. CHƯA có người đọc thật duyệt nội dung sư phạm.
+
+ĐÃ LÀM
+1. Research 5 vòng subagent (3 trục song song + 1 vòng verify quote + 1 vòng bịt lỗ) →
+   research/level-design.txt (691 dòng, 40 nguồn, 14 mục). Mục 11 "Bẫy khái niệm" ghi 9 lỗi
+   trích dẫn kèm nguyên văn đúng — đọc mục này trước nếu bài sau đụng lại chủ đề level design.
+2. Verify quote bằng curl + grep HTML thô (KHÔNG dùng WebFetch — nó tóm tắt qua model nhỏ nên
+   chữ bị đổi). Kết quả: 7/11 khớp 100%, 3 quote bị ghép/cắt câu, 1 quote LỆCH dấu câu
+   (Steve Lee về blockout). Bản trong bài dùng nguyên văn đúng.
+3. Đọc được toàn văn sách Totten (tr.136-142) qua PDF archive.org + pdftotext → xác nhận
+   "architectural weenie" là thuật ngữ của JESSE SCHELL (Totten trích lại), và Totten nói
+   landmark của Kevin Lynch với weenie là một khái niệm.
+4. Viết lessons/tang-3/05-level-design.html (383 dòng, đủ 12 phần), bật curriculum.js
+   status -> "ready" SAU khi file bài đã tồn tại.
+5. Thêm 1 dòng cho bài mới vào tools/shoot.ps1 (danh sách trang hardcoded).
+
+ĐÃ VẤP TRONG SESSION NÀY
+- tools/shoot.ps1 có danh sách trang HARDCODE. Chạy lần đầu nó im lặng chụp hết các bài CŨ
+  và KHÔNG chụp bài mới — không báo lỗi gì. Phải tự thêm dòng cho bài mới rồi chạy lại.
+  check-site.js không bắt được thiếu sót này. Bài sau nhớ thêm dòng NGAY sau khi tạo file bài.
+- Sơ đồ .mda-diagram dùng 4 khối bị wrap xuống dòng trên desktop, để lại mũi tên chỉ vào
+  khoảng trống. Nguyên nhân: .mda-block có flex-basis 140px, 4 khối + 3 mũi tên vượt bề rộng
+  cột (~615px). Toàn site từ trước chỉ dùng 3 khối một chuỗi. Đã đưa về 3 khối.
+  => Quy ước: chuỗi mda-diagram TỐI ĐA 3 khối.
+
+CÒN LẠI
+- Tầng 3 còn bài 06 (UX và onboarding) và 07 (Narrative design), đều status "planned".
+- Chưa có research cho 2 bài này.
+
+SHA: c8ea485
