@@ -1,0 +1,45 @@
+WORKLOG 2026-09-18 — Tầng 3 bài 07 + Tầng 4 bài 03
+
+SUMMARY: Viết xong Tầng 3/07 Narrative design và Tầng 4/03 Đạo đức thiết kế và dark patterns,
+kèm 2 file research. check-site.js 0 lỗi, thẻ HTML cân bằng (script riêng), 9/9 quote dùng trong
+hai bài đã tự curl/pdftotext nguồn gốc rồi so byte HAI CHIỀU (bài ↔ nguồn), đã tự xem ảnh
+desktop + mobile × sáng + tối — layout PASS. CHƯA có người đọc thật duyệt nội dung sư phạm.
+
+ĐÃ LÀM
+1. Tầng 3/07 Narrative design (SHA 3633e6d) — hết Tầng 3. Quote dùng: Smith & Worch GDC 2010
+   (PDF worch.com), Jenkins (MIT), Hocking, Kuelz, Spector. research/narrative-design.txt.
+2. Tầng 4/03 Đạo đức thiết kế và dark patterns (SHA 74b9bcc). Quote dùng: Zagal/Björk/Lewis
+   FDG 2013, FTC 2023, Susser/Roessler/Nissenbaum 2019, Kahneman & Tversky 1979.
+   research/dao-duc-dark-patterns.txt. Có mục phản biện F2P (Alha et al., DiGRA Nordic 2014)
+   để bài không thành bài giảng đạo.
+3. CLAUDE.md mục 8: thêm 4 bẫy mới (58a1715), rồi gộp bẫy li-flex thành 1 gạch đầu dòng
+   kèm case .recap (a30bd6c).
+4. Cả 2 bài: thêm dòng vào $pages trong tools/shoot.ps1 NGAY sau khi tạo file bài, rồi mới
+   bật curriculum.js status -> "ready". Đối chiếu cuối: 23 entry $pages ↔ 23 file .html, khớp.
+
+ĐÃ VẤP TRONG SESSION NÀY
+- Tự gõ nháy thẳng ' trong quote tiếng Anh ở chính bài mình viết (Fortnite's, person's) trong
+  khi nguồn dùng U+2019. Mắt không thấy, chỉ script so byte hai chiều bắt được. => Luôn chạy
+  script so byte SAU KHI viết bài, không chỉ lúc research.
+- ftc.gov trả HTTP 503 cho curl (chặn bot), nên lời subagent tự khai "đã curl trực tiếp
+  ftc.gov" không đứng vững. Lấy được nguyên văn qua bản lưu trữ Wayback dạng raw
+  (web.archive.org/web/<năm>id_/<url>) kèm cờ --compressed.
+- .recap li cũng là flex container giống ol.steps li, nên <strong> inline trong recap bị xé
+  thành cột. Cùng một gốc lỗi, vấp 2 lần trong 1 session.
+- Subagent để rơi file wb_dp_2011.html (snapshot Wayback) vào repo root. check-site.js bắt
+  được vì file đó chứa link gãy. Đã xóa. => Sau mỗi lượt research phải git status kiểm file lạ.
+
+SỬA NỘI DUNG SO VỚI BẢN SUBAGENT GIAO (bài 4/03)
+- Bỉ: subagent viết "Gaming Commission tuyên loot box là game of chance". Trang chính thức
+  chỉ nói báo cáo 2018 "examined whether" — bài viết theo đúng mức độ đó.
+- FTC: 245 triệu (dark pattern) và 275 triệu (COPPA) là HAI dàn xếp riêng. Bài nói rõ điều này
+  và cảnh báo lỗi cộng thành "520 triệu vì dark pattern".
+- Loại khỏi bài mọi số liệu không mở được nguồn gốc: vốn hoá Nhật sau lệnh cấm kompu gacha,
+  năm phán quyết toà Hà Lan, quote EA Battlefront qua báo chí, bản gốc Skinner / sunk cost /
+  endowed progress (paywall).
+
+CÒN LẠI
+- Tầng 4 bài 04 Mổ xẻ game (status "planned", chưa có research)
+- Tầng 4 bài 05 Portfolio và con đường, Capstone 01 Thiết kế game nhỏ
+- Repo chưa có repo-params.json cho skill session-close — đang chạy bằng param suy ra
+  (worklogDir=worklog/, không có handoffsDir). Chờ user quyết có tạo file đó không.
