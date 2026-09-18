@@ -1,0 +1,591 @@
+RESEARCH — PORTFOLIO VÀ CON ĐƯỜNG SỰ NGHIỆP (Tầng 4, bài 05)
+Ngày: 2026-09-18
+
+CẢNH BÁO ĐỌC TRƯỚC KHI DÙNG FILE NÀY
+- Phần thân (TRỤC A, TRỤC B) do subagent viết. Nội dung CHỮ đã được main so byte với nguồn
+  gốc, nhưng KÝ TỰ trong phần thân KHÔNG đáng tin: 9/17 quote của trục B bị làm phẳng nháy
+  cong (’ → ', “ ” → ") ngay trong file gốc của subagent.
+- MUỐN TRÍCH DẪN VÀO BÀI: chỉ được copy từ mục "FIXTURE QUOTE" ở CUỐI FILE này. Fixture lấy
+  byte trực tiếp từ nguồn (curl HTML thô / pdftotext), không ai gõ tay ký tự nào.
+
+KẾT QUẢ SO BYTE (main tự chạy, 2026-09-18)
+- Trục A: 12/12 quote khớp nguồn. (1 quote ban đầu báo lệch là false-negative do stripper HTML
+  chèn space ở ranh giới thẻ </a> — đã xác minh trên HTML thô, quote đúng.)
+- Trục B: 16/17 quote dùng được. 1 quote bị LOẠI: nguồn Schubert viết dính chữ
+  "hisorganization", subagent âm thầm sửa thành "his organization" — đúng kiểu lỗi "làm mượt
+  lỗi trong nguồn" đã ghi ở worklog. Không dùng quote đó.
+- 1 quote Valve bị pdftotext chèn caption "Fig. 4-2" vào giữa câu; fixture đã gỡ caption.
+
+NGUỒN GỐC ĐÃ CURL (7)
+  levy2     https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+  levy5     https://www.gamedeveloper.com/design/breaking-into-game-design-part-5---prepare-to-interview
+  sloper    https://www.gamedesignworkshop.com/applying-for-a-job-in-game-design
+  fullerton https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+  baldwin   https://www.gamedeveloper.com/disciplines/career-paths-in-the-game-industry
+  schubert  http://www.zenofdesign.com/senior-designer/
+  valve     http://media.steampowered.com/apps/valve/Valve_Handbook_LowRes.pdf
+
+================================================================================
+TRỤC A — PORTFOLIO & TUYỂN DỤNG DESIGNER
+
+NGUỒN ĐÃ MỞ ĐỌC THẬT
+- https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio — tác giả Ethan Levy (cựu hiring manager tại BioWare San Francisco, sau này làm indie dev game "Enhanced Wars"), đăng 21/6/2013. Đã tự curl HTML thô và bóc text, đọc trực tiếp (không qua WebFetch/tóm tắt).
+- https://www.gamedeveloper.com/design/breaking-into-game-design-part-5---prepare-to-interview — cùng tác giả Ethan Levy, đăng 12/7/2013. Đã curl + đọc trực tiếp.
+- https://www.gamedesignworkshop.com/applying-for-a-job-in-game-design — tác giả Tom Sloper (Senior Lecturer, USC Viterbi; cựu designer/producer/director tại Sega, Atari, Activision, Rudell Design). Đây là site chính thức đi kèm sách "Game Design Workshop" của Tracy Fullerton (footer ghi "Copyright 2018-25 Tracy Fullerton"). Đã curl + đọc trực tiếp.
+- https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop — trích đoạn sách "Game Design Workshop" bản in lần 5 (2024), tác giả Tracy Fullerton (giáo sư, đạo diễn danh dự chương trình USC Games), đăng 18/4/2024. Đã curl + đọc trực tiếp.
+
+Ngày truy cập tất cả nguồn trên: 18/9/2026.
+
+Ghi chú phương pháp: mọi trích dẫn dưới đây lấy từ HTML thô tải bằng `curl`, bóc thẻ HTML bằng script Node cục bộ (chỉ xóa tag, không diễn giải qua model nào), rồi đọc trực tiếp bằng Read tool — không dùng WebFetch cho phần trích dẫn nguyên văn, đúng quy tắc "không tin WebFetch với quote".
+
+---
+
+## A1. Portfolio designer khác gì artist/programmer — vì sao phải trình bày quá trình tư duy — nhà tuyển dụng tìm gì
+
+- Levy (cựu hiring manager BioWare) mô tả rõ sự mơ hồ đặc thù của portfolio designer, khác với art/code là có sản phẩm hữu hình dễ đánh giá trực quan:
+
+QUOTE:
+It can be difficult to know what to put in a design portfolio, as there are no standards for what a good design document is or how a game economy should be laid out.
+NGUỒN: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+NEO: If your professional experience is minimal or non-existant
+ĐỘ TIN: CAO
+
+- Vì thiếu chuẩn hình thức, Levy nói ông không đánh giá qua tuyên bố/hoạt động ngoại khóa mà chỉ qua bằng chứng năng lực thiết kế thật sự:
+
+QUOTE:
+I only care about proof of your design abilities.
+NGUỒN: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+NEO: your summer job in a completely unrelated industry.
+ĐỘ TIN: CAO
+
+- Levy xác nhận trọng số cực lớn của portfolio trong việc lọc hồ sơ (so với resume/hoạt động khác):
+
+QUOTE:
+A high quality portfolio was the single biggest factor in landing a phone interview.
+NGUỒN: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+NEO: another studio. Sometimes the candidate already had.
+ĐỘ TIN: CAO
+
+- Ba tiêu chí Levy liệt kê để chứng minh năng lực designer qua một game đã hoàn thành — bản chất là chứng minh QUÁ TRÌNH (hoàn thành, lắng nghe người chơi, kể được câu chuyện cải tiến), không chỉ sản phẩm cuối:
+
+QUOTE:
+You know how to finish a game and release it to the world
+You took the time to listen to your players, either through metrics, comments, reviews or other feedback
+You can tell a meaningful story about how you improved your game based on player feedback
+NGUỒN: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+NEO: than being able to show that:
+ĐỘ TIN: CAO
+
+- Sloper (USC, cựu designer/producer nhiều studio) mô tả điều nhà tuyển dụng thực sự đánh giá qua toàn bộ buổi phỏng vấn (không riêng portfolio) là năng lực làm việc + giao tiếp, không phải bằng cấp hay vẻ ngoài:
+
+QUOTE:
+What the company is looking for is hard working, smart, capable communicators first and foremost.
+NGUỒN: https://www.gamedesignworkshop.com/applying-for-a-job-in-game-design
+NEO: Be eager, attentive, and charming (but not smarmy).
+ĐỘ TIN: CAO
+
+- Fullerton (sách Game Design Workshop, bản in 5) định nghĩa tư duy designer gắn liền với QUY TRÌNH chứ không phải kỹ năng thực thi đơn lẻ — đây là câu về bản chất nghề, không phải câu nói riêng về portfolio, nhưng lý giải trực tiếp vì sao portfolio designer phải phơi bày process:
+
+QUOTE:
+Having a good solid process for developing an idea from the initial ideation process into a playable and satisfying game experience is another key to thinking like a game designer.
+NGUỒN: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+NEO: Offer is valid through July 4, 2024. A Playcentric Design Process
+ĐỘ TIN: CAO
+
+NHẬN XÉT TỔNG HỢP (của người viết research, suy ra từ các nguồn trên, không phải trích dẫn trực tiếp — [CHƯA VERIFY] ở mức "so sánh trực diện với portfolio artist/programmer"):
+- Không nguồn nào trong danh sách trên NÓI THẲNG câu "portfolio designer khác artist/programmer ở chỗ X" — đây là suy luận tổng hợp từ việc (a) Levy nói portfolio designer thiếu chuẩn hình thức thống nhất (khác ảnh/demo reel của artist hay repo code chạy được của programmer — thứ có thể "nhìn là biết được/chạy được"), và (b) cả Levy lẫn Fullerton đều nhấn mạnh quá trình/lặp lại (iteration) là cốt lõi của tư duy designer. Người viết bài nên tự đóng khung ý này là "phân tích", không gán nhãn là trích dẫn nguyên văn của một tác giả cụ thể.
+
+---
+
+## A2. Chọn nội dung đưa vào portfolio
+
+- Số lượng mục — Sloper đưa con số cụ thể và lý do (đừng làm hirer ngợp):
+
+QUOTE:
+Just the best stuff, though. At least 10 items, and no more than 20. You want to wow the hirer, not smother him or her under an avalanche.
+NGUỒN: https://www.gamedesignworkshop.com/applying-for-a-job-in-game-design
+NEO: shows off your creativity and desirability as a job candidate.
+ĐỘ TIN: CAO
+
+- Ưu tiên dự án đã hoàn thành (shipped) hơn dự án tham vọng dở dang — Levy nêu quan điểm cá nhân rất cụ thể (một sinh viên nên có 1 game đã phát hành trên app store cho mỗi năm học):
+
+QUOTE:
+The best possible thing to have in your portfolio is shipped games. With tools like Unity and Game Maker Studio and the ease of self publishing, it is my opinion that a prospective game designer should exit college with one game on the app store for each year in school.
+NGUỒN: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+NEO: how a game economy should be laid out.
+ĐỘ TIN: CAO
+
+- Levy cũng cảnh báo thẳng về rủi ro dự án nhóm dở dang (kinh nghiệm cá nhân: rủ được người nhưng không ai hoàn thành), khuyên tự làm game nhỏ nhưng hoàn chỉnh trước khi tin tưởng làm nhóm lớn (paraphrase, không phải quote nguyên văn — đọc trực tiếp từ nguồn):
+  "Building a proper portfolio will take months, if not years... Unless you have a team you truly trust, my advice is to start out by making small but completed and polished games that you can build on your own." — ý chính: ưu tiên game nhỏ tự làm hoàn chỉnh hơn dự án nhóm to nhưng dang dở, trừ khi có team đã tin tưởng thật.
+
+- Vai trò của prototype nhỏ — Fullerton mô tả cụ thể hình thức và mục đích của physical prototype trong quy trình playcentric (không nói trực tiếp về portfolio, nhưng là mô tả gốc về giá trị của prototype nhỏ mà bài học có thể liên hệ):
+
+QUOTE:
+I encourage designers to construct a playable version of their idea immediately after brainstorming ideas. By this I mean a physical prototype of the core game mechanics. A physical prototype can use paper and pen or index cards or even be acted out. It is meant to be played by the designer and her friends. The goal is to play and perfect this simplistic model before a single line of code or art asset is ever made.
+NGUỒN: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+NEO: ideas should be prototyped and playtested early.
+ĐỘ TIN: CAO
+
+- Vai trò của bài phân tích/mổ xẻ game trong portfolio — Levy liệt kê rõ các loại tài liệu ngoài "game hoàn chỉnh" mà designer nên có, trong đó "Game balance evaluation" chính là dạng bài phân tích/mổ xẻ game có sẵn:
+  "Game balance evaluation - much of a designer's job is tuning and balancing game variables. Pick a game and write a report evaluating balance of a particular system or economy. Take detailed notes on multiple play sessions, compile and summarize fan and review feedback and come up with a series of recommendations on how this system's balance can be improved." (paraphrase sát nguyên văn để tránh lỗi ghép câu — nếu dùng làm quote trong bài phải copy lại chính xác từ URL trên, đoạn này khá dài nên không đóng khung QUOTE ở đây để tránh rủi ro sao chép sai khi chuyển file).
+  Các loại tài liệu khác Levy liệt kê cùng mục: Game Treatment (5-7 trang), Feature Brief (kèm UI wireframe), UI/UX redesign, System balance spreadsheet, Pen & Paper prototype có ghi chú quá trình. Nguồn: cùng URL trên.
+
+- Cách chọn nội dung theo mục tiêu nghề nghiệp cá nhân (Levy gọi là "your mountain" — mục tiêu/định hướng cụ thể đã đặt ra ở phần đầu series):
+
+QUOTE:
+What you build for your portfolio is highly dependent on your mountain.
+NGUỒN: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+NEO: it's time to learn! Feature portfolio material
+ĐỘ TIN: CAO
+
+- Trình bày đóng góp cá nhân trong dự án nhóm: không tìm được nguồn gốc nào trong 4 nguồn trên bàn trực diện vào việc "làm sao tách bạch đóng góp cá nhân khi portfolio là sản phẩm của cả team" — xem mục cuối.
+
+- Sloper: KHÔNG để concept game (game concept docs) trong portfolio bản giấy vì rủi ro pháp lý (unsolicited submission), nhưng ok để trong portfolio online công khai:
+  "Do not include any game concepts in a paper game design portfolio... Written game concepts handed to a company representative might be construed as an unsolicited concept submission, which could theoretically make the game company subject to a lawsuit from you if they ever did anything similar to your concept. So don't have any game concept docs in your paper portfolio. It's okay to put them in your online portfolio, though, because that's a public place viewable by anyone." (paraphrase gần nguyên văn, không đóng khung QUOTE vì đoạn dài ghép từ 2 câu cách nhau — muốn trích nguyên văn phải copy lại chính xác từng câu từ URL, không ghép bằng dấu ba chấm).
+
+---
+
+## A3. Bài test thiết kế (design test) và phỏng vấn designer
+
+- Dạng đề bài phổ biến theo Sloper — phân biệt rõ với test của QA/programmer, và mô tả cụ thể dạng bài của design applicant (viết hoặc trình bày miệng một bài phân tích/bình luận thiết kế game):
+
+QUOTE:
+You may interview with multiple individuals, separately or in a group. And you may be given a test. QA applicants get communication tests, programmer candidates get programming tests, and design applicants may be asked to write or extemporize a game analysis or design commentary. Be prepared with knowledge of the company's games, and be creative and eager for the test.
+NGUỒN: https://www.gamedesignworkshop.com/applying-for-a-job-in-game-design
+NEO: and what you say during the interview.
+ĐỘ TIN: CAO
+
+- Levy (Part 5, kinh nghiệm phỏng vấn ứng viên design cho Dragon Age Legends) nêu một sai lầm cụ thể rất hay gặp: ứng viên KHÔNG chơi thử game của chính studio mình đang ứng tuyển — ông nói điều này gần như loại ứng viên ngay lập tức (paraphrase từ nguồn, đọc trực tiếp, không đặt trong ngoặc kép vì đây là diễn giải lại nhiều câu):
+  Levy kể lại việc phỏng vấn ứng viên vị trí design cho Dragon Age Legends (game đang vận hành lúc đó) nhưng ứng viên chưa từng chơi game đó, hoặc chưa chơi bất kỳ game free-to-play nào của studio — ông viết trong hầu hết trường hợp điều này "loại ứng viên ngay trong đầu ông" (instantly disqualify). Lời khuyên đi kèm: chơi thử game của studio ít nhất 20 phút trước khi phỏng vấn, tìm hiểu người sẽ phỏng vấn mình đã từng làm game gì.
+  Nguồn: https://www.gamedeveloper.com/design/breaking-into-game-design-part-5---prepare-to-interview
+
+- Sai lầm khi TRÌNH BÀY portfolio lúc phỏng vấn (Sloper) — không nên tự giải thích lan man, không nên xin lỗi về nội dung trong portfolio:
+
+QUOTE:
+Let the interviewer view the portfolio at his or her own pace; do not explain a work unless asked to. Never apologize for anything in your portfolio. If it contains anything that needs apology, leave it out.
+NGUỒN: https://www.gamedesignworkshop.com/applying-for-a-job-in-game-design
+NEO: that's a public place viewable by anyone.
+ĐỘ TIN: CAO
+
+- Tiêu chí CỤ THỂ mà người chấm design test dùng để chấm điểm (rubric, thang điểm, checklist nội bộ của một studio thật): KHÔNG tìm được nguồn gốc đủ tin — xem mục cuối.
+
+---
+
+## MẢNG KHÔNG TÌM ĐƯỢC NGUỒN TIN CẬY
+
+- A1: không có nguồn gốc (sách/blog tác giả tên tuổi/GDC talk mở được) nói THẲNG và SO SÁNH TRỰC DIỆN "portfolio designer khác portfolio artist/programmer ở điểm cụ thể nào" — phần này trong file là suy luận tổng hợp từ các quote khác, đã ghi rõ là suy luận, không phải trích dẫn.
+- A2: không tìm được nguồn gốc bàn riêng về kỹ thuật "trình bày đóng góp cá nhân trong dự án nhóm" (ví dụ: cách ghi chú "phần tôi làm là X" trong game do nhiều người làm) — các nguồn có thảo luận việc show game đã ship, nhưng không nói cụ thể cách tách bạch vai trò cá nhân khi sản phẩm là của nhóm.
+- A3: không tìm được nguồn nào công bố RUBRIC/tiêu chí chấm điểm cụ thể của một studio thật cho design test (kiểu "chúng tôi chấm theo các mục A, B, C"). Các GDC Vault talk có tên phù hợp (vd "Get Into Game Dev: Crafting a Bespoke Resume and Portfolio", "Killer Portfolio or Portfolio Killer") đều yêu cầu tài khoản/membership GDC Vault để xem, không có transcript công khai kiểm chứng được nên KHÔNG đưa nội dung vào bài.
+- A3: không xác nhận được thời gian làm bài test (vd "1-2 tuần") từ nguồn gốc tên tác giả cụ thể — các trang có nói con số này (gamedesignskills.com và tương tự) là site tổng hợp SEO, không đạt tiêu chuẩn nguồn theo yêu cầu, nên bỏ qua không đưa vào.
+- Không tìm được nguồn chính chủ nào từ Riot/Valve mô tả cụ thể quy trình design test tuyển dụng — trang Riot Games Internship Study Guide đọc được nhưng nội dung chủ yếu về logistics chương trình internship nói chung, không có chi tiết đặc thù về design test/portfolio đủ để trích dẫn an toàn (không quote để tránh gán sai chi tiết cho công ty thật).
+
+
+================================================================================
+
+TRỤC B — CON ĐƯỜNG SỰ NGHIỆP DESIGNER
+
+MỤC LỤC
+1. Nguồn đã mở đọc thật
+2. B1 — Quỹ đạo nghề: junior → mid → senior → lead
+3. B2 — Ngã ba đường: individual contributor vs quản lý/lead
+4. B3 — Chuyên môn hoá: generalist vs specialist
+5. Mảng không tìm được nguồn tin cậy
+
+========================================
+1. NGUỒN ĐÃ MỞ ĐỌC THẬT
+========================================
+- Valve Corporation. "Handbook for New Employees." First Edition, 2012. PDF gốc:
+  http://media.steampowered.com/apps/valve/Valve_Handbook_LowRes.pdf
+  (đọc toàn văn trực tiếp từ lớp text của PDF, không qua tóm tắt). Truy cập 2026-09-18.
+- Mark Baldwin (nhà thiết kế/phát triển/quản lý game kỳ cựu). "Career Paths in the Game
+  Industry." Gamasutra / Game Developer, xuất bản 2006-07-10.
+  https://www.gamedeveloper.com/disciplines/career-paths-in-the-game-industry
+  (tải HTML thô bằng curl, strip thẻ HTML bằng sed, grep xác nhận từng câu trích nguyên văn
+  và ngày xuất bản trong JSON nhúng của trang: "datePublished":"2006-07-10"). Truy cập 2026-09-18.
+- Damion Schubert (Lead Designer, Star Wars: The Old Republic, BioWare Austin; trước đó là
+  Lead Designer Meridian 59 và Ultima Online 2). "The Senior Designer Mindset." Zen Of Design,
+  đăng 2011-11-19. Bản gốc in trong Game Developer magazine, số tháng 11/2011 (bài tự ghi rõ
+  điều này ở đầu bài).
+  http://www.zenofdesign.com/senior-designer/
+  (tải HTML thô bằng curl, strip thẻ HTML bằng sed, grep xác nhận nguyên văn từng câu trích kể
+  cả ký tự nháy cong). Truy cập 2026-09-18.
+
+Ghi chú phương pháp: mọi quote dưới đây đều được đối chiếu trực tiếp trên HTML/PDF thô (không
+qua WebFetch/model tóm tắt), đúng quy tắc "so byte trên nguồn gốc" của dự án.
+
+========================================
+2. B1 — QUỸ ĐẠO NGHỀ: JUNIOR → MID → SENIOR → LEAD
+========================================
+Nguồn chính: Damion Schubert, "The Senior Designer Mindset" (2011). Bài viết trả lời thẳng câu
+hỏi "làm sao để lên senior/lead" bằng các đặc điểm tính cách/hành vi thay đổi qua từng bậc —
+đúng trọng tâm B1 (cái thay đổi không phải chức danh, mà là mindset/mức độ tự chủ và chịu trách
+nhiệm).
+
+- Điểm khởi đầu của bài: câu hỏi "làm sao lên senior/lead" không có câu trả lời đơn giản vì
+  trách nhiệm hàng ngày khác nhau tuỳ tổ chức — nhưng có những đặc điểm chung xuyên suốt mọi
+  chuyên môn (worldbuilder, systems designer, game writer).
+
+QUOTE:
+Every now and then, I get asked by a junior designer how to move up the ranks in his
+organization and become a senior designer or a lead.
+NGUỒN: http://www.zenofdesign.com/senior-designer/
+NEO: (đầu thân bài, ngay sau dòng ghi chú xuất xứ bài viết trên Game Developer magazine)
+ĐỘ TIN: CAO
+
+- Với người mới (entry-level): trọng tâm là hoàn thiện, không phải ý tưởng lớn. Ý tưởng thì rẻ,
+  thực thi mới là thứ được đánh giá.
+
+QUOTE:
+Ideas are a dime a dozen. Execution is what its all about.
+NGUỒN: http://www.zenofdesign.com/senior-designer/
+NEO: speak of huge ideas but demonstrate little follow-through.
+ĐỘ TIN: CAO
+[nguyên văn có lỗi trong nguồn: "its" thay vì "it's"]
+
+QUOTE:
+Entry-level designers should strive to demonstrate that philosophy in their own work.
+NGUỒN: http://www.zenofdesign.com/senior-designer/
+NEO: to wear their brand.
+ĐỘ TIN: CAO
+
+- Từ junior lên senior: thái độ với feedback đảo ngược hoàn toàn. Junior sợ bị "lộ" là mình
+  chưa đủ giỏi; senior chủ động tìm feedback vì hiểu ý tưởng ban đầu không bao giờ hoàn hảo.
+
+QUOTE:
+Some designers fear feedback. Designers that fear feedback are afraid that they're going to
+be discovered as a fraud, and this general tendency is the mark of a junior designer to me.
+NGUỒN: http://www.zenofdesign.com/senior-designer/
+NEO: (mở đầu mục "Value Data")
+ĐỘ TIN: CAO
+
+QUOTE:
+Senior designers crave feedback. They understand that their idea isn't perfect, and that the
+only way for it to get better is to get hands on it.
+NGUỒN: http://www.zenofdesign.com/senior-designer/
+NEO: or being asked to do it again.
+ĐỘ TIN: CAO
+
+- Mức độ tự chủ/ownership tăng: ở vai trò lead, thứ được đánh giá cao nhất là designer tự đi
+  giải quyết vấn đề đến cùng, kể cả việc tự đi lấy nguồn lực (art, fix bug liên đới…) thay vì
+  chờ giao việc.
+
+QUOTE:
+As a lead on a project, I'm insanely busy, so the designers I value the most are the ones who
+make problems disappear. If I give them a problem, they drive it into the ground.
+NGUỒN: http://www.zenofdesign.com/senior-designer/
+NEO: to wear their brand. Entry-level designers should strive to demonstrate that philosophy
+in their own work.
+ĐỘ TIN: CAO
+
+- Trách nhiệm với quyết định của chính mình: dấu hiệu senior, theo lời một producer kể lại
+  trong bài, là sẵn sàng tự huỷ ý tưởng của chính mình khi nó sai — kể cả khi việc đó tạo ra lỗ
+  hổng mà chính họ phải tự bù đắp lại.
+
+QUOTE:
+A producer once told me that the mark of a senior designer to him was that designer's
+willingness to kill his own babies.
+NGUỒN: http://www.zenofdesign.com/senior-designer/
+NEO: sometimes, the discovery is that a beloved feature needs to die.
+ĐỘ TIN: CAO
+
+- Khả năng chịu đựng sự mơ hồ/không chắc chắn: designer giỏi có trực giác biết khi nào thiết
+  kế "có gì đó sai sai", và điểm khác biệt là dám đối mặt với cảm giác đó thay vì để nó trôi qua
+  — tức là tự gỡ sự mơ hồ thay vì chờ người khác chỉ ra.
+
+- Bài kết luận: kỹ năng thiết kế thuần tuý (giỏi công cụ, giỏi lý thuyết) không đủ để leo tiếp;
+  cần thêm năng lực xử lý thực tế sản xuất (production).
+
+QUOTE:
+It's all good and well to be a wizard at UnrealEd, a savant with Excel and a professor of game
+design theory, but actually putting a game on the shelves requires a lot more than the nuts and
+bolts of putting together gameplay. Senior designers have all that, and go beyond.
+NGUỒN: http://www.zenofdesign.com/senior-designer/
+NEO: (mở đầu mục "The Mindset of Development")
+ĐỘ TIN: CAO
+
+========================================
+3. B2 — NGÃ BA ĐƯỜNG: INDIVIDUAL CONTRIBUTOR VS QUẢN LÝ/LEAD
+========================================
+Nguồn duy nhất đủ tin cậy cho mục này: Valve Handbook for New Employees (2012). Đây là data
+point về MỘT mô hình cụ thể (Valve có cơ cấu phẳng, không có quản lý truyền thống) — không đại
+diện cho ngành nói chung, nhưng là nguồn gốc, có tên tổ chức rõ ràng, và trực tiếp trả lời câu
+hỏi "vai trò lead khác quản lý ở chỗ nào" bằng ngôn ngữ rất cụ thể.
+
+- Vai trò "lead" ở Valve KHÔNG phải vai trò quản lý theo nghĩa truyền thống — nó gần với vai trò
+  đầu mối thông tin (information hub) hơn là người ra quyết định thay người khác.
+
+QUOTE:
+Often, someone will emerge as the "lead" for a project. This person's role is not a traditional
+managerial one. Most often, they're primarily a clearinghouse of information. They're keeping
+the whole project in their head at once so that people can use them as a resource to check
+decisions against. The leads serve the team, while acting as centers for the teams.
+NGUỒN: Valve, Handbook for New Employees (2012), trang 16, mục "Team leads"
+NEO: (đầu mục "Team leads", ngay sau tiêu đề)
+ĐỘ TIN: CAO
+
+- Trong hệ thống đánh giá nội bộ (stack ranking, 4 tiêu chí: Skill/Technical Ability,
+  Productivity/Output, Group Contribution, Product Contribution), việc đứng ra làm leader chỉ
+  là MỘT cách đóng góp trong số nhiều cách — không mặc định giá trị cao hơn đóng góp chuyên môn
+  sâu (individual contribution).
+
+QUOTE:
+Stepping up and acting in a leadership role can be good for your group contribution score, but
+being a leader does not impart or guarantee a higher stack rank. It is just a role that people
+adopt from time to time.
+NGUỒN: Valve, Handbook for New Employees (2012), trang 32, mục "3. Group Contribution"
+NEO: amplifying your colleagues, or writing tools used by others?
+ĐỘ TIN: CAO
+
+- Toàn bộ công ty không có chức danh cố định, không có "quản lý" — kể cả người sáng lập/chủ
+  tịch cũng không phải là "manager" của ai.
+
+QUOTE:
+That's why Valve is flat. It's our shorthand way of saying that we don't have any management,
+and nobody "reports to" anybody else. We do have a founder/president, but even he isn't your
+manager.
+NGUỒN: Valve, Handbook for New Employees (2012), trang 4, mục "Welcome to Flatland"
+NEO: telling them to sit at a desk and do what they're told obliterates 99 percent of their value.
+ĐỘ TIN: CAO
+
+- Lộ trình phát triển ("growth ladder") được mô tả là gắn với cá nhân, không gắn với việc leo
+  lên một nấc thang chức danh cố định — điều này khớp với ý B2 rằng nhánh IC và nhánh lead là
+  hai lựa chọn song song, không phải một đường thẳng "IC thấp hơn lead".
+
+QUOTE:
+So the "growth ladder" is tailored to you. It operates exactly as fast as you can manage to
+grow. You're in charge of your track, and you can elicit help with it anytime from those
+around you.
+NGUỒN: Valve, Handbook for New Employees (2012), trang 38, mục "Advancement vs. growth"
+NEO: it provides an opportunity to broaden one's skill set well outside of the narrow
+constraints that careers can have at most other companies.
+ĐỘ TIN: CAO
+
+Nhận định (không phải quote, tự suy luận có ghi rõ): mô hình Valve là trường hợp cực đoan (không
+có quản lý ở đâu cả), nên không dùng để khái quát "ngành game nói chung không coi trọng quản
+lý". Giá trị của nguồn này với B2 là: nó cho thấy RÕ bằng văn bản gốc của một studio thật rằng
+vai trò "lead" có thể tách bạch khỏi quyền lực quản lý nhân sự — một lát cắt hữu ích để đối
+chiếu, không phải chuẩn ngành.
+
+[CHƯA VERIFY] Sự khác biệt cụ thể giữa "lead designer", "creative director" và "game director"
+(phạm vi quyết định, ai báo cáo cho ai, ai giữ quyền phủ quyết cuối) — không tìm được nguồn đạt
+chuẩn (tác giả tên thật, đã tự mở đọc, không phải trang SEO tổng hợp) mô tả sự khác biệt này
+bằng ví dụ/định nghĩa có thể trích dẫn. Xem thêm mục 5.
+
+========================================
+4. B3 — CHUYÊN MÔN HOÁ: GENERALIST VS SPECIALIST
+========================================
+Nguồn chính: Valve Handbook (mô hình "T-shaped" được viết ra thành chính sách tuyển dụng rõ
+ràng), bổ sung bởi Mark Baldwin (2006) về tính linh hoạt vai trò trong ngành game nói chung.
+
+- Valve dùng thẳng khái niệm "T-shaped": vừa rộng (generalist) vừa có một mũi nhọn chuyên sâu
+  world-class ở một lĩnh vực hẹp — đây là mô hình được đưa vào tiêu chí tuyển dụng, không phải
+  chỉ là lời khuyên chung chung.
+
+QUOTE:
+We value "T-shaped" people. That is, people who are both generalists (highly skilled at a
+broad set of valuable things—the top of the T) and also experts (among the best in their field
+within a narrow discipline—the vertical leg of the T).
+NGUỒN: Valve, Handbook for New Employees (2012), trang 46, mục "We value 'T-shaped' people."
+NEO: Of course it's not quite enough to say that a candidate should collaborate well
+ĐỘ TIN: CAO
+
+- Rủi ro của cả hai thái cực đều được nêu rõ: chuyên quá hẹp thì khó phối hợp; rộng mà không có
+  chiều sâu ở bất kỳ mảng nào thì bị đẩy ra rìa, không thực sự đóng góp được với tư cách cá nhân.
+
+QUOTE:
+This recipe is important for success at Valve. We often have to pass on people who are very
+strong generalists without expertise, or vice versa. An expert who is too narrow has
+difficulty collaborating. A generalist who doesn't go deep enough in a single area ends up on
+the margins, not really contributing as an individual.
+NGUỒN: Valve, Handbook for New Employees (2012), trang 46, mục "We value 'T-shaped' people."
+NEO: (ngay sau đoạn định nghĩa T-shaped ở trên)
+ĐỘ TIN: CAO
+
+- "Người thành công nhất" tại Valve được mô tả rõ ràng theo cả hai chiều rộng và sâu cùng lúc —
+  không phải "chọn một trong hai" mà là phát triển song song.
+
+QUOTE:
+The most successful people at Valve are both (1) highly skilled at a broad set of things and
+(2) world-class experts within a more narrow discipline.
+NGUỒN: Valve, Handbook for New Employees (2012), trang 38, mục "Putting more tools in your toolbox"
+NEO: Most people who fit well at Valve will be better-positioned after their time spent here
+than they could have been if they'd spent their time pretty much anywhere else.
+ĐỘ TIN: CAO
+
+- Về việc phân biệt vai trò rộng/hẹp theo quy mô studio: Baldwin (2006) mô tả ngành game nói
+  chung có truyền thống làm nhoè ranh giới mô tả công việc — mô tả công việc là "hướng dẫn theo
+  nhu cầu hiện tại", không phải rào cản cứng. Đây là quan sát chung về ngành, KHÔNG phải phát
+  biểu riêng về studio lớn vs nhỏ (Baldwin không chia theo quy mô studio trong bài).
+
+QUOTE:
+In the game industry, job descriptions do not act as barriers to accomplishing the job, but
+instead act as a guide to current needs.
+NGUỒN: https://www.gamedeveloper.com/disciplines/career-paths-in-the-game-industry
+NEO: the first of these is the tradition of flexibility and blurring of the lines between job
+descriptions.
+ĐỘ TIN: CAO
+
+- Bổ trợ: Baldwin mô tả vai trò designer như trung tâm sáng tạo của cả dự án (tương tự đạo diễn
+  phim) — hữu ích để nói về việc vai trò designer thường ôm nhiều đầu việc, nhưng đây KHÔNG phải
+  là bằng chứng trực tiếp cho câu hỏi "khi nào nên chuyên sâu".
+
+QUOTE:
+Just as the movie director is the center of creativity in the film industry, so the game
+designer is the center of creativity in the game industry.
+NGUỒN: https://www.gamedeveloper.com/disciplines/career-paths-in-the-game-industry
+NEO: one may get a comprehensive feel for the industry as a whole. The Designer
+ĐỘ TIN: CAO
+
+[CHƯA VERIFY] Rủi ro cụ thể của việc chuyên môn hoá quá sớm trong sự nghiệp (early
+specialization risk) — không tìm được bài/talk có tác giả tên thật, đã tự mở đọc, bàn trực tiếp
+về thời điểm nên/không nên chuyên sâu.
+
+[CHƯA VERIFY] So sánh định lượng hoặc mô tả có nguồn cụ thể về "vai trò designer ở studio lớn bị
+bó hẹp vào một mảng (systems/level/narrative/combat/economy/UX) ra sao, khác gì với vai trò rộng
+ở studio nhỏ/indie" — chỉ có suy luận gián tiếp từ quote Baldwin ở trên, không đủ mạnh để trích
+làm kết luận riêng biệt.
+
+========================================
+5. MẢNG KHÔNG TÌM ĐƯỢC NGUỒN TIN CẬY
+========================================
+- Phân biệt rõ ràng creative director / game director / lead designer (B2): các bài tìm được
+  (Prolific Studio, Pixune, Polydin, CareerExplorer, GameDev.net forum, "Ask a Game Dev" trên
+  Tumblr) đều là blog SEO không tác giả tên thật, hoặc tác giả ẩn danh — không đạt chuẩn nguồn
+  của trục này nên KHÔNG đưa vào, kể cả khi nội dung mô tả nghe hợp lý.
+- Vài GDC Vault talk có tựa đề rất đúng trọng tâm B2 nhưng nằm sau paywall, không mở đọc được
+  nội dung thật nên không thể trích dẫn: "So They Made You a Lead, Now What?" (Double Fine),
+  "Take the Lead: Lessons Learned During My Transition from Expert to Manager" (Sushama
+  Chakraverty), "Designing Your Design Team", "Great Management of Technical Leads".
+- Rủi ro chuyên môn hoá quá sớm (B3): không tìm được nguồn gốc tác giả tên thật bàn trực tiếp.
+- So sánh vai trò designer studio lớn (hẹp) vs studio nhỏ/indie (rộng) (B3): không tìm được
+  nguồn gốc có tác giả tên thật mô tả cụ thể, có dẫn chứng, dành riêng cho vấn đề này (khác với
+  quan sát chung của Baldwin về ngành game nói chung).
+- Richard Lemarchand ("A Playful Production Process") và Jesse Schell ("The Art of Game
+  Design") — không tiếp cận được bản đầy đủ của sách trong phiên nghiên cứu này để trích dẫn
+  nguyên văn có kiểm chứng; các trang tóm tắt/review tìm được không đủ để lấy quote gốc, nên
+  không đưa nội dung của hai sách này vào (dù cả hai đều nằm trong danh sách nguồn nền tảng của
+  dự án).
+- Riot Games / Ubisoft / Bungie: không tìm thấy blog nghề nghiệp chính chủ nào của các studio
+  này bàn trực tiếp về quỹ đạo nghề designer (junior→senior→lead) hay ngã ba IC/quản lý mà có
+  thể mở đọc và trích dẫn được trong phiên này.
+
+
+================================================================================
+
+FIXTURE QUOTE — TRUC A (byte lay truc tiep tu nguon, KHONG go tay)
+
+### Q1  [levy2]
+It can be difficult to know what to put in a design portfolio, as there are no standards for what a good design document is or how a game economy should be laid out.
+SRC: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+
+### Q2  [levy2]
+I only care about proof of your design abilities.
+SRC: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+
+### Q3  [levy2]
+A high quality portfolio was the single biggest factor in landing a phone interview.
+SRC: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+
+### Q4  [levy2]
+You know how to finish a game and release it to the world You took the time to listen to your players, either through metrics, comments, reviews or other feedback You can tell a meaningful story about how you improved your game based on player feedback
+SRC: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+
+### Q5  [sloper]
+What the company is looking for is hard working, smart, capable communicators first and foremost.
+SRC: https://www.gamedesignworkshop.com/applying-for-a-job-in-game-design
+
+### Q6  [fullerton]
+Having a good solid process for developing an idea from the initial ideation process into a playable and satisfying game experience is another key to thinking like a game designer.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### Q7  [sloper]
+Just the best stuff, though. At least 10 items, and no more than 20. You want to wow the hirer, not smother him or her under an avalanche.
+SRC: https://www.gamedesignworkshop.com/applying-for-a-job-in-game-design
+
+### Q8  [levy2]
+The best possible thing to have in your portfolio is shipped games. With tools like Unity and Game Maker Studio and the ease of self publishing, it is my opinion that a prospective game designer should exit college with one game on the app store for each year in school.
+SRC: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+
+### Q9  [fullerton]
+I encourage designers to construct a playable version of their idea immediately after brainstorming ideas. By this I mean a physical prototype of the core game mechanics. A physical prototype can use paper and pen or index cards or even be acted out. It is meant to be played by the designer and her friends. The goal is to play and perfect this simplistic model before a single line of code or art asset is ever made.
+SRC: https://www.gamedeveloper.com/design/book-excerpt-game-design-workshop
+
+### Q10  [levy2]  [de-artifact: bo space truoc dau cham do ranh gioi the </a> trong HTML goc]
+What you build for your portfolio is highly dependent on your mountain.
+SRC: https://www.gamedeveloper.com/design/breaking-into-game-design-part-2---build-your-portfolio
+
+### Q11  [sloper]
+You may interview with multiple individuals, separately or in a group. And you may be given a test. QA applicants get communication tests, programmer candidates get programming tests, and design applicants may be asked to write or extemporize a game analysis or design commentary. Be prepared with knowledge of the company's games, and be creative and eager for the test.
+SRC: https://www.gamedesignworkshop.com/applying-for-a-job-in-game-design
+
+### Q12  [sloper]
+Let the interviewer view the portfolio at his or her own pace; do not explain a work unless asked to. Never apologize for anything in your portfolio. If it contains anything that needs apology, leave it out.
+SRC: https://www.gamedesignworkshop.com/applying-for-a-job-in-game-design
+FIXTURE QUOTE — TRUC B (byte lay truc tiep tu nguon, KHONG go tay)
+
+### QB1  KHONG DINH VI DUOC — LOAI
+
+### QB2  [schubert]
+Ideas are a dime a dozen. Execution is what its all about.
+SRC: http://www.zenofdesign.com/senior-designer/
+
+### QB3  [schubert]
+Entry-level designers should strive to demonstrate that philosophy in their own work.
+SRC: http://www.zenofdesign.com/senior-designer/
+
+### QB4  [schubert]
+Some designers fear feedback. Designers that fear feedback are afraid that they’re going to be discovered as a fraud, and this general tendency is the mark of a junior designer to me.
+SRC: http://www.zenofdesign.com/senior-designer/
+
+### QB5  [schubert]
+Senior designers crave feedback. They understand that their idea isn’t perfect, and that the only way for it to get better is to get hands on it.
+SRC: http://www.zenofdesign.com/senior-designer/
+
+### QB6  [schubert]
+As a lead on a project, I’m insanely busy, so the designers I value the most are the ones who make problems disappear. If I give them a problem, they drive it into the ground.
+SRC: http://www.zenofdesign.com/senior-designer/
+
+### QB7  [schubert]
+A producer once told me that the mark of a senior designer to him was that designer’s willingness to kill his own babies.
+SRC: http://www.zenofdesign.com/senior-designer/
+
+### QB8  [schubert]
+It’s all good and well to be a wizard at UnrealEd, a savant with Excel and a professor of game design theory, but actually putting a game on the shelves requires a lot more than the nuts and bolts of putting together gameplay. Senior designers have all that, and go beyond.
+SRC: http://www.zenofdesign.com/senior-designer/
+
+### QB9  [valve]
+Often, someone will emerge as the “lead” for a project. This person’s role is not a traditional managerial one. Most often, they’re primarily a clearinghouse of information. They’re keeping the whole project in their head at once so that people can use them as a resource to check decisions against. The leads serve the team, while acting as centers for the teams.
+SRC: Valve, Handbook for New Employees (2012) — http://media.steampowered.com/apps/valve/Valve_Handbook_LowRes.pdf
+
+### QB10  [valve]
+Stepping up and acting in a leadership role can be good for your group contribution score, but being a leader does not impart or guarantee a higher stack rank. It is just a role that people adopt from time to time.
+SRC: Valve, Handbook for New Employees (2012) — http://media.steampowered.com/apps/valve/Valve_Handbook_LowRes.pdf
+
+### QB11  [valve]
+That’s why Valve is flat. It’s our shorthand way of saying that we don’t have any management, and nobody “reports to” anybody else. We do have a founder/president, but even he isn’t your manager.
+SRC: Valve, Handbook for New Employees (2012) — http://media.steampowered.com/apps/valve/Valve_Handbook_LowRes.pdf
+
+### QB12  [valve]  [de-artifact: pdftotext chen caption "Fig. 4-2" vao giua cau, da bo]
+So the “growth ladder” is tailored to you. It operates exactly as fast as you can manage to grow. You’re in charge of your track, and you can elicit help with it anytime from those around you.
+SRC: Valve, Handbook for New Employees (2012) — http://media.steampowered.com/apps/valve/Valve_Handbook_LowRes.pdf
+
+### QB13  [valve]
+We value “T-shaped” people. That is, people who are both generalists (highly skilled at a broad set of valuable things—the top of the T) and also experts (among the best in their field within a narrow discipline—the vertical leg of the T).
+SRC: Valve, Handbook for New Employees (2012) — http://media.steampowered.com/apps/valve/Valve_Handbook_LowRes.pdf
+
+### QB14  [valve]
+This recipe is important for success at Valve. We often have to pass on people who are very strong generalists without expertise, or vice versa. An expert who is too narrow has difficulty collaborating. A generalist who doesn’t go deep enough in a single area ends up on the margins, not really contributing as an individual.
+SRC: Valve, Handbook for New Employees (2012) — http://media.steampowered.com/apps/valve/Valve_Handbook_LowRes.pdf
+
+### QB15  [valve]
+The most successful people at Valve are both (1) highly skilled at a broad set of things and (2) world-class experts within a more narrow discipline.
+SRC: Valve, Handbook for New Employees (2012) — http://media.steampowered.com/apps/valve/Valve_Handbook_LowRes.pdf
+
+### QB16  [baldwin]
+In the game industry, job descriptions do not act as barriers to accomplishing the job, but instead act as a guide to current needs.
+SRC: https://www.gamedeveloper.com/disciplines/career-paths-in-the-game-industry
+
+### QB17  [baldwin]
+Just as the movie director is the center of creativity in the film industry, so the game designer is the center of creativity in the game industry.
+SRC: https://www.gamedeveloper.com/disciplines/career-paths-in-the-game-industry
+

@@ -368,9 +368,9 @@ window.CURRICULUM = [
                     "Trình bày quá trình tư duy, không chỉ kết quả cuối",
                     "Định hướng con đường sự nghiệp designer"
                 ],
-                minutes: 12,
+                minutes: 14,
                 level: "Nâng cao",
-                status: "planned"
+                status: "ready"
             }
         ]
     },
