@@ -1,0 +1,1431 @@
+RESEARCH — NARRATIVE DESIGN (Tầng 3, bài 07)
+Ngày gộp: 2026-09-18
+Gộp cơ học từ 3 file research trục (trục 1 lý thuyết, trục 2 kỹ thuật, trục 3 ví dụ).
+Không research thêm, không sửa câu chữ quote so với 3 file gốc.
+
+MỤC LỤC
+1. Narrative design là gì, khác game writing
+2. Các khái niệm nền + nguồn gốc thuật ngữ
+3. Environmental storytelling thực hành — Smith & Worch, GDC 2010
+4. Kênh truyền tải câu chuyện
+5. Narrative trong core loop, pacing, agency & choice
+6. Ví dụ phân tích đa thể loại
+7. Sai lầm hay gặp
+8. Đánh giá narrative qua playtest
+9. Đọc thêm
+10. BẪY KHÁI NIỆM
+11. TRẠNG THÁI VERIFY
+
+====================================================================
+1. NARRATIVE DESIGN LÀ GÌ, KHÁC GAME WRITING
+   (nguồn: trục 1, mục 1 "Narrative design vs game writing")
+====================================================================
+
+Tóm tắt: Không tìm được một nguồn học thuật/GDC-talk kinh điển "đặt ra" sự phân biệt
+narrative design vs game writing giống kiểu Hocking coin "ludonarrative dissonance".
+Phân biệt phổ biến hiện nay (writing = viết nội dung: thoại, lore, mô tả item;
+design = thiết kế HỆ THỐNG truyền tải nội dung đó — khi nào, bằng cách nào, qua
+cơ chế gì) là đồng thuận ngành hình thành dần, không có một bài báo gốc duy nhất.
+
+Nguồn tự nhận về xuất xứ chức danh "Narrative Designer": trang narrativedesigner.com
+(tác giả tự giới thiệu là người đầu tiên giữ chức danh này chuyên nghiệp, tại
+THQ/Relic Entertainment, dự án Company of Heroes).
+
+Quote (đã curl, đọc nguyên trang HTML):
+"The term "Narrative Designer" was coined in 2006. The need had existed for decades."
+"While completing my MFA at USC with Marsha Kinder and Scott Fisher, I began the
+conversation at GDC that spring about a dedicated role for integrating story and
+systems. We initially used Narrative Director, then settled on Narrative Designer
+by May 2006. I first held the title professionally at THQ/Relic Entertainment,
+working on Company of Heroes."
+URL: https://narrativedesigner.com/what-is-nd.html
+Trạng thái verify: ĐÃ MỞ ĐỌC — nhưng đây là tự-thuật (self-report) trên trang cá
+nhân của chính người tự nhận đặt ra chức danh, KHÔNG có nguồn độc lập thứ hai xác
+nhận claim "coined in 2006". Dùng được để nói "một người trong ngành tự nhận đã đặt
+tên chức danh năm 2006 tại GDC", KHÔNG nên dùng để khẳng định chắc chắn "narrative
+design ra đời năm 2006" như sự kiện lịch sử đã được kiểm chứng đa nguồn.
+
+Phân biệt nội dung (content) vs hệ thống (system) — theo cùng trang trên, ví dụ cụ
+thể: "Game Writer: Creates character voices and personality." / "Narrative
+Designer: Ensures that character is expressed through mechanics, level design, and
+systems: not just words." — đây là cách diễn đạt phổ biến trong ngành, không phải
+trích dẫn học thuật gốc.
+Trạng thái: ĐÃ VERIFY (đọc nguyên trang), nhưng nguồn không phải academic/GDC talk
+kinh điển như đề bài kỳ vọng — CHƯA tìm được nguồn thẩm quyền hơn (ví dụ GDC talk
+của Molly Maloney & Eric Stirpe 2018 chỉ thấy qua bài search, chưa tự mở slide/video
+gốc để trích nguyên văn — [CHƯA VERIFY] phần này).
+
+====================================================================
+2. CÁC KHÁI NIỆM NỀN + NGUỒN GỐC THUẬT NGỮ
+   (nguồn: trục 1, mục 2 "Các trục phân loại narrative" + mục 4 "Vị trí
+   narrative trong MDA". Gồm: embedded/emergent narrative, environmental
+   storytelling — phần định nghĩa/nguồn gốc; bản THỰC HÀNH đầy đủ của
+   Smith & Worch xem Mục 3 — ludonarrative dissonance, narrative paradox/
+   drama manager, và vị trí Narrative trong 8 aesthetics của MDA)
+====================================================================
+
+2a. EMBEDDED NARRATIVE vs EMERGENT NARRATIVE
+--------------------------------------------------------------------
+
+Tóm tắt: Marc LeBlanc (đồng tác giả MDA) là người đưa ra cặp thuật ngữ này lần đầu
+trong một bài nói tại GDC — nhưng nguồn thứ cấp KHÔNG THỐNG NHẤT về năm: có nguồn
+nói GDC 1999 ("Formal Design Tools: Feedback Systems and the Dramatic Structure of
+Competition"), có nguồn nói GDC 2000. Không tự mở được slide gốc (PPT cũ, không có
+link còn sống tìm được trong phiên research này) để chốt năm chính xác.
+[CHƯA VERIFY năm chính xác — mâu thuẫn giữa các nguồn thứ cấp, chưa đọc được slide
+gốc của LeBlanc]
+
+Salen & Zimmerman, "Rules of Play: Game Design Fundamentals" (MIT Press, 2004) —
+mở rộng và phổ biến hoá cặp khái niệm này trong sách. KHÔNG mở được bản full-text
+sách (chỉ có qua Google Books/trích dẫn thứ cấp), nên KHÔNG trích nguyên văn định
+nghĩa của Salen & Zimmerman — chỉ paraphrase từ nguồn thứ cấp:
+"Embedded narrative: pre-generated narrative content that exists prior to the
+player's interaction with the game" — đây là PARAPHRASE lấy qua kết quả search,
+KHÔNG phải quote đã tự đọc nguyên trang sách. [CHƯA VERIFY — cần đọc bản scan/
+Google Books thật, main tự tra nếu cần trích nguyên văn]
+
+--------------------------------------------------------------------
+2b. ENVIRONMENTAL STORYTELLING
+--------------------------------------------------------------------
+
+(i) Don Carson — "Environmental Storytelling: Creating Immersive 3D Worlds Using
+Lessons Learned from the Theme Park Industry", Gamasutra, 01/03/2000.
+URL gốc (theo chính bài, đã chết): http://www.gamasutra.com/features/20000301/carson_01.htm
+Bản đăng lại NGUYÊN VĂN trên chính blog tác giả (doncarsoncreative.blogspot.com,
+Don Carson tự xác nhận là tác giả trong phần "About Me" cùng blog):
+URL đã curl và đọc trực tiếp:
+http://doncarsoncreative.blogspot.com/2004/06/environmental-storytelling-creating.html
+Trạng thái: ĐÃ MỞ ĐỌC TOÀN BỘ bài (curl + strip tag thủ công), tác giả, ngày, nguồn
+gốc Gamasutra đều khớp trong chính văn bản.
+
+Quote định nghĩa cốt lõi:
+"One of the trade secrets behind the design of entertaining themed environments is
+that the story element is infused into the physical space a guest walks or rides
+through."
+(xuất hiện 2 lần trong bài — mở đầu phần "Environmental Storytelling")
+
+Quote về nguyên tắc "cause and effect storytelling":
+"One of the most successful methods for pulling your audience into your story
+environment is through the use of "cause and effect" vignettes."
+
+Bối cảnh tác giả: "Don Carson is a freelance designer and conceptual illustrator.
+For many years Don worked as a Senior Show Designer for Walt Disney Imagineering...
+Some of the attractions he helped to design are Splash Mountain for Walt Disney
+World Florida, and Mickey's Toontown for Disneyland California."
+Trạng thái: ĐÃ VERIFY — trích trực tiếp từ HTML đã curl.
+
+(ii) Henry Jenkins — "Game Design as Narrative Architecture", in First Person: New
+Media as Story, Performance, and Game (MIT Press) — năm xuất bản sách 2004 theo
+nhiều nguồn thứ cấp trùng khớp (MIT Press listing, ResearchGate), nhưng bản HTML
+gốc tự đọc (trang cá nhân MIT của Jenkins) KHÔNG in ngày tháng trong chính văn bản
+→ năm 2004 [CHƯA VERIFY bằng chính văn bản gốc, chỉ verify qua nguồn thứ cấp đồng
+thuận cao].
+URL đã curl và đọc trực tiếp:
+https://web.mit.edu/~21fms/People/henry3/games&narrative.html
+Trạng thái: ĐÃ MỞ ĐỌC TOÀN BỘ bài qua curl + strip tag.
+
+Jenkins nêu đúng 4 cách environmental storytelling tạo tiền đề cho trải nghiệm
+narrative — quote nguyên văn (đây chính là câu tổng nêu 4 trục mà đề bài hỏi):
+"Environmental storytelling creates the preconditions for an immersive narrative
+experience in at least one of four ways: spatial stories can evoke pre-existing
+narrative associations; they can provide a staging ground where narrative events
+are enacted; they may embed narrative information within their mise-en-scene; or
+they provide resources for emergent narratives."
+
+QUAN TRỌNG — tên 4 mục thật sự trong bài (theo heading gốc, viết hoa trong văn bản):
+- EVOCATIVE SPACES
+- ENACTING STORIES   (KHÔNG PHẢI "enacted narratives" — đề bài ghi sai tên mục, xem
+  BẪY KHÁI NIỆM bên dưới)
+- EMBEDDED NARRATIVES
+- EMERGENT NARRATIVES
+
+Quote định nghĩa Emergent Narratives (trong mục cùng tên, nói về The Sims):
+"Emergent narratives are not pre-structured or pre-programmed, taking shape through
+the game play, yet they are not as unstructured, chaotic, and frustrating as life
+itself."
+Trạng thái: ĐÃ VERIFY — trích trực tiếp từ HTML đã curl (cả câu tổng 4 trục và câu
+định nghĩa emergent narrative).
+
+Trong bài Jenkins cũng trích dẫn lại Don Carson (footnote "(25) Carson, op. cit.")
+→ xác nhận đường dây trích dẫn Carson (2000) → Jenkins (2004) là có thật, không
+phải suy diễn.
+
+(iii) Harvey Smith & Matthias Worch — GDC 2010, "What Happened Here? Environmental
+Storytelling". Có bản slide/note PDF công khai trên trang cá nhân của Worch:
+https://www.worch.com/files/gdc/What_Happened_Here_Web_Notes.pdf
+và listing trên GDC Vault: https://gdcvault.com/play/1012647/What-Happened-Here-Environmental
+Trạng thái: CHỈ xác nhận SỰ TỒN TẠI + tựa đề + năm (2010) + hai tác giả qua kết quả
+search (GDC Vault listing, trang cá nhân Worch, bài LiveJournal review đương thời
+2010 của alexx_kay) — CHƯA tự mở/đọc nguyên văn PDF notes để trích nguyên văn câu
+nào. [CHƯA VERIFY nội dung nguyên văn — main cần tự mở PDF nếu muốn trích dẫn cụ
+thể từ bài này]
+
+--------------------------------------------------------------------
+2c. LUDONARRATIVE DISSONANCE
+--------------------------------------------------------------------
+
+Nguồn: Clint Hocking, blog Click Nothing, bài "Ludonarrative Dissonance in
+Bioshock", đăng 07/10/2007.
+URL đã curl và đọc TOÀN BỘ phần thân bài (không phải chỉ tóm tắt):
+https://clicknothing.com/2007/10/07/ludonarrative-d/
+Trạng thái: ĐÃ MỞ ĐỌC TOÀN BỘ — xác định đúng khối `entry-content` (thân bài thật,
+tách khỏi 46 comment bên dưới) bằng cách tìm class HTML `wp-block-post-content`.
+
+PHÁT HIỆN QUAN TRỌNG (không phải lỗi của mình, mà là sự thật cần ghi lại): trong
+toàn bộ THÂN BÀI hiện tại (bản blog đã re-publish qua WordPress, không phải bản
+Typepad gốc 2007 — xem BẪY KHÁI NIỆM), cụm từ "ludonarrative" CHỈ xuất hiện trong
+TIÊU ĐỀ bài viết, KHÔNG xuất hiện lần nào trong phần văn xuôi của thân bài. Hocking
+dùng chữ "dissonance" trơn xuyên suốt bài, không lặp lại thuật ngữ ghép.
+
+Quote định nghĩa/khởi đầu vấn đề (câu gần nhất với một "định nghĩa" trong bài):
+"To cut straight to the heart of it, Bioshock seems to suffer from a powerful
+dissonance between what it is about as a game, and what it is about as a story."
+
+Câu dẫn ngay sau, nêu hệ quả:
+"By throwing the narrative and ludic elements of the work into opposition, the
+game seems to openly mock the player for having believed in the fiction of the
+game at all."
+
+Kết luận cuối bài (thường bị bỏ qua khi trích dẫn — Hocking không kết án BioShock,
+mà khen ngợi nó là bước gần nhất tới "Citizen Kane của game"):
+"BioShock is not our Citizen Kane. But it does – more than any game I have ever
+played – show us how close we are to achieving that milestone."
+
+Trạng thái: ĐÃ VERIFY toàn bộ 3 quote trên bằng curl trực tiếp vào bản HTML sống
+hiện tại của blog (không qua WebFetch, không qua bản tóm tắt).
+LƯU Ý VERIFY: đây là bản blog đã được re-publish trên nền WordPress hiện đại (theme/
+markup mới, có nút share Facebook/X hiện đại) — khả năng cao nội dung chữ giữ
+nguyên từ 2007 (tác giả thường không sửa bài cũ), nhưng KHÔNG có cách nào từ phiên
+research này để so byte-để-byte với bản Typepad gốc 2007 (Wayback Machine bị rate-
+limit "429 Too Many Requests" khi thử truy cập trong phiên này). Nếu cần độ chính
+xác tuyệt đối 100%, main nên tự thử lại Wayback Machine sau.
+
+--------------------------------------------------------------------
+2d. NARRATIVE PARADOX / "STORY AS DRAMA MANAGER" / CHRIS CRAWFORD
+--------------------------------------------------------------------
+
+CẢNH BÁO SỚM: đề bài gán thuật ngữ "narrative paradox" cho Chris Crawford — qua
+research, điều này CÓ VẤN ĐỀ. Xem chi tiết:
+
+(i) Chris Crawford — khái niệm "Drama Manager" (không phải "narrative paradox")
+xuất phát từ ông, trong sách "Chris Crawford on Interactive Storytelling" (2004,
+2nd ed. 2012, New Riders). Định nghĩa lấy qua trang chính chủ erasmatazz.com (qua
+kết quả search, CHƯA tự curl trực tiếp trang cụ thể trong phiên này):
+"A Drama Manager is a system that can monitor the progress of a story, determine
+how the story might develop over time, and implement that determination within the
+storyworld itself."
+URL: https://www.erasmatazz.com/library/my-books/chris-crawford-on-interacti.html
+Trạng thái: [CHƯA VERIFY nguyên văn — câu trên lấy qua kết quả tóm tắt search, CHƯA
+tự mở trang và curl để so byte. Main cần tự curl lại trang erasmatazz.com nếu muốn
+trích nguyên văn chắc chắn.]
+
+(ii) "Narrative paradox" — thuật ngữ này, theo nhiều nguồn học thuật độc lập
+(paper của Sandy Louchart & Ruth Aylett, "Solving the Narrative Paradox in VEs –
+Lessons from RPGs", IVA 2003; và trích dẫn "(Aylett 2000)" trong nhiều bài sau đó),
+dường như xuất phát/được đặt tên bởi RUTH AYLETT (~2000), KHÔNG PHẢI Chris Crawford.
+Paper Louchart & Aylett có bản PDF công khai:
+https://www.macs.hw.ac.uk/~ruth/Papers/narrative/IVA03-Louchart-Aylett.pdf
+Trạng thái: [CHƯA VERIFY — chỉ xác nhận qua kết quả search tóm tắt nội dung PDF,
+CHƯA tự mở/curl chính PDF Aylett 2000 hay Louchart & Aylett 2003 để trích nguyên
+văn định nghĩa. Nhưng đủ tin cậy để khẳng định: gán "narrative paradox" cho Chris
+Crawford là SAI hoặc ít nhất KHÔNG CÓ NGUỒN — nên tách bạch 2 khái niệm này khi
+viết bài, xem BẪY KHÁI NIỆM.]
+
+Định nghĩa narrative paradox (paraphrase từ search, chưa phải quote xác nhận từng
+chữ): mâu thuẫn giữa quyền tự do lựa chọn/agency của người chơi và quyền kiểm soát
+cốt truyện của tác giả — kiểm soát tuyệt đối thì mất agency, agency tuyệt đối thì
+không còn cấu trúc kịch tính rõ ràng.
+
+--------------------------------------------------------------------
+VỊ TRÍ NARRATIVE TRONG MDA (8 AESTHETICS) — (trục 1, mục 4)
+--------------------------------------------------------------------
+
+
+Nguồn: Hunicke, LeBlanc, Zubek — "MDA: A Formal Approach to Game Design and Game
+Research" (Game Design and Tuning Workshop, GDC San Jose 2001–2004; bản paper
+thường dẫn năm 2004, AAAI Workshop).
+URL đã curl và đọc trực tiếp (pdftotext trên PDF gốc, không qua tool tóm tắt):
+https://users.cs.northwestern.edu/~hunicke/MDA.pdf
+Trạng thái: ĐÃ VERIFY — tải PDF gốc bằng curl, convert bằng pdftotext (có sẵn trên
+máy, không cần cài thêm), đọc trực tiếp text.
+
+Danh sách nguyên văn 8 aesthetics, ĐÚNG THỨ TỰ VÀ ĐÚNG TÊN MỤC như trong paper gốc:
+"1. Sensation    Game as sense-pleasure
+2. Fantasy       Game as make-believe
+3. Narrative     Game as drama
+4. Challenge     Game as obstacle course
+5. Fellowship    Game as social framework
+6. Discovery     Game as uncharted territory
+7. Expression    Game as self-discovery
+8. Submission    Game as pastime"
+
+→ Narrative đứng thứ 3 trong danh sách 8 aesthetics, được định nghĩa/gán nhãn phụ
+là "Game as drama".
+
+Ví dụ minh hoạ trong paper (cũng trích nguyên văn, để tham khảo cách dùng thực
+tế): "The Sims: Discovery, Fantasy, Expression, Narrative." / "Final Fantasy:
+Fantasy, Narrative, Expression, Discovery, Challenge, Submission."
+
+Tác giả paper: Robin Hunicke, Marc LeBlanc, Robert Zubek — email/affiliation ghi
+rõ trong paper: hunicke@cs.northwestern.edu, marc_leblanc@alum.mit.edu,
+rob@cs.northwestern.edu.
+
+====================================================================
+3. ENVIRONMENTAL STORYTELLING THỰC HÀNH — SMITH & WORCH, GDC 2010
+   (nguồn: trục 2, mục 2. Đây là bản THỰC HÀNH đầy đủ nhất trong cả 3
+   file; định nghĩa cốt lõi cũng được trục 1 dẫn ngắn gọn ở Mục 2 —
+   xem Mục 2 cho phần Don Carson (2000) và Henry Jenkins (2004), hai
+   nguồn học thuật đứng trước Smith & Worch)
+====================================================================
+
+
+NGUỒN: tải trực tiếp PDF gốc từ trang cá nhân Matthias Worch (worch.com), dùng
+pdftotext -layout để extract, ĐỌC TOÀN VĂN 84 slide (không qua tóm tắt AI).
+URL: https://www.worch.com/files/gdc/What_Happened_Here_Web_Notes.pdf
+Trạng thái: VERIFY MẠNH — đây là bản PDF gốc do chính tác giả host, đọc trực tiếp
+text extract, không qua model tóm tắt trung gian. Số slide ghi kèm mỗi quote để
+main tự đối chiếu lại PDF nếu cần.
+
+Cấu trúc bài nói (slide 3): 5 phần — (1) nền tảng game environment, (2) định
+nghĩa environmental storytelling, (3) kỹ thuật designer-authored, (4) kỹ thuật
+systemic, (5) kết luận + Q&A.
+
+ĐỊNH NGHĨA CỐT LÕI (slide 15):
+"Environmental Storytelling is the act of staging player-space with
+environmental properties that can be interpreted as a meaningful whole,
+furthering the narrative of the game."
+
+BỐN CHỨC NĂNG CỦA ENVIRONMENTAL STORYTELLING (recap slide 33, nguyên văn):
+1. "Relies on the player to associate disparate elements, interpreting them as
+   a meaningful whole." (slide 17, 33)
+2. "Fundamentally integrates player perception and active problem solving,
+   which builds investment." (slide 25, 33)
+3. "Invites interpretation of situations and meaning according to players'
+   views and experience." (slide 29, 33)
+4. "Can help the player navigate an area by telegraphing." (slide 32, 33)
+
+VÍ DỤ MINH HOẠ CHÍNH: hai con cá vàng mắc kẹt trên lưới cửa sổ cao 6 feet — dựa
+trên ảnh chụp thật của nhiếp ảnh gia Robert Polidori trong sách "After The Flood"
+(chụp New Orleans sau bão Katrina). Người xem tự ráp nối manh mối (mực nước, vị
+trí đồ đạc) để suy ra chuyện gì đã xảy ra — đây là ví dụ họ dùng để mở đầu và
+minh hoạ khái niệm "What Happened Here?" (slide 18-24).
+
+NGUYÊN TẮC/KỸ THUẬT CỤ THỂ CHO DESIGNER-AUTHORED ES (phần 3, slide 40-61):
+- "Establishing a discernible chain of events" — dựng chuỗi nhân-quả rõ ràng, có
+  thể vẽ thành "puzzle structure" (flow chart) để cả level designer và environment
+  artist cùng hình dung (slide 41-44). Kỹ thuật flow chart này họ ghi rõ là vay
+  mượn từ Randy Smith, GDC 2009 "Making Your Players Feel Smart: Puzzles As User
+  Interfaces" (slide 43) — [NGUỒN THỨ CẤP, chưa mở đọc riêng, chỉ ghi nhận theo
+  trích dẫn trong slide Worch/Smith].
+- "Ensuring that event engages the player" — các chi tiết phải có Ý NGHĨA riêng lẻ
+  (không chỉ ráp thành bức tranh lớn): "In good environmental storytelling the
+  elements combining to a larger picture, but have individual significance as
+  well. An anonymous rock wouldn't have worked as well." (slide 47)
+- NGUYÊN TẮC QUAN TRỌNG NHẤT — mọi khoảnh khắc ES phải bắt rễ vào PREMISE của game:
+  "Make sure that all ES moments draw from your story premise, echoing the world
+  at large. Every anonymous ES moment wastes the opportunity to say something
+  about the game." (slide 52)
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI — đây là quote quan trọng nhất của cả bài, main
+  nên tự pdftotext lại file PDF để đối chiếu byte-by-byte]
+- CẢNH BÁO/rủi ro: lệch pha giữa cái player LÀM ĐƯỢC và cái NPC được mô tả LÀM
+  ĐƯỢC trong ES gây khó chịu: "A disconnect between what the player can do and
+  what the game depicts the non-player characters doing can be jarring." (slide 56)
+  Ví dụ phản diện (nên tránh): xác NPC bị kẹp chết bởi cửa — vì đó là hành động
+  player làm liên tục trong game, thấy NPC chết vì nó sẽ phá vỡ luật chơi ngầm
+  (slide 60).
+
+NGUYÊN TẮC CHO SYSTEMIC ES (phần 4, "dynamic history making", slide 62-78):
+- Decal/breakable là ví dụ dễ nhất: vệt đạn, đồ vỡ kể lại lịch sử tương tác của
+  chính người chơi với level (slide 65-69, ví dụ Half-Life 1 deathmatch — vệt
+  graffiti + smiley bằng lỗ đạn kể chuyện người chơi bị bắn lén khi đang "sáng
+  tác" trên tường).
+- Quote về đánh đổi kỹ thuật/thiết kế (Raphael Colantonio, đồng nghiệp của Harvey
+  Smith tại Arkane, slide 72): "Of course you have to cache out bodies, debris
+  and decals, due to memory constraints. But remember that's also a design
+  decision. Players get value when they see that their acts are persistent in
+  the world. It's memorable to come back and see your own mess."
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+- Khuyến nghị tổng kết phần 4 (slide 78): "Devise systems that allow players to
+  see their impact on the environment"; "Create gameflow structures that allow
+  for revisiting spaces"; "Remember 'Caching out shell casings' is a design
+  decision"; "Keep visual history cues consistent between the player and the
+  designer-authored bits"; "Aim for player-centric thinking in your
+  environmental storytelling setups."
+
+Trạng thái tổng: VERIFY MẠNH cho toàn bộ mục 2 — đọc trực tiếp từ PDF gốc do tác
+giả host, extract bằng pdftotext, KHÔNG qua tóm tắt WebFetch. Main vẫn nên tự
+pdftotext lại và grep từng câu quote để so byte-by-byte trước khi đưa vào bài,
+theo đúng rule dự án (pdftotext có thể lỗi dấu nháy/ligature — ví dụ file gốc có
+vài chỗ ký tự "'" bị lỗi encoding thành "�" trong bản extract, xem slide 8, 98).
+
+====================================================================
+4. KÊNH TRUYỀN TẢI CÂU CHUYỆN (DELIVERY METHOD)
+   (nguồn: trục 2, mục 1 — cutscene, dialogue tree, bark, audio log,
+   environmental storytelling ngắn gọn (bản đầy đủ xem Mục 3), và
+   mechanics-as-metaphor/"the mechanic is the message" — mục này cũng
+   phân biệt lại với ludonarrative dissonance, xem Mục 2 và Mục 10 để
+   có đầy đủ ngữ cảnh Hocking/BioShock)
+====================================================================
+
+1. CÁC KÊNH TRUYỀN TẢI CÂU CHUYỆN (DELIVERY METHOD)
+=====================================================================
+
+--- 1.1 Cutscene / scripted sequence ---
+Định nghĩa: đoạn phi tương tác (non-interactive) tạm ngưng quyền điều khiển của
+người chơi để đẩy plot, hé lộ backstory, giới thiệu nhân vật.
+Khi nào dùng: chuyển cảnh lớn, khoảnh khắc kịch tính cần dàn dựng camera/kịch bản
+chặt, giới thiệu nhân vật/bối cảnh mới.
+Điểm yếu: biến người chơi thành "watcher" thụ động; cutscene không-skip-được bị
+phê bình là "cutscene hate" — ép nhịp kể chuyện cứng nhắc, làm người chơi mất agency.
+Đối lập được nêu ra: Half-Life 2 — "control is never taken away from the player,
+even during scripted story sequences" (không dùng cutscene truyền thống, dùng
+scripted sequence trong luồng chơi liên tục).
+Quote: "Increasingly elaborate cutscene sequences threatened to take away the
+fundamental pleasure of gaming: the player's ability to take action and influence
+outcomes, to run the race rather than just observe it play out."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+URL: https://gamerant.com/video-game-cutscenes-good-bad-411/
+Trạng thái: [CHƯA VERIFY ĐẦY ĐỦ] — nội dung lấy qua WebFetch tóm tắt (không phải
+đọc HTML thô), câu quote CẦN main tự curl lại để so byte trước khi đưa vào bài.
+
+--- 1.2 Thoại có điều khiển: dialogue tree / branching choice ---
+Định nghĩa (Wikipedia, đã mở đọc): "a gameplay mechanic that is used throughout
+many adventure games and role-playing video games. When interacting with a
+non-player character, the player is given a choice of what to say and makes
+subsequent choices until the conversation ends."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+URL: https://en.wikipedia.org/wiki/Dialogue_tree
+Trạng thái: VERIFY — trang đã mở qua WebFetch, nhưng đây vẫn là bản model tóm tắt
+lại HTML chứ không phải curl thô; main nên tự curl lại đoạn định nghĩa trước khi
+trích dẫn trong bài.
+Điểm yếu (biến thể "dialogue wheel"): bị phê bình vì "obscuring exactly what the
+player character will say" — prompt rút gọn khiến người chơi chọn nhầm ý, câu
+thoại thực tế ra khác với kỳ vọng ("vague prompts... could restrict player agency
+and cause the spoken response to differ from what the player believed they had
+selected").
+URL: https://en.wikipedia.org/wiki/Dialogue_tree
+Trạng thái: cùng nguồn trên, cùng mức verify.
+
+--- 1.3 Barks (thoại ngắn phát tự động) ---
+Định nghĩa: barks là các câu thoại ngắn, thường do NPC hô/nói tự động khi có
+stimulus (hành động của player hoặc thay đổi trạng thái thế giới), người chơi
+KHÔNG phản hồi trực tiếp được — khác dialogue tree.
+Quote (thenarrativedept.com): "Barks are there for a reason - and the reason is
+usually the player. They're a way of letting the player know that the game
+'noticed' what the player just did."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+URL: https://www.thenarrativedept.com/blog/barks
+Trạng thái: VERIFY (đã mở trang qua WebFetch) — main nên curl lại để so byte quote
+trước khi dùng.
+Nguồn gốc thuật ngữ: KHÔNG tìm được nguồn xác nhận rõ ràng ai/game nào đặt ra chữ
+"bark" đầu tiên. Một giả thuyết dân gian (không phải nguồn học thuật): so sánh với
+tiếng chó sủa khi môi trường thay đổi — đây chỉ là cách diễn giải, KHÔNG phải
+etymology đã xác nhận.
+Trạng thái: [CHƯA VERIFY] — không tìm được nguồn gốc thuật ngữ đáng tin. Có một
+paper học thuật DiGRA "Functions and powers of barks in video games" có thể chứa
+thông tin sâu hơn nhưng CHƯA MỞ ĐỌC (chỉ thấy trong kết quả search):
+https://dl.digra.org/index.php/dl/article/download/1990/1989/1986 — nếu viết bài
+cần mở đọc file này trước khi trích.
+
+--- 1.4 Audio log / diary / codex ---
+Định nghĩa: nhật ký ghi âm/text rải rác trong thế giới game, người chơi tự nhặt
+và nghe/đọc — còn gọi là voxophone (Bioshock Infinite), audiograph, tape recorder.
+Phê bình phổ biến: bị gọi là "exposition dumps entirely segregated from gameplay"
+— tách rời khỏi luồng chơi chính, một số coi là "lazy" storytelling kể từ khi
+Resident Evil (1996) phổ biến hoá kỹ thuật này.
+Quote (Destructoid, đã mở đọc trực tiếp): "Some people I talk to hate them because
+they don't want to have to go out of their way to get story content and then
+spend extra time listening to it."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+URL: https://www.destructoid.com/audio-diaries-unseen-story-video-game-narratives/
+Trạng thái: VERIFY (đã mở qua WebFetch) — main curl lại để so byte trước khi dùng.
+Ghi chú: câu "as diaries fall from the sky" mà đề bài gợi ý — TÌM KHÔNG THẤY, có
+thể main nhớ nhầm nguồn hoặc đây là paraphrase không chính xác. Không đưa vào bài
+nếu không tìm được nguồn gốc thật.
+Trạng thái: [CHƯA VERIFY] — không xác nhận được cụm này tồn tại ở đâu.
+
+--- 1.5 Environmental storytelling ---
+Định nghĩa (Harvey Smith & Matthias Worch, GDC 2010 — xem mục 2 để có đầy đủ,
+đây là định nghĩa cốt lõi): "the act of staging player-space with environmental
+properties that can be interpreted as a meaningful whole, furthering the
+narrative of the game."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI — dù đã pdftotext trực tiếp từ PDF gốc, main vẫn
+nên tự tải lại PDF và grep để so byte, vì pdftotext có thể lỗi ligature/encoding]
+URL: https://www.worch.com/files/gdc/What_Happened_Here_Web_Notes.pdf (slide 15)
+Trạng thái: VERIFY — đã tải PDF gốc bằng curl, extract bằng pdftotext -layout,
+đọc trực tiếp text thô (không qua WebFetch tóm tắt). Đây là nguồn mạnh nhất trong
+cả file này.
+
+--- 1.6 Kể chuyện qua CƠ CHẾ (mechanics as metaphor / "the mechanic is the message") ---
+Ví dụ chuẩn: Brenda Romero, board game "Train" (2009) — một trong chuỗi 6 game bà
+gọi là "The Mechanic is the Message". Cơ chế: người chơi xếp quân cờ (đại diện
+người) lên toa tàu càng nhanh càng hiệu quả càng thắng; đến cuối lộ trình mới lộ
+ra ga đến là trại tập trung Auschwitz — bản thân LUẬT CHƠI (hiệu suất, tốc độ) là
+ẩn dụ cho sự vô cảm quan liêu của bộ máy diệt chủng, không cần lời thoại nào.
+Quote (mô tả chính thức trên trang riêng của Romero, đã mở đọc trực tiếp): "Train
+explores complicity within systems."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+URL: http://brenda.games/train
+Trạng thái: VERIFY một phần — đã mở trang, xác nhận game có thật và mô tả trên,
+nhưng cụm "The Mechanic is the Message" làm TÊN CHUỖI 6 game KHÔNG xuất hiện trực
+tiếp trên trang này (lấy từ tóm tắt search, chưa thấy nguyên văn trên trang chính
+chủ) — main cần tìm thêm nguồn xác nhận cụm từ chính xác trước khi trích là "tên
+gọi chính thức".
+Trạng thái: [CHƯA VERIFY] cho phần tên gọi "The Mechanic is the Message".
+Phân biệt với "ludonarrative dissonance": Clint Hocking đặt ra thuật ngữ này trong
+blog post ngày 7/10/2007 để PHÊ BÌNH Bioshock, không phải để mô tả kỹ thuật kể
+chuyện qua cơ chế mà để chỉ ra XUNG ĐỘT giữa gameplay và narrative.
+Quote (đã mở blog gốc qua WebFetch): "Bioshock seems to suffer from a powerful
+dissonance between what it is about as a game, and what it is about as a story."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+URL: http://www.clicknothing.com/click_nothing/2007/10/ludonarrative-d.html
+Trạng thái: VERIFY (đã mở trang qua WebFetch, cần main curl so byte).
+BẪY: "ludonarrative dissonance" ≠ "mechanics as metaphor". Cái đầu là PHÊ BÌNH sự
+LỆCH PHA giữa cơ chế và câu chuyện; cái sau là kỹ thuật CHỦ ĐỘNG dùng cơ chế để
+truyền tải ý nghĩa. Xem mục BẪY KHÁI NIỆM cuối file.
+
+
+====================================================================
+5. NARRATIVE TRONG CORE LOOP, PACING, AGENCY & CHOICE
+   (nguồn: trục 2, mục 3 + mục 4 + mục 5; và trục 1, mục 3 "Mô hình
+   cấu trúc" — bốn trục Jenkins đã trích đầy đủ ở Mục 2, không lặp lại)
+====================================================================
+
+--------------------------------------------------------------------
+5.1 GẮN NARRATIVE VÀO CORE LOOP: quest structure, pacing, narrative
+    beat, golden path vs side content (trục 2, mục 3)
+--------------------------------------------------------------------
+
+--- 3.1 Jesse Schell, "The Art of Game Design: A Book of Lenses" ---
+NGUỒN: tải trực tiếp file PDF sách (bản scan/ebook lưu hành công khai), extract
+bằng pdftotext, xác nhận số trang và số lens bằng cách grep trực tiếp trong text
+extract (không dựa vào tóm tắt search).
+URL: https://www.inventoridigiochi.it/wp-content/uploads/2020/07/art-of-game-design.pdf
+Trạng thái: VERIFY — đọc trực tiếp nguyên văn từ file, có số trang đối chiếu.
+Lưu ý: đây là bản PDF trôi nổi không phải trang bán sách chính thức — nội dung
+đối chiếu khớp với mục lục sách in (Chapter 15 "One Kind of Experience is the
+Story"), nhưng main nên cân nhắc mua/mượn bản chính thức nếu cần trích dẫn học
+thuật chặt chẽ.
+
+XÁC NHẬN SỐ LENS (grep trực tiếp trong text extract, có số trang gốc):
+- Lens #68: The Lens of the Hero's Journey — trang 274-275 sách in.
+  Nguyên văn phần hỏi của lens: "Does my story have elements that qualify it as
+  a heroic story? If so, how does it match up with the structure of the Hero's
+  Journey? Would my story be improved by including more archetypical elements?
+  Does my story match this form so closely that it feels hackneyed?"
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+- Lens #69: The Lens of the Weirdest Thing — trang 279 (lens phụ, không nằm
+  trong phạm vi đề bài nhưng ghi lại vì nằm giữa 2 lens chính).
+- Lens #70: The Lens of Story — trang 280-281 sách in. Đây là lens TỔNG KẾT
+  chương 15. Nguyên văn 5 câu hỏi:
+  "Does my game really need a story? Why? Why will players be interested in
+  this story? How does the story support the other parts of the tetrad
+  (aesthetics, technology, gameplay)? Can it do a better job? How do the other
+  parts of the tetrad support the story? Can they do a better job? How can my
+  story be better?"
+  [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+Trạng thái: VERIFY — số lens 68 và 70 đã xác nhận bằng grep trực tiếp trên 2 vị
+trí độc lập trong file (mục lục đầu sách VÀ nội dung chương 15), khớp nhau.
+
+Ghi chú thêm từ sách (bối cảnh Lens #68): Schell dẫn lời Bob Bates ví Hero's
+Journey như "circuit tester" chứ không phải công thức bắt buộc, và khuyên nên
+VIẾT XONG câu chuyện rồi mới soi qua lens này để chỉnh, không nên xuất phát từ
+khung Hero's Journey ngay từ đầu.
+Trạng thái: VERIFY (cùng file, cùng trang 273-274).
+
+--- 3.2 Richard Lemarchand, "A Playful Production Process" (MIT Press, 2021) ---
+Xác nhận sách có thật, tác giả, năm xuất bản qua trang MIT Press (nhà xuất bản
+chính chủ, đã mở đọc):
+URL: https://mitpress.mit.edu/9780262045513/a-playful-production-process/
+Trạng thái: VERIFY tên sách/tác giả/năm/nhà xuất bản.
+NỘI DUNG CỤ THỂ về "narrative beat", pacing câu chuyện so với pacing gameplay:
+KHÔNG mở được bản đọc đầy đủ (sách trả phí, không có bản preview công khai tìm
+được trong phiên research này). Trang MIT Press chỉ xác nhận sách "covers... story
+structure for game designers" và mô hình 4 giai đoạn sản xuất (ideation,
+preproduction, full production, post-production) — không có trích dẫn cụ thể về
+thuật ngữ "narrative beat".
+Trạng thái: [CHƯA VERIFY] cho mọi claim cụ thể về nội dung bên trong sách (định
+nghĩa "narrative beat", cách Lemarchand so sánh pacing câu chuyện với pacing
+gameplay). KHÔNG đưa các claim này vào bài nếu không tìm được bản đọc được.
+
+--- 3.3 Golden path vs side content ---
+Định nghĩa (Level Design Book, đã mở đọc — đây là nguồn giáo trình chuyên ngành,
+không phải blog SEO): "critical path (or golden path) is the main intended
+player path / procedure to complete the level and progress."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+URL: https://book.leveldesignbook.com/process/layout/criticalpath
+Trạng thái: VERIFY một phần — nội dung lấy qua tóm tắt WebSearch (không phải mở
+trực tiếp trang), main NÊN tự mở và curl lại trước khi trích dẫn.
+Quan hệ với side content: golden path là đường lý tưởng, side content là lệch
+khỏi đường đó một cách CHỦ ĐỘNG — game phải giữ mạch truyện hợp lý dù người chơi
+đi thẳng một mạch hay lê la làm side quest hàng trăm giờ.
+Trạng thái: [CHƯA VERIFY nguồn gốc thuật ngữ chính xác/ai đặt ra đầu tiên] — đây
+là thuật ngữ phổ biến trong ngành, không có "cha đẻ" rõ ràng được xác nhận trong
+lần research này.
+
+
+--------------------------------------------------------------------
+5.2 AGENCY & CHOICE: illusion of choice, meaningful choice,
+    consequence, Telltale-style choice (trục 2, mục 4)
+--------------------------------------------------------------------
+
+Quote đã mở đọc trực tiếp (Game Informer, "Why Your Choices Don't Matter In
+Telltale Games", tác giả Elise Favis):
+"The main stories in Telltale games are as linear as The Last of Us, with only
+small exceptions."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+Và: "Characters will die regardless of your choices – it just comes down to when."
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+URL: https://gameinformer.com/b/features/archive/2015/02/03/why-your-choices-dont-matter-in-telltale-games.aspx
+Trạng thái: VERIFY (đã mở trang trực tiếp qua WebFetch — main nên curl lại so
+byte vì WebFetch tóm tắt qua model nhỏ).
+Ví dụ cụ thể được nêu trong bài: The Walking Dead Season 1 — dù chọn cứu Duck
+hay Shaun ở nông trại, Shaun vẫn chết; nhân vật Ben luôn chết, chỉ khác thời điểm.
+
+Lý do kinh tế/kỹ thuật đằng sau (từ tóm tắt search, CHƯA mở trực tiếp nguồn gốc):
+mỗi cutscene/dòng thoại/ngày sản xuất thêm tốn tiền — nếu mỗi lựa chọn đều rẽ
+nhánh thật, chi phí sản xuất tăng theo cấp số nhân, khiến mô hình game kiểu
+Telltale không khả thi về tài chính.
+Trạng thái: [CHƯA VERIFY nguồn cụ thể] — đây là lập luận phổ biến trong giới phê
+bình nhưng research lần này CHƯA mở được bài viết gốc nêu luận điểm này (chỉ có
+trong bản tóm tắt tổng hợp của WebSearch). Không trích là quote, chỉ dùng làm ý
+paraphrase nếu đưa vào bài, và nên tìm nguồn gốc trước khi coi là fact.
+
+"Illusion of choice" — thuật ngữ dùng phổ biến trong cộng đồng người chơi (Steam
+Community threads, Reddit...) để mô tả hiện tượng lựa chọn khác nhau dẫn tới cùng
+một kết cục. KHÔNG tìm được người/bài viết cụ thể "đặt ra" thuật ngữ này lần đầu
+— có vẻ là thuật ngữ nảy sinh tự nhiên trong cộng đồng, không có tác giả gốc.
+Trạng thái: [CHƯA VERIFY nguồn gốc thuật ngữ].
+
+Tagline chính thức của Telltale ("story and characters adapt to the decisions you
+make" hoặc biến thể tương tự) — chỉ thấy được nhắc lại qua các bài viết/thảo luận
+cộng đồng, KHÔNG mở được trang marketing/press-kit chính chủ của Telltale còn
+tồn tại để xác nhận nguyên văn chính xác (hãng đã đóng cửa, trang web gốc không
+còn truy cập được dễ dàng).
+Trạng thái: [CHƯA VERIFY] — không đưa nguyên văn tagline vào bài nếu không tìm
+được bản lưu trữ (Wayback Machine) xác nhận.
+
+--------------------------------------------------------------------
+5.3 MÔ HÌNH/KHUNG CẤU TRÚC: string of pearls, hub-and-spoke, story as
+    delivery mechanism (trục 1, mục 3 — bốn trục Jenkins xem Mục 2)
+--------------------------------------------------------------------
+
+
+(i) "String of pearls" — mô hình chuỗi hạt: đoạn phi tương tác (dây) nối các đoạn
+tự do khám phá có mục tiêu cố định (hạt). Nguồn được nhiều tài liệu thứ cấp trích
+dẫn là game designer Jane Jensen (~2002, thường gắn với bài nói/viết về thiết kế
+adventure game), và Jesse Schell nhắc lại trong "The Art of Game Design: A Book of
+Lenses", chương 15.
+Trạng thái: [CHƯA VERIFY — KHÔNG tìm được bản gốc bài viết/nói năm 2002 của Jane
+Jensen để tự đọc; chỉ có trích dẫn thứ cấp lặp lại "Jane Jensen (2002)" mà không
+có link nguồn gốc. Schell's book cũng chưa tự mở để trích nguyên văn chương 15.]
+
+(ii) "Hub-and-spoke" — cấu trúc trung tâm (hub) + các nhánh nhiệm vụ/nội dung tỏa
+ra (spoke) rồi quay lại hub. KHÔNG tìm được một nguồn gốc/tác giả cụ thể đặt tên
+thuật ngữ này cho game narrative — đây có vẻ là thuật ngữ mượn từ thiết kế mạng
+lưới giao thông/level design, được dùng lỏng lẻo trong ngành mà không có một
+"người đặt tên" rõ ràng.
+Trạng thái: KHÔNG XÁC ĐỊNH ĐƯỢC NGUỒN GỐC — nên trình bày trong bài như một mô hình
+mô tả chung của ngành (common pattern), KHÔNG gán tên tác giả cụ thể.
+
+(iii) "Story as delivery mechanism" — cụm này cũng không tìm được nguồn gốc/tác giả
+cụ thể trong phiên research này. [CHƯA VERIFY]
+
+(iv) Bốn trục Jenkins — xem mục 2b(ii) ở trên: EVOCATIVE SPACES, ENACTING STORIES,
+EMBEDDED NARRATIVES, EMERGENT NARRATIVES — ĐÃ VERIFY đầy đủ, trích nguyên văn ở
+trên.
+
+--------------------------------------------------------------------
+5.4 VIẾT CHO GAME KHÁC VIẾT PHIM: nonlinear, người chơi vắng mặt/lạc
+    hướng, budget VO, localization (trục 2, mục 5 — TOÀN BỘ mục này
+    nguồn yếu, đa số [CHƯA VERIFY], xem cảnh báo trong chính đoạn dưới
+    và Mục 11)
+--------------------------------------------------------------------
+
+Ghi chú quan trọng: phần này chủ yếu tổng hợp qua WebSearch (kết quả tóm tắt),
+CHƯA mở trực tiếp từng trang nguồn để đọc nguyên văn — vì các nguồn là bài blog
+tổng hợp (LA Film School, formulawritesolutions...) không phải nguồn gốc/tác giả
+chuyên ngành narrative design. Theo quy tắc dự án, KHÔNG dùng các nguồn này làm
+"nguồn cuối" nếu viết bài — chỉ ghi lại đây làm định hướng, main cần tìm nguồn
+gốc mạnh hơn (vd: sách "Video Game Storytelling" của Evan Skolnick, hoặc GDC talk
+của game writer thực thụ) trước khi đưa vào bài học.
+Trạng thái: [CHƯA VERIFY — toàn bộ mục 5, mức độ nguồn yếu].
+
+Các điểm được các nguồn thứ cấp nêu (paraphrase, KHÔNG trích nguyên văn vì chưa
+verify nguồn gốc):
+- Game writer phải viết một MẠNG các nhánh truyện tiềm năng thay vì một đường
+  thẳng như phim — vì player có agency thật hoặc "ảo giác" về agency.
+- Công cụ làm việc khác nhau: quest editor, dialogue system, spreadsheet/flowchart
+  thay vì phần mềm biên kịch (Final Draft) thuần tuý — dù một nguồn (gamedeveloper
+  audio localization) có nhắc script writer vẫn ưu tiên format kiểu Final Draft
+  hơn Excel khi có thể.
+- Localization: chi phí voice-over chiếm phần lớn ngân sách localize (một nguồn
+  ước tính 50-70% ngân sách âm thanh dành cho lồng tiếng, so với 10-15% cho dịch
+  thuật văn bản) — số liệu này CHƯA verify qua nguồn gốc, chỉ có trong tóm tắt
+  WebSearch, KHÔNG đưa số liệu cụ thể vào bài nếu chưa mở được nguồn báo giá gốc.
+- Lời thoại game thường được thu âm TRƯỚC KHI game hoàn thiện — diễn viên lồng
+  tiếng thu mà không thấy cảnh thật, khác hẳn quy trình quay phim.
+- "Người chơi vắng mặt/lạc hướng" (đề bài gợi ý): tức là game writer không kiểm
+  soát được NHỊP người chơi tiếp nhận thông tin — người chơi có thể bỏ lỡ hoàn
+  toàn một audio log, backtrack, đứng yên hàng giờ — khác phim nơi đạo diễn kiểm
+  soát hoàn toàn thời lượng/nhịp xem. Đây là suy luận logic từ các đặc điểm đã
+  nêu ở mục 1 và 2 (ví dụ nguyên tắc "player is *pulling* the narrative" trong
+  slide 34 của Worch/Smith — xem mục 2), KHÔNG phải trích dẫn trực tiếp từ nguồn
+  chuyên về screenwriting-vs-game-writing.
+
+====================================================================
+6. VÍ DỤ PHÂN TÍCH ĐA THỂ LOẠI
+   (nguồn: trục 3, mục 1 — 13 ví dụ, PC/console/indie/mobile)
+====================================================================
+
+1. VÍ DỤ PHÂN TÍCH ĐA THỂ LOẠI
+====================================================================
+
+--- 1.1 Half-Life 2 (PC, Valve, 2004 — [CHƯA VERIFY năm chính xác, cần main
+    tự confirm lại trên trang chính thức/Wikipedia, nhưng đây là năm được
+    trích dẫn thống nhất trong mọi nguồn phụ tôi đọc được]) ---
+
+Kỹ thuật nổi bật: kể chuyện KHÔNG cắt cảnh (no cutscenes), toàn bộ câu
+chuyện diễn ra qua góc nhìn thứ nhất liên tục của Gordon Freeman, nhân vật
+không bao giờ nói, không có khoảnh khắc nào máy quay rời khỏi player.
+Valve dùng "scripted sequences" trong-engine thay vì cinematic: player vẫn
+giữ toàn quyền điều khiển camera/di chuyển trong lúc sự kiện kịch bản diễn
+ra xung quanh.
+
+Vì sao hiệu quả: giữ liên tục cảm giác "mình LÀ Gordon Freeman", không bị
+ngắt nhịp bởi chuyển góc nhìn sang third-person. Đây được xem là quyết định
+thiết kế có chủ đích để tối đa hoá immersion.
+
+Quote (từ bài phân tích, không phải phát biểu trực tiếp của Valve):
+"apart from short monologues at the very beginning and end of the game,
+there are no cutscenes" — Jake Shapiro, "PICK UP THAT CAN!" Storytelling
+in Half-Life 2, Game Developer / Gamasutra, đăng 25/10/2012.
+URL: https://www.gamedeveloper.com/design/-quot-pick-up-that-can-quot-storytelling-in-half-life-2
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+LƯU Ý: đây là quote của NGƯỜI VIẾT BÀI PHÂN TÍCH, không phải trích lời nhà
+phát triển Valve. Tôi KHÔNG tìm được phát biểu gốc của Valve (Robin Walker/
+Marc Laidlaw) xác nhận triết lý "no cutscenes" bằng lời họ tự nói — chỉ có
+phân tích retrospective từ báo chí/blogger. Ghi rõ để main không lỡ gán
+nhầm quote cho Valve.
+
+--- 1.2 BioShock (PC/console, 2K Boston/Irrational Games, 2007 —
+    [CHƯA VERIFY năm chính xác qua nguồn chính, nhưng 2007 là năm được mọi
+    nguồn phụ thống nhất]) ---
+
+Kỹ thuật nổi bật:
+(a) Audio log — kể chuyện quá khứ (Rapture sụp đổ) song song với hiện tại
+    mà không cần cutscene, người chơi tự chọn nghe hay không.
+(b) Twist "Would you kindly" — cụm từ trigger được lặp lại xuyên game,
+    tiết lộ giữa game rằng nhân vật chính (Jack) đã bị điều kiện hoá tâm lý
+    để tuân lệnh bất cứ khi nào nghe cụm từ này. Twist khai thác chính quy
+    ước gameplay (player luôn làm theo objective) để phản chiếu việc nhân
+    vật mất tự do ý chí — ảo tưởng "tôi tự chọn" của người chơi trùng khớp
+    với ảo tưởng tự do ý chí của Jack.
+    Nguồn: Ken Levine từng kể cụm "would you kindly" đến từ tài liệu quảng
+    cáo đặt câu hỏi giả định kiểu "Would you kill people, even innocent
+    people, to survive?" — [CHƯA VERIFY nguồn gốc phỏng vấn cụ thể, chỉ tìm
+    được tóm tắt gián tiếp, chưa mở được bài phỏng vấn gốc có ngày/nơi đăng
+    rõ ràng].
+
+Vì sao hiệu quả (theo phân tích phổ biến): twist được cài cắm foreshadowing
+xuyên suốt nửa đầu game (theo các bài phân tích retrospective), không phải
+bất ngờ ngẫu nhiên.
+
+(c) Ludonarrative dissonance — thuật ngữ do Clint Hocking đặt ra, chỉ trích
+    chính BioShock: game về mặt CÂU CHUYỆN phê phán chủ nghĩa Objectivism
+    của Ayn Rand (tự do tuyệt đối dẫn tới suy đồi), nhưng về mặt GAMEPLAY
+    lại ép player đi theo đúng một đường thẳng không có lựa chọn thật —
+    mâu thuẫn giữa thông điệp và cơ chế.
+    Quote gốc, đăng 07/10/2007, blog Click Nothing:
+    "Bioshock seems to suffer from a powerful dissonance between what it
+    is about as a game, and what it is about as a story."
+    "By throwing the narrative and ludic elements of the work into
+    opposition, the game seems to openly mock the player for having
+    believed in the fiction."
+    URL: https://clicknothing.com/2007/10/07/ludonarrative-d/
+    [NGUYÊN VĂN CẦN MAIN CURL LẠI]
+
+--- 1.3 Dark Souls (PC/console, FromSoftware, 2011 — [CHƯA VERIFY năm
+    chính xác qua nguồn chính]) ---
+
+Kỹ thuật nổi bật: kể chuyện qua mô tả vật phẩm (item flavor text) + môi
+trường/kiến trúc, gần như không có cutscene thoại trực tiếp giải thích cốt
+truyện. Người chơi phải tự ghép nối (piece together) lore từ các mảnh rời
+rạc.
+
+Vì sao hiệu quả: đạo diễn Hidetaka Miyazaki từng nói ông không thực sự
+giỏi kể chuyện trực tiếp — cách kể gián tiếp qua hình ảnh/mô tả là lựa
+chọn phù hợp với thế mạnh của ông, lấy cảm hứng từ việc đọc sách khi còn
+nhỏ (không hiểu hết chữ nên tự dùng tranh minh hoạ để lấp khoảng trống).
+Nguồn: phỏng vấn WIRED năm 2016 — [CHƯA VERIFY, tôi chỉ đọc được tóm tắt
+qua nguồn thứ cấp, chưa tự mở bài WIRED gốc để xác nhận câu chữ]. Kiến
+trúc trong game (vd. Anor Londo lấy cảm hứng từ Milan Cathedral và Château
+de Chambord) cũng là công cụ kể chuyện — [CHƯA VERIFY nguồn gốc cụ thể của
+chi tiết kiến trúc này, tìm thấy qua nguồn thứ cấp/wiki].
+
+--- 1.4 Gone Home (PC, indie, The Fullbright Company, 2013 — [CHƯA VERIFY
+    năm chính xác qua nguồn chính]) ---
+
+Kỹ thuật nổi bật: environmental storytelling thuần tuý — không có combat,
+không boss fight, chỉ có exploration + đọc ghi chú/vật phẩm trong một ngôi
+nhà để ráp lại câu chuyện gia đình. Ý tưởng khởi phát của studio (theo bài
+phỏng vấn Road to IGF): "điều gì sẽ xảy ra nếu lấy BioShock, bỏ hết combat
+và bạo lực, chỉ giữ lại môi trường và câu chuyện?"
+Nguồn: Road to the IGF: The Fullbright Company's Gone Home, Game Developer.
+URL: https://www.gamedeveloper.com/design/road-to-the-igf-the-fullbright-company-s-i-gone-home-i-
+[CHƯA VERIFY nguyên văn — tôi mới đọc bản tóm tắt qua WebFetch/search, chưa
+tự curl trang này; main cần tự mở lại nếu muốn trích nguyên văn]
+
+--- 1.5 What Remains of Edith Finch (PC/console, Giant Sparrow, 2017 —
+    [CHƯA VERIFY năm chính xác qua nguồn chính, "tháng 4/2017" theo nguồn
+    phụ]) ---
+
+Kỹ thuật nổi bật: "mechanic-as-story" — mỗi thành viên gia đình Finch có
+một mini-game/cơ chế RIÊNG mô phỏng đúng cách người đó đã chết (vd. cơ chế
+làm việc trong nhà máy cá lặp đi lặp lại gây tê liệt cảm xúc để kể chuyện
+một cái chết trong công việc nhàm chán). Cơ chế thay đổi theo từng chương
+thay vì giữ nguyên hệ thống chơi xuyên suốt.
+
+Vì sao hiệu quả: cảm xúc của câu chuyện được TRUYỀN TẢI qua chính cách
+chơi (feel của cơ chế), không chỉ qua lời kể — ví dụ kinh điển của "kể
+chuyện qua gameplay" thay vì qua text/thoại.
+
+--- 1.6 Papers, Please (PC/indie sau đó lên mobile, Lucas Pope, 2013 —
+    [CHƯA VERIFY năm chính xác qua nguồn chính]) ---
+
+Kỹ thuật nổi bật: cơ chế MANG THÔNG ĐIỆP — người chơi đóng vai nhân viên
+kiểm tra giấy tờ ở biên giới, mỗi ngày phải cân bằng giữa tuân thủ luật lệ
+hà khắc và lòng trắc ẩn (để gia đình sống sót cần tiền, tiền đến từ việc
+xử lý đúng luật, kể cả khi luật đó vô nhân đạo).
+
+Vì sao hiệu quả: Pope phát triển cơ chế kiểm tra giấy tờ TRƯỚC, sau đó mới
+xây câu chuyện/thông điệp bọc quanh cơ chế đã chạy tốt — narrative phục vụ
+mechanic, không phải ngược lại. Ông nhận Pioneer Award tại GDC vì "thử
+nghiệm sự tương tác giữa mechanics, narrative và art".
+Nguồn: Road to the IGF: Lucas Pope's Papers, Please, Game Developer.
+URL: https://www.gamedeveloper.com/design/road-to-the-igf-lucas-pope-s-i-papers-please-i-
+[CHƯA VERIFY nguyên văn — mới đọc qua tóm tắt search, chưa tự curl]
+
+--- 1.7 Undertale (PC ban đầu, sau lên console/mobile, Toby Fox, 2015 —
+    [CHƯA VERIFY năm chính xác qua nguồn chính]) ---
+
+Kỹ thuật nổi bật: hệ thống combat với lựa chọn FIGHT/ACT/ITEM/MERCY — mỗi
+quái vật có hành động riêng (check, dỗ, chơi, vuốt ve...) để có thể tha
+thay vì giết. Lựa chọn tha/giết từng con quái CỘNG DỒN quyết định 1 trong
+3 kết thúc (Pacifist/Neutral/Genocide), và game NHỚ lựa chọn cũ xuyên các
+lần chơi lại.
+
+Vì sao hiệu quả: đạo đức không phải lựa chọn kiểu dialogue-tree tách biệt
+khỏi gameplay, mà LÀ chính cơ chế chiến đấu — ví dụ mẫu mực của "cơ chế =
+lựa chọn đạo đức" mà đề bài gợi ý.
+
+--- 1.8 Disco Elysium (PC/console, ZA/UM, 2019 — [CHƯA VERIFY năm chính
+    xác qua nguồn chính]) ---
+
+Kỹ thuật nổi bật: 24 chỉ số kỹ năng (skill) của nhân vật chính được nhân
+cách hoá thành các "giọng nói" nội tâm riêng biệt, tự chen vào hội thoại,
+đưa ra nhận định/gợi ý (đôi khi sai/gây rối) tuỳ vào chỉ số cao/thấp. Một
+số nhánh hội thoại ("detour") chỉ xuất hiện nếu đủ điểm kỹ năng, và người
+chơi không biết mình đã bỏ lỡ detour nào.
+
+Vì sao hiệu quả: hệ thống stat RPG truyền thống (vốn chỉ ảnh hưởng số học)
+được biến thành NHÂN VẬT PHỤ có tính cách, khiến build nhân vật = định
+hình giọng kể chuyện của chính game.
+[CHƯA VERIFY chi tiết "lấy cảm hứng từ Twitter" của Robert Kurvitz — tìm
+thấy qua nguồn thứ cấp dẫn phỏng vấn GameSpot, chưa tự mở bài GameSpot gốc]
+
+--- 1.9 Florence (mobile, Mountains — đội của Ken Wong, người từng làm
+    Monument Valley — phát hành 14/02/2018 iOS, 14/03/2018 Android —
+    [CHƯA VERIFY hai ngày này qua nguồn chính, nguồn phụ nêu khá cụ thể
+    nên khả năng đúng cao nhưng chưa tự mở trang chính thức/Wikipedia để
+    đối chiếu]) ---
+
+Kỹ thuật nổi bật: kể chuyện qua chuỗi minigame ngắn tương ứng từng giai
+đoạn một mối tình (ghép puzzle hội thoại, lướt mạng xã hội, vặn đồng hồ,
+cơ chế "buông tay" ở đoạn chia tay). Hình dạng/màu sắc mảnh ghép puzzle
+hội thoại thay đổi theo mức độ thân thiết trong quan hệ.
+
+Vì sao hiệu quả: gần như không có chữ viết, mọi cảm xúc truyền qua cơ chế
+tương tác — phù hợp phiên chơi ngắn trên mobile (mỗi chương chỉ vài phút),
+mỗi cơ chế nhỏ tồn tại đúng 1 lần rồi không lặp lại, giữ cảm giác mới mẻ
+xuyên suốt trải nghiệm ngắn.
+
+--- 1.10 Reigns (mobile trước, sau lên PC, Nerial, phát hành 11/08/2016 —
+    [CHƯA VERIFY ngày qua nguồn chính, nguồn phụ Wikipedia nêu khá cụ thể]) ---
+
+Kỹ thuật nổi bật: cơ chế "quẹt" (swipe trái/phải) lấy cảm hứng trực tiếp
+từ Tinder — nhà sáng lập Nerial pitch dự án cho Devolver Digital năm 2015
+bằng câu "Tinder meets Game of Thrones" [CHƯA VERIFY nguồn gốc câu pitch
+này qua phỏng vấn gốc, chỉ có qua nguồn thứ cấp]. Mỗi lượt quẹt là một
+quyết định nhị phân của vị vua, ảnh hưởng 4 chỉ số quyền lực (Giáo hội,
+Dân chúng, Quân đội, Ngân khố) — lệch quá 1 chỉ số thì vua chết, sang đời
+vua kế tiếp (game thiết kế để CHẾT liên tục là một phần vòng lặp).
+
+Vì sao hiệu quả: gói API kể chuyện triều đại kéo dài hàng chục đời vua vào
+thao tác 1 giây/lượt — cực kỳ phù hợp phiên chơi mobile rời rạc (chơi vài
+giây rồi bỏ điện thoại xuống, không mất mạch truyện vì mỗi lượt chơi tự
+khép kín một quyết định).
+
+--- 1.11 80 Days (mobile trước — iOS 31/07/2014, Android 15/12/2014 —
+    [CHƯA VERIFY 2 ngày này qua nguồn chính], sau lên PC; inkle, biên kịch
+    chính Meg Jayanth cùng Jon Ingold) ---
+
+Kỹ thuật nổi bật: interactive fiction dựa trên "Vòng quanh thế giới trong
+80 ngày" của Jules Verne, người chơi chọn tuyến đường qua hơn 150 thành
+phố trên bản đồ 3D, mỗi đoạn di chuyển là một đoạn văn ngắn (bite-sized) —
+gần 750.000 từ tổng cộng nhưng mỗi lần đọc chỉ vài chục giây tới vài phút.
+
+Vì sao hiệu quả: cấu trúc "đẩy người chơi tới quyết định tiếp theo bằng
+những miếng truyện nhỏ" khớp hoàn hảo với kiểu chơi mobile ngắt quãng
+(chờ xe bus, giờ nghỉ). Game thắng IGF Excellence in Narrative 2015, được
+TIME chọn Game of the Year 2014 (toàn thể loại, không riêng mobile) —
+[CHƯA VERIFY giải TIME qua nguồn chính, chỉ có qua nguồn thứ cấp].
+
+--- 1.12 Destiny (console/PC, Bungie, 2014) — ví dụ THẤT BẠI về narrative
+    delivery ---
+
+Vấn đề: cốt truyện/lore chính được giấu trong "Grimoire Card" — chỉ xem
+được qua companion app/website BÊN NGOÀI game, không xem được trong lúc
+chơi. Sau khi ra mắt 09/09/2014 [CHƯA VERIFY ngày qua nguồn chính], phản
+ứng người chơi với narrative rất tiêu cực — bị coi là thiếu định hướng
+viết, và cộng đồng chỉ ra chính cơ chế "giấu lore ngoài game" là nguyên
+nhân chính khiến câu chuyện trong game cảm giác rời rạc.
+
+Bài học: đến Destiny 2 (2017), Bungie bỏ hẳn Grimoire Card, chuyển lore
+vào thẳng trong game qua Adventures/nhân vật/scannable — world lead Steve
+Cotton giải thích toàn bộ story giờ được kể "through Adventures, characters
+in the world, the campaign, and scannables". [CHƯA VERIFY nguyên văn phát
+biểu này — mới có qua bài PCGamesN tóm tắt, chưa tự mở phỏng vấn gốc]
+URL: https://www.pcgamesn.com/destiny-2/destiny-2-grimoire-cards
+
+--- 1.13 Fortnite (mobile/console/PC, Epic Games) — live event làm
+    narrative device ---
+
+Kỹ thuật nổi bật: thay vì cutscene hay text, cốt truyện tiến triển qua
+"live event" — sự kiện diễn ra trực tiếp trong thế giới game mà mọi
+player đang online cùng chứng kiến 1 lần duy nhất (vd. sự kiện "The End"
+cuối Chapter 1, đảo bị hút vào hố đen, màn hình đen kéo dài vài ngày
+trước khi Chapter 2 ra mắt). [CHƯA VERIFY ngày cụ thể của "The End" qua
+nguồn chính]
+
+Vì sao đáng chú ý (không hẳn "hiệu quả" thuần tuý — cần phân tích minh
+hoạ riêng, KHÔNG phải kỹ thuật đã được academic verify): đây là hình thức
+kể chuyện live-service đặc thù — biến chính người chơi thành khán giả
+đồng thời của một "sự kiện lịch sử" chung, tạo cảm giác cộng đồng mà
+narrative tuyến tính không làm được. Cần main tự cân nhắc có đưa vào bài
+hay không vì đây là phân tích của tôi, không trích từ nguồn học thuật.
+
+
+====================================================================
+7. SAI LẦM HAY GẶP CỦA NGƯỜI MỚI LÀM NARRATIVE DESIGN
+   (nguồn: trục 3, mục 2 — mục 2.4 "ludonarrative dissonance" đối
+   chiếu lại với BÀY khái niệm ở Mục 10 và ví dụ BioShock ở Mục 6)
+====================================================================
+
+2. SAI LẦM HAY GẶP CỦA NGƯỜI MỚI LÀM NARRATIVE DESIGN
+====================================================================
+
+--- 2.1 Viết cốt truyện tách rời khỏi gameplay từng giây ---
+Nguồn: David Kuelz, "Narrative Design Tips I Wish I'd Known", Game
+Developer, đăng 18/04/2016.
+URL: https://www.gamedeveloper.com/design/narrative-design-tips-i-wish-i-d-known
+Quote: "they create a story that isn't related to the second-by-second
+gameplay...the gameplay does its own thing, which often times has very
+little to do with the story"
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+
+--- 2.2 Dồn hết công sức kể chuyện vào cutscene + thoại, quên rằng mọi
+    khía cạnh khác của game (art, enemy design, môi trường...) cũng kể
+    chuyện ---
+Cùng nguồn 2.1.
+Quote: "beginners will often focus all of their storytelling skills on
+their cutscenes and their dialogue, but the words are only a part of the
+story"
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+
+--- 2.3 Nhồi lore vào cutscene / lore dump ---
+Sai lầm phổ biến: đầu tư quá nhiều vào lore/world history chi tiết trong
+khi câu chuyện HIỆN TẠI (present-tense story) không đủ hấp dẫn để người
+chơi quan tâm đến lore đó. Nguồn liên quan: bài "Exposing the Lore Dumps",
+Game Developer — [CHƯA VERIFY nguyên văn, tôi mới thấy tiêu đề + tóm tắt
+gián tiếp qua search, CHƯA tự mở/curl bài này để lấy quote thật. Main cần
+tự mở lại nếu muốn dùng].
+URL: https://www.gamedeveloper.com/design/exposing-the-lore-dumps
+
+--- 2.4 Ludonarrative dissonance — để cơ chế và câu chuyện "nói ngược
+    nhau" ---
+Xem mục 1.2 (Clint Hocking / BioShock). Đây vừa là ví dụ phân tích vừa là
+khung sai lầm cần tránh: thông điệp câu chuyện và luật chơi phải nhất
+quán, không được để cơ chế ngầm phủ nhận điều câu chuyện đang rao giảng.
+
+--- 2.5 Cho player "choice" không có hệ quả thật ---
+Nguồn: Warren Spector, "Another Narrative Fallacy: Games are About
+Choice", blog cá nhân, đăng 08/08/2015.
+URL: https://warrenspector.wordpress.com/2015/08/08/another-narrative-fallacy-its-all-about-choice/
+Quote: "Choices without consequences are meaningless. If they don't lead
+to different outcomes – preferably radically different outcomes – what's
+the point?"
+[NGUYÊN VĂN CẦN MAIN CURL LẠI]
+Ghi chú: Spector là nhà thiết kế kỳ cựu (Deus Ex, Thief) — bài này thuộc
+loạt "narrative fallacy" ông viết phản biện quan điểm "chọn lựa là tất cả
+của game narrative". Có bản dịch ý tương tự trên Game Developer:
+"Opinion: When choice becomes a metric, narrative design suffers" (tác
+giả Nicholas O'Brien) — [CHƯA VERIFY nguyên văn, chỉ có qua tóm tắt search].
+
+--- 2.6 Cutscene tước quyền điều khiển đúng lúc cao trào ---
+Ghi nhận qua nhiều nguồn thứ cấp (chưa có 1 bài duy nhất làm nguồn chính,
+nên liệt kê như một PATTERN được nhắc lặp lại nhiều nơi, không trích quote
+cụ thể): việc bắt player buông tay điều khiển đúng đỉnh cảm xúc/hành động
+(ví dụ: nhân vật sắp chết, boss sắp bị hạ) làm gãy mạch trải nghiệm — đối
+lập với triết lý Half-Life 2 (mục 1.1) là KHÔNG BAO GIỜ lấy quyền điều
+khiển của player kể cả trong sequence kịch bản.
+[CHƯA VERIFY — đây là tổng hợp pattern từ nhiều bài/thảo luận cộng đồng,
+KHÔNG có 1 nguồn học thuật/GDC talk cụ thể tôi đã tự mở đọc để trích dẫn
+đúng nghĩa. Main cân nhắc dùng như "quan sát chung" chứ không trích nguồn.]
+
+--- 2.7 Audio log thay cho thiết kế không gian ---
+Đây là điểm được gợi ý trong đề bài nhưng tôi KHÔNG tìm được nguồn phê
+bình trực tiếp, cụ thể (bài viết/GDC talk nào đó chỉ đích danh "audio log
+là workaround lười biếng cho environmental design") qua các lượt search đã
+chạy. Ghi vào đây để MAIN biết: cần search thêm riêng nếu muốn đưa mục này
+vào bài, hoặc diễn giải như suy luận cá nhân (không trích nguồn) dựa trên
+đối chiếu BioShock (dùng audio log, mục 1.2) vs. Gone Home (bỏ hẳn combat,
+dùng thuần môi trường + ghi chú viết tay, mục 1.4).
+
+====================================================================
+8. CÁCH ĐÁNH GIÁ / KIỂM CHỨNG NARRATIVE TRONG PLAYTEST
+   (nguồn: trục 3, mục 3)
+====================================================================
+
+====================================================================
+3. CÁCH ĐÁNH GIÁ / KIỂM CHỨNG NARRATIVE TRONG PLAYTEST
+====================================================================
+
+QUAN TRỌNG: tôi KHÔNG tìm được trích dẫn nguyên văn xác thực (đã tự mở đọc
+được đoạn text thật) từ Lemarchand (A Playful Production Process), Fullerton
+(Game Design Workshop), hay Hodent (The Gamer's Brain) nói CỤ THỂ về câu
+hỏi playtest cho narrative. Các search chỉ trả về mô tả tổng quan/tóm tắt
+sách (Blinkist, review), không phải nguyên văn có thể trích dẫn. KHÔNG bịa
+quote — ghi rõ trạng thái sau:
+
+--- 3.1 Về Celia Hodent — The Gamer's Brain ---
+[CHƯA VERIFY nguyên văn] — chỉ xác nhận được QUA NGUỒN THỨ CẤP rằng Hodent
+đề xuất cách tiếp cận: xây giả thuyết (hypothesis) về trải nghiệm người
+chơi, kiểm chứng bằng playtest + analytics; và rằng narrative nên "phục vụ
+gameplay" thay vì đứng tách biệt. Cần main tự tra sách/blog gốc
+(celiahodent.com) nếu muốn trích nguyên văn thật.
+URL tham khảo: https://celiahodent.com/gamers-brain-part-3-ux-engagement-immersion-retention-gdc17-talk/
+(bài blog về UX engagement/immersion — có khả năng chứa nội dung liên quan
+đến câu hỏi playtest, nhưng tôi CHƯA tự mở/đọc để xác nhận).
+
+--- 3.2 Về Richard Lemarchand — A Playful Production Process ---
+[CHƯA VERIFY nguyên văn] — sách xác nhận có bàn về "playtest-centered game
+development" và "story structure for game designers" theo mô tả nhà xuất
+bản (MIT Press, phát hành 10/2021), nhưng tôi không tìm được đoạn trích cụ
+thể về CÂU HỎI playtest dành riêng cho narrative.
+URL: https://www.penguinrandomhouse.com/books/675860/a-playful-production-process-by-richard-lemarchand/
+
+--- 3.3 Về Tracy Fullerton — Game Design Workshop ---
+[CHƯA VERIFY nguyên văn] — không tìm được đoạn cụ thể về câu hỏi story
+trong playtest qua các lượt search.
+
+--- 3.4 Dấu hiệu narrative "hỏng" quan sát được trong playtest (tổng hợp
+    từ nhiều nguồn thứ cấp, KHÔNG PHẢI trích dẫn học thuật — dùng như quan
+    sát chung, không gán cho tác giả cụ thể) ---
+- Người chơi SKIP thoại/dialogue liên tục — dấu hiệu narrative không giữ
+  được sự chú ý hoặc feel như "bài tập bắt buộc" thay vì phần thưởng.
+- Người chơi không nhớ được tên nhân vật/phe phái sau khi được giới thiệu
+  — thường do nhồi quá nhiều thông tin (tên, phe, twist) trong thời gian
+  ngắn, gây quá tải nhận thức (cognitive overload).
+- Người chơi không xác định được mục tiêu hiện tại (bối rối vì thiếu ngữ
+  cảnh nhân vật/động cơ) — dấu hiệu narrative không truyền tải rõ "vì sao
+  tôi đang làm việc này".
+[CHƯA VERIFY — đây là tổng hợp diễn giải từ nhiều bài viết/thảo luận cộng
+đồng (Medium, Destructoid, itch.io devlog...), KHÔNG phải trích dẫn từ
+sách/GDC talk có tên tác giả cụ thể. Main nên coi đây là gợi ý hướng quan
+sát, không trích nguồn khi viết bài, hoặc diễn đạt lại thành "kinh nghiệm
+thực tế được nhiều nhà phát triển chia sẻ" thay vì gán cho 1 người.]
+
+
+====================================================================
+9. ĐỌC THÊM
+   (nguồn: trục 3, mục 4, cộng thêm các nguồn nền tảng đã dùng ở trục 1
+   và trục 2 nhưng chưa liệt trong "đọc thêm" gốc)
+====================================================================
+
+--------------------------------------------------------------------
+9.1 Từ trục 3, mục 4
+--------------------------------------------------------------------
+
+4. ĐỌC THÊM
+====================================================================
+
+1. Clint Hocking — "Ludonarrative Dissonance in Bioshock" (blog Click
+   Nothing, 07/10/2007). Bài gốc đặt ra thuật ngữ "ludonarrative
+   dissonance" — nền tảng để hiểu vì sao câu chuyện và cơ chế PHẢI nhất
+   quán. https://clicknothing.com/2007/10/07/ludonarrative-d/
+
+2. Warren Spector — "Another Narrative Fallacy: Games are About Choice"
+   (blog cá nhân, 08/08/2015). Phản biện trực diện quan điểm "choice là
+   tất cả" — hữu ích để người mới không sa vào bẫy thêm choice cho có mà
+   không có hệ quả. https://warrenspector.wordpress.com/2015/08/08/another-narrative-fallacy-its-all-about-choice/
+
+3. David Kuelz — "Narrative Design Tips I Wish I'd Known" (Game
+   Developer, 18/04/2016). Danh sách sai lầm thực tế của người mới, viết
+   bởi người trong nghề, dễ tiếp cận cho người mới bắt đầu.
+   https://www.gamedeveloper.com/design/narrative-design-tips-i-wish-i-d-known
+
+4. Jake Shapiro — "'PICK UP THAT CAN!' Storytelling in Half-Life 2" (Game
+   Developer, 25/10/2012). Phân tích chi tiết kỹ thuật "kể chuyện không
+   cutscene" — ví dụ nền tảng nên đọc trước khi phân tích các game khác.
+   https://www.gamedeveloper.com/design/-quot-pick-up-that-can-quot-storytelling-in-half-life-2
+
+5. "Road to the IGF: The Fullbright Company's Gone Home" (Game Developer).
+   Phỏng vấn trực tiếp studio về lý do chọn environmental storytelling
+   thuần tuý, tốt để đối chiếu với BioShock (audio log). [CHƯA VERIFY ngày
+   đăng cụ thể — cần main tự mở lại].
+   https://www.gamedeveloper.com/design/road-to-the-igf-the-fullbright-company-s-i-gone-home-i-
+
+6. Celia Hodent — "The Gamer's Brain: How Neuroscience and UX Can Impact
+   Video Game Design" (sách, Taylor & Francis). Nguồn nền tảng cho mục
+   "đánh giá qua playtest" nói chung (không riêng narrative) — cần main tự
+   đọc/tra để lấy trích dẫn cụ thể về narrative UX vì tôi chưa verify được
+   đoạn nào. https://celiahodent.com/video-game-ux-psychology/
+
+--------------------------------------------------------------------
+9.2 Bổ sung từ trục 1 và trục 2 (nguồn nền tảng đã trích trong bài
+    nhưng không nằm trong danh sách "đọc thêm" gốc của trục 3)
+--------------------------------------------------------------------
+
+7. Hunicke, LeBlanc, Zubek — "MDA: A Formal Approach to Game Design and
+   Game Research" (paper, thường dẫn 2004). Nguồn gốc khung MDA và vị
+   trí Narrative là 1 trong 8 aesthetics — xem Mục 2.
+   https://users.cs.northwestern.edu/~hunicke/MDA.pdf
+
+8. Don Carson — "Environmental Storytelling: Creating Immersive 3D
+   Worlds Using Lessons Learned from the Theme Park Industry"
+   (Gamasutra, 01/03/2000). Nguồn gốc thuật ngữ environmental
+   storytelling trước cả Jenkins và Smith & Worch — xem Mục 2.
+   http://doncarsoncreative.blogspot.com/2004/06/environmental-storytelling-creating.html
+
+9. Henry Jenkins — "Game Design as Narrative Architecture" (in First
+   Person, MIT Press, ~2004). Bốn trục environmental storytelling
+   (evocative spaces / enacting stories / embedded narratives /
+   emergent narratives) — xem Mục 2.
+   https://web.mit.edu/~21fms/People/henry3/games&narrative.html
+
+10. Harvey Smith & Matthias Worch — "What Happened Here? Environmental
+    Storytelling" (GDC 2010). Nguồn thực hành mạnh nhất trong toàn bộ
+    research này — xem Mục 3.
+    https://www.worch.com/files/gdc/What_Happened_Here_Web_Notes.pdf
+
+11. Jesse Schell — "The Art of Game Design: A Book of Lenses", chương
+    15 "One Kind of Experience is the Story" (Lens #68 Hero's Journey,
+    Lens #70 Story) — xem Mục 5.1. LƯU Ý số lens có thể lệch giữa các
+    edition sách, xem BẪY KHÁI NIỆM Mục 10.
+
+12. Richard Lemarchand — "A Playful Production Process" (MIT Press,
+    2021) — sách có bàn playtest-centered development và story
+    structure, nhưng research này CHƯA mở được nội dung cụ thể bên
+    trong (sách trả phí) — xem Mục 5.1 và Mục 11.
+    https://mitpress.mit.edu/9780262045513/a-playful-production-process/
+
+13. Sandy Louchart & Ruth Aylett — "Solving the Narrative Paradox in
+    VEs – Lessons from RPGs" (IVA 2003). Nguồn gán đúng tác giả cho
+    thuật ngữ "narrative paradox" (KHÔNG PHẢI Chris Crawford — xem Mục
+    2 và BẪY KHÁI NIỆM Mục 10).
+    https://www.macs.hw.ac.uk/~ruth/Papers/narrative/IVA03-Louchart-Aylett.pdf
+
+14. Chris Crawford — "Chris Crawford on Interactive Storytelling" (New
+    Riders, 2004/2012). Nguồn khái niệm "Drama Manager" — xem Mục 2.
+    https://www.erasmatazz.com/library/my-books/chris-crawford-on-interacti.html
+
+
+====================================================================
+10. BẪY KHÁI NIỆM
+    (gộp nguyên văn mục BẪY của cả 3 file — rà lại không thấy trùng
+    lặp thật sự giữa 3 danh sách, mỗi bẫy cảnh báo một điểm khác nhau
+    nên giữ nguyên cả 18 mục, chia theo trục nguồn)
+====================================================================
+
+--------------------------------------------------------------------
+10.1 Từ trục 1 (lý thuyết)
+--------------------------------------------------------------------
+
+1. "Narrative paradox" KHÔNG PHẢI của Chris Crawford — nhiều tài liệu phổ thông
+   (và cả đề bài research này ban đầu) lẫn giữa "narrative paradox" (Ruth Aylett,
+   ~2000) và "Drama Manager" (Chris Crawford). Hai khái niệm liên quan nhưng KHÔNG
+   cùng một tác giả. Nếu viết bài, tách rõ: Crawford → công cụ/kiến trúc kỹ thuật
+   (Drama Manager) để giải quyết vấn đề; Aylett → cái TÊN của vấn đề (narrative
+   paradox = agency vs authorial control).
+
+2. Tên mục thứ 2 trong 4 trục của Jenkins là "ENACTING STORIES", KHÔNG PHẢI
+   "enacted narratives" như cách nhiều bài tóm tắt trên mạng (và cả đề bài) hay
+   gọi cho "đối xứng" với 3 mục còn lại (evocative SPACES, embedded/emergent
+   NARRATIVES). Bản thân Jenkins không đặt tên đối xứng — đây là chỗ dễ bịa/làm
+   tròn cho đẹp khi paraphrase mà không đọc nguyên bài.
+
+3. Ludonarrative dissonance — nhiều bài tóm tắt trích dẫn như thể Hocking định
+   nghĩa thuật ngữ này tường minh nhiều lần trong bài ("Hocking writes that
+   ludonarrative dissonance is..."). Thực tế đọc nguyên văn: cụm từ ghép
+   "ludonarrative" (ít nhất trong bản blog hiện đang sống, đã re-publish) chỉ nằm
+   trong TIÊU ĐỀ, thân bài dùng "dissonance" trơn. Trích dẫn "định nghĩa" của
+   Hocking nên lấy đúng câu "a powerful dissonance between what it is about as a
+   game, and what it is about as a story" — không nên tự chế một câu có chứa chữ
+   "ludonarrative" rồi gán là nguyên văn Hocking.
+
+4. BioShock KHÔNG bị Hocking "chê" toàn bộ — bài kết bằng lời khen (gần với
+   Citizen Kane của game), nhiều bài tóm tắt trên mạng chỉ trích phần đầu (phê
+   phán) mà bỏ qua sắc thái này, khiến người đọc tưởng Hocking coi BioShock là
+   thất bại hoàn toàn.
+
+5. Embedded/emergent narrative: nhiều nguồn thứ cấp nói "LeBlanc đặt ra thuật ngữ
+   tại GDC 2000", một số khác nói GDC 1999 — hai năm khác nhau bị lẫn lộn qua lại
+   trên mạng. Chưa có cách chốt trong phiên research này (không mở được slide
+   gốc). Đừng chốt cứng một năm cụ thể khi viết bài nếu chưa tự verify thêm.
+
+6. "Narrative design" là chức danh/nghề, KHÔNG có một nguồn academic "đặt ra"
+   giống MDA hay ludonarrative dissonance — claim "coined 2006" chỉ đến từ MỘT
+   trang cá nhân tự thuật, chưa có nguồn độc lập thứ hai xác nhận. Không nên viết
+   trong bài như một sự kiện lịch sử đã chốt ("năm 2006, X đặt ra thuật ngữ...")
+   mà nên diễn đạt mềm hơn ("một cách kể phổ biến trong ngành là...").
+
+--------------------------------------------------------------------
+10.2 Từ trục 2 (kỹ thuật)
+--------------------------------------------------------------------
+
+1. "Ludonarrative dissonance" (Clint Hocking, 2007) KHÔNG đồng nghĩa với
+   "mechanics as metaphor"/"mechanic-as-message" (Brenda Romero). Hocking mô tả
+   một LỖI/XUNG ĐỘT (gameplay nói một đằng, story nói một nẻo — ví dụ Bioshock).
+   Romero mô tả một KỸ THUẬT CHỦ ĐỘNG dùng cơ chế để nói lên chủ đề (Train). Đừng
+   dùng "ludonarrative dissonance" như tên gọi chung cho "kể chuyện qua cơ chế".
+
+2. "Environmental storytelling" theo Smith & Worch (GDC 2010) có 2 nhánh RIÊNG
+   BIỆT hay bị gộp lẫn: designer-authored (đạo diễn đặt sẵn prop) và SYSTEMIC
+   (do chính hệ thống game + hành vi người chơi tạo ra, ví dụ decal đạn, xác chết
+   còn nằm lại). Khi nói "environmental storytelling" mà chỉ nghĩ tới prop tĩnh do
+   designer đặt là bỏ sót một nửa nội dung bài nói gốc (xem mục 2, phần 4).
+
+3. Barks KHÁC dialogue tree ở chỗ người chơi KHÔNG chọn/phản hồi — nhầm hai cái
+   này rất phổ biến trong tài liệu tổng hợp không chuyên.
+
+4. "Golden path" không có nghĩa là "chỉ có 1 đường duy nhất tồn tại trong game" —
+   nó là đường được DESIGNER Ý ĐỊNH/kỳ vọng người chơi đa số sẽ đi, side content
+   vẫn tồn tại song song và hợp lệ, không phải lỗi thiết kế.
+
+5. Số Lens trong sách Schell: bản thân cuốn sách có NHIỀU PHIÊN BẢN (2008, 2nd ed.
+   2014, 3rd ed. gần đây) — số thứ tự lens giữa các bản CÓ THỂ khác nhau nếu sách
+   thêm/bớt lens. File PDF research lần này verify Lens #68 = Hero's Journey và
+   Lens #70 = Story — nhưng đây có thể là bản 1st/2nd edition (chưa xác định rõ
+   edition nào từ file). Main NÊN kiểm tra lại số lens khớp với edition mà mình
+   trích dẫn/sở hữu trước khi ghi vào bài, KHÔNG mặc định mọi bản in đều giống số.
+
+6. "Choice matters" / "illusion of choice" — tránh khẳng định TUYỆT ĐỐI kiểu "mọi
+   lựa chọn trong game Telltale đều vô nghĩa". Nguồn Game Informer đã verify chỉ
+   nói câu chuyện CHÍNH tuyến tính với NGOẠI LỆ NHỎ ("with only small exceptions")
+   — vẫn có một số lựa chọn thực sự rẽ nhánh, không phải 100% ảo giác.
+
+--------------------------------------------------------------------
+10.3 Từ trục 3 (ví dụ) — BẪY KHÁI NIỆM / QUOTE KHÔNG NGUỒN
+--------------------------------------------------------------------
+
+
+- "Would you kindly" — KHÔNG tìm được bài phỏng vấn GỐC (có ngày/nơi đăng
+  rõ ràng, tự mở đọc được) của Ken Levine giải thích nguồn gốc cụm từ này.
+  Chỉ có tóm tắt gián tiếp qua Wikipedia/bài phân tích thứ cấp. KHÔNG đưa
+  vào bài như quote đã verify.
+
+- Câu "Tinder meets Game of Thrones" (pitch của Reigns cho Devolver) —
+  chỉ thấy qua nguồn thứ cấp (Expert Game Reviews), CHƯA tìm được phỏng
+  vấn gốc của nhà sáng lập Nerial (François Alliot) xác nhận đúng câu này.
+  Có thể là diễn giải của báo chí, không phải nguyên văn pitch.
+
+- "ICO taught Miyazaki the power of environmental storytelling" — câu này
+  xuất hiện trong tóm tắt search nhưng đọc như DIỄN GIẢI của người viết bài
+  thứ cấp, không phải trích dẫn có nguồn kiểm chứng được rằng chính
+  Miyazaki nói vậy. Tách bạch: đây là suy luận của nhà báo/wiki, không
+  phải phát biểu của Miyazaki.
+
+- WIRED 2016 interview với Miyazaki ("không giỏi kể chuyện trực tiếp") —
+  chỉ xác nhận được QUA NGUỒN THỨ CẤP (không tự mở được bài WIRED gốc
+  trong phiên research này). Rất có khả năng đúng (nhiều nguồn lặp lại
+  cùng nội dung) nhưng CHƯA đạt chuẩn "đã mở đọc thật" theo yêu cầu dự án
+  — main cần tự mở lại trước khi trích dẫn trong bài.
+
+- Robert Kurvitz nói ý tưởng skill-as-character của Disco Elysium "lấy
+  cảm hứng từ Twitter" — chỉ có qua nguồn thứ cấp dẫn lại phỏng vấn
+  GameSpot, chưa tự mở bài GameSpot gốc. KHÔNG đưa vào bài như đã verify.
+
+- Mọi năm phát hành game trong mục 1 đều lấy từ nguồn thứ cấp (search
+  snippet), KHÔNG có năm nào tôi tự mở trang Wikipedia/trang chính thức
+  để đối chiếu trực tiếp trong phiên này — đã đánh dấu [CHƯA VERIFY] nhất
+  quán ở từng mục. Main/agent fact-check sau nên tự mở Wikipedia cho từng
+  game trước khi đưa năm vào bài chính thức (đa số năm nhiều khả năng
+  đúng vì được nhiều nguồn độc lập lặp lại, nhưng "nhiều nguồn lặp lại"
+  không thay thế được "đã tự mở đọc thật" theo rule dự án).
+
+====================================================================
+11. TRẠNG THÁI VERIFY
+    (bảng liệt kê từng claim/quote chính trong file, theo mục. Trạng
+    thái chi tiết + lý do đầy đủ đã nằm ngay cạnh từng quote/claim
+    trong các mục ở trên, bảng này để tra nhanh, không thay thế phần
+    ghi chú tại chỗ)
+====================================================================
+
+--- Mục 1 — Narrative design vs game writing ---
+- Quote "coined in 2006"/GDC 2006 (narrativedesigner.com): ĐÃ VERIFY
+  (đã mở đọc trực tiếp) nhưng là tự-thuật, không có nguồn độc lập thứ 2
+  — https://narrativedesigner.com/what-is-nd.html
+- Cặp câu "Game Writer" vs "Narrative Designer" (cùng trang): ĐÃ VERIFY
+  (đọc nguyên trang) — không phải nguồn academic.
+- GDC talk Molly Maloney va Eric Stirpe 2018: [CHƯA VERIFY] — chỉ thấy
+  qua search, chưa mở slide/video gốc.
+
+--- Mục 2 — Khái niệm nền ---
+- Năm LeBlanc đặt ra embedded/emergent (GDC 1999 hay 2000): [CHƯA
+  VERIFY] — nguồn thứ cấp mâu thuẫn, chưa mở được slide gốc.
+- Định nghĩa embedded narrative của Salen & Zimmerman: [CHƯA VERIFY] —
+  paraphrase qua search, chưa đọc bản sách đầy đủ.
+- 2 quote Don Carson (trade secret / cause-and-effect) + tiểu sử: ĐÃ
+  VERIFY (curl trực tiếp) —
+  http://doncarsoncreative.blogspot.com/2004/06/environmental-storytelling-creating.html
+- Quote 4 trục ES của Jenkins + định nghĩa Emergent Narratives: ĐÃ
+  VERIFY (curl trực tiếp) —
+  https://web.mit.edu/~21fms/People/henry3/games&narrative.html
+- Năm xuất bản sách Jenkins 2004: [CHƯA VERIFY bằng chính văn bản gốc]
+  — chỉ verify qua nguồn thứ cấp đồng thuận cao.
+- 3 quote Clint Hocking (dissonance / opposition / Citizen Kane): ĐÃ
+  VERIFY (curl trực tiếp) — https://clicknothing.com/2007/10/07/ludonarrative-d/
+- Quote Chris Crawford định nghĩa Drama Manager: [CHƯA VERIFY nguyên
+  văn] — qua tóm tắt search, chưa tự curl erasmatazz.com.
+- Gán "narrative paradox" cho Ruth Aylett (~2000)/Louchart & Aylett
+  2003: [CHƯA VERIFY nguyên văn định nghĩa] — nhưng đủ tin cậy để
+  khẳng định KHÔNG PHẢI của Crawford (xem Mục 10.1 #1).
+- Jane Jensen "string of pearls" (~2002): [CHƯA VERIFY] — không tìm
+  được nguồn gốc.
+- "Hub-and-spoke": KHÔNG XÁC ĐỊNH ĐƯỢC nguồn gốc/tác giả.
+- Danh sách 8 aesthetics MDA + ví dụ The Sims/Final Fantasy: ĐÃ VERIFY
+  (pdftotext trực tiếp từ PDF gốc) —
+  https://users.cs.northwestern.edu/~hunicke/MDA.pdf
+
+--- Mục 3 — Environmental storytelling thực hành (Smith & Worch) ---
+- Toàn bộ Mục 3 (định nghĩa slide 15, 4 chức năng slide 17/25/29/32/33,
+  ví dụ cá vàng, các quote slide 41-78): VERIFY MẠNH — đọc trực tiếp
+  PDF gốc do tác giả host, extract bằng pdftotext -layout —
+  https://www.worch.com/files/gdc/What_Happened_Here_Web_Notes.pdf
+  (LƯU Ý: pdftotext có thể lỗi ligature/nháy đơn ở vài chỗ — bản gốc
+  ghi nhận lỗi tại slide 8, 98 — main nên tự pdftotext lại và so byte
+  trước khi trích nguyên văn vào bài).
+- Randy Smith, GDC 2009 "Making Your Players Feel Smart" (dẫn lại
+  trong slide 43 của Worch): [NGUỒN THỨ CẤP, chưa mở đọc riêng].
+
+--- Mục 4 — Kênh truyền tải câu chuyện ---
+- Quote cutscene (gamerant.com): [CHƯA VERIFY ĐẦY ĐỦ] — qua WebFetch
+  tóm tắt, cần curl lại so byte.
+- Định nghĩa + quote phê bình dialogue tree (Wikipedia): VERIFY (đã mở
+  qua WebFetch) — cần curl lại so byte trước khi trích nguyên văn.
+- Quote barks (thenarrativedept.com): VERIFY (WebFetch) — cần curl lại
+  so byte. Nguồn gốc thuật ngữ "bark": [CHƯA VERIFY] — có paper DiGRA
+  chưa mở đọc.
+- Quote audio log (destructoid.com): VERIFY (WebFetch) — cần curl lại
+  so byte. Cụm "as diaries fall from the sky": [CHƯA VERIFY — KHÔNG
+  TÌM THẤY, không đưa vào bài].
+- Quote Brenda Romero "Train explores complicity within systems"
+  (brenda.games/train): VERIFY một phần (đã mở trang) — nhưng tên
+  chuỗi "The Mechanic is the Message" cho 6 game: [CHƯA VERIFY] không
+  thấy trên chính trang.
+- Định nghĩa ES + quote Hocking dẫn lại trong mục này: xem Mục 2/Mục 3
+  — đã verify ở đó.
+
+--- Mục 5 — Core loop, pacing, agency & choice ---
+- Quote Lens #68 (Hero's Journey) và Lens #70 (Story) của Schell +
+  quote Bob Bates "circuit tester": VERIFY — pdftotext trực tiếp, grep
+  đối chiếu 2 vị trí độc lập trong file —
+  https://www.inventoridigiochi.it/wp-content/uploads/2020/07/art-of-game-design.pdf
+  (LƯU Ý: bản PDF trôi nổi, không phải trang bán sách chính thức).
+- Nội dung cụ thể "narrative beat"/pacing của Lemarchand: [CHƯA VERIFY]
+  — sách trả phí, không có bản đọc công khai tìm được.
+- Định nghĩa golden path (Level Design Book): VERIFY một phần (qua
+  tóm tắt WebSearch, CHƯA mở trực tiếp trang) —
+  https://book.leveldesignbook.com/process/layout/criticalpath
+  Nguồn gốc thuật ngữ: [CHƯA VERIFY].
+- 2 quote Game Informer về Telltale (Elise Favis): VERIFY (WebFetch) —
+  cần curl lại so byte —
+  https://gameinformer.com/b/features/archive/2015/02/03/why-your-choices-dont-matter-in-telltale-games.aspx
+- Lý do kinh tế/kỹ thuật đằng sau "choice không rẽ nhánh thật": [CHƯA
+  VERIFY nguồn cụ thể] — chỉ có qua tóm tắt WebSearch.
+- Nguồn gốc thuật ngữ "illusion of choice": [CHƯA VERIFY].
+- Tagline chính thức Telltale: [CHƯA VERIFY] — không tìm được trang
+  chính chủ còn sống.
+- TOÀN BỘ Mục 5.4 (viết game khác viết phim, VO budget, localization,
+  số liệu 50-70% ngân sách âm thanh cho lồng tiếng): [CHƯA VERIFY —
+  mức độ nguồn yếu, chỉ qua WebSearch tổng hợp] — KHÔNG đưa số liệu cụ
+  thể vào bài học nếu chưa tìm nguồn gốc mạnh hơn.
+
+--- Mục 6 — Ví dụ phân tích đa thể loại ---
+- MỌI năm phát hành game trong Mục 6 (Half-Life 2, BioShock, Dark
+  Souls, Gone Home, Edith Finch, Papers Please, Undertale, Disco
+  Elysium, Florence, Reigns, 80 Days, Destiny, Fortnite): [CHƯA VERIFY
+  qua nguồn chính] — lấy từ nguồn thứ cấp, main cần tự mở
+  Wikipedia/trang chính thức trước khi đưa vào bài học.
+- Quote Jake Shapiro về Half-Life 2 "no cutscenes...": [CHƯA VERIFY]
+  cần curl lại —
+  https://www.gamedeveloper.com/design/-quot-pick-up-that-can-quot-storytelling-in-half-life-2
+  (LƯU Ý: đây là quote của người viết bài phân tích, KHÔNG phải phát
+  biểu của Valve).
+- Nguồn gốc "Would you kindly" (Ken Levine): [CHƯA VERIFY] — không tìm
+  được phỏng vấn gốc.
+- 2 quote Hocking về BioShock trong Mục 6.2: xem Mục 2 — đã VERIFY ở
+  đó (cùng nguồn, cùng trạng thái).
+- Miyazaki/WIRED 2016 (Dark Souls không giỏi kể chuyện trực tiếp):
+  [CHƯA VERIFY] — chỉ qua nguồn thứ cấp, chưa mở bài WIRED gốc. Chi
+  tiết kiến trúc Anor Londo: [CHƯA VERIFY nguồn gốc cụ thể].
+  Câu "ICO dạy Miyazaki environmental storytelling": diễn giải của
+  nguồn thứ cấp, KHÔNG PHẢI phát biểu xác nhận của Miyazaki.
+- Phỏng vấn Road to IGF (Gone Home, Papers Please): [CHƯA VERIFY
+  nguyên văn] — mới đọc tóm tắt qua WebFetch/search.
+- Robert Kurvitz "lấy cảm hứng từ Twitter" (Disco Elysium): [CHƯA
+  VERIFY] — qua nguồn thứ cấp dẫn phỏng vấn GameSpot, chưa mở gốc.
+- "Tinder meets Game of Thrones" (pitch Reigns): [CHƯA VERIFY] — chỉ
+  qua nguồn thứ cấp, chưa xác nhận qua phỏng vấn gốc nhà sáng lập.
+- Giải TIME Game of Year 2014 cho 80 Days: [CHƯA VERIFY] — qua nguồn
+  thứ cấp.
+- Quote Steve Cotton (Destiny 2, world lead) về cách kể lore mới: [CHƯA
+  VERIFY nguyên văn] — qua bài PCGamesN tóm tắt —
+  https://www.pcgamesn.com/destiny-2/destiny-2-grimoire-cards
+- Ngày sự kiện "The End" (Fortnite Chapter 1): [CHƯA VERIFY]. Phần
+  phân tích "vì sao đáng chú ý" là phân tích cá nhân của người viết
+  research, KHÔNG phải trích dẫn academic.
+
+--- Mục 7 — Sai lầm hay gặp ---
+- 2 quote David Kuelz (story tách rời gameplay / dồn hết vào
+  cutscene+thoại): [CHƯA VERIFY nguyên văn] — cần curl lại —
+  https://www.gamedeveloper.com/design/narrative-design-tips-i-wish-i-d-known
+- Bài "Exposing the Lore Dumps": [CHƯA VERIFY] — chỉ thấy tiêu đề qua
+  search, chưa mở/curl.
+- Quote Warren Spector "Choices without consequences are
+  meaningless...": VERIFY (đã mở trang qua WebFetch) — cần curl lại so
+  byte —
+  https://warrenspector.wordpress.com/2015/08/08/another-narrative-fallacy-its-all-about-choice/
+- Bài Nicholas OBrien (Game Developer, liên quan Spector): [CHƯA
+  VERIFY nguyên văn].
+- "Cutscene tước quyền điều khiển đúng lúc cao trào": [CHƯA VERIFY] —
+  tổng hợp pattern từ nhiều nguồn thứ cấp, không có 1 nguồn học thuật
+  cụ thể đã tự mở đọc.
+- "Audio log thay cho thiết kế không gian" là sai lầm: [CHƯA VERIFY] —
+  không tìm được nguồn phê bình trực tiếp, chỉ là suy luận đối chiếu
+  BioShock vs Gone Home.
+
+--- Mục 8 — Đánh giá narrative qua playtest ---
+- TOÀN BỘ Mục 8 (Hodent, Lemarchand, Fullerton, dấu hiệu narrative
+  "hỏng" trong playtest): [CHƯA VERIFY nguyên văn] cho mọi claim cụ
+  thể — chỉ có qua mô tả tổng quan/tóm tắt sách hoặc tổng hợp thảo
+  luận cộng đồng (Medium, Destructoid, itch.io), KHÔNG PHẢI trích dẫn
+  đã tự mở đọc từ sách/GDC talk có tên tác giả cụ thể. KHÔNG bịa quote
+  — nếu viết bài, diễn đạt thành "kinh nghiệm thực tế được nhiều nhà
+  phát triển chia sẻ" thay vì gán cho 1 tác giả.
+
+--- Mục 9 — Đọc thêm ---
+Không có claim/quote riêng cần verify thêm — mọi nguồn liệt kê ở đây
+đã có trạng thái verify tương ứng tại mục nội dung nơi chúng được
+trích dẫn (xem lại Mục 1-8 và các dòng trên trong bảng này).

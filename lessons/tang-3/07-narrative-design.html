@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Narrative design — Xưởng Game Design</title>
+<meta name="description" content="Kể chuyện qua thứ người chơi làm, không chỉ thứ họ xem: các kênh truyền tải, kể chuyện qua môi trường và cơ chế, và cách gắn cốt truyện vào core loop.">
+<script>
+(function () {
+    try {
+        var theme = null;
+        var m = location.search.match(/[?&]theme=(dark|light)/);
+        if (m) { theme = m[1]; }
+        else { theme = localStorage.getItem("gd-theme"); }
+        if (theme !== "dark" && theme !== "light") { theme = "light"; }
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body data-page="lesson" data-root="../../" data-lesson="tang-3/07-narrative-design" class="tier-3">
+
+<header class="topbar">
+    <div class="topbar-inner container">
+        <a class="brand" href="../../index.html">
+            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="8" width="20" height="10" rx="5"></rect><line x1="7" y1="11" x2="7" y2="15"></line><line x1="5" y1="13" x2="9" y2="13"></line><circle cx="16" cy="12" r="1"></circle><circle cx="18.5" cy="14.5" r="1"></circle></svg>
+            <span>Xưởng Game Design</span>
+        </a>
+        <nav class="site-nav" id="siteNav">
+            <a href="../../lo-trinh.html">Lộ trình</a>
+            <a href="../../components.html">Bộ component</a>
+        </nav>
+        <div class="topbar-actions">
+            <button class="btn-icon has-label lesson-nav-toggle" id="lessonNavToggle" aria-label="Mở điều hướng lộ trình" aria-expanded="false" aria-controls="lessonNav"></button>
+            <button class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện tối"></button>
+            <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false" aria-controls="siteNav"></button>
+        </div>
+    </div>
+</header>
+
+<div class="reading-bar"><span id="readingBarFill"></span></div>
+
+<div class="container">
+<div class="lesson-shell">
+
+    <nav class="lesson-nav" id="lessonNav" aria-label="Điều hướng lộ trình">
+        <div id="lessonNavTree"></div>
+    </nav>
+
+    <article class="lesson-article" id="article">
+        <details class="toc-mobile" id="tocMobile"><summary>Trong bài này</summary></details>
+
+        <div class="breadcrumb"><a href="../../lo-trinh.html">Lộ trình</a> › <a href="../../lo-trinh.html#tang-3">Tầng 3 · Thiết kế chuyên sâu</a></div>
+        <header class="lesson-head">
+            <p class="eyebrow"><span class="dot"></span>Tầng 3 · Bài 07</p>
+            <h1>Narrative design</h1>
+            <p class="dek">Người chơi nhớ thứ họ tự ráp nối lâu hơn thứ bạn chiếu cho họ xem. Bài này nói về cách chọn kênh kể chuyện, kể qua môi trường và cơ chế, và gắn câu chuyện vào chính vòng lặp chơi.</p>
+            <div class="lesson-meta">
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12,7 12,12 16,14"></polyline></svg> 15 phút đọc</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="5" y2="11"></line><line x1="12" y1="19" x2="12" y2="6"></line><line x1="19" y1="19" x2="19" y2="14"></line></svg> Độ khó: Trung bình</span>
+                <span class="pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 15 9"></path><path d="M11 6l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 12"></path><path d="M13 18l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 12"></path></svg> Cần biết trước: <a href="05-level-design.html">Level design</a></span>
+            </div>
+            <div class="objectives">
+                <h3>Sau bài này bạn sẽ</h3>
+                <ul>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Phân biệt narrative design và viết kịch bản</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Kể chuyện qua môi trường và cơ chế</li>
+                    <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4,13 9,18 20,6"></polyline></svg> Lồng ghép cốt truyện vào core loop</li>
+                </ul>
+            </div>
+        </header>
+
+        <p>Trong <em>Dark Souls</em>, không ai ngồi xuống kể cho bạn nghe chuyện gì đã xảy ra với vương quốc này. Bạn đi qua một hành lang, thấy vài bộ giáp rỗng quỳ gối quay mặt về cùng một hướng. Bạn nhặt một chiếc nhẫn, dòng mô tả vỏn vẹn hai câu nhắc tới một lời thề bị phản bội. Bạn ghép hai chi tiết đó lại và tự rút ra một kết luận — kết luận ấy là <strong>của bạn</strong>, nên bạn nhớ nó.</p>
+
+        <p>Đổi lại, hãy nhớ lần gần nhất bạn bấm Skip một đoạn cắt cảnh dài. Cùng một lượng thông tin, hai cách đưa tới, hai kết quả trái ngược. Khoảng cách giữa hai tình huống đó chính là công việc của narrative design.</p>
+
+        <h2 id="narrative-design-la-gi">Narrative design là gì</h2>
+
+        <p>Người ta hay gộp hai vai trò làm một, nhưng chúng khác nhau ở câu hỏi trung tâm:</p>
+
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Vai trò</th><th>Lo phần nào</th><th>Câu hỏi trung tâm</th></tr></thead>
+                <tbody>
+                    <tr><td><span class="term" data-en="Game Writer" tabindex="0">người viết</span></td><td>Nội dung</td><td>Nhân vật là ai, họ nói câu gì, chuyện xảy ra theo trình tự nào?</td></tr>
+                    <tr><td><span class="term" data-en="Narrative Designer" tabindex="0">narrative designer</span></td><td>Đường dẫn</td><td>Thông tin đó đến tay người chơi bằng kênh nào, vào lúc nào, đổi lấy hành động gì?</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p>Nói cách khác, narrative designer không hỏi "cảnh này viết thế nào cho hay" mà hỏi "làm sao để người chơi <em>tự</em> phát hiện ra điều này trong lúc họ đang chơi". Đó là một bài toán thiết kế, cùng họ với thiết kế màn chơi hay thiết kế hệ thống — chỉ khác ở thứ nó cần sinh ra: sự hiểu và cảm xúc về câu chuyện.</p>
+
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Ghi chú</p><p>Ranh giới hai vai trò này <strong>không có chuẩn ngành thống nhất</strong> — mỗi studio chia việc một kiểu, nhiều nơi một người làm cả hai. Cách phân biệt ở trên là để bạn dễ nắm việc, không phải một định nghĩa được chốt trong tài liệu gốc nào.</p></div>
+        </div>
+
+        <p>Trong khung MDA (bài 01), câu chuyện không phải là một cơ chế — nó nằm ở tầng <span class="mda-a">Aesthetics</span>, tức là một loại cảm xúc mà game nhắm tới. Paper gốc liệt kê tám aesthetics, trong đó <em>Narrative</em> đứng thứ ba với nhãn <em>"Game as drama"</em>. Chi tiết này quan trọng hơn vẻ ngoài của nó: nó nhắc rằng câu chuyện là <strong>đích đến</strong>, còn cutscene hay audio log chỉ là phương tiện — và phương tiện thì có thể thay.</p>
+
+        <figure class="diagram wide">
+            <div class="mda-diagram">
+                <div class="mda-block loop">Áp đặt<small>Cutscene, kịch bản khóa điều khiển</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Dẫn dắt<small>Thoại, bark, ghi chép</small></div>
+                <span class="mda-arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14,6 20,12 14,18"></polyline></svg></span>
+                <div class="mda-block loop">Tự ráp nối<small>Môi trường, cơ chế</small></div>
+            </div>
+            <div class="mda-rows">
+                <p>Càng về cuối chuỗi: quyền kiểm soát của designer giảm dần</p>
+                <p>Càng về cuối chuỗi: công sức diễn giải của người chơi tăng dần — và cảm giác "chuyện này là của tôi" cũng tăng theo</p>
+            </div>
+            <figcaption>Ba mức can thiệp khi đưa câu chuyện tới người chơi. Không mức nào "đúng" tuyệt đối — chọn theo thứ bạn cần đảm bảo người chơi phải hiểu.</figcaption>
+        </figure>
+
+        <h2 id="kenh-ke-chuyen">Năm kênh kể chuyện và giá phải trả</h2>
+
+        <p>Mỗi kênh mạnh ở một chỗ và tính tiền ở chỗ khác. Chọn kênh sai là nguyên nhân phổ biến nhất khiến một cốt truyện tốt không tới được người chơi.</p>
+
+        <div class="table-wrap">
+            <table class="compare">
+                <thead><tr><th>Kênh</th><th>Mạnh ở</th><th>Giá phải trả</th></tr></thead>
+                <tbody>
+                    <tr><td>Cutscene</td><td>Đảm bảo 100% người chơi nhận đúng thông tin, kiểm soát được nhịp và khung hình</td><td>Tước quyền điều khiển; càng dài càng dễ bị Skip; tốn tiền nhất</td></tr>
+                    <tr><td>Thoại có lựa chọn</td><td>Cho người chơi thể hiện mình là ai; tạo cảm giác được nghe</td><td>Chi phí lồng tiếng và bản địa hóa nhân lên theo số nhánh</td></tr>
+                    <tr><td><span class="term" data-en="Bark" tabindex="0">thoại bật tự động</span></td><td>Kể chuyện mà không dừng gameplay; làm thế giới có vẻ sống</td><td>Lặp lại nhanh chóng thành tiếng ồn; không đảm bảo người chơi nghe được</td></tr>
+                    <tr><td>Ghi chép, nhật ký, audio log</td><td>Rẻ; chứa được lượng lớn bối cảnh cho ai muốn đào sâu</td><td>Dễ thành bãi đổ thông tin; người chơi đọc trong lúc không chơi gì cả</td></tr>
+                    <tr><td>Môi trường và cơ chế</td><td>Người chơi tự rút ra kết luận nên nhớ lâu; không tốn một chữ nào</td><td>Không kiểm soát được họ có hiểu hay không; cần đội ngũ art và design ăn ý</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Kể chuyện qua môi trường</h3>
+
+        <p><span class="term" data-en="Environmental Storytelling" tabindex="0">kể chuyện qua môi trường</span> là kênh đáng học kỹ nhất, vì nó là thứ duy nhất trong bảng trên vừa rẻ vừa khó bị bỏ qua. Trong bài nói <em>What Happened Here? Environmental Storytelling</em> tại GDC 2010, Harvey Smith và Matthias Worch định nghĩa nó là hành vi <em>"staging player-space with environmental properties that can be interpreted as a meaningful whole, furthering the narrative of the game"</em> — dàn dựng không gian người chơi bằng những chi tiết mà khi ghép lại sẽ ra một ý nghĩa trọn vẹn.</p>
+
+        <p>Chữ khóa nằm ở <em>interpreted</em>: bạn không kể, bạn <strong>bày ra bằng chứng</strong> rồi để người chơi kết luận. Trước đó, Henry Jenkins trong <em>Game Design as Narrative Architecture</em> đã xếp việc này thành bốn nhóm — ông viết rằng <em>"Environmental storytelling creates the preconditions for an immersive narrative experience in at least one of four ways"</em>:</p>
+
+        <ol class="steps">
+            <li><span><strong>Gợi liên tưởng có sẵn</strong> — không gian vay mượn thứ người chơi đã biết từ phim ảnh, truyện, lịch sử.</span></li>
+            <li><span><strong>Làm sân khấu</strong> — không gian là nơi các sự kiện của câu chuyện được diễn ra.</span></li>
+            <li><span><strong>Gài thông tin vào bối cảnh</strong> — chi tiết trong khung hình chứa mẩu chuyện đã xảy ra từ trước.</span></li>
+            <li><span><strong>Cung cấp nguyên liệu cho chuyện tự phát sinh</strong> — người chơi tự tạo ra câu chuyện của riêng họ từ những gì có sẵn.</span></li>
+        </ol>
+
+        <p>Smith và Worch còn nhấn một nguyên tắc dễ bị bỏ quên: mọi khoảnh khắc kể chuyện qua môi trường phải bắt rễ từ tiền đề của chính game bạn đang làm. Một cảnh dàn dựng đẹp nhưng vô danh — không nói thêm được gì về thế giới này — là một cơ hội bị lãng phí.</p>
+
+        <h3>Kể chuyện qua cơ chế</h3>
+
+        <p>Mức sâu hơn nữa: để chính <strong>luật chơi</strong> mang thông điệp. Trong <em>Papers, Please</em>, bạn là nhân viên hải quan và cơ chế lõi chỉ là đối chiếu giấy tờ. Nhưng game trả lương theo số hồ sơ xử lý xong, còn tiền thì phải chia cho thuốc men và sưởi ấm của gia đình. Kết quả: bạn bắt đầu xử nhanh ẩu, bắt đầu từ chối người có hoàn cảnh đáng thương vì giấy tờ thiếu một dấu. Không một dòng thoại nào bảo "chế độ quan liêu biến con người thành cỗ máy" — bạn <em>tự làm</em> điều đó rồi tự thấy.</p>
+
+        <div class="callout" data-kind="insight">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg></span>
+            <div class="callout-body"><p class="callout-title">Điều đáng nhớ</p><p>Cutscene cho người chơi <em>biết</em> nhân vật cảm thấy gì. Cơ chế làm chính người chơi <em>cảm thấy</em> điều đó. Hai thứ này không thay thế nhau được.</p></div>
+        </div>
+
+        <h2 id="vi-du">Nhìn qua vài game</h2>
+
+        <div class="callout" data-kind="note">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12" y2="16.2"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Ghi chú</p><p>Các định nghĩa và trích dẫn ở phần trên là <strong>theo nguồn gốc</strong> đã dẫn. Phần dưới đây là <strong>phân tích minh hoạ của bài học</strong> — cách người viết đọc các game này, không phải phát biểu của chính nhà phát triển.</p></div>
+        </div>
+
+        <p><strong>Half-Life 2</strong> (PC/console) gần như không cắt khỏi góc nhìn người chơi: mọi sự kiện lớn diễn ra ngay trước mắt bạn trong khi bạn vẫn xoay được camera và đi lại được. Bạn không xem Gordon Freeman gặp chuyện; bạn <em>đang</em> gặp chuyện. Cái giá là đội ngũ phải dàn dựng cực kỳ công phu để chắc rằng người chơi nhìn đúng hướng vào đúng lúc.</p>
+
+        <p><strong>Gone Home</strong> (indie) đẩy kể chuyện qua môi trường tới cực hạn: toàn bộ game là đi quanh một căn nhà trống, mở ngăn kéo, đọc mẩu giấy. Không kẻ địch, không thất bại. Câu chuyện nằm hoàn toàn ở thứ tự bạn tự chọn để mở ra.</p>
+
+        <p><strong>80 Days</strong> (mobile) giải bài toán ngược: phiên chơi ngắn, màn hình nhỏ, người chơi hay bị ngắt giữa chừng. Nó chọn kênh chữ và lựa chọn — mỗi chặng đường là một quyết định gọn, đọc xong là cất máy được, mở lại không cần nhớ mạch dài.</p>
+
+        <div class="callout" data-kind="example">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+            <div class="callout-body"><p class="callout-title">Ví dụ trong game</p><p><strong>BioShock</strong> dùng audio log rải khắp thành phố để dựng lại chuyện đã xảy ra trước khi bạn tới. Nhưng chính game này cũng là ví dụ kinh điển cho một vấn đề: Clint Hocking viết rằng <em>"Bioshock seems to suffer from a powerful dissonance between what it is about as a game, and what it is about as a story."</em> Ông gọi tên hiện tượng đó là <span class="term" data-en="Ludonarrative Dissonance" tabindex="0">lệch pha giữa luật chơi và câu chuyện</span>: câu chuyện phê phán một điều, còn luật chơi lại bắt bạn làm đúng điều đó.</p></div>
+        </div>
+
+        <p><strong>Destiny</strong> là ví dụ theo chiều ngược lại. Phần lớn bối cảnh của game ban đầu nằm trong các thẻ lore chỉ đọc được trên website, ngoài game. Viết rất hay — nhưng đặt sai chỗ, nên với đa số người chơi nó không tồn tại. Bài học rút ra rất thẳng: <strong>câu chuyện không ở trong đường đi của người chơi thì coi như chưa được kể</strong>.</p>
+
+        <h2 id="lens">Lens</h2>
+
+        <div class="lens">
+            <div class="lens-head">
+                <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><line x1="16" y1="16" x2="21" y2="21"></line></svg></span>
+                <div><span class="lens-eyebrow">Lens</span><h3>Lens của câu chuyện kể qua hành động</h3></div>
+            </div>
+            <ul class="lens-questions">
+                <li><span class="q-icon">?</span> Nếu xóa hết cutscene và thoại, người chơi còn hiểu được bao nhiêu phần câu chuyện?</li>
+                <li><span class="q-icon">?</span> Điều quan trọng nhất của cảnh này, người chơi <em>biết</em> hay <em>tự rút ra</em>?</li>
+                <li><span class="q-icon">?</span> Luật chơi đang nói điều gì? Nó có mâu thuẫn với điều câu chuyện đang nói không?</li>
+                <li><span class="q-icon">?</span> Mẩu chuyện này có nằm trên đường người chơi chắc chắn đi qua không?</li>
+                <li><span class="q-icon">?</span> Chi tiết này nói thêm được gì về thế giới, hay chỉ là đồ trang trí vô danh?</li>
+            </ul>
+            <p class="lens-source">Phỏng theo lối "Lens" trong Schell, The Art of Game Design.</p>
+        </div>
+
+        <h2 id="sai-lam">Sai lầm hay gặp</h2>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Viết xong cốt truyện rồi mới hỏi game chơi thế nào</p><p>Cốt truyện viết trong chân không gần như luôn phải đập đi khi va vào cơ chế thật. Làm ngược lại: biết người chơi sẽ <em>làm</em> gì trong 30 giây, rồi mới hỏi câu chuyện nào hợp với hành động đó.</p></div>
+        </div>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Dồn hết sức kể chuyện vào cutscene và thoại</p><p>David Kuelz nhận xét rằng <em>"beginners will often focus all of their storytelling skills on their cutscenes and their dialogue, but the words are only a part of the story"</em>. Thiết kế kẻ địch, ánh sáng, âm thanh, bố cục màn chơi — tất cả đều đang kể chuyện, dù bạn có chủ ý hay không.</p></div>
+        </div>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Cho lựa chọn nhưng không cho hệ quả</p><p>Warren Spector nói thẳng: <em>"Choices without consequences are meaningless. If they don’t lead to different outcomes – preferably radically different outcomes – what’s the point?"</em> Hai nhánh thoại dẫn về cùng một cảnh tiếp theo không phải là lựa chọn, đó là trang trí — và người chơi phát hiện ra rất nhanh.</p></div>
+        </div>
+
+        <div class="callout" data-kind="mistake">
+            <span class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></span>
+            <div class="callout-body"><p class="callout-title">Dùng ghi chép để vá một không gian không kể được gì</p><p>Khi căn phòng tự nó không nói lên điều gì, rất dễ đặt thêm một mẩu nhật ký giải thích hộ. Đó là chữa triệu chứng. Sửa căn phòng trước, ghi chép chỉ nên thêm chiều sâu cho người muốn đào.</p></div>
+        </div>
+
+        <h2 id="thuc-hanh">Thực hành</h2>
+
+        <div class="exercise">
+            <div class="exercise-head">
+                <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1Z"></path><line x1="14" y1="7" x2="17" y2="10"></line></svg></span>
+                <strong>Thực hành</strong>
+                <span class="time">20 phút</span>
+            </div>
+            <div class="exercise-body">
+                <h3>Dựng một cảnh không lời</h3>
+                <ol class="steps">
+                    <li>Chọn một sự kiện đã xảy ra trước khi người chơi tới: một cuộc cãi vã, một vụ tháo chạy vội, một người ở lại quá lâu.</li>
+                    <li><span>Vẽ sơ đồ một căn phòng và đặt vào đó <strong>tối đa 5 vật thể</strong>. Không chữ viết, không ghi âm, không bảng chỉ dẫn.</span></li>
+                    <li>Với mỗi vật thể, viết một dòng: nó chứng minh điều gì về sự kiện đó?</li>
+                    <li>Đưa sơ đồ cho một người chưa biết gì và hỏi đúng một câu: "Chuyện gì đã xảy ra ở đây?"</li>
+                    <li>Ghi lại câu trả lời của họ. Lệch bao nhiêu so với sự kiện bạn định kể?</li>
+                </ol>
+                <details class="hint">
+                    <summary><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2Z"></path></svg> Xem gợi ý</summary>
+                    <p>Một vật thể đơn lẻ hiếm khi kể được gì; sức mạnh nằm ở <strong>quan hệ</strong> giữa chúng. Hai chiếc cốc thì chỉ là hai chiếc cốc — nhưng hai chiếc cốc, một chiếc vỡ dưới sàn, và một chiếc ghế bị đẩy ngược ra sau thì đã thành một câu chuyện. Nếu người kia trả lời lệch hẳn, đừng vội sửa họ: hỏi xem chi tiết nào khiến họ nghĩ vậy. Thường đó là chi tiết bạn đặt vào mà quên mất nó cũng đang phát ra tín hiệu.</p>
+                </details>
+            </div>
+        </div>
+
+        <h2 id="quiz">Tự kiểm tra</h2>
+
+        <div class="quiz" data-answer="c">
+            <p class="q">Khác biệt cốt lõi giữa narrative designer và game writer là gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Narrative designer viết nhiều chữ hơn</button>
+                <button data-opt="b"><span class="badge">B</span> Game writer chỉ làm game indie</button>
+                <button data-opt="c"><span class="badge">C</span> Writer lo nội dung câu chuyện, narrative designer lo cách câu chuyện đến tay người chơi</button>
+                <button data-opt="d"><span class="badge">D</span> Không khác gì nhau, chỉ là tên gọi</button>
+            </div>
+            <div class="explain" hidden><p>C đúng: writer trả lời "kể chuyện gì", narrative designer trả lời "kể bằng kênh nào, lúc nào, đổi lấy hành động gì". D sai một nửa — ở nhiều studio một người kiêm cả hai, nhưng hai <em>loại việc</em> vẫn khác nhau.</p></div>
+        </div>
+
+        <div class="quiz" data-answer="b">
+            <p class="q">Bạn cần chắc chắn 100% người chơi nắm được một thông tin, nếu không họ sẽ không hiểu nhiệm vụ tiếp theo. Kênh nào phù hợp nhất?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Rải chi tiết trong môi trường</button>
+                <button data-opt="b"><span class="badge">B</span> Cutscene hoặc cảnh kịch bản ngắn</button>
+                <button data-opt="c"><span class="badge">C</span> Audio log đặt trong một phòng phụ</button>
+                <button data-opt="d"><span class="badge">D</span> Bark của NPC khi đi ngang qua</button>
+            </div>
+            <div class="explain" hidden><p>B đúng — đây chính là thứ cutscene giỏi nhất: đảm bảo mọi người nhận đúng thông tin. A và C không kiểm soát được người chơi có để ý hay không; D thì họ có thể chạy qua mà không nghe. Đổi lại, hãy giữ nó thật ngắn.</p></div>
+        </div>
+
+        <div class="quiz" data-answer="a">
+            <p class="q">Một game kể câu chuyện lên án bạo lực, nhưng cách duy nhất để tiến trong game là giết thật nhiều kẻ địch và được thưởng điểm cho việc đó. Đây là hiện tượng gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Ludonarrative dissonance — luật chơi mâu thuẫn với câu chuyện</button>
+                <button data-opt="b"><span class="badge">B</span> Environmental storytelling</button>
+                <button data-opt="c"><span class="badge">C</span> Emergent narrative</button>
+                <button data-opt="d"><span class="badge">D</span> Kể chuyện qua cơ chế</button>
+            </div>
+            <div class="explain" hidden><p>A đúng. Chú ý phân biệt với D: kể chuyện qua cơ chế là khi luật chơi <em>củng cố</em> thông điệp một cách có chủ ý; ludonarrative dissonance là khi luật chơi <em>phản</em> lại thông điệp, thường là ngoài ý muốn.</p></div>
+        </div>
+
+        <div class="quiz" data-answer="d">
+            <p class="q">Playtest xong, người chơi kể lại đúng diễn biến nhưng không nhớ nổi tên nhân vật nào và không nói được vì sao mình phải cứu họ. Dấu hiệu này gợi ý điều gì?</p>
+            <div class="quiz-opts">
+                <button data-opt="a"><span class="badge">A</span> Cần thêm một cutscene mở đầu dài hơn</button>
+                <button data-opt="b"><span class="badge">B</span> Người chơi không phải đối tượng mục tiêu</button>
+                <button data-opt="c"><span class="badge">C</span> Cần thêm audio log giải thích lai lịch nhân vật</button>
+                <button data-opt="d"><span class="badge">D</span> Nhân vật chưa gắn vào thứ người chơi thực sự làm trong game</button>
+            </div>
+            <div class="explain" hidden><p>D đúng. Nhớ diễn biến mà không nhớ người nghĩa là thông tin có tới nhưng không dính — thường vì nhân vật chỉ xuất hiện lúc kể chuyện chứ không can dự vào hành động của người chơi. A và C là phản xạ quen thuộc: đổ thêm thông tin vào cùng một cái kênh đang không hiệu quả.</p></div>
+        </div>
+
+        <h2 id="flashcard">Thẻ ôn nhanh</h2>
+
+        <div class="flashcards">
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Narrative design</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Thiết kế cách câu chuyện đến tay người chơi: kênh nào, lúc nào, đổi lấy hành động gì.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Environmental storytelling</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Dàn dựng không gian bằng những chi tiết mà người chơi ghép lại thành một ý nghĩa trọn vẹn.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Ludonarrative dissonance</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Luật chơi nói một đằng, câu chuyện nói một nẻo. Thuật ngữ do Clint Hocking đặt ra khi bàn về BioShock.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Emergent narrative</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Câu chuyện không được viết sẵn, nảy sinh từ chính lượt chơi của người chơi.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Bark</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Câu thoại ngắn bật tự động trong lúc chơi, kể chuyện mà không dừng gameplay — nhưng lặp nhiều thành tiếng ồn.</span>
+                </span>
+            </button>
+            <button type="button" class="flash">
+                <span class="flash-inner">
+                    <span class="front"><strong>Kể chuyện qua cơ chế</strong><span class="hint-label">Bấm để lật</span></span>
+                    <span class="back">Để chính luật chơi mang thông điệp, khiến người chơi tự làm rồi tự thấy — thay vì được kể lại.</span>
+                </span>
+            </button>
+        </div>
+
+        <h2 id="recap">Chốt lại</h2>
+
+        <div class="recap">
+            <h3>Nhớ 3 điều</h3>
+            <ol>
+                <li><span class="n">1</span> Câu chuyện là đích đến (Aesthetics), cutscene chỉ là một phương tiện — và phương tiện thì thay được.</li>
+                <li><span class="n">2</span> Người chơi nhớ thứ họ tự ráp nối lâu hơn thứ được chiếu cho xem; bày bằng chứng thay vì kể kết luận.</li>
+                <li><span class="n">3</span> Luật chơi luôn đang nói một điều gì đó. Kiểm tra xem nó có mâu thuẫn với câu chuyện của bạn không.</li>
+            </ol>
+        </div>
+
+        <h2 id="doc-them">Đọc thêm</h2>
+
+        <ul class="reading">
+            <li><span class="pill type-bai">Bài viết</span> <span class="reading-title">Game Design as Narrative Architecture</span> <span class="reading-meta">Henry Jenkins</span> <p class="reading-why">Đọc để có bốn cách không gian tạo tiền đề cho câu chuyện — khung gốc mà gần như mọi bài về environmental storytelling sau này đều dựa vào.</p></li>
+            <li><span class="pill type-talk">Talk</span> <span class="reading-title">What Happened Here? Environmental Storytelling</span> <span class="reading-meta">Harvey Smith &amp; Matthias Worch · GDC 2010</span> <p class="reading-why">Đọc để lấy nguyên tắc thực hành cụ thể; bản ghi chú slide có công khai trên trang cá nhân của Worch.</p></li>
+            <li><span class="pill type-bai">Bài viết</span> <span class="reading-title">Environmental Storytelling: Creating Immersive 3D Worlds Using Lessons Learned from the Theme Park Industry</span> <span class="reading-meta">Don Carson</span> <p class="reading-why">Đọc để thấy gốc rễ của kỹ thuật này đến từ thiết kế công viên chủ đề, trước cả khi nó thành thuật ngữ trong ngành game.</p></li>
+            <li><span class="pill type-bai">Bài viết</span> <span class="reading-title">Ludonarrative Dissonance in Bioshock</span> <span class="reading-meta">Clint Hocking</span> <p class="reading-why">Đọc bản gốc thay vì đọc tóm tắt — bài rất ngắn, và phần lớn bài viết trên mạng trích sai ý của nó.</p></li>
+            <li><span class="pill type-sach">Sách</span> <span class="reading-title">The Art of Game Design</span> <span class="reading-meta">Jesse Schell</span> <p class="reading-why">Đọc các chương về story để có thêm bộ câu hỏi tự vấn khi ráp câu chuyện vào gameplay.</p></li>
+        </ul>
+
+        <footer class="lesson-foot">
+            <button type="button" id="markDoneBtn"></button>
+            <nav class="pager" aria-label="Điều hướng bài trước/sau">
+                <a class="pager-prev" id="pagerPrev" href="#"></a>
+                <a class="pager-next" id="pagerNext" href="#"></a>
+            </nav>
+        </footer>
+    </article>
+
+    <aside class="toc" id="toc" aria-label="Mục lục trong bài"></aside>
+
+</div>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Xưởng Game Design · tài liệu tự học</span>
+        <a href="../../lo-trinh.html">Lộ trình</a>
+    </div>
+</footer>
+
+<script src="../../assets/js/curriculum.js"></script>
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

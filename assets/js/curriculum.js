@@ -296,7 +296,7 @@ window.CURRICULUM = [
                 ],
                 minutes: 15,
                 level: "Trung bình",
-                status: "planned"
+                status: "ready"
             }
         ]
     },
