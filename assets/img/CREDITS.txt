@@ -34,3 +34,59 @@ NGUON_URL:
 NGAY_TAI:
 TINH_TRANG_LICENSE:
 DUNG_O_BAI:
+
+FILE: tang-3-05-level-design/celeste-anh-sang-dan-huong.png
+GAME: Celeste
+STUDIO: Matt Makes Games Inc.
+NAM: 2018
+NGUON_URL: https://www.celestegame.com/images/screenshots/02.png
+NGAY_TAI: 2026-09-18
+TINH_TRANG_LICENSE: Trang chính thức celestegame.com KHÔNG có dòng nào về quyền dùng ảnh chụp
+                    màn hình. Giấy phép duy nhất tìm thấy là celestegame.com/letsplay.html, chỉ
+                    cấp quyền kiếm tiền cho video Let's Play/Speedrun/Review, không nói tới ảnh
+                    tĩnh. Dùng theo diện minh hoạ giáo dục, phi thương mại, có credit trong bài.
+DUNG_O_BAI: tang-3/05-level-design
+
+FILE: tang-3-05-level-design/celeste-beat-cang.png
+GAME: Celeste
+STUDIO: Matt Makes Games Inc.
+NAM: 2018
+NGUON_URL: https://www.celestegame.com/images/screenshots/04.png
+NGAY_TAI: 2026-09-18
+TINH_TRANG_LICENSE: Như trên — trang chính thức im lặng về ảnh tĩnh; chỉ có giấy phép video ở
+                    celestegame.com/letsplay.html. Dùng theo diện minh hoạ giáo dục, phi thương mại.
+DUNG_O_BAI: tang-3/05-level-design
+
+FILE: tang-3-05-level-design/celeste-beat-nghi.png
+GAME: Celeste
+STUDIO: Matt Makes Games Inc.
+NAM: 2018
+NGUON_URL: https://www.celestegame.com/images/screenshots/08.png
+NGAY_TAI: 2026-09-18
+TINH_TRANG_LICENSE: Như trên — trang chính thức im lặng về ảnh tĩnh; chỉ có giấy phép video ở
+                    celestegame.com/letsplay.html. Dùng theo diện minh hoạ giáo dục, phi thương mại.
+DUNG_O_BAI: tang-3/05-level-design
+
+FILE: tang-4-04-mo-xe-game/hades-hoi-thoai.jpg
+GAME: Hades
+STUDIO: Supergiant Games
+NAM: 2020 (bản 1.0); ảnh này công bố 12-2019, chụp từ bản Early Access — dấu build VO.23698
+     hiện ở góc trên trái ảnh, giao diện có thể khác bản phát hành.
+NGUON_URL: https://images.ctfassets.net/5owu3y35gz1g/1StZVnaATlNYl4oaNNftOb/2853b2a421cfb09ab3b654f5d0b1c3ea/hades_09-dec-2019_03.jpg
+NGAY_TAI: 2026-09-18
+TINH_TRANG_LICENSE: supergiantgames.com/games/hades/ KHÔNG có dòng nào về quyền dùng ảnh (đã
+                    grep copyright/rights/permission/license trên HTML thô, không có kết quả).
+                    Trang không có press kit riêng, chỉ có link tải gói media zip. Dùng theo
+                    diện minh hoạ giáo dục, phi thương mại, có credit trong bài.
+DUNG_O_BAI: tang-4/04-mo-xe-game
+
+FILE: tang-4-04-mo-xe-game/hades-hud-tran-danh.jpg
+GAME: Hades
+STUDIO: Supergiant Games
+NAM: 2020 (bản 1.0); ảnh này công bố 12-2019, chụp từ bản Early Access — dấu build VO.23698
+     hiện ở góc trên trái ảnh, giao diện có thể khác bản phát hành.
+NGUON_URL: https://images.ctfassets.net/5owu3y35gz1g/2XQPXbWGBgDCkmqrRrpJhm/a7bde035349184e0ced841c4b918cfbd/hades_09-dec-2019_01.jpg
+NGAY_TAI: 2026-09-18
+TINH_TRANG_LICENSE: Như trên — trang chính thức im lặng hoàn toàn về quyền dùng ảnh. Dùng theo
+                    diện minh hoạ giáo dục, phi thương mại, có credit trong bài.
+DUNG_O_BAI: tang-4/04-mo-xe-game
