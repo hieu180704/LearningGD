@@ -90,3 +90,89 @@ NGAY_TAI: 2026-09-18
 TINH_TRANG_LICENSE: Như trên — trang chính thức im lặng hoàn toàn về quyền dùng ảnh. Dùng theo
                     diện minh hoạ giáo dục, phi thương mại, có credit trong bài.
 DUNG_O_BAI: tang-4/04-mo-xe-game
+
+FILE: tang-1-01-mda/into-the-breach-telegraph.jpg
+GAME: Into the Breach
+STUDIO: Subset Games
+NAM: 2018
+NGUON_URL: https://images.gog-statics.com/4b877b55e0d9d9074c7275d9953b7296ef87aa1463cfd24ad7e5fd46ca5d011e.jpg
+NGAY_TAI: 2026-09-19
+TINH_TRANG_LICENSE: Ảnh gallery trên trang bán hàng chính thức GOG.com, kích thước thật 1280x720 (đã kiểm bằng
+                    `file`, không phải thumbnail). GOG không đăng điều khoản riêng cho việc dùng lại ảnh
+                    gallery. Dùng theo diện minh hoạ giáo dục, phi thương mại, có credit trong bài.
+DUNG_O_BAI: tang-1/01-mda
+
+FILE: tang-1-04-flow-do-kho/celeste-mirror-temple.png
+GAME: Celeste
+STUDIO: Matt Makes Games Inc.
+NAM: 2018
+NGUON_URL: https://www.celestegame.com/images/screenshots/07.png
+NGAY_TAI: 2026-09-19
+TINH_TRANG_LICENSE: Trang chính thức celestegame.com KHÔNG có dòng nào về quyền dùng ảnh chụp màn hình; giấy
+                    phép duy nhất (celestegame.com/letsplay.html) chỉ nói về video. Dùng theo diện minh hoạ
+                    giáo dục, phi thương mại, có credit trong bài.
+DUNG_O_BAI: tang-1/04-flow-do-kho
+
+FILE: tang-3-06-ux-onboarding/portal-test-chamber-00.jpg
+GAME: Portal
+STUDIO: Valve
+NAM: 2007
+NGUON_URL: https://i1.theportalwiki.net/img/3/3a/Portal_Test_Chamber_00.png
+NGAY_TAI: 2026-09-19
+TINH_TRANG_LICENSE: Ảnh từ theportalwiki.com (wiki cộng đồng độc lập, không phải Fandom). Bản gốc là PNG
+                    1920x1080 nặng 2,8 MB; đã chuyển sang JPEG chất lượng cao (273 KB) bằng ffmpeg để
+                    giảm dung lượng trang, KHÔNG đổi kích thước. Dùng theo diện minh hoạ giáo dục, phi
+                    thương mại, có credit trong bài.
+DUNG_O_BAI: tang-3/06-ux-onboarding
+
+FILE: tang-3-06-ux-onboarding/baba-is-you-luat-tren-san.png
+GAME: Baba Is You
+STUDIO: Hempuli (Arvi Teikari)
+NAM: 2019
+NGUON_URL: https://img.itch.zone/aW1hZ2UvMzY2MzYzLzE4MzQwOTQucG5n/original/W6uJxi.png
+NGAY_TAI: 2026-09-19
+TINH_TRANG_LICENSE: Ảnh gallery trên trang phát hành chính thức hempuli.itch.io/baba (bản full release, KHÔNG
+                    phải bản Jam Build 2017 ở địa chỉ khác). Kích thước thật 850x472 — thấp hơn các ảnh
+                    khác trong repo vì game render ở độ phân giải gốc thấp; chấp nhận được do đồ hoạ
+                    pixel-art sắc nét khi phóng. Đã crop bỏ viền đen thừa quanh sân chơi (850x472 -> 670x390)
+                    bằng ffmpeg để phần chữ luật to hơn khi xem trên mobile; không phóng to, không sửa
+                    nội dung ảnh. Dùng theo diện minh hoạ giáo dục, phi thương mại.
+DUNG_O_BAI: tang-3/06-ux-onboarding
+
+FILE: tang-3-07-narrative-design/half-life-2-kleiner.jpg
+GAME: Half-Life 2
+STUDIO: Valve
+NAM: 2004
+NGUON_URL: https://combineoverwiki.net/images/f/f4/HL2_KleinerGordon.jpg
+NGAY_TAI: 2026-09-19
+TINH_TRANG_LICENSE: Ảnh từ combineoverwiki.net (wiki cộng đồng độc lập chuyên Half-Life, không phải Fandom).
+                    Bản gốc 1920x1080 nặng 1,5 MB; đã nén lại bằng ffmpeg còn 347 KB, KHÔNG đổi kích thước.
+                    Dùng theo diện minh hoạ giáo dục, phi thương mại, có credit trong bài.
+DUNG_O_BAI: tang-3/07-narrative-design
+
+FILE: tang-3-04-progression-phan-thuong/hades-mirror-of-night.jpg
+GAME: Hades
+STUDIO: Supergiant Games
+NAM: 2020 (bản 1.0) — ảnh chụp giao diện Mirror of Night bản phát hành, KHÔNG phải bản
+     Early Access như hai ảnh Hades cũ trong repo.
+NGUON_URL: https://static.wikia.nocookie.net/hades_gamepedia_en/images/7/78/MirrorInterface.png/revision/latest?cb=20201022080447
+NGAY_TAI: 2026-09-19
+TINH_TRANG_LICENSE: Ảnh từ hades.fandom.com (File:MirrorInterface.png), kích thước gốc 1400x1080.
+                    CDN trả về định dạng WebP dù URL có đuôi .png — đã kiểm bằng `file` và chuyển
+                    sang JPEG bằng ffmpeg, không đổi kích thước. Dùng theo diện minh hoạ giáo dục,
+                    phi thương mại, có credit trong bài.
+DUNG_O_BAI: tang-3/04-progression-phan-thuong
+
+FILE: tang-3-05-level-design/hollow-knight-ban-do-thiet-ke.jpg
+GAME: Hollow Knight
+STUDIO: Team Cherry
+NAM: 2017
+NGUON_URL: https://static.wikia.nocookie.net/hollowknight/images/9/97/Early_Map_-_Full_Map.jpg/revision/latest
+NGAY_TAI: 2026-09-19
+TINH_TRANG_LICENSE: KHÔNG phải ảnh chụp màn hình game mà là ảnh chụp BẢN ĐỒ THIẾT KẾ in trên giấy
+                    của Team Cherry (wiki lưu dưới tên File:Early Map - Full Map.jpg), kích thước
+                    1920x1358. CDN Fandom trả WebP dù URL đuôi .jpg — đã kiểm bằng `file` và chuyển
+                    sang JPEG bằng ffmpeg, không đổi kích thước. Shot-note trong bài ghi rõ đây là tài
+                    liệu thiết kế, không phải ảnh trong game. Dùng theo diện minh hoạ giáo dục, phi
+                    thương mại, có credit trong bài.
+DUNG_O_BAI: tang-3/05-level-design
